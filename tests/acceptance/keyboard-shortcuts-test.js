@@ -4,7 +4,7 @@ import {
 } from 'qunit';
 import {
   visit,
-  currentURL,
+  currentRouteName,
 } from '@ember/test-helpers';
 import {
   setupApplicationTest
@@ -19,6 +19,6 @@ module('Acceptance | keyboard shortcuts', function(hooks) {
   test('keyboard shortcuts page can be visited via a keyboard shortcut', async function(assert) {
     await visit('/');
     await keyDown('alt+KeyS');
-    assert.equal(currentURL(), '/view-mixins/global-keyboard-shortcut');
+    assert.equal(currentRouteName(), 'view-mixins.global-keyboard-shortcut');
   });
 });
