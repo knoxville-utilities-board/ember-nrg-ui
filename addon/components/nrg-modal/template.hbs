@@ -1,0 +1,29 @@
+{{#ui-modal context=context id=modalId class=_modalClass onHide=(action 'onHide') duration=duration transition=transition closable=dismissable detachable=detachable autofocus=autofocus allowMultiple=true}}
+  {{#if dismissable}}
+    <i class="close icon"></i>
+  {{/if}}
+
+  {{#if headerText}}
+    <div class="header">
+      {{headerText}}
+    </div>
+  {{/if}}
+
+  <div class="{{if lightbox 'image'}} content">
+    {{#each flashMessages.queue as |flash|}}
+      {{nrg-flash-message flash=flash}}
+    {{/each}}
+    {{yield}}
+  </div>
+
+  {{#if hasButtons}}
+    <div class="actions">
+      {{#if secondaryButton}}
+        {{nrg-button class=secondaryButtonClass text=secondaryButton action='cancel'}}
+      {{/if}}
+      {{#if primaryButton}}
+        {{nrg-button class='primary right' text=primaryButton action='ok' autofocus=true}}
+      {{/if}}
+    </div>
+  {{/if}}
+{{/ui-modal}}

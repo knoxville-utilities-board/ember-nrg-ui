@@ -1,0 +1,23 @@
+.form-link {
+  cursor: pointer;
+  &:not(:first-of-type):before {
+    pointer-events: none;
+    text-decoration: none;
+    padding: 0 0.5em;
+    color: #000;
+    content: '|';
+  }
+}
+.ui.dropdown:not(.selection):not(.button) > .default.text {
+  color: #000;
+}
+
+.nrg-text-area {
+  flex-direction: column;
+
+  .character-limit {
+    margin-left: auto;
+    order: 2;
+    margin-top: 0.5em;
+  }
+}

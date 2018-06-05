@@ -1,0 +1,28 @@
+<a class='nrg-logo' href='{{appReloadLocation}}'></a>
+{{#each sidebarMenuManager.menuItems as |menuItem|}}
+  {{#if (and menuItem.children.length menuItem.isShownInSidebar)}}
+    <div class="item">
+      {{#link-to menuItem.routeName tagName='div' class="clickable parent-route"}}
+        {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink')}}
+      {{/link-to}}
+      {{#if menuItem.children}}
+        <div class="menu">
+          {{#each menuItem.children as |child|}}
+            {{nrg-sidebar-menu-item item=child clickedLink=(action 'clickedLink') sidebarAction=(action 'sidebarAction')}}
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  {{else}}
+    {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink') sidebarAction=(action 'sidebarAction')}}
+  {{/if}}
+{{/each}}
+
+<div class="sidebar-footer">
+  {{#each sidebarMenuManager.footerMenuItems as |menuItem i|}}
+    {{#if (eq i 0)}}
+      <div class="footer-pusher"></div>
+    {{/if}}
+    {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink') sidebarAction=(action 'sidebarAction')}}
+  {{/each}}
+</div>

@@ -1,0 +1,7 @@
+{{#if hasBlock}}
+  {{yield (hash
+    input=(component 'nrg-text-field/trim-input' type=type value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength)
+  )}}
+{{else}}
+  {{nrg-text-field/trim-input type=type value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength}}
+{{/if}}

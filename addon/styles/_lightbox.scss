@@ -1,0 +1,106 @@
+.photo-thumbnail.photo-thumbnail.photo-thumbnail {
+  cursor: pointer;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: #aaa;
+  user-select: none;
+}
+
+.lightbox.lightbox.lightbox.modal {
+  height: calc(100% - 60px);
+  width: calc(100% - 60px);
+  top: 0;
+  left: 0;
+  z-index: 1002;
+  margin: 30px;
+
+  & .close.icon {
+    background-color: #fff;
+    border-radius: 50%;
+    padding-top: 7px;
+    opacity: 1;
+  }
+
+  &.scrolling {
+    position: fixed;
+    margin: 30px;
+  }
+
+  & .content {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    padding: 0;
+
+    & .lightbox-upper-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      @media (min-width: $tablet-breakpoint) {
+        align-items: center;
+        flex-direction: row;
+      }
+    }
+
+    & .lightbox-details {
+      border-top: 1px solid rgba(34, 36, 38, 0.3);
+      border-left: none;
+      padding: 1rem 2rem 2rem;
+      @media (min-width: $tablet-breakpoint) {
+        align-self: flex-start;
+        width: 300px;
+        border-top: none;
+        border-left: 1px solid rgba(34, 36, 38, 0.3);
+        height: 100%;
+      }
+    }
+
+    & .lightbox-details--bottom {
+      display: flex;
+      justify-content: center;
+      height: auto;
+      margin: 0.5em;
+    }
+
+    & .lightbox-controls {
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      padding: 0.5em;
+    }
+  }
+}
+
+.lightbox-image {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  align-items: stretch;
+}
+
+.image-container {
+  overflow: hidden;
+  user-select: none;
+  background-color: #222;
+  width: 100%;
+
+  & .image {
+    height: auto;
+    max-height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.rotate-right {
+      transform: translateY(-50%) rotate(90deg);
+    }
+
+    &.rotate-left {
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    &.rotate-down {
+      transform: translateY(-50%) rotate(180deg);
+    }
+  }
+}
