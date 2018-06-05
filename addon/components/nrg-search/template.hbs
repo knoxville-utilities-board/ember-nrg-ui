@@ -1,0 +1,37 @@
+<div class="ui icon input">
+  {{nrg-text-field class='prompt' disabled=disabled placeholder=placeholder value=searchString action=(action 'query') click=(action 'inputClicked')}}
+  <i class="search icon"></i>
+</div>
+{{#if showResults}}
+  <div class="results transition visible">
+    {{#each items as |item i|}}
+      <div class="result {{if (eq i activeItem) 'active'}}" {{action 'select' null item preventDefault=true bubbles=false on="click"}}>
+        {{#if hasBlock}}
+          {{yield item}}
+        {{else}}
+          {{#if item.image}}
+            <div class="image">
+              <img src="{{item.image}}">
+            </div>
+          {{/if}}
+          <div class="content">
+            {{#if item.header}}
+              <div class="title">{{item.header}}</div>
+            {{/if}}
+            {{#if item.description}}
+              <div class="description">
+                <p>{{item.description}}</p>
+              </div>
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="result">
+        <div class="content">
+          <div class="header">No Results</div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}

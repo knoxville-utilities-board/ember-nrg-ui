@@ -1,0 +1,9 @@
+{{#if hasBlock}}
+  {{yield (hash
+    list=this
+    header=(component 'nrg-list/header' filterChanged=(action 'filterChanged') searchChanged=(action 'searchChanged'))
+    items=(component 'nrg-list/items' selectionType=selectionType pageMeta=pageMeta pageSizes=pageSizes selectedPageSize=selectedPageSize loading=loading items=items itemClicked=(action 'itemClicked') changePage=(action 'changePage') groupHeaderHandler=groupHeaderHandler)
+    create-button=(component 'nrg-button' class='ui circular icon big primary bottom right floating button' icon='plus'))}}
+{{else}}
+  {{nrg-list/items selectionType=selectionType pageMeta=pageMeta pageSizes=pageSizes selectedPageSize=selectedPageSize loading=loading items=items itemClicked=(action 'itemClicked') changePage=(action 'changePage') groupHeaderHandler=groupHeaderHandler}}
+{{/if}}

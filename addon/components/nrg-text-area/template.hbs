@@ -1,0 +1,6 @@
+{{textarea value=value rows=rows cols=cols maxlength=maxlength name=name placeholder=placeholder disabled=disabled}}
+{{#if characterLimit}}
+  <div class="text character-limit {{if overCharacterLimit 'red'}}">
+    {{or value.length 0}}/{{characterLimit}}
+  </div>
+{{/if}}

@@ -1,0 +1,33 @@
+{{#nrg-modal modalClass='shortcut-modal' isOpen=isOpen headerText='Keyboard Shortcuts'}}
+  <table>
+    {{#each sortedSegments as |segment|}}
+      <tbody>
+        {{#if segment.header}}
+          <tr>
+            <th></th>
+            <th class="shortcut-spacer">{{segment.header}}</th>
+          </tr>
+        {{/if}}
+        {{#each segment.shortcuts as |shortcut|}}
+          <tr class="shortcut-item">
+            <td class="shortcut-keys">
+              {{#each shortcut.modKeys as |key|}}
+                <span class="shortcut-key">{{key}}</span>
+                <span class="shortcut-plus">+</span>
+              {{/each}}
+              {{#each shortcut.keys as |key index|}}
+                {{#if index}}
+                  <span class="shortcut-comma">,</span>
+                {{/if}}
+                <span class="shortcut-key">{{key}}</span>
+              {{/each}}
+            </td>
+            <td class="shortcut-description">
+              {{shortcut.description}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    {{/each}}
+  </table>
+{{/nrg-modal}}

@@ -1,0 +1,8 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#nrg-text-field field=field placeholder=placeholder class='left icon' disabled=disabled as |view|}}
+    {{nrg-icon icon=icon}}
+    {{view.input}}
+  {{/nrg-text-field}}
+{{/if}}

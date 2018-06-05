@@ -1,0 +1,25 @@
+{{#nrg-code-block label="Disabled" codeBlockName='disabled-search.hbs' }}
+  <!-- BEGIN-SNIPPET disabled-search -->
+  {{nrg-search disabled=true}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}
+
+{{#nrg-code-block label="Loading" codeBlockName='loading-search.hbs' }}
+  <p>
+    Searching for <strong>{{or loadingQuery 'Nothing'}}</strong>
+  </p>
+  <!-- BEGIN-SNIPPET loading-search -->
+  {{nrg-search loading=true query=(action (mut loadingQuery))}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}
+
+{{#nrg-code-block label="Querying Template" codeBlockName='querying-search.hbs' }}
+  <p>
+    Selected <strong>{{or selected.header 'Nothing'}}</strong>
+  </p>
+  <!-- BEGIN-SNIPPET querying-search -->
+  {{nrg-search items=items loading=loading query=(action (perform queryTask)) select=(action (mut selected))}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}
+
+{{nrg-code-block label="Querying JS" codeBlockName='querying-search.js' }}
