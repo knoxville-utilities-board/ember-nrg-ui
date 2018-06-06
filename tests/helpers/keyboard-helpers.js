@@ -18,6 +18,7 @@ const keyEvent = function keyEvent(attributes, type, element) {
       event.button = getMouseCode(attribute);
     } else {
       event.key = getKeyCode(attribute);
+      event.keyCode = getKeyCode(attribute);
     }
 
     return event;
