@@ -49,7 +49,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/pages/open-source-staging/ember-nrg-ui';
+    ENV.rootURL = '/ember-nrg-ui';
     ENV.locationType = 'hash';
   }
 
