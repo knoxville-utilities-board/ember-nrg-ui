@@ -14,6 +14,11 @@ module('Integration | Component | nrg-datetime', function(hooks) {
   const testDate = new Date(2013, 2, 3, 4, 10);
   setupRenderingTest(hooks);
 
+  test('validation shows when form is invalid', async function(assert) {
+    await render(hbs `{{date-time-test didValidate=true}}`);
+    assert.equal(this.$('.field.error').length, 1);
+  });
+
   test('it renders (datetime)', async function(assert) {
     this.dateValue = testDate;
     await render(hbs `{{nrg-datetime value=dateValue type='datetime'}}`);

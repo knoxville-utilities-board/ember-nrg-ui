@@ -1,0 +1,6 @@
+{{#nrg-form-container didValidate=didValidate as |form|}}
+  {{#form.field label='Date' as |field|}}
+    {{field.datetime model=this valuePath='date' value=date}}
+  {{/form.field}}
+  {{form.submit-button}}
+{{/nrg-form-container}}

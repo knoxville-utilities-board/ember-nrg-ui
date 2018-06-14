@@ -32,7 +32,7 @@ export default Mixin.create({
       defineProperty(this, 'value', alias(`model.${valuePath}`));
     }
     next(this, () => {
-      if (!this.get('isDestroyed')) {
+      if (!this.get('isDestroyed') && this.get('valuePath')) {
         this.propogateErrorMessage();
       }
     });
@@ -52,7 +52,7 @@ export default Mixin.create({
   }),
 
   propogateErrorMessage() {
-    if (this.get('isDestroyed')) {
+    if (this.get('isDestroyed') || !this.get('valuePath')) {
       return;
     }
     let errorMessage = '';
