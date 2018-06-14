@@ -27,7 +27,7 @@
     "ember-cli-moment-shim": "3.6.0",
     "ember-cli-sass": "7.1.7",
     "ember-concurrency": "0.8.17",
-    "ember-cp-validations": "3.5.2",
+    "ember-cp-validations": "3.5.3",
     "ember-is-mobile": "2.0.5",
     "ember-keyboard": "3.0.1",
     "ember-light-table": "1.12.2",
