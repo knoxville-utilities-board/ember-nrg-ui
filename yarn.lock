@@ -2997,7 +2997,7 @@ ember-factory-for-polyfill@^1.1.0, ember-factory-for-polyfill@^1.3.1:
   dependencies:
     ember-cli-version-checker "^2.1.0"
 
-ember-get-config@^0.2.2, ember-get-config@^0.2.4:
+ember-get-config@0.2.4, ember-get-config@^0.2.2:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/ember-get-config/-/ember-get-config-0.2.4.tgz#118492a2a03d73e46004ed777928942021fe1ecd"
   dependencies:
@@ -3043,9 +3043,9 @@ ember-is-mobile@2.0.5:
     ember-cli-import-polyfill "^0.2.0"
     ismobilejs "^0.4.1"
 
-ember-keyboard@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/ember-keyboard/-/ember-keyboard-3.0.1.tgz#ce96c38172cf2c2dfe6ff260fd52f841097e7208"
+ember-keyboard@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/ember-keyboard/-/ember-keyboard-3.0.2.tgz#839ab5c32a6b3d3ce0b735728c1e1bc362107464"
   dependencies:
     ember-cli-babel "^6.6.0"
 
