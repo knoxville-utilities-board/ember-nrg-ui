@@ -1,4 +1,4 @@
-/*jshint node:true*/
+/* eslint-env node */
 const fs = require('fs');
 
 const environmentChunk = `
@@ -30,9 +30,6 @@ module.exports = {
 
   fileMapTokens: function() {
     return {
-      __markdown__: function() {
-        return '/markdown';
-      },
       __application__: function() {
         return '/app/application';
       },
@@ -48,21 +45,7 @@ module.exports = {
     };
   },
 
-  afterInstall() {
-    var blueprint = this;
-    var nodePackages = [{
-      name: 'ember-cli-sass',
-      target: '^6.1.1'
-    }, {
-      name: 'ember-cli-mirage',
-      target: '^0.3.3'
-    }];
-
-    if (fs.existsSync('app/styles/app.css')) {
-      console.log("  Renaming app.css -> app.scss");
-      fs.renameSync('app/styles/app.css', 'app/styles/app.scss');
-    }
-    console.log("  Podifying the app");
+  podifyApp() {
     if (fs.existsSync('app/controllers/.gitkeep')) {
       fs.unlinkSync('app/controllers/.gitkeep');
     }
@@ -75,6 +58,29 @@ module.exports = {
     if (fs.existsSync('app/templates/application.hbs')) {
       fs.unlinkSync('app/templates/application.hbs');
     }
+  },
+
+  useSCSSInsteadOfCSS() {
+    if (fs.existsSync('app/styles/app.css')) {
+      fs.renameSync('app/styles/app.css', 'app/styles/app.scss');
+    }
+  },
+
+  afterInstall() {
+    const blueprint = this;
+    const nodePackages = [{
+      name: 'ember-cli-sass',
+      target: '^6.1.1'
+    }, {
+      name: 'ember-cli-mirage',
+      target: '^0.3.3'
+    }];
+
+    this.ui.writeLine('Renaming app.css -> app.scss');
+    this.useSCSSInsteadOfCSS();
+
+    this.ui.writeLine('Podifying the app');
+    this.podifyApp();
 
     return blueprint.insertIntoFile('config/environment.js', environmentChunk, {
       after: "locationType: 'auto',"
