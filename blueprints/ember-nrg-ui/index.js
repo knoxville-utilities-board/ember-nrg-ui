@@ -39,9 +39,6 @@ module.exports = {
       __public__: function() {
         return '/public';
       },
-      __index_route__: function() {
-        return '/app/index';
-      },
     };
   },
 
