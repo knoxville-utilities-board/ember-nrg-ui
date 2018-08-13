@@ -20,11 +20,9 @@ module.exports = {
   },
 
   setupPreprocessorRegistry(type, registry) {
-    if (type === 'parent') {
-      const MarkdownTemplateCompiler = require('./lib/preprocessors/markdown-template-compiler');
-      const plugin = new MarkdownTemplateCompiler();
-      registry.instantiatedPlugins.push(plugin);
-      registry.registeredForType('template').unshift(plugin);
-    }
+    const MarkdownTemplateCompiler = require('./lib/preprocessors/markdown-template-compiler');
+    const plugin = new MarkdownTemplateCompiler();
+    registry.instantiatedPlugins.push(plugin);
+    registry.registeredForType('template').unshift(plugin);
   },
 };
