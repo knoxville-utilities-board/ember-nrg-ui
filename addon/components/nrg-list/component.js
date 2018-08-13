@@ -29,6 +29,8 @@ export default Component.extend(ContextMenuMixin, {
 
   searchString: '',
 
+  searchParam: '',
+
   selectedPageSize: DEFAULT_PAGE_SIZE,
 
   selectionType: '',
@@ -42,12 +44,13 @@ export default Component.extend(ContextMenuMixin, {
 
   updateQuery(actionName = 'query') {
     const query = {};
+    const searchParam = this.get('searchParameter') || 'search';
     const searchString = this.get('searchString');
     const selectedFilterValue = this.get('selectedFilter.value');
     const filterParam = this.get('filterParam');
 
     if (!isBlank(searchString)) {
-      query.search = searchString;
+      query[searchParam] = searchString;
     }
 
     if (!isBlank(selectedFilterValue) && !isBlank(filterParam)) {
