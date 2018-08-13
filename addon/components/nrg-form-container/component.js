@@ -7,14 +7,12 @@ import ValidationContainer from 'ember-nrg-ui/mixins/validation-container';
 
 export default Component.extend(ValidationContainer, {
   layout,
+  
   tagName: 'form',
+
   classNames: ['ui', 'form'],
+
   classNameBindings: ['error', 'loading'],
-
-  secondaryFirst: false,
-
-  primaryButton: 'submit',
-  secondaryButton: '',
 
   hasFormLinks: notEmpty('formLinks'),
 
