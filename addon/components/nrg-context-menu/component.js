@@ -10,6 +10,8 @@ import layout from './template';
 export default Component.extend({
   layout,
 
+  tagName: '',
+
   contextService: service('context-menu'),
 
   options: alias('contextService.contextItems'),
