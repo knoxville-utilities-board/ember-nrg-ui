@@ -29,7 +29,7 @@ export default Component.extend(ContextMenuMixin, {
 
   searchString: '',
 
-  searchParam: '',
+  searchParameter: '',
 
   selectedPageSize: DEFAULT_PAGE_SIZE,
 
