@@ -7,7 +7,7 @@
     {{nrg-sidebar-menu-item/content item=item}}
   </a>
 {{else}}
-  {{#link-to item.routeName class='item' click=(action clickedLink)}}
+  {{#link-to item.routeName class=_linkToItemClass click=(action clickedLink)}}
     {{nrg-sidebar-menu-item/content item=item}}
   {{/link-to}}
 {{/if}}

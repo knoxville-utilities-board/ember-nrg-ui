@@ -2,9 +2,7 @@
 {{#each sidebarMenuManager.menuItems as |menuItem|}}
   {{#if (and menuItem.children.length menuItem.isShownInSidebar)}}
     <div class="item">
-      {{#link-to menuItem.routeName tagName='div' class="clickable parent-route"}}
-        {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink')}}
-      {{/link-to}}
+      {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink') isParentGroup=true}}
       {{#if menuItem.children}}
         <div class="menu">
           {{#each menuItem.children as |child|}}
