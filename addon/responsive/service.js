@@ -55,4 +55,10 @@ export default Service.extend({
   isLargeMonitor: readOnly('_mediaService.largeMonitor.matches'),
 
   isWidescreenMonitor: readOnly('_mediaService.widescreenMonitor.matches'),
+
+  /* Media Query Computed Groups */
+
+  isMobileScreenGroup: or('isSmallMobileScreen', 'isMobileScreen', 'isTabletScreen'),
+
+  isComputerScreenGroup: or('isComputerScreen', 'isLargeMonitor', 'isWidescreenMonitor'),
 });

@@ -2,14 +2,12 @@ import {
   computed
 } from '@ember/object';
 import {
-  lt,
+  alias,
 } from '@ember/object/computed';
 import {
   inject as service
 } from '@ember/service';
-import ResizeMixin, {
-  computerBreakpoint,
-} from 'ember-nrg-ui/mixins/resize';
+import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import Component from '@ember/component';
 import layout from './template';
 
@@ -22,7 +20,7 @@ export default Component.extend(ResizeMixin, {
 
   router: service(),
 
-  isMobileScreen: lt('screenWidth', computerBreakpoint),
+  isMobileScreen: alias('responsive.isMobileScreenGroup'),
 
   environmentDisplay: computed('applicationSettings.localEnvironment', function() {
     const environment = this.get('applicationSettings.localEnvironment');
