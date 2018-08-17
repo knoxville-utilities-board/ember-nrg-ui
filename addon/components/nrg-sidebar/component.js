@@ -7,18 +7,16 @@ import {
   observer
 } from '@ember/object';
 import {
-  gte
+  alias
 } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
-import ResizeMixin, {
-  computerBreakpoint
-} from 'ember-nrg-ui/mixins/resize';
+import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 
 export default Component.extend(ResizeMixin, {
   layout,
 
-  isLargeScreen: gte('screenWidth', computerBreakpoint),
+  isLargeScreen: alias('responsive.isComputerScreenGroup'),
 
   sidebarId: computed('elementId', function() {
     return `${this.get('elementId')}-ui-sidebar`;
