@@ -34,23 +34,27 @@ module('Integration | Component | nrg-list/items', function(hooks) {
   });
 
   test('can not select if isSelectable returns false', async function(assert) {
-    const item = {
-      label: 'label',
+    const item1 = {
+      label: 'label1',
     };
+    const item2 = {
+      label: 'label2'
+    }
     this.selected = A([]);
-    this.items = [item];
+    this.items = [item1, item2];
     this.selectAction = function(selectedItem) {
-      assert.equal(selectedItem, item);
+      assert.equal(selectedItem, item2);
     };
 
     this.isSelectable = function(item) {
-      if (item.label == 'label') {
+      if (item.label == 'label1') {
         return false;
-      }
+      } else return true;
     }
     await render(hbs `{{nrg-list/items isSelectable=isSelectable selectionType='multiple' selected=selected items=items itemClicked=(action selectAction)}}`);
-    this.$('.item').click();
-    assert.equal(this.selected.length, 0);
+    this.$('.item').eq(0).click();
+    this.$('.item').eq(1).click();
+    assert.equal(this.selected.length, 1);
   });
 
 });
