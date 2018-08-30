@@ -21,7 +21,10 @@ module('Integration | Component | nrg-list/items', function(hooks) {
     this.selectAction = function(selectedItem) {
       assert.equal(selectedItem, item);
     };
-    await render(hbs `{{nrg-list/items selectionType='single' items=items itemClicked=(action selectAction)}}`);
+    this.isSelectable = function() {
+      return true;
+    }
+    await render(hbs `{{nrg-list/items isSelectable=isSelectable selectionType='single' items=items itemClicked=(action selectAction)}}`);
     this.$('.item').click();
   });
 

@@ -80,10 +80,13 @@ export default Component.extend({
   actions: {
     select(item) {
       let selected = A([item]);
+      if (!this.isSelectable(item)) {
+        return;
+      }
       const selectionType = this.get('selectionType');
       if (selectionType === 'multiple') {
         if (this.get('selected').includes(item)) {
-          selected = this.get('selected').without(item);
+          selected = A(this.get('selected').without(item));
         } else {
           selected = A(this.get('selected').concat(selected));
         }
