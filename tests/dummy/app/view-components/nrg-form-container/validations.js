@@ -10,6 +10,12 @@ export default buildValidations({
   meal: [
     validator('presence', true),
   ],
+  super: [
+    validator('presence', {
+      presence: true,
+      isWarning: true,
+    }),
+  ],
   deal: [
     validator('presence', true),
   ],
