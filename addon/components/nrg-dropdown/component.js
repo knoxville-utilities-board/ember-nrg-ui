@@ -10,7 +10,7 @@ import Validation from 'ember-nrg-ui/mixins/validation';
 
 export default Component.extend(Validation, {
   layout,
-  tagName: '',
+  tagName: 'span',
 
   defaultText: 'Select an Option',
   disabled: false,
@@ -51,11 +51,15 @@ export default Component.extend(Validation, {
     select(option) {
       const notSelected = option !== this.get('selected');
       const hideDropdownAction = this.get('dropdownAction') === 'hide';
+      const shouldHideDropdown = this.get('dropdownAction') !== 'nothing';
       if (notSelected) {
         this.set('selected', option);
       }
       if (hideDropdownAction || notSelected) {
         this.sendAction('action', option);
+      }
+      if(shouldHideDropdown){
+        this.$('.dropdown').dropdown('hide');
       }
     },
   },
