@@ -62,6 +62,9 @@
     &:not(.pagination) {
       padding: 1em !important;
     }
+    &.disabled {
+      cursor: auto;
+    }
   }
 }
 

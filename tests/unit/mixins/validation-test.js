@@ -20,6 +20,20 @@ test('show error when appropriate', function(assert) {
   assert.ok(subject.get('showError'));
 });
 
+test('show error when appropriate', function(assert) {
+  const ValidationObject = EmberObject.extend(ValidationMixin);
+  const subject = ValidationObject.create({
+    hasWarnings: true,
+    isInvalid: false,
+    field: {
+      form: {
+        didValidate: true,
+      },
+    },
+  });
+  assert.ok(subject.get('showWarning'));
+});
+
 test('value is bound properly', function(assert) {
   const ValidationObject = EmberObject.extend(ValidationMixin);
   const subject = ValidationObject.create({

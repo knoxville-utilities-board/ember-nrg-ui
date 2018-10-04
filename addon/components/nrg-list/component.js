@@ -62,6 +62,10 @@ export default Component.extend(ContextMenuMixin, {
     });
   },
 
+  isSelectable( /* item */ ) {
+    return true;
+  },
+
   actions: {
     filterChanged(filterParam, selectedFilter) {
       this.setProperties({

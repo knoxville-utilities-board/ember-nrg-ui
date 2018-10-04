@@ -21,3 +21,7 @@ select,
 textarea {
   font-size: 16px !important;
 }
+
+[data-ember-action] {
+  cursor: pointer;
+}
