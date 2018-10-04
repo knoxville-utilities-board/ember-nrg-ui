@@ -70,6 +70,7 @@
       left: 0;
       bottom: 0;
       overflow-y: auto;
+      overflow-x: hidden;
       display: flex;
       height: calc(100% - #{$appbar-height}) !important;
       width: $sidebar-width;

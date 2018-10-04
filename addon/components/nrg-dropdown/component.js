@@ -27,7 +27,7 @@ export default Component.extend(Validation, {
 
   selection: notEmpty('field'),
 
-  _dropdownClass: computed('selection', 'loading', 'disabled', 'showError', 'class', function() {
+  _dropdownClass: computed('selection', 'loading', 'disabled', 'class', function() {
     let computedClasses = '';
     if (this.get('selection') || this.get('search')) {
       computedClasses += ' selection';

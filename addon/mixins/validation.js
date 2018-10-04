@@ -39,12 +39,23 @@ export default Mixin.create({
   },
 
   errorMessage: oneWay('validation.message'),
+
   didValidate: alias('field.form.didValidate'),
+
   hasContent: notEmpty('value'),
+
   isValid: and('hasContent', 'validation.isTruelyValid'),
+
   isInvalid: oneWay('validation.isInvalid'),
+
+  hasWarnings: oneWay('validation.hasWarnings'),
+
   showError: computed('validation.isDirty', 'isInvalid', 'didValidate', function() {
     return this.get('didValidate') && this.get('isInvalid');
+  }),
+
+  showWarning: computed('validation.isDirty', 'hasWarnings', 'showError', function() {
+    return this.get('hasWarnings') && !this.get('showError');
   }),
 
   errorMessageObserver: observer('validation.message', 'validation.isDirty', 'isInvalid', 'didValidate', function() {
@@ -56,11 +67,16 @@ export default Mixin.create({
       return;
     }
     let errorMessage = '';
+    let warningMessage = '';
     if (this.get('showError')) {
       errorMessage = this.get('validation.message');
     }
+    if (this.get('showWarning')) {
+      warningMessage = this.get('validation.warningMessage');
+    }
     if (this.get('field')) {
       this.set('field.errorMessage', errorMessage);
+      this.set('field.warningMessage', warningMessage);
     }
   },
 });
