@@ -22,8 +22,8 @@ export default Component.extend(ResizeMixin, {
 
   isMobileScreen: alias('responsive.isMobileScreenGroup'),
 
-  environmentDisplay: computed('applicationSettings.localEnvironment', function() {
-    const environment = this.get('applicationSettings.localEnvironment');
+  environmentDisplay: computed('applicationSettings.content.localEnvironment', function() {
+    const environment = this.get('applicationSettings.content.localEnvironment');
     if (environment && environment !== 'prod') {
       return environment.toUpperCase();
     }
