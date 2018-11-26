@@ -7,12 +7,6 @@ const env = process.env.EMBER_ENV;
 module.exports = function(defaults) {
   const app = new EmberAddon(defaults, {
     snippetSearchPaths: ['tests', 'app'],
-    SemanticUI: {
-      destination: {
-        images: 'assets/images',
-        fonts: 'assets/fonts'
-      }
-    },
     fingerprint: {
       enabled: env === 'review' || env === 'production',
       prepend: process.env.rootURL || '/',

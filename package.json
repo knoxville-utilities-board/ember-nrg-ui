@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "broccoli-stew": "2.0.0",
-    "ember-cli-app-version": "3.2.0",
+    "ember-cli-app-version": "3.1.0",
     "ember-cli-babel": "6.16.0",
     "ember-cli-flash": "1.6.6",
     "ember-cli-htmlbars": "3.0.1",
@@ -38,7 +38,8 @@
     "ember-responsive": "3.0.0-beta.3",
     "marky-markdown": "12.0.0",
     "semantic-ui-calendar": "0.0.8",
-    "semantic-ui-ember": "3.0.3"
+    "semantic-ui-ember": "Semantic-Org/Semantic-UI-Ember#9d5f93c750b5d25329da8ab38e04f74f543c0a32",
+    "semantic-ui-css": "2.3.1"
   },
   "devDependencies": {
     "broccoli-asset-rev": "3.0.0",
