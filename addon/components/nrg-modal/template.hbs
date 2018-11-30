@@ -10,9 +10,11 @@
   {{/if}}
 
   <div class="{{if lightbox 'image'}} content">
-    {{#each flashMessages.queue as |flash|}}
-      {{nrg-flash-message flash=flash}}
-    {{/each}}
+    {{#if showFlashMessages}}
+      {{#each flashMessages.queue as |flash|}}
+        {{nrg-flash-message flash=flash}}
+      {{/each}}
+    {{/if}}
     {{#if (or (and renderBodyAfterOpen _isOpen) (not renderBodyAfterOpen))}}
       {{yield}}
     {{/if}}

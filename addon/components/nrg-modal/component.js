@@ -38,6 +38,7 @@ export default Component.extend({
   modalClass: '',
 
   renderBodyAfterOpen: false,
+  showFlashMessages: true,
 
   init() {
     this._super(...arguments);
