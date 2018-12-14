@@ -70,23 +70,39 @@
     <div class='ui segment teal'>In order for modals to nest correctly, the modal on bottom must be first in the DOM</div>
     {{#nrg-form-container as |form|}}
       {{#form.field as |field|}}
-        {{nrg-checkbox type='toggle' label='Open Modal' checked=modalOpen1}}
+        {{field.checkbox type='toggle' label='Open Modal' checked=modalOpen1}}
       {{/form.field}}
       {{#form.field as |field|}}
-        {{nrg-checkbox type='toggle' label='Open Modal with Actions' checked=modalOpen3}}
+        {{field.checkbox type='toggle' label='Open Modal with Actions' checked=modalOpen3}}
       {{/form.field}}
       {{#form.field as |field|}}
-        {{nrg-checkbox type='toggle' label='Open Modal (Not Dismissable)' checked=modalOpen5}}
+        {{field.checkbox type='toggle' label='Open Modal (Not Dismissable)' checked=modalOpen5}}
       {{/form.field}}
     {{/nrg-form-container}}
 
     <div class='ui segment red'>Do not use basic modals when nesting</div>
     {{#nrg-form-container as |form|}}
       {{#form.field as |field|}}
-        {{nrg-checkbox type='toggle' label='Open Basic Modal' checked=modalOpen2}}
+        {{field.checkbox type='toggle' label='Open Basic Modal' checked=modalOpen2}}
       {{/form.field}}
       {{#form.field as |field|}}
-        {{nrg-checkbox type='toggle' label='Open Basic Modal with Actions' checked=modalOpen4}}
+        {{field.checkbox type='toggle' label='Open Basic Modal with Actions' checked=modalOpen4}}
+      {{/form.field}}
+    {{/nrg-form-container}}
+  {{/nrg-modal}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}
+
+{{#nrg-code-block label='Datetime component in Modal' codeBlockName='datetime-modal.hbs' }}
+  {{nrg-button text='Open Modal' action=(action (mut modalOpen7) true)}}
+  <!-- BEGIN-SNIPPET datetime-modal -->
+  <!-- The datetime uses a semantic popup. Due to changes within Semantic, the popup has to be rendered after the modal is open to work correctly. -->
+  <!-- The "renderBodyAfterOpen" flag tells the component not to render the body below until the body is open. -->
+  <!-- The default behavior is to render "always" -->
+  {{#nrg-modal renderBodyAfterOpen=true headerText='Datetime component inside a modal' isOpen=modalOpen7}}
+    {{#nrg-form-container as |form|}}
+      {{#form.field as |field|}}
+        {{field.datetime}}
       {{/form.field}}
     {{/nrg-form-container}}
   {{/nrg-modal}}

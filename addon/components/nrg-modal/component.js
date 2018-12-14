@@ -17,6 +17,9 @@ import {
 } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
+import {
+  next
+} from '@ember/runloop';
 
 export default Component.extend({
   layout,
@@ -34,6 +37,9 @@ export default Component.extend({
   transition: 'scale',
   modalClass: '',
 
+  renderBodyAfterOpen: false,
+  showFlashMessages: true,
+
   init() {
     this._super(...arguments);
     scheduleOnce('afterRender', this, 'openObserver');
@@ -48,8 +54,12 @@ export default Component.extend({
   }),
 
   openModal() {
-    $(`#${this.elementId}-modal`).modal('show');
-    this.sendAction('onModalOpen');
+    this.set('_isOpen', false);
+    next(() => {
+      $(`#${this.elementId}-modal`).modal('show');
+      this.sendAction('onModalOpen');
+      this.set('_isOpen', true);
+    })
   },
 
   closeModal(sendAction = true) {
