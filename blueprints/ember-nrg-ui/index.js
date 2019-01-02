@@ -57,9 +57,6 @@ module.exports = {
   afterInstall() {
     const blueprint = this;
     const nodePackages = [{
-      name: 'ember-cli-sass',
-      target: '8.0.1'
-    }, {
       name: 'ember-cli-mirage',
       target: '^0.4.10'
     }];
