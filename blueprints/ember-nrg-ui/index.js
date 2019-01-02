@@ -58,10 +58,10 @@ module.exports = {
     const blueprint = this;
     const nodePackages = [{
       name: 'ember-cli-sass',
-      target: '^6.1.1'
+      target: '8.0.1'
     }, {
       name: 'ember-cli-mirage',
-      target: '^0.3.3'
+      target: '^0.4.10'
     }];
 
     this.ui.writeLine('Renaming app.css -> app.scss');
@@ -89,7 +89,9 @@ module.exports = {
         after: "const app = new EmberApp(defaults, {"
       });
     }).then(function() {
-      return blueprint.addPackagesToProject(nodePackages);
+      return blueprint.addAddonsToProject({
+        packages: nodePackages
+      });
     }).then(function() {
       return blueprint.removePackageFromProject('ember-welcome-page');
     });
