@@ -1,5 +1,5 @@
 /* eslint-env node */
-const fse = require('fs-extra');
+const fs = require('fs');
 
 const environmentChunk = `
     flashMessageDefaults: {
@@ -25,6 +25,11 @@ const appChunk = `
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
     },`;
 
+function directoryIsEmpty(path) {
+  const files = fs.readdirSync(path);
+  return !files.length;
+}
+
 module.exports = {
   description: '',
 
@@ -43,14 +48,29 @@ module.exports = {
   },
 
   podifyApp() {
-    fse.removeSync('app/controllers');
-    fse.removeSync('app/routes');
-    fse.removeSync('app/templates');
+    if (fs.existsSync('app/controllers/.gitkeep')) {
+      fs.unlinkSync('app/controllers/.gitkeep');
+    }
+    if (fs.existsSync('app/routes/.gitkeep')) {
+      fs.unlinkSync('app/routes/.gitkeep');
+    }
+    if (fs.existsSync('app/templates/components/.gitkeep')) {
+      fs.unlinkSync('app/templates/components/.gitkeep');
+    }
+    if (fs.existsSync('app/templates/application.hbs')) {
+      fs.unlinkSync('app/templates/application.hbs');
+    }
+
+    ['app/controllers', 'app/templates/components', 'app/templates', 'app/routes'].forEach(function(path) {
+      if (fs.existsSync(path) && directoryIsEmpty(path)) {
+        fs.rmdirSync(path);
+      }
+    });
   },
 
   useSCSSInsteadOfCSS() {
-    if (fse.existsSync('app/styles/app.css')) {
-      fse.renameSync('app/styles/app.css', 'app/styles/app.scss');
+    if (fs.existsSync('app/styles/app.css')) {
+      fs.renameSync('app/styles/app.css', 'app/styles/app.scss');
     }
   },
 

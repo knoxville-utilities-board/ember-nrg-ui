@@ -37,7 +37,6 @@
     "ember-responsive": "3.0.0-beta.3",
     "ember-truth-helpers": "2.1.0",
     "marky-markdown": "12.0.0",
-    "node-fs-extra": "^0.8.2",
     "sass": "^1.15.2",
     "semantic-ui-calendar": "0.0.8",
     "semantic-ui-css": "2.3.1",
