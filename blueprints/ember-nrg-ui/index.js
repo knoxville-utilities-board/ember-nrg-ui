@@ -1,5 +1,5 @@
 /* eslint-env node */
-const fs = require('fs');
+const fse = require('fs-extra');
 
 const environmentChunk = `
     flashMessageDefaults: {
@@ -43,23 +43,14 @@ module.exports = {
   },
 
   podifyApp() {
-    if (fs.existsSync('app/controllers/.gitkeep')) {
-      fs.unlinkSync('app/controllers/.gitkeep');
-    }
-    if (fs.existsSync('app/routes/.gitkeep')) {
-      fs.unlinkSync('app/routes/.gitkeep');
-    }
-    if (fs.existsSync('app/templates/components/.gitkeep')) {
-      fs.unlinkSync('app/templates/components/.gitkeep');
-    }
-    if (fs.existsSync('app/templates/application.hbs')) {
-      fs.unlinkSync('app/templates/application.hbs');
-    }
+    fse.removeSync('app/controllers');
+    fse.removeSync('app/routes');
+    fse.removeSync('app/templates');
   },
 
   useSCSSInsteadOfCSS() {
-    if (fs.existsSync('app/styles/app.css')) {
-      fs.renameSync('app/styles/app.css', 'app/styles/app.scss');
+    if (fse.existsSync('app/styles/app.css')) {
+      fse.renameSync('app/styles/app.css', 'app/styles/app.scss');
     }
   },
 
