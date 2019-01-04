@@ -1,0 +1,19 @@
+$primary-color: #232845;
+
+.nrg-application.nrg-application.nrg-application > .main.menu {
+  background-color: rgba($primary-color, .98);
+}
+
+.home-card.home-card.home-card.home-card .image.icon {
+  background-color: $primary-color;
+}
+
+.nrg-logo.nrg-logo.nrg-logo {
+  background-image: url('');
+  background-repeat: no-repeat;
+  background-size: 135px 45px;
+  display: inline-block;
+  height: 45px;
+  margin: 5.5px;
+  width: 135px;
+}
