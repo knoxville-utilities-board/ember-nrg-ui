@@ -3,36 +3,143 @@
 [![Build Status][build-status-img]][build-status-link]
 [![NPM][npm-badge-img]][npm-badge-link]
 
-This README outlines the details of collaborating on this Ember addon.
+Ember NRG UI **supports Ember.js versions from 2.x to 3.3**
+
+![Logo](https://knoxville-utilities-board.github.io/ember-nrg-ui/images/nrg-logo.svg)
+
+Ember NRG UI is an opinionated UI addon based on how KUB scaffolds web applications.
+The addon provides the skeleton of an Ember app so that a developer can immediately start solving a business problem.
+It includes an application shell with sidebar navigation, typical UI components, and a Release Notes route implementation to get you started.
+
+## What it does
+
+- Overwrites `.ember-cli`
+- Overwrites `application.hbs` to use `nrg-application` component
+- Converts the application to `Pods`
+- Converts the application to use Sass
+- Adds routes `/release-notes` and `404 Not Found`
+- Modifies `config/environment.js`
+- Modifies `ember-cli-build.js`
+- Installs `ember-cli-mirage` and `ember-cli-sass`
+- Uninstalls `ember-welcome-page`
+- Adds `public/.htaccess` file
+- Adds `app/styles/_nrg-override.scss` for theming
+
+## Example App
+
+Ember NRG UI comes with a [dummy app](tests/dummy) that implements all of the components.
+__Check out that dummy app for reference__. To start it, run
+
+    git clone git@github.com:knoxville-utilities-board/ember-nrg-ui.git
+    cd ember-nrg-ui
+    yarn install && ember serve
+
+and go to <http://localhost:4200>.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd ember-nrg-ui`
-* `npm install`
+Installing the library is as easy as:
 
-## Running
+```bash
+ember install ember-nrg-ui
+```
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+## Getting Started
 
-## Running Tests
+### Hello World
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+Once the addon is installed, create a new index route and template:
 
-## Building
+```javascript
+// app/index/route.js
 
-* `ember build`
+import Route from '@ember/routing/route';
+import SidebarNavigationMixin from 'ember-nrg-ui/mixins/sidebar-navigation';
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+export default Route.extend(SidebarNavigationMixin, {
+  sidebarLabel: 'Home',
+});
+```
 
-## Deploying
+```html
+<!-- app/index/template.hbs -->
 
-* `ember deploy production`
+<div class="ui segment basic">
+  {{#nrg-home-cards as |view|}}
+    {{view.home-card label="Hello World" icon="globe" route="index" meta="obligatory" }}
+  {{/nrg-home-cards}}
+</div>
+```
+
+### Context Menu
+
+Use the `ContextMenuMixin` to route the user to Release Notes by creating
+an application route.
+
+```javascript
+// app/application/route.js
+
+import Route from '@ember/routing/route';
+import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
+
+export default Route.extend(ContextMenuMixin, {
+
+  contextItems: [{
+    label: 'Release Notes',
+    actionName: 'routeToReleaseNotes',
+    priority: 2,
+  }],
+
+  actions: {
+    routeToReleaseNotes() {
+      this.transitionTo('release-notes');
+    },
+  },
+});
+```
+
+### Theming
+
+Use the `_nrg-override.scss` file to override base colors and Logo
+
+```scss
+// app/styles/_nrg-override.scss
+
+$primary: #6200EE;
+$primaryVariant: #3700B3;
+
+.nrg-application.nrg-application.nrg-application > .main.menu {
+  background-color: rgba($primary, .98);
+}
+
+.nrg-list.nrg-list.nrg-list .items > .item.active.active {
+  background-color: $primary;
+  & .description,
+  & .description > a,
+  & .header,
+  & .meta,
+  & > .icon {
+    color: #fff;
+  }
+}
+
+.home-card.home-card.home-card.home-card .image.icon {
+  background-color: $primaryVariant;
+}
+```
+
+Import the override file into the main `app.scss`
+
+```scss
+// app/styles/app.scss
+
+@import 'nrg-override';
+```
 
 [build-status-img]: https://travis-ci.com/knoxville-utilities-board/ember-nrg-ui.svg?branch=master
+
 [build-status-link]: https://travis-ci.com/knoxville-utilities-board/ember-nrg-ui
+
 [npm-badge-img]: https://badge.fury.io/js/ember-nrg-ui.svg
+
 [npm-badge-link]: http://badge.fury.io/js/ember-nrg-ui
