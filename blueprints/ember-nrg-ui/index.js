@@ -25,6 +25,11 @@ const appChunk = `
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
     },`;
 
+function directoryIsEmpty(path) {
+  const files = fs.readdirSync(path);
+  return !files.length;
+}
+
 module.exports = {
   description: '',
 
@@ -58,6 +63,12 @@ module.exports = {
     if (fs.existsSync('app/templates/application.hbs')) {
       fs.unlinkSync('app/templates/application.hbs');
     }
+
+    ['app/controllers', 'app/templates/components', 'app/templates', 'app/routes'].forEach(function(path) {
+      if (fs.existsSync(path) && directoryIsEmpty(path)) {
+        fs.rmdirSync(path);
+      }
+    });
   },
 
   useSCSSInsteadOfCSS() {
@@ -69,11 +80,8 @@ module.exports = {
   afterInstall() {
     const blueprint = this;
     const nodePackages = [{
-      name: 'ember-cli-sass',
-      target: '^6.1.1'
-    }, {
       name: 'ember-cli-mirage',
-      target: '^0.3.3'
+      target: '^0.4.10'
     }];
 
     this.ui.writeLine('Renaming app.css -> app.scss');
@@ -101,7 +109,9 @@ module.exports = {
         after: "const app = new EmberApp(defaults, {"
       });
     }).then(function() {
-      return blueprint.addPackagesToProject(nodePackages);
+      return blueprint.addAddonsToProject({
+        packages: nodePackages
+      });
     }).then(function() {
       return blueprint.removePackageFromProject('ember-welcome-page');
     }).then(function() {
