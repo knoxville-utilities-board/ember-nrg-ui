@@ -33,6 +33,9 @@ module.exports = {
       __application__: function() {
         return '/app/application';
       },
+      __styles__: function() {
+        return '/app/styles';
+      },
       __root__: function() {
         return '/';
       },
@@ -101,6 +104,8 @@ module.exports = {
       return blueprint.addPackagesToProject(nodePackages);
     }).then(function() {
       return blueprint.removePackageFromProject('ember-welcome-page');
+    }).then(function() {
+      return blueprint.insertIntoFile('app/styles/app.scss', "@import 'nrg-override';");
     });
   },
 
