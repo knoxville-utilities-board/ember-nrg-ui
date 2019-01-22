@@ -24,6 +24,9 @@ Router.map(function() {
     this.route('context-menu');
     this.route('resize');
   });
+  this.route('acceptance', function() {
+    this.route('child');
+  });
 });
 
 export default Router;
