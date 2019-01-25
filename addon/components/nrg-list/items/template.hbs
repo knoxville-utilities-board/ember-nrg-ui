@@ -10,7 +10,7 @@
       {{/with}}
     {{/if}}
     {{#if canSelect}}
-      <div class="{{if (and (exists selected item) canShowActiveItem) 'active'}} item {{unless (list-item-selectable item isSelectable) 'disabled'}}" {{action 'select' item}}>
+      <div class="{{if (and (exists selected item) canShowActiveItem) "active"}} item {{unless (list-item-selectable item isSelectable) "disabled"}}" {{action "select" item}}>
         {{#if hasBlock}}
           {{yield item}}
         {{else}}
@@ -41,7 +41,7 @@
     </div>
   {{/if}}
   {{#if (and pageMeta (not loading) canStepForward)}}
-    <div class="item" {{action 'nextPage'}}>
+    <div class="item" {{action "nextPage"}}>
       <div class="content">
         <div class="header">
           More...

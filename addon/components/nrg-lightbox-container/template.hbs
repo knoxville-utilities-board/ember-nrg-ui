@@ -1,4 +1,4 @@
-{{#nrg-modal isOpen=isOpen lightbox=true autofocus=false onModalOpen='onModalOpen' }}
+{{#nrg-modal isOpen=isOpen lightbox=true autofocus=false onModalOpen="onModalOpen" }}
   <div class="lightbox-upper-container">
     <div class="lightbox-image">
       <div class="image-container">
@@ -17,19 +17,19 @@
     </div>
   {{/if}}
   <div class="lightbox-controls">
-    <button class="ui primary icon button" title="Previous Image" disabled={{previousDisabled}} {{action 'previousImage'}}>
+    <button class="ui primary icon button" title="Previous Image" disabled={{previousDisabled}} {{action "previousImage"}}>
       <i class="chevron left icon"></i>
     </button>
-    <button class="ui primary icon button" title="Rotate Left" {{action 'rotateLeft'}}>
+    <button class="ui primary icon button" title="Rotate Left" {{action "rotateLeft"}}>
       <i class="undo icon"></i>
     </button>
-    <button class="ui primary icon button" title="Detail Location - {{if bottomDetails 'Right' 'Bottom'}}" {{action 'toggleDetailLocation'}}>
-      <i class="{{if bottomDetails 'vertically flipped' 'clockwise rotated'}} columns icon"></i>
+    <button class="ui primary icon button" title="Detail Location - {{if bottomDetails "Right" "Bottom"}}" {{action "toggleDetailLocation"}}>
+      <i class="{{if bottomDetails "vertically flipped" "clockwise rotated"}} columns icon"></i>
     </button>
-    <button class="ui primary icon button" title="Rotate Right" {{action 'rotateRight'}}>
+    <button class="ui primary icon button" title="Rotate Right" {{action "rotateRight"}}>
       <i class="repeat icon"></i>
     </button>
-    <button class="ui primary icon button" title="Next Image" disabled={{nextDisabled}} {{action 'nextImage'}}>
+    <button class="ui primary icon button" title="Next Image" disabled={{nextDisabled}} {{action "nextImage"}}>
       <i class="chevron right icon"></i>
     </button>
   </div>

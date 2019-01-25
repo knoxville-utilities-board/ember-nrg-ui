@@ -1,8 +1,8 @@
 {{#if hasBlock}}
   {{yield (hash
     header=this
-    filter=(component 'nrg-list/header/filter' changed=(action filterChanged))
-    search=(component 'nrg-list/header/search' changed=(action searchChanged))
+    filter=(component "nrg-list/header/filter" changed=(action filterChanged))
+    search=(component "nrg-list/header/search" changed=(action searchChanged))
     filterChangedAction=(action filterChanged))}}
 {{/if}}
 <div class="cleared"></div>
