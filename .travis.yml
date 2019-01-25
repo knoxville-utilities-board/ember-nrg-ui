@@ -17,35 +17,34 @@ env:
     # See https://git.io/vdao3 for details.
     - JOBS=1
 
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
-
-script:
-  - yarn run lint:js
-  # Usually, it's ok to finish the test scenario without reverting
-  #  to the addon's original dependency state, skipping "cleanup".
-  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
-
-stages:
-  - deploy
-  - versioned tests
-
 jobs:
   fail_fast: true
+  allow_failures:
+    - env: EMBER_TRY_SCENARIO=ember-canary
 
   include:
-    - stage: versioned tests
+    # runs linting and tests with current locked deps
+
+    - stage: "Tests"
+      name: "Tests"
+      script:
+        - npm run lint:hbs
+        - npm run lint:js
+        - npm test
+
+    # we recommend new addons test the current and previous LTS
+    # as well as latest stable release (bonus points to beta/canary)
+    - stage: "Additional Tests"
       env: EMBER_TRY_SCENARIO=ember-lts-2.16
     - env: EMBER_TRY_SCENARIO=ember-lts-2.18
     - env: EMBER_TRY_SCENARIO=ember-release
     - env: EMBER_TRY_SCENARIO=ember-beta
     - env: EMBER_TRY_SCENARIO=ember-canary
-    - env: EMBER_TRY_SCENARIO=ember-default
+    - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
 
-    - stage: deploy
-      if: (branch = master OR tag IS present) AND type = push
-      script: node_modules/.bin/ember deploy production
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
 
-  allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
+script:
+  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
