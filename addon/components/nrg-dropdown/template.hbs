@@ -6,7 +6,7 @@
   <i class="dropdown icon"></i>
   <div class="{{menuDirection}} menu">
     {{#each options as |option|}}
-      <div class="{{if option.disabled "disabled"}} item" data-value="{{map-value mapper option}}">
+      <div class="{{if option.disabled "disabled"}} item" data-value={{map-value mapper option}}>
         {{#if hasBlock}}
           {{yield option}}
         {{else}}
