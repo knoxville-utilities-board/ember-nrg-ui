@@ -1,3 +1,4 @@
+/* eslint no-undef: 0 */
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
