@@ -1,7 +1,7 @@
 {{#nrg-modal modalClass="shortcut-modal" isOpen=isOpen headerText="Keyboard Shortcuts"}}
   <table>
-    {{#each sortedSegments as |segment|}}
-      <tbody>
+    <tbody>
+      {{#each sortedSegments as |segment|}}
         {{#if segment.header}}
           <tr>
             <th></th>
@@ -27,7 +27,7 @@
             </td>
           </tr>
         {{/each}}
-      </tbody>
-    {{/each}}
+      {{/each}}
+    </tbody>
   </table>
 {{/nrg-modal}}
