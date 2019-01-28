@@ -10,7 +10,7 @@
       {{/with}}
     {{/if}}
     {{#if canSelect}}
-      <div role="button" class="{{if (and (exists selected item) canShowActiveItem) "active"}} item {{unless (list-item-selectable item isSelectable) "disabled"}}" {{action "select" item}}>
+      <div role="button" class="{{if (and (exists selected item) canShowActiveItem) "active"}} item {{if (list-item-selectable item isSelectable) "" "disabled"}}" {{action "select" item}}>
         {{#if hasBlock}}
           {{yield item}}
         {{else}}
