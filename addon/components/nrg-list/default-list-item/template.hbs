@@ -1,6 +1,6 @@
 {{#if image}}
   <div class="image">
-    <img src={{image}}>
+    <img src={{image}} alt={{altText}}>
   </div>
 {{/if}}
 <div class="middle aligned content">
@@ -20,7 +20,7 @@
   {{#if (or hasBlock item.labels)}}
     <div class="extra">
       {{#each item.labels as |label|}}
-        <div class="ui label" {{action "openLink" label.link label.openLinkInNewWindow bubbles=false}}>
+        <div role="button" class="ui label" {{action "openLink" label.link label.openLinkInNewWindow bubbles=false}}>
           {{#if label.icon}}
             <i class="{{label.icon}} icon"></i>
             {{label.text}}

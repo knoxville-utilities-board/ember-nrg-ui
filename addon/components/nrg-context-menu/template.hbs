@@ -9,7 +9,7 @@
           {{ui-checkbox label=option.label checked=option.checked onChange=(action "itemChecked" option)}}
         </div>
       {{else}}
-        <div class="{{if option.disabled "disabled"}} item" {{action "itemSelected" option}}>
+        <div role="button" class="{{if option.disabled "disabled"}} item" {{action "itemSelected" option}}>
           {{#if option.iconClass}}
             <i class="icon {{option.iconClass}}"></i>
           {{/if}}
