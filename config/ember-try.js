@@ -9,11 +9,12 @@ module.exports = function() {
     getChannelURL('canary')
   ]).then((urls) => {
     return {
-      scenarios: [
-        {
+      scenarios: [{
           name: 'ember-lts-2.16',
           env: {
-            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true }),
+            EMBER_OPTIONAL_FEATURES: JSON.stringify({
+              'jquery-integration': true
+            }),
           },
           npm: {
             devDependencies: {
@@ -25,7 +26,9 @@ module.exports = function() {
         {
           name: 'ember-lts-2.18',
           env: {
-            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true }),
+            EMBER_OPTIONAL_FEATURES: JSON.stringify({
+              'jquery-integration': true
+            }),
           },
           npm: {
             devDependencies: {
@@ -42,37 +45,21 @@ module.exports = function() {
             }
           }
         },
-        resolutions: {
-          'ember': 'release'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null
-        }
-      }
-    },
-    {
-      name: 'ember-beta',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#beta'
+        {
+          name: 'ember-beta',
+          npm: {
+            devDependencies: {
+              'ember-source': urls[1]
+            }
+          }
         },
-        resolutions: {
-          'ember': 'beta'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null
-        }
-      }
-    },
-    {
-      name: 'ember-canary',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#canary'
+        {
+          name: 'ember-canary',
+          npm: {
+            devDependencies: {
+              'ember-source': urls[2]
+            }
+          }
         },
         {
           name: 'ember-default',
@@ -93,13 +80,7 @@ module.exports = function() {
             }
           }
         }
-      }
-    },
-    {
-      name: 'ember-default',
-      npm: {
-        devDependencies: {}
-      }
-    }
-  ]
+      ]
+    };
+  });
 };
