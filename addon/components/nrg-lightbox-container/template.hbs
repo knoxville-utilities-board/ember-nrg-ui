@@ -7,13 +7,13 @@
     </div>
     {{#unless bottomDetails}}
       <div class="lightbox-details">
-        {{{selectedPhoto.detail}}}
+        {{selectedPhotoDetail}}
       </div>
     {{/unless}}
   </div>
   {{#if bottomDetails}}
     <div class="lightbox-details--bottom">
-      {{{selectedPhoto.detail}}}
+      {{selectedPhotoDetail}}
     </div>
   {{/if}}
   <div class="lightbox-controls">
