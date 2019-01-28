@@ -1,5 +1,5 @@
 .ui.vertical.left.menu.sidebar-menu {
-  > .item {
+  >.item {
     padding-left: 0.9em;
     padding-right: 0.9em;
   }
@@ -15,7 +15,7 @@
       flex: 0 0 auto;
     }
   }
-  & > .main.menu {
+  &>.main.menu {
     background-color: rgba($appbar-color, .98);
     height: $appbar-height;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
@@ -64,7 +64,7 @@
     transform: none !important;
 
     & .sidebar-modal.sidebar-modal,
-    & .sidebar-solid > .sidebar-menu {
+    & .sidebar-solid>.sidebar-menu {
       position: fixed;
       top: $appbar-height;
       left: 0;
