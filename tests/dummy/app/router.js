@@ -10,6 +10,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   nrgRoutes(this);
   this.route('view-components', function() {
+    this.route('nrg-error-pages');
     this.route('nrg-form-container');
     this.route('nrg-home-cards');
     this.route('nrg-loading-indicator');
