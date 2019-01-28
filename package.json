@@ -1,24 +1,28 @@
 {
   "name": "ember-nrg-ui",
   "version": "1.0.1",
-  "description": "",
-  "repository": "",
+  "description": "Opinionated UI addon based on how KUB scaffolds web applications",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "Semantic UI"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knoxville-utilities-board/ember-nrg-ui"
+  },
   "license": "MIT",
   "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
- 
   "scripts": {
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
-    "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
+    "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember try:each"
+    "test": "ember test",
+    "test:all": "ember try:each"
   },
   "dependencies": {
     "broccoli-stew": "2.0.0",
@@ -45,6 +49,7 @@
     "semantic-ui-ember": "Semantic-Org/Semantic-UI-Ember#9d5f93c750b5d25329da8ab38e04f74f543c0a32"
   },
   "devDependencies": {
+    "@ember/jquery": "^0.5.1",
     "@ember/optional-features": "^0.6.3",
     "broccoli-asset-rev": "3.0.0",
     "ember-ajax": "3.1.1",
@@ -59,7 +64,7 @@
     "ember-cli-mirage": "0.4.9",
     "ember-cli-qunit": "4.3.2",
     "ember-cli-sri": "2.1.1",
-    "ember-cli-template-lint": "^1.0.0-beta.1",
+    "ember-cli-template-lint": "^1.0.0-beta.2",
     "ember-cli-uglify": "2.1.0",
     "ember-code-snippet": "2.3.1",
     "ember-data": "3.4.4",
@@ -67,12 +72,12 @@
     "ember-export-application-global": "2.0.0",
     "ember-load-initializers": "1.1.0",
     "ember-resolver": "5.0.1",
-    "ember-source": "3.4.4",
+    "ember-source": "~3.4.4",
     "ember-source-channel-url": "1.1.0",
     "ember-try": "1.1.0",
     "eslint-plugin-ember": "5.2.0",
     "eslint-plugin-node": "7.0.1",
-    "loader.js": "4.7.0"
+    "loader.js": "4.7.0"  
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
