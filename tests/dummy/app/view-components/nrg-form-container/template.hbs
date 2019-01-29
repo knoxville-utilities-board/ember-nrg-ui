@@ -1,9 +1,9 @@
-{{#nrg-code-block label="Forms API" codeBlockName='form-api.hbs' }}
+{{#nrg-code-block label="Forms API" codeBlockName="form-api.hbs" }}
   <!-- BEGIN-SNIPPET form-api -->
   {{#nrg-form-container as |form|}}
-    {{#form.field label='Text Field' required=required as |field|}}
-      {{#field.text-field class='left icon action' disabled=disabled as |view|}}
-        {{nrg-icon icon='settings'}}
+    {{#form.field label="Text Field" required=required as |field|}}
+      {{#field.text-field class="left icon action" disabled=disabled as |view|}}
+        {{nrg-icon icon="settings"}}
         {{view.input}}
         {{nrg-button class="primary" text="Action"}}
       {{/field.text-field}}
@@ -11,68 +11,68 @@
     <br>
     <div class="four fields">
       <div class="field"></div>
-      {{#form.field label='Text Field (turkey)' required=required as |field|}}
-        {{field.text-field model=this valuePath='turkey' disabled=disabled}}
+      {{#form.field label="Text Field (turkey)" required=required as |field|}}
+        {{field.text-field model=this valuePath="turkey" disabled=disabled}}
       {{/form.field}}
-      {{#form.field label='Text Field (meal)' required=required as |field|}}
-        {{field.text-field model=this valuePath='meal' disabled=disabled}}
+      {{#form.field label="Text Field (meal)" required=required as |field|}}
+        {{field.text-field model=this valuePath="meal" disabled=disabled}}
       {{/form.field}}
-      {{#form.field label='Text Field (super)' required=required as |field|}}
-        {{field.text-field model=this valuePath='super' disabled=disabled}}
+      {{#form.field label="Text Field (super)" required=required as |field|}}
+        {{field.text-field model=this valuePath="super" disabled=disabled}}
       {{/form.field}}
-      {{#form.field label='Text Field (deal)' required=required as |field|}}
-        {{field.text-field model=this valuePath='deal' disabled=disabled}}
+      {{#form.field label="Text Field (deal)" required=required as |field|}}
+        {{field.text-field model=this valuePath="deal" disabled=disabled}}
       {{/form.field}}
     </div>
     <br>
-    {{#form.field label='Text Area' required=required as |field|}}
-      {{field.text-area model=this valuePath='textArea1' disabled=disabled}}
+    {{#form.field label="Text Area" required=required as |field|}}
+      {{field.text-area model=this valuePath="textArea1" disabled=disabled}}
     {{/form.field}}
     <br>
     <div class="two fields">
-      {{#form.field label='Text Area' required=required as |field|}}
+      {{#form.field label="Text Area" required=required as |field|}}
         {{field.text-area disabled=disabled}}
       {{/form.field}}
-      {{#form.field label='Text Area' required=required as |field|}}
+      {{#form.field label="Text Area" required=required as |field|}}
         {{field.text-area disabled=disabled}}
       {{/form.field}}
     </div>
     <br>
-    {{#form.field label='Datetime' required=required as |field|}}
+    {{#form.field label="Datetime" required=required as |field|}}
       {{field.datetime disabled=disabled}}
     {{/form.field}}
     <br>
-    {{#form.field label='Datetime (Button)' required=required as |field|}}
+    {{#form.field label="Datetime (Button)" required=required as |field|}}
       {{#field.datetime disabled=disabled}}
         {{nrg-button class="green" text="Open Datepicker"}}
       {{/field.datetime}}
     {{/form.field}}
     <br>
-    {{#form.field label='Dropdown' required=required as |field|}}
+    {{#form.field label="Dropdown" required=required as |field|}}
       {{field.dropdown options=optionList disabled=disabled}}
     {{/form.field}}
     <br>
     <div class="grouped fields">
       {{#form.field inline=true required=required as |field|}}
-        {{field.checkbox label='Checkbox' model=this valuePath='checkbox1' disabled=disabled}}
+        {{field.checkbox label="Checkbox" model=this valuePath="checkbox1" disabled=disabled}}
       {{/form.field}}
       {{#form.field inline=true required=required as |field|}}
-        {{field.checkbox type='slider' label='Slider' checked=true disabled=disabled}}
+        {{field.checkbox type="slider" label="Slider" checked=true disabled=disabled}}
       {{/form.field}}
       {{#form.field inline=true required=required as |field|}}
-        {{field.checkbox type='toggle' label='Toggle'  disabled=disabled}}
+        {{field.checkbox type="toggle" label="Toggle"  disabled=disabled}}
       {{/form.field}}
     </div>
     <br>
     <div class="inline fields">
       {{#form.field required=required as |field|}}
-        {{field.checkbox label='Inline Checkbox' model=this valuePath='checkbox1' disabled=disabled}}
+        {{field.checkbox label="Inline Checkbox" model=this valuePath="checkbox1" disabled=disabled}}
       {{/form.field}}
       {{#form.field required=required as |field|}}
-        {{field.checkbox type='slider' label='Inline Slider' checked=true disabled=disabled}}
+        {{field.checkbox type="slider" label="Inline Slider" checked=true disabled=disabled}}
       {{/form.field}}
       {{#form.field required=required as |field|}}
-        {{field.checkbox type='toggle'  label='Inline Toggle' disabled=disabled}}
+        {{field.checkbox type="toggle"  label="Inline Toggle" disabled=disabled}}
       {{/form.field}}
     </div>
     <br>
@@ -108,9 +108,9 @@
 
     {{form.submit-button}}
     {{nrg-button class="basic black" text="Cancel"}}
-    {{form.form-action text='Toggle Required' action='requiredToggle'}}
-    {{form.form-action text='Toggle Disabled' action='disabledToggle'}}
-    {{#form.form-link 'index'}}
+    {{form.form-action text="Toggle Required" action="requiredToggle"}}
+    {{form.form-action text="Toggle Disabled" action="disabledToggle"}}
+    {{#form.form-link "index"}}
       Index
     {{/form.form-link}}
   {{/nrg-form-container}}

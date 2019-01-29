@@ -1,20 +1,20 @@
-<a class='nrg-logo' href='{{appReloadLocation}}'></a>
+<a class="nrg-logo" href={{appReloadLocation}}></a>
 {{#each visibleMenuItems as |menuItem|}}
   {{#if menuItem.children.length}}
     <div class="item">
-      {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink') isParentGroup=true}}
+      {{nrg-sidebar-menu-item item=menuItem clickedLink=(action "clickedLink") isParentGroup=true}}
       {{#if menuItem.children}}
         <div class="menu">
           {{#each menuItem.children as |child|}}
             {{#if child.isShownInSidebar}}
-              {{nrg-sidebar-menu-item item=child clickedLink=(action 'clickedLink') sidebarAction=(action 'sidebarAction')}}
+              {{nrg-sidebar-menu-item item=child clickedLink=(action "clickedLink") sidebarAction=(action "sidebarAction")}}
             {{/if}}
           {{/each}}
         </div>
       {{/if}}
     </div>
   {{else}}
-    {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink') sidebarAction=(action 'sidebarAction')}}
+    {{nrg-sidebar-menu-item item=menuItem clickedLink=(action "clickedLink") sidebarAction=(action "sidebarAction")}}
   {{/if}}
 {{/each}}
 
@@ -23,6 +23,6 @@
     <div class="footer-pusher"></div>
   {{/if}}
   {{#each visibleFooterItems as |menuItem|}}
-    {{nrg-sidebar-menu-item item=menuItem clickedLink=(action 'clickedLink') sidebarAction=(action 'sidebarAction')}}
+    {{nrg-sidebar-menu-item item=menuItem clickedLink=(action "clickedLink") sidebarAction=(action "sidebarAction")}}
   {{/each}}
 </div>

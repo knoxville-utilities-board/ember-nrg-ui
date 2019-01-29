@@ -1,5 +1,5 @@
 {{#if label}}
-  <label for="{{focusId}}">
+  <label for={{focusId}}>
     {{label}}
     {{#if secondaryLabel}}
       <div class="ui basic horizontal label">{{secondaryLabel}}</div>
@@ -9,12 +9,12 @@
 
 {{yield (hash
   field=this
-  checkbox=(component 'nrg-checkbox' field=this)
-  datetime=(component 'nrg-datetime' field=this)
-  dropdown=(component 'nrg-dropdown' field=this)
-  radio=(component 'nrg-radio' field=this)
-  text-area=(component 'nrg-text-area' fluid=true field=this)
-  text-field=(component 'nrg-text-field' fluid=true field=this)
+  checkbox=(component "nrg-checkbox" field=this)
+  datetime=(component "nrg-datetime" field=this)
+  dropdown=(component "nrg-dropdown" field=this)
+  radio=(component "nrg-radio" field=this)
+  text-area=(component "nrg-text-area" fluid=true field=this)
+  text-field=(component "nrg-text-field" fluid=true field=this)
 )}}
 
 {{#if errorMessage}}

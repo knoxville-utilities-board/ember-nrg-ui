@@ -1,6 +1,7 @@
-{{nrg-appbar title=title toggleSidebar='toggleSidebar'}}
+{{! template-lint-disable no-inline-styles }}
+{{nrg-appbar title=title toggleSidebar="toggleSidebar"}}
 <div class="pushable">
-  {{nrg-sidebar isOpen=sidebarIsOpen context=(concat '#' elementId ' .pushable')}}
+  {{nrg-sidebar isOpen=sidebarIsOpen context=(concat "#" elementId " .pushable")}}
   {{#if fullscreenMap}}
     <div class="pusher">
       {{#if sidebarMenuIsOpen}}
@@ -23,7 +24,7 @@
         </div>
       {{/if}}
       <div class="main-content" style={{mainContentStyle}}>
-        <div class="ui {{if fluid 'fluid'}} container">
+        <div class="ui {{if fluid "fluid"}} container">
           {{#each flashMessages.queue as |flash|}}
             {{#nrg-flash-message-wrapper as |view|}}
               {{view.flashMessage flash=flash}}
