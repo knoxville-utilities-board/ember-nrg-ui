@@ -3,11 +3,11 @@
     {{nrg-sidebar-menu-item/content item=item}}
   </a>
 {{else if item.sidebarURL}}
-  <a href={{item.sidebarURL}} class="item" target="_blank" rel="noopener" {{action 'clickedLink' item preventDefault=false}}>
+  <a href={{item.sidebarURL}} class="item" target="_blank" rel="noopener" {{action "clickedLink" item preventDefault=false}}>
     {{nrg-sidebar-menu-item/content item=item}}
   </a>
 {{else}}
-  {{#link-to item.routeName class=_linkToItemClass click=(action 'clickedLink' item)}}
+  {{#link-to item.routeName class=_linkToItemClass click=(action "clickedLink" item)}}
     {{nrg-sidebar-menu-item/content item=item}}
   {{/link-to}}
 {{/if}}

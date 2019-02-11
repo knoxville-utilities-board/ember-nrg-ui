@@ -12,7 +12,6 @@ import hbs from 'htmlbars-inline-precompile';
 import $ from 'jquery';
 
 module('Integration | Component | nrg-sidebar', function(hooks) {
-
   hooks.afterEach(() => {
     // Clean up sidebar remenants
     $('.sidebar-modal').remove();
@@ -22,12 +21,14 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
   setupRenderingTest(hooks);
 
   test('sidebar is not visible', async function(assert) {
-    await render(hbs `{{nrg-sidebar isOpen=false}}`);
+    this.set('clickedItem', () => {});
+    await render(hbs `{{nrg-sidebar isOpen=false clicked=(action clickedItem)}}`);
     assert.equal($('.ui.sidebar.visible').length, 0);
   });
 
   test('sidebar is visible', async function(assert) {
-    await render(hbs `{{nrg-sidebar isOpen=true}}`);
+    this.set('clickedItem', () => {});
+    await render(hbs `{{nrg-sidebar isOpen=true clicked=(action clickedItem)}}`);
     assert.equal($('.ui.sidebar.visible').length, 1);
   });
 
@@ -38,7 +39,8 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
       routeName: '',
       isShownInSidebar: true,
     });
-    await render(hbs `{{nrg-sidebar}}`);
+    this.set('clickedItem', () => {});
+    await render(hbs `{{nrg-sidebar clicked=(action clickedItem)}}`);
     assert.ok($('.ui.sidebar').text().trim().match(/Home/));
   });
 });
