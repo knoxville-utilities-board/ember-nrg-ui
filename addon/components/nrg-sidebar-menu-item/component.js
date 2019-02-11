@@ -19,4 +19,10 @@ export default Component.extend({
   _linkToItemClass: computed('isParentGroup', function() {
     return this.get('isParentGroup') ? 'parent-route': 'item';
   }),
+
+  actions: {
+    clickedLink(item) {
+      this.clicked(item);
+    },
+  },
 });

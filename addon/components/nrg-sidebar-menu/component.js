@@ -24,9 +24,6 @@ export default Component.extend({
   hasVisibleFooterItems: notEmpty('visibleFooterItems'),
 
   actions: {
-    clickedLink() {
-      this.sendAction();
-    },
     sidebarAction(menuItem) {
       menuItem.sidebarAction();
     },
