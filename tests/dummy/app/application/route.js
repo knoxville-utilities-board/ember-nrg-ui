@@ -24,6 +24,6 @@ export default Route.extend(ContextMenuMixin, KeyboardShortcutMixin, {
       this.transitionTo('view-mixins.global-keyboard-shortcut');
     },
     // eslint-disable-next-line no-unused-vars
-    clickedLink(item) {},
+    clicked(item) {},
   },
 });

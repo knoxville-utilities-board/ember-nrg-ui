@@ -27,5 +27,10 @@ export default Component.extend({
     sidebarAction(menuItem) {
       menuItem.sidebarAction();
     },
+    clickedLink(item) {
+      if (this.clicked) {
+        this.clicked(item);
+      }
+    },
   },
 });
