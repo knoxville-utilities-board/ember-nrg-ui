@@ -34,8 +34,8 @@
   .ui.dropdown {
     & > .text {
       max-width: 110px;
-      text-overflow: ellipsis;
       overflow-x: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
       @media (min-width: $tablet-breakpoint) {
         max-width: 280px;
