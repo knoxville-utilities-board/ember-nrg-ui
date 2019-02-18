@@ -21,14 +21,12 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
   setupRenderingTest(hooks);
 
   test('sidebar is not visible', async function(assert) {
-    this.set('clickedItem', () => {});
-    await render(hbs `{{nrg-sidebar isOpen=false clicked=(action clickedItem)}}`);
+    await render(hbs `{{nrg-sidebar isOpen=false}}`);
     assert.equal($('.ui.sidebar.visible').length, 0);
   });
 
   test('sidebar is visible', async function(assert) {
-    this.set('clickedItem', () => {});
-    await render(hbs `{{nrg-sidebar isOpen=true clicked=(action clickedItem)}}`);
+    await render(hbs `{{nrg-sidebar isOpen=true}}`);
     assert.equal($('.ui.sidebar.visible').length, 1);
   });
 
@@ -39,8 +37,7 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
       routeName: '',
       isShownInSidebar: true,
     });
-    this.set('clickedItem', () => {});
-    await render(hbs `{{nrg-sidebar clicked=(action clickedItem)}}`);
+    await render(hbs `{{nrg-sidebar}}`);
     assert.ok($('.ui.sidebar').text().trim().match(/Home/));
   });
 });

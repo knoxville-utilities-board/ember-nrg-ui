@@ -57,8 +57,8 @@ export default Component.extend(ResizeMixin, {
       }
     },
     clickedLink(item) {
-      if (this.clicked) {
-        this.clicked(item);
+      if (this.clickedSidebarItem) {
+        this.clickedSidebarItem(item);
       }
     },
   },

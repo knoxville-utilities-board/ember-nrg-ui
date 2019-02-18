@@ -1,3 +1,3 @@
 {{#ui-sidebar class="sidebar-modal menu" elementId=sidebarId onHide=(action "onHide") context=context transition="overlay" mobileTransition="overlay" silent=true}}
-  {{nrg-sidebar-menu action="onHide" clicked=clicked}}
+  {{nrg-sidebar-menu action="onHide" clickedSidebarItem=(action "clickedLink")}}
 {{/ui-sidebar}}

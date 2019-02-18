@@ -14,8 +14,7 @@ module('Integration | Component | nrg-application', function(hooks) {
   setupRenderingTest(hooks);
 
   test('title rendered', async function(assert) {
-    this.set('clickedItem', () => {});
-    await render(hbs `{{nrg-application title='Application Title' clicked=(action clickedItem)}}`);
+    await render(hbs `{{nrg-application title='Application Title'}}`);
     assert.ok(this.element.textContent.trim().match(/Application Title/));
   });
 });

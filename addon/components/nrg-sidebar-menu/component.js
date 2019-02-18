@@ -28,8 +28,8 @@ export default Component.extend({
       menuItem.sidebarAction();
     },
     clickedLink(item) {
-      if (this.clicked) {
-        this.clicked(item);
+      if (this.clickedSidebarItem) {
+        this.clickedSidebarItem(item);
       }
     },
   },
