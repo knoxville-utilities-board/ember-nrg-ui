@@ -13,7 +13,7 @@ import Validation from 'ember-nrg-ui/mixins/validation';
 export default Component.extend(Validation, {
   layout,
   classNames: ['ui', 'checkbox'],
-  classNameBindings: ['type'],
+  classNameBindings: ['type', 'disabled', 'fitted', 'readonly:read-only'],
 
   readonly: false,
   checked: alias('value'),
