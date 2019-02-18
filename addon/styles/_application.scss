@@ -148,10 +148,24 @@
   }
 }
 
-.environment-title.environment-title {
-  color: red;
-  padding-left: 5px;
-  font-size: 16px;
+.title-item {
+  max-width: 145px;
+  @media (min-width: 375px) {
+    max-width: 200px;
+  }
+  @media (min-width: $tablet-breakpoint) {
+    max-width: 500px;
+  }
+  .title-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .environment-title {
+    color: red;
+    padding-left: 5px;
+    font-size: 16px;
+  }
 }
 
 .text-center {
