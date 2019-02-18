@@ -3,6 +3,7 @@ import {
 } from '@ember/object';
 import {
   alias,
+  bool,
 } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
@@ -15,20 +16,20 @@ export default Component.extend(Validation, {
 
   readonly: false,
   checked: alias('value'),
-  _checked: computed('checked', {
-    get() {
-      return this.get('checked');
-    },
-    set(key, value) {
-      this.set('checked', value);
-      this.sendAction('action', value);
-      return value;
-    },
-  }),
-
+  _checked: bool('checked'),
   bindValue: true,
 
   inputId: computed('elementId', function(){
     return this.get('elementId') + '-input';
   }),
+
+  actions:{
+    onChange(evt){
+      const checked = evt.target.checked;
+      if (this.get('bindValue')) {
+        this.set('checked', checked);
+      }
+      this.sendAction('action', checked);
+    },
+  }
 });
