@@ -31,6 +31,23 @@
       overflow-y: auto;
     }
   }
+  .ui.dropdown {
+    & > .text {
+      max-width: 110px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      @media (min-width: $tablet-breakpoint) {
+        max-width: 280px;
+      }
+      @media (min-width: $computer-breakpoint) {
+        max-width: 440px;
+      }
+    }
+    & > .dropdown.icon {
+      top: -15px;
+    }
+  }
 }
 
 .nrg-list.nrg-list.nrg-list {
