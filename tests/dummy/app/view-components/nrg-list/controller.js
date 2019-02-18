@@ -22,6 +22,9 @@ export default Controller.extend({
   }, {
     label: 'Cats',
     value: 'cat',
+  }, {
+    label: 'This is a very long filter name that also filters by Cats.',
+    value: 'cat',
   }]),
 
   items: A([{
