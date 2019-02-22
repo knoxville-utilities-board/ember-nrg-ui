@@ -22,7 +22,15 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
   test('click toggles state', async function(assert) {
     this.checked = false;
     await render(hbs `{{nrg-checkbox checked=checked}}`);
-    this.$('.checkbox').click();
+    this.$('.checkbox > input').click();
+
+    assert.ok(this.checked);
+  });
+
+  test('clicking label toggles state', async function(assert) {
+    this.checked = false;
+    await render(hbs `{{nrg-checkbox checked=checked}}`);
+    this.$('.checkbox > label').click();
 
     assert.ok(this.checked);
   });

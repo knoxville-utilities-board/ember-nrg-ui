@@ -1,1 +1,2 @@
-{{ui-checkbox class=type label=label name=name checked=_checked disabled=disabled readonly=readonly onChange=(action "onChange")}}
+{{input id=inputId class="hidden" type="checkbox" checked=_checked name=name disabled=disabled readonly=readonly change=(action "onChange")}}
+<label for={{inputId}}>{{label}}</label>
