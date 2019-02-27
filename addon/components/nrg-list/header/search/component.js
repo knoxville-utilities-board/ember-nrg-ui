@@ -43,7 +43,7 @@ export default Component.extend(GlobalKeyboardShortcutsMixin, {
 
   actions: {
     focus() {
-      this.$('input').focus();
+      this.$('input')[0].focus();
     },
   },
 });
