@@ -79,10 +79,16 @@ module.exports = {
 
   afterInstall() {
     const blueprint = this;
-    const nodePackages = [{
-      name: 'ember-cli-mirage',
-      target: '^0.4.10'
-    }];
+    const nodePackages = [
+      {
+        name: 'ember-cli-mirage',
+        target: '^0.4.10'
+      },
+      {
+        name: 'ember-cli-sass',
+        target: '8.0.1'
+      }
+    ];
 
     this.ui.writeLine('Renaming app.css -> app.scss');
     this.useSCSSInsteadOfCSS();
