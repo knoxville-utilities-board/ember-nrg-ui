@@ -46,6 +46,7 @@ export default Component.extend(ResizeMixin, {
       }
     },
     clickedLink(item) {
+      this.send('onHide');
       if (this.clickedSidebarItem) {
         this.clickedSidebarItem(item);
       }
