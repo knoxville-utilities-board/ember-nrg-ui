@@ -12,7 +12,6 @@ import hbs from 'htmlbars-inline-precompile';
 import $ from 'jquery';
 
 module('Integration | Component | nrg-sidebar', function(hooks) {
-
   hooks.afterEach(() => {
     // Clean up sidebar remenants
     $('.sidebar-modal').remove();

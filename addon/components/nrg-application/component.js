@@ -56,5 +56,10 @@ export default Component.extend(ResizeMixin, {
         this.toggleProperty('sidebarIsOpen');
       }
     },
+    clickedLink(item) {
+      if (this.clickedSidebarItem) {
+        this.clickedSidebarItem(item);
+      }
+    },
   },
 });

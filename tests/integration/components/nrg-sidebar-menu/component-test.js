@@ -22,7 +22,7 @@ module('Integration | Component | nrg-sidebar-menu', function(hooks) {
       isShownInSidebar: true,
     });
 
-    await render(hbs `{{nrg-sidebar}}`);
+    await render(hbs `{{nrg-sidebar clickedSidebarItem=clickedSidebarItem}}`);
 
     assert.ok($('.ui.sidebar').text().trim().match(/Home/));
   });

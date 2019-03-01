@@ -1,12 +1,12 @@
 {{! template-lint-disable no-inline-styles }}
 {{nrg-appbar title=title toggleSidebar="toggleSidebar"}}
 <div class="pushable">
-  {{nrg-sidebar isOpen=sidebarIsOpen context=(concat "#" elementId " .pushable")}}
+  {{nrg-sidebar isOpen=sidebarIsOpen context=(concat "#" elementId " .pushable") clickedSidebarItem=(action "clickedLink")}}
   {{#if fullscreenMap}}
     <div class="pusher">
       {{#if sidebarMenuIsOpen}}
         <div class="sidebar-solid">
-          {{nrg-sidebar-menu}}
+          {{nrg-sidebar-menu clickedSidebarItem=(action "clickedLink")}}
         </div>
       {{/if}}
       {{#each flashMessages.queue as |flash|}}
@@ -20,7 +20,7 @@
     <div class="pusher sidebar-flex-container">
       {{#if sidebarMenuIsOpen}}
         <div class="sidebar-solid">
-          {{nrg-sidebar-menu}}
+          {{nrg-sidebar-menu clickedSidebarItem=(action "clickedLink")}}
         </div>
       {{/if}}
       <div class="main-content" style={{mainContentStyle}}>
