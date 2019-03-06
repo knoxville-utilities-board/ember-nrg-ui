@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/application/service';
+export { default } from 'ember-nrg-ui/application/service';

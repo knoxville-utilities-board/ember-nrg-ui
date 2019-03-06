@@ -1,14 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  visit,
-  find
-} from '@ember/test-helpers';
-import {
-  setupApplicationTest
-} from 'ember-qunit';
+import { module, test } from 'qunit';
+import { visit, find } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
 
 module('Acceptance | focus first input', function(hooks) {
   setupApplicationTest(hooks);

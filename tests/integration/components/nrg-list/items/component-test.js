@@ -1,16 +1,7 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
-import {
-  A,
-} from '@ember/array';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
+import { A } from '@ember/array';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nrg-list/items', function(hooks) {
@@ -28,7 +19,9 @@ module('Integration | Component | nrg-list/items', function(hooks) {
     this.isSelectable = function() {
       return true;
     };
-    await render(hbs `{{nrg-list/items isSelectable=isSelectable selectionType='single' selected=selected items=items itemClicked=(action selectAction)}}`);
+    await render(
+      hbs`{{nrg-list/items isSelectable=isSelectable selectionType='single' selected=selected items=items itemClicked=(action selectAction)}}`
+    );
     this.$('.item').click();
     assert.equal(this.selected.length, 1);
   });
@@ -38,7 +31,7 @@ module('Integration | Component | nrg-list/items', function(hooks) {
       label: 'label1',
     };
     const item2 = {
-      label: 'label2'
+      label: 'label2',
     };
     this.selected = A([]);
     this.items = [item1, item2];
@@ -48,10 +41,15 @@ module('Integration | Component | nrg-list/items', function(hooks) {
     this.isSelectable = function(item) {
       return item.label !== 'label1';
     };
-    await render(hbs `{{nrg-list/items isSelectable=isSelectable selectionType='multiple' selected=selected items=items itemClicked=(action selectAction)}}`);
-    this.$('.item').eq(0).click();
-    this.$('.item').eq(1).click();
+    await render(
+      hbs`{{nrg-list/items isSelectable=isSelectable selectionType='multiple' selected=selected items=items itemClicked=(action selectAction)}}`
+    );
+    this.$('.item')
+      .eq(0)
+      .click();
+    this.$('.item')
+      .eq(1)
+      .click();
     assert.equal(this.selected.length, 1);
   });
-
 });

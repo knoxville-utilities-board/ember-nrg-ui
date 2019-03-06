@@ -1,13 +1,8 @@
-import {
-  getKeyCode,
-  getMouseCode
-} from 'ember-keyboard';
+import { getKeyCode, getMouseCode } from 'ember-keyboard';
 import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
 import validMouseButtons from 'ember-keyboard/fixtures/mouse-buttons-array';
 import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
-import {
-  triggerEvent,
-} from '@ember/test-helpers';
+import { triggerEvent } from '@ember/test-helpers';
 
 const keyEvent = function keyEvent(attributes, type, element) {
   const event = (attributes || '').split('+').reduce((event, attribute) => {
@@ -24,7 +19,7 @@ const keyEvent = function keyEvent(attributes, type, element) {
     return event;
   }, {});
   return triggerEvent(element || document.body, type, event);
-}
+};
 
 export const keyDown = function(attributes, element) {
   return keyEvent(attributes, 'keydown', element);

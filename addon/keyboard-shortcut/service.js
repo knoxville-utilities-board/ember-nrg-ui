@@ -1,26 +1,10 @@
 import Service from '@ember/service';
-import {
-  getCode,
-  keyDown,
-  EKMixin,
-  EKOnInitMixin,
-} from 'ember-keyboard';
-import {
-  A,
-  isArray
-} from '@ember/array';
-import {
-  computed
-} from '@ember/object';
-import {
-  on,
-} from '@ember/object/evented';
-import {
-  sort
-} from '@ember/object/computed';
-import {
-  assert,
-} from '@ember/debug';
+import { getCode, keyDown, EKMixin, EKOnInitMixin } from 'ember-keyboard';
+import { A, isArray } from '@ember/array';
+import { computed } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { sort } from '@ember/object/computed';
+import { assert } from '@ember/debug';
 import modifierKeys from './modifier-keys';
 
 export default Service.extend(EKMixin, EKOnInitMixin, {
@@ -30,7 +14,11 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
   modalIsOpen: false,
 
   shortcuts: sort('_shortcuts', 'shortcutsSort'),
-  shortcutsSort: ['priority:desc', 'shortcutRegisteredTime:asc', 'description:asc'],
+  shortcutsSort: [
+    'priority:desc',
+    'shortcutRegisteredTime:asc',
+    'description:asc',
+  ],
 
   _shortcuts: computed('registeredClients.[]', function() {
     const shortcuts = A();
@@ -64,7 +52,10 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
     });
     if (firstMatchingShortcut) {
       this.set('modalIsOpen', false);
-      firstMatchingShortcut.client.send(firstMatchingShortcut.actionName, event);
+      firstMatchingShortcut.client.send(
+        firstMatchingShortcut.actionName,
+        event
+      );
       this.set('lastCode', null);
       event.preventDefault();
     } else {
@@ -80,11 +71,14 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
       let lastCode = null;
 
       if (isArray(clientShortcut.key)) {
-        assert('Chained shortcuts longer than two keys are not currently supported.', clientShortcut.key.length == 2)
+        assert(
+          'Chained shortcuts longer than two keys are not currently supported.',
+          clientShortcut.key.length == 2
+        );
         lastCode = clientShortcut.key[0];
         code = clientShortcut.key[1];
       }
-      const header = clientShortcut.header || clientHeader || "";
+      const header = clientShortcut.header || clientHeader || '';
 
       assert('Shortcuts must have a description', clientShortcut.description);
       return {
@@ -98,8 +92,8 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
         alt: clientShortcut.alt || false,
         ctrl: clientShortcut.ctrl || false,
         shft: clientShortcut.shft || false,
-        actionName: clientShortcut.actionName
-      }
+        actionName: clientShortcut.actionName,
+      };
     });
   },
 
@@ -107,16 +101,24 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
     client.set('shortcutRegisteredTime', new Date());
     const mappedShortcuts = this.mapClientShortcuts(client);
     mappedShortcuts.forEach(shortcut => {
-      const matchingShortcut = this.get('shortcuts').find(registeredShortcut => {
-        const altMatch = registeredShortcut.alt == shortcut.alt;
-        const shftMatch = registeredShortcut.shft == shortcut.shft;
-        const ctrlMatch = registeredShortcut.ctrl == shortcut.ctrl;
-        const modKeysMatch = altMatch && shftMatch && ctrlMatch;
-        const codeMatch = registeredShortcut.code == shortcut.code;
-        const lastCodeMatch = registeredShortcut.lastCode == shortcut.lastCode;
-        return modKeysMatch && codeMatch && lastCodeMatch;
-      });
-      assert(`Registering two shortcuts with the same path: [${shortcut.description}] and [${matchingShortcut.description}]`, !matchingShortcut);
+      const matchingShortcut = this.get('shortcuts').find(
+        registeredShortcut => {
+          const altMatch = registeredShortcut.alt == shortcut.alt;
+          const shftMatch = registeredShortcut.shft == shortcut.shft;
+          const ctrlMatch = registeredShortcut.ctrl == shortcut.ctrl;
+          const modKeysMatch = altMatch && shftMatch && ctrlMatch;
+          const codeMatch = registeredShortcut.code == shortcut.code;
+          const lastCodeMatch =
+            registeredShortcut.lastCode == shortcut.lastCode;
+          return modKeysMatch && codeMatch && lastCodeMatch;
+        }
+      );
+      assert(
+        `Registering two shortcuts with the same path: [${
+          shortcut.description
+        }] and [${matchingShortcut.description}]`,
+        !matchingShortcut
+      );
     });
     client.set('_mappedShortcuts', mappedShortcuts);
     this.get('registeredClients').addObject(client);

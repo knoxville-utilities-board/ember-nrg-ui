@@ -1,12 +1,7 @@
 import Component from '@ember/component';
 import layout from './template';
-import {
-  observer,
-} from '@ember/object';
-import {
-  task,
-  timeout,
-} from 'ember-concurrency';
+import { observer } from '@ember/object';
+import { task, timeout } from 'ember-concurrency';
 import GlobalKeyboardShortcutsMixin from 'ember-nrg-ui/mixins/global-keyboard-shortcut';
 
 export default Component.extend(GlobalKeyboardShortcutsMixin, {
@@ -15,11 +10,13 @@ export default Component.extend(GlobalKeyboardShortcutsMixin, {
   placeholder: 'Search...',
   searchString: null,
 
-  keyboardShortcuts: [{
-    key: 'KeyS',
-    actionName: 'focus',
-    description: 'Focus Search Box',
-  }],
+  keyboardShortcuts: [
+    {
+      key: 'KeyS',
+      actionName: 'focus',
+      description: 'Focus Search Box',
+    },
+  ],
 
   init() {
     this._super(...arguments);
@@ -33,7 +30,7 @@ export default Component.extend(GlobalKeyboardShortcutsMixin, {
   searchTask: task(function*(immediate) {
     const searchString = this.get('searchString');
     if (searchString === null) {
-      return
+      return;
     }
     if (!immediate) {
       yield timeout(400);

@@ -1,13 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupValidations from '../../../helpers/setup-validations';
 
@@ -18,7 +11,7 @@ module('Integration | Component | nrg-text-area', function(hooks) {
     setupValidations(this);
     this.set('value', 'bob');
 
-    await render(hbs `{{nrg-text-area value=value}}`);
+    await render(hbs`{{nrg-text-area value=value}}`);
 
     assert.equal(this.$('textarea').val(), 'bob');
   });

@@ -1,20 +1,10 @@
-import {
-  alias,
-  and,
-  or
-} from '@ember/object/computed';
-import {
-  inject as service
-} from '@ember/service';
+import { alias, and, or } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import layout from './template';
 import ResizeMixin from 'ember-nrg-ui/mixins/resize';
-import {
-  htmlSafe
-} from '@ember/string';
-import {
-  computed
-} from '@ember/object';
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
 
 export default Component.extend(ResizeMixin, {
   layout,
@@ -31,9 +21,16 @@ export default Component.extend(ResizeMixin, {
 
   classNames: ['nrg-application'],
 
-  classNameBindings: ['fullscreenMap:fullscreen-map', 'computerScreenSidebarActive:large-screen-sidebar-active'],
+  classNameBindings: [
+    'fullscreenMap:fullscreen-map',
+    'computerScreenSidebarActive:large-screen-sidebar-active',
+  ],
 
-  isComputerScreen: or('responsive.isComputerScreen', 'responsive.isLargeMonitor', 'responsive.isWidescreenMonitor'),
+  isComputerScreen: or(
+    'responsive.isComputerScreen',
+    'responsive.isLargeMonitor',
+    'responsive.isWidescreenMonitor'
+  ),
 
   title: '',
 

@@ -1,6 +1,4 @@
-import {
-  helper
-} from '@ember/component/helper';
+import { helper } from '@ember/component/helper';
 
 export function listItemSelectable([item, isSelectable]) {
   return isSelectable(item);

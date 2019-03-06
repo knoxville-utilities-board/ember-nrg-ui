@@ -1,18 +1,16 @@
 import Component from '@ember/component';
-import {
-  isBlank,
-} from '@ember/utils';
+import { isBlank } from '@ember/utils';
 import layout from './template';
 import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
-import {
-  next
-} from '@ember/runloop'
+import { next } from '@ember/runloop';
 
-const contextItems = [{
-  label: 'Refresh',
-  actionName: 'refresh',
-  iconClass: 'refresh',
-}];
+const contextItems = [
+  {
+    label: 'Refresh',
+    actionName: 'refresh',
+    iconClass: 'refresh',
+  },
+];
 
 const DEFAULT_PAGE_SIZE = 25;
 
@@ -62,7 +60,7 @@ export default Component.extend(ContextMenuMixin, {
     });
   },
 
-  isSelectable( /* item */ ) {
+  isSelectable(/* item */) {
     return true;
   },
 

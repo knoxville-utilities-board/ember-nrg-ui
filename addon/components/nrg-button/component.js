@@ -1,6 +1,4 @@
-import {
-  or
-} from '@ember/object/computed';
+import { or } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 
@@ -10,7 +8,14 @@ export default Component.extend({
   type: 'button',
   classNames: ['ui button'],
   classNameBindings: ['disabled', 'loading'],
-  attributeBindings: ['type', '_disabled:disabled', 'name', 'tabindex', 'title', 'autofocus'],
+  attributeBindings: [
+    'type',
+    '_disabled:disabled',
+    'name',
+    'tabindex',
+    'title',
+    'autofocus',
+  ],
 
   loading: false,
   disabled: false,

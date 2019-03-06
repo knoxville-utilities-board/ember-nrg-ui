@@ -1,11 +1,6 @@
 import Service from '@ember/service';
-import {
-  inject as service
-} from '@ember/service';
-import {
-  or,
-  readOnly
-} from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import { or, readOnly } from '@ember/object/computed';
 
 export default Service.extend({
   _isMobileService: service('isMobile'),
@@ -20,10 +15,7 @@ export default Service.extend({
   },
 
   _handleResizeEvent() {
-    const {
-      innerWidth,
-      innerHeight
-    } = window;
+    const { innerWidth, innerHeight } = window;
     this.setProperties({
       screenWidth: innerWidth,
       screenHeight: innerHeight,
@@ -58,7 +50,15 @@ export default Service.extend({
 
   /* Media Query Computed Groups */
 
-  isMobileScreenGroup: or('isSmallMobileScreen', 'isMobileScreen', 'isTabletScreen'),
+  isMobileScreenGroup: or(
+    'isSmallMobileScreen',
+    'isMobileScreen',
+    'isTabletScreen'
+  ),
 
-  isComputerScreenGroup: or('isComputerScreen', 'isLargeMonitor', 'isWidescreenMonitor'),
+  isComputerScreenGroup: or(
+    'isComputerScreen',
+    'isLargeMonitor',
+    'isWidescreenMonitor'
+  ),
 });

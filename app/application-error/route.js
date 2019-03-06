@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/application-error/route';
+export { default } from 'ember-nrg-ui/application-error/route';

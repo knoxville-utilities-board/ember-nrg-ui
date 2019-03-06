@@ -1,13 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupTest
-} from 'ember-qunit';
-import {
-  A
-} from '@ember/array';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
+import { A } from '@ember/array';
 
 module('Unit | Service | sidebar-menu-manager', function(hooks) {
   setupTest(hooks);

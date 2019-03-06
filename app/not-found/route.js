@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/not-found/route';
+export { default } from 'ember-nrg-ui/not-found/route';

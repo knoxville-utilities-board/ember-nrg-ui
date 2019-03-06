@@ -1,6 +1,4 @@
-import {
-  alias
-} from '@ember/object/computed';
+import { alias } from '@ember/object/computed';
 import layout from './template';
 import FlashMessage from 'ember-cli-flash/components/flash-message';
 

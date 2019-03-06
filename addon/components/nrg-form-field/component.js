@@ -1,15 +1,11 @@
-import {
-  scheduleOnce
-} from '@ember/runloop';
-import {
-  computed
-} from '@ember/object';
+import { scheduleOnce } from '@ember/runloop';
+import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from './template';
 
 export default Component.extend({
   layout,
-  
+
   classNames: ['ui field'],
 
   classNameBindings: ['required', 'errorMessage:error', 'inline'],

@@ -13,6 +13,5 @@ module('Integration | Component | nrg-application-error', function(hooks) {
     await render(hbs`{{nrg-application-error}}`);
 
     assert.equal(this.$('h3')[0].textContent.trim(), 'An error occurred.');
-
   });
 });

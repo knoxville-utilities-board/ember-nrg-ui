@@ -1,29 +1,32 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupTest
-} from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 import EmberObject from '@ember/object';
 
 module('Unit | Service | context-menu', function(hooks) {
   setupTest(hooks);
 
   hooks.beforeEach(function() {
-    this.clients = [EmberObject.create({
-      contextItems: [{
-        label: 'C',
-        priority: 10,
-      }, {
-        label: 'A',
-      }]
-    }), EmberObject.create({
-      contextItems: [{
-        label: 'B',
-        priority: 11,
-      }]
-    })];
+    this.clients = [
+      EmberObject.create({
+        contextItems: [
+          {
+            label: 'C',
+            priority: 10,
+          },
+          {
+            label: 'A',
+          },
+        ],
+      }),
+      EmberObject.create({
+        contextItems: [
+          {
+            label: 'B',
+            priority: 11,
+          },
+        ],
+      }),
+    ];
   });
 
   test('it sorts items correctly', function(assert) {

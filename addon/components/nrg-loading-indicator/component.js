@@ -7,5 +7,13 @@ export default Component.extend({
   loading: true,
   inline: true,
   classNames: ['ui', 'loader'],
-  classNameBindings: ['loading:active:disabled', 'centered', 'inline', 'text:text', 'inverted', 'indeterminate', 'size'],
+  classNameBindings: [
+    'loading:active:disabled',
+    'centered',
+    'inline',
+    'text:text',
+    'inverted',
+    'indeterminate',
+    'size',
+  ],
 });

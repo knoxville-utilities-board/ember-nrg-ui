@@ -1,15 +1,9 @@
-import {
-  helper
-} from '@ember/component/helper';
+import { helper } from '@ember/component/helper';
 import config from 'ember-get-config';
-import {
-  shaRegExp
-} from 'ember-cli-app-version/utils/regexp';
+import { shaRegExp } from 'ember-cli-app-version/utils/regexp';
 
 const {
-  APP: {
-    version
-  }
+  APP: { version },
 } = config;
 
 export function appVersion() {

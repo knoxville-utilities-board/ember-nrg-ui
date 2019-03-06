@@ -1,13 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nrg-lightbox-thumbnail', function(hooks) {
@@ -17,7 +10,7 @@ module('Integration | Component | nrg-lightbox-thumbnail', function(hooks) {
     this.photo = {
       url: 'http://someUrl',
     };
-    await render(hbs `{{nrg-lightbox-thumbnail photo=photo}}`);
+    await render(hbs`{{nrg-lightbox-thumbnail photo=photo}}`);
     assert.equal(this.$('img').attr('src'), 'http://someUrl');
   });
 });

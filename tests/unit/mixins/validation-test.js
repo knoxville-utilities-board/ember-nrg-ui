@@ -1,9 +1,6 @@
 import EmberObject from '@ember/object';
 import ValidationMixin from 'ember-nrg-ui/mixins/validation';
-import {
-  module,
-  test
-} from 'qunit';
+import { module, test } from 'qunit';
 
 module('Unit | Mixin | validation');
 

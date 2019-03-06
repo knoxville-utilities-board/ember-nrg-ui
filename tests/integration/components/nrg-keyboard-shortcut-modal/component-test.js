@@ -1,22 +1,17 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
 import $ from 'jquery';
 
-module('Integration | Component | nrg-keyboard-shortcut-modal', function(hooks) {
+module('Integration | Component | nrg-keyboard-shortcut-modal', function(
+  hooks
+) {
   setupRenderingTest(hooks);
 
   test('it renders the default shortcut', async function(assert) {
-    await render(hbs `{{nrg-keyboard-shortcut-modal}}`);
+    await render(hbs`{{nrg-keyboard-shortcut-modal}}`);
 
     const text = $('.shortcut-modal').text();
     assert.ok(/Shft/.test(text));
@@ -26,17 +21,21 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(hooks) 
 
   test('it renders registered shortcuts', async function(assert) {
     const keyboardService = this.owner.lookup('service:keyboard-shortcut');
-    keyboardService.registerKeyboardShortcuts(new EmberObject({
-      keyboardShortcuts: [{
-        key: ['KeyX', 'KeyV'],
-        alt: true,
-        shft: true,
-        ctrl: true,
-        description: "testDescription",
-      }],
-    }));
+    keyboardService.registerKeyboardShortcuts(
+      new EmberObject({
+        keyboardShortcuts: [
+          {
+            key: ['KeyX', 'KeyV'],
+            alt: true,
+            shft: true,
+            ctrl: true,
+            description: 'testDescription',
+          },
+        ],
+      })
+    );
 
-    await render(hbs `{{nrg-keyboard-shortcut-modal}}`);
+    await render(hbs`{{nrg-keyboard-shortcut-modal}}`);
 
     const text = $('.shortcut-modal').text();
     assert.ok(/Shft/.test(text));
@@ -46,5 +45,4 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(hooks) 
     assert.ok(/V/.test(text));
     assert.ok(/testDescription/.test(text));
   });
-
 });
