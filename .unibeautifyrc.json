@@ -1,6 +1,6 @@
 {
   "JavaScript": {
-    "beautifiers": ["Pretty Diff", "Prettier"],
+    "beautifiers": ["JS-Beautify", "Prettier"],
     "indent_size": 2,
     "indent_style": "space",
     "quotes": "single",
@@ -51,7 +51,7 @@
     "selector_separator_newline": true
   },
   "HTML": {
-    "beautifiers": ["Pretty Diff"],
+    "beautifiers": ["JS-Beautify"],
     "indent_size": 2,
     "indent_style": "space",
     "wrap_line_length": 240,
@@ -90,18 +90,26 @@
     "space_in_empty_paren": false
   },
   "Handlebars": {
-    "beautifiers": ["Pretty Diff"],
+    "beautifiers": ["JS-Beautify"],
+    "align_assignments": true,
+    "brace_style": "collapse",
+    "space_after_anon_function": false,
+    "quotes": "double",
+    "unformatted": [],
+    "wrap_attributes": "auto",
+    "break_chained_methods": false,
+    "end_with_comma": false,
+    "end_with_newline": true,
+    "force_indentation": false,
+    "indent_comments": false,
+    "indent_inner_html": false,
     "indent_size": 2,
     "indent_style": "space",
-    "quotes": "double",
-    "wrap_line_length": 240,
+    "indent_scripts": "normal",
     "max_preserve_newlines": 1,
-    "end_with_newline": true,
+    "multiline_ternary": "never",
     "preserve_newlines": true,
-    "brace_style": "collapse",
-    "force_indentation": false,
-    "indent_inner_html": true,
-    "indent_scripts": "normal"
+    "wrap_line_length": 250
   },
   "Markdown": {
     "beautifiers": ["Prettier"],
