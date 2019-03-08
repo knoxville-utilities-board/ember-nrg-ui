@@ -1,6 +1,4 @@
-import {
-  computed
-} from '@ember/object';
+import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from './template';
 
@@ -17,7 +15,7 @@ export default Component.extend({
     },
     set(key, value) {
       const oldValue = this.get('value');
-      const newValue = value && value.trim() || '';
+      const newValue = (value && value.trim()) || '';
       if (oldValue !== newValue) {
         this.set('_value', newValue);
       }

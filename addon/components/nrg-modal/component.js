@@ -1,25 +1,12 @@
-import {
-  guidFor
-} from '@ember/object/internals';
+import { guidFor } from '@ember/object/internals';
 import $ from 'jquery';
-import {
-  observer,
-  computed
-} from '@ember/object';
-import {
-  scheduleOnce
-} from '@ember/runloop';
-import {
-  inject as service
-} from '@ember/service';
-import {
-  or
-} from '@ember/object/computed';
+import { observer, computed } from '@ember/object';
+import { scheduleOnce } from '@ember/runloop';
+import { inject as service } from '@ember/service';
+import { or } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
-import {
-  next
-} from '@ember/runloop';
+import { next } from '@ember/runloop';
 
 export default Component.extend({
   layout,
@@ -59,7 +46,7 @@ export default Component.extend({
       $(`#${this.elementId}-modal`).modal('show');
       this.sendAction('onModalOpen');
       this.set('_isOpen', true);
-    })
+    });
   },
 
   closeModal(sendAction = true) {
@@ -100,7 +87,8 @@ export default Component.extend({
 
   actions: {
     onHide() {
-      if (this.get('isOpen')) { // This happens when the modal is closed by clicking the x or clicking out of the modal
+      if (this.get('isOpen')) {
+        // This happens when the modal is closed by clicking the x or clicking out of the modal
         if (this.get('dismissable')) {
           this.set('isOpen', false);
         }

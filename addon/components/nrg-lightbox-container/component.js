@@ -1,15 +1,7 @@
-import {
-  alias
-} from '@ember/object/computed';
-import {
-  inject as service
-} from '@ember/service';
-import {
-  htmlSafe
-} from '@ember/string';
-import {
-  computed
-} from '@ember/object';
+import { alias } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from './template';
 
@@ -19,7 +11,7 @@ export default Component.extend({
 
   isOpen: alias('lightboxService.lightboxIsOpen'),
   selectedPhoto: alias('lightboxService.selectedPhoto'),
-  
+
   selectedPhotoDetail: computed('selectedPhoto.detail', function() {
     return htmlSafe(this.get('selectedPhoto.detail'));
   }),
@@ -72,5 +64,5 @@ export default Component.extend({
         this.set('rotationClass', '');
       }
     },
-  }
+  },
 });

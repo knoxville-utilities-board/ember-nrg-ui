@@ -1,13 +1,6 @@
-import {
-  initialize
-} from 'dummy/initializers/setup-application-user';
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupTest
-} from 'ember-qunit';
+import { initialize } from 'dummy/initializers/setup-application-user';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
 module('Unit | Initializer | setup-application-user', function(hooks) {
   setupTest(hooks);

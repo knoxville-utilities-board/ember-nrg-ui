@@ -1,13 +1,11 @@
-import {
-  notEmpty
-} from '@ember/object/computed';
+import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 import ValidationContainer from 'ember-nrg-ui/mixins/validation-container';
 
 export default Component.extend(ValidationContainer, {
   layout,
-  
+
   tagName: 'form',
 
   classNames: ['ui', 'form'],

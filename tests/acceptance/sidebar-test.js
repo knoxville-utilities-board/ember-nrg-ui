@@ -1,20 +1,14 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  visit,
-  find,
-  findAll
-} from '@ember/test-helpers';
-import {
-  setupApplicationTest
-} from 'ember-qunit';
+import { module, test } from 'qunit';
+import { visit, find, findAll } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
 
 const hasSidebarItem = (label, nodeIdentifier = '.sidebar-menu > .item') => {
   const nodes = findAll(nodeIdentifier);
   return nodes.find(node => {
-    return node.innerText.includes(label) || hasSidebarItem(label, nodeIdentifier + '> .menu > .item');
+    return (
+      node.innerText.includes(label) ||
+      hasSidebarItem(label, nodeIdentifier + '> .menu > .item')
+    );
   });
 };
 module('Acceptance | focus first input', function(hooks) {

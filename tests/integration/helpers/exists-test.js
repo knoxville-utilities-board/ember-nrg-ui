@@ -1,13 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Helper | exists', function(hooks) {
@@ -20,7 +13,7 @@ module('Integration | Helper | exists', function(hooks) {
     this.set('items', items);
     this.set('item', item);
 
-    await render(hbs `{{exists items item}}`);
+    await render(hbs`{{exists items item}}`);
 
     assert.equal(this.element.textContent.trim(), 'true');
   });
@@ -32,7 +25,7 @@ module('Integration | Helper | exists', function(hooks) {
     this.set('items', items);
     this.set('item', item);
 
-    await render(hbs `{{exists items item}}`);
+    await render(hbs`{{exists items item}}`);
 
     assert.equal(this.element.textContent.trim(), 'false');
   });

@@ -1,7 +1,4 @@
-import {
-  scheduleOnce,
-  next
-} from '@ember/runloop';
+import { scheduleOnce, next } from '@ember/runloop';
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
