@@ -1,13 +1,6 @@
-import {
-  lte,
-  gt,
-} from '@ember/object/computed';
-import {
-  computed
-} from '@ember/object';
-import {
-  A
-} from '@ember/array';
+import { lte, gt } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
 import Service from '@ember/service';
 
 export default Service.extend({

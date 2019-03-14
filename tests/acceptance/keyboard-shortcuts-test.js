@@ -1,17 +1,7 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  visit,
-  currentRouteName,
-} from '@ember/test-helpers';
-import {
-  setupApplicationTest
-} from 'ember-qunit';
-import {
-  keyDown
-} from '../helpers/keyboard-helpers';
+import { module, test } from 'qunit';
+import { visit, currentRouteName } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
+import { keyDown } from '../helpers/keyboard-helpers';
 
 module('Acceptance | keyboard shortcuts', function(hooks) {
   setupApplicationTest(hooks);

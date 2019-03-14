@@ -1,21 +1,8 @@
-import {
-  sort,
-  filterBy,
-  setDiff
-} from '@ember/object/computed';
-import Service, {
-  inject as service
-} from '@ember/service';
-import {
-  A
-} from '@ember/array';
-import {
-  computed,
-  set
-} from '@ember/object';
-import {
-  getOwner
-} from '@ember/application';
+import { sort, filterBy, setDiff } from '@ember/object/computed';
+import Service, { inject as service } from '@ember/service';
+import { A } from '@ember/array';
+import { computed, set } from '@ember/object';
+import { getOwner } from '@ember/application';
 import SidebarNavigationMixin from 'ember-nrg-ui/mixins/sidebar-navigation';
 
 export default Service.extend({
@@ -27,8 +14,10 @@ export default Service.extend({
   },
 
   availableRoutes: computed(function() {
-    const availableRoutes = this.get('routing.router._routerMicrolib.recognizer.names');
-    return availableRoutes && Object.keys(availableRoutes) || [];
+    const availableRoutes = this.get(
+      'routing.router._routerMicrolib.recognizer.names'
+    );
+    return (availableRoutes && Object.keys(availableRoutes)) || [];
   }),
 
   loadApplicableRoutes() {
@@ -56,15 +45,19 @@ export default Service.extend({
 
   _menuItems: A(),
 
-  _menuItemsRoleFiltered: computed('_menuItems.[]', 'currentUser.roles.[]', function() {
-    return this.get('_menuItems').filter(item => {
-      if (item.sidebarRole) {
-        const roles = this.get('currentUser.roles');
-        return roles && roles.includes(item.sidebarRole);
-      }
-      return true;
-    });
-  }),
+  _menuItemsRoleFiltered: computed(
+    '_menuItems.[]',
+    'currentUser.roles.[]',
+    function() {
+      return this.get('_menuItems').filter(item => {
+        if (item.sidebarRole) {
+          const roles = this.get('currentUser.roles');
+          return roles && roles.includes(item.sidebarRole);
+        }
+        return true;
+      });
+    }
+  ),
 
   _menuItemsSorted: sort('_menuItemsRoleFiltered', 'contextItemSort'),
 
@@ -83,7 +76,10 @@ export default Service.extend({
         return;
       }
       const children = menuItems.filter(menuItem => {
-        if (!menuItem.sidebarAction && (!menuItem.routeName || menuItem.isSidebarGroupHeader)) {
+        if (
+          !menuItem.sidebarAction &&
+          (!menuItem.routeName || menuItem.isSidebarGroupHeader)
+        ) {
           return false;
         }
 
@@ -91,8 +87,10 @@ export default Service.extend({
         if (menuItem.sidebarAction) {
           isChild = menuItem.sidebarGroup === menuGroup.sidebarGroup;
         } else {
-          const belongsToRoute = menuItem.routeName.indexOf(menuGroup.routeName) === 0;
-          const isSameRoute = menuGroup.routeName === menuItem.routeName && !menuItem.sidebarURL;
+          const belongsToRoute =
+            menuItem.routeName.indexOf(menuGroup.routeName) === 0;
+          const isSameRoute =
+            menuGroup.routeName === menuItem.routeName && !menuItem.sidebarURL;
           isChild = belongsToRoute && !isSameRoute;
         }
 

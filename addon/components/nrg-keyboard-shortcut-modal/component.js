@@ -1,22 +1,9 @@
 import Component from '@ember/component';
-import {
-  A,
-} from '@ember/array';
-import {
-  computed,
-} from '@ember/object';
-import {
-  alias,
-  mapBy,
-  uniq,
-  sort
-} from '@ember/object/computed';
-import {
-  inject as service
-} from '@ember/service';
-import {
-  getKeyCode,
-} from 'ember-keyboard';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import { alias, mapBy, uniq, sort } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import { getKeyCode } from 'ember-keyboard';
 import KeyboardShortcutMixin from 'ember-nrg-ui/mixins/global-keyboard-shortcut';
 import specialCharacterConversion from './special-characters';
 import layout from './template';
@@ -26,13 +13,15 @@ export default Component.extend(KeyboardShortcutMixin, {
   keyboardService: service('keyboard-shortcut'),
   isOpen: alias('keyboardService.modalIsOpen'),
 
-  keyboardShortcuts: [{
-    key: 'Slash',
-    shft: true,
-    priority: 40,
-    actionName: 'openKeyboardHelp',
-    description: "Show Keyboard Help",
-  }],
+  keyboardShortcuts: [
+    {
+      key: 'Slash',
+      shft: true,
+      priority: 40,
+      actionName: 'openKeyboardHelp',
+      description: 'Show Keyboard Help',
+    },
+  ],
 
   shortcuts: alias('keyboardService.shortcuts'),
   mappedShortcuts: computed('shortcuts.[]', function() {
@@ -49,7 +38,9 @@ export default Component.extend(KeyboardShortcutMixin, {
       }
       const keys = [];
       if (shortcut.lastCode) {
-        keys.push(this.getCharacter(getKeyCode(shortcut.lastCode), shortcut.shft));
+        keys.push(
+          this.getCharacter(getKeyCode(shortcut.lastCode), shortcut.shft)
+        );
       }
       keys.push(this.getCharacter(getKeyCode(shortcut.code), shortcut.shft));
 
@@ -58,8 +49,8 @@ export default Component.extend(KeyboardShortcutMixin, {
         keys,
         header: shortcut.header,
         description: shortcut.description,
-      }
-    })
+      };
+    });
   }),
   headers: mapBy('mappedShortcuts', 'header'),
   uniqHeaders: uniq('headers'),
@@ -72,7 +63,7 @@ export default Component.extend(KeyboardShortcutMixin, {
       return {
         header,
         shortcuts,
-      }
+      };
     });
   }),
   segmentSort: ['header:asc'],
@@ -80,7 +71,9 @@ export default Component.extend(KeyboardShortcutMixin, {
 
   getCharacter(code, shift) {
     let key = '';
-    const conversionType = shift ? specialCharacterConversion.shift : specialCharacterConversion.default;
+    const conversionType = shift
+      ? specialCharacterConversion.shift
+      : specialCharacterConversion.default;
 
     if (conversionType[code] !== undefined) {
       key = conversionType[code];

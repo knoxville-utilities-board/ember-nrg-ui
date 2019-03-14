@@ -1,9 +1,6 @@
 import EmberObject from '@ember/object';
 import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
-import {
-  module,
-  test
-} from 'qunit';
+import { module, test } from 'qunit';
 
 module('Unit | Mixin | context-menu', function() {
   test('it works', function(assert) {

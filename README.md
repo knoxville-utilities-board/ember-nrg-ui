@@ -28,7 +28,7 @@ It includes an application shell with sidebar navigation, typical UI components,
 ## Example App
 
 Ember NRG UI comes with a [dummy app](tests/dummy) that implements all of the components.
-__Check out that dummy app for reference__. To start it, run
+**Check out that dummy app for reference**. To start it, run
 
     git clone git@github.com:knoxville-utilities-board/ember-nrg-ui.git
     cd ember-nrg-ui
@@ -53,11 +53,11 @@ Once the addon is installed, create a new index route and template:
 ```javascript
 // app/index/route.js
 
-import Route from '@ember/routing/route';
-import SidebarNavigationMixin from 'ember-nrg-ui/mixins/sidebar-navigation';
+import Route from "@ember/routing/route";
+import SidebarNavigationMixin from "ember-nrg-ui/mixins/sidebar-navigation";
 
 export default Route.extend(SidebarNavigationMixin, {
-  sidebarLabel: 'Home',
+  sidebarLabel: "Home"
 });
 ```
 
@@ -79,22 +79,23 @@ an application route.
 ```javascript
 // app/application/route.js
 
-import Route from '@ember/routing/route';
-import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
+import Route from "@ember/routing/route";
+import ContextMenuMixin from "ember-nrg-ui/mixins/context-menu";
 
 export default Route.extend(ContextMenuMixin, {
-
-  contextItems: [{
-    label: 'Release Notes',
-    actionName: 'routeToReleaseNotes',
-    priority: 2,
-  }],
+  contextItems: [
+    {
+      label: "Release Notes",
+      actionName: "routeToReleaseNotes",
+      priority: 2
+    }
+  ],
 
   actions: {
     routeToReleaseNotes() {
-      this.transitionTo('release-notes');
-    },
-  },
+      this.transitionTo("release-notes");
+    }
+  }
 });
 ```
 
@@ -105,11 +106,11 @@ Use the `_nrg-override.scss` file to override base colors and Logo
 ```scss
 // app/styles/_nrg-override.scss
 
-$primary: #6200EE;
-$primaryVariant: #3700B3;
+$primary: #6200ee;
+$primaryVariant: #3700b3;
 
 .nrg-application.nrg-application.nrg-application > .main.menu {
-  background-color: rgba($primary, .98);
+  background-color: rgba($primary, 0.98);
 }
 
 .nrg-list.nrg-list.nrg-list .items > .item.active.active {
@@ -133,13 +134,10 @@ Import the override file into the main `app.scss`
 ```scss
 // app/styles/app.scss
 
-@import 'nrg-override';
+@import "nrg-override";
 ```
 
 [build-status-img]: https://travis-ci.com/knoxville-utilities-board/ember-nrg-ui.svg?branch=master
-
 [build-status-link]: https://travis-ci.com/knoxville-utilities-board/ember-nrg-ui
-
 [npm-badge-img]: https://badge.fury.io/js/ember-nrg-ui.svg
-
 [npm-badge-link]: http://badge.fury.io/js/ember-nrg-ui

@@ -1,19 +1,9 @@
 import Component from '@ember/component';
 import layout from './template';
-import {
-  A,
-} from '@ember/array';
-import {
-  computed,
-  observer
-} from '@ember/object';
-import {
-  bool,
-  readOnly
-} from '@ember/object/computed';
-import {
-  isEmpty
-} from '@ember/utils';
+import { A } from '@ember/array';
+import { computed, observer } from '@ember/object';
+import { bool, readOnly } from '@ember/object/computed';
+import { isEmpty } from '@ember/utils';
 import ArrayProxy from '@ember/array/proxy';
 
 export default Component.extend({
@@ -40,7 +30,9 @@ export default Component.extend({
     this._super(...arguments);
     const items = this.get('items');
     if (items) {
-      this.get('_items').pushObjects(items.toArray && items.toArray() || items);
+      this.get('_items').pushObjects(
+        (items.toArray && items.toArray()) || items
+      );
     }
   },
 
@@ -55,7 +47,7 @@ export default Component.extend({
   _total: readOnly('pageMeta.total'),
 
   currentPage: computed('_start', 'selectedPageSize', function() {
-    return (this.get('_start') / this.get('selectedPageSize')) + 1;
+    return this.get('_start') / this.get('selectedPageSize') + 1;
   }),
 
   totalPages: computed('selectedPageSize', '_total', function() {
@@ -70,11 +62,14 @@ export default Component.extend({
     const items = this.get('items');
     const start = this.get('_start');
     if (!start) {
-      this.set('_items', new ArrayProxy({
-        content: A(),
-      }));
+      this.set(
+        '_items',
+        new ArrayProxy({
+          content: A(),
+        })
+      );
     }
-    this.get('_items').pushObjects(items.toArray && items.toArray() || items);
+    this.get('_items').pushObjects((items.toArray && items.toArray()) || items);
   }),
 
   actions: {

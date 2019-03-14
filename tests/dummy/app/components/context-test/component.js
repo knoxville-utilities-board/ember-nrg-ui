@@ -5,45 +5,53 @@ import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
 export default Component.extend(ContextMenuMixin, {
   tagName: '',
 
-  contextItems: [{
-    label: 'Context Item',
-    actionName: 'contextCounter',
-    disabled: false,
-  }, {
-    label: 'Context Item With Icon',
-    actionName: 'contextCounter',
-    disabled: false,
-    priority: 7, // Changes the order of the context items
-    iconClass: 'settings',
-  }, {
-    label: 'Disabled Context Item',
-    actionName: 'contextCounter',
-    disabled: true,
-  }, {
-    isCheckbox: true,
-    checked: true,
-    priority: 21,
-    label: 'Context Item w/ Checkbox',
-    actionName: 'contextChecked',
-    disabled: false,
-  }, {
-    isCheckbox: true,
-    checked: false,
-    label: 'Context Item w/ Checkbox and Icon',
-    actionName: 'contextCheckedIcon',
-    disabled: false,
-    iconClass: 'settings',
-  }, {
-    isCheckbox: true,
-    checked: false,
-    priority: 14,
-    label: 'Disabled Context Item w/ Checkbox',
-    actionName: 'contextCheckedDisabled',
-    disabled: true,
-  }, {
-    isDivider: true,
-    priority: 2,
-  }],
+  contextItems: [
+    {
+      label: 'Context Item',
+      actionName: 'contextCounter',
+      disabled: false,
+    },
+    {
+      label: 'Context Item With Icon',
+      actionName: 'contextCounter',
+      disabled: false,
+      priority: 7, // Changes the order of the context items
+      iconClass: 'settings',
+    },
+    {
+      label: 'Disabled Context Item',
+      actionName: 'contextCounter',
+      disabled: true,
+    },
+    {
+      isCheckbox: true,
+      checked: true,
+      priority: 21,
+      label: 'Context Item w/ Checkbox',
+      actionName: 'contextChecked',
+      disabled: false,
+    },
+    {
+      isCheckbox: true,
+      checked: false,
+      label: 'Context Item w/ Checkbox and Icon',
+      actionName: 'contextCheckedIcon',
+      disabled: false,
+      iconClass: 'settings',
+    },
+    {
+      isCheckbox: true,
+      checked: false,
+      priority: 14,
+      label: 'Disabled Context Item w/ Checkbox',
+      actionName: 'contextCheckedDisabled',
+      disabled: true,
+    },
+    {
+      isDivider: true,
+      priority: 2,
+    },
+  ],
 
   counter: 0,
 

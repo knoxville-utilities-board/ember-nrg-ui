@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/keyboard-shortcut/service';
+export { default } from 'ember-nrg-ui/keyboard-shortcut/service';

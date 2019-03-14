@@ -31,6 +31,7 @@
       overflow-y: auto;
     }
   }
+
   .ui.dropdown {
     & > .text {
       max-width: 110px;
@@ -44,6 +45,7 @@
         max-width: 440px;
       }
     }
+
     & > .dropdown.icon {
       top: -15px;
     }
@@ -69,6 +71,7 @@
     .image {
       width: 50px;
     }
+
     .content:not(:first-child) {
       padding: 0 0 0 1em;
     }
@@ -76,9 +79,11 @@
     &.pagination {
       padding: 0;
     }
+
     &:not(.pagination) {
       padding: 1em !important;
     }
+
     &.disabled {
       cursor: auto;
     }
@@ -101,4 +106,9 @@
   border-top: 1px #dadada solid;
   font-weight: 500;
   font-size: 1.1em;
+}
+
+.scrollable-submenu {
+  max-height: 50vh;
+  overflow-y: auto;
 }

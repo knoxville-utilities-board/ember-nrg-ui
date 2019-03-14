@@ -1,14 +1,7 @@
 import $ from 'jquery';
-import {
-  scheduleOnce
-} from '@ember/runloop';
-import {
-  computed,
-  observer
-} from '@ember/object';
-import {
-  alias
-} from '@ember/object/computed';
+import { scheduleOnce } from '@ember/runloop';
+import { computed, observer } from '@ember/object';
+import { alias } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 import ResizeMixin from 'ember-nrg-ui/mixins/resize';

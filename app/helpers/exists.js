@@ -1,5 +1,1 @@
-export {
-  default,
-  exists
-}
-from 'ember-nrg-ui/helpers/exists';
+export { default, exists } from 'ember-nrg-ui/helpers/exists';

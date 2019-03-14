@@ -1,8 +1,6 @@
 import Component from '@ember/component';
 import layout from './template';
-import {
-  observer
-} from '@ember/object';
+import { observer } from '@ember/object';
 
 export default Component.extend({
   layout,

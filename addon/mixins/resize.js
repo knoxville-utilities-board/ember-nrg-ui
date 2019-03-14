@@ -1,9 +1,5 @@
-import {
-  inject as service
-} from '@ember/service';
-import {
-  readOnly
-} from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import { readOnly } from '@ember/object/computed';
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
@@ -25,7 +21,11 @@ export default Mixin.create({
       this.get('resizeService').on('didResize', this, this._handleResizeEvent);
     }
     if (this.get('resizeDebouncedEventsEnabled')) {
-      this.get('resizeService').on('debouncedDidResize', this, this._handleDebouncedResizeEvent);
+      this.get('resizeService').on(
+        'debouncedDidResize',
+        this,
+        this._handleDebouncedResizeEvent
+      );
     }
   },
 
@@ -35,31 +35,29 @@ export default Mixin.create({
       this.get('resizeService').off('didResize', this, this._handleResizeEvent);
     }
     if (this.get('resizeDebouncedEventsEnabled')) {
-      this.get('resizeService').off('debouncedDidResize', this, this._handleDebouncedResizeEvent);
+      this.get('resizeService').off(
+        'debouncedDidResize',
+        this,
+        this._handleDebouncedResizeEvent
+      );
     }
   },
 
-  didResize( /*width, height, evt*/ ) {
+  didResize(/*width, height, evt*/) {
     // Overridden in subclass
   },
 
-  debouncedDidResize( /*width, height, evt*/ ) {
+  debouncedDidResize(/*width, height, evt*/) {
     // Overridden in subclass
   },
 
   _handleResizeEvent(evt) {
-    const {
-      innerWidth,
-      innerHeight,
-    } = window;
+    const { innerWidth, innerHeight } = window;
     this.didResize(innerWidth, innerHeight, evt);
   },
 
   _handleDebouncedResizeEvent(evt) {
-    const {
-      innerWidth,
-      innerHeight,
-    } = window;
+    const { innerWidth, innerHeight } = window;
     this.debouncedDidResize(innerWidth, innerHeight, evt);
   },
 });

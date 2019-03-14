@@ -5,19 +5,22 @@ import SidebarNavigationMixin from 'ember-nrg-ui/mixins/sidebar-navigation';
 export default Route.extend(KeyboardShortcutMixin, SidebarNavigationMixin, {
   sidebarLabel: 'global-keyboard-shortcuts',
 
-  shortcutHeader: "From a Route",
-  keyboardShortcuts: [{
-    key: 'KeyF',
-    alt: true,
-    actionName: 'goToForms',
-    description: "Go to form-container",
-  }, {
-    key: ['KeyH', 'KeyC'],
-    ctrl: true,
-    shft: true,
-    actionName: 'goToHomeCard',
-    description: "Go to home-cards",
-  }],
+  shortcutHeader: 'From a Route',
+  keyboardShortcuts: [
+    {
+      key: 'KeyF',
+      alt: true,
+      actionName: 'goToForms',
+      description: 'Go to form-container',
+    },
+    {
+      key: ['KeyH', 'KeyC'],
+      ctrl: true,
+      shft: true,
+      actionName: 'goToHomeCard',
+      description: 'Go to home-cards',
+    },
+  ],
 
   actions: {
     goToForms() {

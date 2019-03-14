@@ -1,24 +1,21 @@
-import {
-  A
-} from '@ember/array';
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupTest
-} from 'ember-qunit';
+import { A } from '@ember/array';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
 module('Unit | Service | lightbox', function(hooks) {
   hooks.beforeEach(function() {
-    this.allPhotos = A([{
-      id: 0,
-    }, {
-      id: 1,
-    }, {
-      id: 2,
-    }]);
-  })
+    this.allPhotos = A([
+      {
+        id: 0,
+      },
+      {
+        id: 1,
+      },
+      {
+        id: 2,
+      },
+    ]);
+  });
   setupTest(hooks);
 
   test('arrows disable properly', function(assert) {

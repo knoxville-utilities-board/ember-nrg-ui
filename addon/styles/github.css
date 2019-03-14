@@ -117,6 +117,7 @@
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
+
 .markdown-body a:active,
 .markdown-body a:hover {
   outline-width: 0;
@@ -138,6 +139,7 @@
 .markdown-body img {
   border-style: none;
 }
+
 .markdown-body svg:not(:root) {
   overflow: hidden;
 }
@@ -162,7 +164,7 @@
   overflow: visible;
 }
 
-.markdown-body [type="checkbox"] {
+.markdown-body [type='checkbox'] {
   box-sizing: border-box;
   padding: 0;
 }
@@ -180,6 +182,7 @@
   color: #4078c0;
   text-decoration: none;
 }
+
 .markdown-body a:active,
 .markdown-body a:hover {
   text-decoration: underline;
@@ -200,13 +203,13 @@
 
 .markdown-body hr::before {
   display: table;
-  content: "";
+  content: '';
 }
 
 .markdown-body hr::after {
   display: table;
   clear: both;
-  content: "";
+  content: '';
 }
 
 .markdown-body table {
@@ -305,26 +308,29 @@
 }
 
 .markdown-body input {
-  -webkit-font-feature-settings: "liga" 0;
-  font-feature-settings: "liga" 0;
+  -webkit-font-feature-settings: 'liga' 0;
+  font-feature-settings: 'liga' 0;
 }
 
 .markdown-body::before {
   display: table;
-  content: "";
+  content: '';
 }
 
 .markdown-body::after {
   display: table;
   clear: both;
-  content: "";
+  content: '';
 }
+
 .markdown-body > *:first-child {
   margin-top: 0 !important;
 }
+
 .markdown-body > *:last-child {
   margin-bottom: 0 !important;
 }
+
 .markdown-body a:not([href]) {
   color: inherit;
   text-decoration: none;
@@ -336,6 +342,7 @@
   margin-left: -20px;
   line-height: 1;
 }
+
 .markdown-body .anchor:focus {
   outline: none;
 }
@@ -364,9 +371,11 @@
   color: #777;
   border-left: 0.25em solid #ddd;
 }
+
 .markdown-body blockquote > :first-child {
   margin-top: 0;
 }
+
 .markdown-body blockquote > :last-child {
   margin-bottom: 0;
 }
@@ -407,6 +416,7 @@
   vertical-align: middle;
   visibility: hidden;
 }
+
 .markdown-body h1:hover .anchor,
 .markdown-body h2:hover .anchor,
 .markdown-body h3:hover .anchor,
@@ -415,6 +425,7 @@
 .markdown-body h6:hover .anchor {
   text-decoration: none;
 }
+
 .markdown-body h1:hover .anchor .octicon-link,
 .markdown-body h2:hover .anchor .octicon-link,
 .markdown-body h3:hover .anchor .octicon-link,
@@ -470,7 +481,7 @@
   margin-top: 16px;
 }
 
-.markdown-body li+li {
+.markdown-body li + li {
   margin-top: 0.25em;
 }
 
@@ -511,6 +522,7 @@
   background-color: #fff;
   border-top: 1px solid #ccc;
 }
+
 .markdown-body table tr:nth-child(2n) {
   background-color: #f8f8f8;
 }
@@ -525,14 +537,14 @@
   padding: 0.2em 0;
   margin: 0;
   font-size: 85%;
-  background-color: rgba(0,0,0,0.04);
+  background-color: rgba(0, 0, 0, 0.04);
   border-radius: 3px;
 }
 
 .markdown-body code::after,
 .markdown-body code::before {
   letter-spacing: -0.2em;
-  content: "\00a0";
+  content: '\00a0';
 }
 
 .markdown-body pre {
@@ -612,6 +624,7 @@
 .markdown-body .pl-6 {
   padding-left: 48px !important;
 }
+
 .markdown-body .full-commit .btn-outline:not(:disabled):hover {
   color: #4078c0;
   border: 1px solid #4078c0;
@@ -629,7 +642,8 @@
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 #bbb;
 }
-.markdown-body:checked+.radio-label {
+
+.markdown-body:checked + .radio-label {
   position: relative;
   z-index: 1;
   border-color: #4078c0;
@@ -639,7 +653,7 @@
   list-style-type: none;
 }
 
-.markdown-body .task-list-item+.task-list-item {
+.markdown-body .task-list-item + .task-list-item {
   margin-top: 3px;
 }
 

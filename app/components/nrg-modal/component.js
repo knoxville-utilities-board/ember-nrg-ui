@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/components/nrg-modal/component';
+export { default } from 'ember-nrg-ui/components/nrg-modal/component';

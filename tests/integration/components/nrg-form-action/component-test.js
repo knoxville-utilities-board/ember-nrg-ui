@@ -1,13 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nrg-form-action', function(hooks) {
@@ -18,7 +11,7 @@ module('Integration | Component | nrg-form-action', function(hooks) {
     this.set('testAction', function() {
       actionFired = true;
     });
-    await render(hbs `{{nrg-form-action action=(action testAction)}}`);
+    await render(hbs`{{nrg-form-action action=(action testAction)}}`);
 
     this.$('a').click();
 

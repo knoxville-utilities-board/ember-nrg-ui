@@ -1,4 +1,3 @@
 export {
-  default
-}
-from 'ember-nrg-ui/components/nrg-keyboard-shortcut-modal/component';
+  default,
+} from 'ember-nrg-ui/components/nrg-keyboard-shortcut-modal/component';

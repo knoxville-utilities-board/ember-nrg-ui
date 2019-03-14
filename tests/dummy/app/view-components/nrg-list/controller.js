@@ -1,57 +1,61 @@
 import Controller from '@ember/controller';
-import {
-  A
-} from '@ember/array';
-import {
-  reads
-} from '@ember/object/computed';
-import {
-  computed
-} from '@ember/object';
-import {
-  debug
-} from '@ember/debug';
+import { A } from '@ember/array';
+import { reads } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { debug } from '@ember/debug';
 
 export default Controller.extend({
-  filters: A([{
-    label: 'Rabbits',
-    value: 'rabbit',
-  }, {
-    label: 'Dogs',
-    value: 'dog',
-  }, {
-    label: 'Cats',
-    value: 'cat',
-  }, {
-    label: 'This is a very long filter name that also filters by Cats.',
-    value: 'cat',
-  }]),
+  filters: A([
+    {
+      label: 'Rabbits',
+      value: 'rabbit',
+    },
+    {
+      label: 'Dogs',
+      value: 'dog',
+    },
+    {
+      label: 'Cats',
+      value: 'cat',
+    },
+    {
+      label: 'This is a very long filter name that also filters by Cats.',
+      value: 'cat',
+    },
+  ]),
 
-  items: A([{
-    animal: 'rabbit',
-    name: 'Alfred',
-    gender: 'male',
-  }, {
-    animal: 'rabbit',
-    name: 'Betty',
-    gender: 'female',
-  }, {
-    animal: 'dog',
-    name: 'Bobby',
-    gender: 'male',
-  }, {
-    animal: 'dog',
-    name: 'Harley',
-    gender: 'female',
-  }, {
-    animal: 'cat',
-    name: 'Sam',
-    gender: 'male',
-  }, {
-    animal: 'cat',
-    name: 'Sally',
-    gender: 'female',
-  }]),
+  items: A([
+    {
+      animal: 'rabbit',
+      name: 'Alfred',
+      gender: 'male',
+    },
+    {
+      animal: 'rabbit',
+      name: 'Betty',
+      gender: 'female',
+    },
+    {
+      animal: 'dog',
+      name: 'Bobby',
+      gender: 'male',
+    },
+    {
+      animal: 'dog',
+      name: 'Harley',
+      gender: 'female',
+    },
+    {
+      animal: 'cat',
+      name: 'Sam',
+      gender: 'male',
+    },
+    {
+      animal: 'cat',
+      name: 'Sally',
+      gender: 'female',
+    },
+  ]),
 
   groupHeaderHandler(item) {
     return item.header.substr(0, 1);
@@ -69,7 +73,9 @@ export default Controller.extend({
         include = item.animal === query.animal;
       }
       if (query.search) {
-        include = include && item.name.toLowerCase().indexOf(query.search.toLowerCase()) !== -1
+        include =
+          include &&
+          item.name.toLowerCase().indexOf(query.search.toLowerCase()) !== -1;
       }
       return include;
     });
