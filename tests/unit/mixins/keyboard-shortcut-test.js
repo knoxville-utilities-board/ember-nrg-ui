@@ -1,9 +1,6 @@
 import EmberObject from '@ember/object';
 import KeyboardShortcutMixin from 'ember-nrg-ui/mixins/global-keyboard-shortcut';
-import {
-  module,
-  test
-} from 'qunit';
+import { module, test } from 'qunit';
 
 module('Unit | Mixin | keyboard-shortcut', function() {
   test('it works', function(assert) {

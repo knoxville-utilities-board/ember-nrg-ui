@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/lightbox/service';
+export { default } from 'ember-nrg-ui/lightbox/service';

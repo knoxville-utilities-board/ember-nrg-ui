@@ -1,4 +1,3 @@
 export {
-  default
-}
-from 'ember-nrg-ui/components/nrg-flash-message-wrapper/component';
+  default,
+} from 'ember-nrg-ui/components/nrg-flash-message-wrapper/component';

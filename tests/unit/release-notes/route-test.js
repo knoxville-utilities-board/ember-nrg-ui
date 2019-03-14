@@ -1,10 +1,5 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupTest
-} from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
 module('Unit | Route | release-notes', function(hooks) {
   setupTest(hooks);

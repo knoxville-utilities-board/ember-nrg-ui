@@ -1,33 +1,20 @@
-import {
-  next,
-  throttle
-} from '@ember/runloop';
-import {
-  isNone
-} from '@ember/utils';
-import {
-  oneWay,
-  alias,
-  notEmpty,
-  and
-} from '@ember/object/computed';
-import {
-  defineProperty,
-  computed,
-  observer
-} from '@ember/object';
+import { next, throttle } from '@ember/runloop';
+import { isNone } from '@ember/utils';
+import { oneWay, alias, notEmpty, and } from '@ember/object/computed';
+import { defineProperty, computed, observer } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
   init() {
     this._super(...arguments);
     const valuePath = this.get('valuePath');
-    defineProperty(this, 'validation', oneWay(`model.validations.attrs.${valuePath}`));
+    defineProperty(
+      this,
+      'validation',
+      oneWay(`model.validations.attrs.${valuePath}`)
+    );
 
-    const {
-      value,
-      model
-    } = this.getProperties('value', 'model');
+    const { value, model } = this.getProperties('value', 'model');
     if (isNone(value) && !isNone(model)) {
       defineProperty(this, 'value', alias(`model.${valuePath}`));
     }
@@ -50,17 +37,33 @@ export default Mixin.create({
 
   hasWarnings: oneWay('validation.hasWarnings'),
 
-  showError: computed('validation.isDirty', 'isInvalid', 'didValidate', function() {
-    return this.get('didValidate') && this.get('isInvalid');
-  }),
+  showError: computed(
+    'validation.isDirty',
+    'isInvalid',
+    'didValidate',
+    function() {
+      return this.get('didValidate') && this.get('isInvalid');
+    }
+  ),
 
-  showWarning: computed('validation.isDirty', 'hasWarnings', 'showError', function() {
-    return this.get('hasWarnings') && !this.get('showError');
-  }),
+  showWarning: computed(
+    'validation.isDirty',
+    'hasWarnings',
+    'showError',
+    function() {
+      return this.get('hasWarnings') && !this.get('showError');
+    }
+  ),
 
-  errorMessageObserver: observer('validation.message', 'validation.isDirty', 'isInvalid', 'didValidate', function() {
-    throttle(this, this.propogateErrorMessage, 50, false);
-  }),
+  errorMessageObserver: observer(
+    'validation.message',
+    'validation.isDirty',
+    'isInvalid',
+    'didValidate',
+    function() {
+      throttle(this, this.propogateErrorMessage, 50, false);
+    }
+  ),
 
   propogateErrorMessage() {
     if (this.get('isDestroyed') || !this.get('valuePath')) {

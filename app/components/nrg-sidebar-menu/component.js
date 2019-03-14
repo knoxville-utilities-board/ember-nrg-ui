@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/components/nrg-sidebar-menu/component';
+export { default } from 'ember-nrg-ui/components/nrg-sidebar-menu/component';

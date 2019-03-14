@@ -1,7 +1,4 @@
-import {
-  observer,
-  computed,
-} from '@ember/object';
+import { observer, computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from './template';
 import moment from 'moment';
@@ -32,7 +29,7 @@ export default Component.extend(Validation, {
     return icon;
   }),
 
-  isDisabled: function( /* date */ ) {
+  isDisabled: function(/* date */) {
     return false;
   },
 

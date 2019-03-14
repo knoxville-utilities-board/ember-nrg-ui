@@ -1,5 +1,6 @@
 .form-link {
   cursor: pointer;
+
   &:not(:first-of-type):before {
     pointer-events: none;
     text-decoration: none;
@@ -8,6 +9,7 @@
     content: '|';
   }
 }
+
 .ui.dropdown:not(.selection):not(.button) > .default.text {
   color: #000;
 }

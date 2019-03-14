@@ -1,4 +1,1 @@
-export {
-  default
-}
-from 'ember-nrg-ui/components/nrg-search/component';
+export { default } from 'ember-nrg-ui/components/nrg-search/component';

@@ -12,7 +12,9 @@ module('Integration | Component | nrg-not-found', function(hooks) {
 
     await render(hbs`{{nrg-not-found}}`);
 
-    assert.equal(this.$('h3')[0].textContent.trim(), 'This is slightly embarrassing.');
-
+    assert.equal(
+      this.$('h3')[0].textContent.trim(),
+      'This is slightly embarrassing.'
+    );
   });
 });

@@ -15,7 +15,7 @@ module.exports = {
     const jsSource = 'node_modules/semantic-ui-calendar/dist';
     app.import({
       development: path.join(jsSource, 'calendar.js'),
-      production: path.join(jsSource, 'calendar.min.js')
+      production: path.join(jsSource, 'calendar.min.js'),
     });
   },
 

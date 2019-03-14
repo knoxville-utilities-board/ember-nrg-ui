@@ -1,9 +1,5 @@
-import {
-  helper
-} from '@ember/component/helper';
-import {
-  A
-} from '@ember/array';
+import { helper } from '@ember/component/helper';
+import { A } from '@ember/array';
 
 export function exists([items, i, groupHeaderHandler]) {
   const item = A(items).objectAt(i);

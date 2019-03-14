@@ -1,9 +1,7 @@
 import Component from '@ember/component';
 import layout from './template';
 import InViewportMixin from 'ember-in-viewport';
-import {
-  schedule
-} from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 
 export default Component.extend(InViewportMixin, {
   layout,

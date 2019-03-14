@@ -1,13 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nrg-search', function(hooks) {
@@ -15,9 +8,9 @@ module('Integration | Component | nrg-search', function(hooks) {
 
   test('it renders', async function(assert) {
     this.selected = {
-      header: 'header'
+      header: 'header',
     };
-    await render(hbs `{{nrg-search selected=selected}}`);
+    await render(hbs`{{nrg-search selected=selected}}`);
     assert.equal(this.$('input').val(), 'header');
   });
 
@@ -25,7 +18,7 @@ module('Integration | Component | nrg-search', function(hooks) {
     this.selected = {
       isLoading: true,
     };
-    await render(hbs `{{nrg-search selected=selected}}`);
+    await render(hbs`{{nrg-search selected=selected}}`);
     assert.equal(this.$('input').val(), '');
     this.set('selected.header', 'header');
     this.set('selected.isLoading', false);
@@ -35,7 +28,7 @@ module('Integration | Component | nrg-search', function(hooks) {
   test('results do not display when loading', async function(assert) {
     this.items = [{}];
     this.loading = true;
-    await render(hbs `{{nrg-search items=items loading=loading}}`);
+    await render(hbs`{{nrg-search items=items loading=loading}}`);
     assert.notOk(this.$('.results').length);
   });
 
@@ -43,7 +36,9 @@ module('Integration | Component | nrg-search', function(hooks) {
     this.queryAction = searchString => {
       assert.equal(searchString, 'search');
     };
-    await render(hbs `{{nrg-search query=(action queryAction)}}`);
-    this.$('input').val('search').trigger('input');
+    await render(hbs`{{nrg-search query=(action queryAction)}}`);
+    this.$('input')
+      .val('search')
+      .trigger('input');
   });
 });

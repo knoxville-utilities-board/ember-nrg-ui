@@ -1,9 +1,5 @@
-import {
-  computed
-} from '@ember/object';
-import {
-  readOnly
-} from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 import Validation from 'ember-nrg-ui/mixins/validation';

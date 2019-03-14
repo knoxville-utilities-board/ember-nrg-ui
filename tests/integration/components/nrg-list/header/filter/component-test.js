@@ -1,13 +1,6 @@
-import {
-  module,
-  test
-} from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
-import {
-  render
-} from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import $ from 'jquery';
 
@@ -24,10 +17,14 @@ module('Integration | Component | nrg-list/header/filter', function(hooks) {
       assert.equal(selectedFilterValue, filterValue);
     };
 
-    await render(hbs `{{nrg-list/header/filter filterParam='param' filters=filterList changed=(action changedAction)}}`);
+    await render(
+      hbs`{{nrg-list/header/filter filterParam='param' filters=filterList changed=(action changedAction)}}`
+    );
 
     const dropdown = $('.ui.dropdown').eq(0);
     dropdown.click();
-    $('.item', dropdown).eq(0).click();
+    $('.item', dropdown)
+      .eq(0)
+      .click();
   });
 });
