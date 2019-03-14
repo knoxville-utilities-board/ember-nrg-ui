@@ -3,7 +3,7 @@
   <i class="search icon"></i>
 </div>
 {{#if showResults}}
-  <div class="results transition visible">
+  <div class="results scrollable-submenu transition visible">
     {{#each items as |item i|}}
       <div role="button" class="result {{if (eq i activeItem) "active"}}" {{action "select" null item preventDefault=true bubbles=false on="click"}}>
         {{#if hasBlock}}
