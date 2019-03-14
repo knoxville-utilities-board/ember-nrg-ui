@@ -106,7 +106,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   updateDisplayValue: task(function*() {
     const selected = yield this.get('selected');
-    this.set('searchString', get(selected || {}, this.get('displayLabel')));
+    this.set('searchString', get(selected || {}, this.get('displayLabel')) || '');
   }).on('init').restartable(),
 
   canPerformSearch: computed('minCharacters', 'searchString', function() {
