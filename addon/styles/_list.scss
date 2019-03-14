@@ -102,3 +102,8 @@
   font-weight: 500;
   font-size: 1.1em;
 }
+
+.scrollable-submenu {
+  max-height: 50vh;
+  overflow-y: auto;
+}
