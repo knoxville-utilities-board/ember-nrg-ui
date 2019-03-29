@@ -26,7 +26,7 @@ jobs:
     - script: |
         yarn run lint:hbs
         yarn run lint:js
-        yarn test -- --reporter=xunit --reporter-options output=results.xml
+        yarn test -r xunit
 
     - task: PublishTestResults@2
       inputs:
