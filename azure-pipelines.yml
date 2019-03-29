@@ -68,7 +68,7 @@ jobs:
       displayName: 'npm install'
 
     - script: |
-        ember try:one $EMBER_TRY_SCENARIO
+        ember try:one $(EMBER_TRY_SCENARIO)
       displayName: 'Run Ember Try'
 
         
