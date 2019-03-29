@@ -1,0 +1,79 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+resources:
+  containers:
+  - container: linux # reusable alias
+    image: ubuntu:16.04
+
+jobs:
+- job: RunEmberTests
+  container: linux
+
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '8.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install -g yarn ember-cli        
+      displayName: 'Setup global tools'
+
+    - script: |
+        yarn install
+        yarn run build
+      displayName: 'npm install and build'
+
+    - script: |
+        yarn run lint:hbs
+        yarn run lint:js
+        yarn test -- --reporter=xunit --reporter-options output=results.xml
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'jUnit'
+        testResultsFiles: '*-tests.xml'
+
+- job: RunEmberTry
+  container: linux
+
+  strategy:
+    maxParallel: 5
+    matrix:
+      LTS_2_16:
+        EMBER_TRY_SCENARIO: ember-lts-2.16
+      LTS_2_18:
+        EMBER_TRY_SCENARIO: ember-lts-2.18
+      LTS_3.4:
+        EMBER_TRY_SCENARIO: ember-lts-3.4
+      Release:
+        EMBER_TRY_SCENARIO: ember-release
+      Beta:
+        EMBER_TRY_SCENARIO: ember-beta
+      Canary:
+        EMBER_TRY_SCENARIO: ember-canary
+
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '8.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install -g yarn ember-cli
+      displayName: 'Setup global tools'
+      
+    - script: |
+        yarn install
+      displayName: 'npm install'
+
+    - script: |
+        ember try:one $EMBER_TRY_SCENARIO
+      displayName: 'Run Ember Try'
+
+        
+
+
