@@ -3,14 +3,10 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-resources:
-  containers:
-  - container: linux # reusable alias
-    image: ubuntu:16.04
-
 jobs:
 - job: RunEmberTests
-  container: linux
+  pool:
+    vmImage: 'vs2017-win2016'
 
   steps:
     - task: NodeTool@0
@@ -38,7 +34,8 @@ jobs:
         testResultsFiles: '*-tests.xml'
 
 - job: RunEmberTry
-  container: linux
+  pool:
+    vmImage: 'vs2017-win2016'
 
   strategy:
     maxParallel: 5
