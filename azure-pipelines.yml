@@ -4,7 +4,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 jobs:
-- job: RunEmberTests
+- job: Ember Tests
+  pr:
+  - master
   pool:
     vmImage: 'vs2017-win2016'
 
@@ -20,8 +22,7 @@ jobs:
 
     - script: |
         yarn install
-        yarn run build
-      displayName: 'npm install and build'
+      displayName: 'npm install'
 
     - script: |
         yarn run lint:hbs
@@ -40,12 +41,14 @@ jobs:
         testResultsFormat: 'jUnit'
         testResultsFiles: '*-tests.xml'
 
-- job: RunEmberTry
+- job: Ember Try
+  pr:
+  - master
   pool:
     vmImage: 'vs2017-win2016'
 
   strategy:
-    maxParallel: 5
+    maxParallel: 6
     matrix:
       LTS_2_16:
         EMBER_TRY_SCENARIO: ember-lts-2.16
@@ -75,7 +78,7 @@ jobs:
       displayName: 'npm install'
 
     - script: |
-        ember try:one $(EMBER_TRY_SCENARIO)
+        ember try:one $(EMBER_TRY_SCENARIO) --skip-cleanup=true
       displayName: 'Run Ember Try'
 
         
