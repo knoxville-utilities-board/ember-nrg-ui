@@ -88,6 +88,34 @@ jobs:
         testResultsFormat: 'jUnit'
         testResultsFiles: '*-tests.xml'
 
+- job: Release Deployment
+  trigger:
+  - refs/tags/*
+  pool:
+    vmImage: 'vs2017-win2016'
+
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '8.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install -g yarn ember-cli
+      displayName: 'Setup global tools'
+      
+    - script: |
+        yarn install
+      displayName: 'npm install'
+
+    - script: |
+        npm publish
+      displayName: 'Publish to NPM'
+
+    - script: |
+        ember deploy production
+      displayName: 'Deploy Demo App to Github'
+
         
 
 
