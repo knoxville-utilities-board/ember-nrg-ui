@@ -83,6 +83,11 @@ jobs:
         ember try:one $(EMBER_TRY_SCENARIO) --skip-cleanup=true
       displayName: 'Run Ember Try'
 
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'jUnit'
+        testResultsFiles: '*-tests.xml'
+
         
 
 
