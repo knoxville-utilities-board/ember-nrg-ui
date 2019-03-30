@@ -5,6 +5,8 @@
 
 jobs:
 - job: Ember Tests
+  trigger:
+  - master
   pr:
   - master
   pool:
