@@ -11,7 +11,6 @@ module.exports = function() {
   ]).then(urls => {
     return {
       useYarn: true,
-      command: 'ember test -r xunit',
       scenarios: [
         {
           name: 'ember-lts-2.16',
