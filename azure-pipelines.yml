@@ -23,7 +23,7 @@ jobs:
 
     - script: |
         yarn install
-      displayName: 'npm install'
+      displayName: 'Install Dependencies'
 
     - script: |
         yarn run lint:hbs
