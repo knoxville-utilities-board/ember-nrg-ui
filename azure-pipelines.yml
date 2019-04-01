@@ -6,7 +6,7 @@ pr:
 jobs:
 - job: Ember_Tests
 
-  condition: eq(variables['Build.Reason'], 'PullRequest')
+  condition: startsWith(variables['build.sourceBranch'], 'refs/pull')
 
   pool:
     vmImage: 'vs2017-win2016'
@@ -44,7 +44,7 @@ jobs:
 
 - job: Ember_Try
 
-  condition: eq(variables['Build.Reason'], 'PullRequest')
+  condition: startsWith(variables['build.sourceBranch'], 'refs/pull')
 
   pool:
     vmImage: 'vs2017-win2016'
@@ -85,10 +85,10 @@ jobs:
 
 - job: Release_Deployment
 
-  condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
+  condition: startsWith(variables['build.sourceBranch'], 'refs/tags')
 
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'Ubuntu 16.04'
 
   steps:
     - task: NodeTool@0
@@ -105,13 +105,18 @@ jobs:
       displayName: 'Install Dependencies'
 
     - script: |
-        npm publish
-      displayName: 'Publish to NPM'
+        ember build --environment production
+      displayName: 'Build Dummy App'
 
-    - script: |
-        ember deploy production
-      displayName: 'Deploy Demo App to Github'
-
+    - task: PublishPipelineArtifact@0
+      inputs:
+        targetPath: dist
+        artifactName: dummy-app
         
-
+    - task: Npm@1
+      displayName: 'Publish to NPM'
+      inputs:
+        command: publish
+        verbose: false
+        publishEndpoint: NPM
 
