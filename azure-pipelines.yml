@@ -77,7 +77,7 @@ jobs:
       
     - script: |
         yarn install
-      displayName: 'npm install'
+      displayName: 'Install Dependencies'
 
     - script: |
         ember try:one $(EMBER_TRY_SCENARIO) --skip-cleanup=true
@@ -102,7 +102,7 @@ jobs:
       
     - script: |
         yarn install
-      displayName: 'npm install'
+      displayName: 'Install Dependencies'
 
     - script: |
         npm publish
