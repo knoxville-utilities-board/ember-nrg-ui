@@ -137,7 +137,7 @@ Import the override file into the main `app.scss`
 @import "nrg-override";
 ```
 
-[build-status-img]: https://travis-ci.com/knoxville-utilities-board/ember-nrg-ui.svg?branch=master
-[build-status-link]: https://travis-ci.com/knoxville-utilities-board/ember-nrg-ui
+[build-status-img]: https://dev.azure.com/knoxville-utilities-board/ember-nrg-ui/_apis/build/status/knoxville-utilities-board.ember-nrg-ui?branchName=master
+[build-status-link]: https://dev.azure.com/knoxville-utilities-board/ember-nrg-ui/_build/latest?definitionId=1&branchName=master
 [npm-badge-img]: https://badge.fury.io/js/ember-nrg-ui.svg
 [npm-badge-link]: http://badge.fury.io/js/ember-nrg-ui
