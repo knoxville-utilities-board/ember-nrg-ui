@@ -1,0 +1,25 @@
+<div class="ui segment basic">
+  <h3>Components</h3>
+
+  {{#nrg-home-cards as |view|}}
+    {{view.home-card route="/view-components/nrg-error-pages" label="Error Pages" icon="warning sign"}}
+    {{view.home-card route="/view-components/nrg-forms" label="Forms" icon="edit"}}
+    {{view.home-card route="/view-components/nrg-home-cards" label="Home Cards" icon="th"}}
+    {{view.home-card route="/view-components/nrg-loading-indicator" label="Loading Indicator" icon="circle notch"}}
+    {{view.home-card route="/view-components/nrg-modal" label="Modal" icon="clone"}}
+    {{view.home-card route="/view-components/nrg-lightbox" label="Lightbox" icon="images"}}
+    {{view.home-card route="/view-components/nrg-list" label="List" icon="list"}}
+    {{view.home-card route="/view-components/nrg-search" label="Search" icon="search"}}
+  {{/nrg-home-cards}}
+</div>
+
+<div class="ui segment basic">
+  <h3>Mixins</h3>
+
+  {{#nrg-home-cards as |view|}}
+    {{view.home-card route="/view-mixins/context-menu" label="Context Menus" icon="ellipsis vertical"}}
+    {{view.home-card route="/view-mixins/focus-first-input" label="Focus First Input" icon="chevron right"}}
+    {{view.home-card route="/view-mixins/global-keyboard-shortcut" label="Global Keyboard Shortcuts" icon="keyboard"}}
+    {{view.home-card route="/view-mixins/resize" label="Resize" icon="expand arrows alternate"}}
+  {{/nrg-home-cards}}
+</div>
