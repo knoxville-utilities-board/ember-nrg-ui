@@ -56,12 +56,15 @@ jobs:
         EMBER_TRY_SCENARIO: ember-lts-2.18
       LTS_3.4:
         EMBER_TRY_SCENARIO: ember-lts-3.4
-      Release:
-        EMBER_TRY_SCENARIO: ember-release
-      Beta:
-        EMBER_TRY_SCENARIO: ember-beta
-      Canary:
-        EMBER_TRY_SCENARIO: ember-canary
+      # Release:
+      #   EMBER_TRY_SCENARIO: ember-release
+      #   allowedToFail: true
+      # Beta:
+      #   EMBER_TRY_SCENARIO: ember-beta
+      #   allowedToFail: true
+      # Canary:
+      #   EMBER_TRY_SCENARIO: ember-canary
+      #   allowedToFail: true
 
   steps:
     - task: NodeTool@0
