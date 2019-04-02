@@ -1,12 +1,10 @@
 trigger:
-- refs/tags/*
+- release
 pr:
 - master
 
 jobs:
 - job: Ember_Tests
-
-  condition: startsWith(variables['build.sourceBranch'], 'refs/pull')
 
   pool:
     vmImage: 'vs2017-win2016'
@@ -85,7 +83,9 @@ jobs:
 
 - job: Release_Deployment
 
-  condition: startsWith(variables['build.sourceBranch'], 'refs/tags')
+  dependsOn: Ember_Tests
+
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/release'))
 
   pool:
     vmImage: 'Ubuntu 16.04'
@@ -105,6 +105,23 @@ jobs:
       displayName: 'Install Dependencies'
 
     - script: |
+        VERSION="$(node -p "require('./package.json').version")"
+        echo "##vso[task.setvariable variable=packageVersion]$VERSION"
+      displayName: 'Get Package Version'
+
+    - task: GitHubRelease@0
+      displayName: 'Create GitHub release'
+      inputs:
+        gitHubConnection: Github
+        repositoryName: 'knoxville-utilities-board/ember-nrg-ui'
+        tagSource: manual
+        tag: '$(packageVersion)'
+
+    - script: |
+        git fetch origin tag $(packageVersion)
+      displayName: 'Update Local Tags'    
+
+    - script: |
         ember build --environment production
       displayName: 'Build Dummy App'
 
@@ -112,7 +129,7 @@ jobs:
       inputs:
         targetPath: dist
         artifactName: dummy-app
-        
+
     - task: Npm@1
       displayName: 'Publish to NPM'
       inputs:
