@@ -18,7 +18,7 @@ MarkdownFilter.prototype.processString = function(markdown) {
   const markdownIt = new MarkdownIt({
     html: true,
     linkify: true,
-    typographer: true
+    typographer: true,
   });
   return markdownIt.render(markdown);
 };
