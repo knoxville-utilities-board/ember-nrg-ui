@@ -1,5 +1,6 @@
 trigger:
 - release
+- master
 pr:
 - master
 
