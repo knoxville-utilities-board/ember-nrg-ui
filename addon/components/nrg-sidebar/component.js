@@ -29,14 +29,15 @@ export default Component.extend(ResizeMixin, {
     }
   }),
 
+  didResize() {
+    if (this.get('isOpen') && this.get('isLargeScreen')) {
+      this.set('isOpen', false);
+    }
+  },
+
   actions: {
     onHide() {
       this.set('isOpen', false);
-    },
-    resize() {
-      if (this.get('isOpen') && this.get('isLargeScreen')) {
-        this.set('isOpen', false);
-      }
     },
     clickedLink(item) {
       this.send('onHide');
