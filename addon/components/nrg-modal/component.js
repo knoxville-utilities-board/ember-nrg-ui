@@ -56,6 +56,10 @@ export default Component.extend({
     }
   },
 
+  onHidden() {
+    $('.ui.modal.visible').modal('refresh');
+  },
+
   _modalClass: computed('basic', 'lightbox', 'modalClass', function() {
     let appliedClass = '';
     if (this.get('lightbox')) {
