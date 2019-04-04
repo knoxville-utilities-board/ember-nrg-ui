@@ -15,7 +15,7 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
 
   test('sidebar is rendered', async function(assert) {
     await render(hbs`{{nrg-sidebar isOpen=false}}`);
-    assert.equal($('.ui.sidebar').length, 1);
+    assert.equal($('.ui.sidebar').length, 2);
   });
 
   test('Item is rendered', async function(assert) {
