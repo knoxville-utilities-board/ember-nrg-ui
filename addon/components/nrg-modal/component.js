@@ -7,14 +7,16 @@ import { or } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 import { next } from '@ember/runloop';
+import Ember from 'ember';
 
 export default Component.extend({
   layout,
   hasButtons: or('primaryButton', 'secondaryButton'),
 
   flashMessages: service(),
-
   context: 'body',
+  testingContext: 'div#ember-testing',
+  isTesting: Ember.testing,
   isOpen: false,
   autofocus: true,
   detachable: true,

@@ -1,4 +1,4 @@
-{{#ui-modal context=context id=modalId class=_modalClass onHide=(action "onHide") duration=duration transition=transition closable=dismissable detachable=detachable autofocus=autofocus onHidden=onHidden allowMultiple=true}}
+{{#ui-modal context=(if isTesting testingContext context) id=modalId class=_modalClass onHide=(action "onHide") duration=duration transition=transition closable=dismissable detachable=detachable autofocus=autofocus onHidden=onHidden allowMultiple=true}}
   {{#if dismissable}}
     <i class="close icon"></i>
   {{/if}}
