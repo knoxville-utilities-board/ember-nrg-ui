@@ -3,10 +3,11 @@ import $ from 'jquery';
 import { observer, computed } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import { or } from '@ember/object/computed';
+import { or, not } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 import { next } from '@ember/runloop';
+import Ember from 'ember';
 
 export default Component.extend({
   layout,
@@ -17,7 +18,8 @@ export default Component.extend({
   context: 'body',
   isOpen: false,
   autofocus: true,
-  detachable: true,
+  testing: Ember.testing,
+  detachable: not('testing'),
   dismissable: true,
   basic: false,
   duration: 400,
