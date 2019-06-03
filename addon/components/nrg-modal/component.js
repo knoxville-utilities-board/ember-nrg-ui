@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { observer, computed } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import { or, not } from '@ember/object/computed';
+import { or } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 import { next } from '@ember/runloop';
@@ -18,8 +18,7 @@ export default Component.extend({
   context: 'body',
   isOpen: false,
   autofocus: true,
-  testing: Ember.testing,
-  detachable: not('testing'),
+  detachable: !Ember.testing,
   dismissable: true,
   basic: false,
   duration: 400,
