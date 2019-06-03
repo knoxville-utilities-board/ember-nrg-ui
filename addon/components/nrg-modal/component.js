@@ -7,6 +7,7 @@ import { or } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from './template';
 import { next } from '@ember/runloop';
+import Ember from 'ember';
 
 export default Component.extend({
   layout,
@@ -17,7 +18,7 @@ export default Component.extend({
   context: 'body',
   isOpen: false,
   autofocus: true,
-  detachable: true,
+  detachable: !Ember.testing,
   dismissable: true,
   basic: false,
   duration: 400,
