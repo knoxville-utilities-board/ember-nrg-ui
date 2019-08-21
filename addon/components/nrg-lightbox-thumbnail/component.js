@@ -2,11 +2,18 @@ import { scheduleOnce, next } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import layout from './template';
+import { copy } from 'ember-copy';
 
 export default Component.extend({
   layout,
   tagName: '',
   lightboxService: service('lightbox'),
+  uuid:  '',
+
+  init(){
+    this._super(...arguments);
+    this.uuid = Math.random().toString(36).replace(/[^a-z]+/g, '');
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -22,7 +29,12 @@ export default Component.extend({
   },
   actions: {
     openLightbox() {
-      this.get('lightboxService').selectAndOpen(this.get('photo'));
+      const photo = copy(this.get('photo'));
+      const detail = $(`#thumb-${this.uuid}`).html();
+      if(detail){
+        photo.detail = detail;
+      }
+      this.get('lightboxService').selectAndOpen(photo);
     },
   },
 });
