@@ -1,18 +1,21 @@
-import { scheduleOnce, next } from '@ember/runloop';
-import { inject as service } from '@ember/service';
+import {next, scheduleOnce} from '@ember/runloop';
+import {inject as service} from '@ember/service';
 import Component from '@ember/component';
 import layout from './template';
-import { copy } from 'ember-copy';
+import {copy} from 'ember-copy';
+import $ from 'jquery';
 
 export default Component.extend({
   layout,
   tagName: '',
   lightboxService: service('lightbox'),
-  uuid:  '',
+  uuid: '',
 
-  init(){
+  init() {
     this._super(...arguments);
-    this.uuid = Math.random().toString(36).replace(/[^a-z]+/g, '');
+    this.uuid = Math.random()
+      .toString(36)
+      .replace(/[^a-z]+/g, '');
   },
 
   didInsertElement() {
@@ -31,7 +34,7 @@ export default Component.extend({
     openLightbox() {
       const photo = copy(this.get('photo'));
       const detail = $(`#thumb-${this.uuid}`).html();
-      if(detail){
+      if (detail) {
         photo.detail = detail;
       }
       this.get('lightboxService').selectAndOpen(photo);
