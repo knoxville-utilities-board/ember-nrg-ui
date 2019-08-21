@@ -1,8 +1,8 @@
-import {next, scheduleOnce} from '@ember/runloop';
-import {inject as service} from '@ember/service';
+import { next, scheduleOnce } from '@ember/runloop';
+import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import layout from './template';
-import {copy} from 'ember-copy';
+import { copy } from 'ember-copy';
 import $ from 'jquery';
 
 export default Component.extend({
