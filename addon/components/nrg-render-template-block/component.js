@@ -2,8 +2,9 @@ import Component from '@ember/component';
 import layout from './template';
 
 export default Component.extend({
-  classNames: ['ui hidden message'],
   layout,
+  classNames: ['is-visually-hidden'],
+
   getTemplateNode() {
     return this.element.querySelector('.js-capture-node');
   },

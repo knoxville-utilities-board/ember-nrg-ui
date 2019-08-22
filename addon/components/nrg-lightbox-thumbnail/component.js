@@ -9,10 +9,6 @@ export default Component.extend({
   lightboxService: service('lightbox'),
   detail: null,
 
-  init() {
-    this._super(...arguments);
-  },
-
   didInsertElement() {
     this._super(...arguments);
     scheduleOnce('afterRender', this, () => {
@@ -27,7 +23,7 @@ export default Component.extend({
   },
   cloneObject(initialPhoto) {
     if (initialPhoto.toJSON) {
-      return JSON.parse(initialPhoto.toJSON());
+      return initialPhoto.toJSON();
     }
     return JSON.parse(JSON.stringify(initialPhoto));
   },
