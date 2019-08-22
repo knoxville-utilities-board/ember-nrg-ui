@@ -2,20 +2,15 @@ import { next, scheduleOnce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import layout from './template';
-import { copy } from 'ember-copy';
-import $ from 'jquery';
 
 export default Component.extend({
   layout,
   tagName: '',
   lightboxService: service('lightbox'),
-  uuid: '',
+  detail: null,
 
   init() {
     this._super(...arguments);
-    this.uuid = Math.random()
-      .toString(36)
-      .replace(/[^a-z]+/g, '');
   },
 
   didInsertElement() {
@@ -30,12 +25,21 @@ export default Component.extend({
     });
     this._super(...arguments);
   },
+  cloneObject(initialPhoto) {
+    if (initialPhoto.toJSON) {
+      return JSON.parse(initialPhoto.toJSON());
+    }
+    return JSON.parse(JSON.stringify(initialPhoto));
+  },
+  setDetail(node){
+    this.detail = node.innerHTML;
+  },
   actions: {
     openLightbox() {
-      const photo = copy(this.get('photo'));
-      const detail = $(`#thumb-${this.uuid}`).html();
-      if (detail) {
-        photo.detail = detail;
+      const photo = this.cloneObject(this.get('photo'));
+
+      if (this.detail) {
+        photo.detail = this.detail;
       }
       this.get('lightboxService').selectAndOpen(photo);
     },
