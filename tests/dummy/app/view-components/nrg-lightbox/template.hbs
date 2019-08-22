@@ -5,3 +5,13 @@
   {{/each}}
   <!-- END-SNIPPET  -->
 {{/nrg-code-block}}
+
+{{#nrg-code-block label="Lightbox Thumbnails with Custom Details" codeBlockName="lightbox-thumbnails-block.hbs" }}
+  <!-- BEGIN-SNIPPET lightbox-thumbnails-block -->
+  {{#each model as |photo|}}
+    {{#nrg-lightbox-thumbnail photo=photo}}
+      <strong>{{photo.detail}}</strong>
+    {{/nrg-lightbox-thumbnail}}
+  {{/each}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}
