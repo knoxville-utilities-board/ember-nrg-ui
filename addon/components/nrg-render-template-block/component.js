@@ -12,7 +12,11 @@ export default Component.extend({
   setupMutationObserver() {
     const callback = () => this.updateParent();
     const node = this.getTemplateNode();
-    const config = { attributes: true, childList: true, subtree: true };
+    const config = {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    };
 
     this.mutationObserver = new MutationObserver(callback);
     this.mutationObserver.observe(node, config);

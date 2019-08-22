@@ -27,7 +27,7 @@ export default Component.extend({
     }
     return JSON.parse(JSON.stringify(initialPhoto));
   },
-  setDetail(node){
+  setDetail(node) {
     this.detail = node.innerHTML;
   },
   actions: {
