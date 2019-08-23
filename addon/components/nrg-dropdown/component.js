@@ -20,6 +20,7 @@ export default Component.extend(Validation, {
   allowAdditions: false,
   hideAdditions: true,
   menuDirection: '',
+  match: 'both',
 
   selection: notEmpty('field'),
 
