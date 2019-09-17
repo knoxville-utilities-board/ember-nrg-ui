@@ -37,17 +37,17 @@ export default Service.extend({
 
   /* Media Query Breakpoints */
 
-  isSmallMobileScreen: readOnly('_mediaService.smallMobile.matches'),
+  isSmallMobileScreen: readOnly('_mediaService.isSmallMobile'),
 
-  isMobileScreen: readOnly('_mediaService.mobile.matches'),
+  isMobileScreen: readOnly('_mediaService.isMobile'),
 
-  isTabletScreen: readOnly('_mediaService.tablet.matches'),
+  isTabletScreen: readOnly('_mediaService.isTablet'),
 
-  isComputerScreen: readOnly('_mediaService.computer.matches'),
+  isComputerScreen: readOnly('_mediaService.isComputer'),
 
-  isLargeMonitor: readOnly('_mediaService.largeMonitor.matches'),
+  isLargeMonitor: readOnly('_mediaService.isLargeMonitor'),
 
-  isWidescreenMonitor: readOnly('_mediaService.widescreenMonitor.matches'),
+  isWidescreenMonitor: readOnly('_mediaService.isWidescreenMonitor'),
 
   /* Media Query Computed Groups */
 
