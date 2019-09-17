@@ -10,6 +10,7 @@ export default Service.extend({
   resizeService: service('resize'),
 
   init() {
+    this._super(...arguments);
     this.get('resizeService').on('didResize', this, this._handleResizeEvent);
     this._handleResizeEvent();
   },
