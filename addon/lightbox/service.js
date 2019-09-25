@@ -6,53 +6,53 @@ import { set } from '@ember/object';
 
 export default Service.extend({
   lightboxIsOpen: false,
-  allPhotos: A(),
-  selectedPhoto: null,
 
-  hasChildren: gt('allPhotos.length', 0),
+  items: A(),
+
+  selectedItem: null,
+
+  hasChildren: gt('items.length', 0),
 
   add(item) {
-    this.get('allPhotos').pushObject(item);
+    this.get('items').pushObject(item);
   },
 
   remove(thumbnailId) {
-    const allPhotos = this.get('allPhotos').filterBy('thumbnailId', thumbnailId);
-    this.set('allPhotos', allPhotos);
+    const items = this.get('items').filterBy('thumbnailId', thumbnailId);
+    this.set('items', items);
   },
 
   selectAndOpen(thumbnailId) {
-    const item = this.get('allPhotos').findBy('thumbnailId', thumbnailId);
-
-    this.set('selectedPhoto', item);
+    const item = this.get('items').findBy('thumbnailId', thumbnailId);
+    this.set('selectedItem', item);
     this.set('lightboxIsOpen', true);
   },
 
   updateDetail(thumbnailId, detail) {
-    const item = this.get('allPhotos').findBy('thumbnailId', thumbnailId);
+    const item = this.get('items').findBy('thumbnailId', thumbnailId);
     if (item) {
       set(item, 'detail', detail);
     }
   },
 
-  selectedIndex: computed('selectedPhoto', 'allPhotos.[]', function() {
-    return this.get('allPhotos').indexOf(this.get('selectedPhoto'));
+  selectedIndex: computed('selectedItem', 'items.[]', function() {
+    return this.get('items').indexOf(this.get('selectedItem'));
   }),
 
   previousDisabled: lte('selectedIndex', 0),
 
-  nextDisabled: computed('selectedIndex', 'allPhotos.[]', function() {
+  nextDisabled: computed('selectedIndex', 'items.[]', function() {
     const selectedIndex = this.get('selectedIndex');
-    const totalPhotos = this.get('allPhotos.length');
-
+    const totalPhotos = this.get('items.length');
     return selectedIndex === -1 || totalPhotos - 1 === selectedIndex;
   }),
 
   selectNext() {
     if (!this.get('nextDisabled')) {
       const selectedIndex = this.get('selectedIndex');
-      const allPhotos = this.get('allPhotos');
-      const photo = allPhotos.objectAt(selectedIndex + 1);
-      this.set('selectedPhoto', photo);
+      const items = this.get('items');
+      const photo = items.objectAt(selectedIndex + 1);
+      this.set('selectedItem', photo);
       this.set('rotationClass', '');
     }
   },
@@ -60,9 +60,9 @@ export default Service.extend({
   selectPrevious() {
     if (!this.get('previousDisabled')) {
       const selectedIndex = this.get('selectedIndex');
-      const allPhotos = this.get('allPhotos');
-      const photo = allPhotos.objectAt(selectedIndex - 1);
-      this.set('selectedPhoto', photo);
+      const items = this.get('items');
+      const photo = items.objectAt(selectedIndex - 1);
+      this.set('selectedItem', photo);
       this.set('rotationClass', '');
     }
   },

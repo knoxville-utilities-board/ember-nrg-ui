@@ -12,15 +12,13 @@ export default Component.extend({
 
   isOpen: alias('lightboxService.lightboxIsOpen'),
 
-  selectedPhoto: alias('lightboxService.selectedPhoto.photo'),
+  selectedItem: alias('lightboxService.selectedItem'),
 
-  selectedPhotoDetail: computed(
-    'lightboxService.selectedPhoto.detail',
-    function() {
-      const detail = this.get('lightboxService.selectedPhoto.detail');
-      return htmlSafe(detail);
-    }
-  ),
+  selectedPhoto: alias('selectedItem.photo'),
+
+  selectedPhotoDetail: computed('selectedItem.detail', function() {
+    return htmlSafe(this.get('selectedItem.detail'));
+  }),
 
   rotationClass: alias('lightboxService.rotationClass'),
 
