@@ -18,7 +18,7 @@ export default Service.extend({
   },
 
   remove(thumbnailId) {
-    const items = this.get('items').filterBy('thumbnailId', thumbnailId);
+    const items = this.get('items').rejectBy('thumbnailId', thumbnailId);
     this.set('items', items);
   },
 
