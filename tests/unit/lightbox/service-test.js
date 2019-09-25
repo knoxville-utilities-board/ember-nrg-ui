@@ -4,43 +4,43 @@ import { setupTest } from 'ember-qunit';
 
 module('Unit | Service | lightbox', function(hooks) {
   hooks.beforeEach(function() {
-    this.allPhotos = A([
+    this.items = A([
       {
-        id: 0,
+        thumbnailId: 0,
       },
       {
-        id: 1,
+        thumbnailId: 1,
       },
       {
-        id: 2,
+        thumbnailId: 2,
       },
     ]);
   });
   setupTest(hooks);
 
   test('arrows disable properly', function(assert) {
-    const allPhotos = this.allPhotos;
+    const items = this.items;
     const service = this.owner.lookup('service:lightbox');
+    service.set('items', A());
 
-    service.get('allPhotos').pushObjects(allPhotos);
-    service.set('selectedPhoto', allPhotos.get('firstObject'));
+    service.get('items').pushObjects(items);
+    service.set('selectedItem', items.get('firstObject'));
     assert.ok(service.get('previousDisabled'));
 
-    service.set('selectedPhoto', allPhotos.objectAt(2));
+    service.set('selectedItem', items.objectAt(2));
     assert.ok(service.get('nextDisabled'));
   });
 
   test('select next and previous works', function(assert) {
-    const allPhotos = this.allPhotos;
+    const items = this.items;
     const service = this.owner.lookup('service:lightbox');
-    service.get('allPhotos').pushObjects(allPhotos);
-    service.set('selectedPhoto', allPhotos.get('firstObject'));
+    service.get('items').pushObjects(items);
+    service.set('selectedItem', items.get('firstObject'));
     service.selectNext();
     service.selectNext();
-
-    assert.equal(service.get('selectedPhoto.id'), 2);
+    assert.equal(service.get('selectedItem.thumbnailId'), 2);
 
     service.selectPrevious();
-    assert.equal(service.get('selectedPhoto.id'), 1);
+    assert.equal(service.get('selectedItem.thumbnailId'), 1);
   });
 });

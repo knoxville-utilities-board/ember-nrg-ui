@@ -11,7 +11,7 @@ const hasSidebarItem = (label, nodeIdentifier = '.sidebar-menu > .item') => {
     );
   });
 };
-module('Acceptance | focus first input', function(hooks) {
+module('Acceptance | sidebar', function(hooks) {
   setupApplicationTest(hooks);
 
   test('Route shown is not sidebar', async function(assert) {
