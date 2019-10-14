@@ -6,6 +6,17 @@ import { bool, readOnly } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import ArrayProxy from '@ember/array/proxy';
 
+function createArrayProxy(content) {
+  if (ArrayProxy.create) {
+    return ArrayProxy.create({
+      content,
+    });
+  }
+  return new ArrayProxy({
+    content,
+  });
+}
+
 export default Component.extend({
   layout,
 
@@ -37,9 +48,7 @@ export default Component.extend({
   },
 
   _items: computed(function() {
-    return ArrayProxy.create({
-      content: A(),
-    });
+    return createArrayProxy(A());
   }),
 
   _start: readOnly('pageMeta.start'),
@@ -62,12 +71,7 @@ export default Component.extend({
     const items = this.get('items');
     const start = this.get('_start');
     if (!start) {
-      this.set(
-        '_items',
-        ArrayProxy.create({
-          content: A(),
-        })
-      );
+      this.set('_items', createArrayProxy(A()));
     }
     this.get('_items').pushObjects((items.toArray && items.toArray()) || items);
   }),
