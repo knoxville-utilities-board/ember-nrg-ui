@@ -37,7 +37,7 @@ export default Component.extend({
   },
 
   _items: computed(function() {
-    return new ArrayProxy({
+    return ArrayProxy.create({
       content: A(),
     });
   }),
@@ -64,7 +64,7 @@ export default Component.extend({
     if (!start) {
       this.set(
         '_items',
-        new ArrayProxy({
+        ArrayProxy.create({
           content: A(),
         })
       );
