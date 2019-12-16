@@ -20,8 +20,10 @@ export default Component.extend(ResizeMixin, {
   environmentDisplay: computed(
     'applicationSettings.localEnvironment',
     function() {
-      const ENV = getOwner(this).resolveRegistration('config:environment')['ember-nrg-ui'];
-      let productionEnvironments
+      const ENV = getOwner(this).resolveRegistration('config:environment')[
+        'ember-nrg-ui'
+      ];
+      let productionEnvironments;
       if (ENV) {
         productionEnvironments = ENV.productionEnvironments || ['prod'];
       } else {

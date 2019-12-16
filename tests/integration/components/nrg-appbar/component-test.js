@@ -25,9 +25,14 @@ module('Integration | Component | nrg-appbar', function(hooks) {
     this.set('applicationSettings', {
       localEnvironment: 'bob',
     });
-    await render(hbs`{{nrg-appbar applicationSettings=applicationSettings title='test title'}}`);
+    await render(
+      hbs`{{nrg-appbar applicationSettings=applicationSettings title='test title'}}`
+    );
     assert.equal(
-      this.$('.environment-title').text().trim(), 'BOB'
+      this.$('.environment-title')
+        .text()
+        .trim(),
+      'BOB'
     );
   });
 
@@ -38,9 +43,14 @@ module('Integration | Component | nrg-appbar', function(hooks) {
     this.set('applicationSettings', {
       localEnvironment: 'bob',
     });
-    await render(hbs`{{nrg-appbar applicationSettings=applicationSettings title='test title'}}`);
+    await render(
+      hbs`{{nrg-appbar applicationSettings=applicationSettings title='test title'}}`
+    );
     assert.notEqual(
-      this.$('.environment-title').text().trim(), 'BOB'
+      this.$('.environment-title')
+        .text()
+        .trim(),
+      'BOB'
     );
   });
 });
