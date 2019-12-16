@@ -20,8 +20,13 @@ export default Component.extend(ResizeMixin, {
   environmentDisplay: computed(
     'applicationSettings.localEnvironment',
     function() {
-      const ENV = getOwner(this).resolveRegistration('config:environment');
-      const productionEnvironments = ENV.productionEnvironments || ['prod'];
+      const ENV = getOwner(this).resolveRegistration('config:environment')['ember-nrg-ui'];
+      let productionEnvironments
+      if (ENV) {
+        productionEnvironments = ENV.productionEnvironments || ['prod'];
+      } else {
+        productionEnvironments = ['prod'];
+      }
       const environment = this.get('applicationSettings.localEnvironment');
       if (environment && !productionEnvironments.includes(environment)) {
         return environment.toUpperCase();

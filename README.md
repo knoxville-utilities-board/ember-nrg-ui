@@ -152,7 +152,9 @@ For example, if your production environments are `prd` and `prod` the `environme
 module.exports = function(/* environment, appConfig */) {
   const ENV = {
     ...
-    productionEnvironments: ['prd', 'prod'] // <- Look Here
+    'ember-nrg-ui': {
+      productionEnvironments: ['prd', 'prod'] // <- Look Here
+    }
     ...
   }
   return ENV;
