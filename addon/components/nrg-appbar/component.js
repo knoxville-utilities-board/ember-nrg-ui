@@ -21,8 +21,9 @@ export default Component.extend(ResizeMixin, {
     'applicationSettings.localEnvironment',
     function() {
       const ENV = getOwner(this).resolveRegistration('config:environment');
+      const productionEnvironments = ENV.productionEnvironments || ['prod'];
       const environment = this.get('applicationSettings.localEnvironment');
-      if (environment && !ENV.productionEnvironments.includes(environment)) {
+      if (environment && !productionEnvironments.includes(environment)) {
         return environment.toUpperCase();
       }
       return null;

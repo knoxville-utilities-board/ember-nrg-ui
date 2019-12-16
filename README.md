@@ -145,4 +145,16 @@ Import the override file into the main `app.scss`
 ### Displaying Environment In App Bar
 
 By default, every environment will be displayed in the App Bar except for `prod`.
-To change this modify the `productionEnvironments` array `config/environments.js`.
+To change this, add an array property called `productionEnvironments` to  the `ENV` variable in the `config/environment.js` file for your app.
+For example, if your production environments are `prd` and `prod` the `environment.js` file would look something like this:
+
+```javascript
+module.exports = function(/* environment, appConfig */) {
+  const ENV = {
+    ...
+    productionEnvironments: ['prd', 'prod'] // <- Look Here
+    ...
+  }
+  return ENV;
+};
+```
