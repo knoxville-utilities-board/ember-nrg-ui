@@ -13,17 +13,17 @@ It includes an application shell with sidebar navigation, typical UI components,
 
 ## What it does
 
-- Overwrites `.ember-cli`
-- Overwrites `application.hbs` to use `nrg-application` component
-- Converts the application to `Pods`
-- Converts the application to use Sass
-- Adds routes `/release-notes` and `404 Not Found`
-- Modifies `config/environment.js`
-- Modifies `ember-cli-build.js`
-- Installs `ember-cli-mirage` and `ember-cli-sass`
-- Uninstalls `ember-welcome-page`
-- Adds `public/.htaccess` file
-- Adds `app/styles/_nrg-override.scss` for theming
+* Overwrites `.ember-cli`
+* Overwrites `application.hbs` to use `nrg-application` component
+* Converts the application to `Pods`
+* Converts the application to use Sass
+* Adds routes `/release-notes` and `404 Not Found`
+* Modifies `config/environment.js`
+* Modifies `ember-cli-build.js`
+* Installs `ember-cli-mirage` and `ember-cli-sass`
+* Uninstalls `ember-welcome-page`
+* Adds `public/.htaccess` file
+* Adds `app/styles/_nrg-override.scss` for theming
 
 ## Example App
 
@@ -143,5 +143,6 @@ Import the override file into the main `app.scss`
 [npm-badge-link]: http://badge.fury.io/js/ember-nrg-ui
 
 ### Displaying Environment In App Bar
+
 By default, every environment will be displayed in the App Bar except for `prod`.
 To change this modify the `productionEnvironments` array `config/environments.js`.
