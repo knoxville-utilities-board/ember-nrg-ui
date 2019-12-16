@@ -141,3 +141,7 @@ Import the override file into the main `app.scss`
 [build-status-link]: https://dev.azure.com/knoxville-utilities-board/ember-nrg-ui/_build/latest?definitionId=1&branchName=master
 [npm-badge-img]: https://badge.fury.io/js/ember-nrg-ui.svg
 [npm-badge-link]: http://badge.fury.io/js/ember-nrg-ui
+
+### Displaying Environment In App Bar
+By default, every environment will be displayed in the App Bar except for `prod`.
+To change this modify the `productionEnvironments` array `config/environments.js`.
