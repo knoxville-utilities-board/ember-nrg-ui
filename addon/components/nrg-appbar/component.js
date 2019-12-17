@@ -22,7 +22,8 @@ export default Component.extend(ResizeMixin, {
     function() {
       const ENV = getOwner(this).resolveRegistration('config:environment');
       const config = ENV['ember-nrg-ui'];
-      const productionEnvironments = config && config.productionEnvironments || ['prod'];
+      const productionEnvironments = (config &&
+        config.productionEnvironments) || ['prod'];
       const environment = this.get('applicationSettings.localEnvironment');
       if (environment && !productionEnvironments.includes(environment)) {
         return environment.toUpperCase();
