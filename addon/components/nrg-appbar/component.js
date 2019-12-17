@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import Component from '@ember/component';
 import layout from './template';
+import { getOwner } from '@ember/application';
 
 export default Component.extend(ResizeMixin, {
   layout,
@@ -19,8 +20,12 @@ export default Component.extend(ResizeMixin, {
   environmentDisplay: computed(
     'applicationSettings.localEnvironment',
     function() {
+      const ENV = getOwner(this).resolveRegistration('config:environment');
+      const config = ENV['ember-nrg-ui'];
+      const productionEnvironments = (config &&
+        config.productionEnvironments) || ['prod'];
       const environment = this.get('applicationSettings.localEnvironment');
-      if (environment && environment !== 'prod') {
+      if (environment && !productionEnvironments.includes(environment)) {
         return environment.toUpperCase();
       }
       return null;
