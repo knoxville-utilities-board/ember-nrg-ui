@@ -1,18 +1,47 @@
-{{#ui-dropdown name=name class=_dropdownClass allowAdditions=allowAdditions hideAdditions=hideAdditions showOnFocus=showOnFocus selected=selected forceSelection=forceSelection onChange=(action "select") direction=direction allowTab=allowTab match=match action=dropdownAction as |execute mapper|}}
-  {{#if icon}}
-    <i class="icon {{icon}}"></i>
+{{#if icon}}
+  <i class="icon {{icon}}"></i>
+{{/if}}
+{{#if search}}
+  {{input class="search" autocomplete="off" name=name value=searchValue}}
+{{/if}}
+<div class="{{textClass}} text">
+  {{#if hasSelected}}
+    {{#if hasBlock}}
+      {{yield selected}}
+    {{else if isStringData}}
+      {{selected}}
+    {{else}}
+      {{selected.label}}
+    {{/if}}
+  {{else}}
+    {{defaultText}}
   {{/if}}
-  <div class="default text">{{defaultText}}</div>
-  <i class="dropdown icon"></i>
-  <div class="{{menuDirection}} menu">
-    {{#each options as |option|}}
-      <div class="{{if option.disabled "disabled"}} item" data-value={{map-value mapper option}}>
-        {{#if hasBlock}}
-          {{yield option}}
-        {{else}}
-          {{option.label}}
+</div>
+<i class="dropdown icon"></i>
+<div class="{{menuClass}} menu">
+  {{#each displayedOptions as |option i|}}
+    <div role="button" class="{{if option.disabled "disabled"}} {{if (eq i activeItem) "active"}} item" {{action select option}} {{!-- template-lint-disable no-nested-interactive --}}>
+      {{#if hasBlock}}
+        {{yield option}}
+      {{else if isStringData}}
+        {{#if this.isAddingOption}}
+          Add item:
         {{/if}}
-      </div>
-    {{/each}}
-  </div>
-{{/ui-dropdown}}
+        {{option}}
+      {{else}}
+        {{#if this.isAddingOption}}
+          Add item:
+        {{/if}}
+        {{option.label}}
+      {{/if}}
+    </div>
+  {{else}}
+    <div class="disabled item">
+      {{#if isSearching}}
+        <span>No results found.</span>
+      {{else}}
+        <span>No options available.</span>
+      {{/if}}
+    </div>
+  {{/each}}
+</div>
