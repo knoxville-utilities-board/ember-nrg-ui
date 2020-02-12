@@ -1,9 +1,11 @@
 {
   "name": "ember-nrg-ui",
   "version": "1.6.0",
-  "description":
-    "Opinionated UI addon based on how KUB scaffolds web applications",
-  "keywords": ["ember-addon", "Semantic UI"],
+  "description": "Opinionated UI addon based on how KUB scaffolds web applications",
+  "keywords": [
+    "ember-addon",
+    "Semantic UI"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/knoxville-utilities-board/ember-nrg-ui"
@@ -25,7 +27,7 @@
   "dependencies": {
     "broccoli-stew": "2.0.0",
     "ember-cli-app-version": "3.1.0",
-    "ember-cli-babel": "6.16.0",
+    "ember-cli-babel": "^7.7.3",
     "ember-cli-flash": "1.8.0",
     "ember-cli-htmlbars": "3.0.1",
     "ember-cli-sass": "10.0.1",
@@ -43,24 +45,21 @@
     "sass": "1.25.0",
     "semantic-ui-calendar": "0.0.8",
     "semantic-ui-css": "2.3.1",
-    "semantic-ui-ember":
-      "Semantic-Org/Semantic-UI-Ember#9d5f93c750b5d25329da8ab38e04f74f543c0a32"
+    "semantic-ui-ember": "Semantic-Org/Semantic-UI-Ember#9d5f93c750b5d25329da8ab38e04f74f543c0a32"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.1",
-    "@ember/optional-features": "^0.6.3",
+    "@ember/optional-features": "^0.7.0",
     "broccoli-asset-rev": "3.0.0",
-    "ember-ajax": "5.0.0",
-    "ember-cli": "~3.4.4",
-    "ember-cli-dependency-checker": "3.0.0",
+    "ember-cli": "~3.12.0",
+    "ember-cli-dependency-checker": "^3.1.0",
     "ember-cli-deploy": "1.0.2",
     "ember-cli-deploy-build": "1.1.1",
     "ember-cli-deploy-git": "1.3.3",
     "ember-cli-eslint": "5.1.0",
-    "ember-cli-htmlbars-inline-precompile": "1.0.3",
+    "ember-cli-htmlbars-inline-precompile": "^2.1.0",
     "ember-cli-inject-live-reload": "1.8.2",
     "ember-cli-mirage": "1.1.6",
-    "ember-cli-qunit": "4.3.2",
     "ember-cli-sri": "2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.2",
     "ember-cli-uglify": "2.1.0",
@@ -68,17 +67,18 @@
     "ember-data": "3.4.4",
     "ember-disable-prototype-extensions": "1.1.3",
     "ember-export-application-global": "2.0.0",
-    "ember-load-initializers": "1.1.0",
+    "ember-load-initializers": "^2.0.0",
+    "ember-qunit": "^4.4.1",
     "ember-resolver": "5.0.1",
-    "ember-source": "~3.4.4",
+    "ember-source": "~3.12.0",
     "ember-source-channel-url": "1.1.0",
     "ember-try": "1.1.0",
-    "eslint-plugin-ember": "5.2.0",
-    "eslint-plugin-node": "7.0.1",
+    "eslint-plugin-ember": "^6.2.0",
+    "eslint-plugin-node": "^9.0.1",
     "loader.js": "4.7.0"
   },
   "engines": {
-    "node": "6.* || 8.* || >= 10.*"
+    "node": "8.* || >= 10.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
