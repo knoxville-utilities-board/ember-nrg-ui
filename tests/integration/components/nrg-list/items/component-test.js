@@ -1,8 +1,8 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import { A } from '@ember/array';
+import { click, findAll, render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-list/items', function(hooks) {
   setupRenderingTest(hooks);
@@ -22,7 +22,7 @@ module('Integration | Component | nrg-list/items', function(hooks) {
     await render(
       hbs`{{nrg-list/items isSelectable=isSelectable selectionType='single' selected=selected items=items itemClicked=(action selectAction)}}`
     );
-    this.$('.item').click();
+    await click('.item');
     assert.equal(this.selected.length, 1);
   });
 
@@ -44,12 +44,10 @@ module('Integration | Component | nrg-list/items', function(hooks) {
     await render(
       hbs`{{nrg-list/items isSelectable=isSelectable selectionType='multiple' selected=selected items=items itemClicked=(action selectAction)}}`
     );
-    this.$('.item')
-      .eq(0)
-      .click();
-    this.$('.item')
-      .eq(1)
-      .click();
+
+    const items = findAll('.item');
+    await click(items[0]);
+    await click(items[1]);
     assert.equal(this.selected.length, 1);
   });
 });

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nrg-form-field', function(hooks) {
@@ -13,7 +13,7 @@ module('Integration | Component | nrg-form-field', function(hooks) {
       {{/nrg-form-field}}
     `);
 
-    const forProp = this.$('.field label').prop('for');
+    const forProp = find('.field label').htmlFor;
     assert.ok(forProp);
     assert.equal(forProp, 'testId');
   });
@@ -26,9 +26,7 @@ module('Integration | Component | nrg-form-field', function(hooks) {
     `);
 
     assert.equal(
-      this.$('.field.error .label')
-        .text()
-        .trim(),
+      find('.field.error .label').textContent.trim(),
       'Test Message'
     );
   });
@@ -40,6 +38,6 @@ module('Integration | Component | nrg-form-field', function(hooks) {
       {{/nrg-form-container}}
     `);
 
-    assert.ok(this.$('.field').hasClass('error'));
+    assert.ok(find('.field').classList.contains('error'));
   });
 });

@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { find, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-dropdown', function(hooks) {
   hooks.beforeEach(() => {
@@ -24,12 +24,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`{{nrg-dropdown options=options}}`);
 
-    assert.equal(
-      this.$('.text')
-        .text()
-        .trim(),
-      'Select an Option'
-    );
+    assert.equal(find('.text').textContent.trim(), 'Select an Option');
   });
 
   test('default text renders', async function(assert) {
@@ -37,23 +32,13 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
       hbs`{{nrg-dropdown options=options defaultText='Pick Something'}}`
     );
 
-    assert.equal(
-      this.$('.text')
-        .text()
-        .trim(),
-      'Pick Something'
-    );
+    assert.equal(find('.text').textContent.trim(), 'Pick Something');
   });
 
   test('item prepopulation works', async function(assert) {
     await render(hbs`{{nrg-dropdown options=options selected=selectedOption}}`);
 
-    assert.equal(
-      this.$('.text')
-        .text()
-        .trim(),
-      'Option 2'
-    );
+    assert.equal(find('.text').textContent.trim(), 'Option 2');
   });
 
   test('block templating works', async function(assert) {
@@ -63,11 +48,6 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
       {{/nrg-dropdown}}
     `);
 
-    assert.equal(
-      this.$('.text')
-        .text()
-        .trim(),
-      'Label2 2'
-    );
+    assert.equal(find('.text').textContent.trim(), 'Label2 2');
   });
 });

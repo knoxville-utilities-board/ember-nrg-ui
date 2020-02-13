@@ -1,8 +1,8 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
+import { find, render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-context-menu', function(hooks) {
   setupRenderingTest(hooks);
@@ -23,7 +23,7 @@ module('Integration | Component | nrg-context-menu', function(hooks) {
       hbs`{{nrg-context-menu title='' contextService=contextServiceStub}}`
     );
 
-    const text = this.$().text();
+    const text = find('*').textContent;
     assert.ok(/item1/.test(text));
     assert.ok(/item2/.test(text));
   });

@@ -8,13 +8,13 @@ export default Component.extend({
 
   classNames: ['card', 'home-card'],
 
-  classNameBindings: ['actionCard'],
+  classNameBindings: ['actionCard', 'visible::is-visually-hidden'],
 
   tagName: 'a',
 
   router: service(),
 
-  isVisible: computed('currentUser.roles', function() {
+  visible: computed('currentUser.roles', function() {
     const role = this.get('role');
     if (role) {
       return this.get('currentUser.content').hasRole(role);

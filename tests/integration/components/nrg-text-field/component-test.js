@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { find, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 import setupValidations from '../../../helpers/setup-validations';
 
 module('Integration | Component | nrg-text-field', function(hooks) {
@@ -13,6 +13,6 @@ module('Integration | Component | nrg-text-field', function(hooks) {
 
     await render(hbs`{{nrg-text-field value=value}}`);
 
-    assert.equal(this.$('input').val(), 'bob');
+    assert.equal(find('input').value, 'bob');
   });
 });

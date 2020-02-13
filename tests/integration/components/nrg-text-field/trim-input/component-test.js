@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { fillIn, find, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-text-field/trim-input', function(hooks) {
   setupRenderingTest(hooks);
@@ -9,17 +9,15 @@ module('Integration | Component | nrg-text-field/trim-input', function(hooks) {
   test('trim white space', async function(assert) {
     this.set('value', 'bob     ');
     await render(hbs`{{nrg-text-field/trim-input value=value}}`);
-    assert.equal(this.$('input').val(), 'bob');
+    assert.equal(find('input').value, 'bob');
     this.set('value', 'jim     ');
-    assert.equal(this.$('input').val(), 'jim');
+    assert.equal(find('input').value, 'jim');
   });
 
   test('trim white space from user input', async function(assert) {
     this.set('value', '');
     await render(hbs`{{nrg-text-field/trim-input value=value}}`);
-    this.$('input')
-      .val('bob     ')
-      .change();
-    assert.equal(this.get('value'), 'bob');
+    await fillIn('input', 'bob     ');
+    assert.equal(this.value, 'bob');
   });
 });

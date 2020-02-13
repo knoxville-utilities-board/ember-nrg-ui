@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { find, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 import ENV from '../../../../config/environment';
 
 module('Integration | Component | nrg-appbar', function(hooks) {
@@ -10,12 +10,7 @@ module('Integration | Component | nrg-appbar', function(hooks) {
   test('title renders', async function(assert) {
     await render(hbs`{{nrg-appbar title='test title'}}`);
 
-    assert.equal(
-      this.$('.header.item')
-        .text()
-        .trim(),
-      'test title'
-    );
+    assert.equal(find('.header.item').textContent.trim(), 'test title');
   });
 
   test('non-production environments display', async function(assert) {
@@ -28,12 +23,7 @@ module('Integration | Component | nrg-appbar', function(hooks) {
     await render(
       hbs`{{nrg-appbar applicationSettings=applicationSettings title='test title'}}`
     );
-    assert.equal(
-      this.$('.environment-title')
-        .text()
-        .trim(),
-      'BOB'
-    );
+    assert.equal(find('.environment-title').textContent.trim(), 'BOB');
   });
 
   test('production evironment should not display', async function(assert) {
@@ -46,11 +36,6 @@ module('Integration | Component | nrg-appbar', function(hooks) {
     await render(
       hbs`{{nrg-appbar applicationSettings=applicationSettings title='test title'}}`
     );
-    assert.notEqual(
-      this.$('.environment-title')
-        .text()
-        .trim(),
-      'BOB'
-    );
+    assert.notOk(find('.environment-title'));
   });
 });

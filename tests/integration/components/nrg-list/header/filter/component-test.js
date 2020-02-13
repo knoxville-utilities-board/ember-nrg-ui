@@ -1,8 +1,7 @@
-import { module, test } from 'qunit';
+import { click, find, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import $ from 'jquery';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-list/header/filter', function(hooks) {
   setupRenderingTest(hooks);
@@ -21,10 +20,8 @@ module('Integration | Component | nrg-list/header/filter', function(hooks) {
       hbs`{{nrg-list/header/filter filterParam='param' filters=filterList changed=(action changedAction)}}`
     );
 
-    const dropdown = $('.ui.dropdown').eq(0);
-    dropdown.click();
-    $('.item', dropdown)
-      .eq(0)
-      .click();
+    const dropdown = find('.ui.dropdown');
+    await click(dropdown);
+    await click(dropdown.querySelector('.item'));
   });
 });

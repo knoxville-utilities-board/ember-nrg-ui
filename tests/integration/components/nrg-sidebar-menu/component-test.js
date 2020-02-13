@@ -1,8 +1,7 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import $ from 'jquery';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-sidebar-menu', function(hooks) {
   setupRenderingTest(hooks);
@@ -18,9 +17,9 @@ module('Integration | Component | nrg-sidebar-menu', function(hooks) {
     await render(hbs`{{nrg-sidebar clickedSidebarItem=clickedSidebarItem}}`);
 
     assert.ok(
-      $('.ui.sidebar')
-        .text()
-        .trim()
+      document
+        .querySelector('.ui.sidebar')
+        .textContent.trim()
         .match(/Home/)
     );
   });

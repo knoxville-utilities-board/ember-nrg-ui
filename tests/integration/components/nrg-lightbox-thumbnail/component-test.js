@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { find, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-lightbox-thumbnail', function(hooks) {
   setupRenderingTest(hooks);
@@ -11,6 +11,6 @@ module('Integration | Component | nrg-lightbox-thumbnail', function(hooks) {
       url: 'http://someUrl',
     };
     await render(hbs`{{nrg-lightbox-thumbnail photo=photo}}`);
-    assert.equal(this.$('img').attr('src'), 'http://someUrl');
+    assert.equal(find('img').getAttribute('src'), 'http://someUrl');
   });
 });

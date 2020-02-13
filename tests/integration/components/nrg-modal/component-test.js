@@ -1,14 +1,13 @@
-import { module, test } from 'qunit';
+import { find, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import $ from 'jquery';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-modal', function(hooks) {
   hooks.afterEach(function() {
     // Clean up modal dimmers
-    $('.dimmed').removeClass('dimmed');
-    $('.dimmer').removeClass('dimmer');
+    document.querySelector('.dimmed').classList.remove('dimmed');
+    document.querySelector('.dimmer').classList.remove('dimmer');
   });
 
   setupRenderingTest(hooks);
@@ -17,13 +16,7 @@ module('Integration | Component | nrg-modal', function(hooks) {
     await render(
       hbs`{{nrg-modal primaryButton='Button Text' isOpen=true detachable=false}}`
     );
-
-    assert.equal(
-      this.$()
-        .text()
-        .trim(),
-      'Button Text'
-    );
+    assert.equal(find('*').textContent.trim(), 'Button Text');
   });
 
   test('it renders block text', async function(assert) {
@@ -32,11 +25,6 @@ module('Integration | Component | nrg-modal', function(hooks) {
         block text
       {{/nrg-modal}}
     `);
-    assert.equal(
-      this.$()
-        .text()
-        .trim(),
-      'block text'
-    );
+    assert.equal(find('*').textContent.trim(), 'block text');
   });
 });
