@@ -22,7 +22,7 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(
   test('it renders registered shortcuts', async function(assert) {
     const keyboardService = this.owner.lookup('service:keyboard-shortcut');
     keyboardService.registerKeyboardShortcuts(
-      new EmberObject({
+      EmberObject.create({
         keyboardShortcuts: [
           {
             key: ['KeyX', 'KeyV'],
