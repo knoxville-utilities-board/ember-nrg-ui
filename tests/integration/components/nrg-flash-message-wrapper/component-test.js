@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nrg-flash-message-wrapper', function(hooks) {
@@ -21,6 +21,6 @@ module('Integration | Component | nrg-flash-message-wrapper', function(hooks) {
       {{/nrg-flash-message-wrapper}}
     `);
 
-    assert.ok(this.$().height() > 40);
+    assert.ok(find('*').clientHeight > 40);
   });
 });

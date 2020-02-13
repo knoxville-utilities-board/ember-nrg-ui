@@ -41,50 +41,6 @@ jobs:
         testResultsFormat: 'jUnit'
         testResultsFiles: '*-tests.xml'
 
-- job: Ember_Try
-
-  condition: startsWith(variables['build.sourceBranch'], 'refs/pull')
-
-  pool:
-    vmImage: 'vs2017-win2016'
-
-  strategy:
-    maxParallel: 6
-    matrix:
-      LTS_2_16:
-        EMBER_TRY_SCENARIO: ember-lts-2.16
-      LTS_2_18:
-        EMBER_TRY_SCENARIO: ember-lts-2.18
-      LTS_3.4:
-        EMBER_TRY_SCENARIO: ember-lts-3.4
-      # Release:
-      #   EMBER_TRY_SCENARIO: ember-release
-      #   allowedToFail: true
-      # Beta:
-      #   EMBER_TRY_SCENARIO: ember-beta
-      #   allowedToFail: true
-      # Canary:
-      #   EMBER_TRY_SCENARIO: ember-canary
-      #   allowedToFail: true
-
-  steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '8.x'
-      displayName: 'Install Node.js'
-
-    - script: |
-        npm install -g yarn ember-cli
-      displayName: 'Setup global tools'
-      
-    - script: |
-        yarn install
-      displayName: 'Install Dependencies'
-
-    - script: |
-        ember try:one $(EMBER_TRY_SCENARIO) --skip-cleanup=true
-      displayName: 'Run Ember Try'
-
 - job: Release_Deployment
 
   dependsOn: Ember_Tests

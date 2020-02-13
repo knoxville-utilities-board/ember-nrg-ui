@@ -1,9 +1,8 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
-import $ from 'jquery';
+import { find, render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-keyboard-shortcut-modal', function(
   hooks
@@ -13,7 +12,7 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(
   test('it renders the default shortcut', async function(assert) {
     await render(hbs`{{nrg-keyboard-shortcut-modal}}`);
 
-    const text = $('.shortcut-modal').text();
+    const text = find('.shortcut-modal').textContent;
     assert.ok(/Shft/.test(text));
     assert.ok(/\?/.test(text));
     assert.ok(/Show Keyboard Help/.test(text));
@@ -22,7 +21,7 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(
   test('it renders registered shortcuts', async function(assert) {
     const keyboardService = this.owner.lookup('service:keyboard-shortcut');
     keyboardService.registerKeyboardShortcuts(
-      new EmberObject({
+      EmberObject.create({
         keyboardShortcuts: [
           {
             key: ['KeyX', 'KeyV'],
@@ -37,7 +36,7 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(
 
     await render(hbs`{{nrg-keyboard-shortcut-modal}}`);
 
-    const text = $('.shortcut-modal').text();
+    const text = find('.shortcut-modal').textContent;
     assert.ok(/Shft/.test(text));
     assert.ok(/Alt/.test(text));
     assert.ok(/Shft/.test(text));

@@ -1,21 +1,23 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import $ from 'jquery';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-sidebar', function(hooks) {
   hooks.afterEach(() => {
     // Clean up sidebar remenants
-    $('.sidebar-modal').remove();
-    $('.dimmed').removeClass('dimmed');
+    document.querySelector('.sidebar-modal').remove();
+    const dimmedElement = document.querySelector('.dimmed');
+    if (dimmedElement) {
+      dimmedElement.classList.remove('dimmed');
+    }
   });
 
   setupRenderingTest(hooks);
 
   test('sidebar is rendered', async function(assert) {
-    await render(hbs`{{nrg-sidebar isOpen=false}}`);
-    assert.equal($('.ui.sidebar').length, 2);
+    await render(hbs`{{nrg-sidebar isOpen=true}}`);
+    assert.equal(document.querySelectorAll('.ui.sidebar').length, 2);
   });
 
   test('Item is rendered', async function(assert) {
@@ -27,9 +29,9 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
     });
     await render(hbs`{{nrg-sidebar}}`);
     assert.ok(
-      $('.ui.sidebar')
-        .text()
-        .trim()
+      document
+        .querySelector('.ui.sidebar')
+        .textContent.trim()
         .match(/Home/)
     );
   });

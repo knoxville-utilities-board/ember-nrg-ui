@@ -3,7 +3,18 @@
 [![Build Status][build-status-img]][build-status-link]
 [![NPM][npm-badge-img]][npm-badge-link]
 
-Ember NRG UI **supports Ember.js versions from 2.x to 3.3**
+Ember NRG UI
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.4.x to v3.12.x
+* Ember CLI v2.13 or above
+* Node.js v8 or above
+
+
+Installation
+------------------------------------------------------------------------------
 
 ![Logo](https://knoxville-utilities-board.github.io/ember-nrg-ui/images/nrg-logo.svg)
 
@@ -43,6 +54,8 @@ Installing the library is as easy as:
 ```bash
 ember install ember-nrg-ui
 ```
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
 
 ## Getting Started
 

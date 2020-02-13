@@ -6,7 +6,7 @@ module('Unit | Service | keyboard-shortcut', function(hooks) {
   setupTest(hooks);
 
   test('it detects keyboard events', function(assert) {
-    const client = new EmberObject({
+    const client = EmberObject.create({
       keyboardShortcuts: [
         {
           key: ['KeyK', 'KeyT'],

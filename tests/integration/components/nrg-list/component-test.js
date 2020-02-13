@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { click, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-list', function(hooks) {
   setupRenderingTest(hooks);
@@ -17,6 +17,6 @@ module('Integration | Component | nrg-list', function(hooks) {
     await render(
       hbs`{{nrg-list selectionType='single' items=items select=(action selectAction)}}`
     );
-    this.$('.item').click();
+    click('.item');
   });
 });

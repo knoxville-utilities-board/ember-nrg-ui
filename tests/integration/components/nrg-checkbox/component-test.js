@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { click, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-checkbox', function(hooks) {
   setupRenderingTest(hooks);
@@ -15,7 +15,7 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
   test('click toggles state', async function(assert) {
     this.checked = false;
     await render(hbs`{{nrg-checkbox checked=checked}}`);
-    this.$('.checkbox > input').click();
+    await click('.checkbox > input');
 
     assert.ok(this.checked);
   });
@@ -23,7 +23,7 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
   test('clicking label toggles state', async function(assert) {
     this.checked = false;
     await render(hbs`{{nrg-checkbox checked=checked}}`);
-    this.$('.checkbox > label').click();
+    await click('.checkbox > label');
 
     assert.ok(this.checked);
   });
@@ -31,7 +31,7 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
   test('click does nothing when disabled', async function(assert) {
     this.checked = false;
     await render(hbs`{{nrg-checkbox checked=checked disabled=true}}`);
-    this.$('.checkbox').click();
+    await click('.checkbox');
 
     assert.notOk(this.checked);
   });

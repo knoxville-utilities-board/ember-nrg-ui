@@ -1,8 +1,8 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 import ObjectProxy from '@ember/object/proxy';
+import { find, render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-home-cards/home-card', function(hooks) {
   setupRenderingTest(hooks);
@@ -23,11 +23,11 @@ module('Integration | Component | nrg-home-cards/home-card', function(hooks) {
 
   test('hidden if user does not have role', async function(assert) {
     await render(hbs`{{nrg-home-cards/home-card role='administrators'}}`);
-    assert.notOk(this.$('.home-card').is(':visible'));
+    assert.ok(find('.home-card').classList.contains('is-visually-hidden'));
   });
 
   test('show if user has role', async function(assert) {
     await render(hbs`{{nrg-home-cards/home-card role='users'}}`);
-    assert.ok(this.$('.home-card').is(':visible'));
+    assert.notOk(find('.home-card').classList.contains('is-visually-hidden'));
   });
 });
