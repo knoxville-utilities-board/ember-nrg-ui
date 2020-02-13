@@ -5,16 +5,13 @@
 
 Ember NRG UI
 
-Compatibility
-------------------------------------------------------------------------------
+## Compatibility
 
-* Ember.js v3.4.x to v3.12.x
-* Ember CLI v2.13 or above
-* Node.js v8 or above
+- Ember.js v3.4.x to v3.12.x
+- Ember CLI v2.13 or above
+- Node.js v8 or above
 
-
-Installation
-------------------------------------------------------------------------------
+## Installation
 
 ![Logo](https://knoxville-utilities-board.github.io/ember-nrg-ui/images/nrg-logo.svg)
 
