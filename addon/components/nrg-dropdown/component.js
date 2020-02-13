@@ -1,12 +1,12 @@
+import { A } from '@ember/array';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, get, observer } from '@ember/object';
 import { and, equal, not, notEmpty, readOnly } from '@ember/object/computed';
+import { on } from '@ember/object/evented';
+import { next } from '@ember/runloop';
 import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
 import Validation from 'ember-nrg-ui/mixins/validation';
 import layout from './template';
-import { observer } from '@ember/object';
-import { next } from '@ember/runloop';
-import { on } from '@ember/object/evented';
 
 export default Component.extend(
   Validation,
@@ -44,6 +44,7 @@ export default Component.extend(
       'disabled',
       'isOpen:active',
       'isOpen:visible',
+      'multiple',
     ],
 
     selection: notEmpty('field'),
@@ -73,7 +74,7 @@ export default Component.extend(
     },
 
     addWindowClickListener() {
-      document.addEventListener('click', this.get('_clickHandler'));
+      document.addEventListener('click', this.get('_clickHandler'), true);
     },
 
     removeWindowClickListener() {
@@ -82,7 +83,7 @@ export default Component.extend(
 
     createClickHandler() {
       this.set('_clickHandler', evt => {
-        if (this.element !== evt.target) {
+        if (this.element && !this.element.contains(evt.target)) {
           this.set('isOpen', false);
           this.set('activeItem', -1);
           this.focusInput(false);
@@ -180,16 +181,23 @@ export default Component.extend(
 
     displayedOptions: computed(
       'options',
+      'selected.[]',
       'searchValue',
       'isSearching',
       'allowAdditions',
       'hideAdditions',
       function() {
         this.set('isAddingOption', false);
+        let options = this.options;
+        if(this.multiple){
+          options = options.filter(option => {
+            return !this.isCurrentlySelected(option);
+          });
+        }
         if (!this.isSearching) {
-          return this.options;
+          return options;
         } else {
-          const filteredOptions = this.options.filter(option => {
+          const filteredOptions = options.filter(option => {
             return this.isSearchMatch(option, this.searchValue);
           });
           if(this.allowAdditions && filteredOptions.length == 0){
@@ -229,7 +237,10 @@ export default Component.extend(
       return s1.toLowerCase().indexOf(s2.toLowerCase()) != -1;
     },
 
-    click() {
+    click(evt) {
+      if(get(evt, 'target.dataset.dropdownMultiSelection') || get(evt, 'target.dataset.dropdownItem')){
+        return;
+      }
       if (this.isOpen) {
         this.set('isOpen', false);
       } else {
@@ -251,11 +262,33 @@ export default Component.extend(
       }
     },
 
+    isCurrentlySelected(option){
+      if(this.multiple){
+        if(!Array.isArray(this.selected)){
+          return false;
+        }
+        return this.selected.indexOf(option) != -1;
+      } else {
+        return option === this.selected;
+      }
+    },
+
+    unselectOption(option){
+      this.selected.removeObject(option);
+    },
+
     select(option) {
-      const notCurrentlySelected = option !== this.selected;
+      const notCurrentlySelected = !this.isCurrentlySelected(option);
       const hideDropdownAction = this.dropdownAction === 'hide';
       if (notCurrentlySelected) {
-        this.set('selected', option);
+        if(this.multiple){
+          if(!Array.isArray(this.selected)){
+            this.set('selected', A());
+          }
+          this.selected.pushObject(option);
+        } else {
+          this.set('selected', option);
+        }
       }
       if (hideDropdownAction || notCurrentlySelected) {
         this.onSelect(option);
@@ -266,8 +299,10 @@ export default Component.extend(
       if(this.isAddingOption && !this.hideAdditions){
         this.get('options.push') && this.options.push(option);
       }
-      this.focusInput(false);
-      this.set('isOpen', false);
+      if(!this.multiple){
+        this.set('isOpen', false);
+        this.focusInput(false);
+      }
       this.set('isAddingOption', false);
       this.set('activeItem', -1);
     },

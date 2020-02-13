@@ -38,6 +38,15 @@
     {{#form.field label="Allow Additions with String Array" as |field|}}
       {{field.dropdown options=allowAdditionsOptionsListStrings search=true allowAdditions=true hideAdditions=false}}
     {{/form.field}}
+    {{#form.field label="Multiple Selection" as |field|}}
+      {{field.dropdown options=optionList multiple=true}}
+    {{/form.field}}
+    {{#form.field label="Multiple Selection with Search" as |field|}}
+      {{field.dropdown options=optionList multiple=true search=true}}
+    {{/form.field}}
+    {{#form.field label="Multiple Selection with Search and Allow Additions" as |field|}}
+      {{field.dropdown options=optionList multiple=true search=true allowAdditions=true hideAdditions=false}}
+    {{/form.field}}
   {{/nrg-form-container}}
 
   <div>
