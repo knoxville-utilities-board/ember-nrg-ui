@@ -84,5 +84,8 @@
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "https://knoxville-utilities-board.github.io/ember-nrg-ui/"
+  },
+  "resolutions": {
+    "clean-css": "4.1.11"
   }
 }
