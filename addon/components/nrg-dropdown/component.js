@@ -307,8 +307,8 @@ export default Component.extend(
       this.set('activeItem', -1);
     },
 
-    onSelect() {
-      // Implement
+    onSelect(option) {
+      this.sendAction('action', option);
     },
   }
 );
