@@ -15,16 +15,18 @@ export default Component.extend(Validation, {
   bindValue: true,
 
   inputId: computed('elementId', function() {
-    return this.get('elementId') + '-input';
+    return this.elementId + '-input';
   }),
 
-  actions: {
-    onChange(evt) {
-      const checked = evt.target.checked;
-      if (this.get('bindValue')) {
-        this.set('checked', checked);
-      }
-      this.sendAction('action', checked);
-    },
+  handleValueChange(evt) {
+    const checked = evt.target.checked;
+    if (this.bindValue) {
+      this.set('checked', checked);
+    }
+    this.onChange(checked);
+  },
+
+  onChange(checked) {
+    this.sendAction('action', checked);
   },
 });
