@@ -1,8 +1,14 @@
 <div class="ui fluid container">
   <div class="left menu">
-    <a role="button" class="ui item icon sidebar-toggle-button" {{action "toggleSidebar"}}>
-      <i class="content icon"></i>
-    </a>
+    {{#if showBackArrow}}
+      <a role="button" class="ui item icon sidebar-toggle-button" {{action this.onBackArrowClick}}>
+        <i class="arrow left icon"></i>
+      </a>
+    {{else}}
+      <a role="button" class="ui item icon sidebar-toggle-button" {{action this.onToggleSidebar}}>
+        <i class="content icon"></i>
+      </a>
+    {{/if}}
     <div class="header item title-item">
       <span class="title-text">{{title}}</span>
       {{#if environmentDisplay}}
