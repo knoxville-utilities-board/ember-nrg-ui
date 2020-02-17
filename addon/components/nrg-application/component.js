@@ -1,10 +1,10 @@
-import { alias, and, or } from '@ember/object/computed';
-import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import layout from './template';
-import ResizeMixin from 'ember-nrg-ui/mixins/resize';
-import { htmlSafe } from '@ember/string';
 import { computed } from '@ember/object';
+import { alias, and, or, reads } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
+import ResizeMixin from 'ember-nrg-ui/mixins/resize';
+import layout from './template';
 
 export default Component.extend(ResizeMixin, {
   layout,
@@ -34,7 +34,7 @@ export default Component.extend(ResizeMixin, {
     'responsive.isWidescreenMonitor'
   ),
 
-  title: '',
+  title: reads('application.pageTitle'),
 
   init() {
     this._super(...arguments);
