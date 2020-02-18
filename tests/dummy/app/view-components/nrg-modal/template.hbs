@@ -1,3 +1,4 @@
+
 {{#nrg-code-block label="Default Modal" codeBlockName="default-modal.hbs" }}
   {{nrg-button text="Open Modal" action=(action (mut modalOpen1) true)}}
   <!-- BEGIN-SNIPPET default-modal -->
@@ -73,32 +74,20 @@
   <!-- END-SNIPPET  -->
 {{/nrg-code-block}}
 
+
 {{#nrg-code-block label="Nested Modals" codeBlockName="nested-modals.hbs" }}
   {{nrg-button text="Open Modal" action=(action (mut modalOpen6) true)}}
   <!-- BEGIN-SNIPPET nested-modals -->
   {{#nrg-modal headerText="Contains a nested modal (Not dismissable)" primaryButton="Force Dismiss" action="forceDismiss" dismissable=false isOpen=modalOpen6}}
-    <div class="ui segment teal">In order for modals to nest correctly, the modal on bottom must be first in the DOM</div>
-    {{#nrg-form-container as |form|}}
-      {{#form.field as |field|}}
-        {{field.checkbox type="toggle" label="Open Modal" checked=modalOpen1}}
-      {{/form.field}}
-      {{#form.field as |field|}}
-        {{field.checkbox type="toggle" label="Open Modal with Actions" checked=modalOpen3}}
-      {{/form.field}}
-      {{#form.field as |field|}}
-        {{field.checkbox type="toggle" label="Open Modal (Not Dismissable)" checked=modalOpen5}}
-      {{/form.field}}
-    {{/nrg-form-container}}
-
-    <div class="ui segment red">Do not use basic modals when nesting</div>
-    {{#nrg-form-container as |form|}}
-      {{#form.field as |field|}}
-        {{field.checkbox type="toggle" label="Open Basic Modal" checked=modalOpen2}}
-      {{/form.field}}
-      {{#form.field as |field|}}
-        {{field.checkbox type="toggle" label="Open Basic Modal with Actions" checked=modalOpen4}}
-      {{/form.field}}
-    {{/nrg-form-container}}
+    {{nrg-button text="Open Modal" action=(action (mut modalOpen1) true)}}
+    <br>
+    {{nrg-button text="Open Modal with Actions" action=(action (mut modalOpen3) true)}}
+    <br>
+    {{nrg-button text="Open Modal (Not Dismissable)" action=(action (mut modalOpen5) true)}}
+    <br>
+    {{nrg-button text="Open Basic Modal" action=(action (mut modalOpen2) true)}}
+    <br>
+    {{nrg-button text="Open Basic Modal with Actions" action=(action (mut modalOpen4) true)}}
   {{/nrg-modal}}
   <!-- END-SNIPPET  -->
 {{/nrg-code-block}}

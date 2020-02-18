@@ -1,33 +1,40 @@
-{{#ui-modal context=context id=modalId class=_modalClass onHide=(action "onHide") duration=duration transition=transition closable=dismissable detachable=detachable autofocus=autofocus onHidden=onHidden allowMultiple=true}}
-  {{#if dismissable}}
-    <i class="close icon"></i>
-  {{/if}}
-
-  {{#if headerText}}
-    <div class="header">
-      {{headerText}}
+{{#if isOpen}}
+  <div class="modal-origin-container" {{did-insert (action this.moveModalToContainer)}}>
+    <div class="dimmer-anchor">
+      {{#if isActive}}
+        <div role="button" class="ui page dimmer visible active {{unless dismissable "not-dismissable"}}" {{action onHide}}></div>
+      {{/if}}
     </div>
-  {{/if}}
+    <div class="ui modal visible active {{_modalClass}}" role="dialog">
+      {{#if dismissable}}
+        <i class="close icon" role="button" {{action onHide}}></i>
+      {{/if}}
 
-  <div class="{{if lightbox "image"}} content">
-    {{#if showFlashMessages}}
-      {{#each flashMessages.queue as |flash|}}
-        {{nrg-flash-message flash=flash}}
-      {{/each}}
-    {{/if}}
-    {{#if (or (and renderBodyAfterOpen _isOpen) (not renderBodyAfterOpen))}}
-      {{yield}}
-    {{/if}}
+      {{#if headerText}}
+        <div class="header">
+          {{headerText}}
+        </div>
+      {{/if}}
+
+      <div class="{{if lightbox "image"}} content">
+        {{#if showFlashMessages}}
+          {{#each flashMessages.queue as |flash|}}
+            {{nrg-flash-message flash=flash}}
+          {{/each}}
+        {{/if}}
+        {{yield}}
+      </div>
+
+      {{#if hasButtons}}
+        <div class="actions">
+          {{#if secondaryButton}}
+            {{nrg-button class=secondaryButtonClass text=secondaryButton click=(action onSecondary)}}
+          {{/if}}
+          {{#if primaryButton}}
+            {{nrg-button class="primary right" text=primaryButton click=(action onPrimary) autofocus=true}}
+          {{/if}}
+        </div>
+      {{/if}}
+    </div>
   </div>
-
-  {{#if hasButtons}}
-    <div class="actions">
-      {{#if secondaryButton}}
-        {{nrg-button class=secondaryButtonClass text=secondaryButton action="cancel"}}
-      {{/if}}
-      {{#if primaryButton}}
-        {{nrg-button class="primary right" text=primaryButton action="ok" autofocus=true}}
-      {{/if}}
-    </div>
-  {{/if}}
-{{/ui-modal}}
+{{/if}}

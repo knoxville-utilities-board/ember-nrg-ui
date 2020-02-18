@@ -1,65 +1,27 @@
-import { guidFor } from '@ember/object/internals';
-import $ from 'jquery';
-import { observer, computed } from '@ember/object';
-import { scheduleOnce } from '@ember/runloop';
-import { inject as service } from '@ember/service';
-import { or } from '@ember/object/computed';
 import Component from '@ember/component';
+import { computed, observer } from '@ember/object';
+import { or, readOnly } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 import layout from './template';
-import { next } from '@ember/runloop';
-import Ember from 'ember';
 
 export default Component.extend({
   layout,
   hasButtons: or('primaryButton', 'secondaryButton'),
 
   flashMessages: service(),
+  application: service(),
+  modalService: service('modal'),
 
-  context: 'body',
+  isTesting: readOnly('application.isTesting'),
+
   isOpen: false,
-  autofocus: true,
-  detachable: !Ember.testing,
+  hasMovedDom: false,
+
+  showFlashMessages: true,
   dismissable: true,
   basic: false,
-  duration: 400,
-  transition: 'scale',
+  lightbox: false,
   modalClass: '',
-
-  renderBodyAfterOpen: false,
-  showFlashMessages: true,
-
-  init() {
-    this._super(...arguments);
-    scheduleOnce('afterRender', this, 'openObserver');
-  },
-
-  openObserver: observer('isOpen', function() {
-    if (this.get('isOpen')) {
-      this.openModal();
-    } else {
-      this.closeModal();
-    }
-  }),
-
-  openModal() {
-    this.set('_isOpen', false);
-    next(() => {
-      $(`#${this.elementId}-modal`).modal('show');
-      this.sendAction('onModalOpen');
-      this.set('_isOpen', true);
-    });
-  },
-
-  closeModal(sendAction = true) {
-    $(`#${this.elementId}-modal`).modal('hide');
-    if (sendAction) {
-      this.sendAction('onModalClose');
-    }
-  },
-
-  onHidden() {
-    $('.ui.modal.visible').modal('refresh');
-  },
 
   _modalClass: computed('basic', 'lightbox', 'modalClass', function() {
     let appliedClass = '';
@@ -79,40 +41,61 @@ export default Component.extend({
     return classList;
   }),
 
-  modalId: computed(function() {
-    return guidFor(this) + '-modal';
+  openObserver: observer('isOpen', function() {
+    if (!this.isOpen) {
+      this.moveModalFromContainer();
+    }
   }),
 
-  didDestroyElement() {
-    this._super(...arguments);
-    this.closeModal(false);
-    // Cleanup since semantic moved the modal DOM element
-    $(`#${this.get('modalId')}`).remove();
+  moveModalToContainer() {
+    if (this.hasMovedDom || this.isTesting) {
+      return;
+    }
+    this.dimmerNode = this.element.querySelector('.dimmer-anchor');
+    this.modalNode = this.element.querySelector('.modal');
+    const newParent = document.querySelector('#modal-container');
+
+    newParent.appendChild(this.dimmerNode);
+    newParent.appendChild(this.modalNode);
+
+    this.get('modalService').add(this);
+    this.set('hasMovedDom', true);
   },
 
-  actions: {
-    onHide() {
-      if (this.get('isOpen')) {
-        // This happens when the modal is closed by clicking the x or clicking out of the modal
-        if (this.get('dismissable')) {
-          this.set('isOpen', false);
-        }
-        return false; // Don't close the modal yet, wait for the observer to close it.
-      }
-    },
+  moveModalFromContainer() {
+    if (!this.hasMovedDom) {
+      return;
+    }
+    this.get('modalService').remove(this);
 
-    ok: function() {
+    const newParent = this.element.querySelector('.modal-origin-container');
+
+    newParent.appendChild(this.dimmerNode);
+    newParent.appendChild(this.modalNode);
+    this.set('hasMovedDom', false);
+  },
+
+  onHide() {
+    if (this.get('isOpen')) {
+      // This happens when the modal is closed by clicking the x or clicking out of the modal
       if (this.get('dismissable')) {
         this.set('isOpen', false);
       }
-      this.sendAction('action');
-    },
+      return false; // Don't close the modal yet, wait for the observer to close it.
+    }
+  },
 
-    cancel: function() {
-      if (this.get('dismissable')) {
-        this.set('isOpen', false);
-      }
-      this.sendAction('cancel');
-    },
+  onPrimary() {
+    if (this.get('dismissable')) {
+      this.set('isOpen', false);
+    }
+    this.sendAction('action');
+  },
+
+  onSecondary() {
+    if (this.get('dismissable')) {
+      this.set('isOpen', false);
+    }
+    this.sendAction('cancel');
   },
 });
