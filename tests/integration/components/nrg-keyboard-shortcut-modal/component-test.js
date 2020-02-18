@@ -10,7 +10,7 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(
   setupRenderingTest(hooks);
 
   test('it renders the default shortcut', async function(assert) {
-    await render(hbs`{{nrg-keyboard-shortcut-modal}}`);
+    await render(hbs`{{nrg-keyboard-shortcut-modal isOpen=true}}`);
 
     const text = find('.shortcut-modal').textContent;
     assert.ok(/Shft/.test(text));
@@ -34,7 +34,7 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(
       })
     );
 
-    await render(hbs`{{nrg-keyboard-shortcut-modal}}`);
+    await render(hbs`{{nrg-keyboard-shortcut-modal isOpen=true}}`);
 
     const text = find('.shortcut-modal').textContent;
     assert.ok(/Shft/.test(text));

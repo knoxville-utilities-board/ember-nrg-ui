@@ -13,6 +13,8 @@ export default Component.extend(ResizeMixin, {
 
   lightbox: service(),
 
+  modal: service(),
+
   responsive: service(),
 
   sidebarIsOpen: false,
