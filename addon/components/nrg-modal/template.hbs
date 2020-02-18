@@ -2,11 +2,11 @@
   <div class="modal-origin-container" {{did-insert (action this.moveModalToContainer)}}>
     <div class="dimmer-anchor">
       {{#if isActive}}
-        <div role="button" class="ui page dimmer visible active {{unless dismissable "not-dismissable"}}" {{action onHide}}></div>
+        <div role="button" class="ui dimmer visible active {{_dimmerClass}}" {{action onHide}}></div>
       {{/if}}
     </div>
     <div class="ui modal visible active {{_modalClass}}" role="dialog">
-      {{#if dismissable}}
+      {{#if hasCloseIcon}}
         <i class="close icon" role="button" {{action onHide}}></i>
       {{/if}}
 
@@ -16,7 +16,7 @@
         </div>
       {{/if}}
 
-      <div class="{{if lightbox "image"}} content">
+      <div class={{_contentClass}}>
         {{#if showFlashMessages}}
           {{#each flashMessages.queue as |flash|}}
             {{nrg-flash-message flash=flash}}
