@@ -1,5 +1,27 @@
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import layout from './template';
+import { computed } from '@ember/object';
 
 export default Component.extend({
+  layout,
+
+  router: service(),
+
   classNames: ['ui', 'segment', 'master-detail--detail'],
+
+  baseRoute: computed('router.currentRouteName', function() {
+    const currentRouteName = this.router.currentRouteName;
+    const routeSegments = currentRouteName.split('.');
+    routeSegments.pop();
+    return routeSegments.join('.');
+  }),
+
+  shouldTakeOver: computed('router.currentRouteName', function() {
+    return this.router.currentRouteName.indexOf('.index') === -1;
+  }),
+
+  onBackArrowClick() {
+    this.router.transitionTo(this.baseRoute);
+  },
 });
