@@ -47,6 +47,16 @@ export default Component.extend({
     }
   }),
 
+  willDestroy() {
+    if (this.hasMovedDom) {
+      const parentNode = document.querySelector('#modal-container');
+      parentNode.removeChild(this.dimmerNode);
+      parentNode.removeChild(this.modalNode);
+      this.set('hasMovedDom', false);
+      this.modalService.remove(this);
+    }
+  },
+
   moveModalToContainer() {
     if (this.hasMovedDom || this.isTesting) {
       return;

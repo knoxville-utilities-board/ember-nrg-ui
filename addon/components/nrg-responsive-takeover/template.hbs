@@ -1,5 +1,5 @@
 {{#if (and isMobileScreen shouldTakeOver)}}
-  <NrgModal @isOpen={{true}} @dismissable={{false}} @modalClass="master-detail--takeover" @transition="fade" @duration={{0}} @autofocus={{false}}>
+  <NrgModal @isOpen={{true}} @dismissable={{false}} @modalClass="master-detail--takeover">
     <NrgAppbar @title={{title}} @showBackArrow={{true}} @onBackArrowClick={{action this.onBackArrowClick}}/>
     <div class="main-content">
       {{yield}}
