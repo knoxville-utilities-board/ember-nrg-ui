@@ -1,7 +1,6 @@
-import { getOwner } from '@ember/application';
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
-import { or } from '@ember/object/computed';
+import { or, readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import layout from './template';
 
@@ -10,12 +9,10 @@ export default Component.extend({
   hasButtons: or('primaryButton', 'secondaryButton'),
 
   flashMessages: service(),
+  application: service(),
   modalService: service('modal'),
 
-  isTesting: computed(function() {
-    const config = getOwner(this).resolveRegistration('config:environment');
-    return config.environment === 'test';
-  }),
+  isTesting: readOnly('application.isTesting'),
 
   isOpen: false,
   hasMovedDom: false,
@@ -88,14 +85,14 @@ export default Component.extend({
     }
   },
 
-  onPrimary: function() {
+  onPrimary() {
     if (this.get('dismissable')) {
       this.set('isOpen', false);
     }
     this.sendAction('action');
   },
 
-  onSecondary: function() {
+  onSecondary() {
     if (this.get('dismissable')) {
       this.set('isOpen', false);
     }
