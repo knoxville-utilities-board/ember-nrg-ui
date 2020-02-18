@@ -2,7 +2,10 @@
   "name": "ember-nrg-ui",
   "version": "1.6.0",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
-  "keywords": ["ember-addon", "Semantic UI"],
+  "keywords": [
+    "ember-addon",
+    "Semantic UI"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/knoxville-utilities-board/ember-nrg-ui"
@@ -22,6 +25,7 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
+    "@ember/render-modifiers": "^1.0.2",
     "broccoli-stew": "2.0.0",
     "ember-cli-app-version": "3.1.0",
     "ember-cli-babel": "^7.7.3",
@@ -37,13 +41,13 @@
     "ember-moment": "8.0.0",
     "ember-resize": "0.2.2",
     "ember-responsive": "3.0.5",
+    "ember-tether": "^1.0.0",
     "ember-truth-helpers": "2.1.0",
     "markdown-it": "8.4.2",
     "sass": "1.25.0",
     "semantic-ui-calendar": "0.0.8",
     "semantic-ui-css": "2.3.1",
-    "semantic-ui-ember": "Semantic-Org/Semantic-UI-Ember#9d5f93c750b5d25329da8ab38e04f74f543c0a32",
-    "@ember/render-modifiers": "^1.0.2"
+    "semantic-ui-ember": "Semantic-Org/Semantic-UI-Ember#9d5f93c750b5d25329da8ab38e04f74f543c0a32"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.1",
