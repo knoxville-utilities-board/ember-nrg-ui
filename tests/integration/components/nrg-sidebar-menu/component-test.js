@@ -14,11 +14,11 @@ module('Integration | Component | nrg-sidebar-menu', function(hooks) {
       isShownInSidebar: true,
     });
 
-    await render(hbs`{{nrg-sidebar clickedSidebarItem=clickedSidebarItem}}`);
+    await render(hbs`{{nrg-sidebar isOpen=true clickedSidebarItem=clickedSidebarItem}}`);
 
     assert.ok(
       document
-        .querySelector('.ui.sidebar')
+        .querySelector('.sidebar-menu')
         .textContent.trim()
         .match(/Home/)
     );

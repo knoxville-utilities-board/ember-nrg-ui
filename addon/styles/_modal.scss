@@ -15,6 +15,16 @@
   transform-style: flat;
   perspective: 2000px;
 
+  &.sidebar-container {
+    z-index: 100;
+    top: $appbar-height;
+    height: calc(100% - #{$appbar-height});
+
+    & .sidebar-dimmer {
+      background-color: rgba(0,0,0,.4);
+    }
+  }
+
   .ui.modal.visible {
     flex: 0 0 auto;
     position: absolute;
@@ -31,5 +41,18 @@
     &.not-dismissable {
       cursor: default;
     }
+  }
+
+  .sidebar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    height: 100%;
+    width: $sidebar-width;
+    border-radius: 0;
   }
 }

@@ -4,20 +4,11 @@ import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-sidebar', function(hooks) {
-  hooks.afterEach(() => {
-    // Clean up sidebar remenants
-    document.querySelector('.sidebar-modal').remove();
-    const dimmedElement = document.querySelector('.dimmed');
-    if (dimmedElement) {
-      dimmedElement.classList.remove('dimmed');
-    }
-  });
-
   setupRenderingTest(hooks);
 
   test('sidebar is rendered', async function(assert) {
     await render(hbs`{{nrg-sidebar isOpen=true}}`);
-    assert.equal(document.querySelectorAll('.ui.sidebar').length, 2);
+    assert.equal(document.querySelectorAll('.sidebar-menu').length, 1);
   });
 
   test('Item is rendered', async function(assert) {
@@ -27,10 +18,10 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
       routeName: '',
       isShownInSidebar: true,
     });
-    await render(hbs`{{nrg-sidebar}}`);
+    await render(hbs`{{nrg-sidebar isOpen=true}}`);
     assert.ok(
       document
-        .querySelector('.ui.sidebar')
+        .querySelector('.sidebar-menu')
         .textContent.trim()
         .match(/Home/)
     );

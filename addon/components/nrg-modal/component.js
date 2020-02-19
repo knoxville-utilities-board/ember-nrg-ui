@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
-import { or, readOnly } from '@ember/object/computed';
+import { and, not, or, readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import layout from './template';
 
@@ -20,24 +20,56 @@ export default Component.extend({
   showFlashMessages: true,
   dismissable: true,
   basic: false,
+  sidebar: false,
   lightbox: false,
   modalClass: '',
+  dimmerClass: '',
+  notSidebar: not('sidebar'),
+  hasCloseIcon: and('dismissable', 'notSidebar'),
 
-  _modalClass: computed('basic', 'lightbox', 'modalClass', function() {
+  _modalClass: computed('sidebar', 'basic', 'lightbox', 'modalClass', function() {
     let appliedClass = '';
-    if (this.get('lightbox')) {
+    if (this.sidebar) {
+      appliedClass += ' sidebar-modal';
+    }
+    if (this.lightbox) {
       appliedClass += ' fullscreen lightbox';
     }
-    appliedClass += ' ' + this.get('modalClass');
-    if (this.get('basic')) {
+    appliedClass += ' ' + this.modalClass;
+    if (this.basic) {
       appliedClass += ' basic';
+    }
+    return appliedClass;
+  }),
+
+  _dimmerClass: computed('sidebar', 'dimmerClass', function() {
+    let appliedClass = '';
+    if (this.sidebar) {
+      appliedClass += ' sidebar-dimmer';
+    } else {
+      appliedClass += ' page';
+    }
+    if(!this.dismissable){
+      appliedClass += ' not-dismissable';
+    }
+    appliedClass += ' ' + this.dimmerClass;
+    return appliedClass;
+  }),
+
+  _contentClass: computed('sidebar', 'lightbox', function() {
+    let appliedClass = '';
+    if(this.lightbox){
+      appliedClass += ' image';
+    }
+    if (!this.sidebar) {
+      appliedClass += ' content';
     }
     return appliedClass;
   }),
 
   secondaryButtonClass: computed('basic', function() {
     let classList = 'basic';
-    classList += this.get('basic') ? ' secondary' : ' black';
+    classList += this.basic ? ' secondary' : ' black';
     return classList;
   }),
 
