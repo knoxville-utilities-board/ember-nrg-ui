@@ -64,26 +64,28 @@ export default Component.extend(ContextMenuMixin, {
     return true;
   },
 
-  actions: {
-    filterChanged(filterParam, selectedFilter) {
-      this.setProperties({
-        filterParam,
-        selectedFilter,
-      });
-      this.updateQuery();
-    },
-    searchChanged(searchString) {
-      this.set('searchString', searchString);
-      this.updateQuery();
-    },
-    refresh() {
-      this.updateQuery('refresh');
-    },
-    itemClicked(item) {
-      this.sendAction('select', item);
-    },
-    changePage(start) {
-      this.sendAction('changePage', start);
-    },
+  filterChanged(filterParam, selectedFilter) {
+    this.setProperties({
+      filterParam,
+      selectedFilter,
+    });
+    this.updateQuery();
+  },
+
+  searchChanged(searchString) {
+    this.set('searchString', searchString);
+    this.updateQuery();
+  },
+
+  refresh() {
+    this.updateQuery('refresh');
+  },
+
+  onItemSelect(item) {
+    this.sendAction('select', item);
+  },
+
+  onChangePage(start) {
+    this.sendAction('changePage', start);
   },
 });

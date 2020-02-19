@@ -7,4 +7,5 @@ export default Service.extend({
     const config = getOwner(this).resolveRegistration('config:environment');
     return config.environment === 'test';
   }),
+  pageTitle: '',
 });

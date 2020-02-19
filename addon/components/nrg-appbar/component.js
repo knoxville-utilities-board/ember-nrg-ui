@@ -32,9 +32,11 @@ export default Component.extend(ResizeMixin, {
     }
   ),
 
-  actions: {
-    toggleSidebar() {
-      this.sendAction('toggleSidebar');
-    },
+  onToggleSidebar() {
+    this.sendAction('toggleSidebar');
+  },
+
+  onBackArrowClick() {
+    // Implement
   },
 });

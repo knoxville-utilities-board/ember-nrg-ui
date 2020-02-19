@@ -1,0 +1,12 @@
+<!-- BEGIN-SNIPPET master-detail -->
+<NrgMasterDetail as |view|>
+  <view.master>
+    <NrgList @selectionType="single" @pageMeta={{pageMeta}} @items={{mappedItems}} @select={{action this.onSelect}} />
+  </view.master>
+  <view.detail>
+    {{outlet}}
+  </view.detail>
+</NrgMasterDetail>
+<!-- END-SNIPPET  -->
+
+<NrgCodeBlock @label="Route Template" @codeBlockName="master-detail.hbs" />

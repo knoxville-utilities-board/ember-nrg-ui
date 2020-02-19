@@ -1,6 +1,6 @@
 {{#nrg-code-block label="List (Advanced)" codeBlockName="nrg-list-advanced.hbs" }}
   <!-- BEGIN-SNIPPET nrg-list-advanced -->
-  {{#nrg-list items=filteredItems pageMeta=filteredItems.meta query="query" select="select" as |list|}}
+  {{#nrg-list items=filteredItems pageMeta=filteredItems.meta query=(action "query") select=(action "select") as |list|}}
     {{#list.header as |header|}}
       {{header.search}}
       {{header.filter filters=filters filterParam="animal" selectedFilter=selectedFilter}}

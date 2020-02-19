@@ -1,0 +1,93 @@
+.master-detail {
+  border-radius: 0 !important;
+  margin-top: 0 !important;
+
+  @media (min-width: $tablet-breakpoint) {
+    height: calc(100vh - 11.78571429rem);
+  }
+
+  @media (max-width: $computer-breakpoint) {
+    .items .item.active.active.active {
+      background-color: inherit;
+    }
+  }
+
+  &--master {
+    .nrg-list.nrg-list {
+      border: none;
+    }
+    width: 40% !important;
+    padding: 0 !important;
+    @media (min-width: $tablet-breakpoint) {
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+
+    & .items .item:nth-child(even) {
+      background-color: rgba(232, 232, 232, 0.11);
+    }
+
+    .ui.menu:not(.vertical) .left.menu {
+      display: none !important;
+
+      &.visible {
+        display: block !important;
+      }
+    }
+  }
+
+  &--detail {
+    display: none;
+    width: 60% !important;
+    overflow-x: hidden;
+    @media (min-width: $computer-breakpoint) {
+      display: block;
+      overflow-y: scroll;
+    }
+  }
+
+  .item-list--search {
+    .ember-text-field.ember-text-field.ember-text-field.ember-text-field {
+      @media (min-width: 992px) {
+        max-width: 6em;
+      }
+      @media (min-width: 1050px) {
+        max-width: 7em;
+      }
+      @media (min-width: 1100px) {
+        max-width: 9em;
+      }
+      @media (min-width: 1300px) {
+        max-width: inherit;
+      }
+    }
+  }
+}
+
+.ui.modal.master-detail--takeover.master-detail--takeover.master-detail--takeover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0 !important;
+
+  & .main.menu {
+    background-color: rgba($appbar-color, 0.98);
+    height: $appbar-height;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+
+    .ellipsis {
+      height: 1.15em;
+    }
+  }
+
+  .main-content {
+    padding: $appbar-height 0 0;
+
+    .container {
+      margin: 0 -1px !important;
+    }
+  }
+}

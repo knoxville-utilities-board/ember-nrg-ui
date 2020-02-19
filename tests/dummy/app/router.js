@@ -9,6 +9,11 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   nrgRoutes(this);
+  this.route('master-detail', function() {
+    this.route('detail', {
+      path: '/:name',
+    });
+  });
   this.route('view-components', function() {
     this.route('nrg-error-pages');
     this.route('nrg-dropdown');
