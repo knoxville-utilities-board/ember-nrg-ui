@@ -1,34 +1,45 @@
 {{#nrg-code-block label="Popup" codeBlockName="nrg-popup.hbs" }}
   <!-- BEGIN-SNIPPET nrg-popup -->
-  {{!-- Top is the default position --}}
   {{#nrg-popup as |hash|}}
     {{nrg-button text="Hover Me" disabled=true}}
     {{#hash.popup}}
-      position="top" (default)
+      default popup
     {{/hash.popup}}
   {{/nrg-popup}}
   <br>
   <br>
-  {{#nrg-popup position="left" as |hash|}}
+  {{#nrg-popup as |hash|}}
     {{nrg-button text="Hover Me" disabled=true}}
-    {{#hash.popup}}
+    {{#hash.popup position="left"}}
       position="left"
     {{/hash.popup}}
   {{/nrg-popup}}
   <br>
   <br>
-  {{#nrg-popup position="right" as |hash|}}
+  {{#nrg-popup as |hash|}}
     {{nrg-button text="Hover Me" disabled=true}}
-    {{#hash.popup}}
+    {{#hash.popup position="right"}}
       position="right"
     {{/hash.popup}}
   {{/nrg-popup}}
   <br>
   <br>
-  {{#nrg-popup position="bottom" as |hash|}}
+  {{#nrg-popup as |hash|}}
     {{nrg-button text="Hover Me" disabled=true}}
-    {{#hash.popup}}
+    {{#hash.popup position="bottom"}}
       position="bottom"
+    {{/hash.popup}}
+  {{/nrg-popup}}
+  <br>
+  <br>
+  <br>
+  <br>
+  {{#nrg-popup as |hash|}}
+    <div class="ui input disabled">
+      {{input value="Hover Me" disabled=true}}
+    </div>
+    {{#hash.popup inverted=true}}
+      inverted=true
     {{/hash.popup}}
   {{/nrg-popup}}
   <!-- END-SNIPPET  -->
@@ -36,7 +47,7 @@
 
 {{#nrg-code-block label="Complex Popup" codeBlockName="nrg-popup-complex.hbs" }}
   <!-- BEGIN-SNIPPET nrg-popup-complex -->
-  {{#nrg-popup position="bottom" as |hash|}}
+  {{#nrg-popup as |hash|}}
     <div>
       <div class="ui segment">
         <p>
