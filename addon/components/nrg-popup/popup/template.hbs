@@ -1,0 +1,9 @@
+{{#if isOpen}}
+  <div class="tether-anchor">
+    {{#ember-tether bodyElement=popupContainer target=target targetAttachment=targetAttachment attachment=popupAttachment}}
+      <div role="button" class="ui popup {{_popupClass}} visible" {{action onMouseEnter on="mouseEnter"}} {{action onMouseLeave on="mouseLeave"}}>
+        {{yield}}
+      </div>
+    {{/ember-tether}}
+  </div>
+{{/if}}
