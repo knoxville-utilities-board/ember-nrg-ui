@@ -1,7 +1,7 @@
 import { A } from '@ember/array';
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
-import { and, equal, not, notEmpty, readOnly, reads } from '@ember/object/computed';
+import { and, equal, not, notEmpty, or, readOnly, reads } from '@ember/object/computed';
 import { on } from '@ember/object/evented';
 import { next } from '@ember/runloop';
 import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
@@ -50,7 +50,8 @@ export default Component.extend(
     _selection: notEmpty('field'),
     selection: reads('_selection'),
 
-    hideAction: equal('dropdownAction', 'hide'),
+    _hideAction: equal('dropdownAction', 'hide'),
+    hideAction: or('_hideAction', 'freeform'),
     notHideAction: not('hideAction'),
     hasSelected: and('selected', 'notHideAction'),
     hasDefaultText: readOnly('notHideAction'),
@@ -281,8 +282,10 @@ export default Component.extend(
     },
 
     select(option) {
+      if(!option){
+        return false;
+      }
       const notCurrentlySelected = !this.isCurrentlySelected(option);
-      const hideDropdownAction = this.dropdownAction === 'hide';
       if (notCurrentlySelected) {
         if(this.multiple){
           if(!Array.isArray(this.selected)){
@@ -293,7 +296,7 @@ export default Component.extend(
           this.set('selected', option);
         }
       }
-      if (hideDropdownAction || notCurrentlySelected) {
+      if (this.hideAction || notCurrentlySelected) {
         this.onSelect(option);
       }
       if (this.isSearching) {
