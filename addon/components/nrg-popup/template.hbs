@@ -1,0 +1,5 @@
+<div class="popup-anchor">
+  {{yield (hash
+    popup=(component "nrg-popup/popup" isOpen=isOpen target=target targetAttachment=targetAttachment popupAttachment=popupAttachment onMouseEnter=(action onMouseEnter) onMouseLeave=(action onMouseLeave))
+  )}}
+</div>

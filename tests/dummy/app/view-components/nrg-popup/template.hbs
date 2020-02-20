@@ -1,0 +1,105 @@
+{{#nrg-code-block label="Popup" codeBlockName="nrg-popup.hbs" }}
+  <!-- BEGIN-SNIPPET nrg-popup -->
+  {{!-- Top is the default position --}}
+  {{#nrg-popup as |hash|}}
+    {{nrg-button text="Hover Me" disabled=true}}
+    {{#hash.popup}}
+      position="top" (default)
+    {{/hash.popup}}
+  {{/nrg-popup}}
+  <br>
+  <br>
+  {{#nrg-popup position="left" as |hash|}}
+    {{nrg-button text="Hover Me" disabled=true}}
+    {{#hash.popup}}
+      position="left"
+    {{/hash.popup}}
+  {{/nrg-popup}}
+  <br>
+  <br>
+  {{#nrg-popup position="right" as |hash|}}
+    {{nrg-button text="Hover Me" disabled=true}}
+    {{#hash.popup}}
+      position="right"
+    {{/hash.popup}}
+  {{/nrg-popup}}
+  <br>
+  <br>
+  {{#nrg-popup position="bottom" as |hash|}}
+    {{nrg-button text="Hover Me" disabled=true}}
+    {{#hash.popup}}
+      position="bottom"
+    {{/hash.popup}}
+  {{/nrg-popup}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}
+
+{{#nrg-code-block label="Complex Popup" codeBlockName="nrg-popup-complex.hbs" }}
+  <!-- BEGIN-SNIPPET nrg-popup-complex -->
+  {{#nrg-popup position="bottom" as |hash|}}
+    <div>
+      <div class="ui segment">
+        <p>
+          Popups are not limited to text content, and can be attached to any kind of element.
+          Even ember components can be placed inside of popups.
+        </p>
+        <p>
+          However, keep in mind that anything placed in a popup will be destroyed when the popup disappears.
+          Do not expect it's contents to maintain state.
+        </p>
+      </div>
+    </div>
+
+    {{#hash.popup}}
+      {{#nrg-form-container as |form|}}
+        {{#form.field label="Text Field" required=required as |field|}}
+          {{#field.text-field class="left icon action" disabled=disabled as |view|}}
+            {{nrg-icon icon="settings"}}
+            {{view.input}}
+            {{nrg-button class="primary" text="Action"}}
+          {{/field.text-field}}
+        {{/form.field}}
+        <br>
+        {{#form.field label="Datetime (Button)" required=required as |field|}}
+          {{#field.datetime disabled=disabled}}
+            {{nrg-button class="green" text="Open Datepicker"}}
+          {{/field.datetime}}
+        {{/form.field}}
+        <br>
+        {{#form.field label="Dropdown" required=required as |field|}}
+          {{field.dropdown options=optionList disabled=disabled}}
+        {{/form.field}}
+        <br>
+        <div class="grouped fields">
+          {{#form.field inline=true required=required as |field|}}
+            {{field.checkbox label="Checkbox" model=this valuePath="checkbox1" disabled=disabled}}
+          {{/form.field}}
+          {{#form.field inline=true required=required as |field|}}
+            {{field.checkbox type="slider" label="Slider" checked=true disabled=disabled}}
+          {{/form.field}}
+          {{#form.field inline=true required=required as |field|}}
+            {{field.checkbox type="toggle" label="Toggle"  disabled=disabled}}
+          {{/form.field}}
+        </div>
+        <br>
+        <div class="grouped fields">
+          {{#form.field required=required as |field|}}
+            {{field.radio label="Option 1" disabled=disabled value="1" selectedValue=selectedValue}}
+          {{/form.field}}
+          {{#form.field required=required as |field|}}
+            {{field.radio label="Option 2" disabled=disabled value="2" selectedValue=selectedValue}}
+          {{/form.field}}
+          {{#form.field required=required as |field|}}
+            {{field.radio label="Option 3" disabled=disabled value="3" selectedValue=selectedValue}}
+          {{/form.field}}
+          {{#form.field required=required as |field|}}
+            {{field.radio label="Option 4" disabled=disabled value="4" selectedValue=selectedValue}}
+          {{/form.field}}
+        </div>
+        {{form.submit-button}}
+        {{nrg-button class="basic black" text="Cancel"}}
+      {{/nrg-form-container}}
+    {{/hash.popup}}
+  {{/nrg-popup}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}

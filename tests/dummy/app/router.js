@@ -15,14 +15,15 @@ Router.map(function() {
     });
   });
   this.route('view-components', function() {
-    this.route('nrg-error-pages');
     this.route('nrg-dropdown');
+    this.route('nrg-error-pages');
     this.route('nrg-forms');
     this.route('nrg-home-cards');
-    this.route('nrg-loading-indicator');
     this.route('nrg-lightbox');
-    this.route('nrg-modal');
     this.route('nrg-list');
+    this.route('nrg-loading-indicator');
+    this.route('nrg-modal');
+    this.route('nrg-popup');
     this.route('nrg-search');
   });
   this.route('view-mixins', function() {

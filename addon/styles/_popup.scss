@@ -1,0 +1,15 @@
+.ember-tether-element {
+  z-index: 99;
+
+  .ui.popup {
+    position: initial;
+  }
+}
+
+.popup-anchor {
+  display: inline-block;
+}
+
+.tether-anchor {
+  display: none;
+}
