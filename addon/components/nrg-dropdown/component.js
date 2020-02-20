@@ -1,7 +1,7 @@
 import { A } from '@ember/array';
 import Component from '@ember/component';
-import { computed, get, observer } from '@ember/object';
-import { and, equal, not, notEmpty, readOnly } from '@ember/object/computed';
+import { computed, observer } from '@ember/object';
+import { and, equal, not, notEmpty, readOnly, reads } from '@ember/object/computed';
 import { on } from '@ember/object/evented';
 import { next } from '@ember/runloop';
 import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
@@ -47,7 +47,8 @@ export default Component.extend(
       'multiple',
     ],
 
-    selection: notEmpty('field'),
+    _selection: notEmpty('field'),
+    selection: reads('_selection'),
 
     hideAction: equal('dropdownAction', 'hide'),
     notHideAction: not('hideAction'),
@@ -238,7 +239,9 @@ export default Component.extend(
     },
 
     click(evt) {
-      if(get(evt, 'target.dataset.dropdownMultiSelection') || get(evt, 'target.dataset.dropdownItem')){
+      var isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
+      var isDropdownItem = evt.target.closest('[data-dropdown-item]');
+      if(isMultiSelection || isDropdownItem){
         return;
       }
       if (this.isOpen) {

@@ -1,4 +1,4 @@
-{{#nrg-code-block label="NRG Dropdown API" codeBlockName="nrg-dropdown.hbs" }}
+{{#nrg-code-block label="Simple Dropdowns" codeBlockName="nrg-dropdown.hbs" }}
   <!-- BEGIN-SNIPPET nrg-dropdown -->
   {{#nrg-form-container as |form|}}
     {{#form.field label="Dropdown (Linked Value)" as |field|}}
@@ -47,15 +47,58 @@
     {{#form.field label="Multiple Selection with Search and Allow Additions" as |field|}}
       {{field.dropdown options=optionList multiple=true search=true allowAdditions=true hideAdditions=false}}
     {{/form.field}}
+    {{#form.field label="Hide Action" as |field|}}
+      {{field.dropdown options=optionList dropdownAction="hide"}}
+    {{/form.field}}
   {{/nrg-form-container}}
+  <!-- END-SNIPPET  -->
+{{/nrg-code-block}}
 
-  <div>
-    <div>
-      <strong>
-        Hide Action
-      </strong>
-    </div>
-    {{nrg-dropdown options=optionList dropdownAction="hide"}}
+{{#nrg-code-block label="Freeform Dropdowns" codeBlockName="nrg-dropdown-freeform.hbs" }}
+  <!-- BEGIN-SNIPPET nrg-dropdown-freeform -->
+  <div class="ui center aligned segment">
+    {{#nrg-dropdown class="icon button primary float right" freeform=true as |dropdown|}}
+      {{#dropdown.source}}
+        <div class="text">Actions</div>
+        <i class="dropdown icon"></i>
+      {{/dropdown.source}}
+      {{#dropdown.menu as |menu|}}
+        {{#menu.sub-menu menuDirection="left" as |subMenu|}}
+          {{#subMenu.source}}
+            <i class="left dropdown icon"></i>
+            <i class="add user icon"></i>
+            Assign To Worker
+          {{/subMenu.source}}
+          {{#subMenu.menu}}
+            {{#each workers as |worker|}}
+              {{#menu.item}}
+                {{worker}}
+              {{/menu.item}}
+            {{/each}}
+          {{/subMenu.menu}}
+        {{/menu.sub-menu}}
+        {{#menu.sub-menu as |subMenu|}}
+          {{#subMenu.source}}
+            <i class="dropdown icon"></i>
+            <i class="add user icon"></i>
+            Assign To Crew
+          {{/subMenu.source}}
+          {{#subMenu.menu}}
+            {{#each crews as |crew|}}
+              {{#menu.item}}
+                {{crew}}
+              {{/menu.item}}
+            {{/each}}
+          {{/subMenu.menu}}
+        {{/menu.sub-menu}}
+        {{#menu.item}}
+          <i class="remove user icon"></i> Remove
+        {{/menu.item}}
+        {{#menu.item}}
+          <i class="ban icon"></i> Cancel
+        {{/menu.item}}
+      {{/dropdown.menu}}
+    {{/nrg-dropdown}}
   </div>
   <!-- END-SNIPPET  -->
 {{/nrg-code-block}}
