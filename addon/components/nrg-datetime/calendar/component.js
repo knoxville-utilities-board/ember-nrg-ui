@@ -25,6 +25,25 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   value: null,
 
+  showNowShortcut: true,
+
+  _showNowShortcut: computed(
+    'showNowShortcut',
+    'minDate',
+    'maxDate',
+    'isDateDisabled',
+    function() {
+      if (!this.showNowShortcut) {
+        return;
+      }
+      const now = moment();
+      const userDisabled = this.isDateDisabled && this.isDateDisabled(now);
+      const afterMaxDate = now.isAfter(this.maxDate, 'date');
+      const beforeMinDate = now.isBefore(this.minDate, 'date');
+      return !userDisabled && !afterMaxDate && !beforeMinDate;
+    }
+  ),
+
   init() {
     this._super(...arguments);
     if (this.type === 'datetime' || this.type === 'date') {
@@ -72,21 +91,21 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     this._updateSelectedIndexes();
   }),
 
-  _isBeyondDateRange(date) {
+  _isBeyondDateRange(date, precision) {
     date = moment(date);
     let invalid = false;
     if (this.minDate) {
-      invalid = date.isBefore(this.minDate);
+      invalid = date.isBefore(this.minDate, precision);
     }
     if (this.maxDate) {
-      invalid = invalid || date.isAfter(this.maxDate);
+      invalid = invalid || date.isAfter(this.maxDate, precision);
     }
     return invalid;
   },
 
-  _isDateDisabled(date) {
-    const userDisabled = this.isDisabled && this.isDisabled(date);
-    const isBeyondDateRange = this._isBeyondDateRange(date);
+  _isDateDisabled(date, precision) {
+    const userDisabled = this.isDateDisabled && this.isDateDisabled(date);
+    const isBeyondDateRange = this._isBeyondDateRange(date, precision);
     return userDisabled || isBeyondDateRange;
   },
 
@@ -102,7 +121,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       const row = [];
       for (let j = 0; j < 3; j++) {
         const minute = calendar.minute();
-        const disabled = this._isDateDisabled(calendar);
+        const disabled = this._isDateDisabled(calendar, 'minute');
         const selected = !disabled && this.selectedMinuteIndex === minute;
         row.push({
           display: calendar.format('LT'),
@@ -128,7 +147,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       const row = [];
       for (let j = 0; j < 4; j++) {
         const hour = calendar.hour();
-        const disabled = this._isDateDisabled(calendar);
+        const disabled = this._isDateDisabled(calendar, 'hour');
         const selected = !disabled && this.selectedHourIndex === hour;
         row.push({
           display: calendar.format('LT'),
@@ -157,16 +176,17 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       for (let i = 0; i < 6; i++) {
         const week = [];
         do {
-          const day = calendar.date();
+          const date = calendar.date();
           const isDifferentMonth = calendar.month() !== this.selectedMonthIndex;
-          const dateIsToday = calendar.isSame(today, 'day');
-          const disabled = isDifferentMonth || this._isDateDisabled(calendar);
-          const selected = !disabled && this.selectedDayIndex === day;
+          const dateIsToday = calendar.isSame(today, 'date');
+          const disabled =
+            this._isDateDisabled(calendar, 'date') || isDifferentMonth;
+          const selected = !disabled && this.selectedDayIndex === date;
 
           week.push({
             customClass: (dateIsToday && 'today') || '',
-            display: day,
-            day,
+            display: date,
+            date,
             disabled,
             selected,
           });
@@ -188,7 +208,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       let row = [];
       for (let j = 0; j < 3; j++) {
         const month = calendar.month();
-        const disabled = this._isDateDisabled(calendar);
+        const disabled = this._isDateDisabled(calendar, 'month');
         const selected = !disabled && this.selectedMonthIndex === month;
         row.push({
           display: calendar.format('MMM'),
@@ -217,7 +237,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         const calendar = moment({
           year,
         });
-        const disabled = this._isDateDisabled(calendar);
+        const disabled = this._isDateDisabled(calendar, 'year');
         const selected = !disabled && this.selectedYearIndex === year;
         row.push({
           display: year,
@@ -284,7 +304,17 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       hour: this.selectedHourIndex,
       minute: this.selectedMinuteIndex,
     });
-    date[operation](number, unitType);
+
+    if (operation === 'set') {
+      date.set(unitType, number);
+    } else {
+      date[operation](number, unitType);
+    }
+
+    const userDisabled = this.isDateDisabled && this.isDateDisabled(date);
+    if (userDisabled) {
+      return;
+    }
 
     const dateBeforeMinDate = this.minDate && date.isBefore(this.minDate);
     const dateAfterMaxDate = this.maxDate && date.isAfter(this.maxDate);
@@ -376,15 +406,15 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   clickCell(cell) {
     if (this.isSelectingMinutes) {
-      this.set('selectedMinuteIndex', cell.minute);
+      this._manipulateDate('set', cell.minute, 'minute');
     } else if (this.isSelectingHours) {
-      this.set('selectedHourIndex', cell.hour);
+      this._manipulateDate('set', cell.hour, 'hour');
     } else if (this.isSelectingMonths) {
-      this.set('selectedMonthIndex', cell.month);
+      this._manipulateDate('set', cell.month, 'month');
     } else if (this.isSelectingYears) {
-      this.set('selectedYearIndex', cell.year);
+      this._manipulateDate('set', cell.year, 'year');
     } else if (this.isSelectingDays) {
-      this.set('selectedDayIndex', cell.day);
+      this._manipulateDate('set', cell.date, 'date');
     }
     this.goToNextWorkFlowStep();
   },

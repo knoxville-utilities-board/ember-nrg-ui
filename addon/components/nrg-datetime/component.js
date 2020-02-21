@@ -55,7 +55,7 @@ export default Component.extend(Validation, {
     this.set('isFocused', false);
   },
 
-  isDisabled(/* date */) {},
+  isDateDisabled(/* date */) {},
 
   dateFormat: 'LL',
 
