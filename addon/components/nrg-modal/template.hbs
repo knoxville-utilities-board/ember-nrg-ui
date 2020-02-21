@@ -17,11 +17,6 @@
       {{/if}}
 
       <div class={{_contentClass}}>
-        {{#if showFlashMessages}}
-          {{#each flashMessages.queue as |flash|}}
-            {{nrg-flash-message flash=flash}}
-          {{/each}}
-        {{/if}}
         {{yield}}
       </div>
 

@@ -9,11 +9,6 @@
           {{nrg-sidebar-menu clickedSidebarItem=(action "clickedLink")}}
         </div>
       {{/if}}
-      {{#each flashMessages.queue as |flash|}}
-        {{#nrg-flash-message-wrapper as |view|}}
-          {{view.flashMessage isStuck=true flash=flash}}
-        {{/nrg-flash-message-wrapper}}
-      {{/each}}
       {{yield}}
     </div>
   {{else}}
@@ -25,11 +20,6 @@
       {{/if}}
       <div class="main-content" style={{mainContentStyle}}>
         <div class="ui {{if fluid "fluid"}} container">
-          {{#each flashMessages.queue as |flash|}}
-            {{#nrg-flash-message-wrapper as |view|}}
-              {{view.flashMessage flash=flash}}
-            {{/nrg-flash-message-wrapper}}
-          {{/each}}
           {{yield}}
         </div>
       </div>
