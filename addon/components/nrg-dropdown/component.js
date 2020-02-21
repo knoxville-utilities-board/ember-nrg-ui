@@ -240,8 +240,8 @@ export default Component.extend(
     },
 
     click(evt) {
-      var isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
-      var isDropdownItem = evt.target.closest('[data-dropdown-item]');
+      const isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
+      const isDropdownItem = evt.target.closest('[data-dropdown-item]');
       if(isMultiSelection || isDropdownItem){
         return;
       }
