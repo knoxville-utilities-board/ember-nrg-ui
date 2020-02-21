@@ -285,11 +285,19 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     });
     date[operation](number, unitType);
 
-    if (operation === 'subtract' && date.isBefore(this.minDate)) {
+    if (
+      this.minDate &&
+      operation === 'subtract' &&
+      date.isBefore(this.minDate)
+    ) {
       date = moment(this.minDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.add(remainder, 'minute');
-    } else if (operation === 'add' && date.isAfter(this.maxDate)) {
+    } else if (
+      this.maxDate &&
+      operation === 'add' &&
+      date.isAfter(this.maxDate)
+    ) {
       date = moment(this.maxDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.subtract(remainder, 'minute');
@@ -412,6 +420,11 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         this.set('isSelectingMinutes', true);
         return;
       }
+    } else if (this.type === 'time' && this.isSelectingHours) {
+      this.set('selectedMinuteIndex', 0);
+      this.set('isSelectingHours', false);
+      this.set('isSelectingMinutes', true);
+      return;
     }
     const value = moment({
       hour: this.selectedHourIndex,
