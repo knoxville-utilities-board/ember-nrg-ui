@@ -285,19 +285,14 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     });
     date[operation](number, unitType);
 
-    if (
-      this.minDate &&
-      operation === 'subtract' &&
-      date.isBefore(this.minDate)
-    ) {
+    const dateBeforeMinDate = this.minDate && date.isBefore(this.minDate);
+    const dateAfterMaxDate = this.maxDate && date.isAfter(this.maxDate);
+
+    if (dateBeforeMinDate) {
       date = moment(this.minDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.add(remainder, 'minute');
-    } else if (
-      this.maxDate &&
-      operation === 'add' &&
-      date.isAfter(this.maxDate)
-    ) {
+    } else if (dateAfterMaxDate) {
       date = moment(this.maxDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.subtract(remainder, 'minute');
