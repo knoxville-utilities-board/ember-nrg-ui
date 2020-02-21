@@ -73,9 +73,7 @@ export default Controller.extend({
         include = item.animal === query.animal;
       }
       if (query.search) {
-        include =
-          include &&
-          item.name.toLowerCase().indexOf(query.search.toLowerCase()) !== -1;
+        include = include && item.name.toLowerCase().indexOf(query.search.toLowerCase()) !== -1;
       }
       return include;
     });

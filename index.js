@@ -19,13 +19,12 @@ module.exports = {
       production: path.join(cssSource, 'semantic.min.css'),
     });
 
-
     const fontSource = 'node_modules/fomantic-ui-css/themes/default/assets/fonts';
     const fontFiles = walkSync(fontSource, { directories: false });
     const fontOptions = {
-      destDir: 'assets/themes/default/assets/fonts'
-    }
-    for(let font of fontFiles) {
+      destDir: 'assets/themes/default/assets/fonts',
+    };
+    for (let font of fontFiles) {
       app.import(path.join(fontSource, font), fontOptions);
     }
   },

@@ -5,7 +5,7 @@ import RoutePageTitleMixin from 'ember-nrg-ui/mixins/route-page-title';
 
 export default Route.extend(ContextMenuMixin, KeyboardShortcutMixin, RoutePageTitleMixin, {
   pageTitle: 'NRG UI',
-  
+
   contextItems: [
     {
       label: 'Release Notes',

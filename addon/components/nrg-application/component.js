@@ -23,16 +23,9 @@ export default Component.extend(ResizeMixin, {
 
   classNames: ['nrg-application'],
 
-  classNameBindings: [
-    'fullscreenMap:fullscreen-map',
-    'computerScreenSidebarActive:large-screen-sidebar-active',
-  ],
+  classNameBindings: ['fullscreenMap:fullscreen-map', 'computerScreenSidebarActive:large-screen-sidebar-active'],
 
-  isComputerScreen: or(
-    'responsive.isComputerScreen',
-    'responsive.isLargeMonitor',
-    'responsive.isWidescreenMonitor'
-  ),
+  isComputerScreen: or('responsive.isComputerScreen', 'responsive.isLargeMonitor', 'responsive.isWidescreenMonitor'),
 
   title: reads('application.pageTitle'),
 

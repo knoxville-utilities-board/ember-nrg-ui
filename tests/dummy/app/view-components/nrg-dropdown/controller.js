@@ -28,13 +28,7 @@ export default Controller.extend({
       icon: 'comment',
     },
   ],
-  optionListStrings: [
-    'Item String 1',
-    'Item String 2',
-    'Item String 3',
-    'Item String 4',
-    'Item String 5',
-  ],
+  optionListStrings: ['Item String 1', 'Item String 2', 'Item String 3', 'Item String 4', 'Item String 5'],
   allowAdditionsOptionsList: [
     {
       label: 'Item 1',
@@ -88,7 +82,7 @@ export default Controller.extend({
     'U101',
     'U626',
   ],
-  onItemSelect(){
+  onItemSelect() {
     //
   },
 });

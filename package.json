@@ -2,10 +2,7 @@
   "name": "ember-nrg-ui",
   "version": "1.6.0",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
-  "keywords": [
-    "ember-addon",
-    "Fomantic UI"
-  ],
+  "keywords": ["ember-addon", "Fomantic UI"],
   "repository": {
     "type": "git",
     "url": "https://github.com/knoxville-utilities-board/ember-nrg-ui"

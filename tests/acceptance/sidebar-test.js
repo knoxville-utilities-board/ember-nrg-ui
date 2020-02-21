@@ -5,10 +5,7 @@ import { setupApplicationTest } from 'ember-qunit';
 const hasSidebarItem = (label, nodeIdentifier = '.sidebar-menu > .item') => {
   const nodes = findAll(nodeIdentifier);
   return nodes.find(node => {
-    return (
-      node.innerText.includes(label) ||
-      hasSidebarItem(label, nodeIdentifier + '> .menu > .item')
-    );
+    return node.innerText.includes(label) || hasSidebarItem(label, nodeIdentifier + '> .menu > .item');
   });
 };
 module('Acceptance | sidebar', function(hooks) {

@@ -8,14 +8,7 @@ export default Component.extend({
   type: 'button',
   classNames: ['ui button'],
   classNameBindings: ['disabled', 'loading'],
-  attributeBindings: [
-    'type',
-    '_disabled:disabled',
-    'name',
-    'tabindex',
-    'title',
-    'autofocus',
-  ],
+  attributeBindings: ['type', '_disabled:disabled', 'name', 'tabindex', 'title', 'autofocus'],
 
   loading: false,
   disabled: false,

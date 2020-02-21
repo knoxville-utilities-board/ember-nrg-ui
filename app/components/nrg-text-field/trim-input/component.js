@@ -1,3 +1,1 @@
-export {
-  default,
-} from 'ember-nrg-ui/components/nrg-text-field/trim-input/component';
+export { default } from 'ember-nrg-ui/components/nrg-text-field/trim-input/component';

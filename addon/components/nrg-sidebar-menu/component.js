@@ -12,17 +12,9 @@ export default Component.extend({
 
   appReloadLocation: '/',
 
-  visibleMenuItems: filterBy(
-    'sidebarMenuManager.menuItems',
-    'isShownInSidebar',
-    true
-  ),
+  visibleMenuItems: filterBy('sidebarMenuManager.menuItems', 'isShownInSidebar', true),
 
-  visibleFooterItems: filterBy(
-    'sidebarMenuManager.footerMenuItems',
-    'isShownInSidebar',
-    true
-  ),
+  visibleFooterItems: filterBy('sidebarMenuManager.footerMenuItems', 'isShownInSidebar', true),
 
   hasVisibleFooterItems: notEmpty('visibleFooterItems'),
 

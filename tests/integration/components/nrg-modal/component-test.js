@@ -7,9 +7,7 @@ module('Integration | Component | nrg-modal', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(
-      hbs`{{nrg-modal primaryButton='Button Text' isOpen=true}}`
-    );
+    await render(hbs`{{nrg-modal primaryButton='Button Text' isOpen=true}}`);
     assert.equal(find('*').textContent.trim(), 'Button Text');
   });
 

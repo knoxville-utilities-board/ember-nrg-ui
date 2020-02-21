@@ -21,11 +21,7 @@ export default Mixin.create({
       this.get('resizeService').on('didResize', this, this._handleResizeEvent);
     }
     if (this.get('resizeDebouncedEventsEnabled')) {
-      this.get('resizeService').on(
-        'debouncedDidResize',
-        this,
-        this._handleDebouncedResizeEvent
-      );
+      this.get('resizeService').on('debouncedDidResize', this, this._handleDebouncedResizeEvent);
     }
   },
 
@@ -35,11 +31,7 @@ export default Mixin.create({
       this.get('resizeService').off('didResize', this, this._handleResizeEvent);
     }
     if (this.get('resizeDebouncedEventsEnabled')) {
-      this.get('resizeService').off(
-        'debouncedDidResize',
-        this,
-        this._handleDebouncedResizeEvent
-      );
+      this.get('resizeService').off('debouncedDidResize', this, this._handleDebouncedResizeEvent);
     }
   },
 
