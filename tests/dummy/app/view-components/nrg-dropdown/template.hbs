@@ -71,7 +71,7 @@
           {{/subMenu.source}}
           {{#subMenu.menu}}
             {{#each workers as |worker|}}
-              {{#menu.item}}
+              {{#menu.item option=worker}}
                 {{worker}}
               {{/menu.item}}
             {{/each}}
@@ -85,7 +85,7 @@
           {{/subMenu.source}}
           {{#subMenu.menu}}
             {{#each crews as |crew|}}
-              {{#menu.item}}
+              {{#menu.item option=crew}}
                 {{crew}}
               {{/menu.item}}
             {{/each}}
