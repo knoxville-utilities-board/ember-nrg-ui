@@ -21,4 +21,8 @@ export default Component.extend({
       }
     },
   }),
+
+  onChange() {},
+  onFocus() {},
+  onBlur() {},
 });

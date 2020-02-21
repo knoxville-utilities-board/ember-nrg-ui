@@ -39,10 +39,6 @@ module('Integration | Component | nrg-datetime', function(hooks) {
         <span>template block text</span>
       {{/nrg-datetime}}
     `);
-    assert.ok(
-      findAll('span')[3]
-        .textContent.trim()
-        .includes('template block text')
-    );
+    assert.equal(find('*').textContent.trim(), 'template block text');
   });
 });

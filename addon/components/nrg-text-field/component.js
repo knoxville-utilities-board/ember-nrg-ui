@@ -14,4 +14,10 @@ export default Component.extend(Validation, {
   input() {
     this.sendAction('action', this.get('value'));
   },
+
+  onFocus() {},
+
+  onBlur() {},
+
+  onChange() {},
 });

@@ -1,0 +1,44 @@
+<div tabindex="-1" class="ui popup calendar bottom left transition active visible">
+  <table class="ui celled center aligned unstackable table {{table.columnCountClass}} column day">
+    <thead>
+      <tr>
+        <th colspan="7">
+          <span class="link" role="button" {{action this.onHeaderDisplayClick}}>{{this.headerDisplay}}</span>
+          <span class="prev link" role="button" {{action this.onPrevious}}>
+            <i class="chevron left icon" />
+          </span>
+          <span class="next link" role="button" {{action this.onNext}}>
+            <i class="chevron right icon" />
+          </span>
+        </th>
+      </tr>
+      {{#if table.columnHeaders}}
+        <tr>
+          {{#each table.columnHeaders as |columnHeader|}}
+            <th>{{columnHeader}}</th>
+          {{/each}}
+        </tr>   
+      {{/if}}
+    </thead>
+    <tbody>
+      {{#each table.rows as |row|}}
+        <tr>
+          {{#each row as |cell|}}
+            <td
+              class="link {{if cell.disabled "adjacent disabled"}} {{if cell.selected "active focus"}} {{cell.customClass}}"
+              role="button" {{action this.clickCell cell}}>
+              {{cell.display}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+      {{#if showNowShortcut}}
+        <tr>
+          <td colspan="7" class="today link" role="button" {{action this.setToNow}}>
+            {{if (eq type "datetime") "Now" "Today"}}
+          </td>
+        </tr>
+      {{/if}}
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,7 @@
 {{#if hasBlock}}
   {{yield (hash
-    input=(component "nrg-text-field/trim-input" type=type min=min max=max step=step value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength)
+    input=(component "nrg-text-field/trim-input" type=type min=min max=max step=step value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength onFocus=(action this.onFocus) onBlur=(action this.onBlur) onChange=(action this.onChange))
   )}}
 {{else}}
-  {{nrg-text-field/trim-input type=type min=min max=max step=step value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength}}
+  {{nrg-text-field/trim-input type=type min=min max=max step=step value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength onFocus=(action this.onFocus) onBlur=(action this.onBlur) onChange=(action this.onChange)}}
 {{/if}}
