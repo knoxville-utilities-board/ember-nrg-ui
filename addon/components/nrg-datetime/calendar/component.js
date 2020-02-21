@@ -36,9 +36,11 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       if (!this.showNowShortcut) {
         return;
       }
-      const afterMaxDate = moment().isAfter(this.maxDate, 'date');
-      const beforeMinDate = moment().isBefore(this.minDate, 'date');
-      return !afterMaxDate && !beforeMinDate;
+      const now = moment();
+      const userDisabled = this.isDateDisabled && this.isDateDisabled(now);
+      const afterMaxDate = now.isAfter(this.maxDate, 'date');
+      const beforeMinDate = now.isBefore(this.minDate, 'date');
+      return !userDisabled && !afterMaxDate && !beforeMinDate;
     }
   ),
 
