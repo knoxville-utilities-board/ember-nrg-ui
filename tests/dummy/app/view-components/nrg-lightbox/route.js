@@ -7,15 +7,15 @@ export default Route.extend(SidebarNavigationMixin, {
   model() {
     return [
       {
-        url: 'http://fillmurray.com/400/400',
+        url: 'https://www.fillmurray.com/400/400',
         detail: 'Some details about the first photo\n',
       },
       {
-        url: 'http://fillmurray.com/100/100',
+        url: 'https://www.fillmurray.com/100/100',
         detail: 'Some details about the second photo\n',
       },
       {
-        url: 'http://fillmurray.com/1500/1500',
+        url: 'https://www.fillmurray.com/1500/1500',
         detail: 'Some details about the third photo\n',
       },
     ];
