@@ -39,6 +39,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   },
 
   headerDisplay: computed(
+    'selectedDayIndex',
     'selectedMonthIndex',
     'selectedYearIndex',
     'isSelectingDays',
