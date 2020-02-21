@@ -340,7 +340,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingMonths) {
       this._manipulateDate('subtract', 3, 'month', evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('subtract', 2, 'year'), evt;
+      this._manipulateDate('subtract', 2, 'year', evt);
     } else if (this.isSelectingMinutes) {
       this._manipulateDate('subtract', MINUTE_INTERVAL * 3, 'minute', evt);
     } else if (this.isSelectingHours) {
@@ -365,16 +365,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   enter: on(keyDown('Enter'), function(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-
-    if (this.isSelectingMonths || this.isSelectingYears) {
-      this.setProperties({
-        isSelectingDays: true,
-        isSelectingMonths: false,
-        isSelectingYears: false,
-      });
-    } else {
-      this.selectDate();
-    }
+    this.goToNextWorkFlowStep();
   }),
 
   esc: on(keyDown('Escape'), function(evt) {
@@ -390,42 +381,19 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   clickCell(cell) {
     if (this.isSelectingMinutes) {
       this.set('selectedMinuteIndex', cell.minute);
-      this.selectDate();
     } else if (this.isSelectingHours) {
       this.set('selectedHourIndex', cell.hour);
-      this.selectDate();
     } else if (this.isSelectingMonths) {
       this.set('selectedMonthIndex', cell.month);
-      this.set('isSelectingDays', true);
-      this.set('isSelectingMonths', false);
     } else if (this.isSelectingYears) {
       this.set('selectedYearIndex', cell.year);
-      this.set('isSelectingDays', true);
-      this.set('isSelectingYears', false);
     } else if (this.isSelectingDays) {
       this.set('selectedDayIndex', cell.day);
-      this.selectDate();
     }
+    this.goToNextWorkFlowStep();
   },
 
   selectDate() {
-    if (this.type === 'datetime') {
-      if (this.isSelectingDays) {
-        this.set('isSelectingDays', false);
-        this.set('isSelectingHours', true);
-        return;
-      } else if (this.isSelectingHours) {
-        this.set('selectedMinuteIndex', 0);
-        this.set('isSelectingHours', false);
-        this.set('isSelectingMinutes', true);
-        return;
-      }
-    } else if (this.type === 'time' && this.isSelectingHours) {
-      this.set('selectedMinuteIndex', 0);
-      this.set('isSelectingHours', false);
-      this.set('isSelectingMinutes', true);
-      return;
-    }
     const value = moment({
       hour: this.selectedHourIndex,
       minute: this.selectedMinuteIndex,
@@ -446,6 +414,37 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingYears) {
       this.set('isSelectingYears', false);
       this.set('isSelectingDays', true);
+    }
+  },
+
+  goToNextWorkFlowStep() {
+    if (this.type === 'datetime' || this.type === 'date') {
+      if (this.isSelectingMonths) {
+        this.set('isSelectingMonths', false);
+        this.set('isSelectingDays', true);
+        return;
+      } else if (this.isSelectingYears) {
+        this.set('isSelectingYears', false);
+        this.set('isSelectingDays', true);
+        return;
+      }
+    }
+    if (this.type === 'datetime' || this.type === 'time') {
+      if (this.isSelectingHours) {
+        this.set('selectedMinuteIndex', 0);
+        this.set('isSelectingHours', false);
+        this.set('isSelectingMinutes', true);
+        return;
+      } else if (this.isSelectingMinutes) {
+        this.selectDate();
+        return;
+      }
+    }
+    if (this.type === 'datetime' && this.isSelectingDays) {
+      this.set('isSelectingDays', false);
+      this.set('isSelectingHours', true);
+    } else if (this.type === 'date') {
+      this.selectDate();
     }
   },
 
