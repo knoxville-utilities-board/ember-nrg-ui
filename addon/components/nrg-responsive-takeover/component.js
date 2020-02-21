@@ -18,10 +18,7 @@ export default Component.extend({
   title: reads('applicationService.pageTitle'),
 
   onBackArrowClick() {
-    assert(
-      'You must implment the onBackArrowClick action or provide a previousRoute',
-      this.previousRoute
-    );
+    assert('You must implment the onBackArrowClick action or provide a previousRoute', this.previousRoute);
     if (this.previousRoute) {
       this.router.transitionTo(this.previousRoute);
     }

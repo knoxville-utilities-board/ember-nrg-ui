@@ -4,15 +4,15 @@ import layout from './template';
 export default Component.extend({
   layout,
   tagName: '',
-  _onClick(option){
-    if(this.onSelect){
+  _onClick(option) {
+    if (this.onSelect) {
       this.onSelect(option);
       this._onSelect();
-    } else if(option){
+    } else if (option) {
       this._onSelect(option);
     }
   },
-  _onSelect(){
+  _onSelect() {
     // Implemented by menu
   },
   // onSelect() implemented by user

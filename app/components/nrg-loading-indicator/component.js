@@ -1,3 +1,1 @@
-export {
-  default,
-} from 'ember-nrg-ui/components/nrg-loading-indicator/component';
+export { default } from 'ember-nrg-ui/components/nrg-loading-indicator/component';

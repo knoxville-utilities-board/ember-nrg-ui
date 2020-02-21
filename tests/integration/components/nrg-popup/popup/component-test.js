@@ -7,7 +7,7 @@ module('Integration | Component | nrg-popup/popup', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    this.mouseEvent = function(){};
+    this.mouseEvent = function() {};
     await render(hbs`
       {{#nrg-popup/popup isOpen=true}}
         template block text

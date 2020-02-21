@@ -4,9 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
 
-module('Integration | Component | nrg-keyboard-shortcut-modal', function(
-  hooks
-) {
+module('Integration | Component | nrg-keyboard-shortcut-modal', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders the default shortcut', async function(assert) {

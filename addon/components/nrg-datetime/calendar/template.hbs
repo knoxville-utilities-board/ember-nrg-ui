@@ -17,16 +17,14 @@
           {{#each table.columnHeaders as |columnHeader|}}
             <th>{{columnHeader}}</th>
           {{/each}}
-        </tr>   
+        </tr>
       {{/if}}
     </thead>
     <tbody>
       {{#each table.rows as |row|}}
         <tr>
           {{#each row as |cell|}}
-            <td
-              class="link {{if cell.disabled "adjacent disabled"}} {{if cell.selected "active focus"}} {{cell.customClass}}"
-              role="button" {{action this.clickCell cell}}>
+            <td class="link {{if cell.disabled "adjacent disabled"}} {{if cell.selected "active focus"}} {{cell.customClass}}" role="button" {{action this.clickCell cell}}>
               {{cell.display}}
             </td>
           {{/each}}

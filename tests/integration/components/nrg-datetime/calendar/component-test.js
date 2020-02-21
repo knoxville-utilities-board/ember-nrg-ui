@@ -12,9 +12,7 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
       const expectedDate = moment().subtract(1, 'day');
       assert.ok(expectedDate.isSame(date, 'day'));
     };
-    await render(
-      hbs`{{nrg-datetime/calendar type="date" onSelect=(action this.onSelect)}}`
-    );
+    await render(hbs`{{nrg-datetime/calendar type="date" onSelect=(action this.onSelect)}}`);
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
@@ -27,9 +25,7 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     };
 
     this.today = expectedDate.clone();
-    await render(
-      hbs`{{nrg-datetime/calendar type="date" maxDate=today onSelect=(action this.onSelect)}}`
-    );
+    await render(hbs`{{nrg-datetime/calendar type="date" maxDate=today onSelect=(action this.onSelect)}}`);
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
@@ -42,9 +38,7 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     };
 
     this.today = expectedDate.clone();
-    await render(
-      hbs`{{nrg-datetime/calendar type="date" minDate=today onSelect=(action this.onSelect)}}`
-    );
+    await render(hbs`{{nrg-datetime/calendar type="date" minDate=today onSelect=(action this.onSelect)}}`);
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft ');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
@@ -104,9 +98,7 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
         .minute(55);
       assert.ok(expectedDate.isSame(date, 'minute'));
     };
-    await render(
-      hbs`{{nrg-datetime/calendar type="datetime" onSelect=(action this.onSelect)}}`
-    );
+    await render(hbs`{{nrg-datetime/calendar type="datetime" onSelect=(action this.onSelect)}}`);
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
@@ -121,9 +113,7 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
         .minute(55);
       assert.ok(expectedDate.isSame(date, 'minute'));
     };
-    await render(
-      hbs`{{nrg-datetime/calendar type="time" onSelect=(action this.onSelect)}}`
-    );
+    await render(hbs`{{nrg-datetime/calendar type="time" onSelect=(action this.onSelect)}}`);
     await focus('.ui.popup.calendar');
     await click('tbody tr:first-child td:first-child');
     await click('tbody tr:nth-child(4) td:last-child');
@@ -134,9 +124,7 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
       const expectedDate = moment().add(1, 'month');
       assert.ok(expectedDate.isSame(date, 'day'));
     };
-    await render(
-      hbs`{{nrg-datetime/calendar type="date" onSelect=(action this.onSelect)}}`
-    );
+    await render(hbs`{{nrg-datetime/calendar type="date" onSelect=(action this.onSelect)}}`);
     await focus('.ui.popup.calendar');
     await click('.chevron.right.icon');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');

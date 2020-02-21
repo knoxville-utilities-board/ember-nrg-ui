@@ -17,20 +17,16 @@ export default Component.extend(ResizeMixin, {
 
   isMobileScreen: alias('responsive.isMobileScreenGroup'),
 
-  environmentDisplay: computed(
-    'applicationSettings.localEnvironment',
-    function() {
-      const ENV = getOwner(this).resolveRegistration('config:environment');
-      const config = ENV['ember-nrg-ui'];
-      const productionEnvironments = (config &&
-        config.productionEnvironments) || ['prod'];
-      const environment = this.get('applicationSettings.localEnvironment');
-      if (environment && !productionEnvironments.includes(environment)) {
-        return environment.toUpperCase();
-      }
-      return null;
+  environmentDisplay: computed('applicationSettings.localEnvironment', function() {
+    const ENV = getOwner(this).resolveRegistration('config:environment');
+    const config = ENV['ember-nrg-ui'];
+    const productionEnvironments = (config && config.productionEnvironments) || ['prod'];
+    const environment = this.get('applicationSettings.localEnvironment');
+    if (environment && !productionEnvironments.includes(environment)) {
+      return environment.toUpperCase();
     }
-  ),
+    return null;
+  }),
 
   onToggleSidebar() {
     this.sendAction('toggleSidebar');

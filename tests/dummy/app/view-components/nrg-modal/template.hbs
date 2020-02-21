@@ -1,10 +1,10 @@
-
 {{#nrg-code-block label="Default Modal" codeBlockName="default-modal.hbs" }}
   {{nrg-button text="Open Modal" action=(action (mut modalOpen1) true)}}
   <!-- BEGIN-SNIPPET default-modal -->
   {{#nrg-modal headerText="A simple modal" isOpen=modalOpen1}}
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus, scelerisque
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+      scelerisque
       urna sed,
       vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
       Curabitur vestibulum
@@ -19,7 +19,8 @@
   <!-- BEGIN-SNIPPET basic-modal -->
   {{#nrg-modal headerText="A simple basic modal" basic=true isOpen=modalOpen2}}
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus, scelerisque
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+      scelerisque
       urna sed,
       vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
       Curabitur vestibulum
@@ -34,7 +35,8 @@
   <!-- BEGIN-SNIPPET modal-with-actions -->
   {{#nrg-modal headerText="A modal with actions" primaryButton="Primary" secondaryButton="Secondary" isOpen=modalOpen3}}
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus, scelerisque
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+      scelerisque
       urna sed,
       vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
       Curabitur vestibulum
@@ -49,7 +51,8 @@
   <!-- BEGIN-SNIPPET basic-modal-with-actions -->
   {{#nrg-modal headerText="A basic modal with actions" basic=true primaryButton="Primary" secondaryButton="Secondary" isOpen=modalOpen4}}
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus, scelerisque
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+      scelerisque
       urna sed,
       vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
       Curabitur vestibulum
@@ -64,7 +67,8 @@
   <!-- BEGIN-SNIPPET not-dismissable-modal -->
   {{#nrg-modal headerText="This modal cannot be dismissed without clicking the force dismiss button" primaryButton="Force Dismiss" secondaryButton="Does nothing" action="forceDismiss" dismissable=false isOpen=modalOpen5}}
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus, scelerisque
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+      scelerisque
       urna sed,
       vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
       Curabitur vestibulum
@@ -73,7 +77,6 @@
   {{/nrg-modal}}
   <!-- END-SNIPPET  -->
 {{/nrg-code-block}}
-
 
 {{#nrg-code-block label="Nested Modals" codeBlockName="nested-modals.hbs" }}
   {{nrg-button text="Open Modal" action=(action (mut modalOpen6) true)}}

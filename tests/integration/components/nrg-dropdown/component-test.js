@@ -28,9 +28,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
   });
 
   test('default text renders', async function(assert) {
-    await render(
-      hbs`{{nrg-dropdown options=options defaultText='Pick Something'}}`
-    );
+    await render(hbs`{{nrg-dropdown options=options defaultText='Pick Something'}}`);
 
     assert.equal(find('.text').textContent.trim(), 'Pick Something');
   });

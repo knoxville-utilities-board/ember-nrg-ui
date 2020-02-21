@@ -7,10 +7,7 @@ import { module, test } from 'qunit';
 module('Unit | Mixin | focus first input');
 
 test('call focus on init', function(assert) {
-  const FocusFirstInputObject = EmberObject.extend(
-    Evented,
-    FocusFirstInputMixin
-  );
+  const FocusFirstInputObject = EmberObject.extend(Evented, FocusFirstInputMixin);
   run(() => {
     const subject = FocusFirstInputObject.create({
       focusFirstInput() {

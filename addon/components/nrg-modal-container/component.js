@@ -15,7 +15,7 @@ export default Component.extend({
 
   _containerClass: computed('hasOpenModals', 'hasSidebar', function() {
     let appliedClass = '';
-    if(this.hasOpenModals){
+    if (this.hasOpenModals) {
       appliedClass += ' visible active';
     } else {
       appliedClass += ' hidden';

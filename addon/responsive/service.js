@@ -51,15 +51,7 @@ export default Service.extend({
 
   /* Media Query Computed Groups */
 
-  isMobileScreenGroup: or(
-    'isSmallMobileScreen',
-    'isMobileScreen',
-    'isTabletScreen'
-  ),
+  isMobileScreenGroup: or('isSmallMobileScreen', 'isMobileScreen', 'isTabletScreen'),
 
-  isComputerScreenGroup: or(
-    'isComputerScreen',
-    'isLargeMonitor',
-    'isWidescreenMonitor'
-  ),
+  isComputerScreenGroup: or('isComputerScreen', 'isLargeMonitor', 'isWidescreenMonitor'),
 });

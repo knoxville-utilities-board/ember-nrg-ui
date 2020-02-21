@@ -12,31 +12,24 @@ export default Service.extend({
 
   contextItemSort: ['priority:desc', 'baseLabel:asc'],
 
-  rawContextItems: computed(
-    'registeredClients.[]',
-    'registeredClients.@each.contextItems',
-    function() {
-      const rawContextItems = A();
-      this.get('registeredClients').forEach(client => {
-        client.get('contextItems').forEach(item => {
-          const contextItem = EmberObject.create(item);
-          contextItem.set('client', client);
-          contextItem.set('baseLabel', item.label);
-          if (item.isCheckbox && item.iconClass) {
-            contextItem.set(
-              'label',
-              htmlSafe(`<i class='${item.iconClass} icon'></i>${item.label}`)
-            );
-          }
-          if (isNone(item.priority)) {
-            contextItem.set('priority', 10);
-          }
-          rawContextItems.addObject(contextItem);
-        });
+  rawContextItems: computed('registeredClients.[]', 'registeredClients.@each.contextItems', function() {
+    const rawContextItems = A();
+    this.get('registeredClients').forEach(client => {
+      client.get('contextItems').forEach(item => {
+        const contextItem = EmberObject.create(item);
+        contextItem.set('client', client);
+        contextItem.set('baseLabel', item.label);
+        if (item.isCheckbox && item.iconClass) {
+          contextItem.set('label', htmlSafe(`<i class='${item.iconClass} icon'></i>${item.label}`));
+        }
+        if (isNone(item.priority)) {
+          contextItem.set('priority', 10);
+        }
+        rawContextItems.addObject(contextItem);
       });
-      return rawContextItems;
-    }
-  ),
+    });
+    return rawContextItems;
+  }),
 
   addClient(client) {
     this.get('registeredClients').addObject(client);

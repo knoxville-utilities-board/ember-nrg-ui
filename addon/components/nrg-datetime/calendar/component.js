@@ -27,22 +27,16 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   showNowShortcut: true,
 
-  _showNowShortcut: computed(
-    'showNowShortcut',
-    'minDate',
-    'maxDate',
-    'isDateDisabled',
-    function() {
-      if (!this.showNowShortcut) {
-        return;
-      }
-      const now = moment();
-      const userDisabled = this.isDateDisabled && this.isDateDisabled(now);
-      const afterMaxDate = now.isAfter(this.maxDate, 'date');
-      const beforeMinDate = now.isBefore(this.minDate, 'date');
-      return !userDisabled && !afterMaxDate && !beforeMinDate;
+  _showNowShortcut: computed('showNowShortcut', 'minDate', 'maxDate', 'isDateDisabled', function() {
+    if (!this.showNowShortcut) {
+      return;
     }
-  ),
+    const now = moment();
+    const userDisabled = this.isDateDisabled && this.isDateDisabled(now);
+    const afterMaxDate = now.isAfter(this.maxDate, 'date');
+    const beforeMinDate = now.isBefore(this.minDate, 'date');
+    return !userDisabled && !afterMaxDate && !beforeMinDate;
+  }),
 
   init() {
     this._super(...arguments);
@@ -162,42 +156,36 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     return rows;
   }),
 
-  days: computed(
-    'selectedDayIndex',
-    'selectedMonthIndex',
-    'selectedYearIndex',
-    function() {
-      const today = moment();
-      const weeks = [];
-      const calendar = moment({
-        month: this.selectedMonthIndex,
-        year: this.selectedYearIndex,
-      }).startOf('week');
-      for (let i = 0; i < 6; i++) {
-        const week = [];
-        do {
-          const date = calendar.date();
-          const isDifferentMonth = calendar.month() !== this.selectedMonthIndex;
-          const dateIsToday = calendar.isSame(today, 'date');
-          const disabled =
-            this._isDateDisabled(calendar, 'date') || isDifferentMonth;
-          const selected = !disabled && this.selectedDayIndex === date;
+  days: computed('selectedDayIndex', 'selectedMonthIndex', 'selectedYearIndex', function() {
+    const today = moment();
+    const weeks = [];
+    const calendar = moment({
+      month: this.selectedMonthIndex,
+      year: this.selectedYearIndex,
+    }).startOf('week');
+    for (let i = 0; i < 6; i++) {
+      const week = [];
+      do {
+        const date = calendar.date();
+        const isDifferentMonth = calendar.month() !== this.selectedMonthIndex;
+        const dateIsToday = calendar.isSame(today, 'date');
+        const disabled = this._isDateDisabled(calendar, 'date') || isDifferentMonth;
+        const selected = !disabled && this.selectedDayIndex === date;
 
-          week.push({
-            customClass: (dateIsToday && 'today') || '',
-            display: date,
-            date,
-            disabled,
-            selected,
-          });
-          calendar.add(1, 'day');
-        } while (calendar.day() != 0);
+        week.push({
+          customClass: (dateIsToday && 'today') || '',
+          display: date,
+          date,
+          disabled,
+          selected,
+        });
+        calendar.add(1, 'day');
+      } while (calendar.day() != 0);
 
-        weeks.push(week);
-      }
-      return weeks;
+      weeks.push(week);
     }
-  ),
+    return weeks;
+  }),
 
   months: computed('selectedMonthIndex', function() {
     const rows = [];

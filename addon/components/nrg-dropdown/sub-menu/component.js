@@ -5,10 +5,7 @@ import { computed } from '@ember/object';
 export default Component.extend({
   layout,
   classNames: ['item'],
-  classNameBindings: [
-    'disabled',
-    'active',
-  ],
+  classNameBindings: ['disabled', 'active'],
   attributeBindings: ['data-dropdown-item'],
   dataDropdownItem: 'true',
   isOpen: false,
@@ -24,13 +21,13 @@ export default Component.extend({
     }
     return computedClasses;
   }),
-  mouseEnter(){
+  mouseEnter() {
     this.set('isOpen', true);
   },
-  mouseLeave(){
+  mouseLeave() {
     this.set('isOpen', false);
   },
-  _onSelect(){
+  _onSelect() {
     // Implemented by dropdown
   },
 });

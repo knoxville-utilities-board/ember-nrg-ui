@@ -38,9 +38,7 @@ export default Component.extend(KeyboardShortcutMixin, {
       }
       const keys = [];
       if (shortcut.lastCode) {
-        keys.push(
-          this.getCharacter(getKeyCode(shortcut.lastCode), shortcut.shft)
-        );
+        keys.push(this.getCharacter(getKeyCode(shortcut.lastCode), shortcut.shft));
       }
       keys.push(this.getCharacter(getKeyCode(shortcut.code), shortcut.shft));
 
@@ -71,9 +69,7 @@ export default Component.extend(KeyboardShortcutMixin, {
 
   getCharacter(code, shift) {
     let key = '';
-    const conversionType = shift
-      ? specialCharacterConversion.shift
-      : specialCharacterConversion.default;
+    const conversionType = shift ? specialCharacterConversion.shift : specialCharacterConversion.default;
 
     if (conversionType[code] !== undefined) {
       key = conversionType[code];

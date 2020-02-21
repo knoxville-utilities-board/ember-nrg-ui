@@ -49,7 +49,7 @@ export default Component.extend({
     } else {
       appliedClass += ' page';
     }
-    if(!this.dismissable){
+    if (!this.dismissable) {
       appliedClass += ' not-dismissable';
     }
     appliedClass += ' ' + this.dimmerClass;
@@ -58,7 +58,7 @@ export default Component.extend({
 
   _contentClass: computed('sidebar', 'lightbox', function() {
     let appliedClass = '';
-    if(this.lightbox){
+    if (this.lightbox) {
       appliedClass += ' image';
     }
     if (!this.sidebar) {

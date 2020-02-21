@@ -41,9 +41,7 @@ export default Component.extend({
     this._super(...arguments);
     const items = this.get('items');
     if (items) {
-      this.get('_items').pushObjects(
-        (items.toArray && items.toArray()) || items
-      );
+      this.get('_items').pushObjects((items.toArray && items.toArray()) || items);
     }
   },
 

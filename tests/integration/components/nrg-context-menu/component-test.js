@@ -19,9 +19,7 @@ module('Integration | Component | nrg-context-menu', function(hooks) {
       ],
     });
 
-    await render(
-      hbs`{{nrg-context-menu title='' contextService=contextServiceStub}}`
-    );
+    await render(hbs`{{nrg-context-menu title='' contextService=contextServiceStub}}`);
 
     const text = find('*').textContent;
     assert.ok(/item1/.test(text));
