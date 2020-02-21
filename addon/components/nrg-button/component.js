@@ -16,6 +16,10 @@ export default Component.extend({
   _disabled: or('disabled', 'loading'),
 
   click: function(evt) {
+    this.onClick(evt);
+  },
+
+  onClick(evt) {
     this.sendAction('action', evt);
   },
 });
