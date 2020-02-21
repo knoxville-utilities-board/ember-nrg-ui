@@ -5,8 +5,8 @@ const environmentChunk = `
     flashMessageDefaults: {
       timeout: 7000,
       type: 'info',
-      types: ['positive', 'success', 'negative', 'error', 'info', 'warning'],
-      showProgress: false
+      types: ['success', 'error', 'info', 'warning'],
+      showProgress: true
     },
     moment: {
       allowEmpty: true,
@@ -64,7 +64,12 @@ module.exports = {
       fs.unlinkSync('app/templates/application.hbs');
     }
 
-    ['app/controllers', 'app/templates/components', 'app/templates', 'app/routes'].forEach(function(path) {
+    [
+      'app/controllers',
+      'app/templates/components',
+      'app/templates',
+      'app/routes',
+    ].forEach(function(path) {
       if (fs.existsSync(path) && directoryIsEmpty(path)) {
         fs.rmdirSync(path);
       }
@@ -82,11 +87,11 @@ module.exports = {
     const nodePackages = [
       {
         name: 'ember-cli-mirage',
-        target: '^0.4.10',
+        target: '1.1.6',
       },
       {
         name: 'ember-cli-sass',
-        target: '8.0.1',
+        target: '10.0.1',
       },
     ];
 
@@ -101,18 +106,27 @@ module.exports = {
         after: "locationType: 'auto',",
       })
       .then(function() {
-        return blueprint.insertIntoFile('app/router.js', '\n  nrgRoutes(this);', {
-          after: 'Router.map(function() {',
-        });
+        return blueprint.insertIntoFile(
+          'app/router.js',
+          '\n  nrgRoutes(this);',
+          {
+            after: 'Router.map(function() {',
+          }
+        );
       })
       .then(function() {
-        return blueprint.insertIntoFile('app/router.js', "\nimport nrgRoutes from 'ember-nrg-ui/router';", {
-          after: "import config from './config/environment';",
-        });
+        return blueprint.insertIntoFile(
+          'app/router.js',
+          "\nimport nrgRoutes from 'ember-nrg-ui/router';",
+          {
+            after: "import config from './config/environment';",
+          }
+        );
       })
       .then(function() {
         return blueprint.insertIntoFile('ember-cli-build.js', appImportChunk, {
-          after: "const EmberApp = require('ember-cli/lib/broccoli/ember-app');",
+          after:
+            "const EmberApp = require('ember-cli/lib/broccoli/ember-app');",
         });
       })
       .then(function() {
@@ -129,7 +143,10 @@ module.exports = {
         return blueprint.removePackageFromProject('ember-welcome-page');
       })
       .then(function() {
-        return blueprint.insertIntoFile('app/styles/app.scss', "@import 'nrg-override';");
+        return blueprint.insertIntoFile(
+          'app/styles/app.scss',
+          "@import 'nrg-override';"
+        );
       });
   },
 
