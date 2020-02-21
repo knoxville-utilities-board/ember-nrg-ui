@@ -17,6 +17,12 @@ module.exports = function(environment) {
         Date: false,
       },
     },
+    flashMessageDefaults: {
+      timeout: 7000,
+      type: 'info',
+      types: ['success', 'error', 'info', 'warning'],
+      showProgress: true,
+    },
 
     APP: {
       // Here you can pass flags/options to your application instance

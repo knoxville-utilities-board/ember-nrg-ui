@@ -30,5 +30,10 @@
   {{nrg-lightbox-container}}
 {{/if}}
 {{nrg-modal-container}}
+{{#nrg-toast-container as |view|}}
+  {{#each flashMessages.queue as |flash|}}
+    {{view.toast toast=flash}}
+  {{/each}}
+{{/nrg-toast-container}}
 <div id="popup-container"></div>
 {{nrg-keyboard-shortcut-modal}}
