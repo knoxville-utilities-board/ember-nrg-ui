@@ -14,6 +14,7 @@ Router.map(function() {
       path: '/:name',
     });
   });
+  this.route('toasts');
   this.route('view-components', function() {
     this.route('nrg-dropdown');
     this.route('nrg-error-pages');
