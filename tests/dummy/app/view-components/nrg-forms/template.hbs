@@ -39,10 +39,10 @@
     </div>
     <br>
     {{#form.field label="Datetime" required=required as |field|}}
-      {{field.datetime disabled=disabled}}
+      {{field.datetime type="datetime" maxDate=maxDate disabled=disabled}}
     {{/form.field}}
     <br>
-    {{#form.field label="Datetime (Button)" required=required as |field|}}
+    {{#form.field label="Date (Button)" required=required as |field|}}
       {{#field.datetime disabled=disabled}}
         {{nrg-button class="green" text="Open Datepicker"}}
       {{/field.datetime}}

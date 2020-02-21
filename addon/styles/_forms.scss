@@ -31,3 +31,29 @@
 .ui.radio.checkbox label {
   cursor: pointer;
 }
+
+.ui.calendar {
+  &:focus {
+    outline: none;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+  &.popup {
+    top: 42.6875px;
+    left: 0;
+    bottom: auto;
+    right: auto;
+
+    .link:not(.disabled):hover {
+      background: #e0e0e0 !important;
+      color: rgba(0, 0, 0, 0.87) !important;
+    }
+  }
+
+  & .ui.table tr td.today {
+    font-weight: 700;
+  }
+}
