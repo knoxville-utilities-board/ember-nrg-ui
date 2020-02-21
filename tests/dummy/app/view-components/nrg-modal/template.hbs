@@ -95,10 +95,7 @@
 {{#nrg-code-block label="Datetime component in Modal" codeBlockName="datetime-modal.hbs" }}
   {{nrg-button text="Open Modal" action=(action (mut modalOpen7) true)}}
   <!-- BEGIN-SNIPPET datetime-modal -->
-  <!-- The datetime uses a semantic popup. Due to changes within Semantic, the popup has to be rendered after the modal is open to work correctly. -->
-  <!-- The "renderBodyAfterOpen" flag tells the component not to render the body below until the body is open. -->
-  <!-- The default behavior is to render "always" -->
-  {{#nrg-modal renderBodyAfterOpen=true headerText="Datetime component inside a modal" isOpen=modalOpen7}}
+  {{#nrg-modal headerText="Datetime component inside a modal" isOpen=modalOpen7}}
     {{#nrg-form-container as |form|}}
       {{#form.field as |field|}}
         {{field.datetime}}
