@@ -1,14 +1,8 @@
-import { module, test } from 'qunit';
+import { click, find, findAll, focus, render, triggerKeyEvent } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import {
-  render,
-  triggerKeyEvent,
-  focus,
-  click,
-  findAll,
-} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import moment from 'moment';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-datetime/calendar', function(hooks) {
   setupRenderingTest(hooks);
@@ -146,5 +140,16 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     await focus('.ui.popup.calendar');
     await click('.chevron.right.icon');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
+  });
+
+  test('today/now button hidden if after max date', async function(assert) {
+    this.value = moment({
+      day: 20,
+      month: 1,
+      year: 2020,
+    });
+    this.maxDate = this.value.clone();
+    await render(hbs`{{nrg-datetime/calendar type="date" maxDate=maxDate value=value}}`);
+    assert.notOk(find('tbody tr:nth-child(7)'));
   });
 });
