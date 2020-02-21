@@ -32,7 +32,7 @@
           {{/each}}
         </tr>
       {{/each}}
-      {{#if showNowShortcut}}
+      {{#if _showNowShortcut}}
         <tr>
           <td colspan="7" class="today link" role="button" {{action this.setToNow}}>
             {{if (eq type "datetime") "Now" "Today"}}
