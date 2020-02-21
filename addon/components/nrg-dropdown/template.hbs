@@ -1,67 +1,79 @@
-{{#if icon}}
-  <i class="icon {{icon}}"></i>
+{{#if freeform}}
+  {{yield (hash
+    source=(component "nrg-dropdown/source")
+    menu=(component "nrg-dropdown/menu"
+      menuClass=menuClass
+      displayedOptions=displayedOptions
+      activeItem=activeItem
+      _onSelect=(action _onSelect))
+  )}}
+{{else}}
+  {{#if icon}}
+    <i class="icon {{icon}}"></i>
+  {{/if}}
+
+  {{#unless multiple}}
+    <div class="{{textClass}} text">
+      {{#if hasSelected}}
+        {{#if hasBlock}}
+          {{yield selected}}
+        {{else if isStringData}}
+          {{selected}}
+        {{else}}
+          {{selected.label}}
+        {{/if}}
+      {{else}}
+        {{defaultText}}
+      {{/if}}
+    </div>
+  {{/unless}}
+  {{#if (and hasSelected multiple)}}
+    {{#each selected as |selectedOption|}}
+      <a data-dropdown-multi-selection="true" class="ui label transition visible">
+        {{#if hasBlock}}
+          {{yield selectedOption}}
+        {{else if isStringData}}
+          {{selectedOption}}
+        {{else}}
+          {{selectedOption.label}}
+        {{/if}}
+        <i data-dropdown-multi-selection="true" class="delete icon" role="button" {{action unselectOption selectedOption}}></i>
+      </a>
+    {{/each}}
+  {{/if}}
+  {{#if search}}
+    {{input class="search" autocomplete="off" name=name value=searchValue}}
+  {{/if}}
+  {{#if (and search multiple)}}
+    <span class="sizer"></span>
+  {{/if}}
+  <i class="dropdown icon"></i>
+  <div class="{{menuClass}} menu">
+    {{#each displayedOptions as |option i|}}
+      {{#nrg-dropdown/item option=option disabled=option.disabled active=(eq i activeItem) _onSelect=(action _onSelect)}}
+        {{#if hasBlock}}
+          {{yield option}}
+        {{else if isStringData}}
+          {{#if this.isAddingOption}}
+            Add item:
+          {{/if}}
+          {{option}}
+        {{else}}
+          {{#if this.isAddingOption}}
+            Add item:
+          {{/if}}
+          {{option.label}}
+        {{/if}}
+      {{/nrg-dropdown/item}}
+    {{else}}
+      {{#nrg-dropdown/item disabled=true}}
+        {{#if isSearching}}
+          <span>No results found.</span>
+        {{else}}
+          <span>No options available.</span>
+        {{/if}}
+      {{/nrg-dropdown/item}}
+    {{/each}}
+  </div>
 {{/if}}
 
-{{#unless multiple}}
-  <div class="{{textClass}} text">
-    {{#if hasSelected}}
-      {{#if hasBlock}}
-        {{yield selected}}
-      {{else if isStringData}}
-        {{selected}}
-      {{else}}
-        {{selected.label}}
-      {{/if}}
-    {{else}}
-      {{defaultText}}
-    {{/if}}
-  </div>
-{{/unless}}
-{{#if (and hasSelected multiple)}}
-  {{#each selected as |selectedOption|}}
-    <a data-dropdown-multi-selection="true" class="ui label transition visible">
-      {{#if hasBlock}}
-        {{yield selectedOption}}
-      {{else if isStringData}}
-        {{selectedOption}}
-      {{else}}
-        {{selectedOption.label}}
-      {{/if}}
-      <i data-dropdown-multi-selection="true" class="delete icon" role="button" {{action unselectOption selectedOption}}></i>
-    </a>
-  {{/each}}
-{{/if}}
-{{#if search}}
-  {{input class="search" autocomplete="off" name=name value=searchValue}}
-{{/if}}
-{{#if (and search multiple)}}
-  <span class="sizer"></span>
-{{/if}}
-<i class="dropdown icon"></i>
-<div class="{{menuClass}} menu">
-  {{#each displayedOptions as |option i|}}
-    <div data-dropdown-item="true" role="button" class="{{if option.disabled "disabled"}} {{if (eq i activeItem) "active"}} item" {{action select option}} {{!-- template-lint-disable no-nested-interactive --}}>
-      {{#if hasBlock}}
-        {{yield option}}
-      {{else if isStringData}}
-        {{#if this.isAddingOption}}
-          Add item:
-        {{/if}}
-        {{option}}
-      {{else}}
-        {{#if this.isAddingOption}}
-          Add item:
-        {{/if}}
-        {{option.label}}
-      {{/if}}
-    </div>
-  {{else}}
-    <div data-dropdown-item="true" class="disabled item">
-      {{#if isSearching}}
-        <span>No results found.</span>
-      {{else}}
-        <span>No options available.</span>
-      {{/if}}
-    </div>
-  {{/each}}
-</div>

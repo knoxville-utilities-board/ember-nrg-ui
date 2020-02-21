@@ -1,7 +1,7 @@
 import { A } from '@ember/array';
 import Component from '@ember/component';
-import { computed, get, observer } from '@ember/object';
-import { and, equal, not, notEmpty, readOnly } from '@ember/object/computed';
+import { computed, observer } from '@ember/object';
+import { and, equal, not, notEmpty, or, readOnly, reads } from '@ember/object/computed';
 import { on } from '@ember/object/evented';
 import { next } from '@ember/runloop';
 import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
@@ -47,9 +47,11 @@ export default Component.extend(
       'multiple',
     ],
 
-    selection: notEmpty('field'),
+    _selection: notEmpty('field'),
+    selection: reads('_selection'),
 
-    hideAction: equal('dropdownAction', 'hide'),
+    _hideAction: equal('dropdownAction', 'hide'),
+    hideAction: or('_hideAction', 'freeform'),
     notHideAction: not('hideAction'),
     hasSelected: and('selected', 'notHideAction'),
     hasDefaultText: readOnly('notHideAction'),
@@ -111,7 +113,7 @@ export default Component.extend(
           !this.hasSelected &&
           this.get('options.length')
         ) {
-          this.select(this.options[0]);
+          this._onSelect(this.options[0]);
         }
       });
     }),
@@ -145,7 +147,7 @@ export default Component.extend(
       }
       evt.preventDefault();
       evt.stopPropagation();
-      this.select(this.displayedOptions[this.activeItem]);
+      this._onSelect(this.displayedOptions[this.activeItem]);
     }),
 
     menuClass: computed('menuDirection', 'isOpen', function() {
@@ -238,7 +240,9 @@ export default Component.extend(
     },
 
     click(evt) {
-      if(get(evt, 'target.dataset.dropdownMultiSelection') || get(evt, 'target.dataset.dropdownItem')){
+      const isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
+      const isDropdownItem = evt.target.closest('[data-dropdown-item]');
+      if(isMultiSelection || isDropdownItem){
         return;
       }
       if (this.isOpen) {
@@ -277,9 +281,12 @@ export default Component.extend(
       this.selected.removeObject(option);
     },
 
-    select(option) {
+    _onSelect(option) {
+      if(!option){
+        this.set('isOpen', false);
+        this.focusInput(false);
+      }
       const notCurrentlySelected = !this.isCurrentlySelected(option);
-      const hideDropdownAction = this.dropdownAction === 'hide';
       if (notCurrentlySelected) {
         if(this.multiple){
           if(!Array.isArray(this.selected)){
@@ -290,7 +297,7 @@ export default Component.extend(
           this.set('selected', option);
         }
       }
-      if (hideDropdownAction || notCurrentlySelected) {
+      if (this.hideAction || notCurrentlySelected) {
         this.onSelect(option);
       }
       if (this.isSearching) {
