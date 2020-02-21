@@ -5,7 +5,7 @@ export default Component.extend({
   layout,
   tagName: '',
   subMenu: false,
-  select(){
-    // implement
+  _onSelect(){
+    // Implemented by dropdown
   },
 });

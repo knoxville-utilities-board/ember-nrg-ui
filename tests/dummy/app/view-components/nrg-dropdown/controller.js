@@ -88,4 +88,7 @@ export default Controller.extend({
     'U101',
     'U626',
   ],
+  onItemSelect(){
+    //
+  },
 });

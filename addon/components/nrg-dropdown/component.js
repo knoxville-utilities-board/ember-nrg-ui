@@ -113,7 +113,7 @@ export default Component.extend(
           !this.hasSelected &&
           this.get('options.length')
         ) {
-          this.select(this.options[0]);
+          this._onSelect(this.options[0]);
         }
       });
     }),
@@ -147,7 +147,7 @@ export default Component.extend(
       }
       evt.preventDefault();
       evt.stopPropagation();
-      this.select(this.displayedOptions[this.activeItem]);
+      this._onSelect(this.displayedOptions[this.activeItem]);
     }),
 
     menuClass: computed('menuDirection', 'isOpen', function() {
@@ -281,9 +281,10 @@ export default Component.extend(
       this.selected.removeObject(option);
     },
 
-    select(option) {
+    _onSelect(option) {
       if(!option){
-        return false;
+        this.set('isOpen', false);
+        this.focusInput(false);
       }
       const notCurrentlySelected = !this.isCurrentlySelected(option);
       if (notCurrentlySelected) {

@@ -5,7 +5,7 @@
       menuClass=menuClass
       displayedOptions=displayedOptions
       activeItem=activeItem
-      select=(action select))
+      _onSelect=(action _onSelect))
   )}}
 {{else}}
   {{#if icon}}
@@ -50,7 +50,7 @@
   <i class="dropdown icon"></i>
   <div class="{{menuClass}} menu">
     {{#each displayedOptions as |option i|}}
-      {{#nrg-dropdown/item option=option disabled=option.disabled active=(eq i activeItem) select=(action select)}}
+      {{#nrg-dropdown/item option=option disabled=option.disabled active=(eq i activeItem) _onSelect=(action _onSelect)}}
         {{#if hasBlock}}
           {{yield option}}
         {{else if isStringData}}

@@ -57,7 +57,7 @@
 {{#nrg-code-block label="Freeform Dropdowns" codeBlockName="nrg-dropdown-freeform.hbs" }}
   <!-- BEGIN-SNIPPET nrg-dropdown-freeform -->
   <div class="ui center aligned segment">
-    {{#nrg-dropdown class="icon button primary float right" freeform=true as |dropdown|}}
+    {{#nrg-dropdown class="icon button primary float right" onSelect=(action onItemSelect) freeform=true as |dropdown|}}
       {{#dropdown.source}}
         <div class="text">Actions</div>
         <i class="dropdown icon"></i>
@@ -85,7 +85,7 @@
           {{/subMenu.source}}
           {{#subMenu.menu}}
             {{#each crews as |crew|}}
-              {{#menu.item option=crew}}
+              {{#menu.item onSelect=(action onItemSelect crew)}}
                 {{crew}}
               {{/menu.item}}
             {{/each}}

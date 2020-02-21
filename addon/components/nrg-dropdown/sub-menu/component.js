@@ -30,7 +30,7 @@ export default Component.extend({
   mouseLeave(){
     this.set('isOpen', false);
   },
-  select(){
-    // implement
+  _onSelect(){
+    // Implemented by dropdown
   },
 });
