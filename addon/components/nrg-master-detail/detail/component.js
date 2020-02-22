@@ -18,7 +18,7 @@ export default Component.extend({
   }),
 
   shouldTakeOver: computed('router.currentRouteName', function() {
-    return this.router.currentRouteName.indexOf('.index') === -1;
+    return `${this.baseRoute}.index` !== this.router.currentRouteName;
   }),
 
   onBackArrowClick() {
