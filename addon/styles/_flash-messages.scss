@@ -1,18 +1,9 @@
-.sticky-wrapper.sticky-wrapper.sticky-wrapper.sticky-wrapper {
-  margin: 0 0 1rem;
-}
+.nrg-application {
+  .toast-container {
+    padding-top: $appbar-height;
 
-.is-stuck.is-stuck.is-stuck.is-stuck {
-  position: fixed;
-  top: 64px;
-  top: 4rem;
-  left: 32px;
-  left: 2rem;
-  right: 32px;
-  right: 2rem;
-  z-index: 150;
-}
-
-.flash-message {
-  cursor: pointer;
+    .ui.ui.progress.error .bar {
+      background-color: #541212;
+    }
+  }
 }

@@ -17,6 +17,8 @@ export default Component.extend(ResizeMixin, {
 
   responsive: service(),
 
+  flashMessages: service(),
+
   sidebarIsOpen: false,
 
   sidebarMenuIsOpen: alias('application.sidebarMenuIsOpen'),

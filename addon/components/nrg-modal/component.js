@@ -8,7 +8,6 @@ export default Component.extend({
   layout,
   hasButtons: or('primaryButton', 'secondaryButton'),
 
-  flashMessages: service(),
   application: service(),
   modalService: service('modal'),
 
@@ -17,7 +16,6 @@ export default Component.extend({
   isOpen: false,
   hasMovedDom: false,
 
-  showFlashMessages: true,
   dismissable: true,
   basic: false,
   sidebar: false,
