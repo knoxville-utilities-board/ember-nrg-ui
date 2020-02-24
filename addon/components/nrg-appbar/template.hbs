@@ -18,9 +18,11 @@
   </div>
   <div class="right menu">
     {{yield}}
-    <div class="item">
-      {{#link-to "release-notes"}}{{nrg-app-version}}{{/link-to}}
-    </div>
+    {{#if showReleaseNotes}}
+      <div class="item">
+        {{#link-to "release-notes"}}{{nrg-app-version}}{{/link-to}}
+      </div>
+    {{/if}}
     {{nrg-context-menu}}
   </div>
 </div>

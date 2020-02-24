@@ -1,0 +1,23 @@
+<div class="ui modal visible active {{_modalClass}}" role="dialog">
+  {{#if hasCloseIcon}}
+    <i class="close icon" role="button" {{action onHide}}></i>
+  {{/if}}
+  {{#if modal.headerText}}
+    <div class="header">
+      {{modal.headerText}}
+    </div>
+  {{/if}}
+
+  <div class={{_contentClass}} {{did-insert (action this.addModalToWormhole)}} {{will-destroy (action this.removeModalFromWormhole)}}></div>
+
+  {{#if modal.hasButtons}}
+    <div class="actions">
+      {{#if modal.secondaryButton}}
+        {{nrg-button class=modal.secondaryButtonClass text=modal.secondaryButton click=(action _onSecondary)}}
+      {{/if}}
+      {{#if modal.primaryButton}}
+        {{nrg-button class="primary right" text=modal.primaryButton click=(action _onPrimary) autofocus=true}}
+      {{/if}}
+    </div>
+  {{/if}}
+</div>

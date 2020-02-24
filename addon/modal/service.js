@@ -1,26 +1,29 @@
 import { A } from '@ember/array';
-import { gt } from '@ember/object/computed';
+import { filterBy, readOnly, sort } from '@ember/object/computed';
 import Service from '@ember/service';
 
 export default Service.extend({
   items: A(),
 
-  hasChildren: gt('items.length', 0),
+  renderIndex: 0,
+
+  renderedModals: filterBy('items', 'renderInPlace', false),
+
+  _openModals: filterBy('renderedModals', 'isOpen', true),
+
+  modalSort: Object.freeze(['priority:asc', 'renderIndex:asc']),
+
+  openModals: sort('_openModals', 'modalSort'),
+
+  activeModal: readOnly('openModals.lastObject'),
 
   add(item) {
     this.get('items').pushObject(item);
-    this.updateActive();
+    item.set('renderIndex', this.renderIndex);
+    this.incrementProperty('renderIndex');
   },
 
   remove(item) {
     this.get('items').removeObject(item);
-    item.set('isActive', false);
-    this.updateActive();
-  },
-
-  updateActive() {
-    this.items.forEach((item, index) => {
-      item.set('isActive', index == this.items.length - 1);
-    });
   },
 });
