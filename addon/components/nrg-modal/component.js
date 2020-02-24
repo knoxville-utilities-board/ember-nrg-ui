@@ -1,20 +1,21 @@
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
-import { or, readOnly, reads } from '@ember/object/computed';
+import { and, not, or, readOnly, reads } from '@ember/object/computed';
+import { once } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import layout from './template';
 
 export default Component.extend({
   layout,
+
   hasButtons: or('primaryButton', 'secondaryButton'),
 
   applicationService: service('application'),
   modalService: service('modal'),
 
-  renderInPlace: reads('applicationService.isTesting'),
+  isTesting: reads('applicationService.isTesting'),
   isOpen: false,
   hasMovedDom: false,
-  isActive: false,
 
   dismissable: true,
   basic: false,
@@ -24,7 +25,13 @@ export default Component.extend({
   dimmerClass: '',
   priority: 10,
 
-  isVisible: readOnly('renderInPlace'),
+  renderInPlace: reads('isTesting'),
+  renderInModal: not('renderInPlace'),
+  shouldWormhole: and('isOpen', 'renderInModal'),
+
+  attributeBindings: ['hidden'],
+
+  hidden: readOnly('renderInModal'),
 
   secondaryButtonClass: computed('basic', function() {
     let classList = 'basic';
@@ -32,17 +39,23 @@ export default Component.extend({
     return classList;
   }),
 
-  openObserver: observer('isOpen', 'renderInPlace', function() {
-    if (this.isOpen && !this.renderInPlace) {
+  openObserver: observer('shouldWormhole', function() {
+    once(this, '_handleShouldWormHole');
+  }),
+
+  _handleShouldWormHole() {
+    if (this.shouldWormhole) {
       this.addToService();
     } else {
       this.removeFromService();
     }
-  }),
+  },
 
   didInsertElement() {
     this._super(...arguments);
-    this.openObserver();
+    if (this.shouldWormhole) {
+      this.addToService();
+    }
   },
 
   willDestroy() {

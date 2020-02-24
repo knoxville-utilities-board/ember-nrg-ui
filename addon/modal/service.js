@@ -1,5 +1,5 @@
 import { A } from '@ember/array';
-import { filterBy, readOnly, sort } from '@ember/object/computed';
+import { filterBy, notEmpty, readOnly, sort } from '@ember/object/computed';
 import Service from '@ember/service';
 
 export default Service.extend({
@@ -16,6 +16,8 @@ export default Service.extend({
   openModals: sort('_openModals', 'modalSort'),
 
   activeModal: readOnly('openModals.lastObject'),
+
+  hasOpenModals: notEmpty('openModals'),
 
   add(item) {
     this.get('items').pushObject(item);

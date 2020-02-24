@@ -1,17 +1,16 @@
 import Component from '@ember/component';
-import layout from './template';
 import { computed } from '@ember/object';
-import { alias, and, not } from '@ember/object/computed';
+import { alias, and, not, readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import layout from './template';
 export default Component.extend({
   layout,
 
   tagName: '',
 
-  applicationService: service('application'),
   modalService: service('modal'),
 
-  isTesting: alias('applicationService.isTesting'),
+  isTesting: readOnly('modal.isTesting'),
   isOpen: alias('modal.isOpen'),
   isActive: alias('modal.isActive'),
   renderInPlace: alias('modal.renderInPlace'),
@@ -64,6 +63,7 @@ export default Component.extend({
       return;
     }
     this.contentNode = this.modal.element.querySelector('.modal-js');
+    this._parentContentNode = element;
     element.appendChild(this.contentNode);
     this.set('hasMovedDom', true);
   },
@@ -72,10 +72,13 @@ export default Component.extend({
     if (!this.hasMovedDom) {
       return;
     }
-    this.modalService.remove(this);
-    this.modal.element.appendChild(this.contentNode);
-    this.set('hasMovedDom', false);
-    this.modal.onModalClose();
+    if (!this.modal || this.modal.isDestroying) {
+      this._parentContentNode.removeChild(this.contentNode);
+    } else {
+      this.modalService.remove(this);
+      this.modal.element.appendChild(this.contentNode);
+      this.set('hasMovedDom', false);
+    }
   },
 
   onHide() {
