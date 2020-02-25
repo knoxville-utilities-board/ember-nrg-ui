@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { filterBy, notEmpty, readOnly } from '@ember/object/computed';
+import { readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import layout from './template';
 
@@ -11,22 +11,21 @@ export default Component.extend({
   modalService: service('modal'),
 
   openModals: readOnly('modalService.openModals'),
+
   activeModal: readOnly('modalService.activeModal'),
 
   hasOpenModals: readOnly('modalService.hasOpenModals'),
 
-  sidebarItems: filterBy('openModals', 'sidebar', true),
+  activeModalIsSidebar: readOnly('activeModal.sidebar'),
 
-  hasSidebar: notEmpty('sidebarItems'),
-
-  _containerClass: computed('hasOpenModals', 'hasSidebar', function() {
+  _containerClass: computed('hasOpenModals', 'activeModalIsSidebar', function() {
     let appliedClass = '';
     if (this.hasOpenModals) {
       appliedClass += ' visible active';
     } else {
       appliedClass += ' hidden';
     }
-    if (this.hasSidebar) {
+    if (this.activeModalIsSidebar) {
       appliedClass += ' sidebar-container';
     }
     return appliedClass;
