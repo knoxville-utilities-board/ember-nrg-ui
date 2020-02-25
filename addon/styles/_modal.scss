@@ -30,13 +30,9 @@
     position: absolute;
     z-index: 1001;
   }
-
-  .dimmer-anchor {
-    z-index: 1001;
-  }
-
+  
   .page.dimmer {
-    z-index: 0;
+    z-index: 1001;
 
     &.not-dismissable {
       cursor: default;

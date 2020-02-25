@@ -1,10 +1,8 @@
-{{#if (and isMobileScreen shouldTakeOver)}}
-  <NrgModal @isOpen={{true}} @dismissable={{false}} @modalClass="master-detail--takeover">
-    <NrgAppbar @title={{title}} @showBackArrow={{true}} @onBackArrowClick={{action this.onBackArrowClick}} />
-    <div class="main-content">
-      {{yield}}
-    </div>
-  </NrgModal>
-{{else}}
-  {{yield}}
-{{/if}}
+<NrgModal @priority={{0}} @renderInPlace={{renderInPlace}} @isOpen={{true}} @dismissable={{false}} @modalClass="master-detail--takeover">
+  {{#if renderInModal}}
+    <NrgAppbar @showReleaseNotes={{false}} @title={{title}} @showBackArrow={{true}} @onBackArrowClick={{action this.onBackArrowClick}} />
+  {{/if}}
+  <div class={{if renderInModal "main-content" ""}}>
+    {{yield}}
+  </div>
+</NrgModal>

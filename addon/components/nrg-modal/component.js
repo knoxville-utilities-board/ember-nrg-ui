@@ -1,18 +1,19 @@
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
-import { and, not, or, readOnly } from '@ember/object/computed';
+import { and, not, or, readOnly, reads } from '@ember/object/computed';
+import { once } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import layout from './template';
 
 export default Component.extend({
   layout,
+
   hasButtons: or('primaryButton', 'secondaryButton'),
 
-  application: service(),
+  applicationService: service('application'),
   modalService: service('modal'),
 
-  isTesting: readOnly('application.isTesting'),
-
+  isTesting: reads('applicationService.isTesting'),
   isOpen: false,
   hasMovedDom: false,
 
@@ -22,48 +23,15 @@ export default Component.extend({
   lightbox: false,
   modalClass: '',
   dimmerClass: '',
-  notSidebar: not('sidebar'),
-  hasCloseIcon: and('dismissable', 'notSidebar'),
+  priority: 10,
 
-  _modalClass: computed('sidebar', 'basic', 'lightbox', 'modalClass', function() {
-    let appliedClass = '';
-    if (this.sidebar) {
-      appliedClass += ' sidebar-modal';
-    }
-    if (this.lightbox) {
-      appliedClass += ' fullscreen lightbox';
-    }
-    appliedClass += ' ' + this.modalClass;
-    if (this.basic) {
-      appliedClass += ' basic';
-    }
-    return appliedClass;
-  }),
+  renderInPlace: reads('isTesting'),
+  renderInModal: not('renderInPlace'),
+  shouldWormhole: and('isOpen', 'renderInModal'),
 
-  _dimmerClass: computed('sidebar', 'dimmerClass', function() {
-    let appliedClass = '';
-    if (this.sidebar) {
-      appliedClass += ' sidebar-dimmer';
-    } else {
-      appliedClass += ' page';
-    }
-    if (!this.dismissable) {
-      appliedClass += ' not-dismissable';
-    }
-    appliedClass += ' ' + this.dimmerClass;
-    return appliedClass;
-  }),
+  attributeBindings: ['hidden'],
 
-  _contentClass: computed('sidebar', 'lightbox', function() {
-    let appliedClass = '';
-    if (this.lightbox) {
-      appliedClass += ' image';
-    }
-    if (!this.sidebar) {
-      appliedClass += ' content';
-    }
-    return appliedClass;
-  }),
+  hidden: readOnly('renderInModal'),
 
   secondaryButtonClass: computed('basic', function() {
     let classList = 'basic';
@@ -71,71 +39,68 @@ export default Component.extend({
     return classList;
   }),
 
-  openObserver: observer('isOpen', function() {
-    if (!this.isOpen) {
-      this.moveModalFromContainer();
-    }
+  openObserver: observer('shouldWormhole', function() {
+    once(this, '_handleShouldWormHole');
   }),
 
+  _handleShouldWormHole() {
+    if (this.shouldWormhole) {
+      this.addToService();
+    } else {
+      this.removeFromService();
+    }
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    if (this.shouldWormhole) {
+      this.addToService();
+    }
+  },
+
   willDestroy() {
-    if (this.hasMovedDom) {
-      const parentNode = document.querySelector('#modal-container');
-      parentNode.removeChild(this.dimmerNode);
-      parentNode.removeChild(this.modalNode);
-      this.set('hasMovedDom', false);
-      this.modalService.remove(this);
-    }
+    this._super(...arguments);
+    this.removeFromService();
   },
 
-  moveModalToContainer() {
-    if (this.hasMovedDom || this.isTesting) {
-      return;
-    }
-    this.dimmerNode = this.element.querySelector('.dimmer-anchor');
-    this.modalNode = this.element.querySelector('.modal');
-    const newParent = document.querySelector('#modal-container');
-
-    newParent.appendChild(this.dimmerNode);
-    newParent.appendChild(this.modalNode);
-
-    this.get('modalService').add(this);
-    this.set('hasMovedDom', true);
+  addToService() {
+    this.modalService.add(this);
   },
 
-  moveModalFromContainer() {
-    if (!this.hasMovedDom) {
-      return;
-    }
-    this.get('modalService').remove(this);
-
-    const newParent = this.element.querySelector('.modal-origin-container');
-
-    newParent.appendChild(this.dimmerNode);
-    newParent.appendChild(this.modalNode);
-    this.set('hasMovedDom', false);
+  removeFromService() {
+    this.modalService.remove(this);
+    this.onModalClose();
   },
 
-  onHide() {
-    if (this.get('isOpen')) {
-      // This happens when the modal is closed by clicking the x or clicking out of the modal
-      if (this.get('dismissable')) {
-        this.set('isOpen', false);
-      }
-      return false; // Don't close the modal yet, wait for the observer to close it.
-    }
+  onModalClose() {
+    // implement
   },
 
-  onPrimary() {
-    if (this.get('dismissable')) {
+  _onPrimary() {
+    if (this.dismissable) {
       this.set('isOpen', false);
     }
+    this.onPrimaryButtonClick();
+  },
+
+  onPrimaryButtonClick() {
     this.sendAction('action');
   },
 
-  onSecondary() {
-    if (this.get('dismissable')) {
+  _onSecondary() {
+    if (this.dismissable) {
       this.set('isOpen', false);
     }
+    this.onSecondaryButtonClick();
+  },
+
+  onSecondaryButtonClick() {
     this.sendAction('cancel');
+  },
+
+  onHide() {
+    if (this.isOpen && this.dismissable) {
+      this.set('isOpen', false);
+    }
   },
 });

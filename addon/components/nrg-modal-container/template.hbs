@@ -1,1 +1,8 @@
-<div role="button" class="ui modals {{_containerClass}}" id="modal-container"></div>
+<div class="ui modals {{_containerClass}}">
+  {{#each modalService.openModals as |modal|}}
+    {{#if (eq activeModal modal)}}
+      <div role="button" class="ui dimmer visible active {{dimmerClass}}" {{action onDimmerClick}}></div>
+    {{/if}}
+    <NrgModalContainer::ModalWrapper @modal={{modal}} />
+  {{/each}}
+</div>

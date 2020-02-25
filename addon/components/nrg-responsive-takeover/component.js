@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
-import { alias, reads } from '@ember/object/computed';
+import { alias, and, not, reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import layout from './template';
 
@@ -17,8 +17,15 @@ export default Component.extend({
 
   title: reads('applicationService.pageTitle'),
 
+  renderInModal: and('isMobileScreen', 'shouldTakeOver'),
+
+  renderInPlace: not('renderInModal'),
+
   onBackArrowClick() {
-    assert('You must implment the onBackArrowClick action or provide a previousRoute', this.previousRoute);
+    assert(
+      'You must implment the onBackArrowClick action or provide a previousRoute',
+      this.previousRoute
+    );
     if (this.previousRoute) {
       this.router.transitionTo(this.previousRoute);
     }

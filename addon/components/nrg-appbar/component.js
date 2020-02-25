@@ -17,6 +17,8 @@ export default Component.extend(ResizeMixin, {
 
   isMobileScreen: alias('responsive.isMobileScreenGroup'),
 
+  showReleaseNotes: true,
+
   environmentDisplay: computed('applicationSettings.localEnvironment', function() {
     const ENV = getOwner(this).resolveRegistration('config:environment');
     const config = ENV['ember-nrg-ui'];

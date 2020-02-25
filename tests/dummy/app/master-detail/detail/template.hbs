@@ -1,3 +1,17 @@
 <div class="ui segment">
   <h2>{{model.name}}</h2>
 </div>
+{{#nrg-modal headerText="A simple basic modal" basic=true isOpen=modalOpen2}}
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+    scelerisque
+    urna sed,
+    vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
+    Curabitur vestibulum
+    hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+  </p>
+{{/nrg-modal}}
+{{nrg-button text="Open Modal" action=(action (mut modalOpen) true)}}
+{{#nrg-modal headerText="Contains a nested modal (Not dismissable)" primaryButton="Force Dismiss" action="forceDismiss" dismissable=false isOpen=modalOpen}}
+  {{nrg-button text="Open Basic Modal" action=(action (mut modalOpen2) true)}}
+{{/nrg-modal}}
