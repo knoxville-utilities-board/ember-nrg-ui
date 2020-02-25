@@ -1,6 +1,5 @@
-import { scheduleOnce } from '@ember/runloop';
-import { computed } from '@ember/object';
 import Component from '@ember/component';
+import { scheduleOnce } from '@ember/runloop';
 import layout from './template';
 
 export default Component.extend({
@@ -12,9 +11,7 @@ export default Component.extend({
 
   label: '',
 
-  hasInput: computed(function() {
-    return this.$('input').length;
-  }),
+  focusId: '',
 
   init() {
     this._super(...arguments);
@@ -22,9 +19,9 @@ export default Component.extend({
   },
 
   getFocusId() {
-    if (this.get('hasInput')) {
-      const inputId = this.$('input').prop('id');
-      this.set('focusId', inputId);
+    const input = this.element.querySelector('input');
+    if (input) {
+      this.set('focusId', input.id);
     }
   },
 });

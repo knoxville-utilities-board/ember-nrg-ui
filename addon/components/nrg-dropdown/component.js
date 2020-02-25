@@ -72,11 +72,11 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   addWindowClickListener() {
-    document.addEventListener('click', this.get('_clickHandler'), true);
+    document.addEventListener('click', this._clickHandler, true);
   },
 
   removeWindowClickListener() {
-    document.removeEventListener('click', this.get('_clickHandler'));
+    document.removeEventListener('click', this._clickHandler, true);
   },
 
   createClickHandler() {
