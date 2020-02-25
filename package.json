@@ -1,6 +1,6 @@
 {
   "name": "ember-nrg-ui",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
   "keywords": ["ember-addon", "Fomantic UI"],
   "repository": {
@@ -36,6 +36,7 @@
     "ember-is-mobile": "2.0.5",
     "ember-keyboard": "3.0.2",
     "ember-moment": "8.0.0",
+    "ember-cli-moment-shim": "^3.7.1",
     "ember-resize": "0.2.2",
     "ember-responsive": "3.0.5",
     "ember-tether": "^1.0.0",
@@ -53,7 +54,6 @@
     "ember-cli-htmlbars-inline-precompile": "^2.1.0",
     "ember-cli-inject-live-reload": "1.10.0",
     "ember-cli-mirage": "1.1.6",
-    "ember-cli-moment-shim": "^3.7.1",
     "ember-cli-sri": "2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.2",
     "ember-cli-uglify": "2.1.0",
