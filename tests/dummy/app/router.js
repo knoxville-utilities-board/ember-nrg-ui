@@ -15,6 +15,7 @@ Router.map(function() {
     });
   });
   this.route('toasts');
+  this.route('mobile-device');
   this.route('view-components', function() {
     this.route('nrg-dropdown');
     this.route('nrg-error-pages');
