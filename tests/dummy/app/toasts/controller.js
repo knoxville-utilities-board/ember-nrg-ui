@@ -5,11 +5,14 @@ export default Controller.extend({
   flashMessages: service(),
 
   openDefaultToasts() {
+    //BEGIN-SNIPPET default-toasts
     this.flashMessages.info('This is a default info message');
     this.flashMessages.success('This is a default success message');
     this.flashMessages.error('This is a default error message');
+    //END-SNIPPET
   },
   openToastsWithoutProgress() {
+    //BEGIN-SNIPPET no-progress-toasts
     this.flashMessages.info('This is a info message', {
       timeout: 3000,
       showProgress: false,
@@ -22,22 +25,23 @@ export default Controller.extend({
       timeout: 5000,
       showProgress: false,
     });
+    //END-SNIPPET
   },
   openProgressToast() {
+    //BEGIN-SNIPPET progress-toasts
     this.flashMessages.info('This is a info message showing progress', {
       timeout: 3000,
-      showProgress: true,
     });
     this.flashMessages.success('This is a success message showing progress', {
       timeout: 4000,
-      showProgress: true,
     });
     this.flashMessages.error('This is an really long running error message showing progress', {
       timeout: 100000,
-      showProgress: true,
     });
+    //END-SNIPPET
   },
   openStickyToast() {
+    //BEGIN-SNIPPET sticky-toasts
     this.flashMessages.info('This is a sticky info message', {
       timeout: 0,
     });
@@ -47,9 +51,13 @@ export default Controller.extend({
     this.flashMessages.error('This is a sticky error message', {
       sticky: true,
     });
+    //END-SNIPPET
   },
   openToastWithLongMessage() {
+    //BEGIN-SNIPPET long-toasts
     const message = `Bacon ipsum dolor amet beef kevin sausage fatback pork strip steak ribeye short loin ham hock biltong corned beef chicken pig short ribs prosciutto. Biltong turducken short ribs fatback pig tri-tip salami chuck capicola hamburger doner beef ribs chicken. Pork picanha ham hock shankle buffalo sausage kevin turducken spare ribs tongue ham kielbasa. Beef ribs sirloin bacon, turducken short ribs buffalo ground round pork loin swine. Drumstick frankfurter rump, alcatra kevin swine sirloin bacon.`;
     this.flashMessages.info(message);
+    //END-SNIPPET
   },
+  
 });
