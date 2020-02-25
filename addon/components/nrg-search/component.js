@@ -6,7 +6,6 @@ import { and, or, not } from '@ember/object/computed';
 import { on } from '@ember/object/evented';
 import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
 import { next } from '@ember/runloop';
-import $ from 'jquery';
 import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixin, {
@@ -49,11 +48,11 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   addWindowClickListener() {
-    $(window).on('click', this.get('_clickHandler'));
+    document.addEventListener('click', this._clickHandler, true);
   },
 
   removeWindowClickListener() {
-    $(window).off('click', this.get('_clickHandler'));
+    document.removeEventListener('click', this._clickHandler, true);
   },
 
   createClickHandler() {
@@ -154,7 +153,10 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       this.set('selected', item);
       this.set('focused', false);
       next(() => {
-        this.$('input').focus();
+        const input = this.element.querySelector('input');
+        if (input) {
+          input.focus();
+        }
       });
     },
   },

@@ -9,11 +9,11 @@ export default Mixin.create({
 
   focusFirstInput() {
     next(() => {
-      const isDestroyed = this.get('isDestroying') || this.get('isDestroyed');
-      if (!isDestroyed) {
-        const inputs = this.$('input[type=text]:enabled');
-        inputs && inputs.first().focus();
+      if (this.isDestroying) {
+        return;
       }
+      const inputs = this.element.querySelectorAll('input[type=text]:enabled');
+      inputs && inputs[0] && inputs[0].focus();
     });
   },
 });
