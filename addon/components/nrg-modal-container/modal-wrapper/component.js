@@ -72,11 +72,11 @@ export default Component.extend({
     if (!this.hasMovedDom) {
       return;
     }
-    if (!this.modal || this.modal.isDestroying) {
+    if (!this.modal || this.modal.isDestroying || !this.modal.element) {
       this._parentContentNode.removeChild(this.contentNode);
     } else {
-      this.modalService.remove(this);
       this.modal.element.appendChild(this.contentNode);
+      this.modalService.remove(this);
       this.set('hasMovedDom', false);
     }
   },
