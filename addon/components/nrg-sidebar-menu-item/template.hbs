@@ -1,5 +1,5 @@
 {{#if item.sidebarAction}}
-  <a href="" class="item" {{action sidebarAction child}}>
+  <a href="" class="{{if item.active "active"}} item" {{action sidebarAction item}}>
     {{nrg-sidebar-menu-item/content item=item}}
   </a>
 {{else if item.sidebarURL}}
