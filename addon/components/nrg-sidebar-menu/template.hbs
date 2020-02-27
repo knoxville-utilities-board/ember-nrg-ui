@@ -2,7 +2,7 @@
 {{#each visibleMenuItems as |menuItem|}}
   {{#if menuItem.children.length}}
     <div class="item">
-      {{nrg-sidebar-menu-item item=menuItem clickedSidebarItem=(action "clickedLink") isParentGroup=true}}
+      {{nrg-sidebar-menu-item item=menuItem clickedSidebarItem=(action "clickedLink") sidebarAction=(action "sidebarAction") isParentGroup=true}}
       {{#if menuItem.children}}
         <div class="menu">
           {{#each menuItem.children as |child|}}
