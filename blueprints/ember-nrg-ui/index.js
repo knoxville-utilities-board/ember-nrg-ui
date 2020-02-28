@@ -110,7 +110,7 @@ module.exports = {
       })
       .then(function() {
         return blueprint.insertIntoFile('ember-cli-build.js', appChunk, {
-          after: 'const app = new EmberApp(defaults, {',
+          after: 'app = new EmberApp(defaults, {',
         });
       })
       .then(function() {
