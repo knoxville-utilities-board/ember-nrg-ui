@@ -25,6 +25,8 @@ module('Unit | Initializer | breakpoints-override', function(hooks) {
 
     assert.ok(breakpoints);
     assert.ok(breakpoints.smallMobile);
+    assert.ok(breakpoints.mobile);
+    assert.ok(breakpoints.tablet);
     assert.ok(breakpoints.computer);
     assert.ok(breakpoints.largeMonitor);
     assert.ok(breakpoints.widescreenMonitor);
