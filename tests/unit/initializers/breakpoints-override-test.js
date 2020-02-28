@@ -23,13 +23,14 @@ module('Unit | Initializer | breakpoints-override', function(hooks) {
     await this.application.boot();
     const breakpoints = this.application.resolveRegistration('breakpoints:main');
 
-    assert.ok(breakpoints);
     assert.ok(breakpoints.smallMobile);
     assert.ok(breakpoints.mobile);
     assert.ok(breakpoints.tablet);
     assert.ok(breakpoints.computer);
     assert.ok(breakpoints.largeMonitor);
     assert.ok(breakpoints.widescreenMonitor);
+
+    assert.notOk(breakpoints.desktop);
     assert.notOk(breakpoints.jumbo);
   });
 });
