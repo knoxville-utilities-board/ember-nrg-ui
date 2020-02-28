@@ -83,9 +83,17 @@
     }
   }
 
-  .main-content {
-    padding: $appbar-height 0 0;
+  .modal-content.content {
+    padding: 0 !important;
+    margin-top: 48px !important;
+  }
 
+  .main-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    
     .container {
       margin: 0 -1px !important;
     }

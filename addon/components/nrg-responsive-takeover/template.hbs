@@ -2,7 +2,8 @@
   {{#if renderInModal}}
     <NrgAppbar @showReleaseNotes={{false}} @title={{title}} @showBackArrow={{true}} @onBackArrowClick={{action this.onBackArrowClick}} />
   {{/if}}
-  <div class={{if renderInModal "main-content" ""}}>
+  {{! template-lint-disable no-inline-styles }}
+  <div class={{if renderInModal "main-content" ""}} style={{mainContentStyle}}>
     {{yield}}
   </div>
 </NrgModal>
