@@ -1,18 +1,6 @@
 /* eslint-env node */
 const fs = require('fs');
 
-const environmentChunk = `
-    flashMessageDefaults: {
-      timeout: 7000,
-      type: 'info',
-      types: ['success', 'error', 'info', 'warning'],
-      showProgress: true
-    },
-    moment: {
-      allowEmpty: true,
-      includeTimezone: 'all',
-    },`;
-
 const appImportChunk = `
 const config = require('./config/environment');
 const emberENV = process.env.EMBER_ENV;
@@ -102,17 +90,8 @@ module.exports = {
     this.podifyApp();
 
     return blueprint
-      .insertIntoFile('config/environment.js', environmentChunk, {
-        after: "locationType: 'auto',",
-      })
-      .then(function() {
-        return blueprint.insertIntoFile(
-          'app/router.js',
-          '\n  nrgRoutes(this);',
-          {
-            after: 'Router.map(function() {',
-          }
-        );
+      .insertIntoFile('app/router.js', '\n  nrgRoutes(this);', {
+        after: 'Router.map(function() {',
       })
       .then(function() {
         return blueprint.insertIntoFile(
