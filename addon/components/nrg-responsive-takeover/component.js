@@ -1,10 +1,13 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
+import { computed } from '@ember/object';
 import { alias, and, not, reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
+import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import layout from './template';
 
-export default Component.extend({
+export default Component.extend(ResizeMixin, {
   layout,
 
   applicationService: service('application'),
@@ -20,6 +23,10 @@ export default Component.extend({
   renderInModal: and('isMobileScreen', 'shouldTakeOver'),
 
   renderInPlace: not('renderInModal'),
+
+  mainContentStyle: computed('screenHeight', function() {
+    return htmlSafe(`height: calc(${this.get('screenHeight')}px - 48px`);
+  }),
 
   onBackArrowClick() {
     assert(
