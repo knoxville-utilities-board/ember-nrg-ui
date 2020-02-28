@@ -117,8 +117,11 @@ Use the `_nrg-override.scss` file to override base colors and Logo
 $primary: #6200ee;
 $primaryVariant: #3700b3;
 
-.nrg-application.nrg-application.nrg-application > .main.menu {
-  background-color: rgba($primary, 0.98);
+.nrg-application.nrg-application.nrg-application,
+.ui.modal.master-detail--takeover.master-detail--takeover.master-detail--takeover {
+  .main.menu.menu {
+    background-color: rgba($primary, 0.98);
+  }
 }
 
 .nrg-list.nrg-list.nrg-list .items > .item.active.active {
