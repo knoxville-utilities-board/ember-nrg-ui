@@ -167,7 +167,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       const week = [];
       do {
         const date = calendar.date();
-        const isDifferentMonth = calendar.month() !== this.selectedMonthIndex;
+        const monthIndex = calendar.month();
+        const isDifferentMonth = monthIndex !== this.selectedMonthIndex;
         const dateIsToday = calendar.isSame(today, 'date');
         const disabled = this._isDateDisabled(calendar, 'date') || isDifferentMonth;
         const selected = !disabled && this.selectedDayIndex === date;
@@ -178,6 +179,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
           date,
           disabled,
           selected,
+          context: (isDifferentMonth && {unitType: 'month', number: monthIndex}) || '',
         });
         calendar.add(1, 'day');
       } while (calendar.day() != 0);
@@ -280,7 +282,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     }
   ),
 
-  _manipulateDate(operation, number, unitType, evt) {
+  _manipulateDate(operation, number, unitType, evt, context) {
     if (evt) {
       evt.preventDefault();
       evt.stopPropagation();
@@ -294,7 +296,11 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     });
 
     if (operation === 'set') {
-      date.set(unitType, number);
+      if (context) {
+        date.set({[context.unitType]: context.number, [unitType]: number})
+      }else{
+        date.set(unitType, number);
+      }
     } else {
       date[operation](number, unitType);
     }
@@ -402,7 +408,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingYears) {
       this._manipulateDate('set', cell.year, 'year');
     } else if (this.isSelectingDays) {
-      this._manipulateDate('set', cell.date, 'date');
+      this._manipulateDate('set', cell.date, 'date', null, cell.context);
     }
     this.goToNextWorkFlowStep();
   },
