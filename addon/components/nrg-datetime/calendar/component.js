@@ -402,7 +402,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingYears) {
       this._manipulateDate('set', cell.year, 'year');
     } else if (this.isSelectingDays) {
-      this._manipulateDate('set', cell.date, 'date');
+      if(!cell.disabled){
+        this._manipulateDate('set', cell.date, 'date');
+      }
     }
     this.goToNextWorkFlowStep();
   },

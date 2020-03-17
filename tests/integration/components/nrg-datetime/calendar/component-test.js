@@ -90,6 +90,25 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     await click(availableDateCells[24]);
   });
 
+  test('adjacent month dates are not clickable', async function(assert) {
+    const expectedDate = moment({
+      day: 20,
+      month: 1,
+      year: 2020,
+    });
+    this.onSelect = function(date) {
+      assert.ok(expectedDate.isSame(date, 'day'));
+    };
+    this.value = expectedDate.clone().toDate();
+    await render(
+      hbs`{{nrg-datetime/calendar type="date" value=value onSelect=(action this.onSelect)}}`
+    );
+    await focus('.ui.popup.calendar');
+    const availableDateCells = findAll('.ui.calendar tbody td.link');
+    await click(availableDateCells[3]);
+    await click(availableDateCells[38]);
+  });
+
   test('go through full date time workflow', async function(assert) {
     this.onSelect = function(date) {
       const expectedDate = moment()
