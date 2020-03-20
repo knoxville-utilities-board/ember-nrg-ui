@@ -90,6 +90,50 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     await click(availableDateCells[24]);
   });
 
+  test('previous month\'s dates are clickable', async function(assert) {
+    const expectedDate = moment({
+      day: 30,
+      month: 5,
+      year: 2020
+    });
+    this.value = moment({
+      day: 31,
+      month: 6,
+      year: 2020,
+    });
+    this.onSelect = function(date) {
+      assert.ok(expectedDate.isSame(date, 'day'));
+    };
+    await render(
+      hbs`{{nrg-datetime/calendar type="date" value=value onSelect=(action this.onSelect)}}`
+    );
+    await focus('.ui.popup.calendar');
+    const availableDateCells = findAll('.ui.calendar tbody td.link');
+    await click(availableDateCells[2]);
+  });
+
+  test('next month\'s dates are clickable', async function(assert) {
+    const expectedDate = moment({
+      day: 6,
+      month: 2,
+      year: 2020
+    });
+    this.value = moment({
+      day: 15,
+      month: 1,
+      year: 2020,
+    });
+    this.onSelect = function(date) {
+      assert.ok(expectedDate.isSame(date, 'day'));
+    };
+    await render(
+      hbs`{{nrg-datetime/calendar type="date" value=value onSelect=(action this.onSelect)}}`
+    );
+    await focus('.ui.popup.calendar');
+    const availableDateCells = findAll('.ui.calendar tbody td.link');
+    await click(availableDateCells[40]);
+  });
+
   test('go through full date time workflow', async function(assert) {
     this.onSelect = function(date) {
       const expectedDate = moment()

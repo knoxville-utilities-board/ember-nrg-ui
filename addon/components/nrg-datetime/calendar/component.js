@@ -167,7 +167,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       const week = [];
       do {
         const date = calendar.date();
-        const isDifferentMonth = calendar.month() !== this.selectedMonthIndex;
+        const month = calendar.month();
+        const year = calendar.year();
+        const isDifferentMonth = month !== this.selectedMonthIndex;
         const dateIsToday = calendar.isSame(today, 'date');
         const disabled = this._isDateDisabled(calendar, 'date') || isDifferentMonth;
         const selected = !disabled && this.selectedDayIndex === date;
@@ -176,6 +178,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
           customClass: (dateIsToday && 'today') || '',
           display: date,
           date,
+          month,
+          year,
           disabled,
           selected,
         });
@@ -280,7 +284,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     }
   ),
 
-  _manipulateDate(operation, number, unitType, evt) {
+  _manipulateDate(operation, dateTransformation, evt) {
     if (evt) {
       evt.preventDefault();
       evt.stopPropagation();
@@ -293,11 +297,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       minute: this.selectedMinuteIndex,
     });
 
-    if (operation === 'set') {
-      date.set(unitType, number);
-    } else {
-      date[operation](number, unitType);
-    }
+    date[operation](dateTransformation);
 
     const userDisabled = this.isDateDisabled && this.isDateDisabled(date);
     if (userDisabled) {
@@ -322,57 +322,57 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   moveLeft: on(keyDown('ArrowLeft'), function(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('subtract', 1, 'day', evt);
+      this._manipulateDate('subtract', { day: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('subtract', 1, 'month', evt);
+      this._manipulateDate('subtract', { month: 1 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('subtract', 1, 'year', evt);
+      this._manipulateDate('subtract', { year: 1 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('subtract', MINUTE_INTERVAL, 'minute', evt);
+      this._manipulateDate('subtract', { minute: MINUTE_INTERVAL }, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('subtract', 1, 'hour', evt);
+      this._manipulateDate('subtract', { hour: 1 }, evt);
     }
   }),
 
   moveRight: on(keyDown('ArrowRight'), function(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('add', 1, 'day', evt);
+      this._manipulateDate('add', { day: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('add', 1, 'month', evt);
+      this._manipulateDate('add', { month: 1 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('add', 1, 'year', evt);
+      this._manipulateDate('add', { year: 1 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('add', MINUTE_INTERVAL, 'minute', evt);
+      this._manipulateDate('add', { minute: MINUTE_INTERVAL }, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('add', 1, 'hour', evt);
+      this._manipulateDate('add', { hour: 1 }, evt);
     }
   }),
 
   moveUp: on(keyDown('ArrowUp'), function(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('subtract', 1, 'week', evt);
+      this._manipulateDate('subtract', { week: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('subtract', 3, 'month', evt);
+      this._manipulateDate('subtract', { month: 3 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('subtract', 2, 'year', evt);
+      this._manipulateDate('subtract', { year: 2 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('subtract', MINUTE_INTERVAL * 3, 'minute', evt);
+      this._manipulateDate('subtract', { minute: MINUTE_INTERVAL * 3}, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('subtract', 4, 'hour', evt);
+      this._manipulateDate('subtract', { hour: 4 }, evt);
     }
   }),
 
   moveDown: on(keyDown('ArrowDown'), function(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('add', 1, 'week', evt);
+      this._manipulateDate('add', { week: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('add', 3, 'month', evt);
+      this._manipulateDate('add', { month: 3 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('add', 2, 'year', evt);
+      this._manipulateDate('add', { year: 2 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('add', MINUTE_INTERVAL * 3, 'minute', evt);
+      this._manipulateDate('add', { minute: MINUTE_INTERVAL * 3 }, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('add', 4, 'hour', evt);
+      this._manipulateDate('add', { hour: 4 }, evt);
     }
   }),
 
@@ -394,15 +394,15 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   clickCell(cell) {
     if (this.isSelectingMinutes) {
-      this._manipulateDate('set', cell.minute, 'minute');
+      this._manipulateDate('set', { minute: cell.minute });
     } else if (this.isSelectingHours) {
-      this._manipulateDate('set', cell.hour, 'hour');
+      this._manipulateDate('set', { hour: cell.hour });
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('set', cell.month, 'month');
+      this._manipulateDate('set', { month: cell.month });
     } else if (this.isSelectingYears) {
-      this._manipulateDate('set', cell.year, 'year');
+      this._manipulateDate('set', { year: cell.year });
     } else if (this.isSelectingDays) {
-      this._manipulateDate('set', cell.date, 'date');
+      this._manipulateDate('set', { date: cell.date, month: cell.month, year: cell.year });
     }
     this.goToNextWorkFlowStep();
   },
@@ -464,25 +464,25 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   onPrevious() {
     if (this.isSelectingDays) {
-      this._manipulateDate('subtract', 1, 'month');
+      this._manipulateDate('subtract', { month: 1 });
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('subtract', 1, 'year');
+      this._manipulateDate('subtract', { year: 1 });
     } else if (this.isSelectingYears) {
-      this._manipulateDate('subtract', 10, 'year');
+      this._manipulateDate('subtract', { year: 10 });
     } else if (this.isSelectingHours || this.isSelectingMinutes) {
-      this._manipulateDate('subtract', 1, 'day');
+      this._manipulateDate('subtract', { day: 1 });
     }
   },
 
   onNext() {
     if (this.isSelectingDays) {
-      this._manipulateDate('add', 1, 'month');
+      this._manipulateDate('add', { month: 1 });
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('add', 1, 'year');
+      this._manipulateDate('add', { year: 1 });
     } else if (this.isSelectingYears) {
-      this._manipulateDate('add', 10, 'year');
+      this._manipulateDate('add', { year: 10 });
     } else if (this.isSelectingHours || this.isSelectingMinutes) {
-      this._manipulateDate('add', 1, 'day');
+      this._manipulateDate('add', { day: 1 });
     }
   },
 
