@@ -67,8 +67,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         year: this.selectedYearIndex,
       });
       if (this.isSelectingYears) {
-        const firstYear = this.years[0][0].display;
-        const lastYear = this.years[4][1].display;
+        const firstYear = this.years[0][0].year;
+        const lastYear = this.years[4][1].year;
         return `${firstYear} - ${lastYear}`;
       }
       let format = 'MMMM YYYY';
@@ -119,7 +119,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         const selected = !disabled && this.selectedMinuteIndex === minute;
         row.push({
           display: calendar.format('LT'),
-          minute: { minute },
+          minute,
           disabled,
           selected,
         });
@@ -145,7 +145,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         const selected = !disabled && this.selectedHourIndex === hour;
         row.push({
           display: calendar.format('LT'),
-          hour: { hour },
+          hour,
           disabled,
           selected,
         });
@@ -177,7 +177,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         week.push({
           customClass: (dateIsToday && 'today') || '',
           display: date,
-          date: { date, month, year },
+          date,
+          month,
+          year,
           disabled,
           selected,
         });
@@ -202,7 +204,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         const selected = !disabled && this.selectedMonthIndex === month;
         row.push({
           display: calendar.format('MMM'),
-          month: { month },
+          month,
           disabled,
           selected,
         });
@@ -231,7 +233,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         const selected = !disabled && this.selectedYearIndex === year;
         row.push({
           display: year,
-          year: { year },
+          year,
           disabled,
           selected,
         });
@@ -392,15 +394,15 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   clickCell(cell) {
     if (this.isSelectingMinutes) {
-      this._manipulateDate('set', cell.minute);
+      this._manipulateDate('set', { minute: cell.minute });
     } else if (this.isSelectingHours) {
-      this._manipulateDate('set', cell.hour);
+      this._manipulateDate('set', { hour: cell.hour });
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('set', cell.month);
+      this._manipulateDate('set', { month: cell.month });
     } else if (this.isSelectingYears) {
-      this._manipulateDate('set', cell.year);
+      this._manipulateDate('set', { year: cell.year });
     } else if (this.isSelectingDays) {
-      this._manipulateDate('set', cell.date);
+      this._manipulateDate('set', { date: cell.date, month: cell.month, year: cell.year });
     }
     this.goToNextWorkFlowStep();
   },
