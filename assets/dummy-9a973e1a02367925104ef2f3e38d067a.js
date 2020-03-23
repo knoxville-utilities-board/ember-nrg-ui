@@ -221,4 +221,4 @@ e.default=t}),define("dummy/view-mixins/route",["exports","ember-nrg-ui/mixins/s
 var n=Ember.Route.extend(t.default,{sidebarLabel:"Mixins",isSidebarGroupHeader:!0})
 e.default=n})
 define("dummy/config/environment",[],function(){try{var e="dummy/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),n={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(n,"__esModule",{value:!0}),n}catch(o){throw new Error('Could not read config from meta tag with name "'+e+'".')}}),runningTests||require("dummy/app").default.create({name:"ember-nrg-ui",version:"2.1.5"})
+return Object.defineProperty(n,"__esModule",{value:!0}),n}catch(o){throw new Error('Could not read config from meta tag with name "'+e+'".')}}),runningTests||require("dummy/app").default.create({name:"ember-nrg-ui",version:"2.1.6"})
