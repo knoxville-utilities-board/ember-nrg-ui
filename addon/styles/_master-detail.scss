@@ -85,7 +85,8 @@
 
   .modal-content.content {
     padding: 0 !important;
-    margin-top: 48px !important;
+    margin-top: $appbar-height !important;
+    max-height: 100%;
   }
 
   .main-content {
