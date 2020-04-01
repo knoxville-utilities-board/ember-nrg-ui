@@ -30,7 +30,11 @@
     position: absolute;
     z-index: 1001;
   }
-  
+
+  .scrolling.content {
+    max-height: calc(87.5vh - 10rem);
+  }
+
   .page.dimmer {
     z-index: 1001;
 

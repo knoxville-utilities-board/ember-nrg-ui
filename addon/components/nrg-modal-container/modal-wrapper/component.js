@@ -47,15 +47,18 @@ export default Component.extend({
     }
   ),
 
-  _contentClass: computed('sidebar', 'lightbox', function() {
-    let appliedClass = 'modal-content';
+  _contentClass: computed('sidebar', 'lightbox', 'renderInPlace', function() {
+    let appliedClasses = ['modal-content'];
     if (this.lightbox) {
-      appliedClass += ' image';
+      appliedClasses.push('image');
     }
     if (!this.sidebar) {
-      appliedClass += ' content';
+      appliedClasses.push('content');
     }
-    return appliedClass;
+    if (!this.renderInPlace) {
+      appliedClasses.push('scrolling');
+    }
+    return appliedClasses.join(' ');
   }),
 
   addModalToWormhole(element) {
