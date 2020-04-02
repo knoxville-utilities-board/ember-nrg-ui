@@ -32,34 +32,42 @@ export default Component.extend({
     'lightbox',
     'modalClass',
     function() {
-      let appliedClass = '';
+      const appliedClasses = [];
       if (this.sidebar) {
-        appliedClass += ' sidebar-modal';
+        appliedClasses.push('sidebar-modal');
       }
       if (this.lightbox) {
-        appliedClass += ' fullscreen lightbox';
+        appliedClasses.push('fullscreen');
+        appliedClasses.push('lightbox');
       }
-      appliedClass += ' ' + this.modalClass;
+      if (this.modalClass) {
+        appliedClasses.push(this.modalClass);
+      }
       if (this.basic) {
-        appliedClass += ' basic';
+        appliedClasses.push('basic');
       }
-      return appliedClass;
+      return appliedClasses.join(' ');
     }
   ),
 
-  _contentClass: computed('sidebar', 'lightbox', 'renderInPlace', function() {
-    let appliedClasses = ['modal-content'];
-    if (this.lightbox) {
-      appliedClasses.push('image');
+  _contentClass: computed(
+    'sidebar',
+    'lightbox',
+    'renderInPlace',
+    function() {
+      const appliedClasses = ['modal-content'];
+      if (this.lightbox) {
+        appliedClasses.push('image');
+      }
+      if (!this.sidebar) {
+        appliedClasses.push('content');
+      }
+      if (!this.renderInPlace) {
+        appliedClasses.push('scrolling');
+      }
+      return appliedClasses.join(' ');
     }
-    if (!this.sidebar) {
-      appliedClasses.push('content');
-    }
-    if (!this.renderInPlace) {
-      appliedClasses.push('scrolling');
-    }
-    return appliedClasses.join(' ');
-  }),
+  ),
 
   addModalToWormhole(element) {
     if (this.hasMovedDom || this.renderInPlace || this.isTesting) {
