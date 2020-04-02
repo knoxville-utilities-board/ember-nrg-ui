@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { alias, and, or, reads } from '@ember/object/computed';
+import { alias, and, reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
 import ResizeMixin from 'ember-nrg-ui/mixins/resize';
@@ -27,7 +27,7 @@ export default Component.extend(ResizeMixin, {
 
   classNameBindings: ['fullscreenMap:fullscreen-map', 'computerScreenSidebarActive:large-screen-sidebar-active'],
 
-  isComputerScreen: or('responsive.isComputerScreen', 'responsive.isLargeMonitor', 'responsive.isWidescreenMonitor'),
+  isComputerScreen: alias('responsive.isComputerScreenGroup'),
 
   title: reads('application.pageTitle'),
 
