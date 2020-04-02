@@ -140,7 +140,9 @@ export default Component.extend(ResizeMixin, {
 
   willDestroyElement() {
     this._super(...arguments);
-    this.modalMutationObserver.disconnect();
+    if (this.modalMutationObserver) {
+      this.modalMutationObserver.disconnect();
+    }
   },
 
   onHide() {
