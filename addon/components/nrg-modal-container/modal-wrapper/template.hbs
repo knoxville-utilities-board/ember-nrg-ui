@@ -1,4 +1,5 @@
-<div class="ui modal visible active {{_modalClass}}" role="dialog">
+{{! template-lint-disable no-inline-styles }}
+<div class="ui modal visible active {{_modalClass}}" style={{modalStyles}} role="dialog" {{did-insert (action this.modalElementAdded)}}>
   {{#if hasCloseIcon}}
     <i class="close icon" role="button" {{action onHide}}></i>
   {{/if}}

@@ -2,8 +2,14 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { alias, and, not, readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
+import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import layout from './template';
-export default Component.extend({
+
+const isIE11 = !window.ActiveXObject && 'ActiveXObject' in window;
+const useFlexBox = !isIE11;
+
+export default Component.extend(ResizeMixin, {
   layout,
 
   tagName: '',
@@ -16,6 +22,7 @@ export default Component.extend({
   renderInPlace: alias('modal.renderInPlace'),
   hasMovedDom: alias('modal.hasMovedDom'),
 
+  masterDetail: alias('modal.masterDetail'),
   sidebar: alias('modal.sidebar'),
   basic: alias('modal.basic'),
   lightbox: alias('modal.lightbox'),
@@ -26,40 +33,68 @@ export default Component.extend({
   hasCloseIcon: and('dismissable', 'notSidebar'),
   dismissable: alias('modal.dismissable'),
 
+  modalStyles: computed('modalElement', function() {
+    if (useFlexBox || !this.modalElement || this.masterDetail || this.sidebar) {
+      return '';
+    }
+    const marginTop = this.modalElement.offsetHeight / 2;
+    const marginLeft = this.modalElement.offsetWidth / 2;
+    return htmlSafe(
+      `margin-top: -${marginTop}px; margin-left: -${marginLeft}px;`
+    );
+  }),
+
+  didResize() {
+    this.notifyPropertyChange('modalStyles');
+  },
+
   _modalClass: computed(
     'sidebar',
     'basic',
     'lightbox',
     'modalClass',
+    'masterDetail',
     function() {
-      let appliedClass = '';
+      const appliedClasses = [];
       if (this.sidebar) {
-        appliedClass += ' sidebar-modal';
+        appliedClasses.push('sidebar-modal');
       }
       if (this.lightbox) {
-        appliedClass += ' fullscreen lightbox';
+        appliedClasses.push('fullscreen');
+        appliedClasses.push('lightbox');
       }
-      appliedClass += ' ' + this.modalClass;
+      if (this.modalClass) {
+        appliedClasses.push(this.modalClass);
+      }
       if (this.basic) {
-        appliedClass += ' basic';
+        appliedClasses.push('basic');
       }
-      return appliedClass;
+      if (this.masterDetail) {
+        appliedClasses.push('master-detail--takeover');
+      }
+      return appliedClasses.join(' ');
     }
   ),
 
-  _contentClass: computed('sidebar', 'lightbox', 'renderInPlace', function() {
-    let appliedClasses = ['modal-content'];
-    if (this.lightbox) {
-      appliedClasses.push('image');
+  _contentClass: computed(
+    'sidebar',
+    'lightbox',
+    'renderInPlace',
+    'masterDetail',
+    function() {
+      const appliedClasses = ['modal-content'];
+      if (this.lightbox) {
+        appliedClasses.push('image');
+      }
+      if (!this.sidebar) {
+        appliedClasses.push('content');
+      }
+      if (!this.renderInPlace && !this.masterDetail && !this.sidebar) {
+        appliedClasses.push('scrolling');
+      }
+      return appliedClasses.join(' ');
     }
-    if (!this.sidebar) {
-      appliedClasses.push('content');
-    }
-    if (!this.renderInPlace) {
-      appliedClasses.push('scrolling');
-    }
-    return appliedClasses.join(' ');
-  }),
+  ),
 
   addModalToWormhole(element) {
     if (this.hasMovedDom || this.renderInPlace || this.isTesting) {
@@ -81,6 +116,32 @@ export default Component.extend({
       this.modal.element.appendChild(this.contentNode);
       this.modalService.remove(this);
       this.set('hasMovedDom', false);
+    }
+  },
+
+  modalElementAdded(element) {
+    this.set('modalElement', element);
+
+    if (useFlexBox || this.masterDetail || this.sidebar) {
+      return;
+    }
+
+    const config = {
+      attributes: false,
+      childList: true,
+      subtree: true,
+    };
+    this.modalMutationObserver = new MutationObserver(() => {
+      this.notifyPropertyChange('modalStyles');
+    });
+    const observedElement = element.querySelector('.modal-content');
+    this.modalMutationObserver.observe(observedElement, config);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    if (this.modalMutationObserver) {
+      this.modalMutationObserver.disconnect();
     }
   },
 

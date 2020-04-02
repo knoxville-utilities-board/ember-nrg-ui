@@ -13,6 +13,9 @@ module.exports = function(defaults) {
       exclude: ['images/nrg-logo'],
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
     },
+    'ember-cli-babel': {
+      includePolyfill: true,
+    },
   });
 
   return app.toTree();
