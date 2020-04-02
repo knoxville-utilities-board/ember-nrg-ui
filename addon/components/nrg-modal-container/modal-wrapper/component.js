@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { alias, and, not, or, readOnly } from '@ember/object/computed';
+import { alias, and, not, readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
 import ResizeMixin from 'ember-nrg-ui/mixins/resize';
