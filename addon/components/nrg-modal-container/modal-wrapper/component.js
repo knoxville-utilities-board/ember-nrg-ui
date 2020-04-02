@@ -16,6 +16,7 @@ export default Component.extend({
   renderInPlace: alias('modal.renderInPlace'),
   hasMovedDom: alias('modal.hasMovedDom'),
 
+  masterDetail: alias('modal.masterDetail'),
   sidebar: alias('modal.sidebar'),
   basic: alias('modal.basic'),
   lightbox: alias('modal.lightbox'),
@@ -31,6 +32,7 @@ export default Component.extend({
     'basic',
     'lightbox',
     'modalClass',
+    'masterDetail',
     function() {
       const appliedClasses = [];
       if (this.sidebar) {
@@ -46,6 +48,9 @@ export default Component.extend({
       if (this.basic) {
         appliedClasses.push('basic');
       }
+      if (this.masterDetail) {
+        appliedClasses.push('master-detail--takeover');
+      }
       return appliedClasses.join(' ');
     }
   ),
@@ -54,6 +59,7 @@ export default Component.extend({
     'sidebar',
     'lightbox',
     'renderInPlace',
+    'masterDetail',
     function() {
       const appliedClasses = ['modal-content'];
       if (this.lightbox) {
@@ -62,7 +68,7 @@ export default Component.extend({
       if (!this.sidebar) {
         appliedClasses.push('content');
       }
-      if (!this.renderInPlace) {
+      if (!this.renderInPlace && !this.masterDetail) {
         appliedClasses.push('scrolling');
       }
       return appliedClasses.join(' ');
