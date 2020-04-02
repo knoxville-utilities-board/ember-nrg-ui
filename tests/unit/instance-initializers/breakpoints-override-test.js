@@ -1,10 +1,10 @@
 import Application from '@ember/application';
 
-import { initialize } from 'dummy/initializers/breakpoints-override';
+import { initialize } from 'dummy/instance-initializers/breakpoints-override';
 import { module, test } from 'qunit';
 import { run } from '@ember/runloop';
 
-module('Unit | Initializer | breakpoints-override', function(hooks) {
+module('Unit | Instance Initializer | breakpoints-override', function(hooks) {
   hooks.beforeEach(function() {
     this.TestApplication = Application.extend();
     this.TestApplication.initializer({

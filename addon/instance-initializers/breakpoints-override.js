@@ -6,6 +6,5 @@ export function initialize(application) {
 }
 
 export default {
-  after: 'ember-responsive-breakpoints',
   initialize
 };
