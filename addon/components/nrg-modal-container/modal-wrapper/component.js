@@ -1,9 +1,15 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { alias, and, not, readOnly } from '@ember/object/computed';
+import { alias, and, not, or, readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
+import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import layout from './template';
-export default Component.extend({
+
+const isIE11 = !window.ActiveXObject && 'ActiveXObject' in window;
+const useFlexBox = !isIE11;
+
+export default Component.extend(ResizeMixin, {
   layout,
 
   tagName: '',
@@ -26,6 +32,21 @@ export default Component.extend({
   notSidebar: not('sidebar'),
   hasCloseIcon: and('dismissable', 'notSidebar'),
   dismissable: alias('modal.dismissable'),
+
+  modalStyles: computed('modalElement', function() {
+    if (useFlexBox || !this.modalElement || this.masterDetail) {
+      return '';
+    }
+    const marginTop = this.modalElement.offsetHeight / 2;
+    const marginLeft = this.modalElement.offsetWidth / 2;
+    return htmlSafe(
+      `margin-top: -${marginTop}px; margin-left: -${marginLeft}px;`
+    );
+  }),
+
+  didResize() {
+    this.notifyPropertyChange('modalStyles');
+  },
 
   _modalClass: computed(
     'sidebar',
@@ -96,6 +117,30 @@ export default Component.extend({
       this.modalService.remove(this);
       this.set('hasMovedDom', false);
     }
+  },
+
+  modalElementAdded(element) {
+    this.set('modalElement', element);
+
+    if (useFlexBox || this.masterDetail) {
+      return;
+    }
+
+    const config = {
+      attributes: false,
+      childList: true,
+      subtree: true,
+    };
+    this.modalMutationObserver = new MutationObserver(() => {
+      this.notifyPropertyChange('modalStyles');
+    });
+    const observedElement = element.querySelector('.modal-content');
+    this.modalMutationObserver.observe(observedElement, config);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.modalMutationObserver.disconnect();
   },
 
   onHide() {
