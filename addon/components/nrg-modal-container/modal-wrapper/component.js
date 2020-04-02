@@ -34,7 +34,7 @@ export default Component.extend(ResizeMixin, {
   dismissable: alias('modal.dismissable'),
 
   modalStyles: computed('modalElement', function() {
-    if (useFlexBox || !this.modalElement || this.masterDetail) {
+    if (useFlexBox || !this.modalElement || this.masterDetail || this.sidebar) {
       return '';
     }
     const marginTop = this.modalElement.offsetHeight / 2;
@@ -89,7 +89,7 @@ export default Component.extend(ResizeMixin, {
       if (!this.sidebar) {
         appliedClasses.push('content');
       }
-      if (!this.renderInPlace && !this.masterDetail) {
+      if (!this.renderInPlace && !this.masterDetail && !this.sidebar) {
         appliedClasses.push('scrolling');
       }
       return appliedClasses.join(' ');
@@ -122,7 +122,7 @@ export default Component.extend(ResizeMixin, {
   modalElementAdded(element) {
     this.set('modalElement', element);
 
-    if (useFlexBox || this.masterDetail) {
+    if (useFlexBox || this.masterDetail || this.sidebar) {
       return;
     }
 
