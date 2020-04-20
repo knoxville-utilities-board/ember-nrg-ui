@@ -10,7 +10,13 @@
       </a>
     {{/if}}
     <div class="header item title-item">
-      <span class="title-text">{{title}}</span>
+      <span class="title-text">
+        {{#if title}}
+          {{title}}
+        {{else}}
+          {{nrg-loading-indicator size="tiny"}}
+        {{/if}}
+        </span>
       {{#if environmentDisplay}}
         <span class="environment-title">{{environmentDisplay}}</span>
       {{/if}}
