@@ -23,8 +23,6 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   selectedMinuteIndex: null,
   selectedHourIndex: null,
 
-  value: null,
-
   showNowShortcut: true,
 
   _showNowShortcut: computed('showNowShortcut', 'minDate', 'maxDate', 'isDateDisabled', function() {
@@ -44,9 +42,6 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       this.set('isSelectingDays', true);
     } else if (this.type === 'time') {
       this.set('isSelectingHours', true);
-    }
-    if (!this.value) {
-      this.set('value', new Date());
     }
     this._updateSelectedIndexes();
   },
@@ -488,7 +483,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   _updateSelectedIndexes(value) {
     if (!value) {
-      value = moment(this.value);
+      value = moment(this.get('value'));
     }
     this.set('selectedDayIndex', value.date());
     this.set('selectedMonthIndex', value.month());

@@ -22,6 +22,17 @@ export default Component.extend(Validation, {
 
   maxDate: null, // maximum date/time that can be selected, dates/times after are disabled
 
+  date: null,
+
+  allowEmptyDate: false,
+
+  init() {
+    this._super(...arguments);
+    if (!this.date && !this.allowEmptyDate) {
+      this.date = new Date();
+    }
+  },
+
   icon: computed('type', function() {
     const type = this.get('type');
     let icon = 'calendar';
@@ -70,14 +81,14 @@ export default Component.extend(Validation, {
     return this.timeFormat;
   }),
 
-  displayValue: computed('value', 'displayFormat', {
+  displayValue: computed('date', 'displayFormat', {
     get() {
-      return moment(this.value).format(this.displayFormat);
+      return moment(this.date).format(this.displayFormat);
     },
     set(type, value) {
       const newValue = moment(value, this.displayFormat);
       if (newValue.isValid()) {
-        this.set('value', newValue);
+        this.set('date', newValue);
       }
       return value;
     },
