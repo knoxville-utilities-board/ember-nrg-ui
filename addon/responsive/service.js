@@ -55,3 +55,17 @@ export default Service.extend({
 
   isComputerScreenGroup: or('isComputerScreen', 'isLargeMonitor', 'isWidescreenMonitor'),
 });
+
+const mobileBreakpoint = 320;	
+const tabletBreakpoint = 768;	
+const computerBreakpoint = 992;	
+const largeMonitorBreakpoint = 1200;	
+const widescreenMonitorBreakpoint = 1920;
+
+export {
+  mobileBreakpoint,
+  tabletBreakpoint,
+  computerBreakpoint,
+  largeMonitorBreakpoint,
+  widescreenMonitorBreakpoint,
+}
