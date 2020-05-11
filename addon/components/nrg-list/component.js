@@ -7,7 +7,7 @@ import { next } from '@ember/runloop';
 const contextItems = [
   {
     label: 'Refresh',
-    actionName: 'refresh',
+    actionName: 'signalRefresh',
     iconClass: 'refresh',
   },
 ];
@@ -77,10 +77,6 @@ export default Component.extend(ContextMenuMixin, {
     this.updateQuery();
   },
 
-  refresh() {
-    this.updateQuery('refresh');
-  },
-
   onItemSelect(item) {
     this.sendAction('select', item);
   },
@@ -88,4 +84,10 @@ export default Component.extend(ContextMenuMixin, {
   onChangePage(start) {
     this.sendAction('changePage', start);
   },
+
+  actions: {
+    signalRefresh() {
+      this.updateQuery('refresh');
+    }
+  }
 });
