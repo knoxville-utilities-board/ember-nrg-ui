@@ -483,7 +483,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   _updateSelectedIndexes(value) {
     if (!value) {
-      value = moment(this.get('value'));
+      value = moment(this.value);
     }
     this.set('selectedDayIndex', value.date());
     this.set('selectedMonthIndex', value.month());

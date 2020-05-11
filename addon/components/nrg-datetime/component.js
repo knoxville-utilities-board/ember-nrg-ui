@@ -28,8 +28,9 @@ export default Component.extend(Validation, {
 
   init() {
     this._super(...arguments);
-    if (!this.date && !this.allowEmptyDate) {
-      this.date = new Date();
+    if (!this.value && !this.allowEmptyDate) {
+      // this.value = new Date();
+      this.set('value', new Date());
     }
   },
 
@@ -83,12 +84,12 @@ export default Component.extend(Validation, {
 
   displayValue: computed('date', 'displayFormat', {
     get() {
-      return moment(this.date).format(this.displayFormat);
+      return moment(this.value).format(this.displayFormat);
     },
     set(type, value) {
       const newValue = moment(value, this.displayFormat);
       if (newValue.isValid()) {
-        this.set('date', newValue);
+        this.set('value', newValue);
       }
       return value;
     },
