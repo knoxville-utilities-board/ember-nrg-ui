@@ -82,7 +82,7 @@ export default Component.extend(Validation, {
     return this.timeFormat;
   }),
 
-  displayValue: computed('date', 'displayFormat', {
+  displayValue: computed('value', 'displayFormat', {
     get() {
       return moment(this.value).format(this.displayFormat);
     },
