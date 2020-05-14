@@ -22,14 +22,11 @@ export default Component.extend(Validation, {
 
   maxDate: null, // maximum date/time that can be selected, dates/times after are disabled
 
-  date: null,
-
-  allowEmptyDate: false,
+  initializeDate: true,
 
   init() {
     this._super(...arguments);
-    if (!this.value && !this.allowEmptyDate) {
-      // this.value = new Date();
+    if (!this.value && this.initializeDate) {
       this.set('value', new Date());
     }
   },
