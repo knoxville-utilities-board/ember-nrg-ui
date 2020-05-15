@@ -8,8 +8,13 @@ module('Integration | Component | nrg-datetime', function(hooks) {
   setupRenderingTest(hooks);
 
   test('validation shows when form is invalid', async function(assert) {
-    await render(hbs`{{date-time-test didValidate=true}}`);
+    await render(hbs`{{date-time-test didValidate=true required=true}}`);
     assert.equal(findAll('.field.error').length, 1);
+  });
+
+  test('validation doesn\'t show when field is blank', async function(assert) {
+    await render(hbs`{{date-time-test didValidate=true required=false}}`);
+    assert.equal(findAll('.field.error').length, 0);
   });
 
   test('it renders (datetime)', async function(assert) {
