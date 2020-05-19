@@ -3,4 +3,6 @@ import Validations from './validations';
 
 export default Component.extend(Validations, {
   date: null,
+  required: false,
+  initializeDate: true
 });
