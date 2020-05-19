@@ -79,8 +79,11 @@ export default Component.extend(Validation, {
     return this.timeFormat;
   }),
 
-  displayValue: computed('value', 'displayFormat', {
+  displayValue: computed('value', 'displayFormat', 'initializeDate', {
     get() {
+      if (!this.value && !this.initializeDate) {
+        return '';
+      }
       return moment(this.value).format(this.displayFormat);
     },
     set(type, value) {
