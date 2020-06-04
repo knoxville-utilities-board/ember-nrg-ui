@@ -1,23 +1,23 @@
-{{#nrg-dropdown class="item icon" freeform=true onSelect=(action itemSelected) as |dropdown|}}
-  {{#dropdown.source}}
+<NrgDropdown @class="item icon" @freeform={{true}} @onSelect={{action itemSelected}} as |dropdown|>
+  <dropdown.source>
     <i class="ellipsis vertical icon"></i>
-  {{/dropdown.source}}
-  {{#dropdown.menu as |menu|}}
+  </dropdown.source>
+  <dropdown.menu as |menu|>
     {{#each options as |option|}}
       {{#if option.isDivider}}
         <div class="ui divider"></div>
       {{else if option.isCheckbox}}
-        {{#menu.item disabled=option.disabled}}
-          {{nrg-checkbox label=option.label value=option.checked onChange=(action itemChecked option)}}
-        {{/menu.item}}
+        <menu.item @disabled={{option.disabled}}>
+          <NrgCheckbox @label={{option.label}} @value={{option.checked}} @onChange={{action itemChecked option}} />
+        </menu.item>
       {{else}}
-        {{#menu.item option=option disabled=option.disabled}}
+        <menu.item @option={{option}} @disabled={{option.disabled}}>
           {{#if option.iconClass}}
             <i class="icon {{option.iconClass}}"></i>
           {{/if}}
           {{option.label}}
-        {{/menu.item}}
+        </menu.item>
       {{/if}}
     {{/each}}
-  {{/dropdown.menu}}
-{{/nrg-dropdown}}
+  </dropdown.menu>
+</NrgDropdown>

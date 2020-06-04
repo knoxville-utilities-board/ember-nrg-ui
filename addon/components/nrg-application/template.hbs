@@ -1,12 +1,12 @@
 {{! template-lint-disable no-inline-styles }}
-{{nrg-appbar title=title toggleSidebar=(action "toggleSidebar")}}
+<NrgAppbar @title={{this.title}} @toggleSidebar={{action "toggleSidebar"}} />
 <div class="pushable">
-  {{nrg-sidebar isOpen=sidebarIsOpen context=(concat "#" elementId " .pushable") clickedSidebarItem=(action "clickedLink")}}
+  <NrgSidebar @isOpen={{this.sidebarIsOpen}} @context={{concat "#" elementId " .pushable"}} @clickedSidebarItem={{action "clickedLink"}} />
   {{#if fullscreenMap}}
     <div class="pusher">
       {{#if sidebarMenuIsOpen}}
         <div class="sidebar-solid">
-          {{nrg-sidebar-menu clickedSidebarItem=(action "clickedLink")}}
+          <NrgSidebarMenu @clickedSidebarItem={{action "clickedLink"}} />
         </div>
       {{/if}}
       {{yield}}
@@ -15,7 +15,7 @@
     <div class="pusher sidebar-flex-container">
       {{#if sidebarMenuIsOpen}}
         <div class="sidebar-solid">
-          {{nrg-sidebar-menu clickedSidebarItem=(action "clickedLink")}}
+          <NrgSidebarMenu @clickedSidebarItem={{action "clickedLink"}} />
         </div>
       {{/if}}
       <div class="main-content" style={{mainContentStyle}}>
@@ -27,13 +27,13 @@
   {{/if}}
 </div>
 {{#if lightbox.hasChildren}}
-  {{nrg-lightbox-container}}
+  <NrgLightboxContainer />
 {{/if}}
-{{nrg-modal-container}}
-{{#nrg-toast-container as |view|}}
+<NrgModalContainer />
+<NrgToastContainer as |view|>
   {{#each flashMessages.queue as |flash|}}
-    {{view.toast toast=flash}}
+    <view.toast @toast={{flash}} />
   {{/each}}
-{{/nrg-toast-container}}
+</NrgToastContainer>
 <div id="popup-container"></div>
-{{nrg-keyboard-shortcut-modal}}
+<NrgKeyboardShortcutModal />

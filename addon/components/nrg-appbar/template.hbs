@@ -20,9 +20,9 @@
     {{yield}}
     {{#if showReleaseNotes}}
       <div class="item">
-        {{#link-to "release-notes"}}{{nrg-app-version}}{{/link-to}}
+        <LinkTo @route="release-notes">{{nrg-app-version}}</LinkTo>
       </div>
     {{/if}}
-    {{nrg-context-menu}}
+    <NrgContextMenu />
   </div>
 </div>

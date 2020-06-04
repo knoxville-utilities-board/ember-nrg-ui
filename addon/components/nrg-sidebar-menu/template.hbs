@@ -2,19 +2,19 @@
 {{#each visibleMenuItems as |menuItem|}}
   {{#if menuItem.children.length}}
     <div class="item">
-      {{nrg-sidebar-menu-item item=menuItem clickedSidebarItem=(action "clickedLink") sidebarAction=(action "sidebarAction") isParentGroup=true}}
+      <NrgSidebarMenuItem @item={{menuItem}} @clickedSidebarItem={{action "clickedLink"}} @sidebarAction={{action "sidebarAction"}} @isParentGroup={{true}} />
       {{#if menuItem.children}}
         <div class="menu">
           {{#each menuItem.children as |child|}}
             {{#if child.isShownInSidebar}}
-              {{nrg-sidebar-menu-item item=child clickedSidebarItem=(action "clickedLink") sidebarAction=(action "sidebarAction")}}
+              <NrgSidebarMenuItem @item={{child}} @clickedSidebarItem={{action "clickedLink"}} @sidebarAction={{action "sidebarAction"}} />
             {{/if}}
           {{/each}}
         </div>
       {{/if}}
     </div>
   {{else}}
-    {{nrg-sidebar-menu-item item=menuItem clickedSidebarItem=(action "clickedLink") sidebarAction=(action "sidebarAction")}}
+    <NrgSidebarMenuItem @item={{menuItem}} @clickedSidebarItem={{action "clickedLink"}} @sidebarAction={{action "sidebarAction"}} />
   {{/if}}
 {{/each}}
 
@@ -23,6 +23,6 @@
     <div class="footer-pusher"></div>
   {{/if}}
   {{#each visibleFooterItems as |menuItem|}}
-    {{nrg-sidebar-menu-item item=menuItem clickedSidebarItem=(action "clickedLink") sidebarAction=(action "sidebarAction")}}
+    <NrgSidebarMenuItem @item={{menuItem}} @clickedSidebarItem={{action "clickedLink"}} @sidebarAction={{action "sidebarAction"}} />
   {{/each}}
 </div>

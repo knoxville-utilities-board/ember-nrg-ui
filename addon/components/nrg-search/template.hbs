@@ -1,5 +1,5 @@
 <div class="ui icon input">
-  {{nrg-text-field class="prompt" disabled=disabled placeholder=placeholder value=searchString action=(action "query") click=(action "inputClicked")}}
+  <NrgTextField @class="prompt" @disabled={{disabled}} @placeholder={{placeholder}} @value={{searchString}} @action={{action "query"}} @click={{action "inputClicked"}} />
   <i class="search icon"></i>
 </div>
 {{#if showResults}}

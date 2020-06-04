@@ -1,4 +1,4 @@
-{{#nrg-modal modalClass="shortcut-modal" isOpen=isOpen headerText="Keyboard Shortcuts"}}
+<NrgModal @modalClass="shortcut-modal" @isOpen={{isOpen}} @headerText="Keyboard Shortcuts">
   <table>
     <tbody>
       {{#each sortedSegments as |segment|}}
@@ -30,4 +30,4 @@
       {{/each}}
     </tbody>
   </table>
-{{/nrg-modal}}
+</NrgModal>
