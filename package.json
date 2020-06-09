@@ -80,6 +80,7 @@
     "demoURL": "https://knoxville-utilities-board.github.io/ember-nrg-ui/"
   },
   "resolutions": {
-    "clean-css": "4.1.11"
+    "clean-css": "4.1.11",
+    "websocket-extensions": "0.1.4"
   }
 }
