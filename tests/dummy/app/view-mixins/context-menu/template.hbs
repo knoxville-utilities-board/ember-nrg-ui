@@ -9,9 +9,9 @@
 </div>
 <div class="ui bottom attached segment">
   <h3>By the rendering this component, context items will be added in the appbar.</h3>
-  {{nrg-checkbox label="Render Component" type="toggle" checked=showComponent}}
+  <NrgCheckbox @label="Render Component" @type="toggle" @checked={{showComponent}} />
 </div>
 {{#if showComponent}}
-  {{context-test}}
+  <ContextTest />
 {{/if}}
-{{nrg-code-block label="Example" codeBlockName="context-menu-example.js" }}
+<NrgCodeBlock @label="Example" @codeBlockName="context-menu-example.js" />

@@ -1,7 +1,7 @@
-{{#nrg-code-block label="Default Modal" codeBlockName="default-modal.hbs" }}
-  {{nrg-button text="Open Modal" action=(action (mut modalOpen1) true)}}
+<NrgCodeBlock @label="Default Modal" @codeBlockName="default-modal.hbs">
+  <NrgButton @text="Open Modal" @action={{action (mut modalOpen1) true}} />
   <!-- BEGIN-SNIPPET default-modal -->
-  {{#nrg-modal headerText="A simple modal" isOpen=modalOpen1}}
+  <NrgModal @headerText="A simple modal" @isOpen={{modalOpen1}}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
       scelerisque
@@ -10,14 +10,14 @@
       Curabitur vestibulum
       hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
-  {{/nrg-modal}}
+  </NrgModal>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Basic Modal" codeBlockName="basic-modal.hbs" }}
-  {{nrg-button text="Open Modal" action=(action (mut modalOpen2) true)}}
+<NrgCodeBlock @label="Basic Modal" @codeBlockName="basic-modal.hbs">
+  <NrgButton @text="Open Modal" @action={{action (mut modalOpen2) true}} />
   <!-- BEGIN-SNIPPET basic-modal -->
-  {{#nrg-modal headerText="A simple basic modal" basic=true isOpen=modalOpen2}}
+  <NrgModal @headerText="A simple basic modal" @basic={{true}} @isOpen={{modalOpen2}}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
       scelerisque
@@ -26,14 +26,14 @@
       Curabitur vestibulum
       hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
-  {{/nrg-modal}}
+  </NrgModal>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Modal With Actions" codeBlockName="modal-with-actions.hbs" }}
-  {{nrg-button text="Open Modal" action=(action (mut modalOpen3) true)}}
+<NrgCodeBlock @label="Modal With Actions" @codeBlockName="modal-with-actions.hbs">
+  <NrgButton @text="Open Modal" @action={{action (mut modalOpen3) true}} />
   <!-- BEGIN-SNIPPET modal-with-actions -->
-  {{#nrg-modal headerText="A modal with actions" primaryButton="Primary" secondaryButton="Secondary" isOpen=modalOpen3}}
+  <NrgModal @headerText="A modal with actions" @primaryButton="Primary" @secondaryButton="Secondary" @isOpen={{modalOpen3}}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
       scelerisque
@@ -42,14 +42,14 @@
       Curabitur vestibulum
       hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
-  {{/nrg-modal}}
+  </NrgModal>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Basic Modal With Actions" codeBlockName="basic-modal-with-actions.hbs" }}
-  {{nrg-button text="Open Modal" action=(action (mut modalOpen4) true)}}
+<NrgCodeBlock @label="Basic Modal With Actions" @codeBlockName="basic-modal-with-actions.hbs">
+  <NrgButton @text="Open Modal" @action={{action (mut modalOpen4) true}} />
   <!-- BEGIN-SNIPPET basic-modal-with-actions -->
-  {{#nrg-modal headerText="A basic modal with actions" basic=true primaryButton="Primary" secondaryButton="Secondary" isOpen=modalOpen4}}
+  <NrgModal @headerText="A basic modal with actions" @basic={{true}} @primaryButton="Primary" @secondaryButton="Secondary" @isOpen={{modalOpen4}}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
       scelerisque
@@ -58,14 +58,14 @@
       Curabitur vestibulum
       hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
-  {{/nrg-modal}}
+  </NrgModal>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Modal (Not Dismissable)" codeBlockName="not-dismissable-modal.hbs" }}
-  {{nrg-button text="Open Modal" action=(action (mut modalOpen5) true)}}
+<NrgCodeBlock @label="Modal (Not Dismissable)" @codeBlockName="not-dismissable-modal.hbs">
+  <NrgButton @text="Open Modal" @action={{action (mut modalOpen5) true}} />
   <!-- BEGIN-SNIPPET not-dismissable-modal -->
-  {{#nrg-modal headerText="This modal cannot be dismissed without clicking the force dismiss button" primaryButton="Force Dismiss" secondaryButton="Does nothing" action="forceDismiss" dismissable=false isOpen=modalOpen5}}
+  <NrgModal @headerText="This modal cannot be dismissed without clicking the force dismiss button" @primaryButton="Force Dismiss" @secondaryButton="Does nothing" @action={{action "forceDismiss"}} @dismissable={{false}} @isOpen={{modalOpen5}}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
       scelerisque
@@ -74,36 +74,36 @@
       Curabitur vestibulum
       hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
-  {{/nrg-modal}}
+  </NrgModal>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Nested Modals" codeBlockName="nested-modals.hbs" }}
-  {{nrg-button text="Open Modal" action=(action (mut modalOpen6) true)}}
+<NrgCodeBlock @label="Nested Modals" @codeBlockName="nested-modals.hbs">
+  <NrgButton @text="Open Modal" @action={{action (mut modalOpen6) true}} />
   <!-- BEGIN-SNIPPET nested-modals -->
-  {{#nrg-modal headerText="Contains a nested modal (Not dismissable)" primaryButton="Force Dismiss" action="forceDismiss" dismissable=false isOpen=modalOpen6}}
-    {{nrg-button text="Open Modal" action=(action (mut modalOpen1) true)}}
+  <NrgModal @headerText="Contains a nested modal (Not dismissable)" @primaryButton="Force Dismiss" @action={{action "forceDismiss"}} @dismissable={{false}} @isOpen={{modalOpen6}}>
+    <NrgButton @text="Open Modal" @action={{action (mut modalOpen1) true}} />
     <br>
-    {{nrg-button text="Open Modal with Actions" action=(action (mut modalOpen3) true)}}
+    <NrgButton @text="Open Modal with Actions" @action={{action (mut modalOpen3) true}} />
     <br>
-    {{nrg-button text="Open Modal (Not Dismissable)" action=(action (mut modalOpen5) true)}}
+    <NrgButton @text="Open Modal (Not Dismissable)" @action={{action (mut modalOpen5) true}} />
     <br>
-    {{nrg-button text="Open Basic Modal" action=(action (mut modalOpen2) true)}}
+    <NrgButton @text="Open Basic Modal" @action={{action (mut modalOpen2) true}} />
     <br>
-    {{nrg-button text="Open Basic Modal with Actions" action=(action (mut modalOpen4) true)}}
-  {{/nrg-modal}}
+    <NrgButton @text="Open Basic Modal with Actions" @action={{action (mut modalOpen4) true}} />
+  </NrgModal>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Datetime component in Modal" codeBlockName="datetime-modal.hbs" }}
-  {{nrg-button text="Open Modal" action=(action (mut modalOpen7) true)}}
+<NrgCodeBlock @label="Datetime component in Modal" @codeBlockName="datetime-modal.hbs">
+  <NrgButton @text="Open Modal" @action={{action (mut modalOpen7) true}} />
   <!-- BEGIN-SNIPPET datetime-modal -->
-  {{#nrg-modal headerText="Datetime component inside a modal" isOpen=modalOpen7}}
-    {{#nrg-form-container as |form|}}
-      {{#form.field as |field|}}
-        {{field.datetime}}
-      {{/form.field}}
-    {{/nrg-form-container}}
-  {{/nrg-modal}}
+  <NrgModal @headerText="Datetime component inside a modal" @isOpen={{modalOpen7}}>
+    <NrgFormContainer as |form|>
+      <form.field as |field|>
+        <field.datetime />
+      </form.field>
+    </NrgFormContainer>
+  </NrgModal>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>

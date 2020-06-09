@@ -1,104 +1,104 @@
-{{#nrg-code-block label="Simple Dropdowns" codeBlockName="nrg-dropdown.hbs" }}
+<NrgCodeBlock @label="Simple Dropdowns" @codeBlockName="nrg-dropdown.hbs">
   <!-- BEGIN-SNIPPET nrg-dropdown -->
-  {{#nrg-form-container as |form|}}
-    {{#form.field label="Dropdown (Linked Value)" as |field|}}
-      {{field.dropdown options=optionList selected=selected}}
-    {{/form.field}}
-    {{#form.field label="Dropdown with Block Render (Linked Value)" as |field|}}
-      {{#field.dropdown options=optionList selected=selected as |option|}}
+  <NrgFormContainer as |form|>
+    <form.field label="Dropdown (Linked Value)" as |field|>
+      <field.dropdown @options={{optionList}} @selected={{selected}} />
+    </form.field>
+    <form.field @label="Dropdown with Block Render (Linked Value)" as |field|>
+      <field.dropdown @options={{optionList}} @selected={{selected}} as |option|>
         <i class="{{option.icon}} icon"></i>
         <strong>Label</strong>
         <span>{{option.label}}</span>
         <span>,</span>
         <strong>Value</strong>
         <span>{{option.value}}</span>
-      {{/field.dropdown}}
-    {{/form.field}}
-    {{#form.field label="Search (Linked Value)" as |field|}}
-      {{field.dropdown options=optionList selected=selected search=true}}
-    {{/form.field}}
-    {{#form.field label="Dropdown with String Array" as |field|}}
-      {{field.dropdown options=optionListStrings}}
-    {{/form.field}}
-    {{#form.field label="Disabled" as |field|}}
-      {{field.dropdown options=optionList disabled=true}}
-    {{/form.field}}
-    {{#form.field label="Loading" as |field|}}
-      {{field.dropdown options=optionList loading=true}}
-    {{/form.field}}
-    {{#form.field label="Force Selection" as |field|}}
-      {{field.dropdown options=optionList forceSelection=true}}
-    {{/form.field}}
-    {{#form.field label="Allow Additions (Hide Addition)" as |field|}}
-      {{field.dropdown options=optionList search=true allowAdditions=true}}
-    {{/form.field}}
-    {{#form.field label="Allow Additions" as |field|}}
-      {{field.dropdown options=allowAdditionsOptionsList search=true allowAdditions=true hideAdditions=false}}
-    {{/form.field}}
-    {{#form.field label="Allow Additions with String Array" as |field|}}
-      {{field.dropdown options=allowAdditionsOptionsListStrings search=true allowAdditions=true hideAdditions=false}}
-    {{/form.field}}
-    {{#form.field label="Multiple Selection" as |field|}}
-      {{field.dropdown options=optionList multiple=true}}
-    {{/form.field}}
-    {{#form.field label="Multiple Selection with Search" as |field|}}
-      {{field.dropdown options=optionList multiple=true search=true}}
-    {{/form.field}}
-    {{#form.field label="Multiple Selection with Search and Allow Additions" as |field|}}
-      {{field.dropdown options=optionList multiple=true search=true allowAdditions=true hideAdditions=false}}
-    {{/form.field}}
-    {{#form.field label="Hide Action" as |field|}}
-      {{field.dropdown options=optionList dropdownAction="hide"}}
-    {{/form.field}}
-  {{/nrg-form-container}}
+      </field.dropdown>
+    </form.field>
+    <form.field @label="Search (Linked Value)" as |field|>
+      <field.dropdown @options={{optionList}} @selected={{selected}} @search={{true}} />
+    </form.field>
+    <form.field @label="Dropdown with String Array" as |field|>
+      <field.dropdown @options={{optionListStrings}} />
+    </form.field>
+    <form.field @label="Disabled" as |field|>
+      <field.dropdown @options={{optionList}} @disabled={{true}} />
+    </form.field>
+    <form.field @label="Loading" as |field|>
+      <field.dropdown @options={{optionList}} @loading={{true}} />
+    </form.field>
+    <form.field @label="Force Selection" as |field|>
+      <field.dropdown @options={{optionList}} @forceSelection={{true}} />
+    </form.field>
+    <form.field @label="Allow Additions (Hide Addition)" as |field|>
+      <field.dropdown @options={{optionList}} @search={{true}} @allowAdditions={{true}} />
+    </form.field>
+    <form.field @label="Allow Additions" as |field|>
+      <field.dropdown @options={{allowAdditionsOptionsList}} @search={{true}} @allowAdditions={{true}} @hideAdditions={{false}} />
+    </form.field>
+    <form.field @label="Allow Additions with String Array" as |field|>
+      <field.dropdown @options={{allowAdditionsOptionsListStrings}} @search={{true}} @allowAdditions={{true}} @hideAdditions={{false}} />
+    </form.field>
+    <form.field @label="Multiple Selection" as |field|>
+      <field.dropdown @options={{optionList}} @multiple={{true}} />
+    </form.field>
+    <form.field @label="Multiple Selection with Search" as |field|>
+      <field.dropdown @options={{optionList}} @multiple={{true}} @search={{true}} />
+    </form.field>
+    <form.field @label="Multiple Selection with Search and Allow Additions" as |field|>
+      <field.dropdown @options={{optionList}} @multiple={{true}} @search={{true}} @allowAdditions={{true}} @hideAdditions={{false}} />
+    </form.field>
+    <form.field @label="Hide Action" as |field|>
+      <field.dropdown @options={{optionList}} @dropdownAction="hide" />
+    </form.field>
+  </NrgFormContainer>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Freeform Dropdowns" codeBlockName="nrg-dropdown-freeform.hbs" }}
+<NrgCodeBlock @label="Freeform Dropdowns" @codeBlockName="nrg-dropdown-freeform.hbs">
   <!-- BEGIN-SNIPPET nrg-dropdown-freeform -->
   <div class="ui center aligned segment">
-    {{#nrg-dropdown class="icon button primary float right" onSelect=(action onItemSelect) freeform=true as |dropdown|}}
-      {{#dropdown.source}}
+    <NrgDropdown @class="icon button primary float right" @onSelect={{action onItemSelect}} @freeform={{true}} as |dropdown|>
+      <dropdown.source>
         <div class="text">Actions</div>
         <i class="dropdown icon"></i>
-      {{/dropdown.source}}
-      {{#dropdown.menu as |menu|}}
-        {{#menu.sub-menu menuDirection="left" as |subMenu|}}
-          {{#subMenu.source}}
+      </dropdown.source>
+      <dropdown.menu as |menu|>
+        <menu.sub-menu @menuDirection="left" as |subMenu|>
+          <subMenu.source>
             <i class="left dropdown icon"></i>
             <i class="add user icon"></i>
             Assign To Worker
-          {{/subMenu.source}}
-          {{#subMenu.menu}}
+          </subMenu.source>
+          <subMenu.menu>
             {{#each workers as |worker|}}
-              {{#menu.item option=worker}}
+              <menu.item @option={{worker}}>
                 {{worker}}
-              {{/menu.item}}
+              </menu.item>
             {{/each}}
-          {{/subMenu.menu}}
-        {{/menu.sub-menu}}
-        {{#menu.sub-menu as |subMenu|}}
-          {{#subMenu.source}}
+          </subMenu.menu>
+        </menu.sub-menu>
+        <menu.sub-menu as |subMenu|>
+          <subMenu.source>
             <i class="dropdown icon"></i>
             <i class="add user icon"></i>
             Assign To Crew
-          {{/subMenu.source}}
-          {{#subMenu.menu}}
+          </subMenu.source>
+          <subMenu.menu>
             {{#each crews as |crew|}}
-              {{#menu.item onSelect=(action onItemSelect crew)}}
+              <menu.item @onSelect={{action onItemSelect crew}}>
                 {{crew}}
-              {{/menu.item}}
+              </menu.item>
             {{/each}}
-          {{/subMenu.menu}}
-        {{/menu.sub-menu}}
-        {{#menu.item}}
+          </subMenu.menu>
+        </menu.sub-menu>
+        <menu.item>
           <i class="remove user icon"></i> Remove
-        {{/menu.item}}
-        {{#menu.item}}
+        </menu.item>
+        <menu.item>
           <i class="ban icon"></i> Cancel
-        {{/menu.item}}
-      {{/dropdown.menu}}
-    {{/nrg-dropdown}}
+        </menu.item>
+      </dropdown.menu>
+    </NrgDropdown>
   </div>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>

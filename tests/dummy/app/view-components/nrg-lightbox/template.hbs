@@ -1,18 +1,18 @@
-{{#nrg-code-block label="Lightbox Thumbnails" codeBlockName="lightbox-thumbnails.hbs" }}
+<NrgCodeBlock @label="Lightbox Thumbnails" @codeBlockName="lightbox-thumbnails.hbs">
   <!-- BEGIN-SNIPPET lightbox-thumbnails -->
   {{#each model as |photo|}}
-    {{nrg-lightbox-thumbnail photo=photo}}
+    <NrgLightboxThumbnail @photo={{photo}} />
   {{/each}}
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Lightbox Thumbnails with Custom Details" codeBlockName="lightbox-thumbnails-block.hbs" }}
+<NrgCodeBlock @label="Lightbox Thumbnails with Custom Details" @codeBlockName="lightbox-thumbnails-block.hbs">
   <!-- BEGIN-SNIPPET lightbox-thumbnails-block -->
   {{#each model as |photo|}}
-    {{#nrg-lightbox-thumbnail photo=photo}}
+    <NrgLightboxThumbnail @photo={{photo}}>
       <strong>{{photo.detail}}</strong>
       <span>{{counter}}</span>
-    {{/nrg-lightbox-thumbnail}}
+    </NrgLightboxThumbnail>
   {{/each}}
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>

@@ -1,41 +1,41 @@
-{{#nrg-code-block label="Action Cards" codeBlockName="action-card.hbs" }}
+<NrgCodeBlock @label="Action Cards" @codeBlockName="action-card.hbs">
   <!-- BEGIN-SNIPPET action-card -->
-  {{#nrg-home-cards actionCard=true as |view|}}
-    {{view.home-card label="Actionable Item 1" icon="calendar" route="index" meta="22"}}
-    {{view.home-card label="Actionable Item 2" icon="warning sign" route="index" badge="55"}}
-    {{view.home-card label="Actionable Item 3" icon="mail" url="http://www.google.com"}}
-  {{/nrg-home-cards}}
+  <NrgHomeCards @actionCard={{true}} as |view|>
+    <view.home-card @label="Actionable Item 1" @icon="calendar" @route="index" @meta="22" />
+    <view.home-card @label="Actionable Item 2" @icon="warning sign" @route="index" @badge="55" />
+    <view.home-card @label="Actionable Item 3" @icon="mail" @url="http://www.google.com" />
+  </NrgHomeCards>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Home Cards" codeBlockName="home-card.hbs" }}
+<NrgCodeBlock @label="Home Cards" @codeBlockName="home-card.hbs">
   <!-- BEGIN-SNIPPET home-card -->
-  {{#nrg-home-cards as |view|}}
-    {{view.home-card label="Dropdown" icon="settings" route="index" meta="22 Hrs" badgeLoading=true}}
-    {{view.home-card label="Button" icon="code" route="example.nrg-form-container" description="This is the description area" badge="55"}}
-    {{view.home-card label="Forms" icon="tasks" route="example.nrg-form-container" description="This is the description area"}}
-    {{view.home-card label="Forms" icon="tasks" route="example.nrg-form-container" meta="33 Persons"}}
-  {{/nrg-home-cards}}
+  <NrgHomeCards as |view|>
+    <view.home-card @label="Dropdown" @icon="settings" @route="index" @meta="22 Hrs" @badgeLoading={{true}} />
+    <view.home-card @label="Button" @icon="code" @route="example.nrg-form-container" @description="This is the description area" @badge="55" />
+    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @description="This is the description area" />
+    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @meta="33 Persons" />
+  </NrgHomeCards>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Home Cards with Column Size" codeBlockName="home-card-columns.hbs" }}
+<NrgCodeBlock @label="Home Cards with Column Size" @codeBlockName="home-card-columns.hbs">
   <!-- BEGIN-SNIPPET home-card-columns -->
-  {{#nrg-home-cards columns="two" as |view|}}
-    {{view.home-card label="Dropdown" icon="settings" route="index" meta="22 Hrs" badgeLoading=true}}
-    {{view.home-card label="Button" icon="code" route="example.nrg-form-container" description="This is the description area" badge="55"}}
-    {{view.home-card label="Forms" icon="tasks" route="example.nrg-form-container" description="This is the description area"}}
-    {{view.home-card label="Forms" icon="tasks" route="example.nrg-form-container" meta="33 Persons"}}
-  {{/nrg-home-cards}}
+  <NrgHomeCards @columns="two" as |view|>
+    <view.home-card @label="Dropdown" @icon="settings" @route="index" @meta="22 Hrs" @badgeLoading={{true}} />
+    <view.home-card @label="Button" @icon="code" @route="example.nrg-form-container" @description="This is the description area" @badge="55" />
+    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @description="This is the description area" />
+    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @meta="33 Persons" />
+  </NrgHomeCards>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
 
-{{#nrg-code-block label="Cards with Images" codeBlockName="image-card.hbs" }}
+<NrgCodeBlock @label="Cards with Images" @codeBlockName="image-card.hbs">
   <!-- BEGIN-SNIPPET image-card -->
-  {{#nrg-home-cards as |view|}}
-    {{view.home-card label="Dropdown" image="https://www.fillmurray.com/242/250" route="index"}}
-    {{view.home-card label="Button" image="https://www.fillmurray.com/321/320" route="index"}}
-    {{view.home-card label="Forms" image="https://www.fillmurray.com/202/200" route="index"}}
-  {{/nrg-home-cards}}
+  <NrgHomeCards as |view|>
+    <view.home-card @label="Dropdown" @image="https://www.fillmurray.com/242/250" @route="index" />
+    <view.home-card @label="Button" @image="https://www.fillmurray.com/321/320" @route="index" />
+    <view.home-card @label="Forms" @image="https://www.fillmurray.com/202/200" @route="index" />
+  </NrgHomeCards>
   <!-- END-SNIPPET  -->
-{{/nrg-code-block}}
+</NrgCodeBlock>
