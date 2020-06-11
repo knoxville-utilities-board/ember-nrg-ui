@@ -71,11 +71,13 @@ export default Route.extend(SidebarNavigationMixin, {
 });
 ```
 
-```html
+```hbs
 <!-- app/index/template.hbs -->
 
 <div class="ui segment basic">
-  {{#nrg-home-cards as |view|}} {{view.home-card label="Hello World" icon="globe" route="index" meta="obligatory" }} {{/nrg-home-cards}}
+  <NrgHomeCards as |view|>
+    <view.home-card @label="Hello World" @icon="globe" @route="index" @meta="obligatory" />
+  </NrgHomeCards>
 </div>
 ```
 
