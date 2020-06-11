@@ -22,28 +22,28 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{nrg-dropdown options=options}}`);
+    await render(hbs`<NrgDropdown @options={{options}} />`);
 
     assert.equal(find('.text').textContent.trim(), 'Select an Option');
   });
 
   test('default text renders', async function(assert) {
-    await render(hbs`{{nrg-dropdown options=options defaultText='Pick Something'}}`);
+    await render(hbs`<NrgDropdown @options={{options}} @defaultText="Pick Something" />`);
 
     assert.equal(find('.text').textContent.trim(), 'Pick Something');
   });
 
   test('item prepopulation works', async function(assert) {
-    await render(hbs`{{nrg-dropdown options=options selected=selectedOption}}`);
+    await render(hbs`<NrgDropdown @options={{options}} @selected={{selectedOption}} />`);
 
     assert.equal(find('.text').textContent.trim(), 'Option 2');
   });
 
   test('block templating works', async function(assert) {
     await render(hbs`
-      {{#nrg-dropdown options=options selected=selectedOption as |option|}}
+      <NrgDropdown @options={{options}} @selected={{selectedOption}} as |option|>
         {{option.label2}}
-      {{/nrg-dropdown}}
+      </NrgDropdown>
     `);
 
     assert.equal(find('.text').textContent.trim(), 'Label2 2');

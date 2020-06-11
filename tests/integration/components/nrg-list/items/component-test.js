@@ -20,7 +20,7 @@ module('Integration | Component | nrg-list/items', function(hooks) {
       return true;
     };
     await render(
-      hbs`{{nrg-list/items isSelectable=isSelectable selectionType='single' selected=selected items=items itemClicked=(action selectAction)}}`
+      hbs`<NrgList::Items @isSelectable={{isSelectable}} @selectionType="single" @selected={{selected}} @items={{items}} @itemClicked={{action selectAction}} />`
     );
     await click('.item');
     assert.equal(this.selected.length, 1);
@@ -42,7 +42,7 @@ module('Integration | Component | nrg-list/items', function(hooks) {
       return item.label !== 'label1';
     };
     await render(
-      hbs`{{nrg-list/items isSelectable=isSelectable selectionType='multiple' selected=selected items=items itemClicked=(action selectAction)}}`
+      hbs`<NrgList::Items @isSelectable={{isSelectable}} @selectionType="multiple" @selected={{selected}} @items={{items}} @itemClicked={{action selectAction}} />`
     );
 
     const items = findAll('.item');

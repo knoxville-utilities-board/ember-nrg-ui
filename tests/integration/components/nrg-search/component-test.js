@@ -10,7 +10,7 @@ module('Integration | Component | nrg-search', function(hooks) {
     this.selected = {
       header: 'header',
     };
-    await render(hbs`{{nrg-search selected=selected}}`);
+    await render(hbs`<NrgSearch @selected={{selected}} />`);
     assert.equal(find('input').value, 'header');
   });
 
@@ -18,7 +18,7 @@ module('Integration | Component | nrg-search', function(hooks) {
     this.selected = {
       isLoading: true,
     };
-    await render(hbs`{{nrg-search selected=selected}}`);
+    await render(hbs`<NrgSearch @selected={{selected}} />`);
     assert.equal(find('input').value, '');
     this.set('selected.header', 'header');
     this.set('selected.isLoading', false);
@@ -28,7 +28,7 @@ module('Integration | Component | nrg-search', function(hooks) {
   test('results do not display when loading', async function(assert) {
     this.items = [{}];
     this.loading = true;
-    await render(hbs`{{nrg-search items=items loading=loading}}`);
+    await render(hbs`<NrgSearch @items={{items}} @loading={{loading}} />`);
     assert.notOk(findAll('.results').length);
   });
 
@@ -36,7 +36,7 @@ module('Integration | Component | nrg-search', function(hooks) {
     this.queryAction = searchString => {
       assert.equal(searchString, 'search');
     };
-    await render(hbs`{{nrg-search query=(action queryAction)}}`);
+    await render(hbs`<NrgSearch @query={{action queryAction}} />`);
     await fillIn('input', 'search');
   });
 });

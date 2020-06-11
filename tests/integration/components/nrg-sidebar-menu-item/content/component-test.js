@@ -7,7 +7,7 @@ module('Integration | Component | nrg-sidebar-menu-item/content', function(hooks
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{nrg-sidebar-menu-item/content}}`);
+    await render(hbs`<NrgSidebarMenuItem::Content />`);
 
     assert.equal(this.element.textContent.trim(), '');
   });

@@ -22,12 +22,12 @@ module('Integration | Component | nrg-home-cards/home-card', function(hooks) {
   });
 
   test('hidden if user does not have role', async function(assert) {
-    await render(hbs`{{nrg-home-cards/home-card role='administrators'}}`);
+    await render(hbs`<NrgHomeCards::HomeCard @role="administrators" />`);
     assert.ok(find('.home-card').classList.contains('is-visually-hidden'));
   });
 
   test('show if user has role', async function(assert) {
-    await render(hbs`{{nrg-home-cards/home-card role='users'}}`);
+    await render(hbs`<NrgHomeCards::HomeCard @role="users" />`);
     assert.notOk(find('.home-card').classList.contains('is-visually-hidden'));
   });
 });

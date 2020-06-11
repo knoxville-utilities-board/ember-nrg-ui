@@ -10,7 +10,7 @@ module('Integration | Component | nrg-lightbox-thumbnail', function(hooks) {
     this.photo = {
       url: 'http://someUrl',
     };
-    await render(hbs`{{nrg-lightbox-thumbnail photo=photo}}`);
+    await render(hbs`<NrgLightboxThumbnail @photo={{photo}} />`);
     assert.equal(find('img').getAttribute('src'), 'http://someUrl');
   });
 });

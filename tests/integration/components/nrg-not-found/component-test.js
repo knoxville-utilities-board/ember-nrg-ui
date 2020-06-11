@@ -7,7 +7,7 @@ module('Integration | Component | nrg-not-found', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{nrg-not-found}}`);
+    await render(hbs`<NrgNotFound />`);
 
     assert.equal(find('h3').textContent.trim(), 'This is slightly embarrassing.');
   });

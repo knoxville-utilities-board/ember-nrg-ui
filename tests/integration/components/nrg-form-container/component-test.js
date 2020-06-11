@@ -12,9 +12,9 @@ module('Integration | Component | nrg-form-container', function(hooks) {
     });
 
     await render(hbs`
-      {{#nrg-form-container action=(action testAction) as |form|}}
-        {{form.submit-button}}
-      {{/nrg-form-container}}
+      <NrgFormContainer @action={{action testAction}} as |form|>
+        <form.submit-button />
+      </NrgFormContainer>
     `);
 
     await click('button');

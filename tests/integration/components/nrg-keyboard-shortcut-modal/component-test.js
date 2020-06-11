@@ -14,8 +14,8 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(hooks) 
 
   test('modal responds to keyboard shortcut', async function(assert) {
     await render(hbs`
-      {{nrg-modal-container}}
-      {{nrg-keyboard-shortcut-modal isOpen=false}}
+      <NrgModalContainer />
+      <NrgKeyboardShortcutModal @isOpen={{false}} />
     `);
     await triggerKeyEvent(window, 'keydown', 191, {
       shiftKey: true,
@@ -42,7 +42,7 @@ module('Integration | Component | nrg-keyboard-shortcut-modal', function(hooks) 
       })
     );
 
-    await render(hbs`{{nrg-keyboard-shortcut-modal isOpen=true}}`);
+    await render(hbs`<NrgKeyboardShortcutModal @isOpen={{true}} />`);
 
     const text = find('*').textContent;
     assert.ok(/Shft/.test(text));
