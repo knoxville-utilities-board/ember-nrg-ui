@@ -10,7 +10,7 @@ module('Integration | Component | nrg-form-action', function(hooks) {
     this.set('testAction', function() {
       assert.ok(true);
     });
-    await render(hbs`{{nrg-form-action action=(action testAction)}}`);
+    await render(hbs`<NrgFormAction @action={{action testAction}} />`);
 
     await click('a');
   });

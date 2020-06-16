@@ -14,7 +14,7 @@ module('Integration | Component | nrg-sidebar-menu-item', function(hooks) {
       // Stub function
     };
     await render(
-      hbs`{{nrg-sidebar-menu-item clickedSidebarItem=clickedSidebarItem sidebarAction=(action sidebarAction)}}`
+      hbs`<NrgSidebarMenuItem @clickedSidebarItem={{clickedSidebarItem}} @sidebarAction={{action sidebarAction}} />`
     );
 
     assert.equal(this.element.textContent.trim(), '');
@@ -33,7 +33,7 @@ module('Integration | Component | nrg-sidebar-menu-item', function(hooks) {
     };
 
     await render(
-      hbs`{{nrg-sidebar-menu-item item=menuItem clickedSidebarItem=(action clickedAction) sidebarAction=(action sidebarAction)}}`
+      hbs`<NrgSidebarMenuItem @item={{menuItem}} @clickedSidebarItem={{action clickedAction}} @sidebarAction={{action sidebarAction}} />`
     );
     await click('.item');
   });

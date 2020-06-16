@@ -10,15 +10,15 @@ module('Integration | Component | nrg-list/default-list-item', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`{{nrg-list/default-list-item}}`);
+    await render(hbs`<NrgList::DefaultListItem />`);
 
     assert.equal(this.element.textContent.trim(), '');
 
     // Template block usage:
     await render(hbs`
-      {{#nrg-list/default-list-item}}
+      <NrgList::DefaultListItem>
         template block text
-      {{/nrg-list/default-list-item}}
+      </NrgList::DefaultListItem>
     `);
 
     assert.equal(this.element.textContent.trim(), 'template block text');

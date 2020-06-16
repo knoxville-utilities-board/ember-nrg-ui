@@ -7,14 +7,14 @@ module('Integration | Component | nrg-button', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{nrg-button text="Inline text"}}`);
+    await render(hbs`<NrgButton @text="Inline text" />`);
 
     assert.equal(this.element.textContent.trim(), 'Inline text');
 
     await render(hbs`
-      {{#nrg-button}}
+      <NrgButton>
         template block text
-      {{/nrg-button}}
+      </NrgButton>
     `);
 
     assert.equal(this.element.textContent.trim(), 'template block text');
@@ -25,7 +25,7 @@ module('Integration | Component | nrg-button', function(hooks) {
       assert.ok(true);
     });
 
-    await render(hbs`{{nrg-button action=(action testAction)}}`);
+    await render(hbs`<NrgButton @action={{action testAction}} />`);
 
     await click('button');
   });

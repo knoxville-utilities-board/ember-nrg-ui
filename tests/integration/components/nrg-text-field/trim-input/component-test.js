@@ -8,7 +8,7 @@ module('Integration | Component | nrg-text-field/trim-input', function(hooks) {
 
   test('trim white space', async function(assert) {
     this.set('value', 'bob     ');
-    await render(hbs`{{nrg-text-field/trim-input value=value}}`);
+    await render(hbs`<NrgTextField::TrimInput @value={{value}} />`);
     assert.equal(find('input').value, 'bob');
     this.set('value', 'jim     ');
     assert.equal(find('input').value, 'jim');
@@ -16,7 +16,7 @@ module('Integration | Component | nrg-text-field/trim-input', function(hooks) {
 
   test('trim white space from user input', async function(assert) {
     this.set('value', '');
-    await render(hbs`{{nrg-text-field/trim-input value=value}}`);
+    await render(hbs`<NrgTextField::TrimInput @value={{value}} />`);
     await fillIn('input', 'bob     ');
     assert.equal(this.value, 'bob');
   });

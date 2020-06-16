@@ -16,8 +16,8 @@ module('Integration | Component | nrg-modal', function(hooks) {
       assert.ok(true);
     };
     await render(hbs`
-      {{nrg-modal-container}}
-      {{nrg-modal secondaryButton='Button Text' isOpen=true onSecondaryButtonClick=(action this.onButtonClick)}}
+      <NrgModalContainer />
+      <NrgModal @secondaryButton="Button Text" @isOpen={{true}} @onSecondaryButtonClick={{action this.onButtonClick}} />
     `);
     await click('button');
   });
@@ -27,8 +27,8 @@ module('Integration | Component | nrg-modal', function(hooks) {
       assert.ok(true);
     };
     await render(hbs`
-      {{nrg-modal-container}}
-      {{nrg-modal primaryButton='Button Text' isOpen=true onPrimaryButtonClick=(action this.onButtonClick)}}
+      <NrgModalContainer />
+      <NrgModal @primaryButton="Button Text" @isOpen={{true}} @onPrimaryButtonClick={{action this.onButtonClick}} />
     `);
     await click('button');
   });
@@ -36,10 +36,10 @@ module('Integration | Component | nrg-modal', function(hooks) {
   test('modal handles mutliple isOpen changes', async function(assert) {
     this.isOpen = false;
     await render(hbs`
-      {{nrg-modal-container}}
-      {{#nrg-modal isOpen=isOpen}}
+      <NrgModalContainer />
+      <NrgModal @isOpen={{isOpen}}>
         <h2>Test Content</h2>
-      {{/nrg-modal}}
+      </NrgModal>
     `);
     assert.notOk(find('.ui.modals h2'));
     this.set('isOpen', true);
@@ -50,9 +50,9 @@ module('Integration | Component | nrg-modal', function(hooks) {
 
   test('it renders block text in place', async function(assert) {
     await render(hbs`
-      {{#nrg-modal isOpen=true renderInPlace=true}}
+      <NrgModal @isOpen={{true}} @renderInPlace={{true}}>
         block text
-      {{/nrg-modal}}
+      </NrgModal>
     `);
     assert.equal(find('*').textContent.trim(), 'block text');
   });
@@ -64,11 +64,11 @@ module('Integration | Component | nrg-modal', function(hooks) {
     }
     this.hasModal = true;
     await render(hbs`
-      {{nrg-modal-container}}
+      <NrgModalContainer />
       {{#if hasModal}}
-        {{#nrg-modal isOpen=true onModalClose=(action this.onModalClose)}}
+        <NrgModal @isOpen={{true}} @onModalClose={{action this.onModalClose}}>
           block text
-        {{/nrg-modal}}
+        </NrgModal>
       {{/if}}
     `);
     assert.equal(find('.ui.modals').textContent.trim(), 'block text');

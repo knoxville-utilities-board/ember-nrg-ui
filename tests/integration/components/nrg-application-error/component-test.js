@@ -7,7 +7,7 @@ module('Integration | Component | nrg-application-error', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{nrg-application-error}}`);
+    await render(hbs`<NrgApplicationError />`);
 
     assert.equal(find('h3').textContent.trim(), 'An error occurred.');
   });

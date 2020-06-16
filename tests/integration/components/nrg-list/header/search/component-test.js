@@ -10,6 +10,6 @@ module('Integration | Component | nrg-list/header/search', function(hooks) {
     this.changedAction = function(value) {
       assert.equal(value, 'value');
     };
-    await render(hbs`{{nrg-list/header/search searchString='value' changed=(action changedAction)}}`);
+    await render(hbs`<NrgList::Header::Search @searchString="value" @changed={{action changedAction}} />`);
   });
 });

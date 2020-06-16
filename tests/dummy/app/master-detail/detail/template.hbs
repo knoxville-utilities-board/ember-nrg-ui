@@ -29,7 +29,7 @@
   <h2>{{model.name}}</h2>
 </div>
 
-{{#nrg-modal headerText="A simple basic modal" basic=true isOpen=modalOpen2}}
+<NrgModal @headerText="A simple basic modal" @basic={{true}} @isOpen={{modalOpen2}}>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
     scelerisque
@@ -54,11 +54,11 @@
     Curabitur vestibulum
     hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
   </p>
-{{/nrg-modal}}
-{{nrg-button text="Open Modal" action=(action (mut modalOpen) true)}}
-{{#nrg-modal headerText="Contains a nested modal (Not dismissable)" primaryButton="Force Dismiss" action="forceDismiss" dismissable=false isOpen=modalOpen}}
-  {{nrg-button text="Open Basic Modal" action=(action (mut modalOpen2) true)}}
-  {{nrg-checkbox label="Show More Content" value=showMoreContent}}
+</NrgModal>
+<NrgButton @text="Open Modal" @action={{action (mut modalOpen) true}} />
+<NrgModal @headerText="Contains a nested modal (Not dismissable)" @primaryButton="Force Dismiss" @action={{action "forceDismiss"}} @dismissable={{false}} @isOpen={{modalOpen}}>
+  <NrgButton @text="Open Basic Modal" @action={{action (mut modalOpen2) true}} />
+  <NrgCheckbox @label="Show More Content" @value={{showMoreContent}} />
   {{#if showMoreContent}}
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
@@ -85,4 +85,4 @@
     Curabitur vestibulum
     hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
   </p>
-{{/nrg-modal}}
+</NrgModal>

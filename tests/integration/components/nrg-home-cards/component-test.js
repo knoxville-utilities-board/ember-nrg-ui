@@ -8,11 +8,11 @@ module('Integration | Component | nrg-home-cards', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`
-      {{#nrg-home-cards actionCard=true as |view|}}
-        {{view.home-card label="Item 1" icon="settings"}}
-        {{view.home-card label="Item 2" icon="settings"}}
-        {{view.home-card label="Item 3" icon="settings"}}
-      {{/nrg-home-cards}}
+      <NrgHomeCards @actionCard={{true}} as |view|>
+        <view.home-card @label="Item 1" @icon="settings" />
+        <view.home-card @label="Item 2" @icon="settings" />
+        <view.home-card @label="Item 3" @icon="settings" />
+      </NrgHomeCards>
     `);
 
     assert.ok(this.element.textContent.trim().includes('Item 1'));

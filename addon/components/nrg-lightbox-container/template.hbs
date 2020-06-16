@@ -1,4 +1,4 @@
-{{#nrg-modal isOpen=isOpen lightbox=true autofocus=false onModalOpen=(action onModalOpen)}}
+<NrgModal @isOpen={{isOpen}} @lightbox={{true}} @autofocus={{false}} @onModalOpen={{action onModalOpen}}>
   <div class="lightbox-upper-container">
     <div class="lightbox-image">
       <div class="image-container">
@@ -34,6 +34,6 @@
     </button>
   </div>
   {{#if isOpen}}
-    {{nrg-lightbox-container/keyboard-shortcuts}}
+    <NrgLightboxContainer::KeyboardShortcuts />
   {{/if}}
-{{/nrg-modal}}
+</NrgModal>

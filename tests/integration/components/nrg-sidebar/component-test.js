@@ -7,7 +7,7 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
   setupRenderingTest(hooks);
 
   test('sidebar is rendered', async function(assert) {
-    await render(hbs`{{nrg-sidebar isOpen=true}}`);
+    await render(hbs`<NrgSidebar @isOpen={{true}} />`);
     assert.equal(document.querySelectorAll('.sidebar-menu').length, 1);
   });
 
@@ -18,7 +18,7 @@ module('Integration | Component | nrg-sidebar', function(hooks) {
       routeName: '',
       isShownInSidebar: true,
     });
-    await render(hbs`{{nrg-sidebar isOpen=true}}`);
+    await render(hbs`<NrgSidebar @isOpen={{true}} />`);
     assert.ok(
       document
         .querySelector('.sidebar-menu')

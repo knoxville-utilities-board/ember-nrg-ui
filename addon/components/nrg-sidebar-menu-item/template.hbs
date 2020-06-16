@@ -1,13 +1,13 @@
 {{#if item.sidebarAction}}
   <a href="" class="{{if item.active "active"}} item" {{action sidebarAction item}}>
-    {{nrg-sidebar-menu-item/content item=item}}
+    <NrgSidebarMenuItem::Content @item={{item}} />
   </a>
 {{else if item.sidebarURL}}
   <a href={{item.sidebarURL}} class="item" target="_blank" rel="noopener" {{action clickedSidebarItem item preventDefault=false}}>
-    {{nrg-sidebar-menu-item/content item=item}}
+    <NrgSidebarMenuItem::Content @item={{item}} />
   </a>
 {{else}}
-  {{#link-to item.routeName class=_linkToItemClass click=(action clickedSidebarItem item)}}
-    {{nrg-sidebar-menu-item/content item=item}}
-  {{/link-to}}
+  <LinkTo @route={{item.routeName}} @class={{_linkToItemClass}} @click={{action clickedSidebarItem item}}>
+    <NrgSidebarMenuItem::Content @item={{item}} />
+  </LinkTo>
 {{/if}}

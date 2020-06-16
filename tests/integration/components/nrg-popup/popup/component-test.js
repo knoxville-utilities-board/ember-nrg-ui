@@ -9,9 +9,9 @@ module('Integration | Component | nrg-popup/popup', function(hooks) {
   test('it renders', async function(assert) {
     this.mouseEvent = function() {};
     await render(hbs`
-      {{#nrg-popup/popup isOpen=true}}
+      <NrgPopup::Popup @isOpen={{true}}>
         template block text
-      {{/nrg-popup/popup}}
+      </NrgPopup::Popup>
     `);
 
     assert.equal(this.element.textContent.trim(), 'template block text');

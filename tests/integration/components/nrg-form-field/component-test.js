@@ -8,9 +8,9 @@ module('Integration | Component | nrg-form-field', function(hooks) {
 
   test('input id works', async function(assert) {
     await render(hbs`
-      {{#nrg-form-field label='label'}}
-        {{input id='testId' type='text'}}
-      {{/nrg-form-field}}
+      <NrgFormField @label="label">
+        <Input @id="testId" type='text' />
+      </NrgFormField>
     `);
 
     const forProp = find('.field label').htmlFor;
@@ -20,9 +20,9 @@ module('Integration | Component | nrg-form-field', function(hooks) {
 
   test('proper errors display', async function(assert) {
     await render(hbs`
-      {{#nrg-form-container didValidate=true as |form|}}
-        {{form.field errorMessage='Test Message'}}
-      {{/nrg-form-container}}
+      <NrgFormContainer @didValidate={{true}} as |form|>
+        <form.field @errorMessage="Test Message" />
+      </NrgFormContainer>
     `);
 
     assert.equal(find('.field.error .label').textContent.trim(), 'Test Message');
@@ -30,9 +30,9 @@ module('Integration | Component | nrg-form-field', function(hooks) {
 
   test('error class shows', async function(assert) {
     await render(hbs`
-      {{#nrg-form-container didValidate=true as |form|}}
-        {{form.field errorMessage='Test Message'}}
-      {{/nrg-form-container}}
+      <NrgFormContainer @didValidate={{true}} as |form|>
+        <form.field @errorMessage="Test Message" />
+      </NrgFormContainer>
     `);
 
     assert.ok(find('.field').classList.contains('error'));

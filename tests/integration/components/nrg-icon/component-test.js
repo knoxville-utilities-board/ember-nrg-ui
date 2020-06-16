@@ -7,7 +7,7 @@ module('Integration | Component | nrg-icon', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{nrg-icon icon='settings'}}`);
+    await render(hbs`<NrgIcon @icon="settings" />`);
 
     const { classList } = find('i');
 

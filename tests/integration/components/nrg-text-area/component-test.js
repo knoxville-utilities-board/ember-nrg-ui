@@ -11,7 +11,7 @@ module('Integration | Component | nrg-text-area', function(hooks) {
     setupValidations(this);
     this.set('value', 'bob');
 
-    await render(hbs`{{nrg-text-area value=value}}`);
+    await render(hbs`<NrgTextArea @value={{value}} />`);
 
     assert.equal(find('textarea').value, 'bob');
   });

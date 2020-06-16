@@ -5,5 +5,15 @@
     items=(component "nrg-list/items" isSelectable=isSelectable selectionType=selectionType pageMeta=pageMeta pageSizes=pageSizes selectedPageSize=selectedPageSize loading=loading items=items itemClicked=(action this.onItemSelect) changePage=(action this.onChangePage) groupHeaderHandler=groupHeaderHandler)
     create-button=(component "nrg-button" class="ui circular icon big primary bottom right floating button" icon="plus"))}}
 {{else}}
-  {{nrg-list/items isSelectable=isSelectable selectionType=selectionType pageMeta=pageMeta pageSizes=pageSizes selectedPageSize=selectedPageSize loading=loading items=items itemClicked=(action this.onItemSelect) changePage=(action this.onChangePage) groupHeaderHandler=groupHeaderHandler}}
+  <NrgList::Items
+    @isSelectable={{isSelectable}} 
+    @selectionType={{selectionType}}
+    @pageMeta={{pageMeta}}
+    @pageSizes={{pageSizes}}
+    @selectedPageSize={{selectedPageSize}}
+    @loading={{loading}}
+    @items={{items}}
+    @itemClicked={{action this.onItemSelect}}
+    @changePage={{action this.onChangePage}}
+    @groupHeaderHandler={{groupHeaderHandler}} />
 {{/if}}

@@ -16,7 +16,7 @@ module('Integration | Component | nrg-list/header/filter', function(hooks) {
       assert.equal(selectedFilterValue, filterValue);
     };
 
-    await render(hbs`{{nrg-list/header/filter filterParam='param' filters=filterList changed=(action changedAction)}}`);
+    await render(hbs`<NrgList::Header::Filter @filterParam="param" @filters={{filterList}} @changed={{action changedAction}} />`);
 
     const dropdown = find('.ui.dropdown');
     await click(dropdown);

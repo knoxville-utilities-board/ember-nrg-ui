@@ -14,7 +14,7 @@
         {{#if hasBlock}}
           {{yield item}}
         {{else}}
-          {{nrg-list/default-list-item item=item}}
+          <NrgList::DefaultListItem @item={{item}} />
         {{/if}}
       </div>
     {{else}}
@@ -22,7 +22,7 @@
         {{#if hasBlock}}
           {{yield item}}
         {{else}}
-          {{nrg-list/default-list-item item=item}}
+          <NrgList::DefaultListItem @item={{item}} />
         {{/if}}
       </div>
     {{/if}}
@@ -36,7 +36,7 @@
   {{#if loading}}
     <div class="item">
       <div class="content">
-        {{nrg-loading-indicator}}
+        <NrgLoadingIndicator />
       </div>
     </div>
   {{/if}}
