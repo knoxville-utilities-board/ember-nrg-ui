@@ -57,7 +57,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   createClickHandler() {
     this.set('_clickHandler', evt => {
-      if (this.element !== evt.target) {
+      if (!this.element.contains(evt.target)) {
         this.set('focused', false);
         this.set('activeItem', -1);
       }
@@ -147,7 +147,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       if (evt) {
         evt.preventDefault();
         evt.stopPropagation();
-        item = this.get('items').toArray()[this.get('activeItem')];
+        item = this.get('items')[this.get('activeItem')];
       }
       this.select(item);
       this.set('selected', item);
