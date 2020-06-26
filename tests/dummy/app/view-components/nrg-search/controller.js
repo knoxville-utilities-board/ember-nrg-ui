@@ -1,11 +1,11 @@
 // BEGIN-SNIPPET querying-search
-import Controller from '@ember/controller';
 import { A } from '@ember/array';
-import { task, timeout } from 'ember-concurrency';
+import Controller from '@ember/controller';
 import { alias } from '@ember/object/computed';
+import { task, timeout } from 'ember-concurrency';
 
 export default Controller.extend({
-  items: A([
+  options: A([
     {
       animal: 'rabbit',
       header: 'Alfred',
@@ -42,7 +42,7 @@ export default Controller.extend({
 
   queryTask: task(function*() {
     yield timeout(2000);
-    this.set('items', this.get('items').toArray());
+    this.set('items', this.options.toArray());
   }),
 });
 // END-SNIPPET querying-search
