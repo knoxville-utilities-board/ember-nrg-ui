@@ -1,7 +1,7 @@
 <NrgCodeBlock @label="Simple Dropdowns" @codeBlockName="nrg-dropdown.hbs">
   <!-- BEGIN-SNIPPET nrg-dropdown -->
   <NrgFormContainer as |form|>
-    <form.field label="Dropdown (Linked Value)" as |field|>
+    <form.field @label="Dropdown (Linked Value)" as |field|>
       <field.dropdown @options={{optionList}} @selected={{selected}} />
     </form.field>
     <form.field @label="Dropdown with Block Render (Linked Value)" as |field|>
