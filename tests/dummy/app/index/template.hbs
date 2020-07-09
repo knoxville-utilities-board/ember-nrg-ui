@@ -2,14 +2,17 @@
   <h3>Components</h3>
 
   <NrgHomeCards as |view|>
-    <view.home-card @route="/view-components/nrg-error-pages" @label="Error Pages" @icon="warning sign" />
-    <view.home-card @route="/view-components/nrg-forms" @label="Forms" @icon="edit" />
-    <view.home-card @route="/view-components/nrg-home-cards" @label="Home Cards" @icon="th" />
-    <view.home-card @route="/view-components/nrg-loading-indicator" @label="Loading Indicator" @icon="circle notch" />
-    <view.home-card @route="/view-components/nrg-modal" @label="Modal" @icon="clone" />
-    <view.home-card @route="/view-components/nrg-lightbox" @label="Lightbox" @icon="images" />
-    <view.home-card @route="/view-components/nrg-list" @label="List" @icon="list" />
-    <view.home-card @route="/view-components/nrg-search" @label="Search" @icon="search" />
+    <view.home-card @route="view-components.nrg-dropdown" @label="Dropdown" @icon="chevron down" />
+    <view.home-card @route="view-components.nrg-error-pages" @label="Error Pages" @icon="warning sign" />
+    <view.home-card @route="view-components.nrg-forms" @label="Forms" @icon="edit" />
+    <view.home-card @route="view-components.nrg-home-cards" @label="Home Cards" @icon="th" />
+    <view.home-card @route="view-components.nrg-loading-indicator" @label="Loading Indicator" @icon="circle notch" />
+    <view.home-card @route="view-components.nrg-modal" @label="Modal" @icon="clone" />
+    <view.home-card @route="view-components.nrg-lightbox" @label="Lightbox" @icon="images" />
+    <view.home-card @route="view-components.nrg-list" @label="List" @icon="list" />
+    <view.home-card @route="view-components.nrg-search" @label="Search" @icon="search" />
+    <view.home-card @route="view-components.nrg-popup" @label="Popup" @icon="comment" />
+    <view.home-card @route="master-detail" @label="Master Detail" @icon="columns" />
   </NrgHomeCards>
 </div>
 
@@ -17,9 +20,17 @@
   <h3>Mixins</h3>
 
   <NrgHomeCards as |view|>
-    <view.home-card @route="/view-mixins/context-menu" @label="Context Menus" @icon="ellipsis vertical" />
-    <view.home-card @route="/view-mixins/focus-first-input" @label="Focus First Input" @icon="chevron right" />
-    <view.home-card @route="/view-mixins/global-keyboard-shortcut" @label="Global Keyboard Shortcuts" @icon="keyboard" />
-    <view.home-card @route="/view-mixins/resize" @label="Resize" @icon="expand arrows alternate" />
+    <view.home-card @route="view-mixins.context-menu" @label="Context Menus" @icon="ellipsis vertical" />
+    <view.home-card @route="view-mixins.focus-first-input" @label="Focus First Input" @icon="chevron right" />
+    <view.home-card @route="view-mixins.global-keyboard-shortcut" @label="Global Keyboard Shortcuts" @icon="keyboard" />
+    <view.home-card @route="view-mixins.resize" @label="Resize" @icon="expand arrows alternate" />
+  </NrgHomeCards>
+</div>
+
+<div class="ui segment basic">
+  <h3>Services</h3>
+
+  <NrgHomeCards as |view|>
+    <view.home-card @route="toasts" @label="Toasts" @icon="envelope" />
   </NrgHomeCards>
 </div>
