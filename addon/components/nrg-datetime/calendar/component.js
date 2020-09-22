@@ -43,7 +43,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.type === 'time') {
       this.set('isSelectingHours', true);
     }
-    this._updateSelectedIndexes();
+    this._updateSelectedIndexes(this.value);
   },
 
   headerDisplay: computed(
@@ -483,8 +483,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   _updateSelectedIndexes(value) {
     if (!value) {
-      value = moment(this.value);
+      return;
     }
+    value = moment(value);
     this.set('selectedDayIndex', value.date());
     this.set('selectedMonthIndex', value.month());
     this.set('selectedYearIndex', value.year());
