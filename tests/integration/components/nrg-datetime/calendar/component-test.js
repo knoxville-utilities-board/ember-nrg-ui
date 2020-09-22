@@ -184,4 +184,18 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     await render(hbs`<NrgDatetime::Calendar @type="date" @maxDate={{maxDate}} @value={{value}} />`);
     assert.notOk(find('tbody tr:nth-child(7)'));
   });
+
+  test('no time is selected if no value is passed in', async function(assert) {
+    await render(hbs`<NrgDatetime::Calendar @type="time" @value={{value}} />`);
+    
+    const selected = findAll('div.calendar.visible td.active');
+    assert.equal(selected.length, 0);
+  });
+
+  test('no date is selected if no value is passed in', async function(assert) {
+    await render(hbs`<NrgDatetime::Calendar @type="date" @value={{value}} />`);
+    
+    const selected = findAll('div.calendar.visible td.active');
+    assert.equal(selected.length, 0);
+  });
 });
