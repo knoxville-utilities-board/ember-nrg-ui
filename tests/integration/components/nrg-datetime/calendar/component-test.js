@@ -198,4 +198,27 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     const selected = findAll('div.calendar.visible td.active');
     assert.equal(selected.length, 0);
   });
+
+  test('isDateDisabled can use precision', async function(assert) {
+    const hour = 8;
+    const minute = 15;
+    const minDate = moment({
+      hour,
+      minute
+    });
+
+    this.isDateDisabled = function(date, precision) {
+      if (precision == 'hour') {
+        return date.isBefore(minDate, precision);
+      }
+      return date.isSameOrBefore(minDate, precision);
+    }
+    
+    await render(hbs`<NrgDatetime::Calendar @type="time" @isDateDisabled={{isDateDisabled}} />`);
+
+    await click(findAll('tbody tr td.link')[hour]);
+
+    const lastDisabledTime = findAll('tbody tr td.link.disabled')[minute / 5];
+    assert.ok(lastDisabledTime.classList.contains('disabled'));
+  });
 });

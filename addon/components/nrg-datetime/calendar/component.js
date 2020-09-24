@@ -294,7 +294,20 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
     date[operation](dateTransformation);
 
-    const precision = Object.keys(dateTransformation)[0];
+    let precision = null;
+
+    if (this.isSelectingDays) {
+      precision = 'day';
+    } else if (this.isSelectingMonths) {
+      precision = 'month';
+    } else if (this.isSelectingYears) {
+      precision = 'year';
+    } else if (this.isSelectingHours) {
+      precision = 'hour';
+    } else if (this.isSelectingMinutes) {
+      precision = 'minute';
+    }
+
     const userDisabled = this.isDateDisabled && this.isDateDisabled(date, precision);
     if (userDisabled) {
       return;
