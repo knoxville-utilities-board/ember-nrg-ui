@@ -93,7 +93,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   },
 
   _isDateDisabled(date, precision) {
-    const userDisabled = this.isDateDisabled && this.isDateDisabled(date);
+    const userDisabled = this.isDateDisabled && this.isDateDisabled(date, precision);
     const isBeyondDateRange = this._isBeyondDateRange(date, precision);
     return userDisabled || isBeyondDateRange;
   },
@@ -294,7 +294,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
     date[operation](dateTransformation);
 
-    const userDisabled = this.isDateDisabled && this.isDateDisabled(date);
+    const precision = Object.keys(dateTransformation)[0];
+    const userDisabled = this.isDateDisabled && this.isDateDisabled(date, precision);
     if (userDisabled) {
       return;
     }
