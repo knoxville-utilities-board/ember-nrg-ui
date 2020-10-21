@@ -15,8 +15,14 @@ export default Component.extend({
     },
     set(key, value) {
       const oldValue = this.get('value');
-      const newValue = (value && value.trim()) || '';
-      if (oldValue !== newValue) {
+      let newValue;
+      if(value && typeof(value) == 'string'){
+        newValue = value.trim() || '';
+      } else if (value && typeof(value) == 'number') {
+        newValue = value.toString() || '';
+      }
+
+      if(oldValue !== newValue){
         this.set('_value', newValue);
       }
     },

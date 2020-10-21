@@ -209,7 +209,12 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     if (typeof option == 'string') {
       return this.stringContains(option, searchValue);
     } else if (this.searchProperty) {
-      return this.stringContains(option[this.searchProperty], searchValue);
+      const optionAttribute = option[this.searchProperty]
+      if(optionAttribute && typeof optionAttribute == 'string'){
+        return this.stringContains(optionAttribute, searchValue);
+      } else if (optionAttribute && typeof optionAttribute == 'number'){
+        return this.stringContains(optionAttribute.toString(), searchValue);
+      }
     } else {
       return this.stringContains(option.label, searchValue) || this.stringContains(option.value, searchValue);
     }
