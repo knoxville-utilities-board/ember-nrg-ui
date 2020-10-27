@@ -17,7 +17,7 @@ export default Component.extend({
   secondaryButtonText: alias('whatsNewService.secondaryButtonText'),
 
   checkContent: task(function*() {
-    let content = yield this.get('whatsNewService.getContent');
+    let content = yield this.get('whatsNewService.getContent').perform();
     if (content) {
       this.set('content', content);
     }
