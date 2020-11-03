@@ -1,7 +1,8 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { alias, bool, reads } from '@ember/object/computed';
-import { task } from 'ember-concurrency';
+import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
+import { htmlSafe } from '@ember/string';
 import layout from './template';
 
 export default Component.extend({
@@ -9,18 +10,26 @@ export default Component.extend({
 
   whatsNewService: service('whats-new'),
 
-  hasContent: bool('content'),
-  isOpen: reads('hasContent'),
+  isOpen: false,
 
   headerText: alias('whatsNewService.headerText'),
 
   primaryButtonText: alias('whatsNewService.primaryButtonText'),
   secondaryButtonText: alias('whatsNewService.secondaryButtonText'),
+  htmlContent: computed('content', function() {
+    return htmlSafe(this.content);
+  }),
 
-  checkContent: task(function*() {
-    let content = yield this.get('whatsNewService').getContent();
+  didInsertElement() {
+    this._super(...arguments);
+    this.checkContent();
+  },
+
+  async checkContent() {
+    let content = await this.get('whatsNewService').getContent();
     this.set('content', content);
-  }).on('init'),
+    this.set('isOpen', !!content);
+  },
 
   closeModal() {
     this.set('isOpen', false);
