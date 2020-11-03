@@ -37,4 +37,6 @@
 </NrgToastContainer>
 <div id="popup-container"></div>
 <NrgKeyboardShortcutModal />
-<NrgNewFeatures />
+{{#unless isLoading}}
+  <NrgNewFeatures />
+{{/unless}}
