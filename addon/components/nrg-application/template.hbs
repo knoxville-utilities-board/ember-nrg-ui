@@ -9,6 +9,9 @@
           <NrgSidebarMenu @clickedSidebarItem={{action "clickedLink"}} />
         </div>
       {{/if}}
+      {{#if isLoading}}
+        <NrgLoadingIndicator />
+      {{/if}}
       {{yield}}
     </div>
   {{else}}
@@ -20,6 +23,9 @@
       {{/if}}
       <div class="main-content" style={{mainContentStyle}}>
         <div class="ui {{if fluid "fluid"}} container">
+          {{#if isLoading}}
+            <NrgLoadingIndicator />
+          {{/if}}
           {{yield}}
         </div>
       </div>
