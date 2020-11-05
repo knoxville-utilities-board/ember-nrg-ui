@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { alias, bool, reads } from '@ember/object/computed';
+import { alias, and } from '@ember/object/computed';
 import { htmlSafe } from '@ember/string';
 import layout from './template';
 
@@ -10,8 +10,7 @@ export default Component.extend({
 
   whatsNewService: service('whats-new'),
 
-  hasContent: bool('content'),
-  isOpen: reads('hasContent'),
+  _isOpen: and('whatsNewService.isOpen', 'canOpen'),
 
   headerText: alias('whatsNewService.headerText'),
 
@@ -23,16 +22,13 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.checkContent();
+    this.set('canOpen', true);
   },
 
-  async checkContent() {
-    let content = await this.get('whatsNewService').getContent();
-    this.set('content', content);
-  },
+  content: alias('whatsNewService.content'),
 
   closeModal() {
-    this.set('isOpen', false);
+    this.set('whatsNewService.isOpen', false);
   },
 
   onModalClose() {
