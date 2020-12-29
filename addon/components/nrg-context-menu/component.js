@@ -8,7 +8,8 @@ export default Component.extend({
   tagName: '',
   contextService: service('context-menu'),
   options: alias('contextService.contextItems'),
-
+  disabled: alias('contextService.disabled'),
+  
   itemSelected(selected) {
     selected.client.send(selected.actionName, selected);
   },
