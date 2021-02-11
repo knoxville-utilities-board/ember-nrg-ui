@@ -46,12 +46,12 @@ export default Service.extend({
   _menuItemsRoleFiltered: computed('_menuItems.[]', 'currentUser.roles.[]', function() {
     return this.get('_menuItems').filter(item => {
       const roles = this.get('currentUser.roles');
-      if (item.sidebarRole) {
+      if (Array.isArray(item.sidebarRole) && item.needsAllRoles) {
+        return roles && item.sidebarRole.every(role => roles.includes(role));
+      } else if (Array.isArray(item.sidebarRole)) {
+        return roles && item.sidebarRole.some(role => roles.includes(role));
+      } else if (item.sidebarRole) {
         return roles && roles.includes(item.sidebarRole);
-      } else if (item.sidebarRoles && item.needsAllRoles) {
-        return roles && item.sidebarRoles.every(role => roles.includes(role));
-      } else if (item.sidebarRoles) {
-        return roles && item.sidebarRoles.some(role => roles.includes(role));
       }
       return true;
     });

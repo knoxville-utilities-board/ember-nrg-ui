@@ -16,15 +16,14 @@ export default Component.extend({
 
   visible: computed('currentUser.roles', function() {
     const role = this.role;
-    const roles = this.roles;
     const needsAllRoles = this.needsAllRoles;
     const currentUserContent = this.get('currentUser.content');
-    if (role) {
+    if (Array.isArray(role) && needsAllRoles) {
+      return role.every(role => currentUserContent.hasRole(role));
+    } else if (Array.isArray(role)) {
+      return role.some(role => currentUserContent.hasRole(role));
+    } else if (role) {
       return currentUserContent.hasRole(role);
-    } else if (roles && needsAllRoles) {
-      return roles.every(role => currentUserContent.hasRole(role));
-    } else if (roles) {
-      return roles.some(role => currentUserContent.hasRole(role));
     }
     return true;
   }),
