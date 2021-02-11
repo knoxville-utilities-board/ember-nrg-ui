@@ -35,6 +35,8 @@ export default Mixin.create({
             sidebarLabel: item.label,
             sidebarURL: item.url,
             sidebarRole: item.role,
+            sidebarRoles: item.roles,
+            needsAllRoles: item.needsAllRoles,
             sidebarIconClass: item.icon,
             sidebarBadge: item.badge,
             sidebarPriority: item.priority || 10,
