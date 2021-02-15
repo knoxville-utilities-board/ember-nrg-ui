@@ -23,9 +23,8 @@ export default Component.extend({
     const currentUserContent = this.get('currentUser.content');
     if (needsAllRoles) {
       return roles.every(role => currentUserContent.hasRole(role));
-    } else {
-      return roles.some(role => currentUserContent.hasRole(role));
     }
+    return roles.some(role => currentUserContent.hasRole(role));
   }),
 
   click() {

@@ -52,9 +52,8 @@ export default Service.extend({
       const roles = Array.isArray(item.sidebarRole) ? item.sidebarRole : [item.sidebarRole];
       if (item.needsAllRoles) {
         return roles.every(role => currentUserContent.hasRole(role));
-      } else {
-        return roles.some(role => currentUserContent.hasRole(role));
       }
+      return roles.some(role => currentUserContent.hasRole(role));
     });
   }),
 
