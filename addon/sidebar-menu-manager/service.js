@@ -45,15 +45,16 @@ export default Service.extend({
 
   _menuItemsRoleFiltered: computed('_menuItems.[]', 'currentUser.roles.[]', function() {
     return this.get('_menuItems').filter(item => {
-      const roles = this.get('currentUser.roles');
-      if (Array.isArray(item.sidebarRole) && item.needsAllRoles) {
-        return roles && item.sidebarRole.every(role => roles.includes(role));
-      } else if (Array.isArray(item.sidebarRole)) {
-        return roles && item.sidebarRole.some(role => roles.includes(role));
-      } else if (item.sidebarRole) {
-        return roles && roles.includes(item.sidebarRole);
+      if (!item.sidebarRole) {
+        return true;
       }
-      return true;
+      const currentUserContent = this.get('currentUser.content');
+      const roles = Array.isArray(item.sidebarRole) ? item.sidebarRole : [item.sidebarRole];
+      if (item.needsAllRoles) {
+        return roles.every(role => currentUserContent.hasRole(role));
+      } else {
+        return roles.some(role => currentUserContent.hasRole(role));
+      }
     });
   }),
 

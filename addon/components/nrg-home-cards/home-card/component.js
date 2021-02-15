@@ -14,18 +14,18 @@ export default Component.extend({
 
   router: service(),
 
-  visible: computed('currentUser.roles', function() {
-    const role = this.role;
+  visible: computed('currentUser.roles', 'role', function() {
+    if (!this.role) {
+      return true;
+    }
+    const roles = Array.isArray(this.role) ? this.role : [this.role];
     const needsAllRoles = this.needsAllRoles;
     const currentUserContent = this.get('currentUser.content');
-    if (Array.isArray(role) && needsAllRoles) {
-      return role.every(role => currentUserContent.hasRole(role));
-    } else if (Array.isArray(role)) {
-      return role.some(role => currentUserContent.hasRole(role));
-    } else if (role) {
-      return currentUserContent.hasRole(role);
+    if (needsAllRoles) {
+      return roles.every(role => currentUserContent.hasRole(role));
+    } else {
+      return roles.some(role => currentUserContent.hasRole(role));
     }
-    return true;
   }),
 
   click() {
