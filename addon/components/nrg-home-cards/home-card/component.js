@@ -14,22 +14,27 @@ export default Component.extend({
 
   router: service(),
 
-  visible: computed('currentUser.roles', function() {
-    const role = this.get('role');
-    if (role) {
-      return this.get('currentUser.content').hasRole(role);
+  visible: computed('currentUser.roles', 'role', function() {
+    if (!this.role) {
+      return true;
     }
-    return true;
+    const roles = Array.isArray(this.role) ? this.role : [this.role];
+    const needsAllRoles = this.needsAllRoles;
+    const currentUserContent = this.get('currentUser.content');
+    if (needsAllRoles) {
+      return roles.every(role => currentUserContent.hasRole(role));
+    }
+    return roles.some(role => currentUserContent.hasRole(role));
   }),
 
   click() {
-    const route = this.get('route');
-    const routeModel = this.get('routeModel');
-    const url = this.get('url');
+    const route = this.route;
+    const routeModel = this.routeModel;
+    const url = this.url;
     if (route && routeModel) {
-      this.get('router').transitionTo(route, routeModel);
+      this.router.transitionTo(route, routeModel);
     } else if (route) {
-      this.get('router').transitionTo(route);
+      this.router.transitionTo(route);
     } else if (url) {
       // https://mathiasbynens.github.io/rel-noopener/
       const newWindow = window.open();
