@@ -7795,10 +7795,11 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var n=Ember.Component.extend({layout:t.default,columns:"three",classNameBindings:["columns"],classNames:["ui","cards"],actionCard:!1})
 e.default=n}),define("ember-nrg-ui/components/nrg-home-cards/home-card/component",["exports","ember-nrg-ui/components/nrg-home-cards/home-card/template"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var n=Ember.Component.extend({layout:t.default,classNames:["card","home-card"],classNameBindings:["actionCard","visible::is-visually-hidden"],tagName:"a",router:Ember.inject.service(),visible:Ember.computed("currentUser.roles",function(){var e=this.get("role")
-return!e||this.get("currentUser.content").hasRole(e)}),click:function(){var e=this.get("route"),t=this.get("routeModel"),n=this.get("url")
-if(e&&t)this.get("router").transitionTo(e,t)
-else if(e)this.get("router").transitionTo(e)
+var n=Ember.Component.extend({layout:t.default,classNames:["card","home-card"],classNameBindings:["actionCard","visible::is-visually-hidden"],tagName:"a",router:Ember.inject.service(),visible:Ember.computed("currentUser.roles","role",function(){if(!this.role)return!0
+var e=Array.isArray(this.role)?this.role:[this.role],t=this.needsAllRoles,n=this.get("currentUser.content")
+return t?e.every(function(e){return n.hasRole(e)}):e.some(function(e){return n.hasRole(e)})}),click:function(){var e=this.route,t=this.routeModel,n=this.url
+if(e&&t)this.router.transitionTo(e,t)
+else if(e)this.router.transitionTo(e)
 else if(n){var r=window.open()
 r.opener=null,r.location=n}else this.sendAction()}})
 e.default=n}),define("ember-nrg-ui/components/nrg-home-cards/home-card/template",["exports"],function(e){"use strict"
@@ -8235,7 +8236,7 @@ var t=Ember.Mixin.create({sidebarMenuManager:Ember.inject.service(),sidebarPrior
 this._super.apply(this,arguments),Ember.run.next(function(){var t=e.get("sidebarMenuManager")
 t.registerSidebarMenuItem(e)
 var n=e.get("sidebarURLs")||Ember.A(),r=e.get("routeName")
-n.forEach(function(n){void 0===n.isShownInSidebar&&(n.isShownInSidebar=!0),"string"===Ember.typeOf(n.isShownInSidebar)&&(n.isShownInSidebar=e.get(n.isShownInSidebar)),t.registerSidebarMenuItem(Ember.Object.create({sidebarLabel:n.label,sidebarURL:n.url,sidebarRole:n.role,sidebarIconClass:n.icon,sidebarBadge:n.badge,sidebarPriority:n.priority||10,isShownInSidebar:n.isShownInSidebar,sidebarFooterItem:n.sidebarFooterItem,routeName:r}))})})},willDestroy:function(){this._super.apply(this,arguments),this.get("sidebarMenuManager").unregisterSidebarMenuItem(this)}})
+n.forEach(function(n){void 0===n.isShownInSidebar&&(n.isShownInSidebar=!0),"string"===Ember.typeOf(n.isShownInSidebar)&&(n.isShownInSidebar=e.get(n.isShownInSidebar)),t.registerSidebarMenuItem(Ember.Object.create({sidebarLabel:n.label,sidebarURL:n.url,sidebarRole:n.role,needsAllRoles:n.needsAllRoles,sidebarIconClass:n.icon,sidebarBadge:n.badge,sidebarPriority:n.priority||10,isShownInSidebar:n.isShownInSidebar,sidebarFooterItem:n.sidebarFooterItem,routeName:r}))})})},willDestroy:function(){this._super.apply(this,arguments),this.get("sidebarMenuManager").unregisterSidebarMenuItem(this)}})
 e.default=t}),define("ember-nrg-ui/mixins/validation-container",["exports"],function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var t=Ember.Mixin.create({didValidate:!1,showValidation:function(){this.set("didValidate",!0)},hideValidation:function(){this.set("didValidate",!1)}})
@@ -8288,8 +8289,9 @@ var n=Ember.Service.extend({routing:Ember.inject.service("-routing"),init:functi
 return e&&Object.keys(e)||[]}),loadApplicableRoutes:function(){var e=this.get("routing"),n=this.get("availableRoutes"),r=Ember.getOwner(this)
 n.forEach(function(n){var i=r.lookup("route:".concat(n))
 i&&t.default.detect(i)&&e.generateURL(n,Ember.A(),{})})},registerSidebarMenuItem:function(e){this.get("_menuItems").pushObject(e)},unregisterSidebarMenuItem:function(e){this.get("_menuItems").removeObject(e)},contextItemSort:["sidebarPriority:desc","sidebarLabel:asc"],_menuItems:Ember.A(),_menuItemsRoleFiltered:Ember.computed("_menuItems.[]","currentUser.roles.[]",function(){var e=this
-return this.get("_menuItems").filter(function(t){if(t.sidebarRole){var n=e.get("currentUser.roles")
-return n&&n.includes(t.sidebarRole)}return!0})}),_menuItemsSorted:Ember.computed.sort("_menuItemsRoleFiltered","contextItemSort"),footerMenuItems:Ember.computed.filterBy("_menuItemsSorted","sidebarFooterItem",!0),_menuItemsFiltered:Ember.computed.setDiff("_menuItemsSorted","footerMenuItems"),_groupMenuItems:Ember.computed("_menuItemsFiltered.[]",function(){var e=this.get("_menuItemsFiltered"),t=e.filter(function(e){return e.isSidebarGroupHeader})
+return this.get("_menuItems").filter(function(t){if(!t.sidebarRole)return!0
+var n=e.get("currentUser.content"),r=Array.isArray(t.sidebarRole)?t.sidebarRole:[t.sidebarRole]
+return t.needsAllRoles?r.every(function(e){return n.hasRole(e)}):r.some(function(e){return n.hasRole(e)})})}),_menuItemsSorted:Ember.computed.sort("_menuItemsRoleFiltered","contextItemSort"),footerMenuItems:Ember.computed.filterBy("_menuItemsSorted","sidebarFooterItem",!0),_menuItemsFiltered:Ember.computed.setDiff("_menuItemsSorted","footerMenuItems"),_groupMenuItems:Ember.computed("_menuItemsFiltered.[]",function(){var e=this.get("_menuItemsFiltered"),t=e.filter(function(e){return e.isSidebarGroupHeader})
 t.forEach(function(t){if("application"!==t.routeName){var n=e.filter(function(e){if(!e.sidebarAction&&(!e.routeName||e.isSidebarGroupHeader))return!1
 var n=!1
 if(e.sidebarAction)n=e.sidebarGroup===t.sidebarGroup
