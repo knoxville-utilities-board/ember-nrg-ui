@@ -45,10 +45,13 @@ export default Service.extend({
 
   _menuItemsRoleFiltered: computed('_menuItems.[]', 'currentUser.roles.[]', function() {
     return this.get('_menuItems').filter(item => {
+      const currentUserContent = this.get('currentUser.content');
       if (!item.sidebarRole) {
         return true;
       }
-      const currentUserContent = this.get('currentUser.content');
+      if (!currentUserContent) {
+        return false;
+      }
       const roles = Array.isArray(item.sidebarRole) ? item.sidebarRole : [item.sidebarRole];
       if (item.needsAllRoles) {
         return roles.every(role => currentUserContent.hasRole(role));
