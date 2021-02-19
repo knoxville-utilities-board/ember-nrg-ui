@@ -8289,8 +8289,10 @@ var n=Ember.Service.extend({routing:Ember.inject.service("-routing"),init:functi
 return e&&Object.keys(e)||[]}),loadApplicableRoutes:function(){var e=this.get("routing"),n=this.get("availableRoutes"),r=Ember.getOwner(this)
 n.forEach(function(n){var i=r.lookup("route:".concat(n))
 i&&t.default.detect(i)&&e.generateURL(n,Ember.A(),{})})},registerSidebarMenuItem:function(e){this.get("_menuItems").pushObject(e)},unregisterSidebarMenuItem:function(e){this.get("_menuItems").removeObject(e)},contextItemSort:["sidebarPriority:desc","sidebarLabel:asc"],_menuItems:Ember.A(),_menuItemsRoleFiltered:Ember.computed("_menuItems.[]","currentUser.roles.[]",function(){var e=this
-return this.get("_menuItems").filter(function(t){if(!t.sidebarRole)return!0
-var n=e.get("currentUser.content"),r=Array.isArray(t.sidebarRole)?t.sidebarRole:[t.sidebarRole]
+return this.get("_menuItems").filter(function(t){var n=e.get("currentUser.content")
+if(!t.sidebarRole)return!0
+if(!n)return!1
+var r=Array.isArray(t.sidebarRole)?t.sidebarRole:[t.sidebarRole]
 return t.needsAllRoles?r.every(function(e){return n.hasRole(e)}):r.some(function(e){return n.hasRole(e)})})}),_menuItemsSorted:Ember.computed.sort("_menuItemsRoleFiltered","contextItemSort"),footerMenuItems:Ember.computed.filterBy("_menuItemsSorted","sidebarFooterItem",!0),_menuItemsFiltered:Ember.computed.setDiff("_menuItemsSorted","footerMenuItems"),_groupMenuItems:Ember.computed("_menuItemsFiltered.[]",function(){var e=this.get("_menuItemsFiltered"),t=e.filter(function(e){return e.isSidebarGroupHeader})
 t.forEach(function(t){if("application"!==t.routeName){var n=e.filter(function(e){if(!e.sidebarAction&&(!e.routeName||e.isSidebarGroupHeader))return!1
 var n=!1
