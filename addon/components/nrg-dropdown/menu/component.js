@@ -8,10 +8,7 @@ export default Component.extend({
   subMenu: false,
   scrollable: false,
   scrollableClass: computed('scrollable', function() {
-    if (this.scrollable) {
-      return 'scrollable';
-    }
-    return '';
+    return this.scrollable ? 'scrollable' : '';
   }),
   _onSelect() {
     // Implemented by dropdown
