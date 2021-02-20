@@ -1,4 +1,4 @@
-<div class="{{menuClass}} menu">
+<div class="{{menuClass}} {{scrollableClass}} menu">
   {{yield (hash
     options=displayedOptions
     item=(component "nrg-dropdown/item" active=(eq i activeItem) _onSelect=(action _onSelect))
