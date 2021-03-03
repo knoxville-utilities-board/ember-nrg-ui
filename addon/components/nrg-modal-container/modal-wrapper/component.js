@@ -26,6 +26,7 @@ export default Component.extend(ResizeMixin, {
   sidebar: alias('modal.sidebar'),
   basic: alias('modal.basic'),
   lightbox: alias('modal.lightbox'),
+  scrolling: alias('modal.scrolling'),
   modalClass: alias('modal.modalClass'),
   dimmerClass: alias('modal.dimmerClass'),
 
@@ -89,7 +90,7 @@ export default Component.extend(ResizeMixin, {
       if (!this.sidebar) {
         appliedClasses.push('content');
       }
-      if (!this.renderInPlace && !this.masterDetail && !this.sidebar && !this.lightbox) {
+      if (!this.renderInPlace && !this.masterDetail && !this.sidebar && !this.lightbox && this.scrolling) {
         appliedClasses.push('scrolling');
       }
       return appliedClasses.join(' ');

@@ -21,6 +21,7 @@ export default Component.extend({
   basic: false,
   sidebar: false,
   lightbox: false,
+  scrolling: true,
   modalClass: '',
   dimmerClass: '',
   priority: 10,
