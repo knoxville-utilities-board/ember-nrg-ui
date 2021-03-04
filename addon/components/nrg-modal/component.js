@@ -21,6 +21,7 @@ export default Component.extend({
   basic: false,
   sidebar: false,
   lightbox: false,
+  scrolling: and('notMasterDetail', 'notLightbox', 'notSidebar', 'notRenderInModal'),
   modalClass: '',
   dimmerClass: '',
   priority: 10,
@@ -28,6 +29,10 @@ export default Component.extend({
   renderInPlace: reads('isTesting'),
   renderInModal: not('renderInPlace'),
   shouldWormhole: and('isOpen', 'renderInModal'),
+
+  notMasterDetail: not('masterDetail'),
+  notLightbox: not('lightbox'),
+  notSidebar: not('sidebar'),
 
   attributeBindings: ['hidden'],
 
