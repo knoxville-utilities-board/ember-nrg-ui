@@ -97,8 +97,8 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       if (this.element && this.element.contains(evt.target)) {
         const item = evt.target.closest('[data-dropdown-item]');
         if(item){
-          var parent = item.parentNode;
-          var index = [].indexOf.call(parent.children, item);
+          const parent = item.parentNode;
+          const index = [].indexOf.call(parent.children, item);
           this.set('activeItem', index);
         }
       }
