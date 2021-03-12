@@ -94,10 +94,10 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   createMouseEnterHandler() {
     this.set('_mouseEnterHandler', evt => {
-      if (this.element && this.element.contains(evt.target.closest('[data-dropdown-item]'))) {
+      if (this.element && this.element.contains(evt.target)) {
         const item = evt.target.closest('[data-dropdown-item]');
-        const index = [].indexOf.call(item.parentNode.children, item);
-        if(index){
+        if(item) {
+          const index = item.dataset.dropdownIndex;
           this.set('activeItem', index);
         }
       }

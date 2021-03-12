@@ -51,7 +51,7 @@
   <i class="dropdown icon"></i>
   <div class="{{menuClass}} menu">
     {{#each displayedOptions as |option i|}}
-      <NrgDropdown::Item @option={{option}} @disabled={{option.disabled}} @active={{eq i activeItem}} @_onSelect={{action _onSelect}}>
+      <NrgDropdown::Item @option={{option}} @disabled={{option.disabled}} @active={{eq i activeItem}} @index={{i}} @_onSelect={{action _onSelect}}>
         {{#if hasBlock}}
           {{yield option}}
         {{else if isStringData}}
