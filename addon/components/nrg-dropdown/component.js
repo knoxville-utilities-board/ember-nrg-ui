@@ -63,11 +63,14 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   didInsertElement() {
     this._super(...arguments);
+    this.createMouseEnterHandler();
+    this.createMouseLeaveHandler();
     this.createClickHandler();
   },
 
   willDestroyElement() {
     this._super(...arguments);
+    this.removeMouseListeners();
     this.removeWindowClickListener();
   },
 
@@ -77,6 +80,37 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   removeWindowClickListener() {
     document.removeEventListener('click', this._clickHandler, true);
+  },
+
+  addMouseListeners() {
+    document.addEventListener('mouseenter', this._mouseEnterHandler, true);
+    document.addEventListener('mouseleave', this._mouseLeaveHandler, true);
+  },
+
+  removeMouseListeners() {
+    document.removeEventListener('mouseenter', this._mouseEnterHandler, true);
+    document.removeEventListener('mouseleave', this._mouseLeaveHandler, true);
+  },
+
+  createMouseEnterHandler() {
+    this.set('_mouseEnterHandler', evt => {
+      if (this.element && this.element.contains(evt.target)) {
+        const item = evt.target.closest('[data-dropdown-item]');
+        if(item){
+          var parent = item.parentNode;
+          var index = [].indexOf.call(parent.children, item);
+          this.set('activeItem', index);
+        }
+      }
+    });
+  },
+
+  createMouseLeaveHandler() {
+    this.set('_mouseLeaveHandler', evt => {
+      if (this.element && !this.element.contains(evt.target)) {
+        this.set('activeItem', -1);
+      }
+    });
   },
 
   createClickHandler() {
@@ -94,7 +128,9 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     next(() => {
       if (this.get('isOpen')) {
         this.addWindowClickListener();
+        this.addMouseListeners();
       } else {
+        this.removeMouseListeners();
         this.removeWindowClickListener();
       }
     });
