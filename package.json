@@ -88,7 +88,7 @@
     "clean-css": "4.1.11",
     "websocket-extensions": "0.1.4",
     "lodash": "4.17.19",
-    "elliptic": "6.5.3",
+    "elliptic": "6.5.4",
     "dot-prop": "4.2.1"
   }
 }
