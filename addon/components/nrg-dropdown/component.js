@@ -94,11 +94,10 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   createMouseEnterHandler() {
     this.set('_mouseEnterHandler', evt => {
-      if (this.element && this.element.contains(evt.target)) {
+      if (this.element && this.element.contains(evt.target.closest('[data-dropdown-item]'))) {
         const item = evt.target.closest('[data-dropdown-item]');
-        if(item){
-          const parent = item.parentNode;
-          const index = [].indexOf.call(parent.children, item);
+        const index = [].indexOf.call(item.parentNode.children, item);
+        if(index){
           this.set('activeItem', index);
         }
       }
@@ -107,7 +106,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   createMouseLeaveHandler() {
     this.set('_mouseLeaveHandler', evt => {
-      if (this.element && !this.element.contains(evt.target)) {
+      if (this.element && !this.element.contains(evt.target.closest('[data-dropdown-item]'))) {
         this.set('activeItem', -1);
       }
     });
