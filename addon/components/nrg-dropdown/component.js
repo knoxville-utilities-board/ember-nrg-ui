@@ -106,7 +106,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   createMouseLeaveHandler() {
     this.set('_mouseLeaveHandler', evt => {
-      if (this.element && !this.element.contains(evt.target.closest('[data-dropdown-item]'))) {
+      if (this.element && !this.element.contains(evt.target)) {
         this.set('activeItem', -1);
       }
     });
