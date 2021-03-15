@@ -153,6 +153,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     evt.stopPropagation();
     if (this.activeItem > 0) {
       this.decrementProperty('activeItem');
+      this.scrollToItem(this.activeItem);
     }
   }),
 
@@ -164,8 +165,17 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     evt.stopPropagation();
     if (this.activeItem < this.get('displayedOptions.length') - 1) {
       this.incrementProperty('activeItem');
+      this.scrollToItem(this.activeItem);
     }
   }),
+  
+  scrollToItem(itemIndex) {
+    const item = this.element.querySelector(`[data-dropdown-index="${itemIndex}"]`);
+    if (!item) {
+      return;
+    }
+    item.scrollIntoView(false);
+  },
 
   enter: on(keyDown('Enter'), function(evt) {
     const validRange = this.activeItem >= 0 && this.activeItem < this.get('displayedOptions.length');
