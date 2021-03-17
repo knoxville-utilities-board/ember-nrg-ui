@@ -178,13 +178,16 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   enter: on(keyDown('Enter'), function(evt) {
-    const validRange = this.activeItem >= 0 && this.activeItem < this.get('displayedOptions.length');
+    const displayedOptionsLength = this.get('displayedOptions.length');
+    const hasSearchValueAndFoundSingleResult = this.searchValue && displayedOptionsLength === 1;
+    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength || hasSearchValueAndFoundSingleResult;
     if (!this.isOpen || !validRange) {
       return;
     }
     evt.preventDefault();
     evt.stopPropagation();
-    this._onSelect(this.displayedOptions[this.activeItem]);
+    const index = hasSearchValueAndFoundSingleResult ? displayedOptionsLength - 1 : this.activeItem;
+    this._onSelect(this.displayedOptions[index]);
   }),
 
   menuClass: computed('menuDirection', 'isOpen', function() {
