@@ -179,15 +179,18 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   enter: on(keyDown('Enter'), function(evt) {
     const displayedOptionsLength = this.get('displayedOptions.length');
-    const hasSearchValueAndFoundSingleResult = this.searchValue && displayedOptionsLength === 1;
-    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength || hasSearchValueAndFoundSingleResult;
+    const hasSearchClass = this.element.classList.contains('search');
+    const isSearchAndFoundSingleResult = hasSearchClass && displayedOptionsLength === 1;
+    if(isSearchAndFoundSingleResult) {
+      this.incrementProperty('activeItem');
+    }
+    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength || isSearchAndFoundSingleResult;
     if (!this.isOpen || !validRange) {
       return;
     }
     evt.preventDefault();
     evt.stopPropagation();
-    const index = hasSearchValueAndFoundSingleResult ? displayedOptionsLength - 1 : this.activeItem;
-    this._onSelect(this.displayedOptions[index]);
+    this._onSelect(this.displayedOptions[this.activeItem]);
   }),
 
   menuClass: computed('menuDirection', 'isOpen', function() {
