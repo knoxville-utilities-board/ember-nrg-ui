@@ -177,15 +177,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     item.scrollIntoView(false);
   },
 
-  enter: on(keyDown('Enter'), function(evt) {
-    this.performEnterKeyAction(evt)
-  }),
-
-  numPadEnter: on(keyDown('NumpadEnter'), function(evt) {
-    this.performEnterKeyAction(evt);
-  }),
-
-  performEnterKeyAction(evt) {
+  enter: on(keyDown('Enter'), keyDown('NumpadEnter'), function(evt) {
     const displayedOptionsLength = this.get('displayedOptions.length');
     const isSearchAndFoundSingleResult = this.isSearching && displayedOptionsLength === 1;
     if(isSearchAndFoundSingleResult) {
@@ -198,7 +190,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     evt.preventDefault();
     evt.stopPropagation();
     this._onSelect(this.displayedOptions[this.activeItem]);
-  },
+  }),
 
   menuClass: computed('menuDirection', 'isOpen', function() {
     let computedClasses = '';
