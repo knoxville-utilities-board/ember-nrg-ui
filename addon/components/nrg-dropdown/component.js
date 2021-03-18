@@ -178,7 +178,12 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   enter: on(keyDown('Enter'), function(evt) {
-    const validRange = this.activeItem >= 0 && this.activeItem < this.get('displayedOptions.length');
+    const displayedOptionsLength = this.get('displayedOptions.length');
+    const isSearchAndFoundSingleResult = this.isSearching && displayedOptionsLength === 1;
+    if(isSearchAndFoundSingleResult) {
+      this.set('activeItem', 0);
+    }
+    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength;
     if (!this.isOpen || !validRange) {
       return;
     }
