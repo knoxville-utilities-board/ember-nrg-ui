@@ -179,8 +179,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   enter: on(keyDown('Enter'), function(evt) {
     const displayedOptionsLength = this.get('displayedOptions.length');
-    const hasSearchClass = this.element.classList.contains('search');
-    const isSearchAndFoundSingleResult = hasSearchClass && displayedOptionsLength === 1;
+    const isSearchAndFoundSingleResult = this.isSearching && displayedOptionsLength === 1;
     if(isSearchAndFoundSingleResult) {
       this.incrementProperty('activeItem');
     }
