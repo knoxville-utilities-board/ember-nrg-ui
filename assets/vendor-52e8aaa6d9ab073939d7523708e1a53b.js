@@ -7733,8 +7733,10 @@ this.set("_mouseLeaveHandler",function(t){e.element&&!e.element.contains(t.targe
 this.set("_clickHandler",function(t){return e.element&&!e.element.contains(t.target)&&(e.set("isOpen",!1),e.set("activeItem",-1),e.focusInput(!1)),!0})},isOpenObserver:Ember.observer("isOpen",function(){var e=this
 Ember.run.next(function(){e.get("isOpen")?(e.addWindowClickListener(),e.addMouseListeners()):(e.removeMouseListeners(),e.removeWindowClickListener())})}),optionsObserver:Ember.observer("options",function(){var e=this
 this.set("activeItem",-1),Ember.run.next(function(){e.forceSelection&&!e.hasSelected&&e.get("options.length")&&e._onSelect(e.options[0])})}),moveUp:Ember.on((0,t.keyDown)("ArrowUp"),function(e){this.isOpen&&(e.preventDefault(),e.stopPropagation(),this.activeItem>0&&(this.decrementProperty("activeItem"),this.scrollToItem(this.activeItem)))}),moveDown:Ember.on((0,t.keyDown)("ArrowDown"),function(e){this.isOpen&&(e.preventDefault(),e.stopPropagation(),this.activeItem<this.get("displayedOptions.length")-1&&(this.incrementProperty("activeItem"),this.scrollToItem(this.activeItem)))}),scrollToItem:function(e){var t=this.element.querySelector('[data-dropdown-index="'.concat(e,'"]'))
-t&&t.scrollIntoView(!1)},enter:Ember.on((0,t.keyDown)("Enter"),function(e){var t=this.activeItem>=0&&this.activeItem<this.get("displayedOptions.length")
-this.isOpen&&t&&(e.preventDefault(),e.stopPropagation(),this._onSelect(this.displayedOptions[this.activeItem]))}),menuClass:Ember.computed("menuDirection","isOpen",function(){var e=""
+t&&t.scrollIntoView(!1)},enter:Ember.on((0,t.keyDown)("Enter"),function(e){var t=this.get("displayedOptions.length")
+this.isSearching&&1===t&&this.set("activeItem",0)
+var n=this.activeItem>=0&&this.activeItem<t
+this.isOpen&&n&&(e.preventDefault(),e.stopPropagation(),this._onSelect(this.displayedOptions[this.activeItem]))}),menuClass:Ember.computed("menuDirection","isOpen",function(){var e=""
 return this.menuDirection&&(e+=" ".concat(this.menuDirection)),this.isOpen?e+=" transition visible":e+=" transition hidden",e}),textClass:Ember.computed("hasSelected","hasDefaultText","isSearching",function(){return this.isSearching?"filtered":this.hasSelected?"":this.hasDefaultText?"default":""}),displayedOptions:Ember.computed("options","selected.[]","searchValue","isSearching","allowAdditions","hideAdditions",function(){var e=this
 this.set("isAddingOption",!1)
 var t=this.options
