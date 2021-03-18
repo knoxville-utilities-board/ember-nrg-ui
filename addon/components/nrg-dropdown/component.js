@@ -183,7 +183,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     if(isSearchAndFoundSingleResult) {
       this.incrementProperty('activeItem');
     }
-    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength || isSearchAndFoundSingleResult;
+    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength;
     if (!this.isOpen || !validRange) {
       return;
     }
