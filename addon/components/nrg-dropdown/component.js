@@ -177,7 +177,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     item.scrollIntoView(false);
   },
 
-  enter: on(keyDown('Enter'), function(evt) {
+  enter: on(keyDown('Enter'), keyDown('NumpadEnter'), function(evt) {
     const displayedOptionsLength = this.get('displayedOptions.length');
     const isSearchAndFoundSingleResult = this.isSearching && displayedOptionsLength === 1;
     if(isSearchAndFoundSingleResult) {
