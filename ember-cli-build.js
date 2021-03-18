@@ -10,7 +10,7 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: env === 'review' || env === 'production',
       prepend: process.env.rootURL || '/',
-      exclude: ['images/nrg-logo'],
+      exclude: ['images/nrg-logo', 'testem'],
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
     },
     'ember-cli-babel': {
