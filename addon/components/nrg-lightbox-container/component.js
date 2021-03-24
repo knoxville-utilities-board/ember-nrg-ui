@@ -26,6 +26,10 @@ export default Component.extend({
 
   nextDisabled: alias('lightboxService.nextDisabled'),
 
+  bottomDetailClass: computed('bottomDetails', function() {
+    return this.bottomDetails ? '--bottom' : '';
+  }),
+
   onModalOpen() {
     this.set('rotationClass', '');
   },
