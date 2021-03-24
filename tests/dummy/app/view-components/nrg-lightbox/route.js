@@ -15,7 +15,7 @@ export default Route.extend(SidebarNavigationMixin, {
         detail: 'Some details about the second photo\n',
       },
       {
-        url: 'https://www.fillmurray.com/1500/1500',
+        url: 'https://www.fillmurray.com/2448/3264',
         detail: 'Some details about the third photo\n',
       },
     ];
