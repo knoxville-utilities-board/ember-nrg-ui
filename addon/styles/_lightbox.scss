@@ -72,12 +72,7 @@
       margin-top: -48px;
       z-index: 1020;
       @media (max-width: 375px) {
-        user-select: none;
-        display: flex;
-        justify-content: center;
-        padding: 0.5em;
         margin-top: 0px;
-        z-index: 1020;
       }
     }
 
@@ -89,12 +84,7 @@
       margin-top: -81px;
       z-index: 1020;
       @media (max-width: 375px) {
-        user-select: none;
-        display: flex;
-        justify-content: center;
-        padding: 0.5em;
         margin-top: -108px;
-        z-index: 1020;
       }
     }
   }
