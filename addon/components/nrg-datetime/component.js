@@ -45,7 +45,7 @@ export default Component.extend(Validation, {
   },
 
   onFocus(evt) {
-    if (this.isFocused) {
+    if (this.isFocused || this.disabled) {
       return;
     }
 
