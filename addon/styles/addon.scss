@@ -20,10 +20,20 @@ $appbar-color: #232845;
 @import 'popup';
 
 // https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone
+$input-size: 16px !important;
+
 input,
 select,
 textarea {
-  font-size: 16px !important;
+  font-size: $input-size;
+}
+
+.ui.dropdown.selection {
+  font-size: $input-size;
+
+  .item {
+    font-size: $input-size;
+  }
 }
 
 [data-ember-action] {
