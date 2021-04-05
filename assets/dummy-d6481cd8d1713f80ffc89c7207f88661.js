@@ -221,4 +221,4 @@ e.default=t})
 define("dummy/view-mixins/route",["exports","ember-nrg-ui/mixins/sidebar-navigation"],function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var n=Ember.Route.extend(t.default,{sidebarLabel:"Mixins",isSidebarGroupHeader:!0})
 e.default=n}),define("dummy/whats-new/service",["exports","ember-nrg-ui/whats-new/service"],function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})}),define("dummy/config/environment",[],function(){try{var e="dummy/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),n={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(n,"__esModule",{value:!0}),n}catch(r){throw new Error('Could not read config from meta tag with name "'+e+'".')}}),runningTests||require("dummy/app").default.create({name:"ember-nrg-ui",version:"2.4.3"})
+return Object.defineProperty(n,"__esModule",{value:!0}),n}catch(r){throw new Error('Could not read config from meta tag with name "'+e+'".')}}),runningTests||require("dummy/app").default.create({name:"ember-nrg-ui",version:"2.4.4"})
