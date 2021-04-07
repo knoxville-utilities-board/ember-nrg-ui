@@ -69,7 +69,7 @@
     flex-direction: row;
 
     .image {
-      width: 50px;
+      width: 50px !important;
     }
 
     .content:not(:first-child) {
