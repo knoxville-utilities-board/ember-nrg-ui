@@ -1,6 +1,5 @@
 # ember-nrg-ui
 
-[![Build Status][build-status-img]][build-status-link]
 [![NPM][npm-badge-img]][npm-badge-link]
 
 Ember NRG UI
