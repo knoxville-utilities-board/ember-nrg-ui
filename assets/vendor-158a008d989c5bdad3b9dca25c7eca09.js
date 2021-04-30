@@ -7224,7 +7224,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=(0,n.default)(functio
 Object.defineProperty(e,"__esModule",{value:!0}),e.defaultRules=e.pluralize=e.singularize=e.Inflector=void 0,t.default.inflector=new t.default(r.default),e.Inflector=t.default,e.singularize=n.singularize,e.pluralize=n.pluralize,e.defaultRules=r.default}),define("ember-inflector/lib/system/inflections",["exports"],function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default={plurals:[[/$/,"s"],[/s$/i,"s"],[/^(ax|test)is$/i,"$1es"],[/(octop|vir)us$/i,"$1i"],[/(octop|vir)i$/i,"$1i"],[/(alias|status|bonus)$/i,"$1es"],[/(bu)s$/i,"$1ses"],[/(buffal|tomat)o$/i,"$1oes"],[/([ti])um$/i,"$1a"],[/([ti])a$/i,"$1a"],[/sis$/i,"ses"],[/(?:([^f])fe|([lr])f)$/i,"$1$2ves"],[/(hive)$/i,"$1s"],[/([^aeiouy]|qu)y$/i,"$1ies"],[/(x|ch|ss|sh)$/i,"$1es"],[/(matr|vert|ind)(?:ix|ex)$/i,"$1ices"],[/^(m|l)ouse$/i,"$1ice"],[/^(m|l)ice$/i,"$1ice"],[/^(ox)$/i,"$1en"],[/^(oxen)$/i,"$1"],[/(quiz)$/i,"$1zes"]],singular:[[/s$/i,""],[/(ss)$/i,"$1"],[/(n)ews$/i,"$1ews"],[/([ti])a$/i,"$1um"],[/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)(sis|ses)$/i,"$1sis"],[/(^analy)(sis|ses)$/i,"$1sis"],[/([^f])ves$/i,"$1fe"],[/(hive)s$/i,"$1"],[/(tive)s$/i,"$1"],[/([lr])ves$/i,"$1f"],[/([^aeiouy]|qu)ies$/i,"$1y"],[/(s)eries$/i,"$1eries"],[/(m)ovies$/i,"$1ovie"],[/(x|ch|ss|sh)es$/i,"$1"],[/^(m|l)ice$/i,"$1ouse"],[/(bus)(es)?$/i,"$1"],[/(o)es$/i,"$1"],[/(shoe)s$/i,"$1"],[/(cris|test)(is|es)$/i,"$1is"],[/^(a)x[ie]s$/i,"$1xis"],[/(octop|vir)(us|i)$/i,"$1us"],[/(alias|status|bonus)(es)?$/i,"$1"],[/^(ox)en/i,"$1"],[/(vert|ind)ices$/i,"$1ex"],[/(matr)ices$/i,"$1ix"],[/(quiz)zes$/i,"$1"],[/(database)s$/i,"$1"]],irregularPairs:[["person","people"],["man","men"],["child","children"],["sex","sexes"],["move","moves"],["cow","kine"],["zombie","zombies"]],uncountable:["equipment","information","rice","money","species","series","fish","sheep","jeans","police"]}}),define("ember-inflector/lib/system/inflector",["exports"],function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0})
-var t=/^\s*$/,n=/([\w\/-]+[_\/\s-])([a-z\d]+$)/,r=/([\w\/\s-]+)([A-Z][a-z\d]*$)/,i=/[A-Z][a-z\d]*$/
+var t=/^\s*$/,n=/([\w/-]+[_/\s-])([a-z\d]+$)/,r=/([\w/\s-]+)([A-Z][a-z\d]*$)/,i=/[A-Z][a-z\d]*$/
 function o(e,t){for(var n=0,r=t.length;n<r;n++)e.uncountable[t[n].toLowerCase()]=!0}function a(e,t){for(var n=void 0,r=0,i=t.length;r<i;r++)n=t[r],e.irregular[n[0].toLowerCase()]=n[1],e.irregular[n[1].toLowerCase()]=n[1],e.irregularInverse[n[1].toLowerCase()]=n[0],e.irregularInverse[n[0].toLowerCase()]=n[0]}function s(e){(e=e||{}).uncountable=e.uncountable||u(),e.irregularPairs=e.irregularPairs||u()
 var t=this.rules={plurals:e.plurals||[],singular:e.singular||[],irregular:u(),irregularInverse:u(),uncountable:u()}
 o(t,e.uncountable),a(t,e.irregularPairs),this.enableCache()}if(!Object.create&&!Object.create(null).hasOwnProperty)throw new Error("This browser does not support Object.create(null), please polyfil with es5-sham: http://git.io/yBU2rg")
@@ -8373,7 +8373,7 @@ if(a&&(a=this.chooseModuleName(a,e)),a&&this._moduleRegistry.has(a)&&(r=a),t||th
 if(e!==n&&this._moduleRegistry.has(e)&&this._moduleRegistry.has(n))throw new TypeError("Ambiguous module names: '"+e+"' and '"+n+"'")
 if(this._moduleRegistry.has(e))return e
 if(this._moduleRegistry.has(n))return n
-var r=e.replace(/\/-([^\/]*)$/,"/_$1")
+var r=e.replace(/\/-([^/]*)$/,"/_$1")
 return this._moduleRegistry.has(r)?r:void 0},lookupDescription:function(e){var t=this.parseName(e)
 return this.findModuleName(t,!0)},_logLookup:function(e,t,n){if(Ember.ENV.LOG_MODULE_RESOLVER||t.root.LOG_RESOLVER){var r=void 0,i=e?"[✓]":"[ ]"
 r=t.fullName.length>60?".":new Array(60-t.fullName.length).join("."),n||(n=this.lookupDescription(t)),console&&console.info&&console.info(i,t.fullName,r,n)}},knownForType:function(e){for(var t=this._moduleRegistry.moduleNames(),r=(0,n.default)(),i=0,o=t.length;i<o;i++){var a=t[i],s=this.translateToContainerFullname(e,a)
@@ -8628,6 +8628,6 @@ var r=Object.create(null)
 if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)n.d(r,i,function(t){return e[t]}.bind(null,i))
 return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e}
 return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=1)}([function(e,t){window._eai_r=require,window._eai_d=define},function(e,t,n){n(0),e.exports=n(2)},function(e,t,n){var r
-"undefined"!=typeof document&&(n.p=(r=document.querySelectorAll("script"))[r.length-1].src.replace(/\/[^\/]*$/,"/")),e.exports=function(){_eai_d
+"undefined"!=typeof document&&(n.p=(r=document.querySelectorAll("script"))[r.length-1].src.replace(/\/[^/]*$/,"/")),e.exports=function(){_eai_d
 var e=_eai_r
 window.emberAutoImportDynamic=function(t){return 1===arguments.length?e("_eai_dyn_"+t):e("_eai_dynt_"+t)(Array.prototype.slice.call(arguments,1))}}()}])
