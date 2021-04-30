@@ -33,7 +33,7 @@ jobs:
     - name: Run Handlebars Linter
       run: yarn run lint:hbs
 
-    - name: Run Handlebars Linter
+    - name: Run Javascript Linter
       run: yarn run lint:js
 
   test:
