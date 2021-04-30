@@ -12,7 +12,8 @@ export default Service.extend({
 
   contextItemSort: ['priority:desc', 'baseLabel:asc'],
 
-  disabled: true,
+  disabled: false,
+  
   rawContextItems: computed('registeredClients.[]', 'registeredClients.@each.contextItems', function() {
     const rawContextItems = A();
     this.get('registeredClients').forEach(client => {

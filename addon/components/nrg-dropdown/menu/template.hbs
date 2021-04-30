@@ -1,7 +1,7 @@
 <div class="{{menuClass}} {{scrollableClass}} menu">
   {{yield (hash
     options=displayedOptions
-    item=(component "nrg-dropdown/item" active=(eq i activeItem) _onSelect=(action _onSelect))
+    item=(component "nrg-dropdown/item" activeItem=activeItem _onSelect=(action _onSelect))
     sub-menu=(component "nrg-dropdown/sub-menu" _onSelect=(action _onSelect))
     )}}
 </div>

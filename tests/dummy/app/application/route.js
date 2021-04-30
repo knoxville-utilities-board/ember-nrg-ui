@@ -12,6 +12,11 @@ export default Route.extend(ContextMenuMixin, KeyboardShortcutMixin, RoutePageTi
       actionName: 'routeToReleaseNotes',
       priority: 2,
     },
+    {
+      label: 'More Release Note',
+      actionName: 'routeToReleaseNotes',
+      priority: 2,
+    },
   ],
 
   keyboardShortcuts: [
