@@ -89,9 +89,14 @@ jobs:
     - name: Install Dependencies
       run: yarn install
 
+    - name: Get Package Version
+      id: package-version
+      uses: martinbeentjes/npm-get-version-action@master
+
     - uses: "marvinpinto/action-automatic-releases@v1.1.2"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "${{ steps.package-version.outputs.current-version}}"
         prerelease: false
 
     - name: Build App
