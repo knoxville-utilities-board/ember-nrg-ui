@@ -25,7 +25,7 @@ jobs:
         path: |
           node_modules
           */*/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-lint
+        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-lint
 
     - name: Install Dependencies
       run: yarn install
@@ -55,7 +55,7 @@ jobs:
         path: |
           node_modules
           */*/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-test
+        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-test
 
     - name: Install Dependencies
       run: yarn install
@@ -84,7 +84,7 @@ jobs:
         path: |
           node_modules
           */*/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-release
+        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-release
 
     - name: Install Dependencies
       run: yarn install
