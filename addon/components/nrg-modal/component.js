@@ -21,7 +21,7 @@ export default Component.extend({
   basic: false,
   sidebar: false,
   lightbox: false,
-  scrolling: and('notMasterDetail', 'notLightbox', 'notSidebar', 'notRenderInModal'),
+  scrolling: and('notMasterDetail', 'notLightbox', 'notSidebar', 'renderInModal'),
   modalClass: '',
   dimmerClass: '',
   priority: 10,
