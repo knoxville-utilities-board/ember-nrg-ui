@@ -81,6 +81,7 @@ export default Component.extend(ResizeMixin, {
     'lightbox',
     'renderInPlace',
     'masterDetail',
+    'scrolling',
     function() {
       const appliedClasses = ['modal-content'];
       if (this.lightbox) {
