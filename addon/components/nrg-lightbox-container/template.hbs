@@ -1,5 +1,5 @@
 <NrgModal @isOpen={{isOpen}} @lightbox={{true}} @autofocus={{false}} @onModalOpen={{action onModalOpen}}>
-  <div class="lightbox-upper-container">
+  <div class="lightbox-upper-container{{bottomDetailClass}}">
     <div class="lightbox-image">
       <div class="image-container">
         <img class="ui image centered {{rotationClass}}" src={{selectedPhoto.url}} alt={{selectedPhoto.altText}}>
