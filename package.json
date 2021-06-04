@@ -90,6 +90,7 @@
     "websocket-extensions": "0.1.4",
     "lodash": "4.17.19",
     "elliptic": "6.5.4",
-    "dot-prop": "4.2.1"
+    "dot-prop": "4.2.1",
+    "ws": "7.4.6"
   }
 }
