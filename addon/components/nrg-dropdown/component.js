@@ -307,6 +307,16 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     }
   },
 
+  onInputFocus() {
+    // do not propagate event
+    return false;
+  },
+
+  onInputChange() {
+    this.set('isOpen', true);
+    this.focusInput(true);
+  },
+
   isCurrentlySelected(option) {
     if (this.multiple) {
       if (!Array.isArray(this.selected)) {

@@ -43,7 +43,7 @@
     {{/each}}
   {{/if}}
   {{#if search}}
-    <Input @class="search" @autocomplete="off" @name={{name}} @value={{searchValue}} />
+    <Input @class="search" @autocomplete="off" @name={{name}} @value={{searchValue}} @focus={{action onInputFocus}} @input={{action onInputChange}} />
   {{/if}}
   {{#if (and search multiple)}}
     <span class="sizer"></span>
