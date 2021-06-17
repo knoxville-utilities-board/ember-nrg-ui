@@ -13,7 +13,7 @@
     <i class="icon {{icon}}"></i>
   {{/if}}
 
-  {{#unless multiple}}
+  {{#if (and (not multiple) (not searchPlaceholder))}}
     <div class="{{textClass}} text">
       {{#if hasSelected}}
         {{#if hasBlock}}
@@ -27,7 +27,7 @@
         {{defaultText}}
       {{/if}}
     </div>
-  {{/unless}}
+  {{/if}}
   {{#if (and hasSelected multiple)}}
     {{#each selected as |selectedOption|}}
       <a data-dropdown-multi-selection="true" class="ui label transition visible">
@@ -43,13 +43,13 @@
     {{/each}}
   {{/if}}
   {{#if search}}
-    <Input @class="search" @autocomplete="off" @name={{name}} @value={{searchValue}} @focus={{action onInputFocus}} @input={{action onInputChange}} />
+    <Input tabindex="0" @class="search" @autocomplete="off" @name={{name}} @placeholder={{searchPlaceholder}} @value={{searchValue}} @input={{action onSearchInputChange}} />
   {{/if}}
   {{#if (and search multiple)}}
     <span class="sizer"></span>
   {{/if}}
   <i class="dropdown icon"></i>
-  <div class="{{menuClass}} menu">
+  <div class="{{menuClass}} menu" tabindex="-1">
     {{#each displayedOptions as |option i|}}
       <NrgDropdown::Item @option={{option}} @disabled={{option.disabled}} @index={{i}} @activeItem={{activeItem}} @_onSelect={{action _onSelect}}>
         {{#if hasBlock}}
