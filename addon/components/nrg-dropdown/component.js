@@ -125,22 +125,18 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     if (this.isOpen) {
       return;
     }
-    next(() => {
-      this.set('isOpen', true);
-      this.addWindowClickListener();
-      this.focusInput(true);
-    });
+    this.set('isOpen', true);
+    this.addWindowClickListener();
+    this.focusInput(true);
   },
 
   closeDropdown() {
     if (!this.isOpen) {
       return;
     }
-    next(() => {
-      this.set('isOpen', false);
-      this.focusInput(false);
-      this.removeWindowClickListener();
-    });
+    this.set('isOpen', false);
+    this.focusInput(false);
+    this.removeWindowClickListener();
   },
 
   optionsObserver: observer('options', function() {
@@ -324,7 +320,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   focusOut(evt) {
-    if (evt.relatedTarget && evt.relatedTarget.closest('.visible.menu')) {
+    if (evt.target && evt.target.closest('.dropdown')) {
       return;
     }
     this.closeDropdown();
@@ -336,7 +332,9 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     }
     const input = this.element.querySelector('input');
     if (focus) {
-      input.focus();
+      next(() => {
+        input.focus();
+      });
     } else {
       this.set('searchValue', '');
       input.blur();
@@ -345,7 +343,6 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   onSearchInputChange() {
     this.openDropdown();
-    this.focusInput(true);
   },
 
   isCurrentlySelected(option) {
