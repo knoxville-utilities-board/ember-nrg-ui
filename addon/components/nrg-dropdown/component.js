@@ -11,6 +11,11 @@ import layout from './template';
 export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixin, {
   layout,
   tagName: 'div',
+  attributeBindings : ['tabindex'],
+
+  tabindex: computed('search', function() {
+    return this.search ? null : "0";
+  }),
 
   defaultText: 'Select an Option',
   disabled: false,
@@ -29,6 +34,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   isOpen: false,
   searchProperty: undefined,
   activeItem: -1,
+  _dropdownDisabled: or('disabled', 'loading'), 
 
   classNames: ['ui', 'dropdown'],
   classNameBindings: [
@@ -56,6 +62,29 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     return this.get('options.length') && typeof this.options[0] == 'string';
   }),
 
+  searchPlaceholder: computed('activeItem', function() {
+    if (this.activeItem === -1 || this.multiple || !this.isSearching) {
+      return '';
+    }
+    const option = this.displayedOptions[this.activeItem];
+    if (this.isStringData) {
+      return option || '';
+    }
+    
+    if (!option) {
+      return '';
+    }
+
+    if (!option.label) {
+      const item = this.element.querySelector(`[data-dropdown-index="${this.activeItem}"]`);
+      if (item) {
+        const text = item.textContent;
+        return text && text.trim() || '';
+      }
+    }
+    return option.label || ''
+  }),
+
   init() {
     this._super(...arguments);
     this.optionsObserver();
@@ -63,14 +92,11 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
 
   didInsertElement() {
     this._super(...arguments);
-    this.createMouseEnterHandler();
-    this.createMouseLeaveHandler();
     this.createClickHandler();
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    this.removeMouseListeners();
     this.removeWindowClickListener();
   },
 
@@ -82,58 +108,36 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     document.removeEventListener('click', this._clickHandler, true);
   },
 
-  addMouseListeners() {
-    document.addEventListener('mouseenter', this._mouseEnterHandler, true);
-    document.addEventListener('mouseleave', this._mouseLeaveHandler, true);
-  },
-
-  removeMouseListeners() {
-    document.removeEventListener('mouseenter', this._mouseEnterHandler, true);
-    document.removeEventListener('mouseleave', this._mouseLeaveHandler, true);
-  },
-
-  createMouseEnterHandler() {
-    this.set('_mouseEnterHandler', evt => {
-      if (this.element && this.element.contains(evt.target)) {
-        const item = evt.target.closest('[data-dropdown-item]');
-        if(item) {
-          const index = item.dataset.dropdownIndex;
-          this.set('activeItem', index);
-        }
-      }
-    });
-  },
-
-  createMouseLeaveHandler() {
-    this.set('_mouseLeaveHandler', evt => {
-      if (this.element && !this.element.contains(evt.target)) {
-        this.set('activeItem', -1);
-      }
-    });
-  },
-
   createClickHandler() {
     this.set('_clickHandler', evt => {
       if (this.element && !this.element.contains(evt.target)) {
-        this.set('isOpen', false);
+        if (this.activeItem !== -1) {
+          this._onSelect(this.options[this.activeItem]);
+        }
+        this.closeDropdown();
         this.set('activeItem', -1);
-        this.focusInput(false);
       }
       return true;
     });
   },
 
-  isOpenObserver: observer('isOpen', function() {
-    next(() => {
-      if (this.get('isOpen')) {
-        this.addWindowClickListener();
-        this.addMouseListeners();
-      } else {
-        this.removeMouseListeners();
-        this.removeWindowClickListener();
-      }
-    });
-  }),
+  openDropdown() {
+    if (this.isOpen) {
+      return;
+    }
+    this.set('isOpen', true);
+    this.addWindowClickListener();
+    this.focusInput(true);
+  },
+
+  closeDropdown() {
+    if (!this.isOpen) {
+      return;
+    }
+    this.set('isOpen', false);
+    this.focusInput(false);
+    this.removeWindowClickListener();
+  },
 
   optionsObserver: observer('options', function() {
     this.set('activeItem', -1);
@@ -145,8 +149,30 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     });
   }),
 
-  moveUp: on(keyDown('ArrowUp'), function(evt) {
+  keyboardEscapeHandler: on(keyDown('Enter'), keyDown('NumpadEnter'), keyDown('Tab'), keyDown('Escape'), function(evt) {
+    if (this._dropdownDisabled) {
+      return;
+    }
+    const displayedOptionsLength = this.get('displayedOptions.length');
+    const isSearchAndFoundResults = this.isSearching && displayedOptionsLength > 0;
+    if(isSearchAndFoundResults) {
+      this.set('activeItem', 0);
+    }
+    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength;
     if (!this.isOpen) {
+      return;
+    }
+    evt.preventDefault();
+    evt.stopPropagation();
+    if (validRange) {
+      this._onSelect(this.displayedOptions[this.activeItem]);
+    } else {
+      this.closeDropdown();
+    }
+  }),
+
+  moveUp: on(keyDown('ArrowUp'), function(evt) {
+    if (!this.isOpen || this._dropdownDisabled) {
       return;
     }
     evt.preventDefault();
@@ -158,7 +184,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   }),
 
   moveDown: on(keyDown('ArrowDown'), function(evt) {
-    if (!this.isOpen) {
+    if (!this.isOpen || this._dropdownDisabled) {
       return;
     }
     evt.preventDefault();
@@ -176,21 +202,6 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     }
     item.scrollIntoView(false);
   },
-
-  enter: on(keyDown('Enter'), keyDown('NumpadEnter'), function(evt) {
-    const displayedOptionsLength = this.get('displayedOptions.length');
-    const isSearchAndFoundSingleResult = this.isSearching && displayedOptionsLength === 1;
-    if(isSearchAndFoundSingleResult) {
-      this.set('activeItem', 0);
-    }
-    const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength;
-    if (!this.isOpen || !validRange) {
-      return;
-    }
-    evt.preventDefault();
-    evt.stopPropagation();
-    this._onSelect(this.displayedOptions[this.activeItem]);
-  }),
 
   menuClass: computed('menuDirection', 'isOpen', function() {
     let computedClasses = '';
@@ -232,25 +243,23 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
         options = options.filter(option => {
           return !this.isCurrentlySelected(option);
         });
-      }
-      if (!this.isSearching) {
+      } else if (!this.isSearching) {
         return options;
-      } else {
-        const filteredOptions = options.filter(option => {
-          return this.isSearchMatch(option, this.searchValue);
-        });
-        if (this.allowAdditions && filteredOptions.length == 0) {
-          this.set('isAddingOption', true);
-          const addedOption = this.isStringData
-            ? this.searchValue
-            : {
-                label: this.searchValue,
-                value: this.searchValue,
-              };
-          return [addedOption];
-        } else {
-          return filteredOptions;
+      }
+      const filteredOptions = options.filter(option => {
+        return this.isSearchMatch(option, this.searchValue);
+      });
+      if (this.allowAdditions && filteredOptions.length == 0) {
+        this.set('isAddingOption', true);
+        if (this.isStringData) {
+          return [this.searchValue]
         }
+        return [{
+          label: this.searchValue,
+          value: this.searchValue,
+        }];
+      } else {
+        return filteredOptions;
       }
     }
   ),
@@ -280,31 +289,60 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     return s1.toLowerCase().indexOf(s2.toLowerCase()) != -1;
   },
 
-  click(evt) {
+  mouseDown(evt) {
     const isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
     const isDropdownItem = evt.target.closest('[data-dropdown-item]');
     if (isMultiSelection || isDropdownItem) {
+      return false;
+    }
+    const isDropdownIcon = evt.target.closest('.dropdown.icon');
+    if (this.search && !this.isOpen) {
+      this.openDropdown();
+    } else if (!this.search || isDropdownIcon) {
+      if (this.isOpen) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
+    }
+  },
+
+  focusIn() {
+    if (this._dropdownDisabled) {
       return;
     }
-    if (this.isOpen) {
-      this.set('isOpen', false);
-    } else {
-      this.set('isOpen', true);
+    if (this.showOnFocus) {
+      this.openDropdown()
+    }
+    if (this.search) {
       this.focusInput(true);
     }
   },
 
+  focusOut(evt) {
+    if (evt.target && evt.target.closest('.dropdown')) {
+      return;
+    }
+    this.closeDropdown();
+  },
+
   focusInput(focus) {
-    if (!this.search) {
+    if (!this.search || this._dropdownDisabled) {
       return;
     }
     const input = this.element.querySelector('input');
     if (focus) {
-      input.focus();
+      next(() => {
+        input.focus();
+      });
     } else {
       this.set('searchValue', '');
       input.blur();
     }
+  },
+
+  onSearchInputChange() {
+    this.openDropdown();
   },
 
   isCurrentlySelected(option) {
@@ -323,9 +361,8 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   _onSelect(option) {
-    if (!option) {
-      this.set('isOpen', false);
-      this.focusInput(false);
+    if (!option || this._dropdownDisabled) {
+      this.closeDropdown();
     }
     const notCurrentlySelected = !this.isCurrentlySelected(option);
     if (notCurrentlySelected) {
@@ -348,8 +385,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       this.get('options.push') && this.options.push(option);
     }
     if (!this.multiple) {
-      this.set('isOpen', false);
-      this.focusInput(false);
+      this.closeDropdown();
     }
     this.set('isAddingOption', false);
     this.set('activeItem', -1);
