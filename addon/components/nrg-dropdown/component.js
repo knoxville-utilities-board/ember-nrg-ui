@@ -154,8 +154,8 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       return;
     }
     const displayedOptionsLength = this.get('displayedOptions.length');
-    const isSearchAndFoundResults = this.isSearching && displayedOptionsLength > 0;
-    if(isSearchAndFoundResults) {
+    const isSearchAndFoundOneResult = this.isSearching && displayedOptionsLength === 1;
+    if(isSearchAndFoundOneResult) {
       this.set('activeItem', 0);
     }
     const validRange = this.activeItem >= 0 && this.activeItem < displayedOptionsLength;
