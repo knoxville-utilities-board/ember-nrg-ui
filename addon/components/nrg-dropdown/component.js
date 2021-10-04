@@ -300,7 +300,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     if (this.search && !this.isOpen) {
       this.openDropdown();
     } else if (!this.search || isDropdownIcon) {
-      if (this.isOpen && isDropdownIcon || !clickedInsideDropdownElement ) {
+      if (this.isOpen && (isDropdownIcon || !clickedInsideDropdownElement)) {
         this.closeDropdown();
       } else {
         this.openDropdown();
