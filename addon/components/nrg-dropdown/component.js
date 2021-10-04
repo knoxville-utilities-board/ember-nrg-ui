@@ -296,10 +296,11 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       return false;
     }
     const isDropdownIcon = evt.target.closest('.dropdown.icon');
+    const clickedInsideDropdownElement = evt.target.closest('.dropdown');
     if (this.search && !this.isOpen) {
       this.openDropdown();
     } else if (!this.search || isDropdownIcon) {
-      if (this.isOpen) {
+      if (this.isOpen && (isDropdownIcon || !clickedInsideDropdownElement)) {
         this.closeDropdown();
       } else {
         this.openDropdown();
