@@ -1,9 +1,14 @@
 .nrg-application {
   .toast-container {
-    padding-top: $appbar-height;
+    margin-top: $appbar-height;
 
     .ui.ui.progress.error .bar {
       background-color: #541212;
     }
   }
+}
+
+.ui.toast-container {
+  position: fixed;
+  z-index: 50;
 }
