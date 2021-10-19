@@ -13,6 +13,6 @@ module('Integration | Component | nrg-text-area', function(hooks) {
 
     await render(hbs`<NrgTextArea @value={{value}} />`);
 
-    assert.equal(find('textarea').value, 'bob');
+    assert.dom('textarea').hasValue('bob');
   });
 });

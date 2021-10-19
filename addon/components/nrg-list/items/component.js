@@ -33,15 +33,15 @@ export default Component.extend({
   canSelect: bool('selectionType'),
 
   canShowActiveItem: computed('selected.[]', function() {
-    const selected = this.get('selected');
+    const selected = this.selected;
     return !isEmpty(selected);
   }),
 
   init() {
     this._super(...arguments);
-    const items = this.get('items');
+    const items = this.items;
     if (items) {
-      this.get('_items').pushObjects((items.toArray && items.toArray()) || items);
+      this._items.pushObjects((items.toArray && items.toArray()) || items);
     }
   },
 
@@ -54,24 +54,24 @@ export default Component.extend({
   _total: readOnly('pageMeta.total'),
 
   currentPage: computed('_start', 'selectedPageSize', function() {
-    return this.get('_start') / this.get('selectedPageSize') + 1;
+    return this._start / this.selectedPageSize + 1;
   }),
 
   totalPages: computed('selectedPageSize', '_total', function() {
-    return Math.ceil(this.get('_total') / this.get('selectedPageSize'));
+    return Math.ceil(this._total / this.selectedPageSize);
   }),
 
   canStepForward: computed('currentPage', 'totalPages', function() {
-    return this.get('currentPage') < this.get('totalPages');
+    return this.currentPage < this.totalPages;
   }),
 
   itemsObserver: observer('items', function() {
-    const items = this.get('items');
-    const start = this.get('_start');
+    const items = this.items;
+    const start = this._start;
     if (!start) {
       this.set('_items', createArrayProxy(A()));
     }
-    this.get('_items').pushObjects((items.toArray && items.toArray()) || items);
+    this._items.pushObjects((items.toArray && items.toArray()) || items);
   }),
 
   actions: {
@@ -80,12 +80,12 @@ export default Component.extend({
       if (!this.isSelectable(item)) {
         return;
       }
-      const selectionType = this.get('selectionType');
+      const selectionType = this.selectionType;
       if (selectionType === 'multiple') {
-        if (this.get('selected').includes(item)) {
-          selected = A(this.get('selected').without(item));
+        if (this.selected.includes(item)) {
+          selected = A(this.selected.without(item));
         } else {
-          selected = A(this.get('selected').concat(selected));
+          selected = A(this.selected.concat(selected));
         }
       } else if (!selectionType) {
         return;
@@ -96,7 +96,7 @@ export default Component.extend({
       this.itemClicked(item, selected);
     },
     nextPage() {
-      const pageSize = this.get('selectedPageSize');
+      const pageSize = this.selectedPageSize;
       const start = this.get('pageMeta.start');
       this.changePage(start + pageSize);
     },

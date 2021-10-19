@@ -22,8 +22,8 @@ export default Component.extend({
   }),
 
   handleChangedFilter(sendFalsyValue = true) {
-    const filterParam = this.get('filterParam');
-    const selectedFilter = this.get('selectedFilter');
+    const filterParam = this.filterParam;
+    const selectedFilter = this.selectedFilter;
     const shouldSendFalsyValue = selectedFilter || sendFalsyValue;
     if (filterParam && shouldSendFalsyValue) {
       this.changed(filterParam, selectedFilter);

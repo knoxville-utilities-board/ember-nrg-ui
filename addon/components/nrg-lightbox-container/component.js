@@ -35,11 +35,11 @@ export default Component.extend({
   },
 
   previousImage() {
-    this.get('lightboxService').selectPrevious();
+    this.lightboxService.selectPrevious();
   },
 
   nextImage() {
-    this.get('lightboxService').selectNext();
+    this.lightboxService.selectNext();
   },
 
   toggleDetailLocation() {
@@ -47,7 +47,7 @@ export default Component.extend({
   },
 
   rotateLeft() {
-    const rotationClass = this.get('rotationClass');
+    const rotationClass = this.rotationClass;
     if (!rotationClass) {
       this.set('rotationClass', 'rotate-left');
     }
@@ -63,7 +63,7 @@ export default Component.extend({
   },
 
   rotateRight() {
-    const rotationClass = this.get('rotationClass');
+    const rotationClass = this.rotationClass;
     if (!rotationClass) {
       this.set('rotationClass', 'rotate-right');
     }

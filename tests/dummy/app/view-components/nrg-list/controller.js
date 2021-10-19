@@ -62,8 +62,8 @@ export default Controller.extend({
   },
 
   filteredItems: computed('items', 'query', function() {
-    const query = this.get('query') || {};
-    let items = this.get('items');
+    const query = this.query || {};
+    let items = this.items;
     if (!query.search && !query.animal) {
       return items;
     }
@@ -86,7 +86,7 @@ export default Controller.extend({
   }),
 
   mappedItems: computed('items', function() {
-    return this.get('items').map(item => {
+    return this.items.map(item => {
       return {
         header: item.name,
         meta: item.gender,
@@ -98,9 +98,9 @@ export default Controller.extend({
   pageStart: 0,
 
   pageItems: computed('mappedItems', 'pageStart', function() {
-    const start = this.get('pageStart');
+    const start = this.pageStart;
     const count = 2;
-    const items = this.get('mappedItems').slice(start, start + count);
+    const items = this.mappedItems.slice(start, start + count);
     items.meta = {
       start,
       count,

@@ -9,7 +9,7 @@ export default Controller.extend({
     this.set('counter', ++counter);
     if (!Ember.testing) {
       yield timeout(1000);
-      this.get('counterTask').perform(counter);
+      this.counterTask.perform(counter);
     }
   }).on('init'),
 });

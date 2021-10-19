@@ -25,7 +25,7 @@ export default Component.extend(ResizeMixin, {
   renderInPlace: not('renderInModal'),
 
   mainContentStyle: computed('screenHeight', function() {
-    return htmlSafe(`height: calc(${this.get('screenHeight')}px - 48px`);
+    return htmlSafe(`height: calc(${this.screenHeight}px - 48px`);
   }),
 
   onBackArrowClick() {

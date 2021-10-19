@@ -9,7 +9,7 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<NrgCheckbox @label="label text" />`);
 
-    assert.equal(this.element.textContent.trim(), 'label text');
+    assert.dom(this.element).hasText('label text');
   });
 
   test('click toggles state', async function(assert) {

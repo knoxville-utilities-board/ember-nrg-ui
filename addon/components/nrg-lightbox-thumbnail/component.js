@@ -20,23 +20,23 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
     const item = this.getProperties('thumbnailId', 'photo', 'detail');
-    this.get('lightboxService').add(item);
+    this.lightboxService.add(item);
   },
 
   didDestroyElement() {
-    const thumbnailId = this.get('thumbnailId');
-    this.get('lightboxService').remove(thumbnailId);
+    const thumbnailId = this.thumbnailId;
+    this.lightboxService.remove(thumbnailId);
     this._super(...arguments);
   },
 
   setDetail({ innerHTML }) {
     this.set('detail', innerHTML);
-    const thumbnailId = this.get('thumbnailId');
-    this.get('lightboxService').updateDetail(thumbnailId, innerHTML);
+    const thumbnailId = this.thumbnailId;
+    this.lightboxService.updateDetail(thumbnailId, innerHTML);
   },
 
   openLightbox() {
-    const thumbnailId = this.get('thumbnailId');
-    this.get('lightboxService').selectAndOpen(thumbnailId);
+    const thumbnailId = this.thumbnailId;
+    this.lightboxService.selectAndOpen(thumbnailId);
   },
 });

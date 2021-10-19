@@ -8,21 +8,21 @@ module('Integration | Component | nrg-radio', function(hooks) {
 
   test('it becomes checked when its value is selected', async function(assert) {
     await render(hbs`<NrgRadio @value="1" @selectedValue="1" />`);
-    assert.ok(find('.ui.checkbox.radio input').checked);
+    assert.dom('.ui.checkbox.radio input').isChecked();
   });
 
   test('label is clickable', async function(assert) {
     await render(hbs`<NrgRadio @value="1" />`);
-    assert.notOk(find('.ui.checkbox.radio input').checked);
+    assert.dom('.ui.checkbox.radio input').isNotChecked();
     await click('label');
-    assert.ok(find('.ui.checkbox.radio input').checked);
+    assert.dom('.ui.checkbox.radio input').isChecked();
   });
 
   test('radio is clickable', async function(assert) {
     await render(hbs`<NrgRadio @value="1" />`);
-    assert.notOk(find('.ui.checkbox.radio input').checked);
+    assert.dom('.ui.checkbox.radio input').isNotChecked();
     await click('input');
-    assert.ok(find('.ui.checkbox.radio input').checked);
+    assert.dom('.ui.checkbox.radio input').isChecked();
   });
 
   test('only one radio is checked in a group', async function(assert) {

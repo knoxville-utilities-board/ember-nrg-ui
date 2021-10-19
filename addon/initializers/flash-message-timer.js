@@ -7,7 +7,7 @@ export function initialize() {
     _startHoverTime: null,
     timerTask(timeout) {
       // Allow a timeout to be specified for function override below
-      timeout = timeout || get(this, 'timeout');
+      timeout = timeout || this.timeout;
       if (!timeout) {
         return;
       }
@@ -25,7 +25,7 @@ export function initialize() {
     },
     allowExit() {
       // Start timer back up while accounting for hover time
-      const hoverTime = new Date().getTime() - get(this, '_startHoverTime');
+      const hoverTime = new Date().getTime() - this._startHoverTime;
       set(this, '_startHoverTime', null);
       set(this, 'initializedTime', this.initializedTime + hoverTime);
       if (this._getElapsedTime() < this.timeout && !this.sticky) {

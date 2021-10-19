@@ -19,8 +19,8 @@ export default Service.extend({
   }),
 
   loadApplicableRoutes() {
-    const routing = this.get('routing');
-    const availableRoutes = this.get('availableRoutes');
+    const routing = this.routing;
+    const availableRoutes = this.availableRoutes;
     const container = getOwner(this);
     availableRoutes.forEach(routeName => {
       const route = container.lookup(`route:${routeName}`);
@@ -32,11 +32,11 @@ export default Service.extend({
   },
 
   registerSidebarMenuItem(menuItem) {
-    this.get('_menuItems').pushObject(menuItem);
+    this._menuItems.pushObject(menuItem);
   },
 
   unregisterSidebarMenuItem(menuItem) {
-    this.get('_menuItems').removeObject(menuItem);
+    this._menuItems.removeObject(menuItem);
   },
 
   contextItemSort: ['sidebarPriority:desc', 'sidebarLabel:asc'],
@@ -44,7 +44,7 @@ export default Service.extend({
   _menuItems: A(),
 
   _menuItemsRoleFiltered: computed('_menuItems.[]', 'currentUser.roles.[]', function() {
-    return this.get('_menuItems').filter(item => {
+    return this._menuItems.filter(item => {
       const currentUserContent = this.get('currentUser.content');
       if (!item.sidebarRole) {
         return true;
@@ -67,7 +67,7 @@ export default Service.extend({
   _menuItemsFiltered: setDiff('_menuItemsSorted', 'footerMenuItems'),
 
   _groupMenuItems: computed('_menuItemsFiltered.[]', function() {
-    const menuItems = this.get('_menuItemsFiltered');
+    const menuItems = this._menuItemsFiltered;
     const menuGroups = menuItems.filter(menuItem => {
       return menuItem.isSidebarGroupHeader;
     });

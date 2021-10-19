@@ -11,10 +11,10 @@ export default Component.extend({
 
   value: computed('_value', {
     get() {
-      return this.get('_value').trim();
+      return this._value.trim();
     },
     set(key, value) {
-      const oldValue = this.get('value');
+      const oldValue = this.value;
       let newValue = '';
       if(value && typeof(value) == 'string'){
         newValue = value.trim() || '';

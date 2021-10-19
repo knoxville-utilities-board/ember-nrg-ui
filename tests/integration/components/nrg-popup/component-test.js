@@ -13,6 +13,6 @@ module('Integration | Component | nrg-popup', function(hooks) {
       </NrgPopup>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });
