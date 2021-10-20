@@ -1,8 +1,11 @@
-import { setModifierManager } from '@ember/modifier';
+import { capabilities, setModifierManager } from '@ember/modifier';
 import { guidFor } from '@ember/object/internals';
+import { gte } from 'ember-compatibility-helpers';
 
 export default setModifierManager(
   owner => ({
+    capabilities: capabilities(gte('3.22.0') ? '3.22' : '3.13', { disableAutoTracking: true }),
+
     createModifier() {
       return {
         element: null,

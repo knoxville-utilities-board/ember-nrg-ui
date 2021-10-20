@@ -11,7 +11,7 @@ export default Component.extend({
 
   value: computed('_value', {
     get() {
-      return this._value.trim();
+      return this.get('_value').trim();
     },
     set(key, value) {
       const oldValue = this.value;
