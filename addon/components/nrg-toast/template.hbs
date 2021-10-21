@@ -4,11 +4,7 @@
     <div class="bar down progressing pausable" style={{this.progressDuration}}></div>
   </div>
 {{/if}}
-<div
-  class="{{this.toast.type}} ui toast compact visible"
-  {{did-insert this.onDidInsert}}
-  {{will-destroy this.onWillDestroy}}
-  >
+<div class="{{this.toast.type}} ui toast compact visible">
   <div class="content">
     <div class="ui header">{{this.toast.title}}</div>
     <div>{{this.toast.message}}</div>

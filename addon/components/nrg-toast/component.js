@@ -11,6 +11,20 @@ export default FlashMessage.extend({
 
   flash: alias('toast'),
 
+  didInsertElement() {
+    this._super(...arguments);
+    this.set('_mouseEnterHandler', this._mouseEnter.bind(this));
+    this.set('_mouseLeaveHandler', this._mouseLeave.bind(this));
+    this.element.addEventListener('mouseenter', this._mouseEnterHandler);
+    this.element.addEventListener('mouseleave', this._mouseLeaveHandler);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.element.removeEventListener('mouseenter', this._mouseEnterHandler);
+    this.element.removeEventListener('mouseleave', this._mouseLeaveHandler);
+  },
+
   showProgress: computed('toast.showProgress', 'toast.sticky', 'toast.timeout', function() {
     const timeout = this.get('toast.timeout');
     const showProgress = this.get('toast.showProgress');
