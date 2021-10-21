@@ -11,6 +11,6 @@ module('Integration | Component | nrg-lightbox-thumbnail', function(hooks) {
       url: 'http://someUrl',
     };
     await render(hbs`<NrgLightboxThumbnail @photo={{photo}} />`);
-    assert.equal(find('img').getAttribute('src'), 'http://someUrl');
+    assert.dom('img').hasAttribute('src', 'http://someUrl');
   });
 });

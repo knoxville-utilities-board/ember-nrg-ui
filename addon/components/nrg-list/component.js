@@ -34,7 +34,7 @@ export default Component.extend(ContextMenuMixin, {
   selectionType: '',
 
   init() {
-    if (this.get('hasRefreshContextItem')) {
+    if (this.hasRefreshContextItem) {
       this.contextItems = contextItems;
     }
     this._super(...arguments);
@@ -42,17 +42,17 @@ export default Component.extend(ContextMenuMixin, {
 
   updateQuery(actionName = 'query') {
     const query = {};
-    const searchParam = this.get('searchParameter') || 'search';
-    const searchString = this.get('searchString');
+    const searchParam = this.searchParameter || 'search';
+    const searchString = this.searchString;
     const selectedFilterValue = this.get('selectedFilter.value');
-    const filterParam = this.get('filterParam');
+    const filterParam = this.filterParam;
 
     if (!isBlank(searchString)) {
       query[searchParam] = searchString;
     }
 
     if (!isBlank(selectedFilterValue) && !isBlank(filterParam)) {
-      query[this.get('filterParam')] = selectedFilterValue;
+      query[this.filterParam] = selectedFilterValue;
     }
 
     next(() => {

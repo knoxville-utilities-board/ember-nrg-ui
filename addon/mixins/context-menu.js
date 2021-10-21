@@ -10,10 +10,10 @@ export default Mixin.create({
   contextItems: [],
 
   registerContextItems() {
-    this.get('contextService').addClient(this);
+    this.contextService.addClient(this);
   },
   unregisterContextItems() {
-    this.get('contextService').removeClient(this);
+    this.contextService.removeClient(this);
   },
 
   didInsertElement() {

@@ -11,7 +11,7 @@ module('Integration | Helper | format-number', function(hooks) {
 
     await render(hbs`{{format-number value 2}}`);
 
-    assert.equal(this.element.textContent.trim(), '1,000,000.10');
+    assert.dom(this.element).hasText('1,000,000.10');
   });
 
   test('integer for hbs template', async function(assert) {
@@ -19,9 +19,9 @@ module('Integration | Helper | format-number', function(hooks) {
 
     await render(hbs`{{format-number value 0}}`);
 
-    assert.equal(this.element.textContent.trim(), '1,000,000');
+    assert.dom(this.element).hasText('1,000,000');
 
     this.set('value', '-1060000');
-    assert.equal(this.element.textContent.trim(), '-1,060,000');
+    assert.dom(this.element).hasText('-1,060,000');
   });
 });

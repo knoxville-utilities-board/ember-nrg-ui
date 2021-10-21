@@ -11,7 +11,7 @@ module('Integration | Component | nrg-search', function(hooks) {
       header: 'header',
     };
     await render(hbs`<NrgSearch @selected={{selected}} />`);
-    assert.equal(find('input').value, 'header');
+    assert.dom('input').hasValue('header');
   });
 
   test('value is populated after it is loaded', async function(assert) {
@@ -19,10 +19,10 @@ module('Integration | Component | nrg-search', function(hooks) {
       isLoading: true,
     };
     await render(hbs`<NrgSearch @selected={{selected}} />`);
-    assert.equal(find('input').value, '');
+    assert.dom('input').hasValue('');
     this.set('selected.header', 'header');
     this.set('selected.isLoading', false);
-    assert.equal(find('input').value, 'header');
+    assert.dom('input').hasValue('header');
   });
 
   test('results do not display when loading', async function(assert) {

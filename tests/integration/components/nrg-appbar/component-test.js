@@ -10,7 +10,7 @@ module('Integration | Component | nrg-appbar', function(hooks) {
   test('title renders', async function(assert) {
     await render(hbs`<NrgAppbar @title="test title" />`);
 
-    assert.equal(find('.header.item').textContent.trim(), 'test title');
+    assert.dom('.header.item').hasText('test title');
   });
 
   test('non-production environments display', async function(assert) {
@@ -21,7 +21,7 @@ module('Integration | Component | nrg-appbar', function(hooks) {
       localEnvironment: 'bob',
     });
     await render(hbs`<NrgAppbar @applicationSettings={{applicationSettings}} @title="test title" />`);
-    assert.equal(find('.environment-title').textContent.trim(), 'BOB');
+    assert.dom('.environment-title').hasText('BOB');
   });
 
   test('production evironment should not display', async function(assert) {
@@ -32,6 +32,6 @@ module('Integration | Component | nrg-appbar', function(hooks) {
       localEnvironment: 'bob',
     });
     await render(hbs`<NrgAppbar @applicationSettings={{applicationSettings}} @title="test title" />`);
-    assert.notOk(find('.environment-title'));
+    assert.dom('.environment-title').doesNotExist();
   });
 });

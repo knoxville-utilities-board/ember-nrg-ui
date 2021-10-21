@@ -41,11 +41,11 @@ module('Integration | Component | nrg-modal', function(hooks) {
         <h2>Test Content</h2>
       </NrgModal>
     `);
-    assert.notOk(find('.ui.modals h2'));
+    assert.dom('.ui.modals h2').doesNotExist();
     this.set('isOpen', true);
-    assert.ok(find('.ui.modals h2'));
+    assert.dom('.ui.modals h2').exists();
     this.set('isOpen', false);
-    assert.notOk(find('.ui.modals h2'));
+    assert.dom('.ui.modals h2').doesNotExist();
   });
 
   test('it renders block text in place', async function(assert) {
@@ -54,7 +54,7 @@ module('Integration | Component | nrg-modal', function(hooks) {
         block text
       </NrgModal>
     `);
-    assert.equal(find('*').textContent.trim(), 'block text');
+    assert.dom('*').hasText('block text');
   });
 
   test('modal supports being destroying instead of using isOpen', async function(assert) {
@@ -71,8 +71,8 @@ module('Integration | Component | nrg-modal', function(hooks) {
         </NrgModal>
       {{/if}}
     `);
-    assert.equal(find('.ui.modals').textContent.trim(), 'block text');
+    assert.dom('.ui.modals').hasText('block text');
     this.set('hasModal', false);
-    assert.equal(find('.ui.modals').textContent.trim(), '');
+    assert.dom('.ui.modals').hasText('');
   });
 });

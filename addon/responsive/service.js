@@ -11,7 +11,7 @@ export default Service.extend({
 
   init() {
     this._super(...arguments);
-    this.get('resizeService').on('didResize', this, this._handleResizeEvent);
+    this.resizeService.on('didResize', this, this._handleResizeEvent);
     this._handleResizeEvent();
   },
 

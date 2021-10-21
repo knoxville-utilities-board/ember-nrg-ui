@@ -10,10 +10,10 @@ export default Mixin.create({
   keyboardShortcuts: [],
 
   register() {
-    this.get('keyboardService').registerKeyboardShortcuts(this);
+    this.keyboardService.registerKeyboardShortcuts(this);
   },
   unregister() {
-    this.get('keyboardService').unregisterKeyboardShortcuts(this);
+    this.keyboardService.unregisterKeyboardShortcuts(this);
   },
 
   didInsertElement() {

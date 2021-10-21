@@ -16,7 +16,7 @@ export default Service.extend({
   
   rawContextItems: computed('registeredClients.[]', 'registeredClients.@each.contextItems', function() {
     const rawContextItems = A();
-    this.get('registeredClients').forEach(client => {
+    this.registeredClients.forEach(client => {
       client.get('contextItems').forEach(item => {
         const contextItem = EmberObject.create(item);
         contextItem.set('client', client);
@@ -34,9 +34,9 @@ export default Service.extend({
   }),
 
   addClient(client) {
-    this.get('registeredClients').addObject(client);
+    this.registeredClients.addObject(client);
   },
   removeClient(client) {
-    this.get('registeredClients').removeObject(client);
+    this.registeredClients.removeObject(client);
   },
 });

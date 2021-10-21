@@ -9,7 +9,7 @@ export default Component.extend(ResizeMixin, {
   isLargeScreen: alias('responsive.isComputerScreenGroup'),
 
   didResize() {
-    if (this.get('isOpen') && this.get('isLargeScreen')) {
+    if (this.isOpen && this.isLargeScreen) {
       this.set('isOpen', false);
     }
   },

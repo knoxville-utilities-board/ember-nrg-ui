@@ -13,6 +13,6 @@ export default Component.extend({
   isParentGroup: false,
 
   _linkToItemClass: computed('isParentGroup', function() {
-    return this.get('isParentGroup') ? 'parent-route' : 'item';
+    return this.isParentGroup ? 'parent-route' : 'item';
   }),
 });

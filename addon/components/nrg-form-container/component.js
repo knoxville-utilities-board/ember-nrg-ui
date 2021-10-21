@@ -17,7 +17,7 @@ export default Component.extend(ValidationContainer, {
   submit: function(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.sendAction('action', this.get('param'));
+    this.sendAction('action', this.param);
     this.showValidation();
   },
 

@@ -14,7 +14,7 @@ export default Component.extend({
       return this.get('_value').trim();
     },
     set(key, value) {
-      const oldValue = this.get('value');
+      const oldValue = this.value;
       let newValue = '';
       if(value && typeof(value) == 'string'){
         newValue = value.trim() || '';

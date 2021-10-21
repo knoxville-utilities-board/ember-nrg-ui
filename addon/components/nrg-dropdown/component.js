@@ -1,10 +1,22 @@
 import { A } from '@ember/array';
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
-import { and, equal, not, notEmpty, or, readOnly, reads } from '@ember/object/computed';
+import {
+  and,
+  equal,
+  not,
+  notEmpty,
+  or,
+  readOnly,
+  reads
+} from '@ember/object/computed';
 import { on } from '@ember/object/evented';
 import { next } from '@ember/runloop';
-import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
+import {
+  EKFirstResponderOnFocusMixin,
+  EKMixin,
+  keyDown
+} from 'ember-keyboard';
 import Validation from 'ember-nrg-ui/mixins/validation';
 import layout from './template';
 

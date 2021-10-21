@@ -39,12 +39,12 @@ export default Component.extend(ResizeMixin, {
   computerScreenSidebarActive: and('isComputerScreen', 'sidebarMenuIsOpen'),
 
   mainContentStyle: computed('screenHeight', function() {
-    return htmlSafe(`height:${this.get('screenHeight')}px`);
+    return htmlSafe(`height:${this.screenHeight}px`);
   }),
 
   actions: {
     toggleSidebar() {
-      if (this.get('isComputerScreen')) {
+      if (this.isComputerScreen) {
         this.toggleProperty('sidebarMenuIsOpen');
       } else {
         this.toggleProperty('sidebarIsOpen');
