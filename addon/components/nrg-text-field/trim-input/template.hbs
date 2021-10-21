@@ -1,2 +1,16 @@
-<Input @type={{type}} @min={{min}} @max={{max}} @step={{step}} @value={{_value}} @name={{name}} @placeholder={{placeholder}} @autocomplete={{if autocomplete "on" "off"}} @autocapitalize={{autocapitalize}} @disabled={{disabled}}
-  @maxlength={{maxLength}} @readonly={{readonly}} @focus-out={{action this.onBlur}} @focus-in={{action this.onFocus}} @key-up={{action this.onChange}} />
+<Input
+  @type={{type}}
+  @min={{min}}
+  @max={{max}}
+  @step={{step}}
+  @value={{_value}}
+  @name={{name}}
+  @placeholder={{placeholder}}
+  @autocomplete={{if autocomplete "on" "off"}}
+  @autocapitalize={{autocapitalize}}
+  @disabled={{disabled}}
+  @maxlength={{maxLength}}
+  @focus-out={{action this.onBlur}}
+  @focus-in={{action this.onFocus}}
+  @key-up={{action this.onChange}}
+/>

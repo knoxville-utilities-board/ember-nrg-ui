@@ -14,6 +14,6 @@ export default Component.extend(Validation, {
   characterLimit: readOnly('validation.options.length.max'),
 
   overCharacterLimit: computed('characterLimit', 'value.length', function() {
-    return this.get('characterLimit') < this.get('value.length');
+    return this.characterLimit < this.get('value.length');
   }),
 });

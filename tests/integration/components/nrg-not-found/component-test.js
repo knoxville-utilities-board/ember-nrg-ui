@@ -9,6 +9,6 @@ module('Integration | Component | nrg-not-found', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<NrgNotFound />`);
 
-    assert.equal(find('h3').textContent.trim(), 'This is slightly embarrassing.');
+    assert.dom('h3').hasText('This is slightly embarrassing.');
   });
 });

@@ -17,7 +17,7 @@ module('Integration | Component | nrg-sidebar-menu-item', function(hooks) {
       hbs`<NrgSidebarMenuItem @clickedSidebarItem={{clickedSidebarItem}} @sidebarAction={{action sidebarAction}} />`
     );
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
   });
 
   test('should fire action when clicked', async function(assert) {

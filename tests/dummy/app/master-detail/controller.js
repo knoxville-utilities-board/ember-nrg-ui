@@ -77,7 +77,7 @@ export default Controller.extend({
   ]),
 
   mappedItems: computed('items', function() {
-    return this.get('items').map(item => {
+    return this.items.map(item => {
       return {
         header: item.name,
         meta: item.gender,
@@ -95,7 +95,7 @@ export default Controller.extend({
   }),
 
   onSelect(item) {
-    const animal = this.get('items').findBy('name', item.header);
+    const animal = this.items.findBy('name', item.header);
     this.transitionToRoute('master-detail.detail', animal);
   },
 });

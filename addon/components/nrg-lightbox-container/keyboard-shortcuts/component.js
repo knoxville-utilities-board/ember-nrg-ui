@@ -25,13 +25,13 @@ export default Component.extend(KeyboardShortcutMixin, {
 
   actions: {
     leftPressed() {
-      if (!this.get('previousDisabled')) {
-        this.get('lightboxService').selectPrevious();
+      if (!this.previousDisabled) {
+        this.lightboxService.selectPrevious();
       }
     },
     rightPressed() {
-      if (!this.get('nextDisabled')) {
-        this.get('lightboxService').selectNext();
+      if (!this.nextDisabled) {
+        this.lightboxService.selectNext();
       }
     },
   },

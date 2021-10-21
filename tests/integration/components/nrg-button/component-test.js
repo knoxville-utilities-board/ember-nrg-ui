@@ -9,7 +9,7 @@ module('Integration | Component | nrg-button', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<NrgButton @text="Inline text" />`);
 
-    assert.equal(this.element.textContent.trim(), 'Inline text');
+    assert.dom(this.element).hasText('Inline text');
 
     await render(hbs`
       <NrgButton>
@@ -17,7 +17,7 @@ module('Integration | Component | nrg-button', function(hooks) {
       </NrgButton>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 
   test('fires action on click', async function(assert) {

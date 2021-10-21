@@ -1,7 +1,11 @@
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import { on } from '@ember/object/evented';
-import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
+import {
+  EKFirstResponderOnFocusMixin,
+  EKMixin,
+  keyDown
+} from 'ember-keyboard';
 import moment from 'moment';
 import layout from './template';
 

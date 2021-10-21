@@ -25,7 +25,7 @@ module('Integration | Component | nrg-form-field', function(hooks) {
       </NrgFormContainer>
     `);
 
-    assert.equal(find('.field.error .label').textContent.trim(), 'Test Message');
+    assert.dom('.field.error .label').hasText('Test Message');
   });
 
   test('error class shows', async function(assert) {
@@ -35,6 +35,6 @@ module('Integration | Component | nrg-form-field', function(hooks) {
       </NrgFormContainer>
     `);
 
-    assert.ok(find('.field').classList.contains('error'));
+    assert.dom('.field').hasClass('error');
   });
 });

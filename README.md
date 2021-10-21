@@ -6,9 +6,9 @@ Ember NRG UI
 
 ## Compatibility
 
-- Ember.js v3.4.x to v3.12.x
-- Ember CLI v2.13 or above
-- Node.js v8 or above
+* Ember.js v3.24 or above
+* Ember CLI v3.24 or above
+* Node.js v12 or above
 
 ## Installation
 

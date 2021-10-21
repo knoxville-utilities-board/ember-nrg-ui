@@ -4,7 +4,11 @@ import Validation from 'ember-nrg-ui/mixins/validation';
 import { computed, get, observer } from '@ember/object';
 import { and, or, not } from '@ember/object/computed';
 import { on } from '@ember/object/evented';
-import { EKFirstResponderOnFocusMixin, EKMixin, keyDown } from 'ember-keyboard';
+import {
+  EKFirstResponderOnFocusMixin,
+  EKMixin,
+  keyDown
+} from 'ember-keyboard';
 import { next } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 
@@ -71,12 +75,12 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   }),
 
   selectedObserver: observer('selected', 'selected.isLoading', 'selected.isFulfilled', function() {
-    this.get('updateDisplayValue').perform();
+    this.updateDisplayValue.perform();
   }),
 
   showResultsObserver: observer('showResults', function() {
     next(() => {
-      if (this.get('showResults')) {
+      if (this.showResults) {
         this.addWindowClickListener();
       } else {
         this.removeWindowClickListener();
@@ -85,18 +89,18 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   }),
 
   updateDisplayValue: task(function*() {
-    const selected = yield this.get('selected');
+    const selected = yield this.selected;
     if(!selected) {
       return;
     }
-    const displayLabel = get(selected || {}, this.get('displayLabel'));
+    const displayLabel = get(selected || {}, this.displayLabel);
     this.set('searchString', displayLabel || '');
   })
     .on('init')
     .restartable(),
 
   canPerformSearch: computed('minCharacters', 'searchString', function() {
-    return this.get('searchString.length') >= this.get('minCharacters');
+    return this.get('searchString.length') >= this.minCharacters;
   }),
 
   showResults: and('focused', 'canPerformSearch', 'notLoading', 'receivedResults'),
@@ -104,14 +108,14 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   searchTimeout: 300,
 
   throttleQuery: task(function*(searchString) {
-    yield timeout(this.get('searchTimeout'));
+    yield timeout(this.searchTimeout);
     this.query(searchString);
     this.set('focused', true);
   }).restartable(),
 
   moveUp: on(keyDown('ArrowUp'), function(evt) {
-    const activeItem = this.get('activeItem');
-    if (this.get('showResults')) {
+    const activeItem = this.activeItem;
+    if (this.showResults) {
       evt.preventDefault();
       evt.stopPropagation();
       if (activeItem !== 0) {
@@ -121,8 +125,8 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   }),
 
   moveDown: on(keyDown('ArrowDown'), function(evt) {
-    const activeItem = this.get('activeItem');
-    if (this.get('showResults')) {
+    const activeItem = this.activeItem;
+    if (this.showResults) {
       evt.preventDefault();
       evt.stopPropagation();
       if (activeItem < this.get('items.length') - 1) {
@@ -141,16 +145,16 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     },
     query(searchString) {
       this.set('receivedResults', false);
-      this.get('throttleQuery').perform(searchString);
+      this.throttleQuery.perform(searchString);
     },
     select(evt, item) {
-      if (!this.get('showResults')) {
+      if (!this.showResults) {
         return true;
       }
       if (evt) {
         evt.preventDefault();
         evt.stopPropagation();
-        item = this.get('items')[this.get('activeItem')];
+        item = this.items[this.activeItem];
       }
       this.select(item);
       this.set('selected', item);

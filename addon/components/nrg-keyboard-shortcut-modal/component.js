@@ -25,7 +25,7 @@ export default Component.extend(KeyboardShortcutMixin, {
 
   shortcuts: alias('keyboardService.shortcuts'),
   mappedShortcuts: computed('shortcuts.[]', function() {
-    return this.get('shortcuts').map(shortcut => {
+    return this.shortcuts.map(shortcut => {
       const modKeys = [];
       if (shortcut.ctrl) {
         modKeys.push('Ctrl');
@@ -54,8 +54,8 @@ export default Component.extend(KeyboardShortcutMixin, {
   uniqHeaders: uniq('headers'),
 
   shortcutSegments: computed('uniqHeaders', 'mappedShortcuts', function() {
-    const mappedShortcuts = this.get('mappedShortcuts');
-    const headers = this.get('uniqHeaders');
+    const mappedShortcuts = this.mappedShortcuts;
+    const headers = this.uniqHeaders;
     return headers.map(header => {
       const shortcuts = A(mappedShortcuts).filterBy('header', header);
       return {

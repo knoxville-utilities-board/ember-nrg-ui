@@ -9,7 +9,6 @@ export default Component.extend(Validation, {
   classNames: ['ui', 'checkbox'],
   classNameBindings: ['type', 'disabled', 'fitted', 'readonly:read-only'],
 
-  readonly: false,
   checked: alias('value'),
   _checked: bool('checked'),
   bindValue: true,

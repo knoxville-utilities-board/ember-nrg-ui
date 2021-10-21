@@ -20,15 +20,15 @@ export default Component.extend(GlobalKeyboardShortcutsMixin, {
 
   init() {
     this._super(...arguments);
-    this.get('searchTask').perform(true);
+    this.searchTask.perform(true);
   },
 
   searchStringObserver: observer('searchString', function() {
-    this.get('searchTask').perform();
+    this.searchTask.perform();
   }),
 
   searchTask: task(function*(immediate) {
-    const searchString = this.get('searchString');
+    const searchString = this.searchString;
     if (searchString === null) {
       return;
     }

@@ -13,6 +13,6 @@ module('Integration | Component | nrg-text-field', function(hooks) {
 
     await render(hbs`<NrgTextField @value={{value}} />`);
 
-    assert.equal(find('input').value, 'bob');
+    assert.dom('input').hasValue('bob');
   });
 });
