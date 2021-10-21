@@ -32,7 +32,7 @@ export default Component.extend(Validation, {
   },
 
   icon: computed('type', function() {
-    const type = this.get('type');
+    const type = this.type;
     let icon = 'calendar';
     if (type === 'time') {
       icon = 'clock';

@@ -20,12 +20,12 @@ export default Service.extend({
   hasOpenModals: notEmpty('openModals'),
 
   add(item) {
-    this.get('items').pushObject(item);
+    this.items.pushObject(item);
     item.set('renderIndex', this.renderIndex);
     this.incrementProperty('renderIndex');
   },
 
   remove(item) {
-    this.get('items').removeObject(item);
+    this.items.removeObject(item);
   },
 });

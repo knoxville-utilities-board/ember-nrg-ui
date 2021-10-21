@@ -4,7 +4,7 @@
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 const env = process.env.EMBER_ENV;
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   const app = new EmberAddon(defaults, {
     snippetSearchPaths: ['tests', 'app'],
     fingerprint: {
@@ -18,5 +18,12 @@ module.exports = function(defaults) {
     },
   });
 
-  return app.toTree();
+  const { maybeEmbroider } = require('@embroider/test-setup');
+  return maybeEmbroider(app, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+  });
 };

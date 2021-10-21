@@ -12,7 +12,7 @@ export default Component.extend(Validation, {
   type: 'text',
 
   input() {
-    this.sendAction('action', this.get('value'));
+    this.sendAction('action', this.value);
   },
 
   onFocus() {},

@@ -17,12 +17,12 @@ export default Mixin.create({
   init() {
     this._super(...arguments);
     next(() => {
-      const sidebarMenuManager = this.get('sidebarMenuManager');
+      const sidebarMenuManager = this.sidebarMenuManager;
 
       sidebarMenuManager.registerSidebarMenuItem(this);
 
-      const sidebarURLs = this.get('sidebarURLs') || A();
-      const routeName = this.get('routeName');
+      const sidebarURLs = this.sidebarURLs || A();
+      const routeName = this.routeName;
       sidebarURLs.forEach(item => {
         if (item.isShownInSidebar === undefined) {
           item.isShownInSidebar = true;
@@ -50,6 +50,6 @@ export default Mixin.create({
 
   willDestroy() {
     this._super(...arguments);
-    this.get('sidebarMenuManager').unregisterSidebarMenuItem(this);
+    this.sidebarMenuManager.unregisterSidebarMenuItem(this);
   },
 });

@@ -17,21 +17,21 @@ export default Mixin.create({
 
   didInsertElement() {
     this._super(...arguments);
-    if (this.get('resizeEventsEnabled')) {
-      this.get('resizeService').on('didResize', this, this._handleResizeEvent);
+    if (this.resizeEventsEnabled) {
+      this.resizeService.on('didResize', this, this._handleResizeEvent);
     }
-    if (this.get('resizeDebouncedEventsEnabled')) {
-      this.get('resizeService').on('debouncedDidResize', this, this._handleDebouncedResizeEvent);
+    if (this.resizeDebouncedEventsEnabled) {
+      this.resizeService.on('debouncedDidResize', this, this._handleDebouncedResizeEvent);
     }
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    if (this.get('resizeEventsEnabled')) {
-      this.get('resizeService').off('didResize', this, this._handleResizeEvent);
+    if (this.resizeEventsEnabled) {
+      this.resizeService.off('didResize', this, this._handleResizeEvent);
     }
-    if (this.get('resizeDebouncedEventsEnabled')) {
-      this.get('resizeService').off('debouncedDidResize', this, this._handleDebouncedResizeEvent);
+    if (this.resizeDebouncedEventsEnabled) {
+      this.resizeService.off('debouncedDidResize', this, this._handleDebouncedResizeEvent);
     }
   },
 

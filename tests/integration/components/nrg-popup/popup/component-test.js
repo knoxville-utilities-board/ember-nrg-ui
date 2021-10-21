@@ -14,6 +14,6 @@ module('Integration | Component | nrg-popup/popup', function(hooks) {
       </NrgPopup::Popup>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });

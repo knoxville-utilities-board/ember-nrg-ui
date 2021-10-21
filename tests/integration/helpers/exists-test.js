@@ -15,7 +15,7 @@ module('Integration | Helper | exists', function(hooks) {
 
     await render(hbs`{{exists items item}}`);
 
-    assert.equal(this.element.textContent.trim(), 'true');
+    assert.dom(this.element).hasText('true');
   });
 
   test('item does not exist', async function(assert) {
@@ -27,6 +27,6 @@ module('Integration | Helper | exists', function(hooks) {
 
     await render(hbs`{{exists items item}}`);
 
-    assert.equal(this.element.textContent.trim(), 'false');
+    assert.dom(this.element).hasText('false');
   });
 });

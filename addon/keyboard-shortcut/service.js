@@ -1,5 +1,10 @@
 import Service from '@ember/service';
-import { getCode, keyDown, EKMixin, EKOnInitMixin } from 'ember-keyboard';
+import {
+  getCode,
+  keyDown,
+  EKMixin,
+  EKOnInitMixin
+} from 'ember-keyboard';
 import { A, isArray } from '@ember/array';
 import { computed } from '@ember/object';
 import { on } from '@ember/object/evented';
@@ -18,7 +23,7 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
 
   _shortcuts: computed('registeredClients.[]', function() {
     const shortcuts = A();
-    this.get('registeredClients').forEach(client => {
+    this.registeredClients.forEach(client => {
       shortcuts.addObjects(client.get('_mappedShortcuts'));
     });
     return shortcuts;
@@ -26,14 +31,14 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
 
   keyTrigger: on(keyDown(), function(event) {
     const code = getCode(event);
-    const lastCode = this.get('lastCode');
+    const lastCode = this.lastCode;
 
     // Ignore modifier keys
     if (modifierKeys.includes(code)) {
       return;
     }
 
-    const firstMatchingShortcut = this.get('shortcuts').find(shortcut => {
+    const firstMatchingShortcut = this.shortcuts.find(shortcut => {
       const altMatch = (event.altKey || false) == shortcut.alt;
       const shftMatch = (event.shiftKey || false) == shortcut.shft;
       const ctrlOrMeta = event.ctrlKey || event.metaKey;
@@ -91,7 +96,7 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
     client.set('shortcutRegisteredTime', new Date());
     const mappedShortcuts = this.mapClientShortcuts(client);
     mappedShortcuts.forEach(shortcut => {
-      const matchingShortcut = this.get('shortcuts').find(registeredShortcut => {
+      const matchingShortcut = this.shortcuts.find(registeredShortcut => {
         const altMatch = registeredShortcut.alt == shortcut.alt;
         const shftMatch = registeredShortcut.shft == shortcut.shft;
         const ctrlMatch = registeredShortcut.ctrl == shortcut.ctrl;
@@ -106,9 +111,9 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
       );
     });
     client.set('_mappedShortcuts', mappedShortcuts);
-    this.get('registeredClients').addObject(client);
+    this.registeredClients.addObject(client);
   },
   unregisterKeyboardShortcuts(client) {
-    this.get('registeredClients').removeObject(client);
+    this.registeredClients.removeObject(client);
   },
 });
