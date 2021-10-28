@@ -5,7 +5,7 @@
       <field.text-field @class="left icon action" @disabled={{disabled}} as |view|>
         <NrgIcon @icon="settings" />
         {{view.input}}
-        <NrgButton @class="primary" @text="Action" />
+        <NrgButton @class="primary" @text="Action" @disabled={{disabled}}/>
       </field.text-field>
     </form.field>
     <br>

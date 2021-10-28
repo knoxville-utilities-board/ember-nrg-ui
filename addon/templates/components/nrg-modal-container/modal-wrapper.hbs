@@ -14,10 +14,10 @@
   {{#if modal.hasButtons}}
     <div class="actions">
       {{#if modal.secondaryButton}}
-        <NrgButton @class={{modal.secondaryButtonClass}} @text={{modal.secondaryButton}} @click={{action _onSecondary}} />
+        <NrgButton @class={{modal.secondaryButtonClass}} @text={{modal.secondaryButton}} @onClick={{action _onSecondary}} />
       {{/if}}
       {{#if modal.primaryButton}}
-        <NrgButton @class="primary right" @text={{modal.primaryButton}} @click={{action _onPrimary}} @autofocus={{true}} />
+        <NrgButton @class="primary right" @text={{modal.primaryButton}} @onClick={{action _onPrimary}} @autofocus={{true}} />
       {{/if}}
     </div>
   {{/if}}

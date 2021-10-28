@@ -57,7 +57,7 @@
 </NrgModal>
 <NrgButton @text="Open Modal" @action={{action (mut modalOpen) true}} />
 <NrgModal @headerText="Contains a nested modal (Not dismissable)" @primaryButton="Force Dismiss" @action={{action "forceDismiss"}} @dismissable={{false}} @isOpen={{modalOpen}}>
-  <NrgButton @text="Open Basic Modal" @action={{action (mut modalOpen2) true}} />
+  <NrgButton @text="Open Basic Modal" @onClick={{action (mut modalOpen2) true}} />
   <NrgCheckbox @label="Show More Content" @value={{showMoreContent}} />
   {{#if showMoreContent}}
     <p>
