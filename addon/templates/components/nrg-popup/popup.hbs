@@ -1,9 +1,0 @@
-{{#if isOpen}}
-  <div class="tether-anchor">
-    <EmberTether @bodyElement={{popupContainer}} @target={{target}} @targetAttachment={{targetAttachment}} @attachment={{popupAttachment}}>
-      <div role="button" class="ui popup {{_popupClass}} visible" {{action onMouseEnter on="mouseEnter"}} {{action onMouseLeave on="mouseLeave"}}>
-        {{yield}}
-      </div>
-    </EmberTether>
-  </div>
-{{/if}}

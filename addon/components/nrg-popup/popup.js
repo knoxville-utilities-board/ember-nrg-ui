@@ -1,6 +1,4 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import layout from '../../templates/components/nrg-popup/popup';
+import Component from '@glimmer/component';
 
 const TARGET_POSITIONS = {
   top: 'top left',
@@ -16,41 +14,26 @@ const POPUP_POSITIONS = {
   right: 'middle left',
 };
 
-export default Component.extend({
-  layout,
-  tagName: '',
+export default class NrgPopupPopupComponent extends Component {
+  get targetAttachment() {
+    const position = this.args.position || 'top';
+    return TARGET_POSITIONS[position];
+  }
 
-  position: 'top',
-  targetAttachment: computed('position', function() {
-    return TARGET_POSITIONS[this.position];
-  }),
-  popupAttachment: computed('position', function() {
-    return POPUP_POSITIONS[this.position];
-  }),
+  get popupAttachment() {
+    const position = this.args.position || 'top';
+    return POPUP_POSITIONS[position];
+  }
 
-  popupClass: '',
-  _popupClass: computed('targetAttachment', 'inverted', 'popupClass', function() {
-    let appliedClass = '';
+  get targetAttachmentClass() {
     if (this.targetAttachment) {
-      appliedClass += this.targetAttachment.replace('middle', 'center');
+      return this.targetAttachment.replace('middle', 'center');
+    } else {
+      return '';
     }
-    if (this.inverted) {
-      appliedClass += ' inverted';
-    }
-    if (this.popupClass) {
-      appliedClass += ` ${this.popupClass}`;
-    }
-    return appliedClass;
-  }),
+  }
 
-  popupContainer: computed(function() {
+  get popupContainer() {
     return document.querySelector('#popup-container');
-  }),
-
-  onMouseEnter() {
-    // implement
-  },
-  onMouseLeave() {
-    // implement
-  },
-});
+  }
+}
