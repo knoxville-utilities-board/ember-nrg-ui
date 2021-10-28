@@ -1,0 +1,21 @@
+<form class="ui form">
+  <div class="ui field required {{unless this.validations.attrs.textField.isValid "error"}}">
+    <label>Text Field</label>
+    <div class="ui input fluid">
+      <Input @value={{textField}} />
+    </div>
+    {{#unless this.validations.attrs.textField.isValid}}
+      <div class="ui basic red pointing prompt label">{{this.validations.attrs.textField.message}}</div>
+    {{/unless}}
+  </div>
+  <br />
+  <div class="ui field required {{unless this.validations.attrs.textArea.isValid "error"}}">
+    <label for="">Text Area</label>
+    <div class="ui fluid input nrg-text-area fluid">
+      <Textarea @value={{textArea}} />
+    </div>
+    {{#unless this.validations.attrs.textArea.isValid}}
+      <div class="ui basic red pointing prompt label">{{this.validations.attrs.textArea.message}}</div>
+    {{/unless}}
+  </div>
+</form>
