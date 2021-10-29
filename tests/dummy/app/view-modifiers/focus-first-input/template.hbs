@@ -1,0 +1,12 @@
+
+<!-- BEGIN-SNIPPET focus-first-input -->
+<div class="ui segment" {{focus-first-input}}>
+  <NrgFormContainer as |form|>
+    <form.field @label="Test Input" as |field|>
+      <field.text-field />
+    </form.field>
+  </NrgFormContainer>
+</div>
+<!-- END-SNIPPET -->
+
+<NrgCodeBlock @label="HBS" @codeBlockName="focus-first-input.hbs" />
