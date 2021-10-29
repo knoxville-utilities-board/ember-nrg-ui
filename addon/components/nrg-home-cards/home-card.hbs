@@ -1,0 +1,35 @@
+<a
+  class="card home-card
+    {{if @actionCard "action-card"}}
+    {{unless this.visible "is-visually-hidden"}}"
+>
+  {{#if @icon}}
+    <div class="image icon">
+      <i class="circular {{@icon}} icon"></i>
+    </div>
+  {{else if @image}}
+    <div class="image">
+      <img src={{@image}} alt={{@altText}} />
+    </div>
+  {{/if}}
+  <div class="content">
+    <div class="header">{{@label}}</div>
+    {{#if @meta}}
+      <div class="meta">
+        <span class="ui label">{{@meta}}</span>
+      </div>
+    {{/if}}
+    {{#if @description}}
+      <div class="description">
+        <p>{{@description}}</p>
+      </div>
+    {{/if}}
+  </div>
+  {{#if @badgeLoading}}
+    <div class="floating ui circular red label">
+      <i class="icon loading spinner"></i>
+    </div>
+  {{else if @badge}}
+    <div class="floating ui circular red label">{{@badge}}</div>
+  {{/if}}
+</a>

@@ -1,33 +1,27 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
-import layout from '../../templates/components/nrg-home-cards/home-card';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  layout,
+export default class HomeCard extends Component {
+  @service application;
+  @service router;
 
-  classNames: ['card', 'home-card'],
-
-  classNameBindings: ['actionCard', 'visible::is-visually-hidden'],
-
-  tagName: 'a',
-
-  router: service(),
-
-  visible: computed('currentUser.roles', 'role', function() {
-    if (!this.role) {
+  get visible() {
+    if (!this.args.role) {
       return true;
     }
-    const roles = Array.isArray(this.role) ? this.role : [this.role];
-    const needsAllRoles = this.needsAllRoles;
-    const currentUserContent = this.get('currentUser.content');
+    const roles = Array.isArray(this.args.role)
+      ? this.args.role
+      : [this.args.role];
+    const needsAllRoles = this.args.needsAllRoles;
+    const currentUserContent = this.application.currentUser.content;
     if (needsAllRoles) {
-      return roles.every(role => currentUserContent.hasRole(role));
+      return roles.every((role) => currentUserContent.hasRole(role));
     }
-    return roles.some(role => currentUserContent.hasRole(role));
-  }),
+    return roles.some((role) => currentUserContent.hasRole(role));
+  }
 
-  click() {
+  @action click() {
     const route = this.route;
     const routeModel = this.routeModel;
     const url = this.url;
@@ -41,7 +35,9 @@ export default Component.extend({
       newWindow.opener = null;
       newWindow.location = url;
     } else {
-      this.sendAction();
+      if (this.args.onClick) {
+        this.args.onClick();
+      }
     }
-  },
-});
+  }
+}
