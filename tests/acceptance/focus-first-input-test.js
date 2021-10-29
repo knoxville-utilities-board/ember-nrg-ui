@@ -6,7 +6,7 @@ module('Acceptance | focus first input', function(hooks) {
   setupApplicationTest(hooks);
 
   test('First form input is focused', async function(assert) {
-    await visit('/view-mixins/focus-first-input');
+    await visit('/view-modifiers/focus-first-input');
     assert.equal(find('input'), document.activeElement);
   });
 });
