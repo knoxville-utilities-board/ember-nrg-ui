@@ -1,0 +1,19 @@
+<div
+  role="button"
+  class="floating toast-box compact transition visible"
+  {{on "mouseenter" this._mouseEnterHandler}}
+  {{on "mouseleave" this._mouseLeaveHandler}}
+>
+  {{#if this.showProgress}}
+    <div class="ui attached active progress {{this.toast.type}} inverted top compact">
+      {{! template-lint-disable no-inline-styles }}
+      <div class="bar down progressing pausable" style={{this.progressDuration}}></div>
+    </div>
+  {{/if}}
+  <div class="{{this.toast.type}} ui toast compact visible">
+    <div class="content">
+      <div class="ui header">{{this.toast.title}}</div>
+      <div>{{this.toast.message}}</div>
+    </div>
+  </div>
+</div>
