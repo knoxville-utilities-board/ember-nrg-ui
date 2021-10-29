@@ -1,0 +1,15 @@
+<button
+  type={{if @type @type "button"}}
+  class="ui button
+    {{if @disabled "disabled"}}
+    {{if @loading "loading"}}
+    {{@class}}"
+  disabled={{or @disabled @loading}}
+  {{on "click" @onClick}}
+  autofocus={{@autofocus}}
+>
+  {{#if @icon}}
+    <i class="icon {{@icon}}"></i>
+  {{/if}}
+  {{@text}}{{yield}}
+</button>
