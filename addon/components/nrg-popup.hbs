@@ -1,0 +1,18 @@
+<div
+  class="popup-anchor"
+  {{on "mouseenter" this.onMouseEnter}}
+  {{on "mouseleave" this.onMouseLeave}}
+  {{did-insert this.getTarget}}
+>
+  {{yield
+    (hash
+      popup=(component
+        "nrg-popup/popup"
+        isOpen=this.isOpen
+        target=this.target
+        onMouseEnter=this.onMouseEnter
+        onMouseLeave=this.onMouseLeave
+      )
+    )
+  }}
+</div>
