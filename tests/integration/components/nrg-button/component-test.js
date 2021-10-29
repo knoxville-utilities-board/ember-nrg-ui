@@ -25,7 +25,7 @@ module('Integration | Component | nrg-button', function(hooks) {
       assert.ok(true);
     });
 
-    await render(hbs`<NrgButton @action={{action testAction}} />`);
+    await render(hbs`<NrgButton @onClick={{action testAction}} />`);
 
     await click('button');
   });
