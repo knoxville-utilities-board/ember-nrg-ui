@@ -1,6 +1,6 @@
 {{#if hasBlock}}
   {{yield (hash
-    input=(component "nrg-text-field/trim-input" type=type min=min max=max step=step value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength onFocus=(action this.onFocus) onBlur=(action this.onBlur) onChange=(action this.onChange))
+    input=(component "nrg-text-field/trim-input" type=type min=min max=max step=step value=value name=name placeholder=placeholder autocomplete=autocomplete autocapitalize=autocapitalize disabled=disabled maxLength=maxLength onFocus=(action this.onFocus) onBlur=(action this.onBlur) onChange=(action this._onChange))
   )}}
 {{else}}
   <NrgTextField::TrimInput
@@ -17,5 +17,5 @@
     @maxLength={{maxLength}}
     @onFocus={{action this.onFocus}}
     @onBlur={{action this.onBlur}}
-    @onChange={{action this.onChange}} />
+    @onChange={{action this._onChange}} />
 {{/if}}

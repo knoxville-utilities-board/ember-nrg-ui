@@ -19,5 +19,8 @@ export default Component.extend(Validation, {
 
   onBlur() {},
 
-  onChange() {},
+  _onChange(newValue) {
+    this.set('value', newValue);
+    this.onChange && this.onChange();
+  },
 });
