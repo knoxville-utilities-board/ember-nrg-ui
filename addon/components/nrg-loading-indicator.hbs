@@ -1,0 +1,13 @@
+<div
+  class="ui loader
+    {{if (eq @loading false) "disabled" "active"}}
+    {{unless (eq @centered false) "centered"}}
+    {{unless (eq @inline false) "inline"}}
+    {{if @text "text"}}
+    {{if @inverted "inverted"}}
+    {{if @indeterminate "indeterminate"}}
+    {{if @size @size}}"
+>
+  {{@text}}
+  {{yield}}
+</div>
