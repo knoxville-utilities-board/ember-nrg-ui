@@ -1,34 +1,34 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import layout from '../templates/components/nrg-popup';
-import { task, timeout } from 'ember-concurrency';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { timeout } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency-decorators';
 
-export default Component.extend({
-  layout,
-  tagName: 'span',
-  isOpen: false,
-  hoverTimeout: 250,
+export default class NrgPopupComponent extends Component {
+  @tracked
+  isOpen;
 
-  target: computed(function() {
-    return this.element.querySelector('.popup-anchor');
-  }),
+  hoverTimeout = 250;
 
-  mouseEnter() {
-    this.onMouseEnter();
-  },
-  mouseLeave() {
-    this.onMouseLeave();
-  },
+  @restartableTask
+  *hoverTask(hovering) {
+    const hoverTimeout = this.args.hoverTimeout || this.hoverTimeout;
+    yield timeout(hoverTimeout);
+    this.isOpen = hovering;
+  }
 
+  @action
+  getTarget(element) {
+    this.target = element;
+  }
+
+  @action
   onMouseEnter() {
     this.hoverTask.perform(true);
-  },
+  }
+
+  @action
   onMouseLeave() {
     this.hoverTask.perform(false);
-  },
-
-  hoverTask: task(function*(hovering) {
-    yield timeout(this.hoverTimeout);
-    this.set('isOpen', hovering);
-  }).restartable(),
-});
+  }
+}
