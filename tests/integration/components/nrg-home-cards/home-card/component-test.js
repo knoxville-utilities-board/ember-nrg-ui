@@ -18,7 +18,7 @@ module('Integration | Component | nrg-home-cards/home-card', function(hooks) {
       instantiate: false,
       singleton: true,
     });
-    this.owner.inject('component', 'currentUser', 'user:current');
+    this.owner.inject('service', 'currentUser', 'user:current');
   });
 
   test('hidden if user does not have role', async function(assert) {
