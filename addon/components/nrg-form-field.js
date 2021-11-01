@@ -1,27 +1,26 @@
-import Component from '@ember/component';
-import { scheduleOnce } from '@ember/runloop';
-import layout from '../templates/components/nrg-form-field';
+import { guidFor } from '@ember/object/internals';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
+export default class NrgFormFieldComponent extends Component {
+  @tracked
+  focusId = 'field-' + guidFor(this);
 
-  classNames: ['ui field'],
+  @tracked
+  errorMessage;
 
-  classNameBindings: ['required', 'errorMessage:error', 'inline'],
+  @tracked
+  warningMessage;
 
-  label: '',
+  get didValidate() {
+    return this.args.form?.didValidate;
+  }
 
-  focusId: '',
+  get showError() {
+    return this.didValidate && this.errorMessage;
+  }
 
-  init() {
-    this._super(...arguments);
-    scheduleOnce('afterRender', this, 'getFocusId');
-  },
-
-  getFocusId() {
-    const input = this.element.querySelector('input');
-    if (input) {
-      this.set('focusId', input.id);
-    }
-  },
-});
+  get showWarning() {
+    return this.warningMessage && !this.errorMessage;
+  }
+}
