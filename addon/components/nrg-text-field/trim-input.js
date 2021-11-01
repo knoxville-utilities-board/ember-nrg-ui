@@ -1,34 +1,46 @@
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import layout from '../../templates/components/nrg-text-field/trim-input';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
+export default class TrimInputComponent extends Component {
+  constructor() {
+    super(...arguments);
+    this.valueChange();
+  }
 
-  tagName: '',
+  @tracked
+  _value;
 
-  _value: '',
+  @action
+  blur() {
+    this.args.onBlur && this.args.onBlur();
+  }
 
-  value: computed('_value', {
-    get() {
-      return this.get('_value').trim();
-    },
-    set(key, value) {
-      const oldValue = this.value;
-      let newValue = '';
-      if(value && typeof(value) == 'string'){
-        newValue = value.trim() || '';
-      } else if (value && typeof(value) == 'number') {
-        newValue = value.toString() || '';
-      }
+  @action
+  focus() {
+    this.args.onFocus && this.args.onFocus();
+  }
 
-      if(oldValue !== newValue){
-        this.set('_value', newValue);
-      }
-    },
-  }),
+  @action
+  _valueChange({ target }) {
+    this._value = target.value;
+    const value = target.value.trim();
+    this.args.onChange && this.args.onChange(value);
+  }
 
-  onChange() {},
-  onFocus() {},
-  onBlur() {},
-});
+  @action
+  valueChange() {
+    const value = this.args.value;
+    const oldValue = this._value && this._value.trim();
+    let newValue = '';
+    if (value && typeof value == 'string') {
+      newValue = value.trim() || '';
+    } else if (value && typeof value == 'number') {
+      newValue = value.toString() || '';
+    }
+
+    if (oldValue !== newValue) {
+      this._value = newValue;
+    }
+  }
+}

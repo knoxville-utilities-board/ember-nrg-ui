@@ -1,0 +1,17 @@
+<input
+  type={{@type}}
+  min={{@min}}
+  max={{@max}}
+  step={{@step}}
+  value={{this._value}}
+  name={{@name}}
+  autocapitalize={{@autocapitalize}}
+  disabled={{@disabled}}
+  maxlength={{@maxLength}}
+  autocomplete={{if @autocomplete "on" "off"}}
+  placeholder={{@placeholder}}
+  {{on "blur" this.blur}}
+  {{on "focus" this.focus}}
+  {{on "input" this._valueChange}}
+  {{did-update this.valueChange @value}}
+/>

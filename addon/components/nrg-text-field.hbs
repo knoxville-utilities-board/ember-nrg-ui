@@ -1,0 +1,43 @@
+<div class="ui input {{if @fluid @fluid}} {{@class}}" type="text">
+  {{#if hasBlock}}
+    {{yield
+      (hash
+        input=(component
+          "nrg-text-field/trim-input"
+          type=@type
+          min=@min
+          max=@max
+          step=@step
+          value=@value
+          name=@name
+          placeholder=@placeholder
+          autocomplete=@autocomplete
+          autocapitalize=@autocapitalize
+          disabled=@disabled
+          maxLength=@maxLength
+          onFocus=@onFocus
+          onBlur=@onBlur
+          onChange=this._onChange
+        )
+      )
+    }}
+  {{else}}
+    <NrgTextField::TrimInput
+      @type={{@type}}
+      @min={{@min}}
+      @max={{@max}}
+      @step={{@step}}
+      @value={{@value}}
+      @name={{@name}}
+      @placeholder={{@placeholder}}
+      @autocomplete={{@autocomplete}}
+      @autocapitalize={{@autocapitalize}}
+      @disabled={{@disabled}}
+      @maxLength={{@maxLength}}
+      @onFocus={{@onFocus}}
+      @onBlur={{@onBlur}}
+      @onChange={{this._onChange}}
+    />
+  {{/if}}
+
+</div>
