@@ -1,26 +1,3 @@
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-text-field';
-import Validation from 'ember-nrg-ui/mixins/validation';
+import NrgValidationComponent from './nrg-validation-component';
 
-export default Component.extend(Validation, {
-  layout,
-
-  classNames: ['ui', 'input'],
-
-  classNameBindings: ['fluid'],
-
-  type: 'text',
-
-  input() {
-    this.sendAction('action', this.value);
-  },
-
-  onFocus() {},
-
-  onBlur() {},
-
-  _onChange(newValue) {
-    this.set('value', newValue);
-    this.onChange && this.onChange();
-  },
-});
+export default class NrgTextFieldComponent extends NrgValidationComponent {}
