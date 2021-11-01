@@ -5,7 +5,7 @@
     {{if @loading "loading"}}
     {{@class}}"
   disabled={{or @disabled @loading}}
-  {{on "click" @onClick}}
+  {{on "click" this.onClick}}
   autofocus={{@autofocus}}
 >
   {{#if @icon}}

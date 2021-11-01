@@ -18,21 +18,23 @@ export default function validationState(validatorsArgument) {
 
         for (const key in validators) {
           attrState[key] = {
-            messages: [],
+            warningMessage: null,
+            message: null,
             isValid: true,
           };
 
           for (const validator of validators[key]) {
-            const [computedValid, message] = validator.apply(this, [
+            const validatorResponse = validator.apply(this, [
               this[key],
               messages,
             ]);
 
-            if (computedValid) {
+            if (validatorResponse.valid) {
+              attrState[key].warningMessage = validatorResponse.warningMessage;
               continue;
             }
 
-            attrState[key].message = message;
+            attrState[key].message = validatorResponse.errorMessage;
             attrState[key].isValid = false;
             break;
           }
@@ -65,13 +67,25 @@ export function validator(eventName, options) {
     }
 
     if (typeof validationResponse === 'boolean' && validationResponse) {
-      return [true];
+      return {
+        valid: true,
+      };
     }
 
     const message =
       options.message ||
       messages.getMessageFor(validationResponse.type, options);
 
-    return [false, message];
+    if (options.isWarning) {
+      return {
+        valid: true,
+        warningMessage: message,
+      };
+    } else {
+      return {
+        valid: false,
+        errorMessage: message,
+      };
+    }
   };
 }

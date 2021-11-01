@@ -1,0 +1,38 @@
+<div
+  class="ui field
+    {{if this.showError "error"}}
+    {{if @required "required"}}
+    {{if @inline "inline"}}
+    {{@class}}"
+>
+  {{#if @label}}
+    <label for={{this.focusId}}>
+      {{@label}}
+      {{#if @secondaryLabel}}
+        <div class="ui basic horizontal label">{{@secondaryLabel}}</div>
+      {{/if}}
+    </label>
+  {{/if}}
+
+  {{yield
+    (hash
+      field=this
+      checkbox=(component "nrg-checkbox" field=this)
+      datetime=(component "nrg-datetime" field=this)
+      dropdown=(component "nrg-dropdown" field=this)
+      radio=(component "nrg-radio" field=this)
+      text-area=(component "nrg-text-area" fluid=true field=this)
+      text-field=(component "nrg-text-field" fluid=true field=this)
+    )
+  }}
+
+  {{#if this.showError}}
+    <div class="ui basic red pointing prompt label">{{this.errorMessage}}</div>
+  {{/if}}
+  {{#if this.showWarning}}
+    <div class="ui basic orange pointing label">{{this.warningMessage}}</div>
+  {{/if}}
+  {{#if @caption}}
+    <div class="ui basic pointing label">{{@caption}}</div>
+  {{/if}}
+</div>
