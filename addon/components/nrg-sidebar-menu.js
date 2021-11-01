@@ -1,31 +1,14 @@
 import { inject as service } from '@ember/service';
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-sidebar-menu';
+import Component from '@glimmer/component';
 import { filterBy, notEmpty } from '@ember/object/computed';
 
-export default Component.extend({
-  layout,
+export default class NrgSidebarMenu extends Component {
+  @service sidebarMenuManager;
+  @filterBy('sidebarMenuManager.menuItems', 'isShownInSidebar', true) visibleMenuItems;
+  @filterBy('sidebarMenuManager.footerMenuItems', 'isShownInSidebar', true) visibleFooterItems;
+  @notEmpty('visibleFooterItems') hasVisibleFooterItems;
 
-  sidebarMenuManager: service(),
-
-  classNames: ['ui', 'vertical', 'left', 'menu', 'sidebar-menu'],
-
-  appReloadLocation: '/',
-
-  visibleMenuItems: filterBy('sidebarMenuManager.menuItems', 'isShownInSidebar', true),
-
-  visibleFooterItems: filterBy('sidebarMenuManager.footerMenuItems', 'isShownInSidebar', true),
-
-  hasVisibleFooterItems: notEmpty('visibleFooterItems'),
-
-  actions: {
-    sidebarAction(menuItem) {
-      menuItem.sidebarAction();
-    },
-    clickedLink(item) {
-      if (this.clickedSidebarItem) {
-        this.clickedSidebarItem(item);
-      }
-    },
-  },
-});
+  sidebarAction(menuItem) {
+    menuItem.sidebarAction();
+  }
+};
