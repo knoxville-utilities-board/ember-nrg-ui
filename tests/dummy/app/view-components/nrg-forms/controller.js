@@ -22,8 +22,9 @@ const Validators = {
   ],
   checkbox2: [validator('presence', true)],
   textArea: [
+    validator('presence', true),
     validator('length', {
-      min: 0,
+      min: 3,
       max: 5,
     }),
   ],
@@ -52,7 +53,10 @@ export default class ViewComponentsNrgFormsController extends Controller {
   deal;
 
   @tracked
-  textArea1 = 'Sample Text';
+  textArea;
+
+  @tracked
+  textArea1;
 
   @tracked
   checkbox1 = true;
