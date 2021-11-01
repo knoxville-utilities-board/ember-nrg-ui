@@ -1,0 +1,20 @@
+<form
+  class="ui form {{if @error "error"}} {{if @loading "loading"}} {{@class}}"
+  {{on "submit" this.submit}}
+>
+  {{yield
+    (hash
+      form=this
+      field=(component "nrg-form-field" form=this)
+      submit-button=(component
+        "nrg-button"
+        type="submit"
+        class="primary"
+        text="Submit"
+        disabled=@disabled
+      )
+      form-link=(component "link-to" class="item form-link")
+      form-action=(component "nrg-form-action")
+    )
+  }}
+</form>
