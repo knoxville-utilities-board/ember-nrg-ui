@@ -57,7 +57,7 @@
         <field.checkbox @label="Checkbox" @model={{this}} @valuePath="checkbox1" @disabled={{disabled}} />
       </form.field>
       <form.field @inline={{true}} @required={{required}} as |field|>
-        <field.checkbox @type="slider" @label="Slider" @checked={{true}} @disabled={{disabled}} />
+        <field.checkbox @type="slider" @label="Slider" @model={{this}} @valuePath="checkbox2" @disabled={{disabled}} />
       </form.field>
       <form.field @inline={{true}} @required={{required}} as |field|>
         <field.checkbox @type="toggle" @label="Toggle" @disabled={{disabled}} />
@@ -69,7 +69,7 @@
         <field.checkbox @label="Inline Checkbox" @model={{this}} @valuePath="checkbox1" @disabled={{disabled}} />
       </form.field>
       <form.field @required={{required}} as |field|>
-        <field.checkbox @type="slider" @label="Inline Slider" @checked={{true}} @disabled={{disabled}} />
+        <field.checkbox @type="slider" @label="Inline Slider" @disabled={{disabled}} />
       </form.field>
       <form.field @required={{required}} as |field|>
         <field.checkbox @type="toggle" @label="Inline Toggle" @disabled={{disabled}} />
