@@ -20,6 +20,7 @@ const Validators = {
       in: [true],
     }),
   ],
+  checkbox2: [validator('presence', true)],
   textArea: [
     validator('length', {
       min: 0,
@@ -39,7 +40,7 @@ export default class ViewComponentsNrgFormsController extends Controller {
   disabled = false;
 
   @tracked
-  turkey;
+  turkey = 'turkey';
 
   @tracked
   meal;
@@ -51,10 +52,10 @@ export default class ViewComponentsNrgFormsController extends Controller {
   deal;
 
   @tracked
-  textArea1;
+  textArea1 = 'Sample Text';
 
   @tracked
-  checkbox1;
+  checkbox1 = true;
 
   @tracked
   maxDate = moment().add(5, 'days').toDate();
