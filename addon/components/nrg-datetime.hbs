@@ -1,0 +1,49 @@
+<div
+  class="ui calendar"
+  role="button"
+  {{on "click" this.onFocus}}
+  {{!-- {{on-click-outside this.onBlur}} --}}
+>
+  {{#if hasBlock}}
+    <div class="wrapper">
+      {{yield}}
+      {{#if this.isFocused}}
+        <NrgDatetime::calendar
+          @minDate={{@minDate}}
+          @maxDate={{@maxDate}}
+          @type={{this.type}}
+          @value={{this.value}}
+          @showNowShortcut={{this.showNowShortcut}}
+          @isDateDisabled={{@isDateDisabled}}
+          @onSelect={{this.onDateSelect}}
+          @onClose={{this.onBlur}}
+        />
+      {{/if}}
+    </div>
+  {{else}}
+    <NrgTextField
+      @field={{@field}}
+      @placeholder={{@placeholder}}
+      @class="left icon"
+      @disabled={{@disabled}}
+      @model={{this}}
+      @valuePath="displayValue"
+      as |view|
+    >
+      {{#if this.isFocused}}
+        <NrgDatetime::calendar
+          @minDate={{@minDate}}
+          @maxDate={{@maxDate}}
+          @type={{this.type}}
+          @value={{this.value}}
+          @showNowShortcut={{this.showNowShortcut}}
+          @isDateDisabled={{@isDateDisabled}}
+          @onSelect={{this.onDateSelect}}
+          @onClose={{this.onBlur}}
+        />
+      {{/if}}
+      <NrgIcon @icon={{this.icon}} />
+      <view.input />
+    </NrgTextField>
+  {{/if}}
+</div>
