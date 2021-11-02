@@ -1,31 +1,18 @@
-import { computed } from '@ember/object';
-import { alias, bool } from '@ember/object/computed';
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-checkbox';
-import Validation from 'ember-nrg-ui/mixins/validation';
+import { action } from '@ember/object';
+import { guidFor } from '@ember/object/internals';
+import { tracked } from '@glimmer/tracking';
+import NrgValidationComponent from './nrg-validation-component';
 
-export default Component.extend(Validation, {
-  layout,
-  classNames: ['ui', 'checkbox'],
-  classNameBindings: ['type', 'disabled', 'fitted', 'readonly:read-only'],
+export default class NrgCheckboxComponent extends NrgValidationComponent {
+  @tracked
+  focusId = 'field-' + guidFor(this);
 
-  checked: alias('value'),
-  _checked: bool('checked'),
-  bindValue: true,
+  get checked() {
+    return !!this.value;
+  }
 
-  inputId: computed('elementId', function() {
-    return this.elementId + '-input';
-  }),
-
-  handleValueChange(evt) {
-    const checked = evt.target.checked;
-    if (this.bindValue) {
-      this.set('checked', checked);
-    }
-    this.onChange(checked);
-  },
-
-  onChange(checked) {
-    this.sendAction('action', checked);
-  },
-});
+  @action
+  _valueChange({ target }) {
+    this._onChange(target.checked);
+  }
+}

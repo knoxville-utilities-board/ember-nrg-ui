@@ -1,0 +1,20 @@
+<div
+  class="ui checkbox
+    {{if @disabled "disabled"}}
+    {{if @fitted "fitted"}}
+    {{if @readonly "read-only"}}
+    {{@class}}"
+>
+  <input
+    id={{this.focusId}}
+    class="hidden"
+    type="checkbox"
+    checked={{this.checked}}
+    name={{@name}}
+    disabled={{@disabled}}
+    {{on "input" this._valueChange}}
+  />
+  <label for={{this.focusId}}>
+    {{@label}}
+  </label>
+</div>
