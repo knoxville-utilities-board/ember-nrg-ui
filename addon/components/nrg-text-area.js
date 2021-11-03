@@ -1,19 +1,18 @@
-import { computed } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-text-area';
-import Validation from 'ember-nrg-ui/mixins/validation';
+import NrgValidationComponent from './nrg-validation-component';
+import { action } from '@ember/object';
+export default class NrgTextAreaComponent extends NrgValidationComponent {
+  @action
+  _valueChange({ target }) {
+    this._onChange(target.value);
+  }
 
-export default Component.extend(Validation, {
-  layout,
+  get characterLimit() {
+    return this.validation?.options?.length?.max;
+  }
 
-  classNames: ['ui', 'fluid', 'input', 'nrg-text-area'],
-
-  classNameBindings: ['fluid'],
-
-  characterLimit: readOnly('validation.options.length.max'),
-
-  overCharacterLimit: computed('characterLimit', 'value.length', function() {
-    return this.characterLimit < this.get('value.length');
-  }),
-});
+  get overCharacterLimit() {
+    return (
+      this.value && this.value.length && this.characterLimit < this.value.length
+    );
+  }
+}

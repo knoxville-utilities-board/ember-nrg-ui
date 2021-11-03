@@ -31,7 +31,7 @@
     <br>
     <div class="two fields">
       <form.field @label="Text Area" @required={{required}} as |field|>
-        <field.text-area @disabled={{disabled}} />
+        <field.text-area @model={{this}} @valuePath="textArea" @disabled={{disabled}}/>
       </form.field>
       <form.field @label="Text Area" @required={{required}} as |field|>
         <field.text-area @disabled={{disabled}} />

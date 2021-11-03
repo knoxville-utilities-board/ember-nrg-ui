@@ -1,0 +1,17 @@
+<div class="ui fluid input nrg-text-area {{if @fluid "fluid"}} {{@class}} ">
+  <textarea
+    value={{@value}}
+    rows={{@rows}}
+    cols={{@cols}}
+    maxlength={{@maxlength}}
+    name={{@name}}
+    placeholder={{@placeholder}}
+    disabled={{@disabled}}
+    {{on "input" this._valueChange}}
+  />
+  {{#if this.characterLimit}}
+    <div class="text character-limit {{if this.overCharacterLimit "red"}}">
+      {{or this.value.length 0}}/{{this.characterLimit}}
+    </div>
+  {{/if}}
+</div>
