@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import {
-  getCode,
   keyDown,
   EKMixin,
   EKOnInitMixin
@@ -30,7 +29,7 @@ export default Service.extend(EKMixin, EKOnInitMixin, {
   }),
 
   keyTrigger: on(keyDown(), function(event) {
-    const code = getCode(event);
+    const code = event;
     const lastCode = this.lastCode;
 
     // Ignore modifier keys

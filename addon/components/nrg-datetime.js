@@ -1,102 +1,103 @@
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-datetime';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 import moment from 'moment';
-import Validation from 'ember-nrg-ui/mixins/validation';
-import { next } from '@ember/runloop';
+import NrgValidationComponent from './nrg-validation-component';
 
-export default Component.extend(Validation, {
-  layout,
+const defaultDateFormat = 'LL';
+const defaultTimeFormat = 'LT';
 
-  tagName: '',
+export default class NrgTextFieldComponent extends NrgValidationComponent {
+  @tracked
+  isFocused = false;
 
-  classNames: [],
-
-  type: 'date', // 'datetime', 'date', 'time'
-
-  showNowShortcut: true,
-
-  isFocused: false,
-
-  minDate: null, // minimum date/time that can be selected, dates/times before are disabled
-
-  maxDate: null, // maximum date/time that can be selected, dates/times after are disabled
-
-  initializeDate: true,
-
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
     if (!this.value && this.initializeDate) {
-      this.set('value', new Date());
+      this.value = new Date();
     }
-  },
+  }
 
-  icon: computed('type', function() {
-    const type = this.type;
+  get dateFormat() {
+    return this.args.dateFormat || defaultDateFormat;
+  }
+
+  get timeFormat() {
+    return this.args.timeFormat || defaultTimeFormat;
+  }
+
+  get type() {
+    return this.args.type || 'date'; // 'datetime', 'date', 'time'
+  }
+
+  get showNowShortcut() {
+    return this.args.showNowShortcut !== false;
+  }
+
+  get initializeDate() {
+    return this.args.initializeDate !== false;
+  }
+
+  get icon() {
     let icon = 'calendar';
-    if (type === 'time') {
+    if (this.type === 'time') {
       icon = 'clock';
     }
     return icon;
-  }),
+  }
 
-  onBlur() {
-    this.set('isFocused', false);
-  },
-
-  onFocus(evt) {
-    if (this.isFocused || this.disabled) {
-      return;
-    }
-
-    const wrapper = evt.currentTarget;
-    next(() => {
-      const popup = wrapper && wrapper.querySelector('.ui.popup.calendar');
-      if (popup) {
-        popup.focus();
-      }
-    });
-
-    this.set('isFocused', true);
-  },
-
-  onCalendarClose() {
-    this.set('isFocused', false);
-  },
-
-  isDateDisabled(/* date */) {},
-
-  dateFormat: 'LL',
-
-  timeFormat: 'LT',
-
-  displayFormat: computed('dateFormat', 'timeFormat', 'type', function() {
+  get displayFormat() {
     if (this.type === 'datetime') {
       return `${this.dateFormat} ${this.timeFormat}`;
     } else if (this.type === 'date') {
       return this.dateFormat;
     }
     return this.timeFormat;
-  }),
+  }
 
-  displayValue: computed('value', 'displayFormat', 'initializeDate', {
-    get() {
-      if (!this.value) {
-        return '';
-      }
-      return moment(this.value).format(this.displayFormat);
-    },
-    set(type, value) {
-      const newValue = moment(value, this.displayFormat);
-      if (newValue.isValid()) {
-        this.set('value', newValue);
-      }
-      return value;
-    },
-  }),
+  get displayValue() {
+    if (!this.value) {
+      return '';
+    }
+    return moment(this.value).format(this.displayFormat);
+  }
 
+  set displayValue(value) {
+    const newValue = moment(value, this.displayFormat);
+    if (!newValue.isValid()) {
+      return;
+    }
+
+    if (newValue.isSame(this.value, 'minute')) {
+      return;
+    }
+    this.value = newValue.toDate();
+  }
+
+  @action
+  onBlur() {
+    this.isFocused = false;
+  }
+
+  @action
+  onFocus(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    if (this.isFocused || this.args.disabled) {
+      return;
+    }
+
+    this.isFocused = true;
+
+    const wrapper = evt.currentTarget;
+    const popup = wrapper && wrapper.querySelector('.ui.popup.calendar');
+    if (popup) {
+      popup.focus();
+    }
+  }
+
+  @action
   onDateSelect(value) {
-    this.set('isFocused', false);
-    this.set('value', value);
-  },
-});
+    this.value = value;
+  }
+}

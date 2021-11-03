@@ -1,0 +1,71 @@
+<div
+  tabindex="-1"
+  class="ui popup calendar bottom left transition active visible"
+  {{on-key "ArrowUp" this.moveUp}}
+  {{on-key "ArrowDown" this.moveDown}}
+  {{on-key "ArrowLeft" this.moveLeft}}
+  {{on-key "ArrowRight" this.moveRight}}
+  {{on-key "Enter" this.onEnter}}
+  {{on-key "Escape" this.onEscape}}
+>
+  <table
+    class="ui celled center aligned unstackable table
+      {{this.table.columnCountClass}}
+      column day"
+  >
+    <thead>
+      <tr>
+        <th colspan="7">
+          <span
+            class="link"
+            role="button"
+            {{on "click" this.onHeaderDisplayClick}}
+          >{{this.headerDisplay}}</span>
+          <span class="prev link" role="button" {{on "click" this.onPrevious}}>
+            <i class="chevron left icon"></i>
+          </span>
+          <span class="next link" role="button" {{on "click" this.onNext}}>
+            <i class="chevron right icon"></i>
+          </span>
+        </th>
+      </tr>
+      {{#if this.table.columnHeaders}}
+        <tr>
+          {{#each this.table.columnHeaders as |columnHeader|}}
+            <th>{{columnHeader}}</th>
+          {{/each}}
+        </tr>
+      {{/if}}
+    </thead>
+    <tbody>
+      {{#each this.table.rows as |row|}}
+        <tr>
+          {{#each row as |cell|}}
+            <td
+              class="link
+                {{if cell.disabled "adjacent disabled"}}
+                {{if cell.selected "active focus"}}
+                {{cell.customClass}}"
+              role="button"
+              {{on "click" (fn this.clickCell cell)}}
+            >
+              {{cell.display}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+      {{#if this._showNowShortcut}}
+        <tr>
+          <td
+            colspan="7"
+            class="today link"
+            role="button"
+            {{on "click" this.setToNow}}
+          >
+            {{if (eq @type "date") "Today" "Now"}}
+          </td>
+        </tr>
+      {{/if}}
+    </tbody>
+  </table>
+</div>
