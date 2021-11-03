@@ -1,8 +1,8 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import moment from 'moment';
 import validationState, { validator } from 'ember-nrg-ui/validation';
+import moment from 'moment';
 
 const Validators = {
   turkey: [validator('presence', true)],
@@ -28,6 +28,7 @@ const Validators = {
       max: 5,
     }),
   ],
+  searchResult: [validator('presence', true)],
 };
 
 export default class ViewComponentsNrgFormsController extends Controller {
@@ -71,6 +72,9 @@ export default class ViewComponentsNrgFormsController extends Controller {
   maxDate = moment().add(5, 'days').toDate();
 
   @tracked
+  searchResult;
+
+  @tracked
   optionList = [
     {
       label: 'Item 1',
@@ -88,6 +92,11 @@ export default class ViewComponentsNrgFormsController extends Controller {
       label: 'Item 5',
     },
   ];
+
+  @action
+  searchQuery() {
+    return this.optionList;
+  }
 
   @action
   requiredToggle() {

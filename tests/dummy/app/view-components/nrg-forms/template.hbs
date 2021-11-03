@@ -113,6 +113,19 @@
       </form.field>
     </div>
     <br />
+    <form.field @label="Search" @required={{required}} as |field|>
+      <field.search
+        @query={{this.searchQuery}}
+        @model={{this}}
+        @valuePath="searchResult"
+        @displayLabel="label"
+        @disabled={{disabled}}
+        as |view|
+      >
+        {{view.label}}
+      </field.search>
+    </form.field>
+    <br />
     <div class="inline fields">
       <form.field @required={{required}} as |field|>
         <field.checkbox
