@@ -62,6 +62,12 @@ export default class ViewComponentsNrgFormsController extends Controller {
   checkbox1 = true;
 
   @tracked
+  dateTime1;
+
+  @tracked
+  dateTime2;
+
+  @tracked
   maxDate = moment().add(5, 'days').toDate();
 
   @tracked

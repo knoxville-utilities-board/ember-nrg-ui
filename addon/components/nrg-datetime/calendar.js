@@ -1,108 +1,106 @@
-import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
-import { on } from '@ember/object/evented';
-import {
-  EKFirstResponderOnFocusMixin,
-  EKMixin,
-  keyDown
-} from 'ember-keyboard';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import moment from 'moment';
-import layout from '../../templates/components/nrg-datetime/calendar';
 
 const DAY_HEADERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const MINUTE_INTERVAL = 5;
 
-export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
-  layout,
+export default class NrgValidationComponent extends Component {
+  @tracked
+  isSelectingDays = false;
 
-  isSelectingDays: false,
-  isSelectingMonths: false,
-  isSelectingYears: false,
-  isSelectingHours: false,
-  isSelectingMinutes: false,
+  @tracked
+  isSelectingMonths = false;
 
-  selectedDayIndex: null,
-  selectedMonthIndex: null,
-  selectedYearIndex: null,
-  selectedMinuteIndex: null,
-  selectedHourIndex: null,
+  @tracked
+  isSelectingYears = false;
 
-  showNowShortcut: true,
+  @tracked
+  isSelectingHours = false;
 
-  _showNowShortcut: computed('showNowShortcut', 'minDate', 'maxDate', 'isDateDisabled', function() {
-    if (!this.showNowShortcut) {
-      return;
+  @tracked
+  isSelectingMinutes = false;
+
+  constructor() {
+    super(...arguments);
+    if (this.args.type === 'datetime' || this.args.type === 'date') {
+      this.isSelectingDays = true;
+    } else if (this.args.type === 'time') {
+      this.isSelectingHours = true;
+    }
+  }
+
+  get selectedDayIndex() {
+    if (!this.args.value) {
+      return null;
+    }
+    return moment(this.args.value).date();
+  }
+
+  get selectedMonthIndex() {
+    if (!this.args.value) {
+      return null;
+    }
+    return moment(this.args.value).month();
+  }
+
+  get selectedYearIndex() {
+    if (!this.args.value) {
+      return null;
+    }
+    return moment(this.args.value).year();
+  }
+
+  get selectedHourIndex() {
+    const hasTime = this.args.type === 'datetime' || this.args.type === 'time';
+    if (!this.args.value || !hasTime) {
+      return null;
+    }
+    return moment(this.args.value).hour();
+  }
+
+  get selectedMinuteIndex() {
+    const hasTime = this.args.type === 'datetime' || this.args.type === 'time';
+    if (!this.args.value || !hasTime) {
+      return null;
+    }
+    return moment(this.args.value).minute();
+  }
+
+  get _showNowShortcut() {
+    if (this.args.showNowShortcut === false) {
+      return false;
     }
     const now = moment();
-    const userDisabled = this.isDateDisabled && this.isDateDisabled(now);
-    const afterMaxDate = now.isAfter(this.maxDate, 'date');
-    const beforeMinDate = now.isBefore(this.minDate, 'date');
+    const userDisabled =
+      this.args.isDateDisabled && this.args.isDateDisabled(now);
+    const afterMaxDate = now.isAfter(this.args.maxDate, 'date');
+    const beforeMinDate = now.isBefore(this.args.minDate, 'date');
     return !userDisabled && !afterMaxDate && !beforeMinDate;
-  }),
+  }
 
-  init() {
-    this._super(...arguments);
-    if (this.type === 'datetime' || this.type === 'date') {
-      this.set('isSelectingDays', true);
-    } else if (this.type === 'time') {
-      this.set('isSelectingHours', true);
+  get headerDisplay() {
+    const calendar = moment({
+      day: this.selectedDayIndex,
+      month: this.selectedMonthIndex,
+      year: this.selectedYearIndex,
+    });
+    if (this.isSelectingYears) {
+      const firstYear = this.years[0][0].year;
+      const lastYear = this.years[4][1].year;
+      return `${firstYear} - ${lastYear}`;
     }
-    this._updateSelectedIndexes(this.value);
-  },
-
-  headerDisplay: computed(
-    'selectedDayIndex',
-    'selectedMonthIndex',
-    'selectedYearIndex',
-    'isSelectingDays',
-    'isSelectingMonths',
-    'isSelectingYears',
-    'isSelectingHours',
-    'isSelectingMinutes',
-    function() {
-      const calendar = moment({
-        day: this.selectedDayIndex,
-        month: this.selectedMonthIndex,
-        year: this.selectedYearIndex,
-      });
-      if (this.isSelectingYears) {
-        const firstYear = this.years[0][0].year;
-        const lastYear = this.years[4][1].year;
-        return `${firstYear} - ${lastYear}`;
-      }
-      let format = 'MMMM YYYY';
-      if (this.isSelectingMonths) {
-        format = 'YYYY';
-      } else if (this.isSelectingHours || this.isSelectingMinutes) {
-        format = 'LL';
-      }
-      return calendar.format(format);
+    let format = 'MMMM YYYY';
+    if (this.isSelectingMonths) {
+      format = 'YYYY';
+    } else if (this.isSelectingHours || this.isSelectingMinutes) {
+      format = 'LL';
     }
-  ),
+    return calendar.format(format);
+  }
 
-  valueObserver: observer('value', function() {
-    this._updateSelectedIndexes();
-  }),
-
-  _isBeyondDateRange(date, precision) {
-    date = moment(date);
-    let invalid = false;
-    if (this.minDate) {
-      invalid = date.isBefore(this.minDate, precision);
-    }
-    if (this.maxDate) {
-      invalid = invalid || date.isAfter(this.maxDate, precision);
-    }
-    return invalid;
-  },
-
-  _isDateDisabled(date, precision) {
-    const userDisabled = this.isDateDisabled && this.isDateDisabled(date, precision);
-    const isBeyondDateRange = this._isBeyondDateRange(date, precision);
-    return userDisabled || isBeyondDateRange;
-  },
-
-  minutes: computed('selectedMinuteIndex', function() {
+  get minutes() {
     const calendar = moment({
       hour: this.selectedHourIndex,
       day: this.selectedDayIndex,
@@ -127,9 +125,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       rows.push(row);
     }
     return rows;
-  }),
+  }
 
-  hours: computed('selectedHourIndex', function() {
+  get hours() {
     const calendar = moment({
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
@@ -153,9 +151,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       rows.push(row);
     }
     return rows;
-  }),
+  }
 
-  days: computed('selectedDayIndex', 'selectedMonthIndex', 'selectedYearIndex', function() {
+  get days() {
     const today = moment();
     const weeks = [];
     const calendar = moment({
@@ -170,7 +168,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         const year = calendar.year();
         const isDifferentMonth = month !== this.selectedMonthIndex;
         const dateIsToday = calendar.isSame(today, 'date');
-        const disabled = this._isDateDisabled(calendar, 'date') || isDifferentMonth;
+        const disabled =
+          this._isDateDisabled(calendar, 'date') || isDifferentMonth;
         const selected = !disabled && this.selectedDayIndex === date;
 
         week.push({
@@ -188,9 +187,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       weeks.push(week);
     }
     return weeks;
-  }),
+  }
 
-  months: computed('selectedMonthIndex', function() {
+  get months() {
     const rows = [];
     const calendar = moment({
       year: this.selectedYearIndex,
@@ -213,9 +212,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     }
 
     return rows;
-  }),
+  }
 
-  years: computed('selectedYearIndex', function() {
+  get years() {
     const rows = [];
     const remainder = this.selectedYearIndex % 10;
     const beginYear = this.selectedYearIndex - remainder;
@@ -241,47 +240,54 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     }
 
     return rows;
-  }),
+  }
 
-  table: computed(
-    'isSelectingDays',
-    'isSelectingMonths',
-    'isSelectingYears',
-    'isSelectingHours',
-    'isSelectingMinutes',
-    'days',
-    'months',
-    'years',
-    'hours',
-    'minutes',
-    function() {
-      let columnHeaders = DAY_HEADERS;
-      let columnCountClass = 'seven';
-      let rows = this.days;
-      if (this.isSelectingMonths) {
-        columnHeaders = null;
-        columnCountClass = 'three';
-        rows = this.months;
-      } else if (this.isSelectingYears) {
-        columnHeaders = null;
-        columnCountClass = 'two';
-        rows = this.years;
-      } else if (this.isSelectingHours) {
-        columnHeaders = null;
-        columnCountClass = 'four';
-        rows = this.hours;
-      } else if (this.isSelectingMinutes) {
-        columnHeaders = null;
-        columnCountClass = 'three';
-        rows = this.minutes;
-      }
-      return {
-        columnCountClass,
-        columnHeaders,
-        rows,
-      };
+  get table() {
+    let columnHeaders = DAY_HEADERS;
+    let columnCountClass = 'seven';
+    let rows = this.days;
+    if (this.isSelectingMonths) {
+      columnHeaders = null;
+      columnCountClass = 'three';
+      rows = this.months;
+    } else if (this.isSelectingYears) {
+      columnHeaders = null;
+      columnCountClass = 'two';
+      rows = this.years;
+    } else if (this.isSelectingHours) {
+      columnHeaders = null;
+      columnCountClass = 'four';
+      rows = this.hours;
+    } else if (this.isSelectingMinutes) {
+      columnHeaders = null;
+      columnCountClass = 'three';
+      rows = this.minutes;
     }
-  ),
+    return {
+      columnCountClass,
+      columnHeaders,
+      rows,
+    };
+  }
+
+  isBeyondDateRange(date, precision) {
+    date = moment(date);
+    let valid = true;
+    if (this.args.minDate) {
+      valid = !date.isBefore(this.args.minDate, precision);
+    }
+    if (this.args.maxDate) {
+      valid = valid && !date.isAfter(this.args.maxDate, precision);
+    }
+    return !valid;
+  }
+
+  _isDateDisabled(date, precision) {
+    const userDisabled =
+      this.args.isDateDisabled && this.args.isDateDisabled(date, precision);
+    const isBeyondDateRange = this.isBeyondDateRange(date, precision);
+    return userDisabled || isBeyondDateRange;
+  }
 
   _manipulateDate(operation, dateTransformation, evt) {
     if (evt) {
@@ -312,28 +318,51 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       precision = 'minute';
     }
 
-    const userDisabled = this.isDateDisabled && this.isDateDisabled(date, precision);
+    const userDisabled =
+      this.args.isDateDisabled && this.args.isDateDisabled(date, precision);
     if (userDisabled) {
       return;
     }
 
-    const dateBeforeMinDate = this.minDate && date.isBefore(this.minDate);
-    const dateAfterMaxDate = this.maxDate && date.isAfter(this.maxDate);
+    const dateBeforeMinDate =
+      this.args.minDate && date.isBefore(this.args.minDate);
+    const dateAfterMaxDate =
+      this.args.maxDate && date.isAfter(this.args.maxDate);
 
     if (dateBeforeMinDate) {
-      date = moment(this.minDate).clone();
+      date = moment(this.args.minDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.add(remainder, 'minute');
     } else if (dateAfterMaxDate) {
-      date = moment(this.maxDate).clone();
+      date = moment(this.args.maxDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.subtract(remainder, 'minute');
     }
 
-    this._updateSelectedIndexes(date);
-  },
+    this._onSelect(date.toDate());
+  }
 
-  moveLeft: on(keyDown('ArrowLeft'), function(evt) {
+  selectDate() {
+    const value = moment({
+      hour: this.selectedHourIndex,
+      minute: this.selectedMinuteIndex,
+      day: this.selectedDayIndex,
+      month: this.selectedMonthIndex,
+      year: this.selectedYearIndex,
+    });
+    this._onSelect(value.toDate());
+  }
+
+  _onSelect(date) {
+    this.args.onSelect && this.args.onSelect(date);
+  }
+
+  close() {
+    this.args.onClose && this.args.onClose();
+  }
+
+  @action
+  moveLeft(evt) {
     if (this.isSelectingDays) {
       this._manipulateDate('subtract', { day: 1 }, evt);
     } else if (this.isSelectingMonths) {
@@ -345,9 +374,10 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingHours) {
       this._manipulateDate('subtract', { hour: 1 }, evt);
     }
-  }),
+  }
 
-  moveRight: on(keyDown('ArrowRight'), function(evt) {
+  @action
+  moveRight(evt) {
     if (this.isSelectingDays) {
       this._manipulateDate('add', { day: 1 }, evt);
     } else if (this.isSelectingMonths) {
@@ -359,9 +389,10 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingHours) {
       this._manipulateDate('add', { hour: 1 }, evt);
     }
-  }),
+  }
 
-  moveUp: on(keyDown('ArrowUp'), function(evt) {
+  @action
+  moveUp(evt) {
     if (this.isSelectingDays) {
       this._manipulateDate('subtract', { week: 1 }, evt);
     } else if (this.isSelectingMonths) {
@@ -369,13 +400,14 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingYears) {
       this._manipulateDate('subtract', { year: 2 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('subtract', { minute: MINUTE_INTERVAL * 3}, evt);
+      this._manipulateDate('subtract', { minute: MINUTE_INTERVAL * 3 }, evt);
     } else if (this.isSelectingHours) {
       this._manipulateDate('subtract', { hour: 4 }, evt);
     }
-  }),
+  }
 
-  moveDown: on(keyDown('ArrowDown'), function(evt) {
+  @action
+  moveDown(evt) {
     if (this.isSelectingDays) {
       this._manipulateDate('add', { week: 1 }, evt);
     } else if (this.isSelectingMonths) {
@@ -387,94 +419,101 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingHours) {
       this._manipulateDate('add', { hour: 4 }, evt);
     }
-  }),
+  }
 
-  enter: on(keyDown('Enter'), function(evt) {
+  @action
+  onEnter(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     this.goToNextWorkFlowStep();
-  }),
+  }
 
-  esc: on(keyDown('Escape'), function(evt) {
+  @action
+  onEscape(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.onClose();
-  }),
+    this.close();
+  }
 
+  @action
   setToNow() {
-    this.onSelect(new Date());
-  },
+    this._onSelect(new Date());
+  }
 
-  clickCell(cell) {
+  @action
+  clickCell(cell, evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
     if (this.isSelectingMinutes) {
       this._manipulateDate('set', { minute: cell.minute });
     } else if (this.isSelectingHours) {
-      this._manipulateDate('set', { hour: cell.hour });
+      this._manipulateDate('set', {
+        hour: cell.hour,
+        minute: 0,
+      });
     } else if (this.isSelectingMonths) {
       this._manipulateDate('set', { month: cell.month });
     } else if (this.isSelectingYears) {
       this._manipulateDate('set', { year: cell.year });
     } else if (this.isSelectingDays) {
-      this._manipulateDate('set', { date: cell.date, month: cell.month, year: cell.year });
+      this._manipulateDate('set', {
+        date: cell.date,
+        month: cell.month,
+        year: cell.year,
+      });
     }
     this.goToNextWorkFlowStep();
-  },
+  }
 
-  selectDate() {
-    const value = moment({
-      hour: this.selectedHourIndex,
-      minute: this.selectedMinuteIndex,
-      day: this.selectedDayIndex,
-      month: this.selectedMonthIndex,
-      year: this.selectedYearIndex,
-    });
-    this.onSelect(value.toDate());
-  },
-
+  @action
   onHeaderDisplayClick() {
     if (this.isSelectingDays) {
-      this.set('isSelectingDays', false);
-      this.set('isSelectingMonths', true);
+      this.isSelectingDays = false;
+      this.isSelectingMonths = true;
     } else if (this.isSelectingMonths) {
-      this.set('isSelectingMonths', false);
-      this.set('isSelectingYears', true);
+      this.isSelectingMonths = false;
+      this.isSelectingYears = true;
     } else if (this.isSelectingYears) {
-      this.set('isSelectingYears', false);
-      this.set('isSelectingDays', true);
+      this.isSelectingYears = false;
+      this.isSelectingDays = true;
     }
-  },
+  }
 
+  @action
   goToNextWorkFlowStep() {
-    if (this.type === 'datetime' || this.type === 'date') {
+    if (this.args.type === 'datetime' || this.args.type === 'date') {
       if (this.isSelectingMonths) {
-        this.set('isSelectingMonths', false);
-        this.set('isSelectingDays', true);
+        this.isSelectingMonths = false;
+        this.isSelectingDays = true;
         return;
       } else if (this.isSelectingYears) {
-        this.set('isSelectingYears', false);
-        this.set('isSelectingDays', true);
+        this.isSelectingYears = false;
+        this.isSelectingMonths = true;
         return;
       }
     }
-    if (this.type === 'datetime' || this.type === 'time') {
+    if (this.args.type === 'datetime' || this.args.type === 'time') {
       if (this.isSelectingHours) {
-        this.set('selectedMinuteIndex', 0);
-        this.set('isSelectingHours', false);
-        this.set('isSelectingMinutes', true);
+        this.isSelectingHours = false;
+        this.isSelectingMinutes = true;
         return;
       } else if (this.isSelectingMinutes) {
         this.selectDate();
+        this.close();
         return;
       }
     }
-    if (this.type === 'datetime' && this.isSelectingDays) {
-      this.set('isSelectingDays', false);
-      this.set('isSelectingHours', true);
-    } else if (this.type === 'date') {
+    if (this.args.type === 'datetime' && this.isSelectingDays) {
+      this.isSelectingDays = false;
+      this.isSelectingHours = true;
+    } else if (this.args.type === 'date') {
       this.selectDate();
+      this.close();
     }
-  },
+  }
 
+  @action
   onPrevious() {
     if (this.isSelectingDays) {
       this._manipulateDate('subtract', { month: 1 });
@@ -485,8 +524,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingHours || this.isSelectingMinutes) {
       this._manipulateDate('subtract', { day: 1 });
     }
-  },
+  }
 
+  @action
   onNext() {
     if (this.isSelectingDays) {
       this._manipulateDate('add', { month: 1 });
@@ -497,28 +537,5 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.isSelectingHours || this.isSelectingMinutes) {
       this._manipulateDate('add', { day: 1 });
     }
-  },
-
-  _updateSelectedIndexes(value) {
-    if (!value) {
-      return;
-    }
-    value = moment(value);
-    this.set('selectedDayIndex', value.date());
-    this.set('selectedMonthIndex', value.month());
-    this.set('selectedYearIndex', value.year());
-
-    if (this.type === 'datetime' || this.type === 'time') {
-      this.set('selectedHourIndex', value.hour());
-      this.set('selectedMinuteIndex', value.minute());
-    }
-  },
-
-  onSelect() {
-    // Implement Action
-  },
-
-  onClose() {
-    // Implement Action
-  },
-});
+  }
+}

@@ -3,7 +3,6 @@ import { A } from '@ember/array';
 import { computed } from '@ember/object';
 import { alias, mapBy, uniq, sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
-import { getKeyCode } from 'ember-keyboard';
 import KeyboardShortcutMixin from 'ember-nrg-ui/mixins/global-keyboard-shortcut';
 import specialCharacterConversion from '../utils/special-characters';
 import layout from '../templates/components/nrg-keyboard-shortcut-modal';
@@ -38,9 +37,9 @@ export default Component.extend(KeyboardShortcutMixin, {
       }
       const keys = [];
       if (shortcut.lastCode) {
-        keys.push(this.getCharacter(getKeyCode(shortcut.lastCode), shortcut.shft));
+        keys.push(this.getCharacter(shortcut.lastCode, shortcut.shft));
       }
-      keys.push(this.getCharacter(getKeyCode(shortcut.code), shortcut.shft));
+      keys.push(this.getCharacter(shortcut.code, shortcut.shft));
 
       return {
         modKeys,

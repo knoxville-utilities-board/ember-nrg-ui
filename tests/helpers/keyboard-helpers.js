@@ -1,4 +1,4 @@
-import { getKeyCode, getMouseCode } from 'ember-keyboard';
+import { getMouseCode } from 'ember-keyboard';
 import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
 import validMouseButtons from 'ember-keyboard/fixtures/mouse-buttons-array';
 import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
@@ -12,8 +12,8 @@ const keyEvent = function keyEvent(attributes, type, element) {
     } else if (validMouseButtons.indexOf(attribute) > -1) {
       event.button = getMouseCode(attribute);
     } else {
-      event.key = getKeyCode(attribute);
-      event.keyCode = getKeyCode(attribute);
+      event.key = attribute;
+      event.keyCode = attribute;
     }
 
     return event;
@@ -21,30 +21,30 @@ const keyEvent = function keyEvent(attributes, type, element) {
   return triggerEvent(element || document.body, type, event);
 };
 
-export const keyDown = function(attributes, element) {
+export const keyDown = function (attributes, element) {
   return keyEvent(attributes, 'keydown', element);
 };
 
-export const keyUp = function(attributes, element) {
+export const keyUp = function (attributes, element) {
   return keyEvent(attributes, 'keyup', element);
 };
 
-export const keyPress = function(attributes, element) {
+export const keyPress = function (attributes, element) {
   return keyEvent(attributes, 'keypress', element);
 };
 
-export const mouseDown = function(attributes, element) {
+export const mouseDown = function (attributes, element) {
   return keyEvent(attributes, 'mousedown', element);
 };
 
-export const mouseUp = function(attributes, element) {
+export const mouseUp = function (attributes, element) {
   return keyEvent(attributes, 'mouseup', element);
 };
 
-export const touchStart = function(attributes, element) {
+export const touchStart = function (attributes, element) {
   return keyEvent(attributes, 'touchstart', element);
 };
 
-export const touchEnd = function(attributes, element) {
+export const touchEnd = function (attributes, element) {
   return keyEvent(attributes, 'touchend', element);
 };
