@@ -59,7 +59,11 @@
     <br />
     <div class="two fields">
       <form.field @label="Text Area" @required={{required}} as |field|>
-        <field.text-area @model={{this}} @valuePath="textArea" @disabled={{disabled}}/>
+        <field.text-area
+          @model={{this}}
+          @valuePath="textArea"
+          @disabled={{disabled}}
+        />
       </form.field>
       <form.field @label="Text Area" @required={{required}} as |field|>
         <field.text-area @disabled={{disabled}} />
@@ -144,7 +148,8 @@
           @label="Option 1"
           @disabled={{disabled}}
           @value="1"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
       <form.field @required={{required}} as |field|>
@@ -152,7 +157,8 @@
           @label="Option 2"
           @disabled={{disabled}}
           @value="2"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
       <form.field @required={{required}} as |field|>
@@ -160,7 +166,8 @@
           @label="Option 3"
           @disabled={{disabled}}
           @value="3"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
       <form.field @required={{required}} as |field|>
@@ -168,7 +175,8 @@
           @label="Option 4"
           @disabled={{disabled}}
           @value="4"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
     </div>
@@ -179,7 +187,8 @@
           @label="Option 1"
           @disabled={{disabled}}
           @value="1"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
       <form.field @required={{required}} as |field|>
@@ -187,7 +196,8 @@
           @label="Option 2"
           @disabled={{disabled}}
           @value="2"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
       <form.field @required={{required}} as |field|>
@@ -195,7 +205,8 @@
           @label="Option 3"
           @disabled={{disabled}}
           @value="3"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
       <form.field @required={{required}} as |field|>
@@ -203,21 +214,16 @@
           @label="Option 4"
           @disabled={{disabled}}
           @value="4"
-          @selectedValue={{selectedValue}}
+          @model={{this}}
+          @valuePath="radio"
         />
       </form.field>
     </div>
 
     <form.submit-button />
     <NrgButton @class="basic black" @text="Cancel" />
-    <form.form-action
-      @text="Toggle Required"
-      @onClick={{requiredToggle}}
-    />
-    <form.form-action
-      @text="Toggle Disabled"
-      @onClick={{disabledToggle}}
-    />
+    <form.form-action @text="Toggle Required" @onClick={{requiredToggle}} />
+    <form.form-action @text="Toggle Disabled" @onClick={{disabledToggle}} />
     <form.form-link @route="index">
       Index
     </form.form-link>

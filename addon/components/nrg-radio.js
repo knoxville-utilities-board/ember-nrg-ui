@@ -1,22 +1,13 @@
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-radio';
+import { action } from '@ember/object';
+import NrgValidationComponent from './nrg-validation-component';
 
-export default Component.extend({
-  layout,
+export default class NrgRadioComponent extends NrgValidationComponent {
+  get checked() {
+    return this.args.value && this.args.value == this.value;
+  }
 
-  tagName: '',
-
-  readonly: false,
-
-  onClick(value) {
-    if (this.disabled || this.readOnly) {
-      return;
-    }
-    this.set('selectedValue', value);
-    this.onChange(value);
-  },
-
-  onChange(value) {
-    this.sendAction('action', value);
-  },
-});
+  @action
+  selectOption() {
+    this._onChange(this.args.value);
+  }
+}

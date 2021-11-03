@@ -15,6 +15,7 @@ const Validators = {
   ],
   deal: [validator('presence', true)],
   textArea1: [validator('presence', true)],
+  radio: [validator('presence', true)],
   checkbox1: [
     validator('inclusion', {
       in: [true],
@@ -51,6 +52,9 @@ export default class ViewComponentsNrgFormsController extends Controller {
 
   @tracked
   deal;
+
+  @tracked
+  radio;
 
   @tracked
   textArea;

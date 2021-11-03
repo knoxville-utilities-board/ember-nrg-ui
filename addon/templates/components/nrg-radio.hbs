@@ -1,4 +1,0 @@
-<div class={{concat "ui checkbox radio" (if disabled " disabled")}}>
-  <input type="radio" tabindex="0" disabled={{this.disabled}} readonly={{this.readonly}} name={{this.name}} checked={{eq this.value this.selectedValue}} onchange={{action this.onClick value}}>
-  <label {{action this.onClick value}}>{{label}}</label>
-</div>
