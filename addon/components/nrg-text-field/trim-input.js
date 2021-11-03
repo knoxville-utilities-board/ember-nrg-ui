@@ -5,11 +5,33 @@ import { tracked } from '@glimmer/tracking';
 export default class TrimInputComponent extends Component {
   constructor() {
     super(...arguments);
-    this.valueChange();
+    this.innerValue = this.trimmedOuterValue;
   }
 
   @tracked
-  _value;
+  innerValue;
+
+  get trimmedOuterValue() {
+    const value = this.args.value;
+    if (value && typeof value == 'string') {
+      return value.trim() || '';
+    } else if (value && typeof value == 'number') {
+      return value.toString() || '';
+    } else {
+      return '';
+    }
+  }
+
+  get trimmedInnerValue() {
+    return (this.innerValue && this.innerValue.trim()) || '';
+  }
+
+  get displayValue() {
+    if (this.trimmedInnerValue != this.trimmedOuterValue) {
+      return this.trimmedOuterValue;
+    }
+    return this.innerValue;
+  }
 
   @action
   blur() {
@@ -23,24 +45,8 @@ export default class TrimInputComponent extends Component {
 
   @action
   _valueChange({ target }) {
-    this._value = target.value;
+    this.innerValue = target.value;
     const value = target.value.trim();
     this.args.onChange && this.args.onChange(value);
-  }
-
-  @action
-  valueChange() {
-    const value = this.args.value;
-    const oldValue = this._value && this._value.trim();
-    let newValue = '';
-    if (value && typeof value == 'string') {
-      newValue = value.trim() || '';
-    } else if (value && typeof value == 'number') {
-      newValue = value.toString() || '';
-    }
-
-    if (oldValue !== newValue) {
-      this._value = newValue;
-    }
   }
 }

@@ -3,7 +3,7 @@
   min={{@min}}
   max={{@max}}
   step={{@step}}
-  value={{this._value}}
+  value={{this.displayValue}}
   name={{@name}}
   autocapitalize={{@autocapitalize}}
   disabled={{@disabled}}
@@ -13,5 +13,4 @@
   {{on "blur" this.blur}}
   {{on "focus" this.focus}}
   {{on "input" this._valueChange}}
-  {{did-update this.valueChange @value}}
 />
