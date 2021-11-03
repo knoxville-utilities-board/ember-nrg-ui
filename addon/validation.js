@@ -21,6 +21,7 @@ export default function validationState(validatorsArgument) {
             warningMessage: null,
             message: null,
             isValid: true,
+            options: {},
           };
 
           for (const validator of validators[key]) {
@@ -29,6 +30,13 @@ export default function validationState(validatorsArgument) {
               messages,
             ]);
 
+            attrState[key].options[validatorResponse.validator] =
+              validatorResponse.options;
+
+            if (!attrState[key].isValid) {
+              continue;
+            }
+
             if (validatorResponse.valid) {
               attrState[key].warningMessage = validatorResponse.warningMessage;
               continue;
@@ -36,7 +44,6 @@ export default function validationState(validatorsArgument) {
 
             attrState[key].message = validatorResponse.errorMessage;
             attrState[key].isValid = false;
-            break;
           }
         }
 
@@ -66,10 +73,14 @@ export function validator(eventName, options) {
       options.description = messages.defaultDescription;
     }
 
+    const response = {
+      validator: eventName,
+      options,
+      valid: true,
+    };
+
     if (typeof validationResponse === 'boolean' && validationResponse) {
-      return {
-        valid: true,
-      };
+      return response;
     }
 
     const message =
@@ -77,15 +88,11 @@ export function validator(eventName, options) {
       messages.getMessageFor(validationResponse.type, options);
 
     if (options.isWarning) {
-      return {
-        valid: true,
-        warningMessage: message,
-      };
+      response.warningMessage = message;
     } else {
-      return {
-        valid: false,
-        errorMessage: message,
-      };
+      response.valid = false;
+      response.errorMessage = message;
     }
+    return response;
   };
 }
