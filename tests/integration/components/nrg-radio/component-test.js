@@ -20,7 +20,7 @@ module('Integration | Component | nrg-radio', function (hooks) {
       hbs`<NrgRadio @value="1" @model={{this}} @valuePath="selectedValue" />`
     );
     assert.equal(this.selectedValue, '0');
-    await click(find('.ui.checkbox.radio input'));
+    await click('.ui.checkbox.radio input');
     assert.equal(this.selectedValue, '1');
   });
 
