@@ -274,7 +274,7 @@ export default class NrgValidationComponent extends Component {
     date = moment(date);
     let valid = true;
     if (this.args.minDate) {
-      valid = valid && !date.isBefore(this.args.minDate, precision);
+      valid = !date.isBefore(this.args.minDate, precision);
     }
     if (this.args.maxDate) {
       valid = valid && !date.isAfter(this.args.maxDate, precision);

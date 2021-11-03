@@ -2,13 +2,13 @@
   class="ui calendar"
   role="button"
   {{on "click" this.onFocus}}
-  {{!-- {{on-click-outside this.onBlur}} --}}
+  {{on-click-outside this.onBlur}}
 >
-  {{#if hasBlock}}
+  {{#if (has-block)}}
     <div class="wrapper">
       {{yield}}
       {{#if this.isFocused}}
-        <NrgDatetime::calendar
+        <NrgDatetime::Calendar
           @minDate={{@minDate}}
           @maxDate={{@maxDate}}
           @type={{this.type}}
@@ -31,7 +31,7 @@
       as |view|
     >
       {{#if this.isFocused}}
-        <NrgDatetime::calendar
+        <NrgDatetime::Calendar
           @minDate={{@minDate}}
           @maxDate={{@maxDate}}
           @type={{this.type}}

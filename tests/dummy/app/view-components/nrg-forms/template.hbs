@@ -212,11 +212,11 @@
     <NrgButton @class="basic black" @text="Cancel" />
     <form.form-action
       @text="Toggle Required"
-      @onClick={{action "requiredToggle"}}
+      @onClick={{requiredToggle}}
     />
     <form.form-action
       @text="Toggle Disabled"
-      @onClick={{action "disabledToggle"}}
+      @onClick={{disabledToggle}}
     />
     <form.form-link @route="index">
       Index
