@@ -3,7 +3,7 @@
   class="card home-card
     {{if @actionCard "action-card"}}
     {{unless this.visible "is-visually-hidden"}}"
-  {{on "click" click}}
+  {{on "click" this.click}}
 >
   {{#if @icon}}
     <div class="image icon">
