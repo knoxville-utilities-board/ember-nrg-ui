@@ -22,9 +22,9 @@ export default class HomeCard extends Component {
   }
 
   @action click() {
-    const route = this.route;
-    const routeModel = this.routeModel;
-    const url = this.url;
+    const route = this.args.route;
+    const routeModel = this.args.routeModel;
+    const url = this.args.url;
     if (route && routeModel) {
       this.router.transitionTo(route, routeModel);
     } else if (route) {
