@@ -1,7 +1,9 @@
 <a
+  role="button"
   class="card home-card
     {{if @actionCard "action-card"}}
     {{unless this.visible "is-visually-hidden"}}"
+  {{on "click" this.click}}
 >
   {{#if @icon}}
     <div class="image icon">
@@ -9,7 +11,7 @@
     </div>
   {{else if @image}}
     <div class="image">
-      <img src={{@image}} alt={{@altText}} />
+      <img src={{@image}} alt={{@altText}}>
     </div>
   {{/if}}
   <div class="content">
