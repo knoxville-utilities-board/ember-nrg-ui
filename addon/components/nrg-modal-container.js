@@ -5,9 +5,8 @@ export default class Modal extends Component {
   @service('modal') modalService;
 
   @action onDimmerClick() {
-    if (!this.modalService?.activeModal?.dismissable) {
-      return;
+    if (this.modalService?.activeModal?.dismissable) {
+      this.modalService?.activeModal?.onHide();
     }
-    this.modalService?.activeModal?.onHide();
   }
 };
