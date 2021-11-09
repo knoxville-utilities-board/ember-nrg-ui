@@ -8,6 +8,7 @@ const defaultPlaceholder = 'Search';
 const defaultMinCharacters = 1;
 const defaultSearchTimeout = 300;
 const defaultDisplayLabel = 'header';
+const defaultNoResultsLabel = 'No Results';
 
 export default class NrgSearchComponent extends NrgValidationComponent {
   @tracked
@@ -45,6 +46,10 @@ export default class NrgSearchComponent extends NrgValidationComponent {
 
   get displayLabel() {
     return this.args.displayLabel || defaultDisplayLabel;
+  }
+
+  get noResultsLabel() {
+    return this.args.noResultsLabel || defaultNoResultsLabel;
   }
 
   get _loading() {
