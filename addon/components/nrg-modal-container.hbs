@@ -1,7 +1,21 @@
-<div class="ui modals {{if this.modalService.hasOpenModals "visible active" "hidden"}} {{if this.activeModal.sidebar "sidebar-container"}}">
+<div
+  class="ui modals
+    {{if this.modalService.hasOpenModals "visible active" "hidden"}}
+    {{if this.modalService.activeModal.sidebar "sidebar-container"}}"
+>
   {{#each this.modalService.openModals as |modal|}}
     {{#if (eq this.modalService.activeModal modal)}}
-      <div role="button" class="ui dimmer visible active {{if this.modalService.activeModal.sidebar "sidebar-dimmer" "page"}} {{if (not this.modalService.activeModal.isDismissable) "not-dismissable"}} {{this.modalService.activeModal.dimmerClass}}" {{on "click" this.onDimmerClick}}></div>
+      <div
+        role="button"
+        class="ui dimmer visible active
+          {{if modal.sidebar "sidebar-dimmer" "page"}}
+          {{if
+            (not modal.isDismissable)
+            "not-dismissable"
+          }}
+          {{modal.dimmerClass}}"
+        {{on "click" this.onDimmerClick}}
+      ></div>
     {{/if}}
     <NrgModalContainer::ModalWrapper @modal={{modal}} />
   {{/each}}
