@@ -1,49 +1,41 @@
-import Component from '@ember/component';
-import layout from '../../../templates/components/nrg-list/header/search';
-import { observer } from '@ember/object';
-import { task, timeout } from 'ember-concurrency';
-import GlobalKeyboardShortcutsMixin from 'ember-nrg-ui/mixins/global-keyboard-shortcut';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { timeout } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency-decorators';
 
-export default Component.extend(GlobalKeyboardShortcutsMixin, {
-  layout,
-  classNames: ['item'],
-  placeholder: 'Search...',
-  searchString: null,
+const defaultPlaceholder = 'Search...';
+const defaultSearchTimeout = 400;
 
-  keyboardShortcuts: [
-    {
-      key: 'KeyS',
-      actionName: 'focus',
-      description: 'Focus Search Box',
-    },
-  ],
+export default class NrgListHeaderSearchComponent extends Component {
+  get placeholder() {
+    return this.args.placeholder || defaultPlaceholder;
+  }
 
-  init() {
-    this._super(...arguments);
-    this.searchTask.perform(true);
-  },
+  get searchTimeout() {
+    return this.args.searchTimeout || defaultSearchTimeout;
+  }
 
-  searchStringObserver: observer('searchString', function() {
-    this.searchTask.perform();
-  }),
-
-  searchTask: task(function*(immediate) {
-    const searchString = this.searchString;
+  @restartableTask
+  *searchTask(searchString, immediate) {
     if (searchString === null) {
       return;
     }
     if (!immediate) {
-      yield timeout(400);
+      yield timeout(this.searchTimeout);
     }
-    this.changed(searchString);
-  }).restartable(),
+    this.args.onChange && this.args.onChange(searchString);
+  }
 
-  actions: {
-    focus() {
-      const input = this.element.querySelector('input');
-      if (input) {
-        input.focus();
-      }
-    },
-  },
-});
+  @action
+  onSearchInput(searchString) {
+    this.searchTask.perform(searchString);
+  }
+
+  @action
+  onFocus({ target }) {
+    const input = target.querySelector('input');
+    if (input) {
+      input.focus();
+    }
+  }
+}
