@@ -9,4 +9,4 @@ export default class Modal extends Component {
       this.modalService?.activeModal?.onHide();
     }
   }
-};
+}
