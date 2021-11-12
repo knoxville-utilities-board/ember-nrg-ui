@@ -104,7 +104,7 @@ export default class ViewComponentsNrgFormsController extends Controller {
   get pageItems() {
     const start = this.pageStart;
     const count = 2;
-    const items = this.mappedItems.slice(start, start + count);
+    const items = this.mappedItems.slice(0, start + count);
     items.meta = {
       start,
       count,
