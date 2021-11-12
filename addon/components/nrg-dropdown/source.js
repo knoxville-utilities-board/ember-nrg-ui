@@ -1,7 +1,3 @@
-import Component from '@ember/component';
-import layout from '../../templates/components/nrg-dropdown/source';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  tagName: '',
-});
+export default class NrgDropdownSourceComponent extends Component {}

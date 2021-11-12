@@ -22,6 +22,7 @@ const Validators = {
     }),
   ],
   checkbox2: [validator('presence', true)],
+  selectedOption: [validator('presence', true)],
   textArea: [
     validator('presence', true),
     validator('length', {
@@ -71,6 +72,9 @@ export default class ViewComponentsNrgFormsController extends Controller {
 
   @tracked
   dateTime2;
+
+  @tracked
+  selectedOption;
 
   @tracked
   maxDate = moment().add(5, 'days').toDate();

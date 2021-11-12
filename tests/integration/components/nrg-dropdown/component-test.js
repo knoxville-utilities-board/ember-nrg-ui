@@ -1,10 +1,10 @@
-import { click, find, fillIn, focus, render } from '@ember/test-helpers';
+import { click, fillIn, focus, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
 import { triggerKeyDown } from 'ember-keyboard';
 
-module('Integration | Component | nrg-dropdown', function(hooks) {
+module('Integration | Component | nrg-dropdown', function (hooks) {
   hooks.beforeEach(() => {
     this.options = [
       {
@@ -21,27 +21,31 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
 
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await render(hbs`<NrgDropdown @options={{options}} />`);
 
     assert.dom('.text').hasText('Select an Option');
   });
 
-  test('default text renders', async function(assert) {
-    await render(hbs`<NrgDropdown @options={{options}} @defaultText="Pick Something" />`);
+  test('default text renders', async function (assert) {
+    await render(
+      hbs`<NrgDropdown @options={{options}} @defaultText="Pick Something" />`
+    );
 
     assert.dom('.text').hasText('Pick Something');
   });
 
-  test('item prepopulation works', async function(assert) {
-    await render(hbs`<NrgDropdown @options={{options}} @selected={{selectedOption}} />`);
+  test('item prepopulation works', async function (assert) {
+    await render(
+      hbs`<NrgDropdown @options={{options}} @model={{this}} @valuePath="selectedOption" />`
+    );
 
     assert.dom('.text').hasText('Option 2');
   });
 
-  test('block templating works', async function(assert) {
+  test('block templating works', async function (assert) {
     await render(hbs`
-      <NrgDropdown @options={{options}} @selected={{selectedOption}} as |option|>
+      <NrgDropdown @options={{options}} @model={{this}} @valuePath="selectedOption" as |option|>
         {{option.label2}}
       </NrgDropdown>
     `);
@@ -49,7 +53,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
     assert.dom('.text').hasText('Label2 2');
   });
 
-  test('menu keyboard navigation - arrow down', async function(assert) {
+  test('menu keyboard navigation - arrow down', async function (assert) {
     this.options = [
       {
         label: 'Option 1',
@@ -68,7 +72,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
     assert.dom('.text').hasText('Option 2');
   });
 
-  test('menu keyboard navigation - arrow up', async function(assert) {
+  test('menu keyboard navigation - arrow up', async function (assert) {
     this.options = [
       {
         label: 'Option 1',
@@ -88,7 +92,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
     assert.dom('.text').hasText('Option 1');
   });
 
-  test('menu keyboard navigation - select and tab', async function(assert) {
+  test('menu keyboard navigation - select and tab', async function (assert) {
     this.options = [
       {
         label: 'Option 1',
@@ -107,7 +111,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
     assert.dom('.text').hasText('Option 2');
   });
 
-  test('menu keyboard navigation - search and tab', async function(assert) {
+  test('menu keyboard navigation - search and tab', async function (assert) {
     this.options = [
       {
         label: 'Option 1',
@@ -125,7 +129,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
     assert.dom('.text').hasText('Option 2');
   });
 
-  test('open dropdown with dom focus', async function(assert) {
+  test('open dropdown with dom focus', async function (assert) {
     this.options = [
       {
         label: 'Option 1',
@@ -133,7 +137,7 @@ module('Integration | Component | nrg-dropdown', function(hooks) {
       },
     ];
     await render(hbs`<NrgDropdown @search={{true}} @options={{options}} />`);
-    await focus('input')
+    await focus('input');
     assert.dom('.dropdown.visible').exists();
   });
 });
