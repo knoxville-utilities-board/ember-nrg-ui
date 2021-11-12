@@ -17,7 +17,7 @@ export default Service.extend({
   rawContextItems: computed('registeredClients.[]', 'registeredClients.@each.contextItems', function() {
     const rawContextItems = A();
     this.registeredClients.forEach(client => {
-      client.get('contextItems').forEach(item => {
+      client.contextItems.forEach(item => {
         const contextItem = EmberObject.create(item);
         contextItem.set('client', client);
         contextItem.set('baseLabel', item.label);
