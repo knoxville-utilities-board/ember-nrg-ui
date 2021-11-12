@@ -1,7 +1,13 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  optionList: [
+export default class ViewComponentsNrgDropdownController extends Controller {
+  @tracked
+  selectedOption;
+
+  @tracked
+  optionList = [
     {
       label: 'Item 1',
       value: 'Value A',
@@ -27,18 +33,31 @@ export default Controller.extend({
       value: 'Value E',
       icon: 'comment',
     },
-  ],
-  optionListStrings: ['Item String 1', 'Item String 2', 'Item String 3', 'Item String 4', 'Item String 5'],
-  allowAdditionsOptionsList: [
+  ];
+
+  @tracked
+  optionListStrings = [
+    'Item String 1',
+    'Item String 2',
+    'Item String 3',
+    'Item String 4',
+    'Item String 5',
+  ];
+
+  @tracked
+  allowAdditionsOptionsList = [
     {
       label: 'Item 1',
       value: 'Value A',
       icon: 'power off',
     },
-  ],
-  allowAdditionsOptionsListStrings: ['Item String 1'],
+  ];
 
-  workers: [
+  @tracked
+  allowAdditionsOptionsListStrings = ['Item String 1'];
+
+  @tracked
+  workers = [
     'Lurline Groce',
     'Miyoko Galbreath',
     'Bambi Lincoln',
@@ -59,8 +78,10 @@ export default Controller.extend({
     'Onita Testerman',
     'Penni Rorick',
     'Ronny Armentrout',
-  ],
-  crews: [
+  ];
+
+  @tracked
+  crews = [
     'A427',
     'A884',
     'A581',
@@ -81,8 +102,8 @@ export default Controller.extend({
     'U342',
     'U101',
     'U626',
-  ],
-  onItemSelect() {
-    //
-  },
-});
+  ];
+
+  @action
+  onItemSelect() {}
+}

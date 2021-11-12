@@ -2,10 +2,10 @@
   <!-- BEGIN-SNIPPET nrg-dropdown -->
   <NrgFormContainer as |form|>
     <form.field @label="Dropdown (Linked Value)" as |field|>
-      <field.dropdown @options={{optionList}} @selected={{selected}} />
+      <field.dropdown @options={{optionList}} @model={{this}} @valuePath="selectedOption" />
     </form.field>
     <form.field @label="Dropdown with Block Render (Linked Value)" as |field|>
-      <field.dropdown @options={{optionList}} @selected={{selected}} as |option|>
+      <field.dropdown @options={{optionList}} @model={{this}} @valuePath="selectedOption" as |option|>
         <i class="{{option.icon}} icon"></i>
         <strong>Label</strong>
         <span>{{option.label}}</span>
@@ -15,7 +15,7 @@
       </field.dropdown>
     </form.field>
     <form.field @label="Search (Linked Value)" as |field|>
-      <field.dropdown @options={{optionList}} @selected={{selected}} @search={{true}} />
+      <field.dropdown @options={{optionList}} @model={{this}} @valuePath="selectedOption" @search={{true}} />
     </form.field>
     <form.field @label="Dropdown with String Array" as |field|>
       <field.dropdown @options={{optionListStrings}} />
@@ -57,7 +57,7 @@
 <NrgCodeBlock @label="Freeform Dropdowns" @codeBlockName="nrg-dropdown-freeform.hbs">
   <!-- BEGIN-SNIPPET nrg-dropdown-freeform -->
   <div class="ui center aligned segment">
-    <NrgDropdown @class="icon button primary float right" @onSelect={{action onItemSelect}} @freeform={{true}} as |dropdown|>
+    <NrgDropdown @class="icon button primary float right" @onSelect={{this.onItemSelect}} @freeform={{true}} as |dropdown|>
       <dropdown.source>
         <div class="text">Actions</div>
         <i class="dropdown icon"></i>
@@ -85,7 +85,7 @@
           </subMenu.source>
           <subMenu.menu>
             {{#each crews as |crew|}}
-              <menu.item @onSelect={{action onItemSelect crew}}>
+              <menu.item @onSelect={{(fn this.onItemSelect crew)}}>
                 {{crew}}
               </menu.item>
             {{/each}}

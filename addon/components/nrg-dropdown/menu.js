@@ -1,16 +1,13 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import layout from '../../templates/components/nrg-dropdown/menu';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  tagName: '',
-  subMenu: false,
-  scrollable: false,
-  scrollableClass: computed('scrollable', function() {
-    return this.scrollable ? 'scrollable' : '';
-  }),
-  _onSelect() {
-    // Implemented by dropdown
-  },
-});
+export default class NrgDropdownMenuComponent extends Component {
+  @action
+  onSelectInternal(option, evt) {
+    if (evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+    }
+    this.args.onSelectInternal && this.args.onSelectInternal(...arguments);
+  }
+}

@@ -1,18 +1,15 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import layout from '../../templates/components/nrg-dropdown/sub-menu';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
-  classNames: ['item'],
-  classNameBindings: ['disabled', 'active'],
-  attributeBindings: ['data-dropdown-item'],
-  dataDropdownItem: 'true',
-  isOpen: false,
-  menuClass: computed('menuDirection', 'isOpen', function() {
+export default class NrgDropdownSourceComponent extends Component {
+  @tracked
+  isOpen = false;
+
+  get menuClass() {
     let computedClasses = '';
-    if (this.menuDirection) {
-      computedClasses += ` ${this.menuDirection}`;
+    if (this.args.menuDirection) {
+      computedClasses = this.args.menuDirection;
     }
     if (this.isOpen) {
       computedClasses += ' transition visible';
@@ -20,14 +17,24 @@ export default Component.extend({
       computedClasses += ' transition hidden';
     }
     return computedClasses;
-  }),
-  mouseEnter() {
-    this.set('isOpen', true);
-  },
-  mouseLeave() {
-    this.set('isOpen', false);
-  },
-  _onSelect() {
-    // Implemented by dropdown
-  },
-});
+  }
+
+  @action
+  onMouseEnter() {
+    this.isOpen = true;
+  }
+
+  @action
+  onMouseLeave() {
+    this.isOpen = false;
+  }
+
+  @action
+  onSelectInternal(option, evt) {
+    if (evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+    }
+    this.args.onSelectInternal && this.args.onSelectInternal(...arguments);
+  }
+}

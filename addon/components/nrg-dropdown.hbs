@@ -1,0 +1,129 @@
+<div
+  class="ui dropdown
+    {{if @search "search"}}
+    {{if (or this.selection @search) "selection"}}
+    {{if @loading "loading"}}
+    {{if this._dropdownDisabled "disabled"}}
+    {{if this.isOpen "active visible"}}
+    {{if @multiple "multiple"}}
+    {{@class}}"
+  tabindex={{this.tabindex}}
+  {{on "click" this.onClick}}
+  {{on-click-outside this.onBlur}}
+  {{did-insert this.setWrapperElement}}
+  {{on-key "ArrowUp" this.moveUp}}
+  {{on-key "ArrowDown" this.moveDown}}
+  {{on-key "Enter" this.keyboardEscapeHandler}}
+  {{on-key "NumpadEnter" this.keyboardEscapeHandler}}
+  {{on-key "Tab" this.keyboardEscapeHandler}}
+  {{on-key "Escape" this.keyboardEscapeHandler}}
+>
+  {{#if @freeform}}
+    {{yield
+      (hash
+        source=(component "nrg-dropdown/source")
+        menu=(component
+          "nrg-dropdown/menu"
+          class=this.menuClass
+          scrollable=@scrollable
+          displayedOptions=this.displayedOptions
+          activeItem=this.activeItem
+          onSelectInternal=this.onSelectInternal
+        )
+      )
+    }}
+  {{else}}
+    {{#if @icon}}
+      <i class="icon {{@icon}}"></i>
+    {{/if}}
+
+    {{#if this.displayDefaultText}}
+      <div class="{{this.textClass}} text">
+        {{#if this.hasSelected}}
+          {{#if (has-block)}}
+            {{yield this.value}}
+          {{else if this.isStringData}}
+            {{this.value}}
+          {{else}}
+            {{this.value.label}}
+          {{/if}}
+        {{else}}
+          {{this.defaultText}}
+        {{/if}}
+      </div>
+    {{/if}}
+    {{#if @multiple}}
+      {{#each this.value as |selectedOption|}}
+        <a
+          data-dropdown-multi-selection="true"
+          class="ui label transition visible"
+        >
+          {{#if (has-block)}}
+            {{yield selectedOption}}
+          {{else if this.isStringData}}
+            {{selectedOption}}
+          {{else}}
+            {{selectedOption.label}}
+          {{/if}}
+          <i
+            data-dropdown-multi-selection="true"
+            class="delete icon"
+            role="button"
+            {{on "click" (fn this.unselectOption selectedOption)}}
+          ></i>
+        </a>
+      {{/each}}
+    {{/if}}
+    {{#if @search}}
+      <input
+        tabindex="0"
+        class="search"
+        autocomplete="off"
+        name={{@name}}
+        value={{this.searchValue}}
+        {{on "input" this.onSearchInputChange}}
+        {{on "focus" this.onClick}}
+      />
+    {{/if}}
+    {{#if (and @search @multiple)}}
+      <span class="sizer"></span>
+    {{/if}}
+    <i class="dropdown icon"></i>
+    <div class="{{this.menuClass}} menu" tabindex="-1">
+      {{#each this.displayedOptions as |option i|}}
+        <NrgDropdown::Item
+          @option={{option}}
+          @disabled={{option.disabled}}
+          @index={{i}}
+          @activeItem={{this.activeItem}}
+          @onSelectInternal={{this.onSelectInternal}}
+        >
+          {{#if (has-block)}}
+            {{yield option}}
+          {{else if this.isStringData}}
+            {{#if this.isAddingOption}}
+              Add item:
+            {{/if}}
+            {{option}}
+          {{else}}
+            {{#if this.isAddingOption}}
+              Add item:
+            {{/if}}
+            {{option.label}}
+          {{/if}}
+        </NrgDropdown::Item>
+      {{else}}
+        <NrgDropdown::Item
+          @disabled={{true}}
+          @onSelectInternal={{this.onSelectInternal}}
+        >
+          {{#if this.isSearching}}
+            <span>No results found.</span>
+          {{else}}
+            <span>No options available.</span>
+          {{/if}}
+        </NrgDropdown::Item>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
