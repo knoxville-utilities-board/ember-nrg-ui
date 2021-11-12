@@ -1,0 +1,18 @@
+<div
+  class="item {{if @disabled "disabled"}} {{if @active "active"}} {{@class}}"
+  data-dropdown-item={{@data-dropdown-item}}
+  {{on "mouseenter" this.onMouseEnter}}
+  {{on "mouseleave" this.onMouseLeave}}
+>
+  {{yield
+    (hash
+      source=(component "nrg-dropdown/source")
+      menu=(component
+        "nrg-dropdown/menu"
+        class=this.menuClass
+        scrollable=true
+        onSelectInternal=this.onSelectInternal
+      )
+    )
+  }}
+</div>
