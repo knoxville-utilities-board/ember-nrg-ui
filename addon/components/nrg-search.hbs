@@ -1,0 +1,63 @@
+<div
+  class="ui category search focus box inlined
+    {{if this.fluid "fluid"}}
+    {{if this._loading "loading"}}
+    {{@class}}"
+  {{on "click" this.onFocus}}
+  {{on-click-outside this.onBlur}}
+>
+  <div class="ui icon input">
+    <NrgTextField
+      @class="prompt"
+      @disabled={{@disabled}}
+      @placeholder={{this.placeholder}}
+      @model={{this}}
+      @valuePath="searchString"
+      @onChange={{this.query}}
+    />
+    <i class="search icon"></i>
+  </div>
+  {{#if this.showResults}}
+    <div
+      class="results scrollable-submenu transition visible"
+      {{on-key "ArrowUp" this.moveUp}}
+      {{on-key "ArrowDown" this.moveDown}}
+      {{on-key "Enter" this.onEnter}}
+      {{on-key "Escape" this.onEscape}}
+    >
+      {{#each this.items as |item i|}}
+        <div
+          role="button"
+          class="result {{if (eq i this.activeItem) "active"}}"
+          {{on "click" (fn this.onItemClick item)}}
+        >
+          {{#if (has-block)}}
+            {{yield item}}
+          {{else}}
+            {{#if item.image}}
+              <div class="image">
+                <img src={{item.image}} alt={{item.altText}} />
+              </div>
+            {{/if}}
+            <div class="content">
+              {{#if item.header}}
+                <div class="title">{{item.header}}</div>
+              {{/if}}
+              {{#if item.description}}
+                <div class="description">
+                  <p>{{item.description}}</p>
+                </div>
+              {{/if}}
+            </div>
+          {{/if}}
+        </div>
+      {{else}}
+        <div class="result">
+          <div class="content">
+            <div class="header">{{this.noResultsLabel}}</div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
