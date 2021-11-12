@@ -89,11 +89,7 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
 
     this.isFocused = true;
 
-    const wrapper = evt.currentTarget;
-    const popup = wrapper && wrapper.querySelector('.ui.popup.calendar');
-    if (popup) {
-      popup.focus();
-    }
+    evt.currentTarget?.querySelector('.ui.popup.calendar')?.focus();
   }
 
   @action

@@ -15,7 +15,7 @@ export default class NrgDropdownItemComponent extends Component {
       evt.stopPropagation();
       evt.preventDefault();
     }
-    this.args.onSelect && this.args.onSelect(option);
-    this.args.onSelectInternal && this.args.onSelectInternal(option);
+    this.args.onSelect?.(option);
+    this.args.onSelectInternal?.(option);
   }
 }

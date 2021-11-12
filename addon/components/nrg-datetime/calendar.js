@@ -73,8 +73,7 @@ export default class NrgValidationComponent extends Component {
       return false;
     }
     const now = moment();
-    const userDisabled =
-      this.args.isDateDisabled && this.args.isDateDisabled(now);
+    const userDisabled = this.args.isDateDisabled?.(now);
     const afterMaxDate = now.isAfter(this.args.maxDate, 'date');
     const beforeMinDate = now.isBefore(this.args.minDate, 'date');
     return !userDisabled && !afterMaxDate && !beforeMinDate;
@@ -283,8 +282,7 @@ export default class NrgValidationComponent extends Component {
   }
 
   _isDateDisabled(date, precision) {
-    const userDisabled =
-      this.args.isDateDisabled && this.args.isDateDisabled(date, precision);
+    const userDisabled = this.args.isDateDisabled?.(date, precision);
     const isBeyondDateRange = this.isBeyondDateRange(date, precision);
     return userDisabled || isBeyondDateRange;
   }
@@ -318,8 +316,7 @@ export default class NrgValidationComponent extends Component {
       precision = 'minute';
     }
 
-    const userDisabled =
-      this.args.isDateDisabled && this.args.isDateDisabled(date, precision);
+    const userDisabled = this.args.isDateDisabled?.(date, precision);
     if (userDisabled) {
       return;
     }
@@ -354,11 +351,11 @@ export default class NrgValidationComponent extends Component {
   }
 
   _onSelect(date) {
-    this.args.onSelect && this.args.onSelect(date);
+    this.args.onSelect?.(date);
   }
 
   close() {
-    this.args.onClose && this.args.onClose();
+    this.args.onClose?.();
   }
 
   @action

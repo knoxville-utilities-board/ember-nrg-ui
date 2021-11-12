@@ -8,6 +8,6 @@ export default class NrgDropdownMenuComponent extends Component {
       evt.stopPropagation();
       evt.preventDefault();
     }
-    this.args.onSelectInternal && this.args.onSelectInternal(...arguments);
+    this.args.onSelectInternal?.(...arguments);
   }
 }

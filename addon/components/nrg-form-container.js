@@ -11,6 +11,6 @@ export default class NrgFormComponent extends Component {
     event.stopPropagation();
 
     this.didValidate = true;
-    this.args.onSubmit && this.args.onSubmit();
+    this.args.onSubmit?.();
   }
 }
