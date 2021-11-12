@@ -91,7 +91,12 @@
     </form.field>
     <br />
     <form.field @label="Dropdown" @required={{required}} as |field|>
-      <field.dropdown @options={{optionList}} @disabled={{disabled}} />
+      <field.dropdown
+        @options={{optionList}}
+        @model={{this}}
+        @valuePath="selectedOption"
+        @disabled={{disabled}}
+      />
     </form.field>
     <br />
     <div class="grouped fields">
