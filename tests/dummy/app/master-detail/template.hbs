@@ -1,7 +1,7 @@
 <!-- BEGIN-SNIPPET master-detail -->
 <NrgMasterDetail as |view|>
   <view.master>
-    <NrgList @selectionType="single" @pageMeta={{pageMeta}} @items={{mappedItems}} @select={{action this.onSelect}} />
+    <NrgList @selectionType="single" @pageMeta={{pageMeta}} @items={{mappedItems}} @onItemSelect={{action this.onSelect}} />
   </view.master>
   <view.detail>
     {{outlet}}
