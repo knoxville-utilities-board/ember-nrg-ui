@@ -4,21 +4,20 @@
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Loading" @codeBlockName="loading-search.hbs">
+<NrgCodeBlock @label="Querying" @codeBlockName="querying-search.hbs">
   <p>
-    Searching for <strong>{{or loadingQuery "Nothing"}}</strong>
-  </p>
-  <!-- BEGIN-SNIPPET loading-search -->
-  <NrgSearch @loading={{true}} @query={{action (mut loadingQuery)}} />
-  <!-- END-SNIPPET  -->
-</NrgCodeBlock>
-
-<NrgCodeBlock @label="Querying Template" @codeBlockName="querying-search.hbs">
-  <p>
-    Selected <strong>{{or selected.header "Nothing"}}</strong>
+    Searching for
+    <strong>{{or queryString "Nothing"}}</strong>
+    <br />
+    Selected
+    <strong>{{or selectedResult.header "Nothing"}}</strong>
   </p>
   <!-- BEGIN-SNIPPET querying-search -->
-  <NrgSearch @items={{items}} @loading={{loading}} @query={{action (perform queryTask)}} @select={{action (mut selected)}} />
+  <NrgSearch
+    @query={{query}}
+    @model={{this}}
+    @valuePath="selectedResult"
+  />
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 

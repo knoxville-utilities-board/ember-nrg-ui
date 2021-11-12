@@ -1,167 +1,163 @@
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-search';
-import Validation from 'ember-nrg-ui/mixins/validation';
-import { computed, get, observer } from '@ember/object';
-import { and, or, not } from '@ember/object/computed';
-import { on } from '@ember/object/evented';
-import {
-  EKFirstResponderOnFocusMixin,
-  EKMixin,
-  keyDown
-} from 'ember-keyboard';
-import { next } from '@ember/runloop';
-import { task, timeout } from 'ember-concurrency';
+import { action, get } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import { timeout } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency-decorators';
+import NrgValidationComponent from './nrg-validation-component';
 
-export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixin, {
-  layout,
+const defaultPlaceholder = 'Search';
+const defaultMinCharacters = 1;
+const defaultSearchTimeout = 300;
+const defaultDisplayLabel = 'header';
+const defaultNoResultsLabel = 'No Results';
 
-  classNames: ['ui', 'category', 'search', 'focus', 'box', 'inlined'],
+export default class NrgSearchComponent extends NrgValidationComponent {
+  @tracked
+  isFocused = false;
 
-  classNameBindings: ['fluid', '_loading:loading'],
+  @tracked
+  activeItem = -1;
 
-  focused: false,
+  @tracked
+  searchString = '';
 
-  fluid: true,
+  @tracked
+  items = null;
 
-  placeholder: 'Search',
+  constructor() {
+    super(...arguments);
+    this.updateDisplayValue(this.value);
+  }
 
-  items: null,
+  get fluid() {
+    return this.args.fluid !== false;
+  }
 
-  loading: false,
+  get searchTimeout() {
+    return this.args.searchTimeout || defaultSearchTimeout;
+  }
 
-  _loading: or('loading', 'updateDisplayValue.isRunning'),
+  get minCharacters() {
+    return this.args.minCharacters || defaultMinCharacters;
+  }
 
-  displayLabel: 'header',
+  get placeholder() {
+    return this.args.placeholder || defaultPlaceholder;
+  }
 
-  notLoading: not('_loading'),
+  get displayLabel() {
+    return this.args.displayLabel || defaultDisplayLabel;
+  }
 
-  minCharacters: 1,
+  get noResultsLabel() {
+    return this.args.noResultsLabel || defaultNoResultsLabel;
+  }
 
-  activeItem: -1,
+  get _loading() {
+    return this.args.loading || this.throttleQuery.isRunning;
+  }
 
-  selected: null,
+  get canPerformSearch() {
+    return this.searchString.length >= this.minCharacters;
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-    this.createClickHandler();
-  },
+  get receivedResults() {
+    return this.items != null;
+  }
 
-  willDestroyElement() {
-    this._super(...arguments);
-    this.removeWindowClickListener();
-  },
+  get showResults() {
+    return (
+      this.isFocused &&
+      this.canPerformSearch &&
+      !this._loading &&
+      this.receivedResults
+    );
+  }
 
-  addWindowClickListener() {
-    document.addEventListener('click', this._clickHandler, true);
-  },
-
-  removeWindowClickListener() {
-    document.removeEventListener('click', this._clickHandler, true);
-  },
-
-  createClickHandler() {
-    this.set('_clickHandler', evt => {
-      if (!this.element.contains(evt.target)) {
-        this.set('focused', false);
-        this.set('activeItem', -1);
-      }
-      return true;
-    });
-  },
-
-  itemsObserver: observer('items', function() {
-    this.set('activeItem', -1);
-    this.set('receivedResults', true);
-  }),
-
-  selectedObserver: observer('selected', 'selected.isLoading', 'selected.isFulfilled', function() {
-    this.updateDisplayValue.perform();
-  }),
-
-  showResultsObserver: observer('showResults', function() {
-    next(() => {
-      if (this.showResults) {
-        this.addWindowClickListener();
-      } else {
-        this.removeWindowClickListener();
-      }
-    });
-  }),
-
-  updateDisplayValue: task(function*() {
-    const selected = yield this.selected;
+  updateDisplayValue(selected) {
     const displayLabel = get(selected || {}, this.displayLabel);
-    this.set('searchString', displayLabel || '');
-  })
-    .on('init')
-    .restartable(),
+    this.searchString = displayLabel || '';
+  }
 
-  canPerformSearch: computed('minCharacters', 'searchString', function() {
-    return this.get('searchString.length') >= this.minCharacters;
-  }),
+  selectItem(item) {
+    if (!item) {
+      item = this.items[this.activeItem];
+    }
+    this._onChange(item);
+    this.updateDisplayValue(item);
+    this.onBlur();
+  }
 
-  showResults: and('focused', 'canPerformSearch', 'notLoading', 'receivedResults'),
-
-  searchTimeout: 300,
-
-  throttleQuery: task(function*(searchString) {
+  @restartableTask
+  *throttleQuery(searchString) {
     yield timeout(this.searchTimeout);
-    this.query(searchString);
-    this.set('focused', true);
-  }).restartable(),
+    this.items = yield this.args.query(searchString);
+    this.activeItem = -1;
+    this.isFocused = true;
+  }
 
-  moveUp: on(keyDown('ArrowUp'), function(evt) {
-    const activeItem = this.activeItem;
-    if (this.showResults) {
-      evt.preventDefault();
-      evt.stopPropagation();
-      if (activeItem !== 0) {
-        this.decrementProperty('activeItem');
-      }
+  @action
+  onBlur() {
+    this.isFocused = false;
+    this.items = null;
+  }
+
+  @action
+  onFocus(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    if (this.isFocused || this.args.disabled) {
+      return;
     }
-  }),
 
-  moveDown: on(keyDown('ArrowDown'), function(evt) {
-    const activeItem = this.activeItem;
-    if (this.showResults) {
-      evt.preventDefault();
-      evt.stopPropagation();
-      if (activeItem < this.get('items.length') - 1) {
-        this.incrementProperty('activeItem');
-      }
+    this.isFocused = true;
+    this.activeItem = -1;
+    if (this.canPerformSearch) {
+      this.query(this.searchString);
     }
-  }),
+  }
 
-  enter: on(keyDown('Enter'), function(evt) {
-    this.send('select', evt);
-  }),
+  @action
+  moveUp(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    if (this.activeItem !== 0) {
+      this.activeItem--;
+    }
+  }
 
-  actions: {
-    inputClicked() {
-      this.set('focused', true);
-    },
-    query(searchString) {
-      this.set('receivedResults', false);
-      this.throttleQuery.perform(searchString);
-    },
-    select(evt, item) {
-      if (!this.showResults) {
-        return true;
-      }
-      if (evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        item = this.items[this.activeItem];
-      }
-      this.select(item);
-      this.set('selected', item);
-      this.set('focused', false);
-      next(() => {
-        const input = this.element.querySelector('input');
-        if (input) {
-          input.focus();
-        }
-      });
-    },
-  },
-});
+  @action
+  moveDown(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    if (this.activeItem < this.items.length - 1) {
+      this.activeItem++;
+    }
+  }
+
+  @action
+  onEnter(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.selectItem();
+  }
+
+  @action
+  onEscape(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.onBlur();
+  }
+
+  @action
+  onItemClick(item, evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.selectItem(item);
+  }
+
+  @action
+  query(searchString) {
+    this.throttleQuery.perform(searchString);
+  }
+}
