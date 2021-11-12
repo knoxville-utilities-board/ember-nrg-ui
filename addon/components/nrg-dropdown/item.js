@@ -1,23 +1,21 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import layout from '../../templates/components/nrg-dropdown/item';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  tagName: '',
-  active: computed('index', 'activeItem', function() {
-    return this.index == this.activeItem && this.activeItem != undefined;
-  }),
-  _onClick(option) {
-    if (this.onSelect) {
-      this.onSelect(option);
-      this._onSelect();
-    } else if (option) {
-      this._onSelect(option);
+export default class NrgDropdownItemComponent extends Component {
+  get active() {
+    return (
+      this.args.index == this.args.activeItem &&
+      this.args.activeItem != undefined
+    );
+  }
+
+  @action
+  _onClick(option, evt) {
+    if (evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
     }
-  },
-  _onSelect() {
-    // Implemented by menu
-  },
-  // onSelect() implemented by user
-});
+    this.args.onSelect && this.args.onSelect(option);
+    this.args.onSelectInternal && this.args.onSelectInternal(option);
+  }
+}
