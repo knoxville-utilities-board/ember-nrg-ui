@@ -1,0 +1,44 @@
+<div {{did-insert this.onInsert}} {{will-destroy this.onDestroy}} hidden></div>
+{{#if (has-block)}}
+  {{yield
+    (hash
+      list=this
+      header=(component
+        "nrg-list/header"
+        onFilterChange=this.onFilterChange
+        onSearchChange=this.onSearchChange
+      )
+      items=(component
+        "nrg-list/items"
+        isSelectable=this.isSelectable
+        selectionType=@selectionType
+        pageMeta=@pageMeta
+        pageSizes=@pageSizes
+        selectedPageSize=@selectedPageSize
+        loading=@loading
+        items=@items
+        onItemSelect=(action this.onItemSelect)
+        changePage=(action this.onChangePage)
+        groupHeaderHandler=this.groupHeaderHandler
+      )
+      create-button=(component
+        "nrg-button"
+        class="ui circular icon big primary bottom right floating button"
+        icon="plus"
+      )
+    )
+  }}
+{{else}}
+  <NrgList::Items
+    @isSelectable={{this.isSelectable}}
+    @selectionType={{@selectionType}}
+    @pageMeta={{@pageMeta}}
+    @pageSizes={{@pageSizes}}
+    @selectedPageSize={{@selectedPageSize}}
+    @loading={{@loading}}
+    @items={{@items}}
+    @onItemSelect={{this.onItemSelect}}
+    @onChangePage={{this.onChangePage}}
+    @groupHeaderHandler={{this.groupHeaderHandler}}
+  />
+{{/if}}

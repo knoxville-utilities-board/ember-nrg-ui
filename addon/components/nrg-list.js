@@ -1,93 +1,107 @@
-import Component from '@ember/component';
+import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
-import layout from '../templates/components/nrg-list';
-import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
-import { next } from '@ember/runloop';
+import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
 
-const contextItems = [
-  {
-    label: 'Refresh',
-    actionName: 'signalRefresh',
-    iconClass: 'refresh',
-  },
-];
+const defaultPageSize = 25;
+const defaultSearchParameter = 'search';
 
-const DEFAULT_PAGE_SIZE = 25;
+export default class NrgListComponent extends Component {
+  filterParam;
+  selectedFilter;
+  searchString;
 
-export default Component.extend(ContextMenuMixin, {
-  layout,
+  contextItems = [
+    {
+      label: 'Refresh',
+      actionName: 'signalRefresh',
+      iconClass: 'refresh',
+    },
+  ];
 
-  tagName: '',
+  @service('context-menu')
+  contextService;
 
-  hasRefreshContextItem: true,
+  get hasRefreshContextItem() {
+    return this.args.hasRefreshContextItem !== false;
+  }
 
-  filters: null,
+  get selectedPageSize() {
+    return this.args.selectedPageSize ?? defaultPageSize;
+  }
 
-  filterParam: null,
+  get searchParameter() {
+    return this.args.searchParameter ?? defaultSearchParameter;
+  }
 
-  searchString: '',
+  updateQuery(isRefresh) {
+    const selectedFilterValue = this.selectedFilter?.value;
 
-  searchParameter: '',
-
-  selectedPageSize: DEFAULT_PAGE_SIZE,
-
-  selectionType: '',
-
-  init() {
-    if (this.hasRefreshContextItem) {
-      this.contextItems = contextItems;
-    }
-    this._super(...arguments);
-  },
-
-  updateQuery(actionName = 'query') {
     const query = {};
-    const searchParam = this.searchParameter || 'search';
-    const searchString = this.searchString;
-    const selectedFilterValue = this.get('selectedFilter.value');
-    const filterParam = this.filterParam;
-
-    if (!isBlank(searchString)) {
-      query[searchParam] = searchString;
+    if (!isBlank(this.searchString)) {
+      query[this.searchParameter] = this.searchString;
     }
 
-    if (!isBlank(selectedFilterValue) && !isBlank(filterParam)) {
+    if (!isBlank(selectedFilterValue) && !isBlank(this.filterParam)) {
       query[this.filterParam] = selectedFilterValue;
     }
 
-    next(() => {
-      this.sendAction(actionName, query);
-    });
-  },
-
-  isSelectable(/* item */) {
-    return true;
-  },
-
-  filterChanged(filterParam, selectedFilter) {
-    this.setProperties({
-      filterParam,
-      selectedFilter,
-    });
-    this.updateQuery();
-  },
-
-  searchChanged(searchString) {
-    this.set('searchString', searchString);
-    this.updateQuery();
-  },
-
-  onItemSelect(item) {
-    this.sendAction('select', item);
-  },
-
-  onChangePage(start) {
-    this.sendAction('changePage', start);
-  },
-
-  actions: {
-    signalRefresh() {
-      this.updateQuery('refresh');
+    if (isRefresh) {
+      this.args.onRefresh?.(query) ?? this.args.onQuery?.(query);
+    } else {
+      this.args.onQuery?.(query);
     }
   }
-});
+
+  @action
+  onInsert() {
+    if (this.hasRefreshContextItem) {
+      this.contextService.addClient(this);
+    }
+  }
+
+  @action
+  onDestroy() {
+    if (this.hasRefreshContextItem) {
+      this.contextService.removeClient(this);
+    }
+  }
+
+  @action
+  signalRefresh() {
+    this.updateQuery(true);
+  }
+
+  @action
+  onFilterChange(filterParam, selectedFilter) {
+    this.filterParam = filterParam;
+    this.selectedFilter = selectedFilter;
+    this.updateQuery();
+  }
+
+  @action
+  onSearchChange(searchString) {
+    this.searchString = searchString;
+    this.updateQuery();
+  }
+
+  @action
+  groupHeaderHandler() {
+    return this.args.groupHeaderHandler?.(...arguments) ?? '';
+  }
+
+  @action
+  isSelectable() {
+    return this.args.isSelectable?.(...arguments) ?? true;
+  }
+
+  @action
+  onItemSelect() {
+    this.args.onItemSelect?.(...arguments);
+  }
+
+  @action
+  onChangePage() {
+    this.args.onChangePage?.(...arguments);
+  }
+}
