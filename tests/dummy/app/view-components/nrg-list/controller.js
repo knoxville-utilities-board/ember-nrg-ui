@@ -67,18 +67,19 @@ export default class ViewComponentsNrgFormsController extends Controller {
 
   get filteredItems() {
     let items = defaultList;
+    const query = this.query || {};
     if (!this.query?.search && !this.query?.animal) {
       return items;
     }
     items = items.filter((item) => {
       let include = true;
-      if (this.query?.animal) {
-        include = item.animal === this.query?.animal;
+      if (query.animal) {
+        include = item.animal === query.animal;
       }
-      if (this.query?.search) {
+      if (query.search) {
         include =
           include &&
-          item.name.toLowerCase().indexOf(this.query?.search?.toLowerCase()) !==
+          item.name.toLowerCase().indexOf(query.search?.toLowerCase()) !==
             -1;
       }
       return include;
