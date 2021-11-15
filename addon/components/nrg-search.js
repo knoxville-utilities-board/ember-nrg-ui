@@ -33,27 +33,27 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   }
 
   get searchTimeout() {
-    return this.args.searchTimeout || defaultSearchTimeout;
+    return this.args.searchTimeout ?? defaultSearchTimeout;
   }
 
   get minCharacters() {
-    return this.args.minCharacters || defaultMinCharacters;
+    return this.args.minCharacters ?? defaultMinCharacters;
   }
 
   get placeholder() {
-    return this.args.placeholder || defaultPlaceholder;
+    return this.args.placeholder ?? defaultPlaceholder;
   }
 
   get displayLabel() {
-    return this.args.displayLabel || defaultDisplayLabel;
+    return this.args.displayLabel ?? defaultDisplayLabel;
   }
 
   get noResultsLabel() {
-    return this.args.noResultsLabel || defaultNoResultsLabel;
+    return this.args.noResultsLabel ?? defaultNoResultsLabel;
   }
 
   get _loading() {
-    return this.args.loading || this.throttleQuery.isRunning;
+    return this.args.loading ?? this.throttleQuery.isRunning;
   }
 
   get canPerformSearch() {
@@ -74,8 +74,8 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   }
 
   updateDisplayValue(selected) {
-    const displayLabel = get(selected || {}, this.displayLabel);
-    this.searchString = displayLabel || '';
+    const displayLabel = get(selected ?? {}, this.displayLabel);
+    this.searchString = displayLabel ?? '';
   }
 
   selectItem(item) {

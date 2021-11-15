@@ -49,7 +49,7 @@ export default class NrgValidationComponent extends Component {
   @action
   _onChange(newValue) {
     this.value = newValue;
-    this.args.onChange && this.args.onChange(...arguments);
+    this.args.onChange?.(...arguments);
     this.propogateErrorMessage.perform();
   }
 

@@ -38,7 +38,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   get options() {
-    return this.args.options || [];
+    return this.args.options ?? [];
   }
 
   get tabindex() {
@@ -46,11 +46,11 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   get defaultText() {
-    return this.args.defaultText || baseDefaultText;
+    return this.args.defaultText ?? baseDefaultText;
   }
 
   get dropdownAction() {
-    return this.args.dropdownAction || defaultDropdownAction;
+    return this.args.dropdownAction ?? defaultDropdownAction;
   }
 
   get allowTab() {
@@ -66,15 +66,15 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   get match() {
-    return this.args.match || defaultMatch;
+    return this.args.match ?? defaultMatch;
   }
 
   get _dropdownDisabled() {
-    return this.args.loading || this.args.disabled;
+    return this.args.loading ?? this.args.disabled;
   }
 
   get selection() {
-    return this.args.selection || this.args.field;
+    return this.args.selection ?? this.args.field;
   }
 
   get menuClass() {

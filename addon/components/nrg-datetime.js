@@ -18,15 +18,15 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
   }
 
   get dateFormat() {
-    return this.args.dateFormat || defaultDateFormat;
+    return this.args.dateFormat ?? defaultDateFormat;
   }
 
   get timeFormat() {
-    return this.args.timeFormat || defaultTimeFormat;
+    return this.args.timeFormat ?? defaultTimeFormat;
   }
 
   get type() {
-    return this.args.type || 'date'; // 'datetime', 'date', 'time'
+    return this.args.type ?? 'date'; // 'datetime', 'date', 'time'
   }
 
   get showNowShortcut() {
@@ -89,11 +89,7 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
 
     this.isFocused = true;
 
-    const wrapper = evt.currentTarget;
-    const popup = wrapper && wrapper.querySelector('.ui.popup.calendar');
-    if (popup) {
-      popup.focus();
-    }
+    evt.currentTarget?.querySelector('.ui.popup.calendar')?.focus();
   }
 
   @action

@@ -1,5 +1,5 @@
 export default function unformat(value) {
-  value = value || 0;
+  value = value ?? 0;
   if (typeof value === 'number') {
     return value;
   }

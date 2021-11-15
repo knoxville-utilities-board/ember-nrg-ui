@@ -7,7 +7,7 @@ export function initialize() {
     _startHoverTime: null,
     timerTask(timeout) {
       // Allow a timeout to be specified for function override below
-      timeout = timeout || this.timeout;
+      timeout = timeout ?? this.timeout;
       if (!timeout) {
         return;
       }
