@@ -1,0 +1,11 @@
+<div class="item">
+  <div class="ui icon input">
+    <NrgTextField
+      @class="item-list--search"
+      @placeholder={{@placeholder}}
+      @onChange={{this.onSearchInput}}
+      {{on "focus" this.onFocus}}
+    />
+    <i class="search link icon"></i>
+  </div>
+</div>

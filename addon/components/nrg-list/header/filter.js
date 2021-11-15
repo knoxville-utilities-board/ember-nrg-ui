@@ -1,32 +1,34 @@
-import Component from '@ember/component';
-import layout from '../../../templates/components/nrg-list/header/filter';
-import { observer } from '@ember/object';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  classNames: ['right', 'item'],
-  defaultText: 'Select a Filter',
-  direction: 'down',
-  dropdownClass: 'floating',
-  menuDirection: 'left',
+const baseDefaultText = 'Select a Filter';
+const defaultDirection = 'down';
+const defaultMenuDirection = 'left';
 
-  selectedFilter: null,
+export default class NrgListHeaderFilterComponent extends Component {
+  get defaultText() {
+    return this.args.defaultText ?? baseDefaultText;
+  }
 
-  init() {
-    this._super(...arguments);
-    this.handleChangedFilter(false);
-  },
+  get direction() {
+    return this.args.direction ?? defaultDirection;
+  }
 
-  selectedObserver: observer('selectedFilter', function() {
-    this.handleChangedFilter();
-  }),
+  get menuDirection() {
+    return this.args.menuDirection ?? defaultMenuDirection;
+  }
 
-  handleChangedFilter(sendFalsyValue = true) {
-    const filterParam = this.filterParam;
-    const selectedFilter = this.selectedFilter;
+  constructor() {
+    super(...arguments);
+    this.onFilterChange(null, false);
+  }
+
+  @action
+  onFilterChange(selectedFilter, sendFalsyValue) {
+    const filterParam = this.args.filterParam;
     const shouldSendFalsyValue = selectedFilter || sendFalsyValue;
     if (filterParam && shouldSendFalsyValue) {
-      this.changed(filterParam, selectedFilter);
+      this.args.onChange?.(filterParam, selectedFilter);
     }
-  },
-});
+  }
+}
