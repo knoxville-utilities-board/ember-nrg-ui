@@ -11,9 +11,18 @@ export default Component.extend({
   disabled: alias('contextService.disabled'),
 
   itemSelected(selected) {
-    selected.client.send(selected.actionName, selected);
+    if(selected.client[selected.actionName]) {
+      selected.client[selected.actionName]?.();
+    } else {
+      selected.client.send(selected.actionName, selected);
+    }
   },
+
   itemChecked(selected, checked) {
-    selected.client.send(selected.actionName, selected, checked);
+    if(selected.client[selected.actionName]) {
+      selected.client[selected.actionName]?.(checked);
+    } else {
+      selected.client.send(selected.actionName, selected, checked);
+    }
   },
 });

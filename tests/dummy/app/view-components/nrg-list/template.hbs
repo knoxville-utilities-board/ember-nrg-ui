@@ -1,9 +1,15 @@
 <NrgCodeBlock @label="List (Advanced)" @codeBlockName="nrg-list-advanced.hbs">
   <!-- BEGIN-SNIPPET nrg-list-advanced -->
-  <NrgList @items={{filteredItems}} @pageMeta={{filteredItems.meta}} @query={{action "query"}} @select={{action "select"}} as |list|>
+  <NrgList
+    @items={{filteredItems}}
+    @pageMeta={{filteredItems.meta}}
+    @onQuery={{onQuery}}
+    @onItemSelect={{onItemSelect}}
+    as |list|
+  >
     <list.header as |header|>
       <header.search />
-      <header.filter @filters={{filters}} @filterParam="animal" @selectedFilter={{selectedFilter}} />
+      <header.filter @filters={{filters}} @filterParam="animal" />
     </list.header>
     <list.items as |item|>
       <div class="content">
@@ -23,19 +29,33 @@
 
 <NrgCodeBlock @label="List (Simple)" @codeBlockName="nrg-list-simple.hbs">
   <!-- BEGIN-SNIPPET nrg-list-simple -->
-  <NrgList @items={{mappedItems}} @select="select" />
+  <NrgList @items={{mappedItems}} @onItemSelect={{onItemSelect}} />
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="List (Single Select)" @codeBlockName="nrg-list-simple.hbs">
+<NrgCodeBlock
+  @label="List (Single Select)"
+  @codeBlockName="nrg-list-simple.hbs"
+>
   <!-- BEGIN-SNIPPET nrg-list-simple -->
-  <NrgList @selectionType="single" @items={{mappedItems}} @select="select" />
+  <NrgList
+    @selectionType="single"
+    @items={{mappedItems}}
+    @onItemSelect={{onItemSelect}}
+  />
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="List (Multiple Select)" @codeBlockName="nrg-list-multiple.hbs">
+<NrgCodeBlock
+  @label="List (Multiple Select)"
+  @codeBlockName="nrg-list-multiple.hbs"
+>
   <!-- BEGIN-SNIPPET nrg-list-multiple -->
-  <NrgList @selectionType="multiple" @items={{mappedItems}} @select="select" />
+  <NrgList
+    @selectionType="multiple"
+    @items={{mappedItems}}
+    @onItemSelect={{onItemSelect}}
+  />
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 
@@ -45,14 +65,26 @@
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="List (Group Header Labels)" @codeBlockName="nrg-list-group-header.hbs">
+<NrgCodeBlock
+  @label="List (Group Header Labels)"
+  @codeBlockName="nrg-list-group-header.hbs"
+>
   <!-- BEGIN-SNIPPET nrg-list-group-header -->
-  <NrgList @groupHeaderHandler={{groupHeaderHandler}} @items={{mappedItems}} @select="select" />
+  <NrgList
+    @groupHeaderHandler={{groupHeaderHandler}}
+    @items={{mappedItems}}
+    @onItemSelect={{onItemSelect}}
+  />
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="List (Paged)" @codeBlockName="nrg-list-paged.hbs">
   <!-- BEGIN-SNIPPET nrg-list-paged -->
-  <NrgList @items={{pageItems}} @pageMeta={{pageItems.meta}} @changePage={{action (mut pageStart)}} @selectedPageSize={{2}} />
+  <NrgList
+    @items={{pageItems}}
+    @pageMeta={{pageItems.meta}}
+    @onChangePage={{onChangePage}}
+    @selectedPageSize={{2}}
+  />
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>

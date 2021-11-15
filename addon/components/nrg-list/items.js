@@ -1,104 +1,73 @@
-import Component from '@ember/component';
-import layout from '../../templates/components/nrg-list/items';
 import { A } from '@ember/array';
-import { computed, observer } from '@ember/object';
-import { bool, readOnly } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import ArrayProxy from '@ember/array/proxy';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
-function createArrayProxy(content) {
-  if (ArrayProxy.create) {
-    return ArrayProxy.create({
-      content,
-    });
+const defaultNoResultsLabel = 'No Results';
+
+export default class NrgListItemsComponent extends Component {
+  @tracked
+  selected = A();
+
+  get itemsProxy() {
+    let content = this.args.items ?? [];
+    if (content?.toArray) {
+      content = content.toArray();
+    }
+    return A(content);
   }
-  return new ArrayProxy({
-    content,
-  });
-}
 
-export default Component.extend({
-  layout,
+  get noResultsLabel() {
+    return this.args.noResultsLabel ?? defaultNoResultsLabel;
+  }
 
-  classNames: ['ui', 'attached', 'segment', 'nrg-list'],
+  get canSelect() {
+    return !!this.args.selectionType;
+  }
 
-  classNameBindings: ['loading:disabled'],
+  get canShowActiveItem() {
+    return !isEmpty(this.selected);
+  }
 
-  noResultsLabel: 'No Results',
+  get currentPage() {
+    return this.args.pageMeta?.start / this.args.selectedPageSize + 1;
+  }
 
-  selectionType: '',
+  get totalPages() {
+    return Math.ceil(this.args.pageMeta?.total / this.args.selectedPageSize);
+  }
 
-  selected: A([]),
-
-  canSelect: bool('selectionType'),
-
-  canShowActiveItem: computed('selected.[]', function() {
-    const selected = this.selected;
-    return !isEmpty(selected);
-  }),
-
-  init() {
-    this._super(...arguments);
-    const items = this.items;
-    if (items) {
-      this._items.pushObjects((items.toArray && items.toArray()) || items);
-    }
-  },
-
-  _items: computed(function() {
-    return createArrayProxy(A());
-  }),
-
-  _start: readOnly('pageMeta.start'),
-
-  _total: readOnly('pageMeta.total'),
-
-  currentPage: computed('_start', 'selectedPageSize', function() {
-    return this._start / this.selectedPageSize + 1;
-  }),
-
-  totalPages: computed('selectedPageSize', '_total', function() {
-    return Math.ceil(this._total / this.selectedPageSize);
-  }),
-
-  canStepForward: computed('currentPage', 'totalPages', function() {
+  get canStepForward() {
     return this.currentPage < this.totalPages;
-  }),
+  }
 
-  itemsObserver: observer('items', function() {
-    const items = this.items;
-    const start = this._start;
-    if (!start) {
-      this.set('_items', createArrayProxy(A()));
+  @action
+  onItemClick(item) {
+    let selected = A([item]);
+
+    if (!this.canSelect || !this.args.isSelectable?.(item)) {
+      return;
     }
-    this._items.pushObjects((items.toArray && items.toArray()) || items);
-  }),
 
-  actions: {
-    select(item) {
-      let selected = A([item]);
-      if (!this.isSelectable(item)) {
-        return;
+    const selectionType = this.args.selectionType;
+    if (selectionType === 'multiple') {
+      if (this.selected.includes(item)) {
+        selected = A(this.selected.without(item));
+      } else {
+        selected = A(this.selected.concat(selected));
       }
-      const selectionType = this.selectionType;
-      if (selectionType === 'multiple') {
-        if (this.selected.includes(item)) {
-          selected = A(this.selected.without(item));
-        } else {
-          selected = A(this.selected.concat(selected));
-        }
-      } else if (!selectionType) {
-        return;
-      }
-      if (selectionType !== 'click') {
-        this.set('selected', selected);
-      }
-      this.itemClicked(item, selected);
-    },
-    nextPage() {
-      const pageSize = this.selectedPageSize;
-      const start = this.get('pageMeta.start');
-      this.changePage(start + pageSize);
-    },
-  },
-});
+    }
+    if (selectionType !== 'click') {
+      this.selected = selected;
+    }
+    this.args.onItemSelect?.(item, selected);
+  }
+
+  @action
+  nextPage() {
+    const pageSize = this.args.selectedPageSize;
+    const start = this.args.pageMeta?.start;
+    this.args.onChangePage?.(start + pageSize);
+  }
+}
