@@ -1,80 +1,69 @@
-import { alias } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { htmlSafe } from '@ember/string';
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-lightbox-container';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
+export default class NrgPopupComponent extends Component {
+  @service('lightbox')
+  lightboxService;
 
-  lightboxService: service('lightbox'),
+  @tracked
+  rotationClass;
 
-  isOpen: alias('lightboxService.lightboxIsOpen'),
+  @tracked
+  bottomDetails = false;
 
-  selectedItem: alias('lightboxService.selectedItem'),
-
-  selectedPhoto: alias('selectedItem.photo'),
-
-  selectedPhotoDetail: computed('selectedItem.detail', function() {
-    return htmlSafe(this.get('selectedItem.detail'));
-  }),
-
-  rotationClass: alias('lightboxService.rotationClass'),
-
-  previousDisabled: alias('lightboxService.previousDisabled'),
-
-  nextDisabled: alias('lightboxService.nextDisabled'),
-
-  bottomDetailClass: computed('bottomDetails', function() {
-    return this.bottomDetails ? '--bottom' : '';
-  }),
-
+  @action
   onModalOpen() {
-    this.set('rotationClass', '');
-  },
+    this.rotationClass = '';
+  }
 
+  @action
   previousImage() {
     this.lightboxService.selectPrevious();
-  },
+  }
 
+  @action
   nextImage() {
     this.lightboxService.selectNext();
-  },
+  }
 
+  @action
   toggleDetailLocation() {
-    this.toggleProperty('bottomDetails');
-  },
+    this.bottomDetails = !this.bottomDetails;
+  }
 
+  @action
   rotateLeft() {
     const rotationClass = this.rotationClass;
     if (!rotationClass) {
-      this.set('rotationClass', 'rotate-left');
+      this.rotationClass = 'rotate-left';
     }
     if (rotationClass === 'rotate-left') {
-      this.set('rotationClass', 'rotate-down');
+      this.rotationClass = 'rotate-down';
     }
     if (rotationClass === 'rotate-down') {
-      this.set('rotationClass', 'rotate-right');
+      this.rotationClass = 'rotate-right';
     }
     if (rotationClass === 'rotate-right') {
-      this.set('rotationClass', '');
+      this.rotationClass = '';
     }
-  },
+  }
 
+  @action
   rotateRight() {
     const rotationClass = this.rotationClass;
     if (!rotationClass) {
-      this.set('rotationClass', 'rotate-right');
+      this.rotationClass = 'rotate-right';
     }
     if (rotationClass === 'rotate-right') {
-      this.set('rotationClass', 'rotate-down');
+      this.rotationClass = 'rotate-down';
     }
     if (rotationClass === 'rotate-down') {
-      this.set('rotationClass', 'rotate-left');
+      this.rotationClass = 'rotate-left';
     }
     if (rotationClass === 'rotate-left') {
-      this.set('rotationClass', '');
+      this.rotationClass = '';
     }
-  },
-});
+  }
+}
