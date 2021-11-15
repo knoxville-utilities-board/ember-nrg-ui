@@ -1,32 +1,9 @@
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-render-template-block';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  classNames: ['is-visually-hidden'],
-
-  getTemplateNode() {
-    return this.element.querySelector('.js-capture-node');
-  },
-
-  setupMutationObserver() {
-    const callback = () => this.updateParent();
-    const node = this.getTemplateNode();
-    const config = {
-      attributes: true,
-      childList: true,
-      subtree: true,
-    };
-
-    this.mutationObserver = new MutationObserver(callback);
-    this.mutationObserver.observe(node, config);
-  },
-
-  teardownMutationObserver() {
-    if (this.mutationObserver) {
-      this.mutationObserver.disconnect();
-    }
-  },
+export default class NrgRenderTemplateBlockComponent extends Component {
+  mutationObserver;
+  captureElement;
 
   removeIdsInDomTree(node) {
     node.id = '';
@@ -34,26 +11,32 @@ export default Component.extend({
     for (let i = 0; i < children.length; i++) {
       this.removeIdsInDomTree(children[i]);
     }
-  },
+  }
 
   updateParent() {
-    const clonedNode = this.getTemplateNode().cloneNode(true);
+    const clonedNode = this.captureElement.cloneNode(true);
     this.removeIdsInDomTree(clonedNode);
-    this.templateRendered && this.templateRendered(clonedNode);
-  },
+    this.args.templateRendered?.(clonedNode);
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-    this.setupMutationObserver();
-  },
+  @action
+  setupMutationObserver(element) {
+    this.captureElement = element;
+    const callback = () => this.updateParent();
+    const config = {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      characterData: true,
+    };
 
-  didRender() {
-    this._super(...arguments);
+    this.mutationObserver = new MutationObserver(callback);
+    this.mutationObserver.observe(element, config);
     this.updateParent();
-  },
+  }
 
-  willDestroyElement() {
-    this.teardownMutationObserver();
-    this._super(...arguments);
-  },
-});
+  @action
+  teardownMutationObserver() {
+    this.mutationObserver?.disconnect();
+  }
+}
