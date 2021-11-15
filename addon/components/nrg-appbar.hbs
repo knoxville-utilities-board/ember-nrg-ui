@@ -1,0 +1,38 @@
+<div class="ui menu main fixed inverted">
+  <div class="ui fluid container">
+    <div class="left menu">
+      {{#if @showBackArrow}}
+        <a
+          role="button"
+          class="ui item icon sidebar-toggle-button"
+          {{on "click" this.onBackArrowClick}}
+        >
+          <i class="arrow left icon"></i>
+        </a>
+      {{else}}
+        <a
+          role="button"
+          class="ui item icon sidebar-toggle-button"
+          {{on "click" this.onToggleSidebar}}
+        >
+          <i class="content icon"></i>
+        </a>
+      {{/if}}
+      <div class="header item title-item">
+        <span class="title-text">{{this.pageTitle}}</span>
+        {{#if this.environmentDisplay}}
+          <span class="environment-title">{{this.environmentDisplay}}</span>
+        {{/if}}
+      </div>
+    </div>
+    <div class="right menu">
+      {{yield}}
+      {{#if @showReleaseNotes}}
+        <div class="item">
+          <LinkTo @route="release-notes">{{nrg-app-version}}</LinkTo>
+        </div>
+      {{/if}}
+      <NrgContextMenu />
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 {{! template-lint-disable no-inline-styles }}
-<NrgAppbar @title={{this.title}} @toggleSidebar={{action "toggleSidebar"}} />
+<NrgAppbar @title={{this.title}} @onToggleSidebar={{action "toggleSidebar"}} />
 <div class="pushable">
   <NrgSidebar @isOpen={{this.sidebarIsOpen}} @context={{concat "#" elementId " .pushable"}} @clickedSidebarItem={{action "clickedLink"}} />
   {{#if fullscreenMap}}
