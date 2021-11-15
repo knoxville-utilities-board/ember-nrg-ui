@@ -1,40 +1,36 @@
-import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import ResizeMixin from 'ember-nrg-ui/mixins/resize';
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-appbar';
-import { getOwner } from '@ember/application';
+import Component from '@glimmer/component';
 
-export default Component.extend(ResizeMixin, {
-  layout,
+export default class NrgAppbarComponent extends Component {
+  @service
+  router;
 
-  title: 'App Title',
+  @service
+  application;
 
-  classNames: ['ui', 'menu', 'main', 'fixed', 'inverted'],
+  get showReleaseNotes() {
+    return this.args.showReleaseNotes !== false;
+  }
 
-  router: service(),
-
-  isMobileScreen: alias('responsive.isMobileScreenGroup'),
-
-  showReleaseNotes: true,
-
-  environmentDisplay: computed('applicationSettings.localEnvironment', function() {
-    const ENV = getOwner(this).resolveRegistration('config:environment');
-    const config = ENV['ember-nrg-ui'];
-    const productionEnvironments = (config && config.productionEnvironments) || ['prod'];
-    const environment = this.get('applicationSettings.localEnvironment');
+  get environmentDisplay() {
+    const productionEnvironments = this.application.environmentConfig?.[
+      'ember-nrg-ui'
+    ]?.productionEnvironments ?? ['prod'];
+    const environment = this.application.applicationSettings.localEnvironment;
     if (environment && !productionEnvironments.includes(environment)) {
       return environment.toUpperCase();
     }
     return null;
-  }),
+  }
 
+  @action
   onToggleSidebar() {
-    this.sendAction('toggleSidebar');
-  },
+    this.args.onToggleSidebar?.();
+  }
 
+  @action
   onBackArrowClick() {
-    // Implement
-  },
-});
+    this.args.onBackArrowClick?.();
+  }
+}
