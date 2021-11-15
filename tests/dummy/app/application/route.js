@@ -1,10 +1,21 @@
 import Route from '@ember/routing/route';
 import KeyboardShortcutMixin from 'ember-nrg-ui/mixins/global-keyboard-shortcut';
-import RoutePageTitleMixin from 'ember-nrg-ui/mixins/route-page-title';
 
-export default Route.extend(KeyboardShortcutMixin, RoutePageTitleMixin, {
+export default Route.extend(KeyboardShortcutMixin, {
   pageTitle: 'NRG UI',
 
+  contextItems: [
+    {
+      label: 'Release Notes',
+      actionName: 'routeToReleaseNotes',
+      priority: 2,
+    },
+    {
+      label: 'More Release Note',
+      actionName: 'routeToReleaseNotes',
+      priority: 2,
+    },
+  ],
 
   keyboardShortcuts: [
     {
