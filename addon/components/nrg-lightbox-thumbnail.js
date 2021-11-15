@@ -1,42 +1,40 @@
-import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
-import Component from '@ember/component';
-import layout from '../templates/components/nrg-lightbox-thumbnail';
-import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
+export default class NrgLightboxThumbnailComponent extends Component {
+  @service('lightbox')
+  lightboxService;
 
-  tagName: '',
+  @tracked
+  detail;
 
-  lightboxService: service('lightbox'),
+  thumbnailId = 'thumbnail-' + guidFor(this);
 
-  detail: null,
+  @action
+  onInsert() {
+    this.lightboxService.add({
+      thumbnailId: this.thumbnailId,
+      photo: this.args.photo,
+      detail: this.detail,
+    });
+  }
 
-  thumbnailId: computed(function() {
-    return guidFor(this);
-  }),
+  @action
+  onDestroy() {
+    this.lightboxService.remove(this.thumbnailId);
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-    const item = this.getProperties('thumbnailId', 'photo', 'detail');
-    this.lightboxService.add(item);
-  },
-
-  didDestroyElement() {
-    const thumbnailId = this.thumbnailId;
-    this.lightboxService.remove(thumbnailId);
-    this._super(...arguments);
-  },
-
+  @action
   setDetail({ innerHTML }) {
-    this.set('detail', innerHTML);
-    const thumbnailId = this.thumbnailId;
-    this.lightboxService.updateDetail(thumbnailId, innerHTML);
-  },
+    this.detail = innerHTML;
+    this.lightboxService.updateDetail(this.thumbnailId, innerHTML);
+  }
 
+  @action
   openLightbox() {
-    const thumbnailId = this.thumbnailId;
-    this.lightboxService.selectAndOpen(thumbnailId);
-  },
-});
+    this.lightboxService.selectAndOpen(this.thumbnailId);
+  }
+}

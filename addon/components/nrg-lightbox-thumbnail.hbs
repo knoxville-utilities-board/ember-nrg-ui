@@ -1,0 +1,14 @@
+<img
+  role="button"
+  class="ui image photo-thumbnail"
+  src={{@photo.url}}
+  alt={{@photo.altText}}
+  {{on "click" this.openLightbox}}
+  {{did-insert this.onInsert}}
+  {{will-destroy this.onDestroy}}
+/>
+{{#if (has-block)}}
+  <NrgRenderTemplateBlock @templateRendered={{this.setDetail}}>
+    {{yield}}
+  </NrgRenderTemplateBlock>
+{{/if}}
