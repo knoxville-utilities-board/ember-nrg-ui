@@ -1,59 +1,70 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { alias, and, reads } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
-import ResizeMixin from 'ember-nrg-ui/mixins/resize';
-import layout from '../templates/components/nrg-application';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+export default class NrgFormComponent extends Component {
+  @service
+  application;
 
-export default Component.extend(ResizeMixin, {
-  layout,
+  @service
+  lightbox;
 
-  application: service(),
+  @service
+  modal;
 
-  lightbox: service(),
+  @service
+  responsive;
 
-  modal: service(),
+  @service
+  resize;
 
-  responsive: service(),
+  @service
+  flashMessages;
 
-  flashMessages: service(),
+  @tracked
+  sidebarIsOpen = false;
 
-  sidebarIsOpen: false,
+  @tracked
+  mainContentStyle;
 
-  sidebarMenuIsOpen: alias('application.sidebarMenuIsOpen'),
+  get computerScreenSidebarActive() {
+    return (
+      this.responsive.isComputerScreenGroup &&
+      this.application.sidebarMenuIsOpen
+    );
+  }
 
-  classNames: ['nrg-application'],
+  constructor() {
+    super(...arguments);
+    this.setMainContentStyle();
+  }
 
-  classNameBindings: ['fullscreenMap:fullscreen-map', 'computerScreenSidebarActive:large-screen-sidebar-active'],
+  setMainContentStyle() {
+    return htmlSafe(`height:${window.innerHeight}px`);
+  }
 
-  isComputerScreen: alias('responsive.isComputerScreenGroup'),
+  @action
+  onInsert() {
+    this.resize.on('didResize', this, this.setMainContentStyle);
+  }
 
-  title: reads('application.pageTitle'),
+  @action
+  onDestroy() {
+    this.resize.off('didResize', this, this.setMainContentStyle);
+  }
 
-  init() {
-    this._super(...arguments);
-    this.set('sidebarMenuIsOpen', true);
-  },
+  @action
+  toggleSidebar() {
+    if (this.responsive.isComputerScreenGroup) {
+      this.application.sidebarMenuIsOpen = !this.application.sidebarMenuIsOpen;
+    } else {
+      this.sidebarIsOpen = !this.sidebarIsOpen;
+    }
+  }
 
-  computerScreenSidebarActive: and('isComputerScreen', 'sidebarMenuIsOpen'),
-
-  mainContentStyle: computed('screenHeight', function() {
-    return htmlSafe(`height:${this.screenHeight}px`);
-  }),
-
-  actions: {
-    toggleSidebar() {
-      if (this.isComputerScreen) {
-        this.toggleProperty('sidebarMenuIsOpen');
-      } else {
-        this.toggleProperty('sidebarIsOpen');
-      }
-    },
-    clickedLink(item) {
-      if (this.clickedSidebarItem) {
-        this.clickedSidebarItem(item);
-      }
-    },
-  },
-});
+  @action
+  clickedLink(item) {
+    this.args.clickedSidebarItem?.(item);
+  }
+}
