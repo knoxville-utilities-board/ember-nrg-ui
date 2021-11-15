@@ -14,16 +14,16 @@ export default class TrimInputComponent extends Component {
   get trimmedOuterValue() {
     const value = this.args.value;
     if (value && typeof value == 'string') {
-      return value.trim() || '';
+      return value.trim() ?? '';
     } else if (value && typeof value == 'number') {
-      return value.toString() || '';
+      return value.toString() ?? '';
     } else {
       return '';
     }
   }
 
   get trimmedInnerValue() {
-    return (this.innerValue && this.innerValue.trim()) || '';
+    return this.innerValue?.trim?.() ?? '';
   }
 
   get displayValue() {
@@ -35,18 +35,18 @@ export default class TrimInputComponent extends Component {
 
   @action
   blur() {
-    this.args.onBlur && this.args.onBlur();
+    this.args.onBlur?.();
   }
 
   @action
   focus() {
-    this.args.onFocus && this.args.onFocus();
+    this.args.onFocus?.();
   }
 
   @action
   _valueChange({ target }) {
     this.innerValue = target.value;
     const value = target.value.trim();
-    this.args.onChange && this.args.onChange(value);
+    this.args.onChange?.(value);
   }
 }

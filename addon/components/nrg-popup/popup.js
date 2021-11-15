@@ -16,12 +16,12 @@ const POPUP_POSITIONS = {
 
 export default class NrgPopupPopupComponent extends Component {
   get targetAttachment() {
-    const position = this.args.position || 'top';
+    const position = this.args.position ?? 'top';
     return TARGET_POSITIONS[position];
   }
 
   get popupAttachment() {
-    const position = this.args.position || 'top';
+    const position = this.args.position ?? 'top';
     return POPUP_POSITIONS[position];
   }
 

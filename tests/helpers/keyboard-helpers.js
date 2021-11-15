@@ -5,7 +5,7 @@ import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
 import { triggerEvent } from '@ember/test-helpers';
 
 const keyEvent = function keyEvent(attributes, type, element) {
-  const event = (attributes || '').split('+').reduce((event, attribute) => {
+  const event = (attributes ?? '').split('+').reduce((event, attribute) => {
     if (validModifiers.indexOf(attribute) > -1) {
       attribute = attribute === 'cmd' ? getCmdKey() : attribute;
       event[`${attribute}Key`] = true;
@@ -18,7 +18,7 @@ const keyEvent = function keyEvent(attributes, type, element) {
 
     return event;
   }, {});
-  return triggerEvent(element || document.body, type, event);
+  return triggerEvent(element ?? document.body, type, event);
 };
 
 export const keyDown = function (attributes, element) {

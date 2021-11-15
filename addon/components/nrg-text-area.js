@@ -11,8 +11,6 @@ export default class NrgTextAreaComponent extends NrgValidationComponent {
   }
 
   get overCharacterLimit() {
-    return (
-      this.value && this.value.length && this.characterLimit < this.value.length
-    );
+    return this.value?.length > this.characterLimit;
   }
 }
