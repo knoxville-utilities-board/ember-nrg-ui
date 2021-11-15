@@ -21,7 +21,7 @@
               "active"
             }}
             item
-            {{if (list-item-selectable item @isSelectable) "" "disabled"}}"
+            {{unless (list-item-selectable item @isSelectable) "disabled"}}"
           {{on "click" (fn this.onItemClick item)}}
         >
           {{#if (has-block)}}

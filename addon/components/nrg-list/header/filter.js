@@ -7,15 +7,15 @@ const defaultMenuDirection = 'left';
 
 export default class NrgListHeaderFilterComponent extends Component {
   get defaultText() {
-    return this.args.defaultText || baseDefaultText;
+    return this.args.defaultText ?? baseDefaultText;
   }
 
   get direction() {
-    return this.args.direction || defaultDirection;
+    return this.args.direction ?? defaultDirection;
   }
 
   get menuDirection() {
-    return this.args.menuDirection || defaultMenuDirection;
+    return this.args.menuDirection ?? defaultMenuDirection;
   }
 
   constructor() {
@@ -28,7 +28,7 @@ export default class NrgListHeaderFilterComponent extends Component {
     const filterParam = this.args.filterParam;
     const shouldSendFalsyValue = selectedFilter || sendFalsyValue;
     if (filterParam && shouldSendFalsyValue) {
-      this.args.onChange && this.args.onChange(filterParam, selectedFilter);
+      this.args.onChange?.(filterParam, selectedFilter);
     }
   }
 }

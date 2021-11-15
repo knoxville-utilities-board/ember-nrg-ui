@@ -11,7 +11,7 @@ export default class NrgListItemsComponent extends Component {
   selected = A();
 
   get itemsProxy() {
-    let content = this.args.items || [];
+    let content = this.args.items ?? [];
     if (content?.toArray) {
       content = content.toArray();
     }
@@ -46,7 +46,7 @@ export default class NrgListItemsComponent extends Component {
   onItemClick(item) {
     let selected = A([item]);
 
-    if (!this.canSelect || !(this.args.isSelectable?.(item) ?? true)) {
+    if (!this.canSelect || !this.args.isSelectable?.(item)) {
       return;
     }
 

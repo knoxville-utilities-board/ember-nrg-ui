@@ -8,11 +8,11 @@ const defaultSearchTimeout = 400;
 
 export default class NrgListHeaderSearchComponent extends Component {
   get placeholder() {
-    return this.args.placeholder || defaultPlaceholder;
+    return this.args.placeholder ?? defaultPlaceholder;
   }
 
   get searchTimeout() {
-    return this.args.searchTimeout || defaultSearchTimeout;
+    return this.args.searchTimeout ?? defaultSearchTimeout;
   }
 
   @restartableTask
@@ -23,7 +23,7 @@ export default class NrgListHeaderSearchComponent extends Component {
     if (!immediate) {
       yield timeout(this.searchTimeout);
     }
-    this.args.onChange && this.args.onChange(searchString);
+    this.args.onChange?.(searchString);
   }
 
   @action
@@ -33,9 +33,6 @@ export default class NrgListHeaderSearchComponent extends Component {
 
   @action
   onFocus({ target }) {
-    const input = target.querySelector('input');
-    if (input) {
-      input.focus();
-    }
+    target.querySelector('input')?.focus();
   }
 }
