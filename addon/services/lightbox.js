@@ -1,69 +1,85 @@
-import { lte, gt } from '@ember/object/computed';
-import { computed } from '@ember/object';
 import { A } from '@ember/array';
+import { action } from '@ember/object';
 import Service from '@ember/service';
-import { set } from '@ember/object';
+import { htmlSafe } from '@ember/string';
+import { tracked } from '@glimmer/tracking';
 
-export default Service.extend({
-  lightboxIsOpen: false,
+export default class LightboxService extends Service {
+  @tracked
+  lightboxIsOpen = false;
 
-  items: A(),
+  @tracked
+  items = A();
 
-  selectedItem: null,
+  @tracked
+  selectedItem;
 
-  hasChildren: gt('items.length', 0),
+  @tracked
+  selectedPhotoDetail;
 
+  get hasChildren() {
+    return this.items?.length > 0;
+  }
+
+  get previousDisabled() {
+    return this.selectedIndex <= 0;
+  }
+
+  get selectedIndex() {
+    return this.items.indexOf(this.selectedItem);
+  }
+
+  get nextDisabled() {
+    return (
+      this.selectedIndex === -1 || this.items.length - 1 === this.selectedIndex
+    );
+  }
+
+  @action
   add(item) {
     this.items.pushObject(item);
-  },
+  }
 
+  @action
   remove(thumbnailId) {
     const items = this.items.rejectBy('thumbnailId', thumbnailId);
-    this.set('items', items);
-  },
+    this.items = items;
+  }
 
+  @action
   selectAndOpen(thumbnailId) {
     const item = this.items.findBy('thumbnailId', thumbnailId);
-    this.set('selectedItem', item);
-    this.set('lightboxIsOpen', true);
-  },
+    this.selectedItem = item;
+    this.lightboxIsOpen = true;
+    this.setSelectedDetail();
+  }
 
+  @action
   updateDetail(thumbnailId, detail) {
     const item = this.items.findBy('thumbnailId', thumbnailId);
-    if (item) {
-      set(item, 'detail', detail);
-    }
-  },
+    item.detail = detail;
+    this.setSelectedDetail();
+  }
 
-  selectedIndex: computed('selectedItem', 'items.[]', function() {
-    return this.items.indexOf(this.selectedItem);
-  }),
+  setSelectedDetail() {
+    this.selectedPhotoDetail = htmlSafe(this.selectedItem?.detail);
+  }
 
-  previousDisabled: lte('selectedIndex', 0),
-
-  nextDisabled: computed('selectedIndex', 'items.[]', function() {
-    const selectedIndex = this.selectedIndex;
-    const totalPhotos = this.get('items.length');
-    return selectedIndex === -1 || totalPhotos - 1 === selectedIndex;
-  }),
-
+  @action
   selectNext() {
-    if (!this.nextDisabled) {
-      const selectedIndex = this.selectedIndex;
-      const items = this.items;
-      const photo = items.objectAt(selectedIndex + 1);
-      this.set('selectedItem', photo);
-      this.set('rotationClass', '');
+    if (this.nextDisabled) {
+      return;
     }
-  },
+    this.selectedItem = this.items.objectAt(this.selectedIndex + 1);
+    this.rotationClass = '';
+  }
 
+  @action
   selectPrevious() {
-    if (!this.previousDisabled) {
-      const selectedIndex = this.selectedIndex;
-      const items = this.items;
-      const photo = items.objectAt(selectedIndex - 1);
-      this.set('selectedItem', photo);
-      this.set('rotationClass', '');
+    if (this.previousDisabled) {
+      return;
     }
-  },
-});
+    this.selectedItem = this.items.objectAt(this.selectedIndex - 1);
+    this.rotationClass = '';
+  }
+}
