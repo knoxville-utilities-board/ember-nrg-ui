@@ -26,6 +26,7 @@ Router.map(function () {
     this.route('nrg-loading-indicator');
     this.route('nrg-modal');
     this.route('nrg-popup');
+    this.route('nrg-render-template-block');
     this.route('nrg-search');
   });
   this.route('view-mixins', function () {
