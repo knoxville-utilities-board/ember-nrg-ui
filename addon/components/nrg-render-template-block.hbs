@@ -1,0 +1,9 @@
+<div class="is-visually-hidden">
+  <div
+    class="js-capture-node"
+    {{did-insert this.setupMutationObserver}}
+    {{will-destroy this.teardownMutationObserver}}
+  >
+    {{yield}}
+  </div>
+</div>
