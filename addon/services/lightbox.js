@@ -71,7 +71,6 @@ export default class LightboxService extends Service {
       return;
     }
     this.selectedItem = this.items.objectAt(this.selectedIndex + 1);
-    this.rotationClass = '';
   }
 
   @action
@@ -80,6 +79,5 @@ export default class LightboxService extends Service {
       return;
     }
     this.selectedItem = this.items.objectAt(this.selectedIndex - 1);
-    this.rotationClass = '';
   }
 }
