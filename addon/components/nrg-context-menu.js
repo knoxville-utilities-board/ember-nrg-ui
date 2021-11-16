@@ -1,28 +1,16 @@
-import Component from '@ember/component';
-import { alias } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import layout from '../templates/components/nrg-context-menu';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  tagName: '',
-  contextService: service('context-menu'),
-  options: alias('contextService.contextItems'),
-  disabled: alias('contextService.disabled'),
+export default class NrgContextMenuComponent extends Component {
+  @service('context-menu')
+  contextService;
 
-  itemSelected(selected) {
-    if(selected.client[selected.actionName]) {
-      selected.client[selected.actionName]?.();
-    } else {
-      selected.client.send(selected.actionName, selected);
+  @action
+  itemSelected(option) {
+    if (option.isCheckbox) {
+      option.checked = !option.checked;
     }
-  },
-
-  itemChecked(selected, checked) {
-    if(selected.client[selected.actionName]) {
-      selected.client[selected.actionName]?.(checked);
-    } else {
-      selected.client.send(selected.actionName, selected, checked);
-    }
-  },
-});
+    option.action?.(option.checked);
+  }
+}

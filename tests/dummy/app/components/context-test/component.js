@@ -1,26 +1,42 @@
 //BEGIN-SNIPPET context-menu-example
-import Component from '@ember/component';
-import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend(ContextMenuMixin, {
-  tagName: '',
+export default class NrgContextTestComponent extends Component {
+  @service('context-menu')
+  contextService;
 
-  contextItems: [
+  @tracked
+  counter = 0;
+
+  @tracked
+  checked = true;
+
+  @tracked
+  checkedIcon = false;
+
+  @tracked
+  checkedDisabled = false;
+
+  @tracked
+  contextItems = [
     {
       label: 'Context Item',
-      actionName: 'contextCounter',
+      action: this.contextCounter,
       disabled: false,
     },
     {
       label: 'Context Item With Icon',
-      actionName: 'contextCounter',
+      action: this.contextCounter,
       disabled: false,
       priority: 7, // Changes the order of the context items
       iconClass: 'settings',
     },
     {
       label: 'Disabled Context Item',
-      actionName: 'contextCounter',
+      actionName: this.contextCounter,
       disabled: true,
     },
     {
@@ -28,14 +44,14 @@ export default Component.extend(ContextMenuMixin, {
       checked: true,
       priority: 21,
       label: 'Context Item w/ Checkbox',
-      actionName: 'contextChecked',
+      action: this.contextChecked,
       disabled: false,
     },
     {
       isCheckbox: true,
       checked: false,
       label: 'Context Item w/ Checkbox and Icon',
-      actionName: 'contextCheckedIcon',
+      action: this.contextCheckedIcon,
       disabled: false,
       iconClass: 'settings',
     },
@@ -44,36 +60,43 @@ export default Component.extend(ContextMenuMixin, {
       checked: false,
       priority: 14,
       label: 'Disabled Context Item w/ Checkbox',
-      actionName: 'contextCheckedDisabled',
+      action: this.contextCheckedDisabled,
       disabled: true,
     },
     {
       isDivider: true,
-      priority: 2,
+      priority: 11,
     },
-  ],
+  ];
 
-  counter: 0,
+  @action
+  onInsert() {
+    this.contextService.addClient(this);
+  }
 
-  checked: true,
+  @action
+  onDestroy() {
+    this.contextService.removeClient(this);
+  }
 
-  checkedIcon: false,
+  @action
+  contextCounter() {
+    this.counter++;
+  }
 
-  checkedDisabled: false,
+  @action
+  contextChecked(checked) {
+    this.checked = checked;
+  }
 
-  actions: {
-    contextCounter() {
-      this.incrementProperty('counter');
-    },
-    contextChecked(item, checked) {
-      this.set('checked', checked);
-    },
-    contextCheckedIcon(item, checked) {
-      this.set('checkedIcon', checked);
-    },
-    contextCheckedDisabled(item, checked) {
-      this.set('checkedDisabled', checked);
-    },
-  },
-});
+  @action
+  contextCheckedIcon(checked) {
+    this.checkedIcon = checked;
+  }
+
+  @action
+  contextCheckedDisabled(checked) {
+    this.checkedDisabled = checked;
+  }
+}
 //END-SNIPPET
