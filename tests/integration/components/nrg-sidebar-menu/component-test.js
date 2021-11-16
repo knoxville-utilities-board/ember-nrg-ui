@@ -14,7 +14,7 @@ module('Integration | Component | nrg-sidebar-menu', function(hooks) {
       isShownInSidebar: true,
     });
 
-    await render(hbs`<NrgSidebar @isOpen={{true}} @clickedSidebarItem={{clickedSidebarItem}} />`);
+    await render(hbs`<NrgSidebar @isOpen={{true}} @onSidebarItemClick={{onSidebarItemClick}} />`);
 
     assert.ok(
       document
