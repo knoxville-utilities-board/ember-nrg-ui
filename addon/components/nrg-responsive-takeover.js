@@ -1,40 +1,54 @@
-import Component from '@ember/component';
-import { assert } from '@ember/debug';
-import { computed } from '@ember/object';
-import { alias, and, not, reads } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
-import ResizeMixin from 'ember-nrg-ui/mixins/resize';
-import layout from '../templates/components/nrg-responsive-takeover';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+export default class NrgFormComponent extends Component {
+  @service
+  application;
 
-export default Component.extend(ResizeMixin, {
-  layout,
+  @service
+  resize;
 
-  applicationService: service('application'),
+  @service
+  responsive;
 
-  responsive: service('responsive'),
+  @service
+  router;
 
-  router: service('router'),
+  @tracked
+  mainContentStyle;
 
-  isMobileScreen: alias('responsive.isMobileScreenGroup'),
+  constructor() {
+    super(...arguments);
+    this.setMainContentStyle();
+  }
 
-  title: reads('applicationService.pageTitle'),
+  get renderInModal() {
+    return this.responsive.isMobileScreenGroup && this.args.shouldTakeOver;
+  }
 
-  renderInModal: and('isMobileScreen', 'shouldTakeOver'),
-
-  renderInPlace: not('renderInModal'),
-
-  mainContentStyle: computed('screenHeight', function() {
-    return htmlSafe(`height: calc(${this.screenHeight}px - 48px`);
-  }),
-
-  onBackArrowClick() {
-    assert(
-      'You must implment the onBackArrowClick action or provide a previousRoute',
-      this.previousRoute
+  setMainContentStyle() {
+    this.mainContentStyle = htmlSafe(
+      `height: calc(${window.innerHeight}px - 48px)`
     );
+  }
+
+  @action
+  onInsert() {
+    this.resize.on('didResize', this, this.setMainContentStyle);
+  }
+
+  @action
+  onDestroy() {
+    this.resize.off('didResize', this, this.setMainContentStyle);
+  }
+
+  @action
+  onBackArrowClick() {
+    this.args.onBackArrowClick?.();
     if (this.previousRoute) {
       this.router.transitionTo(this.previousRoute);
     }
-  },
-});
+  }
+}
