@@ -61,7 +61,7 @@ jobs:
       run: yarn install
       
     - name: Run Ember Tests 
-      run: yarn test -r xunit
+      run: yarn test -p xunit
   
   release:
     name: Release
