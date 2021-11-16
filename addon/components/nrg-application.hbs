@@ -1,7 +1,7 @@
 {{! template-lint-disable no-inline-styles }}
 <div
   class="nrg-application
-    {{if this.fullscreenMap "fullscreen-map"}}
+    {{if @fullscreenMap "fullscreen-map"}}
     {{if this.computerScreenSidebarActive "large-screen-sidebar-active"}}"
   {{did-insert this.onInsert}}
   {{will-destroy this.onDestroy}}
@@ -12,7 +12,7 @@
       @isOpen={{this.sidebarIsOpen}}
       @clickedSidebarItem={{this.clickedLink}}
     />
-    {{#if this.fullscreenMap}}
+    {{#if @fullscreenMap}}
       <div class="pusher">
         {{#if this.application.sidebarMenuIsOpen}}
           <div class="sidebar-solid">
