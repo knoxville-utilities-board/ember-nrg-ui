@@ -62,6 +62,6 @@ export default class NrgFormComponent extends Component {
 
   @action
   clickedLink(item) {
-    this.args.clickedSidebarItem?.(item);
+    this.args.onSidebarItemClick?.(item);
   }
 }

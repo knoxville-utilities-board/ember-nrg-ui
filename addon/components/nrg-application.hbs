@@ -8,12 +8,12 @@
 >
   <NrgAppbar @title={{this.title}} @onToggleSidebar={{this.toggleSidebar}} />
   <div class="pushable">
-    <NrgSidebar @clickedSidebarItem={{this.clickedLink}} />
+    <NrgSidebar @onSidebarItemClick={{this.clickedLink}} />
     {{#if @fullscreenMap}}
       <div class="pusher">
         {{#if this.application.sidebarMenuIsOpen}}
           <div class="sidebar-solid">
-            <NrgSidebarMenu @clickedSidebarItem={{this.clickedLink}} />
+            <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}} />
           </div>
         {{/if}}
         {{#if @isLoading}}
@@ -25,7 +25,7 @@
       <div class="pusher sidebar-flex-container">
         {{#if this.application.sidebarMenuIsOpen}}
           <div class="sidebar-solid">
-            <NrgSidebarMenu @clickedSidebarItem={{this.clickedLink}} />
+            <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}} />
           </div>
         {{/if}}
         <div class="main-content" style={{this.mainContentStyle}}>
