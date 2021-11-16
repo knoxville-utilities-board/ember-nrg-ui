@@ -37,7 +37,7 @@ export default class ContextMenuService extends Service {
     const rawContextItems = A();
     this.registeredClients.forEach((client) => {
       client.contextItems.forEach((item) => {
-        const menuItem = new ContextMenuItem(item);
+        const menuItem = new ContextMenuItem();
         menuItem.checked = item.checked;
         menuItem.label = item.label;
         menuItem.disabled = item.disabled;
