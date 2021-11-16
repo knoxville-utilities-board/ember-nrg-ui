@@ -1,11 +1,28 @@
 import { getOwner } from '@ember/application';
-import { computed } from '@ember/object';
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+export default class ApplicationService extends Service {
+  @service('page-title')
+  pageTitleService;
 
-export default Service.extend({
-  isTesting: computed(function() {
-    const config = getOwner(this).resolveRegistration('config:environment');
-    return config.environment === 'test';
-  }),
-  pageTitle: '',
-});
+  constructor() {
+    super(...arguments);
+    this.pageTitleService.titleDidUpdate = (title) => {
+      this.pageTitle = title;
+    };
+  }
+
+  @tracked
+  sidebarMenuIsOpen = true;
+
+  @tracked
+  pageTitle = this.environmentConfig?.APP?.name;
+
+  get environmentConfig() {
+    return getOwner(this).resolveRegistration('config:environment');
+  }
+
+  get isTesting() {
+    return this.environmentConfig.environment === 'test';
+  }
+}

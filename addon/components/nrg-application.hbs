@@ -1,0 +1,59 @@
+{{! template-lint-disable no-inline-styles }}
+<div
+  class="nrg-application
+    {{if @fullscreenMap "fullscreen-map"}}
+    {{if this.computerScreenSidebarActive "large-screen-sidebar-active"}}"
+  {{did-insert this.onInsert}}
+  {{will-destroy this.onDestroy}}
+>
+  <NrgAppbar @title={{this.title}} @onToggleSidebar={{this.toggleSidebar}} />
+  <div class="pushable">
+    <NrgSidebar
+      @isOpen={{this.sidebarIsOpen}}
+      @clickedSidebarItem={{this.clickedLink}}
+    />
+    {{#if @fullscreenMap}}
+      <div class="pusher">
+        {{#if this.application.sidebarMenuIsOpen}}
+          <div class="sidebar-solid">
+            <NrgSidebarMenu @clickedSidebarItem={{this.clickedLink}} />
+          </div>
+        {{/if}}
+        {{#if @isLoading}}
+          <NrgLoadingIndicator />
+        {{/if}}
+        {{yield}}
+      </div>
+    {{else}}
+      <div class="pusher sidebar-flex-container">
+        {{#if this.application.sidebarMenuIsOpen}}
+          <div class="sidebar-solid">
+            <NrgSidebarMenu @clickedSidebarItem={{this.clickedLink}} />
+          </div>
+        {{/if}}
+        <div class="main-content" style={{this.mainContentStyle}}>
+          <div class="ui {{if @fluid "fluid"}} container">
+            {{#if @isLoading}}
+              <NrgLoadingIndicator />
+            {{/if}}
+            {{yield}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+  {{#if this.lightbox.hasChildren}}
+    <NrgLightboxContainer />
+  {{/if}}
+  <NrgModalContainer />
+  <NrgToastContainer as |view|>
+    {{#each this.flashMessages.queue as |flash|}}
+      <view.toast @toast={{flash}} />
+    {{/each}}
+  </NrgToastContainer>
+  <div id="popup-container"></div>
+  <NrgKeyboardShortcutModal />
+  {{#unless @isLoading}}
+    <NrgNewFeatures />
+  {{/unless}}
+</div>
