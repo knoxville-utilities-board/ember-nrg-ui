@@ -1,0 +1,13 @@
+<NrgModal
+  @isOpen={{this._isOpen}}
+  @headerText={{this.headerText}}
+  @onModalClose={{this.onModalClose}}
+  @dismissable={{false}}
+  @primaryButton={{this.primaryButtonText}}
+  @onPrimaryButtonClick={{this.onPrimaryClick}}
+  @secondaryButton={{this.secondaryButtonText}}
+  @onSecondaryButtonClick={{this.onSecondaryClick}}
+  {{did-insert this.onInsert}}
+>
+  {{this.htmlContent}}
+</NrgModal>

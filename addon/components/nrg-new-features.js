@@ -1,47 +1,53 @@
-import Component from '@ember/component';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
-import { alias, and } from '@ember/object/computed';
 import { htmlSafe } from '@ember/string';
-import layout from '../templates/components/nrg-new-features';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
+const defaultWhatsNewText = "What's New";
+const defaultHeaderText = 'Dismiss';
 
-  whatsNewService: service('whats-new'),
+export default class NrgNewFeaturesComponent extends Component {
+  @service('whats-new')
+  whatsNewService;
 
-  _isOpen: and('whatsNewService.isOpen', 'canOpen'),
+  @tracked
+  canOpen = false;
 
-  headerText: alias('whatsNewService.headerText'),
+  get headerText() {
+    return this.args.headerText ?? defaultWhatsNewText;
+  }
 
-  primaryButtonText: alias('whatsNewService.primaryButtonText'),
-  secondaryButtonText: alias('whatsNewService.secondaryButtonText'),
-  htmlContent: computed('content', function() {
-    return htmlSafe(this.content);
-  }),
+  get primaryButtonText() {
+    return this.args.primaryButtonText ?? defaultHeaderText;
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-    this.set('canOpen', true);
-  },
+  get secondaryButtonText() {
+    return this.args.secondaryButtonText ?? '';
+  }
 
-  content: alias('whatsNewService.content'),
+  get _isOpen() {
+    return this.whatsNewService.isOpen && this.canOpen;
+  }
 
-  closeModal() {
-    this.set('whatsNewService.isOpen', false);
-  },
+  get htmlContent() {
+    return htmlSafe(this.whatsNewService.content);
+  }
 
-  onModalClose() {
-    this.whatsNewService.onModalClose();
-  },
+  @action
+  onInsert() {
+    this.canOpen = true;
+  }
 
+  @action
   onPrimaryClick() {
-    this.whatsNewService.onPrimaryClick();
-    this.closeModal();
-  },
+    this.args.onPrimaryClick?.();
+    this.whatsNewService.isOpen = false;
+  }
 
+  @action
   onSecondaryClick() {
-    this.whatsNewService.onSecondaryClick();
-    this.closeModal();
-  },
-});
+    this.args.onSecondaryClick?.();
+    this.whatsNewService.isOpen = false;
+  }
+}

@@ -1,23 +1,19 @@
 import Service from '@ember/service';
-import { bool, reads } from '@ember/object/computed';
+import { tracked } from '@glimmer/tracking';
 
-export default Service.extend({
-  headerText: "What's New",
-  primaryButtonText: "Dismiss",
-  secondaryButtonText: '',
+export default class WhatsNewService extends Service {
+  @tracked
+  content = '';
 
-  hasContent: bool('content'),
-  isOpen: reads('hasContent'),
+  @tracked
+  isOpen;
 
-  onModalClose() {
-    // Implemented by user
-  },
-
-  onPrimaryClick() {
-    // Implemented by user
-  },
-
-  onSecondaryClick() {
-    // Implemented by user
+  get hasContent() {
+    return !!this.content;
   }
-});
+
+  constructor() {
+    super(...arguments);
+    this.isOpen = this.hasContent;
+  }
+}
