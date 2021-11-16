@@ -1,0 +1,24 @@
+<NrgModal
+  @priority={{0}}
+  @renderInPlace={{(not this.renderInModal)}}
+  @isOpen={{true}}
+  @dismissable={{false}}
+  @masterDetail={{true}}
+  {{did-insert this.onInsert}}
+  {{will-destroy this.onDestroy}}
+>
+  {{#if this.renderInModal}}
+    <NrgAppbar
+      @showReleaseNotes={{false}}
+      @showBackArrow={{true}}
+      @onBackArrowClick={{this.onBackArrowClick}}
+    />
+  {{/if}}
+  {{! template-lint-disable no-inline-styles }}
+  <div
+    class="{{if this.renderInModal "main-content"}}"
+    style={{this.mainContentStyle}}
+  >
+    {{yield}}
+  </div>
+</NrgModal>

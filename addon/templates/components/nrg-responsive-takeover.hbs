@@ -1,9 +1,0 @@
-<NrgModal @priority={{0}} @renderInPlace={{renderInPlace}} @isOpen={{true}} @dismissable={{false}} @masterDetail={{true}}>
-  {{#if renderInModal}}
-    <NrgAppbar @showReleaseNotes={{false}} @title={{title}} @showBackArrow={{true}} @onBackArrowClick={{action this.onBackArrowClick}} />
-  {{/if}}
-  {{! template-lint-disable no-inline-styles }}
-  <div class={{if renderInModal "main-content" ""}} style={{mainContentStyle}}>
-    {{yield}}
-  </div>
-</NrgModal>
