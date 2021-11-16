@@ -10,11 +10,11 @@ module('Integration | Component | nrg-sidebar-menu-item', function(hooks) {
     this.sidebarAction = () => {
       // Stub function
     };
-    this.clickedSidebarItem = () => {
+    this.onSidebarItemClick = () => {
       // Stub function
     };
     await render(
-      hbs`<NrgSidebarMenuItem @clickedSidebarItem={{clickedSidebarItem}} @sidebarAction={{action sidebarAction}} />`
+      hbs`<NrgSidebarMenuItem @onSidebarItemClick={{onSidebarItemClick}} @sidebarAction={{action sidebarAction}} />`
     );
 
     assert.dom(this.element).hasText('');
@@ -33,7 +33,7 @@ module('Integration | Component | nrg-sidebar-menu-item', function(hooks) {
     };
 
     await render(
-      hbs`<NrgSidebarMenuItem @item={{menuItem}} @clickedSidebarItem={{action clickedAction}} @sidebarAction={{action sidebarAction}} />`
+      hbs`<NrgSidebarMenuItem @item={{menuItem}} @onSidebarItemClick={{action clickedAction}} @sidebarAction={{action sidebarAction}} />`
     );
     await click('.item');
   });

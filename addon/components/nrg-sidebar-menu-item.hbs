@@ -3,11 +3,11 @@
     <NrgSidebarMenuItem::Content @item={{@item}} />
   </a>
 {{else if @item.sidebarURL}}
-  <a href={{@item.sidebarURL}} class="item" target="_blank" rel="noopener" {{on "click" (fn @clickedSidebarItem @item preventDefault=false)}}>
+  <a href={{@item.sidebarURL}} class="item" target="_blank" rel="noopener" {{on "click" (fn @onSidebarItemClick @item preventDefault=false)}}>
     <NrgSidebarMenuItem::Content @item={{@item}} />
   </a>
 {{else}}
-  <LinkTo @route={{@item.routeName}} @class={{if @isParentGroup "parent-route" "item"}} @click={{fn @clickedSidebarItem @item}}>
+  <LinkTo @route={{@item.routeName}} @class={{if @isParentGroup "parent-route" "item"}} @click={{fn @onSidebarItemClick @item}}>
     <NrgSidebarMenuItem::Content @item={{@item}} />
   </LinkTo>
 {{/if}}

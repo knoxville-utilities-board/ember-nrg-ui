@@ -23,9 +23,6 @@ export default class NrgFormComponent extends Component {
   flashMessages;
 
   @tracked
-  sidebarIsOpen = false;
-
-  @tracked
   mainContentStyle;
 
   get computerScreenSidebarActive() {
@@ -59,12 +56,12 @@ export default class NrgFormComponent extends Component {
     if (this.responsive.isComputerScreenGroup) {
       this.application.sidebarMenuIsOpen = !this.application.sidebarMenuIsOpen;
     } else {
-      this.sidebarIsOpen = !this.sidebarIsOpen;
+      this.application.sidebarIsOpen = !this.application.sidebarIsOpen;
     }
   }
 
   @action
   clickedLink(item) {
-    this.args.clickedSidebarItem?.(item);
+    this.args.onSidebarItemClick?.(item);
   }
 }

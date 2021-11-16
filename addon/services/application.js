@@ -16,6 +16,9 @@ export default class ApplicationService extends Service {
   sidebarMenuIsOpen = true;
 
   @tracked
+  sidebarIsOpen = false;
+
+  @tracked
   pageTitle = this.environmentConfig?.APP?.name;
 
   get environmentConfig() {
