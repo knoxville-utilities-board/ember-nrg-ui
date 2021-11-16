@@ -4,8 +4,8 @@ import { htmlSafe } from '@ember/string';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-const defaultWhatsNewText = "What's New";
-const defaultHeaderText = 'Dismiss';
+const defaultHeaderText = "What's New";
+const defaultPrimaryText = 'Dismiss';
 
 export default class NrgNewFeaturesComponent extends Component {
   @service('whats-new')
@@ -15,11 +15,11 @@ export default class NrgNewFeaturesComponent extends Component {
   canOpen = false;
 
   get headerText() {
-    return this.args.headerText ?? defaultWhatsNewText;
+    return this.args.headerText ?? defaultHeaderText;
   }
 
   get primaryButtonText() {
-    return this.args.primaryButtonText ?? defaultHeaderText;
+    return this.args.primaryButtonText ?? defaultPrimaryText;
   }
 
   get secondaryButtonText() {
