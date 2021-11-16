@@ -1,42 +1,62 @@
-import { isNone } from '@ember/utils';
-import { htmlSafe } from '@ember/string';
-import EmberObject, { computed } from '@ember/object';
-import { sort } from '@ember/object/computed';
 import { A } from '@ember/array';
 import Service from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
-export default Service.extend({
-  registeredClients: A(),
+class ContextMenuItem {
+  @tracked checked;
+  @tracked label;
+  @tracked disabled;
+  @tracked isDivider;
+  @tracked isCheckbox;
+  @tracked iconClass;
+  @tracked priority;
+  action;
+}
 
-  contextItems: sort('rawContextItems', 'contextItemSort'),
+export default class ContextMenuService extends Service {
+  @tracked
+  registeredClients = A();
 
-  contextItemSort: ['priority:desc', 'baseLabel:asc'],
+  get contextItems() {
+    return this.rawContextItems.sort((a, b) => {
+      if (a.priority > b.priority) {
+        return -1;
+      } else if (a.priority < b.priority) {
+        return 1;
+      }
+      if (a.label > b.label || !b.label) {
+        return 1;
+      } else if (a.label < b.label || !a.label) {
+        return -1;
+      }
+      return 0;
+    });
+  }
 
-  disabled: false,
-
-  rawContextItems: computed('registeredClients.[]', 'registeredClients.@each.contextItems', function() {
+  get rawContextItems() {
     const rawContextItems = A();
-    this.registeredClients.forEach(client => {
-      client.contextItems.forEach(item => {
-        const contextItem = EmberObject.create(item);
-        contextItem.set('client', client);
-        contextItem.set('baseLabel', item.label);
-        if (item.isCheckbox && item.iconClass) {
-          contextItem.set('label', htmlSafe(`<i class='${item.iconClass} icon'></i>${item.label}`));
-        }
-        if (isNone(item.priority)) {
-          contextItem.set('priority', 10);
-        }
-        rawContextItems.addObject(contextItem);
+    this.registeredClients.forEach((client) => {
+      client.contextItems.forEach((item) => {
+        const menuItem = new ContextMenuItem();
+        menuItem.checked = item.checked;
+        menuItem.label = item.label;
+        menuItem.disabled = item.disabled;
+        menuItem.isDivider = item.isDivider;
+        menuItem.isCheckbox = item.isCheckbox;
+        menuItem.iconClass = item.iconClass;
+        menuItem.priority = item.priority ?? 10;
+        menuItem.action = item.action;
+        rawContextItems.addObject(menuItem);
       });
     });
     return rawContextItems;
-  }),
+  }
 
   addClient(client) {
     this.registeredClients.addObject(client);
-  },
+  }
+
   removeClient(client) {
     this.registeredClients.removeObject(client);
-  },
-});
+  }
+}

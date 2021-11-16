@@ -1,4 +1,8 @@
-<div class="ui segment">
+<div
+  class="ui segment"
+  {{did-insert this.onInsert}}
+  {{will-destroy this.onDestroy}}
+>
   <div class="ui form">
     <div class="ui field">
       <label>Items Clicked</label>
