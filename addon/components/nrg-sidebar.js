@@ -1,23 +1,43 @@
-import Component from '@ember/component';
-import { alias } from '@ember/object/computed';
-import ResizeMixin from 'ember-nrg-ui/mixins/resize';
-import layout from '../templates/components/nrg-sidebar';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+export default class NrgSidebarComponent extends Component {
+  @service
+  application;
 
-export default Component.extend(ResizeMixin, {
-  layout,
+  @service
+  resize;
 
-  isLargeScreen: alias('responsive.isComputerScreenGroup'),
+  @service
+  responsive;
 
-  didResize() {
-    if (this.isOpen && this.isLargeScreen) {
-      this.set('isOpen', false);
+  @tracked
+  isOpen = false;
+
+  @action
+  onInsert() {
+    this.resize.on('didResize', this, this.onResize);
+  }
+
+  @action
+  onDestroy() {
+    this.resize.off('didResize', this, this.onResize);
+  }
+
+  @action
+  onResize() {
+    if (
+      this.application.sidebarIsOpen &&
+      this.responsive.isComputerScreenGroup
+    ) {
+      this.application.sidebarIsOpen = false;
     }
-  },
+  }
 
-  clickedLink(item) {
-    this.set('isOpen', false);
-    if (this.clickedSidebarItem) {
-      this.clickedSidebarItem(item);
-    }
-  },
-});
+  @action
+  onLinkClick(item) {
+    this.application.sidebarIsOpen = false;
+    this.clickedSidebarItem?.(item);
+  }
+}

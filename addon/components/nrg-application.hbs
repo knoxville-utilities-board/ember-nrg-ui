@@ -8,10 +8,7 @@
 >
   <NrgAppbar @title={{this.title}} @onToggleSidebar={{this.toggleSidebar}} />
   <div class="pushable">
-    <NrgSidebar
-      @isOpen={{this.sidebarIsOpen}}
-      @clickedSidebarItem={{this.clickedLink}}
-    />
+    <NrgSidebar @clickedSidebarItem={{this.clickedLink}} />
     {{#if @fullscreenMap}}
       <div class="pusher">
         {{#if this.application.sidebarMenuIsOpen}}
