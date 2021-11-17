@@ -119,7 +119,7 @@ $primary: #6200ee;
 $primaryVariant: #3700b3;
 
 .nrg-application.nrg-application.nrg-application,
-.ui.modal.master-detail--takeover.master-detail--takeover.master-detail--takeover {
+.ui.modal.side-by-side--takeover.side-by-side--takeover.side-by-side--takeover {
   .main.menu.menu {
     background-color: rgba($primary, 0.98);
   }

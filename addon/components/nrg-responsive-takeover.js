@@ -24,8 +24,12 @@ export default class NrgFormComponent extends Component {
     this.setMainContentStyle();
   }
 
+  get shouldTakeOver() {
+    return this.args.shouldTakeOver !== false;
+  }
+
   get renderInModal() {
-    return this.responsive.isMobileScreenGroup && this.args.shouldTakeOver;
+    return this.responsive.isMobileScreenGroup && this.shouldTakeOver;
   }
 
   setMainContentStyle() {
@@ -47,8 +51,8 @@ export default class NrgFormComponent extends Component {
   @action
   onBackArrowClick() {
     this.args.onBackArrowClick?.();
-    if (this.previousRoute) {
-      this.router.transitionTo(this.previousRoute);
+    if (this.args.previousRoute) {
+      this.router.transitionTo(this.args.previousRoute);
     }
   }
 }
