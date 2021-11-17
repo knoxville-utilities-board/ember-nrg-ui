@@ -1,0 +1,17 @@
+<!-- BEGIN-SNIPPET side-by-side -->
+{{page-title "nrg-side-by-side"}}
+
+<NrgSideBySide>
+  <:primary>
+    <NrgList @selectionType="single" @pageMeta={{pageMeta}} @items={{mappedItems}} @onItemSelect={{action this.onSelect}} />
+  </:primary>
+  <:secondary>
+    {{outlet}}
+  </:secondary>
+</NrgSideBySide>
+<!-- END-SNIPPET  -->
+
+<NrgCodeBlock @label="Parent Route Template" @codeBlockName="side-by-side.hbs" />
+<NrgCodeBlock @label="Index Route Template" @codeBlockName="side-by-side-index.hbs" />
+<NrgCodeBlock @label="Detail Route Template" @codeBlockName="side-by-side-detail.hbs" />
+
