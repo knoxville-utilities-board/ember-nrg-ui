@@ -1,5 +1,75 @@
 {{page-title "NRG UI"}}
 
 <NrgApplication>
-  {{outlet}}
+
+  <:sidebar as |sidebar|>
+    <sidebar.group @routeName="view-components">
+      <:default>Components</:default>
+      <:menu as |menu|>
+        <menu.item @routeName="view-components.nrg-error-pages">
+          Error Pages
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-forms">
+          Forms
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-dropdown">
+          nrg-dropdown
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-home-cards">
+          nrg-home-cards
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-lightbox">
+          nrg-lightbox
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-list">
+          nrg-list
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-loading-indicator">
+          nrg-loading-indicator
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-modal">
+          nrg-modal
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-popup">
+          nrg-popup
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-render-template-block">
+          nrg-render-template-block
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-search">
+          nrg-search
+        </menu.item>
+      </:menu>
+    </sidebar.group>
+    <sidebar.item @routeName="master-detail">
+      Master Detail
+    </sidebar.item>
+    <sidebar.group @routeName="view-mixins">
+      <:default>Mixins</:default>
+      <:menu as |menu|>
+        <menu.item @routeName="view-mixins.context-menu">
+          context-menu
+        </menu.item>
+        <menu.item @routeName="view-mixins.resize">
+          resize
+        </menu.item>
+      </:menu>
+    </sidebar.group>
+    <sidebar.group @routeName="view-modifiers">
+      <:default>Modifiers</:default>
+      <:menu as |menu|>
+        <menu.item @routeName="view-modifiers.focus-first-input">
+          focus-first-input
+        </menu.item>
+      </:menu>
+    </sidebar.group>
+    <sidebar.item @routeName="toasts">
+      Toasts
+    </sidebar.item>
+  </:sidebar>
+
+  <:default>
+    {{outlet}}
+  </:default>
+
 </NrgApplication>

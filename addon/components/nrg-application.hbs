@@ -7,12 +7,26 @@
 >
   <NrgAppbar @title={{this.title}} @onToggleSidebar={{this.toggleSidebar}} />
   <div class="pushable">
-    <NrgSidebar @onSidebarItemClick={{this.clickedLink}} />
+    <NrgSidebar @onSidebarItemClick={{this.clickedLink}}>
+      <:default as |sidebar|>
+        {{yield sidebar to="sidebar"}}
+      </:default>
+      <:footer as |sidebar|>
+        {{yield sidebar to="sidebar-footer"}}
+      </:footer>
+    </NrgSidebar>
     {{#if @fullscreenMap}}
       <div class="pusher">
         {{#if this.application.sidebarMenuIsOpen}}
           <div class="sidebar-solid">
-            <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}} />
+            <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}}>
+              <:default as |sidebar|>
+                {{yield sidebar to="sidebar"}}
+              </:default>
+              <:footer as |sidebar|>
+                {{yield sidebar to="sidebar-footer"}}
+              </:footer>
+            </NrgSidebarMenu>
           </div>
         {{/if}}
         {{#if @isLoading}}
@@ -24,7 +38,14 @@
       <div class="pusher sidebar-flex-container">
         {{#if this.application.sidebarMenuIsOpen}}
           <div class="sidebar-solid">
-            <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}} />
+            <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}}>
+              <:default as |sidebar|>
+                {{yield sidebar to="sidebar"}}
+              </:default>
+              <:footer as |sidebar|>
+                {{yield sidebar to="sidebar-footer"}}
+              </:footer>
+            </NrgSidebarMenu>
           </div>
         {{/if}}
         <div class="main-content" style={{this.mainContentStyle}}>

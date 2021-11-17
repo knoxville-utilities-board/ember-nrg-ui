@@ -1,0 +1,19 @@
+{{#if @routeName}}
+  <LinkTo
+    @route={{@routeName}}
+    @class={{if @isParentGroup "parent-route" "item"}}
+    @click={{this.onClick}}
+  >
+    {{yield}}
+  </LinkTo>
+{{else}}
+  <a
+    href={{this.url}}
+    class={{if @isParentGroup "parent-route" "item"}}
+    target="_blank"
+    rel="noopener"
+    {{on "click" this.onClick}}
+  >
+    {{yield}}
+  </a>
+{{/if}}
