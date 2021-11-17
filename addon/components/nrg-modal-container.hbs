@@ -7,7 +7,7 @@
     {{#if (eq this.modalService.activeModal modal)}}
       <div
         role="button"
-        aria-label={{unless modal.isDismissable "Dismiss Modal"}}
+        aria-label={{if modal.isDismissable "Dismiss Modal"}}
         class="ui dimmer visible active
           {{if modal.sidebar "sidebar-dimmer" "page"}}
           {{unless modal.isDismissable "not-dismissable"}}
