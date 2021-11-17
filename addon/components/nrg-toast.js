@@ -19,4 +19,4 @@ export default class Toast extends FlashMessage {
     }
     return htmlSafe(`animation-duration: ${timeout}ms;`);
   }
-};
+}
