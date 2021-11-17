@@ -34,6 +34,20 @@ export default class NrgPopupComponent extends Component {
   }
 
   @action
+  moveLeft() {
+    if (!this.lightboxService.previousDisabled) {
+      this.lightboxService.selectPrevious();
+    }
+  }
+
+  @action
+  moveRight() {
+    if (!this.lightboxService.nextDisabled) {
+      this.lightboxService.selectNext();
+    }
+  }
+
+  @action
   rotateLeft() {
     const rotationClass = this.rotationClass;
     if (!rotationClass) {

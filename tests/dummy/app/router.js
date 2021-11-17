@@ -31,7 +31,6 @@ Router.map(function () {
   });
   this.route('view-mixins', function () {
     this.route('focus-first-input');
-    this.route('global-keyboard-shortcut');
     this.route('context-menu');
     this.route('resize');
   });

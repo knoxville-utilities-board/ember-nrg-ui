@@ -80,6 +80,10 @@
     </button>
   </div>
   {{#if this.lightboxService.lightboxIsOpen}}
-    <NrgLightboxContainer::KeyboardShortcuts />
+    <div
+      {{on-key "ArrowLeft" this.moveLeft}}
+      {{on-key "ArrowRight" this.moveRight}}
+      hidden
+    ></div>
   {{/if}}
 </NrgModal>

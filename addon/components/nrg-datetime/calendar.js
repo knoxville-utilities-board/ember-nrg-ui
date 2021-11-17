@@ -6,7 +6,7 @@ import moment from 'moment';
 const DAY_HEADERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const MINUTE_INTERVAL = 5;
 
-export default class NrgValidationComponent extends Component {
+export default class NrgDateTimeCalendarComponent extends Component {
   @tracked
   isSelectingDays = false;
 
