@@ -96,6 +96,6 @@ export default Controller.extend({
 
   onSelect(item) {
     const animal = this.items.findBy('name', item.header);
-    this.transitionToRoute('master-detail.detail', animal);
+    this.transitionToRoute('side-by-side.detail', animal);
   },
 });

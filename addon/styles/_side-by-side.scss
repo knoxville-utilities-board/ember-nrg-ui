@@ -1,4 +1,4 @@
-.master-detail {
+.side-by-side {
   border-radius: 0 !important;
   margin-top: 0 !important;
 
@@ -12,7 +12,7 @@
     }
   }
 
-  &--master {
+  &--primary {
     .nrg-list.nrg-list {
       border: none;
     }
@@ -36,7 +36,7 @@
     }
   }
 
-  &--detail {
+  &--secondary {
     display: none;
     width: 60% !important;
     overflow-x: hidden;
@@ -64,7 +64,7 @@
   }
 }
 
-.ui.modal.master-detail--takeover.master-detail--takeover.master-detail--takeover {
+.ui.modal.side-by-side--takeover.side-by-side--takeover.side-by-side--takeover {
   position: fixed;
   top: 0;
   right: 0;

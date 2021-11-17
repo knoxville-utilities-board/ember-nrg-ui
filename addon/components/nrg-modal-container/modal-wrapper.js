@@ -22,7 +22,7 @@ export default Component.extend(ResizeMixin, {
   renderInPlace: alias('modal.renderInPlace'),
   hasMovedDom: alias('modal.hasMovedDom'),
 
-  masterDetail: alias('modal.masterDetail'),
+  takeover: alias('modal.takeover'),
   sidebar: alias('modal.sidebar'),
   basic: alias('modal.basic'),
   lightbox: alias('modal.lightbox'),
@@ -34,7 +34,7 @@ export default Component.extend(ResizeMixin, {
   dismissable: alias('modal.dismissable'),
 
   modalStyles: computed('modalElement', function() {
-    if (useFlexBox || !this.modalElement || this.masterDetail || this.sidebar || this.lightbox) {
+    if (useFlexBox || !this.modalElement || this.takeover || this.sidebar || this.lightbox) {
       return '';
     }
     const marginTop = this.modalElement.offsetHeight / 2;
@@ -53,7 +53,7 @@ export default Component.extend(ResizeMixin, {
     'basic',
     'lightbox',
     'modalClass',
-    'masterDetail',
+    'takeover',
     function() {
       const appliedClasses = [];
       if (this.sidebar) {
@@ -69,8 +69,8 @@ export default Component.extend(ResizeMixin, {
       if (this.basic) {
         appliedClasses.push('basic');
       }
-      if (this.masterDetail) {
-        appliedClasses.push('master-detail--takeover');
+      if (this.takeover) {
+        appliedClasses.push('side-by-side--takeover');
       }
       return appliedClasses.join(' ');
     }
@@ -80,7 +80,7 @@ export default Component.extend(ResizeMixin, {
     'sidebar',
     'lightbox',
     'renderInPlace',
-    'masterDetail',
+    'takeover',
     function() {
       const appliedClasses = ['modal-content'];
       if (this.lightbox) {
@@ -122,7 +122,7 @@ export default Component.extend(ResizeMixin, {
   modalElementAdded(element) {
     this.set('modalElement', element);
 
-    if (useFlexBox || this.masterDetail || this.sidebar || this.lightbox) {
+    if (useFlexBox || this.takeover || this.sidebar || this.lightbox) {
       return;
     }
 
