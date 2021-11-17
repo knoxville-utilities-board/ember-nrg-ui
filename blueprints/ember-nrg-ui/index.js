@@ -21,18 +21,18 @@ function directoryIsEmpty(path) {
 module.exports = {
   description: '',
 
-  fileMapTokens: function() {
+  fileMapTokens: function () {
     return {
-      __application__: function() {
+      __application__: function () {
         return '/app/application';
       },
-      __styles__: function() {
+      __styles__: function () {
         return '/app/styles';
       },
-      __root__: function() {
+      __root__: function () {
         return '/';
       },
-      __public__: function() {
+      __public__: function () {
         return '/public';
       },
     };
@@ -57,7 +57,7 @@ module.exports = {
       'app/templates/components',
       'app/templates',
       'app/routes',
-    ].forEach(function(path) {
+    ].forEach(function (path) {
       if (fs.existsSync(path) && directoryIsEmpty(path)) {
         fs.rmdirSync(path);
       }
@@ -93,7 +93,7 @@ module.exports = {
       .insertIntoFile('app/router.js', '\n  nrgRoutes(this);', {
         after: 'Router.map(function() {',
       })
-      .then(function() {
+      .then(function () {
         return blueprint.insertIntoFile(
           'app/router.js',
           "\nimport nrgRoutes from 'ember-nrg-ui/router';",
@@ -102,26 +102,26 @@ module.exports = {
           }
         );
       })
-      .then(function() {
+      .then(function () {
         return blueprint.insertIntoFile('ember-cli-build.js', appImportChunk, {
           after:
             "const EmberApp = require('ember-cli/lib/broccoli/ember-app');",
         });
       })
-      .then(function() {
+      .then(function () {
         return blueprint.insertIntoFile('ember-cli-build.js', appChunk, {
           after: 'app = new EmberApp(defaults, {',
         });
       })
-      .then(function() {
+      .then(function () {
         return blueprint.addAddonsToProject({
           packages: nodePackages,
         });
       })
-      .then(function() {
+      .then(function () {
         return blueprint.removePackageFromProject('ember-welcome-page');
       })
-      .then(function() {
+      .then(function () {
         return blueprint.insertIntoFile(
           'app/styles/app.scss',
           "@import 'nrg-override';"
@@ -129,5 +129,5 @@ module.exports = {
       });
   },
 
-  normalizeEntityName: function() {},
+  normalizeEntityName: function () {},
 };
