@@ -28,10 +28,10 @@ Router.map(function () {
     this.route('nrg-popup');
     this.route('nrg-render-template-block');
     this.route('nrg-search');
+    this.route('nrg-context-item');
   });
   this.route('view-mixins', function () {
     this.route('focus-first-input');
-    this.route('context-menu');
   });
   this.route('view-modifiers', function () {
     this.route('focus-first-input');

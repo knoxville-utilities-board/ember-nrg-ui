@@ -1,0 +1,13 @@
+{{#if this.renderTo}}
+  {{#in-element this.renderTo insertBefore=null}}
+    <a
+      href=''
+      role="button"
+      class="{{if @disabled "disabled"}} item {{@class}}"
+      {{on "click" this._onClick}}
+      ...attributes
+    >
+      {{yield}}
+    </a>
+  {{/in-element}}
+{{/if}}

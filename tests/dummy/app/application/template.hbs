@@ -1,7 +1,6 @@
 {{page-title "NRG UI"}}
 
 <NrgApplication>
-
   <:sidebar as |sidebar|>
     <sidebar.group @routeName="view-components">
       <:default>Components</:default>
@@ -39,6 +38,9 @@
         <menu.item @routeName="view-components.nrg-search">
           nrg-search
         </menu.item>
+        <menu.item @routeName="view-components.nrg-context-item">
+          nrg-context-item
+        </menu.item>
       </:menu>
     </sidebar.group>
     <sidebar.item @routeName="side-by-side">
@@ -64,6 +66,10 @@
       Toasts
     </sidebar.item>
   </:sidebar>
+
+  <NrgContextItem @bottom={{true}}>
+    Logout
+  </NrgContextItem>
 
   <:default>
     {{outlet}}

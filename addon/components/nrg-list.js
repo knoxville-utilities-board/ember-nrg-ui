@@ -1,7 +1,6 @@
 import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
 
 const defaultPageSize = 25;
 const defaultSearchParameter = 'search';
@@ -10,17 +9,6 @@ export default class NrgListComponent extends Component {
   filterParam;
   selectedFilter;
   searchString;
-
-  contextItems = [
-    {
-      label: 'Refresh',
-      actionName: 'signalRefresh',
-      iconClass: 'refresh',
-    },
-  ];
-
-  @service('context-menu')
-  contextService;
 
   get hasRefreshContextItem() {
     return this.args.hasRefreshContextItem !== false;
@@ -50,20 +38,6 @@ export default class NrgListComponent extends Component {
       this.args.onRefresh?.(query) ?? this.args.onQuery?.(query);
     } else {
       this.args.onQuery?.(query);
-    }
-  }
-
-  @action
-  onInsert() {
-    if (this.hasRefreshContextItem) {
-      this.contextService.addClient(this);
-    }
-  }
-
-  @action
-  onDestroy() {
-    if (this.hasRefreshContextItem) {
-      this.contextService.removeClient(this);
     }
   }
 
