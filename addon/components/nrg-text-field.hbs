@@ -4,7 +4,7 @@
       (hash
         input=(component
           "nrg-text-field/trim-input"
-          type=@type
+          type=this.type
           min=@min
           max=@max
           step=@step
@@ -23,7 +23,7 @@
     }}
   {{else}}
     <NrgTextField::TrimInput
-      @type={{@type}}
+      @type={{this.type}}
       @min={{@min}}
       @max={{@max}}
       @step={{@step}}
