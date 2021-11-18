@@ -18,7 +18,7 @@ export default class OnResizeModifier extends Modifier {
   }
 
   @action
-  handleResize(...args) {
-    this.callback(...args);
+  handleResize() {
+    this.callback(...arguments);
   }
 }

@@ -34,6 +34,7 @@ export default class NrgFormComponent extends Component {
     this.setMainContentStyle();
   }
 
+  @action
   setMainContentStyle() {
     this.mainContentStyle = htmlSafe(`height:${window.innerHeight}px`);
   }

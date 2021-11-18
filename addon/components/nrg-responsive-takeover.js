@@ -29,6 +29,7 @@ export default class NrgFormComponent extends Component {
     return this.responsive.isMobileScreenGroup && this.shouldTakeOver;
   }
 
+  @action
   setMainContentStyle() {
     this.mainContentStyle = htmlSafe(
       `height: calc(${window.innerHeight}px - 48px)`

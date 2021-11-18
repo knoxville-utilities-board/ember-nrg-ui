@@ -1,7 +1,7 @@
 <NrgModal
   @sidebar={{true}}
   @isOpen={{this.application.sidebarIsOpen}}
-  {{on-resize onResize}}
+  {{on-resize this.onResize}}
 >
   <NrgSidebarMenu @onSidebarItemClick={{this.onLinkClick}} />
 </NrgModal>

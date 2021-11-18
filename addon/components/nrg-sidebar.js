@@ -12,6 +12,7 @@ export default class NrgSidebarComponent extends Component {
   @tracked
   isOpen = false;
 
+  @action
   onResize() {
     if (
       this.application.sidebarIsOpen &&
