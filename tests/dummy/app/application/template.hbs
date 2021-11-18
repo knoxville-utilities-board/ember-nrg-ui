@@ -1,3 +1,4 @@
+<!-- BEGIN-SNIPPET nrg-application -->
 {{page-title "NRG UI"}}
 
 <NrgContextItem @bottom={{true}}>
@@ -5,10 +6,24 @@
 </NrgContextItem>
 
 <NrgApplication>
+  <:appbar>
+    <a
+      href="https://github.com/knoxville-utilities-board/ember-nrg-ui"
+      target="_blank"
+      rel="noopener"
+      class="item icon"
+    >
+      <i class="big github icon"></i>
+    </a>
+  </:appbar>
+
   <:sidebar as |sidebar|>
     <sidebar.group @routeName="view-components">
       <:default>Components</:default>
       <:menu as |menu|>
+        <menu.item @routeName="view-components.nrg-application">
+          nrg-application
+        </menu.item>
         <menu.item @routeName="view-components.nrg-error-pages">
           Error Pages
         </menu.item>
@@ -71,3 +86,4 @@
   </:default>
 
 </NrgApplication>
+<!-- END-SNIPPET -->

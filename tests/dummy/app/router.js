@@ -17,6 +17,7 @@ Router.map(function () {
   });
   this.route('toasts');
   this.route('view-components', function () {
+    this.route('nrg-application');
     this.route('nrg-dropdown');
     this.route('nrg-error-pages');
     this.route('nrg-forms');
