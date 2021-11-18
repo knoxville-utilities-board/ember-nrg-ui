@@ -289,7 +289,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
       this.searchValue = '';
     }
     if (this.isAddingOption && !this.args.hideAdditions) {
-      this.options?.push && this.options.push(option);
+      this.options?.push?.(option);
     }
     if (!this.args.multiple) {
       this.isOpen = false;
