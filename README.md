@@ -63,11 +63,8 @@ Once the addon is installed, create a new index route and template:
 // app/index/route.js
 
 import Route from "@ember/routing/route";
-import SidebarNavigationMixin from "ember-nrg-ui/mixins/sidebar-navigation";
 
-export default Route.extend(SidebarNavigationMixin, {
-  sidebarLabel: "Home"
-});
+export default Route.extend({});
 ```
 
 ```hbs
