@@ -35,6 +35,7 @@ Router.map(function () {
   });
   this.route('view-modifiers', function () {
     this.route('focus-first-input');
+    this.route('on-click-outside');
   });
   this.route('acceptance', function () {
     this.route('child');

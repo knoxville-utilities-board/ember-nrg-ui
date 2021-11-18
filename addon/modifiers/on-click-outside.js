@@ -1,54 +1,39 @@
-import { capabilities, setModifierManager } from '@ember/modifier';
+import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
-import { gte } from 'ember-compatibility-helpers';
+import Modifier from 'ember-modifier';
 
-export default setModifierManager(
-  owner => ({
-    capabilities: capabilities(gte('3.22.0') ? '3.22' : '3.13', { disableAutoTracking: true }),
+export default class OnClickOutsideModifier extends Modifier {
+  guid = guidFor(this);
 
-    createModifier() {
-      return {
-        element: null,
-        clickHandler: null,
-        disabled: false,
-      };
-    },
+  get callback() {
+    return this.args.positional[0];
+  }
+  get disabled() {
+    return this.args.named?.disabled;
+  }
 
-    installModifier(state, element, args) {
-      const [callback] = args.positional;
-      const { disabled } = args.named;
+  didInstall() {
+    this.element.dataset.clickHandler = this.guid;
+    document.documentElement.addEventListener('click', this.clickHandler, true);
+  }
 
-      const guid = guidFor(element);
+  willRemove() {
+    delete this.element.dataset.clickHandler;
+    document.documentElement.removeEventListener(
+      'click',
+      this.clickHandler,
+      true
+    );
+  }
 
-      const clickHandler = function(event) {
-        const foundTargetInWrapper = event.target.closest(`[data-click-handler=${guid}]`);
-        if (!foundTargetInWrapper && !owner.isDestroying && !state.disabled) {
-          callback();
-        }
-        return false;
-      };
-
-      state.element = element;
-      state.clickHandler = clickHandler;
-      state.disabled = disabled;
-
-      element.dataset.clickHandler = guid;
-
-      document.documentElement.addEventListener('click', clickHandler, true);
-    },
-
-    updateModifier(state, args) {
-      const { disabled } = args.named;
-      state.disabled = disabled;
-    },
-
-    destroyModifier(state) {
-      if (state.element) {
-        delete state.element.dataset.clickHandler;
-      }
-      document.documentElement.removeEventListener('click', state.clickHandler, true);
-      state.clickHandler = null;
-    },
-  }),
-  class OnClickOutsideModifer {}
-);
+  @action
+  clickHandler(evt) {
+    const foundTargetInWrapper = evt.target.closest(
+      `[data-click-handler=${this.guid}]`
+    );
+    if (!foundTargetInWrapper && !this.disabled) {
+      this.callback(...arguments);
+    }
+    return false;
+  }
+}

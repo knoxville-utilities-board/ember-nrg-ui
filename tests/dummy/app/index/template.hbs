@@ -18,18 +18,11 @@
 </div>
 
 <div class="ui segment basic">
-  <h3>Mixins</h3>
-
-  <NrgHomeCards as |view|>
-    <view.home-card @route="view-mixins.focus-first-input" @label="Focus First Input" @icon="chevron right" />
-  </NrgHomeCards>
-</div>
-
-<div class="ui segment basic">
   <h3>Modifiers</h3>
 
   <NrgHomeCards as |view|>
     <view.home-card @route="view-modifiers.focus-first-input" @label="Focus First Input" @icon="chevron right" />
+    <view.home-card @route="view-modifiers.on-click-outside" @label="On Click Outside" @icon="mouse pointer" />
   </NrgHomeCards>
 </div>
 
