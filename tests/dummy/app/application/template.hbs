@@ -1,5 +1,9 @@
 {{page-title "NRG UI"}}
 
+<NrgContextItem @bottom={{true}}>
+  Logout
+</NrgContextItem>
+
 <NrgApplication>
   <:sidebar as |sidebar|>
     <sidebar.group @routeName="view-components">
@@ -46,19 +50,14 @@
     <sidebar.item @routeName="side-by-side">
       Side by Side
     </sidebar.item>
-    <sidebar.group @routeName="view-mixins">
-      <:default>Mixins</:default>
-      <:menu as |menu|>
-        <menu.item @routeName="view-mixins.context-menu">
-          context-menu
-        </menu.item>
-      </:menu>
-    </sidebar.group>
     <sidebar.group @routeName="view-modifiers">
       <:default>Modifiers</:default>
       <:menu as |menu|>
         <menu.item @routeName="view-modifiers.focus-first-input">
           focus-first-input
+        </menu.item>
+        <menu.item @routeName="view-modifiers.on-click-outside">
+          on-click-outside
         </menu.item>
       </:menu>
     </sidebar.group>
@@ -66,10 +65,6 @@
       Toasts
     </sidebar.item>
   </:sidebar>
-
-  <NrgContextItem @bottom={{true}}>
-    Logout
-  </NrgContextItem>
 
   <:default>
     {{outlet}}
