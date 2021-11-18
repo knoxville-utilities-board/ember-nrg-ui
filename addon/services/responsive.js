@@ -1,57 +1,69 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
-import { or, readOnly } from '@ember/object/computed';
 
-export default Service.extend({
-  _isMobileService: service('isMobile'),
+export default class Responsive extends Service {
+  @service isMobile;
+  @service media;
 
-  _mediaService: service('media'),
+  get screenWidth() {
+    return window.innerWidth;
+  }
 
-  resizeService: service('resize'),
-
-  init() {
-    this._super(...arguments);
-    this.resizeService.on('didResize', this, this._handleResizeEvent);
-    this._handleResizeEvent();
-  },
-
-  _handleResizeEvent() {
-    const { innerWidth, innerHeight } = window;
-    this.setProperties({
-      screenWidth: innerWidth,
-      screenHeight: innerHeight,
-    });
-  },
-
-  screenWidth: window.innerWidth,
-
-  screenHeight: window.innerHeight,
+  get screenHeight() {
+    return window.innerHeight;
+  }
 
   /* Mobile Device Checks */
 
-  isIOS: readOnly('_isMobileService.apple.device'),
+  get isIOS() {
+    return this.isMobile?.apple?.device;
+  }
 
-  isAndroid: readOnly('_isMobileService.android.device'),
+  get isAndroid() {
+    return this.isMobile?.android?.device;
+  }
 
-  isMobileDevice: or('isIOS', 'isAndroid'),
+  get isMobileDevice() {
+    return this.isIOS || this.isAndroid;
+  }
 
   /* Media Query Breakpoints */
 
-  isSmallMobileScreen: readOnly('_mediaService.isSmallMobile'),
+  get isSmallMobileScreen() {
+    return this.media?.isSmallMobile;
+  }
 
-  isMobileScreen: readOnly('_mediaService.isMobile'),
+  get isMobileScreen() {
+    return this.media?.isMobile;
+  }
 
-  isTabletScreen: readOnly('_mediaService.isTablet'),
+  get isTabletScreen() {
+    return this.media?.isTablet;
+  }
 
-  isComputerScreen: readOnly('_mediaService.isComputer'),
+  get isComputerScreen() {
+    return this.media?.isComputer;
+  }
 
-  isLargeMonitor: readOnly('_mediaService.isLargeMonitor'),
+  get isLargeMonitor() {
+    return this.media?.isLargeMonitor;
+  }
 
-  isWidescreenMonitor: readOnly('_mediaService.isWidescreenMonitor'),
+  get isWidescreenMonitor() {
+    return this.media?.isWidescreenMonitor;
+  }
 
   /* Media Query Computed Groups */
 
-  isMobileScreenGroup: or('isSmallMobileScreen', 'isMobileScreen', 'isTabletScreen'),
+  get isMobileScreenGroup() {
+    return (
+      this.isSmallMobileScreen || this.isMobileScreen || this.isTabletScreen
+    );
+  }
 
-  isComputerScreenGroup: or('isComputerScreen', 'isLargeMonitor', 'isWidescreenMonitor'),
-});
+  get isComputerScreenGroup() {
+    return (
+      this.isComputerScreen || this.isLargeMonitor || this.isWidescreenMonitor
+    );
+  }
+}

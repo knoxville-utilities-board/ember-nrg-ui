@@ -8,9 +8,6 @@ export default class NrgFormComponent extends Component {
   application;
 
   @service
-  resize;
-
-  @service
   responsive;
 
   @service
@@ -32,20 +29,11 @@ export default class NrgFormComponent extends Component {
     return this.responsive.isMobileScreenGroup && this.shouldTakeOver;
   }
 
+  @action
   setMainContentStyle() {
     this.mainContentStyle = htmlSafe(
       `height: calc(${window.innerHeight}px - 48px)`
     );
-  }
-
-  @action
-  onInsert() {
-    this.resize.on('didResize', this, this.setMainContentStyle);
-  }
-
-  @action
-  onDestroy() {
-    this.resize.off('didResize', this, this.setMainContentStyle);
   }
 
   @action

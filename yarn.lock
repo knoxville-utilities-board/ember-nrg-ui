@@ -5432,7 +5432,7 @@ ember-cli-babel@^7.0.0, ember-cli-babel@^7.1.2, ember-cli-babel@^7.10.0, ember-c
     rimraf "^3.0.1"
     semver "^5.5.0"
 
-ember-cli-babel@^7.1.0, ember-cli-babel@^7.1.3, ember-cli-babel@^7.13.2, ember-cli-babel@^7.19.0, ember-cli-babel@^7.22.1, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6, ember-cli-babel@^7.4.0:
+ember-cli-babel@^7.1.3, ember-cli-babel@^7.13.2, ember-cli-babel@^7.19.0, ember-cli-babel@^7.22.1, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6, ember-cli-babel@^7.4.0:
   version "7.26.6"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.26.6.tgz#322fbbd3baad9dd99e3276ff05bc6faef5e54b39"
   integrity sha512-040svtfj2RC35j/WMwdWJFusZaXmNoytLAMyBDGLMSlRvznudTxZjGlPV6UupmtTBApy58cEF8Fq4a+COWoEmQ==
@@ -6143,13 +6143,13 @@ ember-require-module@^0.3.0:
   dependencies:
     ember-cli-babel "^6.9.2"
 
-ember-resize@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/ember-resize/-/ember-resize-0.3.4.tgz#2ee19377213ca1e13eb6bce5903ad493e9bbbe2d"
-  integrity sha512-8FM8DzKv9wr70o1OPX7357qxlVvcPao9Ex0n8uoqHu8i2sKUK34YFeu8wtTkr65pProWRFCdkf957v/tXSd0KA==
+ember-resize-observer-service@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.npmjs.org/ember-resize-observer-service/-/ember-resize-observer-service-0.4.5.tgz#d76153e807d302dd900f6120b33d1f1949964c94"
+  integrity sha512-eL9X+HKARogmv7hkXhVe+NJ6FTG3p2tylJVFDFCvYq/b6LISGtY8SfJj070x8iIeuzKvxRrT6iPe2fQ59OqoLQ==
   dependencies:
-    ember-cli-babel "^7.1.0"
-    ember-cli-htmlbars "^3.0.0"
+    ember-cli-babel "^7.26.6"
+    ember-cli-htmlbars "^5.7.1"
 
 ember-resolver@8.0.2:
   version "8.0.2"

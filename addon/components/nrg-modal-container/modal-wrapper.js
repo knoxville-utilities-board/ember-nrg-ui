@@ -3,13 +3,12 @@ import { computed } from '@ember/object';
 import { alias, and, not, readOnly } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
-import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import layout from '../../templates/components/nrg-modal-container/modal-wrapper';
 
 const isIE11 = !window.ActiveXObject && 'ActiveXObject' in window;
 const useFlexBox = !isIE11;
 
-export default Component.extend(ResizeMixin, {
+export default Component.extend({
   layout,
 
   tagName: '',
@@ -44,7 +43,7 @@ export default Component.extend(ResizeMixin, {
     );
   }),
 
-  didResize() {
+  onResize() {
     this.notifyPropertyChange('modalStyles');
   },
 

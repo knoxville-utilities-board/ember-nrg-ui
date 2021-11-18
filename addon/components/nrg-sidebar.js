@@ -7,23 +7,10 @@ export default class NrgSidebarComponent extends Component {
   application;
 
   @service
-  resize;
-
-  @service
   responsive;
 
   @tracked
   isOpen = false;
-
-  @action
-  onInsert() {
-    this.resize.on('didResize', this, this.onResize);
-  }
-
-  @action
-  onDestroy() {
-    this.resize.off('didResize', this, this.onResize);
-  }
 
   @action
   onResize() {

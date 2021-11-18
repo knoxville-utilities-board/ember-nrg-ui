@@ -32,7 +32,6 @@ Router.map(function () {
   this.route('view-mixins', function () {
     this.route('focus-first-input');
     this.route('context-menu');
-    this.route('resize');
   });
   this.route('view-modifiers', function () {
     this.route('focus-first-input');
