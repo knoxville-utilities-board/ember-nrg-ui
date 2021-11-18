@@ -1,4 +1,9 @@
-<div {{did-insert this.onInsert}} {{will-destroy this.onDestroy}} hidden></div>
+{{#if this.hasRefreshContextItem}}
+  <NrgContextItem @onClick={{this.signalRefresh}}>
+    <i class="refresh icon"></i>
+    Refresh
+  </NrgContextItem>
+{{/if}}
 {{#if (has-block)}}
   {{yield
     (hash

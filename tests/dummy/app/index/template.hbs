@@ -13,6 +13,7 @@
     <view.home-card @route="view-components.nrg-search" @label="Search" @icon="search" />
     <view.home-card @route="view-components.nrg-popup" @label="Popup" @icon="comment" />
     <view.home-card @route="side-by-side" @label="Side by Side" @icon="columns" />
+    <view.home-card @route="view-components.nrg-context-item" @label="Context Menus" @icon="ellipsis vertical" />
   </NrgHomeCards>
 </div>
 
@@ -20,7 +21,6 @@
   <h3>Mixins</h3>
 
   <NrgHomeCards as |view|>
-    <view.home-card @route="view-mixins.context-menu" @label="Context Menus" @icon="ellipsis vertical" />
     <view.home-card @route="view-mixins.focus-first-input" @label="Focus First Input" @icon="chevron right" />
   </NrgHomeCards>
 </div>
