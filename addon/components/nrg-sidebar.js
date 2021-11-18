@@ -23,8 +23,7 @@ export default class NrgSidebarComponent extends Component {
   }
 
   @action
-  onLinkClick(item) {
+  onClickInternal() {
     this.application.sidebarIsOpen = false;
-    this.args.onSidebarItemClick?.(item);
   }
 }

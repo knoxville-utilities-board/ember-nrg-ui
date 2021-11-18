@@ -1,30 +1,28 @@
 <div class="ui vertical left menu sidebar-menu">
   <a class="nrg-logo" href={{if @appReloadLocation @appReloadLocation "/"}}></a>
-  {{#each visibleMenuItems as |menuItem|}}
-    {{#if menuItem.children.length}}
-      <div class="item">
-        <NrgSidebarMenuItem @item={{menuItem}} @onSidebarItemClick={{@onSidebarItemClick}} @sidebarAction={{fn sidebarAction}} @isParentGroup={{true}} />
-        {{#if menuItem.children}}
-          <div class="menu">
-            {{#each menuItem.children as |child|}}
-              {{#if child.isShownInSidebar}}
-                <NrgSidebarMenuItem @item={{child}} @onSidebarItemClick={{@onSidebarItemClick}} @sidebarAction={{fn sidebarAction}} />
-              {{/if}}
-            {{/each}}
-          </div>
-        {{/if}}
-      </div>
-    {{else}}
-      <NrgSidebarMenuItem @item={{menuItem}} @onSidebarItemClick={{@onSidebarItemClick}} @sidebarAction={{fn sidebarAction}} />
-    {{/if}}
-  {{/each}}
+  {{yield
+    (hash
+      item=(component "nrg-sidebar-menu/item" onClickInternal=@onClickInternal)
+      group=(component
+        "nrg-sidebar-menu/group" onClickInternal=@onClickInternal
+      )
+    )
+  }}
 
-  <div class="sidebar-footer">
-    {{#if hasVisibleFooterItems}}
+  {{#if (has-block "footer")}}
+    <div class="sidebar-footer">
       <div class="footer-pusher"></div>
-    {{/if}}
-    {{#each visibleFooterItems as |menuItem|}}
-      <NrgSidebarMenuItem @item={{menuItem}} @onSidebarItemClick={{@onSidebarItemClick}} @sidebarAction={{fn sidebarAction}} />
-    {{/each}}
-  </div>
+      {{yield
+        (hash
+          item=(component
+            "nrg-sidebar-menu/item" onClickInternal=@onClickInternal
+          )
+          group=(component
+            "nrg-sidebar-menu/group" onClickInternal=@onClickInternal
+          )
+        )
+        to="footer"
+      }}
+    </div>
+  {{/if}}
 </div>
