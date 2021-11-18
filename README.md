@@ -59,14 +59,6 @@ See the [Contributing](CONTRIBUTING.md) guide for details.
 
 Once the addon is installed, create a new index route and template:
 
-```javascript
-// app/index/route.js
-
-import Route from "@ember/routing/route";
-
-export default Route.extend({});
-```
-
 ```hbs
 <!-- app/index/template.hbs -->
 

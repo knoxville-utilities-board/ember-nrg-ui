@@ -9,7 +9,6 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   nrgRoutes(this);
-  this.route('validation-test');
   this.route('side-by-side', function () {
     this.route('detail', {
       path: '/:name',
