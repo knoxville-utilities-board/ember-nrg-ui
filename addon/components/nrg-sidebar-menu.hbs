@@ -9,18 +9,20 @@
     )
   }}
 
-  <div class="sidebar-footer">
-    <div class="footer-pusher"></div>
-    {{yield
-      (hash
-        item=(component
-          "nrg-sidebar-menu/item" onClickInternal=@onClickInternal
+  {{#if (has-block "footer")}}
+    <div class="sidebar-footer">
+      <div class="footer-pusher"></div>
+      {{yield
+        (hash
+          item=(component
+            "nrg-sidebar-menu/item" onClickInternal=@onClickInternal
+          )
+          group=(component
+            "nrg-sidebar-menu/group" onClickInternal=@onClickInternal
+          )
         )
-        group=(component
-          "nrg-sidebar-menu/group" onClickInternal=@onClickInternal
-        )
-      )
-      to="footer"
-    }}
-  </div>
+        to="footer"
+      }}
+    </div>
+  {{/if}}
 </div>
