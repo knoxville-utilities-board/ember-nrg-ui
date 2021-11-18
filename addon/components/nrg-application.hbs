@@ -3,8 +3,7 @@
   class="nrg-application
     {{if @fullscreenMap "fullscreen-map"}}
     {{if this.computerScreenSidebarActive "large-screen-sidebar-active"}}"
-  {{did-insert this.onInsert}}
-  {{will-destroy this.onDestroy}}
+  {{on-resize this.setMainContentStyle}}
 >
   <NrgAppbar @title={{this.title}} @onToggleSidebar={{this.toggleSidebar}} />
   <div class="pushable">

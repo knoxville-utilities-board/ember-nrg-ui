@@ -1,8 +1,7 @@
 <NrgModal
   @sidebar={{true}}
   @isOpen={{this.application.sidebarIsOpen}}
-  {{did-insert this.onInsert}}
-  {{will-destroy this.onDestroy}}
+  {{on-resize onResize}}
 >
   <NrgSidebarMenu @onSidebarItemClick={{this.onLinkClick}} />
 </NrgModal>

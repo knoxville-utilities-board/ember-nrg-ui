@@ -4,8 +4,7 @@
   @isOpen={{true}}
   @dismissable={{false}}
   @takeover={{true}}
-  {{did-insert this.onInsert}}
-  {{will-destroy this.onDestroy}}
+  {{on-resize this.setMainContentStyle}}
 >
   {{#if this.renderInModal}}
     <NrgAppbar

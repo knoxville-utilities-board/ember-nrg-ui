@@ -17,9 +17,6 @@ export default class NrgFormComponent extends Component {
   responsive;
 
   @service
-  resize;
-
-  @service
   flashMessages;
 
   @tracked
@@ -39,16 +36,6 @@ export default class NrgFormComponent extends Component {
 
   setMainContentStyle() {
     this.mainContentStyle = htmlSafe(`height:${window.innerHeight}px`);
-  }
-
-  @action
-  onInsert() {
-    this.resize.on('didResize', this, this.setMainContentStyle);
-  }
-
-  @action
-  onDestroy() {
-    this.resize.off('didResize', this, this.setMainContentStyle);
   }
 
   @action
