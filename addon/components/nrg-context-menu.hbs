@@ -8,7 +8,9 @@
     <i class="ellipsis vertical icon"></i>
   </dropdown.source>
   <dropdown.menu>
-    <div class="context-menu-container top"></div>
-    <div class="context-menu-container bottom"></div>
+    <div {{did-insert this.onInsert}} {{will-destroy this.onDestroy}}>
+      <div class="context-menu-container top"></div>
+      <div class="context-menu-container bottom"></div>
+    </div>
   </dropdown.menu>
 </NrgDropdown>
