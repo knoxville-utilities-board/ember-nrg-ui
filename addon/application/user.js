@@ -1,11 +1,11 @@
 import EmberObject from '@ember/object';
 import Evented from '@ember/object/evented';
-import { computed } from '@ember/object';
+import { A } from '@ember/array';
 
-export default EmberObject.extend(Evented, {
-  name: '',
+export default class ApplicationUser extends EmberObject.extend(Evented) {
+  name = '';
 
-  roles: computed(function() {
-    return [];
-  }),
-});
+  get roles() {
+    return A();
+  }
+}

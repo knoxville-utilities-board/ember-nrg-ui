@@ -1,4 +1,4 @@
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 import { later } from '@ember/runloop';
 import FlashObject from 'ember-cli-flash/flash/object';
 
