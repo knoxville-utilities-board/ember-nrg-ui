@@ -1,0 +1,51 @@
+{{! template-lint-disable no-inline-styles }}
+<div
+  class="ui modal visible active
+    {{if @modal.sidebar "sidebar-modal"}}
+    {{if @modal.lightbox "fullscreen lightbox"}}
+    {{if @modal.modalClass @modal.modalClass}}
+    {{if @modal.basic "basic"}}
+    {{if @modal.takeover "side-by-side--takeover"}}"
+  style={{this.modalStyles}}
+  role="dialog"
+  aria-label="Modal"
+  {{did-insert this.modalElementAdded}}
+>
+  {{#if this.hasCloseIcon}}
+    <i class="close icon" role="button" {{on "click" onHide}}></i>
+  {{/if}}
+  {{#if @modal.headerText}}
+    <div class="header">
+      {{@modal.headerText}}
+    </div>
+  {{/if}}
+
+  <div
+    class="modal-content
+      {{if @modal.lightbox "image"}}
+      {{unless @modal.sidebar "content"}}
+      {{if @modal.scrolling "scrolling"}}"
+    {{did-insert this.addModalToWormhole}}
+    {{will-destroy this.removeModalFromWormhole}}
+  ></div>
+
+  {{#if @modal.hasButtons}}
+    <div class="actions">
+      {{#if @modal.secondaryButton}}
+        <NrgButton
+          @class={{@modal.secondaryButtonClass}}
+          @text={{@modal.secondaryButton}}
+          @onClick={{fn _onSecondary}}
+        />
+      {{/if}}
+      {{#if @modal.primaryButton}}
+        <NrgButton
+          @class="primary right"
+          @text={{@modal.primaryButton}}
+          @onClick={{fn _onPrimary}}
+          @autofocus={{true}}
+        />
+      {{/if}}
+    </div>
+  {{/if}}
+</div>
