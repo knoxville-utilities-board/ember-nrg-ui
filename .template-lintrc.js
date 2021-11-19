@@ -2,7 +2,12 @@
 
 module.exports = {
   extends: 'recommended',
-  'no-curly-component-invocation': {
-    allow: ['nrg-app-version'],
+  rules: {
+    'no-curly-component-invocation': {
+      allow: ['nrg-app-version'],
+    },
+    'no-implicit-this': {
+      allow: ['nrg-app-version'],
+    },
   },
 };
