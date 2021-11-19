@@ -87,7 +87,7 @@
           </subMenu.source>
           <subMenu.menu>
             {{#each this.crews as |crew|}}
-              <menu.item @onSelect={{(fn this.onItemSelect crew)}}>
+              <menu.item @onSelect={{fn this.onItemSelect crew}}>
                 {{crew}}
               </menu.item>
             {{/each}}
