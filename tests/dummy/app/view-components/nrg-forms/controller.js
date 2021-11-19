@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import validationState, { validator } from 'ember-nrg-ui/validation';
+import validationState, { validator } from 'ember-nrg-ui/decorators/validation';
 import moment from 'moment';
 
 const Validators = {
