@@ -42,7 +42,7 @@ export default class LightboxService extends Service {
 
   @action
   remove(thumbnailId) {
-    const items = this.items.rejectBy('thumbnailId', thumbnailId);
+    const items = A(this.items.rejectBy('thumbnailId', thumbnailId));
     this.items = items;
   }
 
