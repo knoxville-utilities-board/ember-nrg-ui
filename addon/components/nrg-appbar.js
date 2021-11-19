@@ -24,10 +24,6 @@ export default class NrgAppbarComponent extends Component {
     return null;
   }
 
-  get pageTitle() {
-    return this.args.pageTitle ?? this.application.pageTitle;
-  }
-
   @action
   onToggleSidebar() {
     this.args.onToggleSidebar?.();
