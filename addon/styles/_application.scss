@@ -184,3 +184,15 @@
 .is-visually-hidden.is-visually-hidden.is-visually-hidden {
   display: none;
 }
+
+.sidebar-menu .item {
+  .default-external-icon {
+    display: none;
+  }
+
+  &:hover {
+    .default-external-icon {
+      display: block;
+    }
+  }
+}
