@@ -65,48 +65,48 @@
 
     <hash.popup>
       <NrgFormContainer as |form|>
-        <form.field @label="Text Field" @required={{required}} as |field|>
-          <field.text-field @class="left icon action" @disabled={{disabled}} as |view|>
+        <form.field @label="Text Field" @required={{this.required}} as |field|>
+          <field.text-field @class="left icon action" @disabled={{this.disabled}} as |view|>
             <NrgIcon @icon="settings" />
             <view.input />
             <NrgButton @class="primary" @text="Action" />
           </field.text-field>
         </form.field>
         <br>
-        <form.field @label="Datetime (Button)" @required={{required}} as |field|>
-          <field.datetime @disabled={{disabled}}>
+        <form.field @label="Datetime (Button)" @required={{this.required}} as |field|>
+          <field.datetime @disabled={{this.disabled}}>
             <NrgButton @class="green" @text="Open Datepicker" />
           </field.datetime>
         </form.field>
         <br>
-        <form.field @label="Dropdown" @required={{required}} as |field|>
-          <field.dropdown @options={{optionList}} @disabled={{disabled}} />
+        <form.field @label="Dropdown" @required={{this.required}} as |field|>
+          <field.dropdown @options={{this.optionList}} @disabled={{this.disabled}} />
         </form.field>
         <br>
         <div class="grouped fields">
-          <form.field @inline={{true}} @required={{required}} as |field|>
-            <field.checkbox @label="Checkbox" @model={{this}} @valuePath="checkbox1" @disabled={{disabled}} />
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.checkbox @label="Checkbox" @model={{this}} @valuePath="checkbox1" @disabled={{this.disabled}} />
           </form.field>
-          <form.field @inline={{true}} @required={{required}} as |field|>
-            <field.checkbox @type="slider" @label="Slider" @checked={{true}} @disabled={{disabled}} />
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.checkbox @type="slider" @label="Slider" @checked={{true}} @disabled={{this.disabled}} />
           </form.field>
-          <form.field @inline={{true}} @required={{required}} as |field|>
-            <field.checkbox @type="toggle" @label="Toggle" @disabled={{disabled}} />
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.checkbox @type="toggle" @label="Toggle" @disabled={{this.disabled}} />
           </form.field>
         </div>
         <br>
         <div class="grouped fields">
-          <form.field @required={{required}} as |field|>
-            <field.radio @label="Option 1" @disabled={{disabled}} @value="1" @selectedValue={{selectedValue}} />
+          <form.field @required={{this.required}} as |field|>
+            <field.radio @label="Option 1" @disabled={{this.disabled}} @value="1" @selectedValue={{this.selectedValue}} />
           </form.field>
-          <form.field @required={{required}} as |field|>
-            <field.radio @label="Option 2" @disabled={{disabled}} @value="2" @selectedValue={{selectedValue}} />
+          <form.field @required={{this.required}} as |field|>
+            <field.radio @label="Option 2" @disabled={{this.disabled}} @value="2" @selectedValue={{this.selectedValue}} />
           </form.field>
-          <form.field @required={{required}} as |field|>
-            <field.radio @label="Option 3" @disabled={{disabled}} @value="3" @selectedValue={{selectedValue}} />
+          <form.field @required={{this.required}} as |field|>
+            <field.radio @label="Option 3" @disabled={{this.disabled}} @value="3" @selectedValue={{this.selectedValue}} />
           </form.field>
-          <form.field @required={{required}} as |field|>
-            <field.radio @label="Option 4" @disabled={{disabled}} @value="4" @selectedValue={{selectedValue}} />
+          <form.field @required={{this.required}} as |field|>
+            <field.radio @label="Option 4" @disabled={{this.disabled}} @value="4" @selectedValue={{this.selectedValue}} />
           </form.field>
         </div>
         <form.submit-button />

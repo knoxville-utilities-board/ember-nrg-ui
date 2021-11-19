@@ -9,14 +9,14 @@
 <NrgCodeBlock @label="Querying" @codeBlockName="querying-search.hbs">
   <p>
     Searching for
-    <strong>{{or queryString "Nothing"}}</strong>
+    <strong>{{or this.queryString "Nothing"}}</strong>
     <br />
     Selected
-    <strong>{{or selectedResult.header "Nothing"}}</strong>
+    <strong>{{or this.selectedResult.header "Nothing"}}</strong>
   </p>
   <!-- BEGIN-SNIPPET querying-search -->
   <NrgSearch
-    @query={{query}}
+    @query={{this.query}}
     @model={{this}}
     @valuePath="selectedResult"
   />
