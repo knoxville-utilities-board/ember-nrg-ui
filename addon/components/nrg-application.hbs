@@ -5,7 +5,9 @@
     {{if this.computerScreenSidebarActive "large-screen-sidebar-active"}}"
   {{on-resize this.setMainContentStyle}}
 >
-  <NrgAppbar @title={{this.title}} @onToggleSidebar={{this.toggleSidebar}} />
+  <NrgAppbar @onToggleSidebar={{this.toggleSidebar}}>
+    {{yield to="appbar"}}
+  </NrgAppbar>
   <div class="pushable">
     <NrgSidebar @onSidebarItemClick={{this.clickedLink}}>
       <:default as |sidebar|>
