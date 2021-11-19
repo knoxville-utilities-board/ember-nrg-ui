@@ -1,31 +1,42 @@
 import { A } from '@ember/array';
-import { filterBy, notEmpty, readOnly, sort } from '@ember/object/computed';
 import Service from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
-export default Service.extend({
-  items: A(),
+export default class Modal extends Service {
+  @tracked items = A();
 
-  renderIndex: 0,
+  @tracked renderIndex = 0;
 
-  renderedModals: filterBy('items', 'renderInPlace', false),
+  get openModals() {
+    return A(
+      this.items
+        ?.filter((item) => !item.renderInPlace && item.isOpen)
+        ?.sort((a, b) =>
+          a.priority == b.priority
+            ? a.renderIndex - b.renderIndex
+            : a.priority - b.priority
+        )
+    );
+  }
 
-  _openModals: filterBy('renderedModals', 'isOpen', true),
+  get activeModal() {
+    return this.openModals?.lastObject;
+  }
 
-  modalSort: Object.freeze(['priority:asc', 'renderIndex:asc']),
+  get hasOpenModals() {
+    return this.openModals?.length;
+  }
 
-  openModals: sort('_openModals', 'modalSort'),
-
-  activeModal: readOnly('openModals.lastObject'),
-
-  hasOpenModals: notEmpty('openModals'),
-
+  @action
   add(item) {
     this.items.pushObject(item);
     item.set('renderIndex', this.renderIndex);
-    this.incrementProperty('renderIndex');
-  },
+    this.renderIndex++;
+  }
 
+  @action
   remove(item) {
     this.items.removeObject(item);
-  },
-});
+  }
+}
