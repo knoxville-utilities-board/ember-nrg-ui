@@ -1,27 +1,26 @@
-import ObjectProxy from '@ember/object/proxy';
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
+import Service from '@ember/service';
 import { render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
-module('Integration | Component | nrg-home-cards', function(hooks) {
+class ApplicationServiceStub extends Service {
+  environmentConfig = {};
+  user = {
+    hasRole(role) {
+      return role === 'users';
+    },
+  };
+}
+
+module('Integration | Component | nrg-home-cards', function (hooks) {
   setupRenderingTest(hooks);
-  hooks.beforeEach(function() {
-    const currentUser = ObjectProxy.create({
-      content: {
-        hasRole(role) {
-          return role === 'users';
-        },
-      },
-    });
-    this.owner.register('user:current', currentUser, {
-      instantiate: false,
-      singleton: true,
-    });
-    this.owner.inject('service', 'currentUser', 'user:current');
+
+  hooks.beforeEach(function () {
+    this.owner.register('service:application', ApplicationServiceStub);
   });
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await render(hbs`
       <NrgHomeCards @actionCard={{true}} as |view|>
         <view.home-card @label="Item 1" @icon="settings" />
@@ -35,7 +34,7 @@ module('Integration | Component | nrg-home-cards', function(hooks) {
     assert.ok(this.element.textContent.trim().includes('Item 3'));
   });
 
-  test('access restricted cards are hidden', async function(assert) {
+  test('access restricted cards are hidden', async function (assert) {
     await render(hbs`
       <NrgHomeCards as |view|>
         <view.home-card @label="I am visible" @role="users" @icon="settings" />
@@ -43,7 +42,13 @@ module('Integration | Component | nrg-home-cards', function(hooks) {
       </NrgHomeCards>
     `);
 
-    assert.ok(this.element.textContent.trim().includes('I am visible'), 'Visible card is shown');
-    assert.notOk(this.element.textContent.trim().includes('I am invisible'), 'Hidden card is hidden');
+    assert.ok(
+      this.element.textContent.trim().includes('I am visible'),
+      'Visible card is shown'
+    );
+    assert.notOk(
+      this.element.textContent.trim().includes('I am invisible'),
+      'Hidden card is hidden'
+    );
   });
 });
