@@ -7,7 +7,7 @@
     {{if this.isOpen "active visible"}}
     {{if @multiple "multiple"}}
     {{@class}}"
-  tabindex={{this.tabindex}}
+  tabindex={{unless @search "0"}}
   {{on "click" this.onClick}}
   {{on-click-outside this.onBlur}}
   {{did-insert this.setWrapperElement}}

@@ -41,10 +41,6 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     return this.args.options ?? [];
   }
 
-  get tabindex() {
-    return this.args.search ? null : '0';
-  }
-
   get defaultText() {
     return this.args.defaultText ?? baseDefaultText;
   }
