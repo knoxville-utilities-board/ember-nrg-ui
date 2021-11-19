@@ -41,4 +41,5 @@ Router.map(function () {
   this.route('acceptance', function () {
     this.route('child');
   });
+  this.route('validation-test');
 });

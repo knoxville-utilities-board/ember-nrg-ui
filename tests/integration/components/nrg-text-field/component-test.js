@@ -1,14 +1,12 @@
-import { find, render } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
-import setupValidations from '../../../helpers/setup-validations';
 
-module('Integration | Component | nrg-text-field', function(hooks) {
+module('Integration | Component | nrg-text-field', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('use like a regular text field with bound value', async function(assert) {
-    setupValidations(this);
+  test('use like a regular text field with bound value', async function (assert) {
     this.set('value', 'bob');
 
     await render(hbs`<NrgTextField @value={{value}} />`);

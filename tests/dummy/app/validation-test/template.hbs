@@ -1,0 +1,49 @@
+<NrgFormContainer as |form|>
+  <form.field @label="Text Field" as |field|>
+    <field.text-field @model={{this}} @valuePath="textField" />
+  </form.field>
+
+  <form.field @label="Text Area" as |field|>
+    <field.text-area @model={{this}} @valuePath="textArea" />
+  </form.field>
+
+  <form.field @label="Datetime" as |field|>
+    <field.datetime
+      @model={{this}}
+      @valuePath="dateTime"
+      @initializeDate={{false}}
+    />
+  </form.field>
+
+  <form.field @label="Dropdown" as |field|>
+    <field.dropdown
+      @options={{optionList}}
+      @model={{this}}
+      @valuePath="dropdown"
+    />
+  </form.field>
+
+  <form.field as |field|>
+    <field.checkbox @label="Checkbox" @model={{this}} @valuePath="checkbox" />
+  </form.field>
+
+  <form.field as |field|>
+    <field.radio
+      @label="Radio 1"
+      @value="1"
+      @model={{this}}
+      @valuePath="radio"
+    />
+  </form.field>
+
+  <form.field as |field|>
+    <field.radio
+      @label="Radio 2"
+      @value="2"
+      @model={{this}}
+      @valuePath="radio"
+    />
+  </form.field>
+
+  <form.submit-button />
+</NrgFormContainer>
