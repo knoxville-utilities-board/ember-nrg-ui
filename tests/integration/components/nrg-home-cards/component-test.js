@@ -16,8 +16,11 @@ class ApplicationServiceStub extends Service {
 module('Integration | Component | nrg-home-cards', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
+  hooks.beforeEach(function () {
     this.owner.register('service:application', ApplicationServiceStub);
+  });
+
+  test('it renders', async function (assert) {
     await render(hbs`
       <NrgHomeCards @actionCard={{true}} as |view|>
         <view.home-card @label="Item 1" @icon="settings" />
@@ -32,7 +35,6 @@ module('Integration | Component | nrg-home-cards', function (hooks) {
   });
 
   test('access restricted cards are hidden', async function (assert) {
-    this.owner.register('service:application', ApplicationServiceStub);
     await render(hbs`
       <NrgHomeCards as |view|>
         <view.home-card @label="I am visible" @role="users" @icon="settings" />

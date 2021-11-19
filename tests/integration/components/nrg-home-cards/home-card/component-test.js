@@ -16,14 +16,16 @@ class ApplicationServiceStub extends Service {
 module('Integration | Component | nrg-home-cards/home-card', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('hidden if user does not have role', async function (assert) {
+  hooks.beforeEach(function () {
     this.owner.register('service:application', ApplicationServiceStub);
+  });
+
+  test('hidden if user does not have role', async function (assert) {
     await render(hbs`<NrgHomeCards::HomeCard @role="administrators" />`);
     assert.dom('.home-card').hasClass('is-visually-hidden');
   });
 
   test('show if user has role', async function (assert) {
-    this.owner.register('service:application', ApplicationServiceStub);
     await render(hbs`<NrgHomeCards::HomeCard @role="users" />`);
     assert.dom('.home-card').hasNoClass('is-visually-hidden');
   });

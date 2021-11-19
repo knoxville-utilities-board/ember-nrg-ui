@@ -41,10 +41,6 @@ export default class ApplicationService extends Service {
   @tracked
   pageTitle = this.environmentConfig?.APP?.name;
 
-  get userRoles() {
-    return this.user?.roles ?? [];
-  }
-
   get environmentConfig() {
     return getOwner(this).resolveRegistration('config:environment');
   }
