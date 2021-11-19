@@ -1,21 +1,21 @@
-<div class="ui raised segments">
+<div class="ui raised segments code-block">
   <div class="ui segment">
     <h5 class="ui header">
       <i class="icon code"></i>
       <div class="content">
-        {{label}}
+        {{@label}}
         {{#if secondaryLabel}}
           <div class="sub header">
-            {{secondaryLabel}}
+            {{@secondaryLabel}}
           </div>
         {{/if}}
       </div>
     </h5>
   </div>
-  {{#if hasBlock}}
+  {{#if (has-block)}}
     <div class="ui segment">
       {{yield}}
     </div>
   {{/if}}
-  <CodeSnippet @name={{codeBlockName}} />
+  <CodeSnippet @name={{@codeBlockName}} />
 </div>

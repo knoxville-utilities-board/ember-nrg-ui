@@ -1,4 +1,3 @@
-import { A } from '@ember/array';
 import { click, findAll, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
