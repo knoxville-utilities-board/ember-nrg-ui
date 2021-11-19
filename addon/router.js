@@ -1,4 +1,4 @@
-export default function(router) {
+export default function (router) {
   router.route('release-notes');
   router.route('not-found', {
     path: '/*path',
