@@ -16,6 +16,9 @@
       {{on "click" this.onClick}}
     >
       {{yield}}
+      {{#if this.url}}
+        <i class="right icon external default-external-icon"></i>
+      {{/if}}
     </a>
   {{/if}}
 {{/if}}
