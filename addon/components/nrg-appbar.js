@@ -17,7 +17,7 @@ export default class NrgAppbarComponent extends Component {
     const productionEnvironments = this.application.environmentConfig?.[
       'ember-nrg-ui'
     ]?.productionEnvironments ?? ['prod'];
-    const environment = this.application.applicationSettings.localEnvironment;
+    const environment = this.application.settings?.localEnvironment;
     if (environment && !productionEnvironments.includes(environment)) {
       return environment.toUpperCase();
     }

@@ -17,11 +17,11 @@ export default class NrgSidebarMenuItem extends Component {
       ? this.args.role
       : [this.args.role];
     const needsAllRoles = this.args.needsAllRoles;
-    const currentUserContent = this.application.currentUser.content;
+    const currentUser = this.application.user;
     if (needsAllRoles) {
-      return roles.every((role) => currentUserContent.hasRole(role));
+      return roles.every((role) => currentUser.hasRole(role));
     }
-    return roles.some((role) => currentUserContent.hasRole(role));
+    return roles.some((role) => currentUser.hasRole(role));
   }
 
   @action
