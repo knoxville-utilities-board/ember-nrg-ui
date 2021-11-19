@@ -1,0 +1,17 @@
+{{page-title "on-resize"}}
+
+<!-- BEGIN-SNIPPET on-resize -->
+<div class="ui segment" {{on-resize onResize}}>
+  <p>
+    <strong>Current Width:</strong>
+    <span>{{width}}</span>
+  </p>
+  <p>
+    <strong>Current Height:</strong>
+    <span>{{height}}</span>
+  </p>
+</div>
+<!-- END-SNIPPET -->
+
+<NrgCodeBlock @label="HBS" @codeBlockName="on-resize.hbs" />
+<NrgCodeBlock @label="JS" @codeBlockName="on-resize.js" />
