@@ -12,7 +12,7 @@
   {{did-insert this.modalElementAdded}}
 >
   {{#if this.hasCloseIcon}}
-    <i class="close icon" role="button" {{on "click" onHide}}></i>
+    <i class="close icon" role="button" aria-label="Close modal" {{on "click" onHide}}></i>
   {{/if}}
   {{#if @modal.headerText}}
     <div class="header">
