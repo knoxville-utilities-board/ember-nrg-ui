@@ -2,8 +2,8 @@
   {{#if @routeName}}
     <LinkTo
       @route={{@routeName}}
-      @class={{if @isParentGroup "parent-route" "item"}}
-      @click={{this.onClick}}
+      class={{if @isParentGroup "parent-route" "item"}}
+      {{on "click" this.onClick}}
     >
       {{yield}}
     </LinkTo>
