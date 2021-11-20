@@ -15,21 +15,21 @@ module('Integration | Component | nrg-datetime', function (hooks) {
 
   test('it renders (datetime)', async function (assert) {
     this.dateValue = testDate;
-    await render(hbs`<NrgDatetime @value={{dateValue}} @type="datetime" />`);
+    await render(hbs`<NrgDatetime @value={{this.dateValue}} @type="datetime" />`);
 
     assert.dom('input').hasValue('March 3, 2013 4:10 AM');
   });
 
   test('it renders (date)', async function (assert) {
     this.dateValue = testDate;
-    await render(hbs`<NrgDatetime @value={{dateValue}} />`);
+    await render(hbs`<NrgDatetime @value={{this.dateValue}} />`);
 
     assert.dom('input').hasValue('March 3, 2013');
   });
 
   test('it renders (time)', async function (assert) {
     this.dateValue = testDate;
-    await render(hbs`<NrgDatetime @value={{dateValue}} @type="time" />`);
+    await render(hbs`<NrgDatetime @value={{this.dateValue}} @type="time" />`);
 
     assert.dom('input').hasValue('4:10 AM');
   });

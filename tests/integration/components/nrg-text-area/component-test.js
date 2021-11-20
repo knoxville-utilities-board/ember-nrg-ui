@@ -9,7 +9,7 @@ module('Integration | Component | nrg-text-area', function (hooks) {
   test('use like a regular text area with bound value', async function (assert) {
     this.set('value', 'bob');
 
-    await render(hbs`<NrgTextArea @value={{value}} />`);
+    await render(hbs`<NrgTextArea @value={{this.value}} />`);
 
     assert.dom('textarea').hasValue('bob');
   });

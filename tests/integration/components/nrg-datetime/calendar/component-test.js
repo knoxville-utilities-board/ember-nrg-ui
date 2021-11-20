@@ -20,7 +20,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       this.set('value', moment(date));
     };
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
@@ -37,7 +37,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       this.set('value', moment(date));
     };
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @maxDate={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @maxDate={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
@@ -54,7 +54,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     };
 
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @minDate={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @minDate={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
@@ -131,7 +131,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       year: 2020,
     });
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     const availableDateCells = findAll('.ui.calendar tbody td.link');
@@ -156,7 +156,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       year: 2020,
     });
     await render(
-      hbs`<NrgDatetime::Calendar @type="date"  @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     const availableDateCells = findAll('.ui.calendar tbody td.link');
@@ -171,7 +171,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       this.set('value', moment(date));
     };
     await render(
-      hbs`<NrgDatetime::Calendar @type="datetime" @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="datetime" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
@@ -189,7 +189,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       this.set('value', moment(date));
     };
     await render(
-      hbs`<NrgDatetime::Calendar @type="time" @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="time" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await click('tbody tr:first-child td:first-child');
@@ -205,7 +205,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       this.set('value', moment(date));
     };
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await click('.chevron.right.icon');
@@ -222,7 +222,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     });
     this.maxDate = this.value.clone();
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @maxDate={{maxDate}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @maxDate={{this.maxDate}} />`
     );
     assert.dom('tbody tr:nth-child(7)').doesNotExist();
   });
@@ -258,7 +258,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     };
 
     await render(
-      hbs`<NrgDatetime::Calendar @type="time" @value={{value}} @isDateDisabled={{isDateDisabled}} />`
+      hbs`<NrgDatetime::Calendar @type="time" @value={{this.value}} @isDateDisabled={{this.isDateDisabled}} />`
     );
 
     await click(findAll('tbody tr td.link')[hour]);

@@ -9,7 +9,7 @@ module('Integration | Component | nrg-text-field', function (hooks) {
   test('use like a regular text field with bound value', async function (assert) {
     this.set('value', 'bob');
 
-    await render(hbs`<NrgTextField @value={{value}} />`);
+    await render(hbs`<NrgTextField @value={{this.value}} />`);
 
     assert.dom('input').hasValue('bob');
   });
