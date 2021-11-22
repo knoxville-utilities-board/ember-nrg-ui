@@ -1,13 +1,14 @@
 <div
-  role="button"
   class="ui category search focus box inlined
     {{if this.fluid "fluid"}}
     {{if this._loading "loading"}}
     {{@class}}"
-  {{on "click" this.onFocus}}
   {{on-click-outside this.onBlur}}
 >
-  <div class="ui icon input">
+  <div class="ui icon input"
+    role="button"
+    {{on "click" this.onFocus}}
+  >
     <NrgTextField
       @class="prompt"
       @disabled={{@disabled}}
