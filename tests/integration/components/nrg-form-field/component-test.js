@@ -1,26 +1,14 @@
-import { module, test } from 'qunit';
+import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-form-field', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('input id works', async function (assert) {
-    await render(hbs`
-      <NrgFormField @label="label">
-        <Input @id="testId" type='text' />
-      </NrgFormField>
-    `);
-
-    const forProp = find('.field label').htmlFor;
-    assert.ok(forProp);
-    assert.equal(forProp, 'testId');
-  });
-
   test('proper errors display', async function (assert) {
     await render(hbs`
-      <NrgFormContainer @didValidate={{true}} as |form|>
+      <NrgFormContainer as |form|>
         <form.field @errorMessage="Test Message" />
         <form.submit-button />
       </NrgFormContainer>
@@ -32,7 +20,7 @@ module('Integration | Component | nrg-form-field', function (hooks) {
 
   test('error class shows', async function (assert) {
     await render(hbs`
-      <NrgFormContainer @didValidate={{true}} as |form|>
+      <NrgFormContainer as |form|>
         <form.field @errorMessage="Test Message" />
         <form.submit-button />
       </NrgFormContainer>

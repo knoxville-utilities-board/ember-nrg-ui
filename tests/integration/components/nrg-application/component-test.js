@@ -3,11 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | nrg-application', function(hooks) {
+module('Integration | Component | nrg-application', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('title rendered', async function(assert) {
-    await render(hbs`<NrgApplication @title="Application Title" />`);
+  test('title rendered', async function (assert) {
+    await render(hbs`{{page-title "Application Title"}}<NrgApplication />`);
     assert.ok(this.element.textContent.trim().match(/Application Title/));
   });
 });
