@@ -3,10 +3,10 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | nrg-button', function(hooks) {
+module('Integration | Component | nrg-button', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await render(hbs`<NrgButton @text="Inline text" />`);
 
     assert.dom(this.element).hasText('Inline text');
@@ -20,8 +20,9 @@ module('Integration | Component | nrg-button', function(hooks) {
     assert.dom(this.element).hasText('template block text');
   });
 
-  test('fires action on click', async function(assert) {
-    this.set('testAction', function() {
+  test('fires action on click', async function (assert) {
+    assert.expect(1);
+    this.set('testAction', function () {
       assert.ok(true);
     });
 

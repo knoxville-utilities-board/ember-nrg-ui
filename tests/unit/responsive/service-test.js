@@ -6,6 +6,6 @@ module('Unit | Service | responsive', function(hooks) {
 
   test('is mobile device evaulates correctly', function(assert) {
     const service = this.owner.lookup('service:responsive');
-    assert.equal(service.get('isMobileDevice'), false);
+    assert.false(service.get('isMobileDevice'));
   });
 });

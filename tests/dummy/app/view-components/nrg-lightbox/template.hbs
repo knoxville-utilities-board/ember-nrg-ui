@@ -2,7 +2,7 @@
 
 <NrgCodeBlock @label="Lightbox Thumbnails" @codeBlockName="lightbox-thumbnails.hbs">
   <!-- BEGIN-SNIPPET lightbox-thumbnails -->
-  {{#each model as |photo|}}
+  {{#each photos as |photo|}}
     <NrgLightboxThumbnail @photo={{photo}} />
   {{/each}}
   <!-- END-SNIPPET  -->
@@ -10,7 +10,7 @@
 
 <NrgCodeBlock @label="Lightbox Thumbnails with Custom Details" @codeBlockName="lightbox-thumbnails-block.hbs">
   <!-- BEGIN-SNIPPET lightbox-thumbnails-block -->
-  {{#each model as |photo|}}
+  {{#each photos as |photo|}}
     <NrgLightboxThumbnail @photo={{photo}}>
       <strong>{{photo.detail}}</strong>
       <span>{{counter}}</span>

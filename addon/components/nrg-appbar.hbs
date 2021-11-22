@@ -3,6 +3,7 @@
     <div class="left menu">
       {{#if @showBackArrow}}
         <a
+          href=""
           role="button"
           class="ui item icon sidebar-toggle-button"
           {{on "click" this.onBackArrowClick}}
@@ -11,6 +12,7 @@
         </a>
       {{else}}
         <a
+          href=""
           role="button"
           class="ui item icon sidebar-toggle-button"
           {{on "click" this.onToggleSidebar}}
