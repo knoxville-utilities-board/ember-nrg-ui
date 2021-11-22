@@ -3,7 +3,7 @@
 
 <NrgSideBySide>
   <:primary>
-    <NrgList @selectionType="single" @pageMeta={{this.pageMeta}} @items={{this.mappedItems}} @onItemSelect={{action this.onSelect}} />
+    <NrgList @selectionType="single" @pageMeta={{this.pageMeta}} @items={{this.mappedItems}} @onItemSelect={{this.onSelect}} />
   </:primary>
   <:secondary>
     {{outlet}}

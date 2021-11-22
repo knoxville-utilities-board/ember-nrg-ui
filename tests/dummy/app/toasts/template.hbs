@@ -2,18 +2,18 @@
 
 <div class="ui segment">
   <NrgCodeBlock @label="Default Toasts" @codeBlockName="default-toasts.js">
-    <NrgButton @onClick={{action this.openDefaultToasts}}>Open</NrgButton>
+    <NrgButton @onClick={{this.openDefaultToasts}}>Open</NrgButton>
   </NrgCodeBlock>
   <NrgCodeBlock @label="Toasts without Progress" @codeBlockName="no-progress-toasts.js">
-    <NrgButton @onClick={{action this.openToastsWithoutProgress}}>Open</NrgButton>
+    <NrgButton @onClick={{this.openToastsWithoutProgress}}>Open</NrgButton>
   </NrgCodeBlock>
   <NrgCodeBlock @label="Toasts with Progress" @codeBlockName="progress-toasts.js">
-    <NrgButton @onClick={{action this.openProgressToast}}>Open</NrgButton>
+    <NrgButton @onClick={{this.openProgressToast}}>Open</NrgButton>
   </NrgCodeBlock>
   <NrgCodeBlock @label="Sticky Toasts" @codeBlockName="sticky-toasts.js">
-    <NrgButton @onClick={{action this.openStickyToast}}>Open</NrgButton>
+    <NrgButton @onClick={{this.openStickyToast}}>Open</NrgButton>
   </NrgCodeBlock>
   <NrgCodeBlock @label="Long Paragraph Toast" @codeBlockName="long-toasts.js">
-    <NrgButton @onClick={{action this.openToastWithLongMessage}}>Open</NrgButton>
+    <NrgButton @onClick={{this.openToastWithLongMessage}}>Open</NrgButton>
   </NrgCodeBlock>
 </div>
