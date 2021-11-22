@@ -1,7 +1,7 @@
 {{page-title "nrg-dropdown"}}
 
 <NrgCodeBlock @label="Simple Dropdowns" @codeBlockName="nrg-dropdown.hbs">
-  <!-- BEGIN-SNIPPET nrg-dropdown -->
+  {{!-- BEGIN-SNIPPET nrg-dropdown --}}
   <NrgFormContainer as |form|>
     <form.field @label="Dropdown (Linked Value)" as |field|>
       <field.dropdown @options={{this.optionList}} @model={{this}} @valuePath="selectedOption" />
@@ -53,11 +53,11 @@
       <field.dropdown @options={{this.optionList}} @dropdownAction="hide" />
     </form.field>
   </NrgFormContainer>
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Freeform Dropdowns" @codeBlockName="nrg-dropdown-freeform.hbs">
-  <!-- BEGIN-SNIPPET nrg-dropdown-freeform -->
+  {{!-- BEGIN-SNIPPET nrg-dropdown-freeform --}}
   <div class="ui center aligned segment">
     <NrgDropdown @class="icon button primary float right" @onSelect={{this.onItemSelect}} @freeform={{true}} as |dropdown|>
       <dropdown.source>
@@ -102,5 +102,5 @@
       </dropdown.menu>
     </NrgDropdown>
   </div>
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>

@@ -1,7 +1,7 @@
 {{page-title "nrg-list"}}
 
 <NrgCodeBlock @label="List (Advanced)" @codeBlockName="nrg-list-advanced.hbs">
-  <!-- BEGIN-SNIPPET nrg-list-advanced -->
+  {{!-- BEGIN-SNIPPET nrg-list-advanced --}}
   <NrgList
     @items={{this.filteredItems}}
     @pageMeta={{this.filteredItems.meta}}
@@ -26,67 +26,67 @@
     </list.items>
     <list.create-button />
   </NrgList>
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="List (Simple)" @codeBlockName="nrg-list-simple.hbs">
-  <!-- BEGIN-SNIPPET nrg-list-simple -->
+  {{!-- BEGIN-SNIPPET nrg-list-simple --}}
   <NrgList @items={{this.mappedItems}} @onItemSelect={{this.onItemSelect}} />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock
   @label="List (Single Select)"
   @codeBlockName="nrg-list-simple.hbs"
 >
-  <!-- BEGIN-SNIPPET nrg-list-simple -->
+  {{!-- BEGIN-SNIPPET nrg-list-simple --}}
   <NrgList
     @selectionType="single"
     @items={{this.mappedItems}}
     @onItemSelect={{this.onItemSelect}}
   />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock
   @label="List (Multiple Select)"
   @codeBlockName="nrg-list-multiple.hbs"
 >
-  <!-- BEGIN-SNIPPET nrg-list-multiple -->
+  {{!-- BEGIN-SNIPPET nrg-list-multiple --}}
   <NrgList
     @selectionType="multiple"
     @items={{this.mappedItems}}
     @onItemSelect={{this.onItemSelect}}
   />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="List (Loading)" @codeBlockName="nrg-list-loading.hbs">
-  <!-- BEGIN-SNIPPET nrg-list-loading -->
+  {{!-- BEGIN-SNIPPET nrg-list-loading --}}
   <NrgList @loading={{true}} />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock
   @label="List (Group Header Labels)"
   @codeBlockName="nrg-list-group-header.hbs"
 >
-  <!-- BEGIN-SNIPPET nrg-list-group-header -->
+  {{!-- BEGIN-SNIPPET nrg-list-group-header --}}
   <NrgList
     @groupHeaderHandler={{this.groupHeaderHandler}}
     @items={{this.mappedItems}}
     @onItemSelect={{this.onItemSelect}}
   />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="List (Paged)" @codeBlockName="nrg-list-paged.hbs">
-  <!-- BEGIN-SNIPPET nrg-list-paged -->
+  {{!-- BEGIN-SNIPPET nrg-list-paged --}}
   <NrgList
     @items={{this.pageItems}}
     @pageMeta={{this.pageItems.meta}}
     @onChangePage={{this.onChangePage}}
     @selectedPageSize={{2}}
   />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>

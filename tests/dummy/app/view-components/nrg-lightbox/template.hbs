@@ -1,20 +1,20 @@
 {{page-title "nrg-lightbox"}}
 
 <NrgCodeBlock @label="Lightbox Thumbnails" @codeBlockName="lightbox-thumbnails.hbs">
-  <!-- BEGIN-SNIPPET lightbox-thumbnails -->
+  {{!-- BEGIN-SNIPPET lightbox-thumbnails --}}
   {{#each this.photos as |photo|}}
     <NrgLightboxThumbnail @photo={{photo}} />
   {{/each}}
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Lightbox Thumbnails with Custom Details" @codeBlockName="lightbox-thumbnails-block.hbs">
-  <!-- BEGIN-SNIPPET lightbox-thumbnails-block -->
+  {{!-- BEGIN-SNIPPET lightbox-thumbnails-block --}}
   {{#each this.photos as |photo|}}
     <NrgLightboxThumbnail @photo={{photo}}>
       <strong>{{photo.detail}}</strong>
       <span>{{this.counter}}</span>
     </NrgLightboxThumbnail>
   {{/each}}
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
