@@ -1,7 +1,7 @@
-import { module, test } from 'qunit';
+import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-datetime', function (hooks) {
   const testDate = new Date(2013, 2, 3, 4, 10);

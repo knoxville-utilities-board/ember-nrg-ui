@@ -1,9 +1,14 @@
-import Controller from '@ember/controller';
 import { A } from '@ember/array';
-import { computed } from '@ember/object';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  items: A([
+export default class SideBySideController extends Controller {
+  @service
+  router;
+
+  @tracked
+  items = A([
     {
       animal: 'rabbit',
       name: 'Alfred',
@@ -74,28 +79,28 @@ export default Controller.extend({
       name: 'Sally',
       gender: 'female',
     },
-  ]),
+  ]);
 
-  mappedItems: computed('items', function() {
-    return this.items.map(item => {
+  get mappedItems() {
+    return this.items.map((item) => {
       return {
         header: item.name,
         meta: item.gender,
         extra: item.animal,
       };
     });
-  }),
+  }
 
-  pageMeta: computed('items', function() {
+  get pageMeta() {
     return {
       start: 0,
-      count: this.get('items.length'),
-      total: this.get('items.length'),
+      count: this.items.length,
+      total: this.items.length,
     };
-  }),
+  }
 
   onSelect(item) {
     const animal = this.items.findBy('name', item.header);
-    this.transitionToRoute('side-by-side.detail', animal);
-  },
-});
+    this.router.transitionTo('side-by-side.detail', animal);
+  }
+}

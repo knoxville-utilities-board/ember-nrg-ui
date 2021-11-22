@@ -1,18 +1,19 @@
-import { click, find, render } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
 
-module('Integration | Component | nrg-modal', function(hooks) {
+module('Integration | Component | nrg-modal', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     const service = this.owner.lookup('service:application');
     service.set('isTesting', false);
   });
 
-  test('secondary button works', async function(assert) {
-    this.onButtonClick = function() {
+  test('secondary button works', async function (assert) {
+    assert.expect(1);
+    this.onButtonClick = function () {
       assert.ok(true);
     };
     await render(hbs`
@@ -22,8 +23,9 @@ module('Integration | Component | nrg-modal', function(hooks) {
     await click('button');
   });
 
-  test('primary button works', async function(assert) {
-    this.onButtonClick = function() {
+  test('primary button works', async function (assert) {
+    assert.expect(1);
+    this.onButtonClick = function () {
       assert.ok(true);
     };
     await render(hbs`
@@ -33,7 +35,7 @@ module('Integration | Component | nrg-modal', function(hooks) {
     await click('button');
   });
 
-  test('modal handles mutliple isOpen changes', async function(assert) {
+  test('modal handles mutliple isOpen changes', async function (assert) {
     this.isOpen = false;
     await render(hbs`
       <NrgModalContainer />
@@ -48,7 +50,7 @@ module('Integration | Component | nrg-modal', function(hooks) {
     assert.dom('.ui.modals h2').doesNotExist();
   });
 
-  test('it renders block text in place', async function(assert) {
+  test('it renders block text in place', async function (assert) {
     await render(hbs`
       <NrgModal @isOpen={{true}} @renderInPlace={{true}}>
         block text
@@ -57,11 +59,11 @@ module('Integration | Component | nrg-modal', function(hooks) {
     assert.dom('*').hasText('block text');
   });
 
-  test('modal supports being destroying instead of using isOpen', async function(assert) {
+  test('modal supports being destroying instead of using isOpen', async function (assert) {
     assert.expect(3);
-    this.onModalClose = function() {
+    this.onModalClose = function () {
       assert.ok(true);
-    }
+    };
     this.hasModal = true;
     await render(hbs`
       <NrgModalContainer />

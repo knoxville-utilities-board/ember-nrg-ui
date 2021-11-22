@@ -1,5 +1,5 @@
 <div class="ui input {{if @fluid @fluid}} {{@class}}" type="text">
-  {{#if hasBlock}}
+  {{#if (has-block)}}
     {{yield
       (hash
         input=(component
