@@ -299,6 +299,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       hour: this.selectedHourIndex,
       minute: this.selectedMinuteIndex,
     });
+    const currentDate = date.clone();
 
     date[operation](dateTransformation);
 
@@ -318,6 +319,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
 
     const userDisabled = this.args.isDateDisabled?.(date, precision);
     if (userDisabled) {
+      this._onSelect(currentDate.toDate());
       return;
     }
 
@@ -496,7 +498,6 @@ export default class NrgDateTimeCalendarComponent extends Component {
         this.isSelectingMinutes = true;
         return;
       } else if (this.isSelectingMinutes) {
-        this.selectDate();
         this.close();
         return;
       }
@@ -505,7 +506,6 @@ export default class NrgDateTimeCalendarComponent extends Component {
       this.isSelectingDays = false;
       this.isSelectingHours = true;
     } else if (this.args.type === 'date') {
-      this.selectDate();
       this.close();
     }
   }

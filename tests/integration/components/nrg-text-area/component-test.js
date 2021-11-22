@@ -1,17 +1,15 @@
-import { module, test } from 'qunit';
+import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import setupValidations from '../../../helpers/setup-validations';
+import { module, test } from 'qunit';
 
-module('Integration | Component | nrg-text-area', function(hooks) {
+module('Integration | Component | nrg-text-area', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('use like a regular text area with bound value', async function(assert) {
-    setupValidations(this);
+  test('use like a regular text area with bound value', async function (assert) {
     this.set('value', 'bob');
 
-    await render(hbs`<NrgTextArea @value={{value}} />`);
+    await render(hbs`<NrgTextArea @value={{this.value}} />`);
 
     assert.dom('textarea').hasValue('bob');
   });
