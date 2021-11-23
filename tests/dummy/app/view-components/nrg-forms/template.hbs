@@ -1,17 +1,21 @@
 {{page-title "nrg-forms"}}
 
 <NrgCodeBlock @label="Forms API" @codeBlockName="form-api.hbs">
-  <!-- BEGIN-SNIPPET form-api -->
+  {{!-- BEGIN-SNIPPET form-api --}}
   <NrgFormContainer as |form|>
-    <form.field @label="Text Field" @required={{required}} as |field|>
+    <form.field @label="Text Field" @required={{this.required}} as |field|>
       <field.text-field
         @class="left icon action"
-        @disabled={{disabled}}
+        @disabled={{this.disabled}}
         as |view|
       >
         <NrgIcon @icon="settings" />
         {{view.input}}
-        <NrgButton @class="primary" @text="Action" @disabled={{disabled}} />
+        <NrgButton
+          @class="primary"
+          @text="Action"
+          @disabled={{this.disabled}}
+        />
       </field.text-field>
     </form.field>
     <br />
@@ -19,72 +23,84 @@
       <div class="field"></div>
       <form.field
         @label="Text Field (turkey)"
-        @required={{required}}
+        @required={{this.required}}
         as |field|
       >
         <field.text-field
           @model={{this}}
           @valuePath="turkey"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @label="Text Field (meal)" @required={{required}} as |field|>
+      <form.field
+        @label="Text Field (meal)"
+        @required={{this.required}}
+        as |field|
+      >
         <field.text-field
           @model={{this}}
           @valuePath="meal"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @label="Text Field (super)" @required={{required}} as |field|>
+      <form.field
+        @label="Text Field (super)"
+        @required={{this.required}}
+        as |field|
+      >
         <field.text-field
           @model={{this}}
           @valuePath="super"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @label="Text Field (deal)" @required={{required}} as |field|>
+      <form.field
+        @label="Text Field (deal)"
+        @required={{this.required}}
+        as |field|
+      >
         <field.text-field
           @model={{this}}
           @valuePath="deal"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
     </div>
     <br />
-    <form.field @label="Text Area" @required={{required}} as |field|>
+    <form.field @label="Text Area" @required={{this.required}} as |field|>
       <field.text-area
         @model={{this}}
         @valuePath="textArea1"
-        @disabled={{disabled}}
+        @disabled={{this.disabled}}
       />
     </form.field>
     <br />
     <div class="two fields">
-      <form.field @label="Text Area" @required={{required}} as |field|>
+      <form.field @label="Text Area" @required={{this.required}} as |field|>
         <field.text-area
           @model={{this}}
           @valuePath="textArea"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @label="Text Area" @required={{required}} as |field|>
-        <field.text-area @disabled={{disabled}} />
+      <form.field @label="Text Area" @required={{this.required}} as |field|>
+        <field.text-area @disabled={{this.disabled}} />
       </form.field>
     </div>
     <br />
-    <form.field @label="Datetime" @required={{required}} as |field|>
+    <form.field @label="Datetime" @required={{this.required}} as |field|>
       <field.datetime
         @type="datetime"
-        @maxDate={{maxDate}}
-        @disabled={{disabled}}
+        @maxDate={{this.maxDate}}
+        @disabled={{this.disabled}}
         @model={{this}}
         @valuePath="dateTime1"
       />
     </form.field>
     <br />
-    <form.field @label="Date (Button)" @required={{required}} as |field|>
+    <form.field @label="Date (Button)" @required={{this.required}} as |field|>
       <field.datetime
-        @disabled={{disabled}}
+        @disabled={{this.disabled}}
         @model={{this}}
         @valuePath="dateTime2"
       >
@@ -92,45 +108,49 @@
       </field.datetime>
     </form.field>
     <br />
-    <form.field @label="Dropdown" @required={{required}} as |field|>
+    <form.field @label="Dropdown" @required={{this.required}} as |field|>
       <field.dropdown
-        @options={{optionList}}
+        @options={{this.optionList}}
         @model={{this}}
         @valuePath="selectedOption"
-        @disabled={{disabled}}
+        @disabled={{this.disabled}}
       />
     </form.field>
     <br />
     <div class="grouped fields">
-      <form.field @inline={{true}} @required={{required}} as |field|>
+      <form.field @inline={{true}} @required={{this.required}} as |field|>
         <field.checkbox
           @label="Checkbox"
           @model={{this}}
           @valuePath="checkbox1"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @inline={{true}} @required={{required}} as |field|>
+      <form.field @inline={{true}} @required={{this.required}} as |field|>
         <field.checkbox
           @type="slider"
           @label="Slider"
           @model={{this}}
           @valuePath="checkbox2"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @inline={{true}} @required={{required}} as |field|>
-        <field.checkbox @type="toggle" @label="Toggle" @disabled={{disabled}} />
+      <form.field @inline={{true}} @required={{this.required}} as |field|>
+        <field.checkbox
+          @type="toggle"
+          @label="Toggle"
+          @disabled={{this.disabled}}
+        />
       </form.field>
     </div>
     <br />
-    <form.field @label="Search" @required={{required}} as |field|>
+    <form.field @label="Search" @required={{this.required}} as |field|>
       <field.search
         @query={{this.searchQuery}}
         @model={{this}}
         @valuePath="searchResult"
         @displayLabel="label"
-        @disabled={{disabled}}
+        @disabled={{this.disabled}}
         as |view|
       >
         {{view.label}}
@@ -138,62 +158,62 @@
     </form.field>
     <br />
     <div class="inline fields">
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.checkbox
           @label="Inline Checkbox"
           @model={{this}}
           @valuePath="checkbox1"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.checkbox
           @type="slider"
           @label="Inline Slider"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.checkbox
           @type="toggle"
           @label="Inline Toggle"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
         />
       </form.field>
     </div>
     <br />
     <div class="grouped fields">
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 1"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="1"
           @model={{this}}
           @valuePath="radio"
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 2"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="2"
           @model={{this}}
           @valuePath="radio"
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 3"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="3"
           @model={{this}}
           @valuePath="radio"
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 4"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="4"
           @model={{this}}
           @valuePath="radio"
@@ -202,37 +222,37 @@
     </div>
     <br />
     <div class="inline fields">
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 1"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="1"
           @model={{this}}
           @valuePath="radio"
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 2"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="2"
           @model={{this}}
           @valuePath="radio"
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 3"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="3"
           @model={{this}}
           @valuePath="radio"
         />
       </form.field>
-      <form.field @required={{required}} as |field|>
+      <form.field @required={{this.required}} as |field|>
         <field.radio
           @label="Option 4"
-          @disabled={{disabled}}
+          @disabled={{this.disabled}}
           @value="4"
           @model={{this}}
           @valuePath="radio"
@@ -242,11 +262,17 @@
 
     <form.submit-button />
     <NrgButton @class="basic black" @text="Cancel" />
-    <form.form-action @text="Toggle Required" @onClick={{requiredToggle}} />
-    <form.form-action @text="Toggle Disabled" @onClick={{disabledToggle}} />
+    <form.form-action
+      @text="Toggle Required"
+      @onClick={{this.requiredToggle}}
+    />
+    <form.form-action
+      @text="Toggle Disabled"
+      @onClick={{this.disabledToggle}}
+    />
     <form.form-link @route="index">
       Index
     </form.form-link>
   </NrgFormContainer>
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>

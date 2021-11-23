@@ -26,7 +26,7 @@ export default class NrgSidebarMenuItem extends Component {
 
   @action
   onClick(evt) {
-    if (!this.args.url) {
+    if (!this.args.url && !this.args.routeName) {
       evt.preventDefault();
       evt.stopPropagation();
     }

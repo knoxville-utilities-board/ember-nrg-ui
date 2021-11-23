@@ -1,8 +1,8 @@
 <div
   class="ui loader
     {{if (eq @loading false) "disabled" "active"}}
-    {{unless (eq @centered false) "centered"}}
-    {{unless (eq @inline false) "inline"}}
+    {{if this.centered "centered"}}
+    {{if this.inline "inline"}}
     {{if @text "text"}}
     {{if @inverted "inverted"}}
     {{if @indeterminate "indeterminate"}}

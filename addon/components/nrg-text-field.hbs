@@ -4,6 +4,7 @@
       (hash
         input=(component
           "nrg-text-field/trim-input"
+          focusId=@focusId
           type=this.type
           min=@min
           max=@max
@@ -23,6 +24,7 @@
     }}
   {{else}}
     <NrgTextField::TrimInput
+      @focusId={{@focusId}}
       @type={{this.type}}
       @min={{@min}}
       @max={{@max}}

@@ -1,5 +1,6 @@
 <div class="ui checkbox radio {{if @disabled "disabled"}} {{@class}}">
   <input
+    id={{@focusId}}
     type="radio"
     tabindex="0"
     disabled={{@disabled}}
@@ -8,7 +9,7 @@
     checked={{this.checked}}
     {{on "click" this.selectOption}}
   />
-  <label {{on "click" this.selectOption}}>
+  <label for={{@focusId}} {{on "click" this.selectOption}}>
     {{@label}}
   </label>
 </div>

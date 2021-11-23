@@ -1,54 +1,54 @@
 <div class="ui segment">
-<!-- BEGIN-SNIPPET context-item -->
-  <NrgContextItem @onClick={{contextCounter}}>
+{{!-- BEGIN-SNIPPET context-item --}}
+  <NrgContextItem @onClick={{this.contextCounter}}>
     Context Item
   </NrgContextItem>
-  <NrgContextItem @onClick={{contextCounter}}>
+  <NrgContextItem @onClick={{this.contextCounter}}>
     <i class="icon settings"></i>
     Context Item With Icon
   </NrgContextItem>
-  <NrgContextItem @onClick={{contextCounter}} @disabled={{true}}>
+  <NrgContextItem @onClick={{this.contextCounter}} @disabled={{true}}>
     Disabled Context Item
   </NrgContextItem>
-  <NrgContextItem @onClick={{contextChecked}}>
-    Toggle ({{if checked "Enabled" "Disabled"}})
+  <NrgContextItem @onClick={{this.contextChecked}}>
+    Toggle ({{if this.checked "Enabled" "Disabled"}})
   </NrgContextItem>
-  <NrgContextItem @onClick={{contextCheckedIcon}}>
+  <NrgContextItem @onClick={{this.contextCheckedIcon}}>
     <div class="ui checkbox read-only">
-      <input class="hidden" type="checkbox" checked={{checkedIcon}} />
-      <label>
+      <input id="cbEnabled" class="hidden" type="checkbox" checked={{this.checkedIcon}} />
+      <label for="cbEnabled">
         <i class="icon settings"></i>
         Context Item w/ Checkbox and Icon
       </label>
     </div>
   </NrgContextItem>
-  <NrgContextItem @onClick={{contextCheckedDisabled}} @disabled={{true}}>
+  <NrgContextItem @onClick={{this.contextCheckedDisabled}} @disabled={{true}}>
     <div class="ui checkbox read-only">
-      <input class="hidden" type="checkbox" checked={{checkedDisabled}} disabled={{true}}/>
-      <label>
+      <input id="cbDisabled" class="hidden" type="checkbox" checked={{this.checkedDisabled}} disabled={{true}}/>
+      <label for="cbDisabled">
         <i class="icon settings"></i>
         Disabled Context Item w/ Checkbox
       </label>
     </div>
   </NrgContextItem>
-<!-- END-SNIPPET context-item -->
+{{!-- END-SNIPPET context-item --}}
 
   <div class="ui form">
     <div class="ui field">
       <label>Items Clicked</label>
-      <div>{{counter}} time(s)</div>
+      <div>{{this.counter}} time(s)</div>
     </div>
     <div class="ui field">
       <label>Item Checked</label>
-      <div>{{checked}}</div>
+      <div>{{this.checked}}</div>
     </div>
     <div class="ui field">
       <label>Icon Item Checked</label>
-      <div>{{checkedIcon}}</div>
+      <div>{{this.checkedIcon}}</div>
     </div>
     <div class="ui field">
       <label>Disabled Item Checked</label>
-      <div>{{checkedDisabled}}</div>
+      <div>{{this.checkedDisabled}}</div>
     </div>
   </div>
 </div>
