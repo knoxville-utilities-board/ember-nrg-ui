@@ -1,9 +1,9 @@
 <div class="right item">
   <NrgDropdown
     @class="floating {{@class}}"
-    @menuDirection={{menuDirection}}
-    @direction={{direction}}
-    @defaultText={{defaultText}}
+    @menuDirection={{this.menuDirection}}
+    @direction={{this.direction}}
+    @defaultText={{this.defaultText}}
     @options={{@filters}}
     @onChange={{this.onFilterChange}}
   />

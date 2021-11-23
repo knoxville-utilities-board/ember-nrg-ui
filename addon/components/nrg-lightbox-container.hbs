@@ -39,6 +39,7 @@
       }}"
   >
     <button
+      type="button"
       class="ui primary icon button"
       title="Previous Image"
       disabled={{this.lightboxService.previousDisabled}}
@@ -47,6 +48,7 @@
       <i class="chevron left icon"></i>
     </button>
     <button
+      type="button"
       class="ui primary icon button"
       title="Rotate Left"
       {{on "click" this.rotateLeft}}
@@ -54,16 +56,18 @@
       <i class="undo icon"></i>
     </button>
     <button
+      type="button"
       class="ui primary icon button"
       title="Detail Location - {{if this.bottomDetails "Right" "Bottom"}}"
       {{on "click" this.toggleDetailLocation}}
     >
       <i
-        class="{{if bottomDetails "vertically flipped" "clockwise rotated"}}
+        class="{{if this.bottomDetails "vertically flipped" "clockwise rotated"}}
           columns icon"
       ></i>
     </button>
     <button
+      type="button"
       class="ui primary icon button"
       title="Rotate Right"
       {{on "click" this.rotateRight}}
@@ -71,6 +75,7 @@
       <i class="repeat icon"></i>
     </button>
     <button
+      type="button"
       class="ui primary icon button"
       title="Next Image"
       disabled={{this.lightboxService.nextDisabled}}

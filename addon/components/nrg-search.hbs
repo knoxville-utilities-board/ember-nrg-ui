@@ -3,11 +3,14 @@
     {{if this.fluid "fluid"}}
     {{if this._loading "loading"}}
     {{@class}}"
-  {{on "click" this.onFocus}}
   {{on-click-outside this.onBlur}}
 >
-  <div class="ui icon input">
+  <div class="ui icon input"
+    role="button"
+    {{on "click" this.onFocus}}
+  >
     <NrgTextField
+      @focusId={{@focusId}}
       @class="prompt"
       @disabled={{@disabled}}
       @placeholder={{this.placeholder}}

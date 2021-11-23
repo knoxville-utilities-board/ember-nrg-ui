@@ -7,7 +7,7 @@
     {{if this.isOpen "active visible"}}
     {{if @multiple "multiple"}}
     {{@class}}"
-  tabindex={{this.tabindex}}
+  tabindex={{unless @search "0"}}
   {{on "click" this.onClick}}
   {{on-click-outside this.onBlur}}
   {{did-insert this.setWrapperElement}}
@@ -54,7 +54,7 @@
     {{/if}}
     {{#if @multiple}}
       {{#each this.value as |selectedOption|}}
-        <a
+        <div
           data-dropdown-multi-selection="true"
           class="ui label transition visible"
         >
@@ -71,11 +71,12 @@
             role="button"
             {{on "click" (fn this.unselectOption selectedOption)}}
           ></i>
-        </a>
+        </div>
       {{/each}}
     {{/if}}
     {{#if @search}}
       <input
+        id={{@focusId}}
         tabindex="0"
         class="search"
         autocomplete="off"

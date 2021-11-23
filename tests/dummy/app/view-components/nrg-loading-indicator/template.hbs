@@ -1,25 +1,25 @@
 {{page-title "nrg-loading-indicator"}}
 
 <NrgCodeBlock @label="Centered Loading Indicator" @codeBlockName="loading-indicator-center.hbs">
-  <!-- BEGIN-SNIPPET loading-indicator-center -->
+  {{!-- BEGIN-SNIPPET loading-indicator-center --}}
   <NrgLoadingIndicator />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Uncentered Loading Indicator" @codeBlockName="loading-indicator-uncenter.hbs">
-  <!-- BEGIN-SNIPPET loading-indicator-uncenter -->
+  {{!-- BEGIN-SNIPPET loading-indicator-uncenter --}}
   <NrgLoadingIndicator @centered={{false}} />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Indeterminate Loading Indicator" @codeBlockName="loading-indicator-indeterminate.hbs">
-  <!-- BEGIN-SNIPPET loading-indicator-indeterminate -->
+  {{!-- BEGIN-SNIPPET loading-indicator-indeterminate --}}
   <NrgLoadingIndicator @indeterminate={{true}} />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Loading Indicator Sizes" @codeBlockName="loading-indicator-sizes.hbs">
-  <!-- BEGIN-SNIPPET loading-indicator-sizes -->
+  {{!-- BEGIN-SNIPPET loading-indicator-sizes --}}
   <div class="ui segments">
     <div class="ui segment">
       <div class="ui top left attached label">Tiny</div>
@@ -42,11 +42,11 @@
       <NrgLoadingIndicator @size="massive" />
     </div>
   </div>
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Loading Indicator With Text" @codeBlockName="loading-indicator-text.hbs">
-  <!-- BEGIN-SNIPPET loading-indicator-text -->
+  {{!-- BEGIN-SNIPPET loading-indicator-text --}}
   <NrgLoadingIndicator @size="massive" @text="Loading" />
-  <!-- END-SNIPPET  -->
+  {{!-- END-SNIPPET --}}
 </NrgCodeBlock>
