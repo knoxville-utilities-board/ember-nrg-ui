@@ -9,113 +9,40 @@ const useFlexBox = !isIE11;
 
 export default class ModalWrapper extends Component {
   @service('modal') modalService;
-  @tracked _parentContentNode;
-  @tracked modalElement;
-  @tracked contentNode;
-
-  get isTesting() {
-    return this.args.modal?.isTesting;
-  }
-
-  get isOpen() {
-    return this.args.modal?.isOpen;
-  }
-
-  get isActive() {
-    return this.args.modal?.isActive;
-  }
-
-  get renderInPlace() {
-    return this.args.modal?.renderInPlace;
-  }
-
-  get hasMovedDom() {
-    return this.args.modal?.hasMovedDom;
-  }
-
-  get takeover() {
-    return this.args.modal?.takeover;
-  }
-
-  get sidebar() {
-    return this.args.modal?.sidebar;
-  }
-
-  get basic() {
-    return this.args.modal?.basic;
-  }
-
-  get lightbox() {
-    return this.args.modal?.lightbox;
-  }
-
-  get scrolling() {
-    return this.args.modal?.scrolling;
-  }
+  @tracked modalStyles;
 
   get hasCloseIcon() {
     return this.args.modal?.dismissable && !this.args.modal?.sidebar;
   }
 
-  get modalContent() {
-    return this.modalElement?.querySelector('.modal-content');
-  }
-
-  get marginTop() {
-    return this.modalElement?.offsetHeight / 2;
-  }
-
-  get marginLeft() {
-    return this.modalElement?.offsetWidth / 2;
-  }
-
-  get modalStyles() {
+  @action
+  onResize(element) {
     if (
       useFlexBox ||
-      !this.modalElement ||
-      this.takeover ||
-      this.sidebar ||
-      this.lightbox
+      this.args.modal?.takeover ||
+      this.args.modal?.sidebar ||
+      this.args.modal?.lightbox
     ) {
-      return '';
+      this.modalStyles = '';
     }
-    return htmlSafe(
-      `margin-top: -${this.marginTop}px; margin-left: -${this.marginLeft}px;`
+    const marginTop = element.offsetHeight / 2;
+    const marginLeft = element.offsetWidth / 2;
+    this.modalStyles = htmlSafe(
+      `margin-top: -${marginTop}px; margin-left: -${marginLeft}px;`
     );
   }
 
   @action
   addModalToWormhole(element) {
-    if (this.hasMovedDom || this.renderInPlace || this.isTesting) {
+    if (this.args.modal?.renderInPlace || this.args.modal?.isTesting) {
       return;
     }
-    this.contentNode = this.args.modal?.element?.querySelector('.modal-js');
-    this._parentContentNode = element;
-    element.appendChild(this.contentNode);
-    this.args.modal.hasMovedDom = true;
+    this.args.modal.renderTo = element;
   }
 
   @action
   removeModalFromWormhole() {
-    if (!this.hasMovedDom) {
-      return;
-    }
-    if (
-      !this.args.modal ||
-      this.args.modal?.isDestroying ||
-      !this.args.modal?.element
-    ) {
-      this._parentContentNode.removeChild(this.contentNode);
-    } else {
-      this.args.modal?.element?.appendChild(this.contentNode);
-      this.modalService?.remove(this);
-      this.args.modal.hasMovedDom = false;
-    }
-  }
-
-  @action
-  modalElementAdded(element) {
-    this.modalElement = element;
+    this.args.modal.renderTo = null;
   }
 
   @action
