@@ -1,111 +1,142 @@
-import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
-import { and, not, or, readOnly, reads } from '@ember/object/computed';
-import { once } from '@ember/runloop';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
-import layout from '../templates/components/nrg-modal';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  layout,
+export default class NrgModal extends Component {
+  @service('modal') modalService;
+  @service('application') applicationService;
+  @tracked renderIndex;
+  @tracked renderTo;
 
-  hasButtons: or('primaryButton', 'secondaryButton'),
+  get hasButtons() {
+    return !!(this.primaryButton || this.secondaryButton);
+  }
 
-  applicationService: service('application'),
-  modalService: service('modal'),
+  get isTesting() {
+    return this.applicationService?.isTesting ?? false;
+  }
 
-  isTesting: reads('applicationService.isTesting'),
-  isOpen: false,
-  hasMovedDom: false,
+  get dismissable() {
+    return this.args.dismissable !== false;
+  }
 
-  dismissable: true,
-  basic: false,
-  sidebar: false,
-  lightbox: false,
-  scrolling: and('notTakeover', 'notLightbox', 'notSidebar', 'renderInModal'),
-  modalClass: '',
-  dimmerClass: '',
-  priority: 10,
+  get basic() {
+    return this.args.basic ?? false;
+  }
 
-  renderInPlace: reads('isTesting'),
-  renderInModal: not('renderInPlace'),
-  shouldWormhole: and('isOpen', 'renderInModal'),
+  get sidebar() {
+    return this.args.sidebar ?? false;
+  }
 
-  notTakeover: not('takeover'),
-  notLightbox: not('lightbox'),
-  notSidebar: not('sidebar'),
+  get lightbox() {
+    return this.args.lightbox ?? false;
+  }
 
-  attributeBindings: ['hidden'],
+  get scrolling() {
+    return (
+      !this.takeover && !this.lightbox && !this.sidebar && this.renderInModal
+    );
+  }
 
-  hidden: readOnly('renderInModal'),
+  get modalClass() {
+    return this.args.modalClass ?? '';
+  }
 
-  secondaryButtonClass: computed('basic', function() {
+  get dimmerClass() {
+    return this.args.dimmerClass ?? '';
+  }
+
+  get headerText() {
+    return this.args.headerText ?? '';
+  }
+
+  get priority() {
+    return this.args.priority ?? 10;
+  }
+
+  get renderInPlace() {
+    return this.args.renderInPlace ?? this.isTesting;
+  }
+
+  get renderInModal() {
+    return this.args.renderInModal ?? !this.renderInPlace;
+  }
+
+  get shouldWormhole() {
+    return this.args.isOpen && this.renderInModal;
+  }
+
+  get primaryButton() {
+    return this.args.primaryButton;
+  }
+
+  get secondaryButton() {
+    return this.args.secondaryButton;
+  }
+
+  get hidden() {
+    return this.args.hidden ?? !this.renderInModal;
+  }
+
+  get takeover() {
+    return this.args.takeover ?? false;
+  }
+
+  get secondaryButtonClass() {
     let classList = 'basic';
     classList += this.basic ? ' secondary' : ' black';
     return classList;
-  }),
+  }
 
-  openObserver: observer('shouldWormhole', function() {
-    once(this, '_handleShouldWormHole');
-  }),
-
-  _handleShouldWormHole() {
+  @action
+  handleIsOpenChange(element) {
     if (this.shouldWormhole) {
-      this.addToService();
+      this.addToService(element);
     } else {
       this.removeFromService();
     }
-  },
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-    if (this.shouldWormhole) {
-      this.addToService();
-    }
-  },
-
-  willDestroy() {
-    this._super(...arguments);
-    this.removeFromService();
-  },
-
+  @action
   addToService() {
-    this.modalService.add(this);
-  },
+    if (this.shouldWormhole) {
+      this.modalService.add(this);
+    }
+  }
 
+  @action
   removeFromService() {
     this.modalService.remove(this);
-    this.onModalClose();
-  },
+  }
 
-  onModalClose() {
-    // implement
-  },
-
+  @action
   _onPrimary() {
-    if (this.dismissable) {
-      this.set('isOpen', false);
-    }
+    this.onHide();
     this.onPrimaryButtonClick();
-  },
+  }
 
-  onPrimaryButtonClick() {
-    this.sendAction('action');
-  },
-
+  @action
   _onSecondary() {
-    if (this.dismissable) {
-      this.set('isOpen', false);
-    }
+    this.onHide();
     this.onSecondaryButtonClick();
-  },
+  }
 
+  @action
+  onPrimaryButtonClick() {
+    this.args.onPrimaryButtonClick?.();
+  }
+
+  @action
   onSecondaryButtonClick() {
-    this.sendAction('cancel');
-  },
+    this.args.onSecondaryButtonClick?.();
+  }
 
+  @action
   onHide() {
-    if (this.isOpen && this.dismissable) {
-      this.set('isOpen', false);
+    if (this.args.isOpen && this.dismissable) {
+      this.args.onDismiss?.();
+      this.removeFromService();
     }
-  },
-});
+  }
+}
