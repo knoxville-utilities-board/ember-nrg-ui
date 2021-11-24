@@ -11,7 +11,7 @@ export default class Modal extends Service {
   get openModals() {
     return A(
       this.items
-        ?.filter((item) => !item.renderInPlace && item.isOpen)
+        ?.filter((item) => !item.renderInPlace && item.args.isOpen)
         ?.sort((a, b) =>
           a.priority == b.priority
             ? a.renderIndex - b.renderIndex
@@ -31,7 +31,7 @@ export default class Modal extends Service {
   @action
   add(item) {
     this.items.pushObject(item);
-    item.set('renderIndex', this.renderIndex);
+    item.renderIndex = this.renderIndex;
     this.renderIndex++;
   }
 
