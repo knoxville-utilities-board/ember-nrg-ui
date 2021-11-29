@@ -2,8 +2,8 @@ import { A } from '@ember/array';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Service | lightbox', function(hooks) {
-  hooks.beforeEach(function() {
+module('Unit | Service | lightbox', function (hooks) {
+  hooks.beforeEach(function () {
     this.items = A([
       {
         thumbnailId: 0,
@@ -18,7 +18,7 @@ module('Unit | Service | lightbox', function(hooks) {
   });
   setupTest(hooks);
 
-  test('arrows disable properly', function(assert) {
+  test('arrows disable properly', function (assert) {
     const items = this.items;
     const service = this.owner.lookup('service:lightbox');
     service.set('items', A());
@@ -31,7 +31,7 @@ module('Unit | Service | lightbox', function(hooks) {
     assert.ok(service.get('nextDisabled'));
   });
 
-  test('select next and previous works', function(assert) {
+  test('select next and previous works', function (assert) {
     const items = this.items;
     const service = this.owner.lookup('service:lightbox');
     service.get('items').pushObjects(items);

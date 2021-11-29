@@ -1,9 +1,9 @@
 {{page-title "nrg-search"}}
 
 <NrgCodeBlock @label="Disabled" @codeBlockName="disabled-search.hbs">
-  {{!-- BEGIN-SNIPPET disabled-search --}}
+  {{! BEGIN-SNIPPET disabled-search }}
   <NrgSearch @disabled={{true}} />
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Querying" @codeBlockName="querying-search.hbs">
@@ -14,13 +14,13 @@
     Selected
     <strong>{{or this.selectedResult.header "Nothing"}}</strong>
   </p>
-  {{!-- BEGIN-SNIPPET querying-search --}}
+  {{! BEGIN-SNIPPET querying-search }}
   <NrgSearch
     @query={{this.query}}
     @model={{this}}
     @valuePath="selectedResult"
   />
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Querying JS" @codeBlockName="querying-search.js" />

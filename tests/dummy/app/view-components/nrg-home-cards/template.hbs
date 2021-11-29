@@ -1,43 +1,116 @@
 {{page-title "nrg-home-cards"}}
 
 <NrgCodeBlock @label="Action Cards" @codeBlockName="action-card.hbs">
-  {{!-- BEGIN-SNIPPET action-card --}}
+  {{! BEGIN-SNIPPET action-card }}
   <NrgHomeCards @actionCard={{true}} as |view|>
-    <view.home-card @label="Actionable Item 1" @icon="calendar" @route="index" @meta="22" />
-    <view.home-card @label="Actionable Item 2" @icon="warning sign" @route="index" @badge="55" />
-    <view.home-card @label="Actionable Item 3" @icon="mail" @url="http://www.google.com" />
+    <view.home-card
+      @label="Actionable Item 1"
+      @icon="calendar"
+      @route="index"
+      @meta="22"
+    />
+    <view.home-card
+      @label="Actionable Item 2"
+      @icon="warning sign"
+      @route="index"
+      @badge="55"
+    />
+    <view.home-card
+      @label="Actionable Item 3"
+      @icon="mail"
+      @url="http://www.google.com"
+    />
   </NrgHomeCards>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Home Cards" @codeBlockName="home-card.hbs">
-  {{!-- BEGIN-SNIPPET home-card --}}
+  {{! BEGIN-SNIPPET home-card }}
   <NrgHomeCards as |view|>
-    <view.home-card @label="Dropdown" @icon="settings" @route="index" @meta="22 Hrs" @badgeLoading={{true}} />
-    <view.home-card @label="Button" @icon="code" @route="example.nrg-form-container" @description="This is the description area" @badge="55" />
-    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @description="This is the description area" />
-    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @meta="33 Persons" />
+    <view.home-card
+      @label="Dropdown"
+      @icon="settings"
+      @route="index"
+      @meta="22 Hrs"
+      @badgeLoading={{true}}
+    />
+    <view.home-card
+      @label="Button"
+      @icon="code"
+      @route="example.nrg-form-container"
+      @description="This is the description area"
+      @badge="55"
+    />
+    <view.home-card
+      @label="Forms"
+      @icon="tasks"
+      @route="example.nrg-form-container"
+      @description="This is the description area"
+    />
+    <view.home-card
+      @label="Forms"
+      @icon="tasks"
+      @route="example.nrg-form-container"
+      @meta="33 Persons"
+    />
   </NrgHomeCards>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Home Cards with Column Size" @codeBlockName="home-card-columns.hbs">
-  {{!-- BEGIN-SNIPPET home-card-columns --}}
+<NrgCodeBlock
+  @label="Home Cards with Column Size"
+  @codeBlockName="home-card-columns.hbs"
+>
+  {{! BEGIN-SNIPPET home-card-columns }}
   <NrgHomeCards @columns="two" as |view|>
-    <view.home-card @label="Dropdown" @icon="settings" @route="index" @meta="22 Hrs" @badgeLoading={{true}} />
-    <view.home-card @label="Button" @icon="code" @route="example.nrg-form-container" @description="This is the description area" @badge="55" />
-    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @description="This is the description area" />
-    <view.home-card @label="Forms" @icon="tasks" @route="example.nrg-form-container" @meta="33 Persons" />
+    <view.home-card
+      @label="Dropdown"
+      @icon="settings"
+      @route="index"
+      @meta="22 Hrs"
+      @badgeLoading={{true}}
+    />
+    <view.home-card
+      @label="Button"
+      @icon="code"
+      @route="example.nrg-form-container"
+      @description="This is the description area"
+      @badge="55"
+    />
+    <view.home-card
+      @label="Forms"
+      @icon="tasks"
+      @route="example.nrg-form-container"
+      @description="This is the description area"
+    />
+    <view.home-card
+      @label="Forms"
+      @icon="tasks"
+      @route="example.nrg-form-container"
+      @meta="33 Persons"
+    />
   </NrgHomeCards>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Cards with Images" @codeBlockName="image-card.hbs">
-  {{!-- BEGIN-SNIPPET image-card --}}
+  {{! BEGIN-SNIPPET image-card }}
   <NrgHomeCards as |view|>
-    <view.home-card @label="Dropdown" @image="https://www.fillmurray.com/242/250" @route="index" />
-    <view.home-card @label="Button" @image="https://www.fillmurray.com/321/320" @route="index" />
-    <view.home-card @label="Forms" @image="https://www.fillmurray.com/202/200" @route="index" />
+    <view.home-card
+      @label="Dropdown"
+      @image="https://www.fillmurray.com/242/250"
+      @route="index"
+    />
+    <view.home-card
+      @label="Button"
+      @image="https://www.fillmurray.com/321/320"
+      @route="index"
+    />
+    <view.home-card
+      @label="Forms"
+      @image="https://www.fillmurray.com/202/200"
+      @route="index"
+    />
   </NrgHomeCards>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>

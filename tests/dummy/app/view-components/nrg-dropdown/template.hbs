@@ -1,13 +1,22 @@
 {{page-title "nrg-dropdown"}}
 
 <NrgCodeBlock @label="Simple Dropdowns" @codeBlockName="nrg-dropdown.hbs">
-  {{!-- BEGIN-SNIPPET nrg-dropdown --}}
+  {{! BEGIN-SNIPPET nrg-dropdown }}
   <NrgFormContainer as |form|>
     <form.field @label="Dropdown (Linked Value)" as |field|>
-      <field.dropdown @options={{this.optionList}} @model={{this}} @valuePath="selectedOption" />
+      <field.dropdown
+        @options={{this.optionList}}
+        @model={{this}}
+        @valuePath="selectedOption"
+      />
     </form.field>
     <form.field @label="Dropdown with Block Render (Linked Value)" as |field|>
-      <field.dropdown @options={{this.optionList}} @model={{this}} @valuePath="selectedOption" as |option|>
+      <field.dropdown
+        @options={{this.optionList}}
+        @model={{this}}
+        @valuePath="selectedOption"
+        as |option|
+      >
         <i class="{{option.icon}} icon"></i>
         <strong>Label</strong>
         <span>{{option.label}}</span>
@@ -17,7 +26,12 @@
       </field.dropdown>
     </form.field>
     <form.field @label="Search (Linked Value)" as |field|>
-      <field.dropdown @options={{this.optionList}} @model={{this}} @valuePath="selectedOption" @search={{true}} />
+      <field.dropdown
+        @options={{this.optionList}}
+        @model={{this}}
+        @valuePath="selectedOption"
+        @search={{true}}
+      />
     </form.field>
     <form.field @label="Dropdown with String Array" as |field|>
       <field.dropdown @options={{this.optionListStrings}} />
@@ -32,34 +46,69 @@
       <field.dropdown @options={{this.optionList}} @forceSelection={{true}} />
     </form.field>
     <form.field @label="Allow Additions (Hide Addition)" as |field|>
-      <field.dropdown @options={{this.optionList}} @search={{true}} @allowAdditions={{true}} />
+      <field.dropdown
+        @options={{this.optionList}}
+        @search={{true}}
+        @allowAdditions={{true}}
+      />
     </form.field>
     <form.field @label="Allow Additions" as |field|>
-      <field.dropdown @options={{this.allowAdditionsOptionsList}} @search={{true}} @allowAdditions={{true}} @hideAdditions={{false}} />
+      <field.dropdown
+        @options={{this.allowAdditionsOptionsList}}
+        @search={{true}}
+        @allowAdditions={{true}}
+        @hideAdditions={{false}}
+      />
     </form.field>
     <form.field @label="Allow Additions with String Array" as |field|>
-      <field.dropdown @options={{this.allowAdditionsOptionsListStrings}} @search={{true}} @allowAdditions={{true}} @hideAdditions={{false}} />
+      <field.dropdown
+        @options={{this.allowAdditionsOptionsListStrings}}
+        @search={{true}}
+        @allowAdditions={{true}}
+        @hideAdditions={{false}}
+      />
     </form.field>
     <form.field @label="Multiple Selection" as |field|>
       <field.dropdown @options={{this.optionList}} @multiple={{true}} />
     </form.field>
     <form.field @label="Multiple Selection with Search" as |field|>
-      <field.dropdown @options={{this.optionList}} @multiple={{true}} @search={{true}} />
+      <field.dropdown
+        @options={{this.optionList}}
+        @multiple={{true}}
+        @search={{true}}
+      />
     </form.field>
-    <form.field @label="Multiple Selection with Search and Allow Additions" as |field|>
-      <field.dropdown @options={{this.optionList}} @multiple={{true}} @search={{true}} @allowAdditions={{true}} @hideAdditions={{false}} />
+    <form.field
+      @label="Multiple Selection with Search and Allow Additions"
+      as |field|
+    >
+      <field.dropdown
+        @options={{this.optionList}}
+        @multiple={{true}}
+        @search={{true}}
+        @allowAdditions={{true}}
+        @hideAdditions={{false}}
+      />
     </form.field>
     <form.field @label="Hide Action" as |field|>
       <field.dropdown @options={{this.optionList}} @dropdownAction="hide" />
     </form.field>
   </NrgFormContainer>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Freeform Dropdowns" @codeBlockName="nrg-dropdown-freeform.hbs">
-  {{!-- BEGIN-SNIPPET nrg-dropdown-freeform --}}
+<NrgCodeBlock
+  @label="Freeform Dropdowns"
+  @codeBlockName="nrg-dropdown-freeform.hbs"
+>
+  {{! BEGIN-SNIPPET nrg-dropdown-freeform }}
   <div class="ui center aligned segment">
-    <NrgDropdown @class="icon button primary float right" @onSelect={{this.onItemSelect}} @freeform={{true}} as |dropdown|>
+    <NrgDropdown
+      @class="icon button primary float right"
+      @onSelect={{this.onItemSelect}}
+      @freeform={{true}}
+      as |dropdown|
+    >
       <dropdown.source>
         <div class="text">Actions</div>
         <i class="dropdown icon"></i>
@@ -94,13 +143,15 @@
           </subMenu.menu>
         </menu.sub-menu>
         <menu.item>
-          <i class="remove user icon"></i> Remove
+          <i class="remove user icon"></i>
+          Remove
         </menu.item>
         <menu.item>
-          <i class="ban icon"></i> Cancel
+          <i class="ban icon"></i>
+          Cancel
         </menu.item>
       </dropdown.menu>
     </NrgDropdown>
   </div>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>

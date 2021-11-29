@@ -15,7 +15,9 @@ module('Integration | Component | nrg-datetime', function (hooks) {
 
   test('it renders (datetime)', async function (assert) {
     this.dateValue = testDate;
-    await render(hbs`<NrgDatetime @value={{this.dateValue}} @type="datetime" />`);
+    await render(
+      hbs`<NrgDatetime @value={{this.dateValue}} @type="datetime" />`
+    );
 
     assert.dom('input').hasValue('March 3, 2013 4:10 AM');
   });

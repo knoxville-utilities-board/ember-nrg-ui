@@ -2,7 +2,10 @@
   data-dropdown-item="true"
   data-dropdown-index={{@index}}
   role="button"
-  class="{{if @disabled "disabled"}} {{if this.active "active"}} item {{@class}}"
+  class="{{if @disabled "disabled"}}
+    {{if this.active "active"}}
+    item
+    {{@class}}"
   {{on "click" (fn this._onClick @option)}}
   ...attributes
 >

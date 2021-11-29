@@ -1,111 +1,215 @@
 {{page-title "nrg-modal"}}
 
 <NrgCodeBlock @label="Default Modal" @codeBlockName="default-modal.hbs">
-  <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen1" true}} />
-  {{!-- BEGIN-SNIPPET default-modal --}}
-  <NrgModal @headerText="A simple modal" @onDismiss={{fn this.setProperty "modalOpen1" false}} @isOpen={{this.modalOpen1}}>
+  <NrgButton
+    @text="Open Modal"
+    @onClick={{fn this.setProperty "modalOpen1" true}}
+  />
+  {{! BEGIN-SNIPPET default-modal }}
+  <NrgModal
+    @headerText="A simple modal"
+    @onDismiss={{fn this.setProperty "modalOpen1" false}}
+    @isOpen={{this.modalOpen1}}
+  >
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
-      scelerisque
-      urna sed,
-      vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
-      Curabitur vestibulum
-      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
   </NrgModal>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Basic Modal" @codeBlockName="basic-modal.hbs">
-  <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen2" true}} />
-  {{!-- BEGIN-SNIPPET basic-modal --}}
-  <NrgModal @headerText="A simple basic modal" @onDismiss={{fn this.setProperty "modalOpen2" false}} @basic={{true}} @isOpen={{this.modalOpen2}}>
+  <NrgButton
+    @text="Open Modal"
+    @onClick={{fn this.setProperty "modalOpen2" true}}
+  />
+  {{! BEGIN-SNIPPET basic-modal }}
+  <NrgModal
+    @headerText="A simple basic modal"
+    @onDismiss={{fn this.setProperty "modalOpen2" false}}
+    @basic={{true}}
+    @isOpen={{this.modalOpen2}}
+  >
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
-      scelerisque
-      urna sed,
-      vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
-      Curabitur vestibulum
-      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
   </NrgModal>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Modal With Actions" @codeBlockName="modal-with-actions.hbs">
-  <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen3" true}} />
-  {{!-- BEGIN-SNIPPET modal-with-actions --}}
-  <NrgModal @headerText="A modal with actions" @onDismiss={{fn this.setProperty "modalOpen3" false}} @primaryButton="Primary" @secondaryButton="Secondary" @isOpen={{this.modalOpen3}}>
+<NrgCodeBlock
+  @label="Modal With Actions"
+  @codeBlockName="modal-with-actions.hbs"
+>
+  <NrgButton
+    @text="Open Modal"
+    @onClick={{fn this.setProperty "modalOpen3" true}}
+  />
+  {{! BEGIN-SNIPPET modal-with-actions }}
+  <NrgModal
+    @headerText="A modal with actions"
+    @onDismiss={{fn this.setProperty "modalOpen3" false}}
+    @primaryButton="Primary"
+    @secondaryButton="Secondary"
+    @isOpen={{this.modalOpen3}}
+  >
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
-      scelerisque
-      urna sed,
-      vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
-      Curabitur vestibulum
-      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
   </NrgModal>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Basic Modal With Actions" @codeBlockName="basic-modal-with-actions.hbs">
-  <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen4" true}} />
-  {{!-- BEGIN-SNIPPET basic-modal-with-actions --}}
-  <NrgModal @headerText="A basic modal with actions" @onDismiss={{fn this.setProperty "modalOpen4" false}} @basic={{true}} @primaryButton="Primary" @secondaryButton="Secondary" @isOpen={{this.modalOpen4}}>
+<NrgCodeBlock
+  @label="Basic Modal With Actions"
+  @codeBlockName="basic-modal-with-actions.hbs"
+>
+  <NrgButton
+    @text="Open Modal"
+    @onClick={{fn this.setProperty "modalOpen4" true}}
+  />
+  {{! BEGIN-SNIPPET basic-modal-with-actions }}
+  <NrgModal
+    @headerText="A basic modal with actions"
+    @onDismiss={{fn this.setProperty "modalOpen4" false}}
+    @basic={{true}}
+    @primaryButton="Primary"
+    @secondaryButton="Secondary"
+    @isOpen={{this.modalOpen4}}
+  >
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
-      scelerisque
-      urna sed,
-      vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
-      Curabitur vestibulum
-      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
   </NrgModal>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Modal (Not Dismissable)" @codeBlockName="not-dismissable-modal.hbs">
-  <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen5" true}} />
-  {{!-- BEGIN-SNIPPET not-dismissable-modal --}}
-  <NrgModal @headerText="This modal cannot be dismissed without clicking the force dismiss button" @onDismiss={{fn this.setProperty "modalOpen5" true}} @primaryButton="Force Dismiss" @secondaryButton="Does nothing" @onPrimaryButtonClick={{fn this.setProperty "modalOpen5" false}} @dismissable={{false}} @isOpen={{this.modalOpen5}}>
+<NrgCodeBlock
+  @label="Modal (Not Dismissable)"
+  @codeBlockName="not-dismissable-modal.hbs"
+>
+  <NrgButton
+    @text="Open Modal"
+    @onClick={{fn this.setProperty "modalOpen5" true}}
+  />
+  {{! BEGIN-SNIPPET not-dismissable-modal }}
+  <NrgModal
+    @headerText="This modal cannot be dismissed without clicking the force dismiss button"
+    @onDismiss={{fn this.setProperty "modalOpen5" true}}
+    @primaryButton="Force Dismiss"
+    @secondaryButton="Does nothing"
+    @onPrimaryButtonClick={{fn this.setProperty "modalOpen5" false}}
+    @dismissable={{false}}
+    @isOpen={{this.modalOpen5}}
+  >
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
-      scelerisque
-      urna sed,
-      vehicula sem. Ut vitae semper ligula, eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat dolor sed nunc rhoncus finibus.
-      Curabitur vestibulum
-      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
   </NrgModal>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
 <NrgCodeBlock @label="Nested Modals" @codeBlockName="nested-modals.hbs">
-  <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen6" true}} />
-  {{!-- BEGIN-SNIPPET nested-modals --}}
-  <NrgModal @headerText="Contains a nested modal (Not dismissable)" @onDismiss={{fn this.setProperty "modalOpen6" true}} @primaryButton="Force Dismiss" @onPrimaryButtonClick={{fn this.setProperty "modalOpen6" false}} @dismissable={{false}} @isOpen={{this.modalOpen6}}>
-    <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen1" true}} />
-    <br>
-    <NrgButton @text="Open Modal with Actions" @onClick={{fn this.setProperty "modalOpen3" true}} />
-    <br>
-    <NrgButton @text="Open Modal (Not Dismissable)" @onClick={{fn this.setProperty "modalOpen5" true}} />
-    <br>
-    <NrgButton @text="Open Basic Modal" @onClick={{fn this.setProperty "modalOpen2" true}} />
-    <br>
-    <NrgButton @text="Open Basic Modal with Actions" @onClick={{fn this.setProperty "modalOpen4" true}} />
+  <NrgButton
+    @text="Open Modal"
+    @onClick={{fn this.setProperty "modalOpen6" true}}
+  />
+  {{! BEGIN-SNIPPET nested-modals }}
+  <NrgModal
+    @headerText="Contains a nested modal (Not dismissable)"
+    @onDismiss={{fn this.setProperty "modalOpen6" true}}
+    @primaryButton="Force Dismiss"
+    @onPrimaryButtonClick={{fn this.setProperty "modalOpen6" false}}
+    @dismissable={{false}}
+    @isOpen={{this.modalOpen6}}
+  >
+    <NrgButton
+      @text="Open Modal"
+      @onClick={{fn this.setProperty "modalOpen1" true}}
+    />
+    <br />
+    <NrgButton
+      @text="Open Modal with Actions"
+      @onClick={{fn this.setProperty "modalOpen3" true}}
+    />
+    <br />
+    <NrgButton
+      @text="Open Modal (Not Dismissable)"
+      @onClick={{fn this.setProperty "modalOpen5" true}}
+    />
+    <br />
+    <NrgButton
+      @text="Open Basic Modal"
+      @onClick={{fn this.setProperty "modalOpen2" true}}
+    />
+    <br />
+    <NrgButton
+      @text="Open Basic Modal with Actions"
+      @onClick={{fn this.setProperty "modalOpen4" true}}
+    />
   </NrgModal>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Datetime component in Modal" @codeBlockName="datetime-modal.hbs">
-  <NrgButton @text="Open Modal" @onClick={{fn this.setProperty "modalOpen7" true}} />
-  {{!-- BEGIN-SNIPPET datetime-modal --}}
-  <NrgModal @headerText="Datetime component inside a modal" @onDismiss={{fn this.setProperty "modalOpen7" false}} @isOpen={{this.modalOpen7}}>
+<NrgCodeBlock
+  @label="Datetime component in Modal"
+  @codeBlockName="datetime-modal.hbs"
+>
+  <NrgButton
+    @text="Open Modal"
+    @onClick={{fn this.setProperty "modalOpen7" true}}
+  />
+  {{! BEGIN-SNIPPET datetime-modal }}
+  <NrgModal
+    @headerText="Datetime component inside a modal"
+    @onDismiss={{fn this.setProperty "modalOpen7" false}}
+    @isOpen={{this.modalOpen7}}
+  >
     <NrgFormContainer as |form|>
       <form.field as |field|>
         <field.datetime />
       </form.field>
     </NrgFormContainer>
   </NrgModal>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>
