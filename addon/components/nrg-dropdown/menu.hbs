@@ -3,9 +3,13 @@
     (hash
       options=@displayedOptions
       item=(component
-        "nrg-dropdown/item" activeItem=@activeItem onSelectInternal=this.onSelectInternal
+        "nrg-dropdown/item"
+        activeItem=@activeItem
+        onSelectInternal=this.onSelectInternal
       )
-      sub-menu=(component "nrg-dropdown/sub-menu" onSelectInternal=this.onSelectInternal)
+      sub-menu=(component
+        "nrg-dropdown/sub-menu" onSelectInternal=this.onSelectInternal
+      )
     )
   }}
 </div>

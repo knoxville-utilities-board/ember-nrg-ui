@@ -1,4 +1,4 @@
-{{!-- BEGIN-SNIPPET nrg-application --}}
+{{! BEGIN-SNIPPET nrg-application }}
 {{page-title "NRG UI"}}
 
 <NrgContextItem @bottom={{true}}>
@@ -85,15 +85,16 @@
   </:sidebar>
 
   <:sidebar-footer as |sidebar|>
-    <sidebar.item @url="https://github.com/knoxville-utilities-board/ember-nrg-ui">
+    <sidebar.item
+      @url="https://github.com/knoxville-utilities-board/ember-nrg-ui"
+    >
       Github
     </sidebar.item>
   </:sidebar-footer>
-
 
   <:default>
     {{outlet}}
   </:default>
 
 </NrgApplication>
-{{!-- END-SNIPPET --}}
+{{! END-SNIPPET }}

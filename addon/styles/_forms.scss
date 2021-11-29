@@ -63,17 +63,16 @@
   }
 }
 
-
 .context-menu-container.context-menu-container.context-menu-container.context-menu-container.context-menu-container {
   .item {
     color: rgba(0, 0, 0, 0.95) !important;
     &.disabled {
       opacity: 0.5;
       color: #000000 !important;
-      background:  #FFFFFF !important;
+      background: #ffffff !important;
     }
     &:hover {
-      background:  rgba(0, 0, 0, 0.05) !important;
+      background: rgba(0, 0, 0, 0.05) !important;
     }
   }
   &.bottom {

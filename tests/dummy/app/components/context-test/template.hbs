@@ -1,5 +1,5 @@
 <div class="ui segment">
-{{!-- BEGIN-SNIPPET context-item --}}
+  {{! BEGIN-SNIPPET context-item }}
   <NrgContextItem @onClick={{this.contextCounter}}>
     Context Item
   </NrgContextItem>
@@ -15,7 +15,12 @@
   </NrgContextItem>
   <NrgContextItem @onClick={{this.contextCheckedIcon}}>
     <div class="ui checkbox read-only">
-      <input id="cbEnabled" class="hidden" type="checkbox" checked={{this.checkedIcon}} />
+      <input
+        id="cbEnabled"
+        class="hidden"
+        type="checkbox"
+        checked={{this.checkedIcon}}
+      />
       <label for="cbEnabled">
         <i class="icon settings"></i>
         Context Item w/ Checkbox and Icon
@@ -24,14 +29,20 @@
   </NrgContextItem>
   <NrgContextItem @onClick={{this.contextCheckedDisabled}} @disabled={{true}}>
     <div class="ui checkbox read-only">
-      <input id="cbDisabled" class="hidden" type="checkbox" checked={{this.checkedDisabled}} disabled={{true}}/>
+      <input
+        id="cbDisabled"
+        class="hidden"
+        type="checkbox"
+        checked={{this.checkedDisabled}}
+        disabled={{true}}
+      />
       <label for="cbDisabled">
         <i class="icon settings"></i>
         Disabled Context Item w/ Checkbox
       </label>
     </div>
   </NrgContextItem>
-{{!-- END-SNIPPET context-item --}}
+  {{! END-SNIPPET context-item }}
 
   <div class="ui form">
     <div class="ui field">

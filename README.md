@@ -6,9 +6,9 @@ Ember NRG UI
 
 ## Compatibility
 
-* Ember.js v3.20 or above
-* Ember CLI v3.20 or above
-* Node.js v12 or above
+- Ember.js v3.20 or above
+- Ember CLI v3.20 or above
+- Node.js v12 or above
 
 ## Installation
 
@@ -37,9 +37,11 @@ It includes an application shell with sidebar navigation, typical UI components,
 Ember NRG UI comes with a [dummy app](tests/dummy) that implements all of the components.
 **Check out that dummy app for reference**. To start it, run
 
-    git clone git@github.com:knoxville-utilities-board/ember-nrg-ui.git
-    cd ember-nrg-ui
-    yarn install && ember serve
+```bash
+git clone git@github.com:knoxville-utilities-board/ember-nrg-ui.git
+cd ember-nrg-ui
+yarn install && ember serve
+```
 
 and go to <http://localhost:4200>.
 
@@ -62,9 +64,14 @@ Once the addon is installed, create a new index route and template:
 ```hbs
 <!-- app/index/template.hbs -->
 
-<div class="ui segment basic">
+<div class='ui segment basic'>
   <NrgHomeCards as |view|>
-    <view.home-card @label="Hello World" @icon="globe" @route="index" @meta="obligatory" />
+    <view.home-card
+      @label='Hello World'
+      @icon='globe'
+      @route='index'
+      @meta='obligatory'
+    />
   </NrgHomeCards>
 </div>
 ```
@@ -77,23 +84,23 @@ an application route.
 ```javascript
 // app/application/route.js
 
-import Route from "@ember/routing/route";
-import ContextMenuMixin from "ember-nrg-ui/mixins/context-menu";
+import Route from '@ember/routing/route';
+import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
 
 export default Route.extend(ContextMenuMixin, {
   contextItems: [
     {
-      label: "Release Notes",
-      actionName: "routeToReleaseNotes",
-      priority: 2
-    }
+      label: 'Release Notes',
+      actionName: 'routeToReleaseNotes',
+      priority: 2,
+    },
   ],
 
   actions: {
     routeToReleaseNotes() {
-      this.transitionTo("release-notes");
-    }
-  }
+      this.transitionTo('release-notes');
+    },
+  },
 });
 ```
 
@@ -135,7 +142,7 @@ Import the override file into the main `app.scss`
 ```scss
 // app/styles/app.scss
 
-@import "nrg-override";
+@import 'nrg-override';
 ```
 
 [build-status-img]: https://dev.azure.com/knoxville-utilities-board/ember-nrg-ui/_apis/build/status/knoxville-utilities-board.ember-nrg-ui?branchName=master

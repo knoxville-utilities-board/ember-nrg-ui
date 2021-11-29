@@ -27,7 +27,8 @@
     margin: 30px;
   }
 
-  & .content, & .modal-js {
+  & .content,
+  & .modal-js {
     display: flex;
     height: 100%;
     flex-direction: column;
