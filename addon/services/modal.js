@@ -4,9 +4,11 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class Modal extends Service {
-  @tracked items = A();
+  @tracked
+  items = A();
 
-  @tracked renderIndex = 0;
+  @tracked
+  renderIndex = 0;
 
   get openModals() {
     return A(

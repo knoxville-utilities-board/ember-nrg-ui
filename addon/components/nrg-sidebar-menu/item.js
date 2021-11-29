@@ -3,7 +3,8 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 
 export default class NrgSidebarMenuItem extends Component {
-  @service application;
+  @service
+  application;
 
   get url() {
     return this.args.url ?? '';
