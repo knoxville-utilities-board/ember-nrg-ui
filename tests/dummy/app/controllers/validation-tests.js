@@ -11,7 +11,7 @@ const Validators = {
   radio: [validator('presence', true)],
 };
 
-export default class ViewComponentsNrgFormsController extends Controller {
+export default class ValidationTestsController extends Controller {
   @validationState(Validators)
   validations;
 

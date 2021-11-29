@@ -6,7 +6,7 @@ module('Acceptance | form validation', function (hooks) {
   setupApplicationTest(hooks);
 
   test('All form elements fail validation with no input', async function (assert) {
-    await visit('/validation-test');
+    await visit('/validation-tests');
     await click('button[type=submit]');
     const errorNodes = findAll('.error');
 
