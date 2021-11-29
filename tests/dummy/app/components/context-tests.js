@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-export default class NrgContextTestComponent extends Component {
+export default class NrgContextTestsComponent extends Component {
   @tracked
   counter = 0;
 
