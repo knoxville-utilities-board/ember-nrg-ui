@@ -60,8 +60,8 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Run Ember Tests
-        run: yarn test -p xunit
+      - name: Run Ember Tests and Linting
+        run: yarn test:cicd
 
   release:
     name: Release
