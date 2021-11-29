@@ -2,7 +2,7 @@
   @label="Render Template Block"
   @codeBlockName="nrg-render-template-block.hbs"
 >
-  {{!-- BEGIN-SNIPPET nrg-render-template-block --}}
+  {{! BEGIN-SNIPPET nrg-render-template-block }}
   <NrgButton @onClick={{this.changeTemplate}}>Change Template</NrgButton>
   <NrgRenderTemplateBlock @templateRendered={{this.cloneTemplate}}>
     <p>
@@ -15,5 +15,5 @@
   <div class="ui attached segment">
     {{this.clonedTemplateBlock}}
   </div>
-  {{!-- END-SNIPPET --}}
+  {{! END-SNIPPET }}
 </NrgCodeBlock>

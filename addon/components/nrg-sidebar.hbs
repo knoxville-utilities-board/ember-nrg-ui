@@ -3,9 +3,7 @@
   @isOpen={{this.application.sidebarIsOpen}}
   {{on-resize this.onResize}}
 >
-  <NrgSidebarMenu
-    @onClickInternal={{this.onClickInternal}}
-  >
+  <NrgSidebarMenu @onClickInternal={{this.onClickInternal}}>
     <:default as |sidebar|>
       {{yield sidebar}}
     </:default>

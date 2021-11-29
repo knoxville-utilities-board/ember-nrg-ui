@@ -62,7 +62,11 @@
       {{on "click" this.toggleDetailLocation}}
     >
       <i
-        class="{{if this.bottomDetails "vertically flipped" "clockwise rotated"}}
+        class="{{if
+            this.bottomDetails
+            "vertically flipped"
+            "clockwise rotated"
+          }}
           columns icon"
       ></i>
     </button>

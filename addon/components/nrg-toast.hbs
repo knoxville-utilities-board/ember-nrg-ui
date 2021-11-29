@@ -5,9 +5,16 @@
   {{on "mouseleave" this._mouseLeaveHandler}}
 >
   {{#if this.showProgress}}
-    <div class="ui attached active progress {{this.toast.type}} inverted top compact">
+    <div
+      class="ui attached active progress
+        {{this.toast.type}}
+        inverted top compact"
+    >
       {{! template-lint-disable no-inline-styles }}
-      <div class="bar down progressing pausable" style={{this.progressDuration}}></div>
+      <div
+        class="bar down progressing pausable"
+        style={{this.progressDuration}}
+      ></div>
     </div>
   {{/if}}
   <div class="{{this.toast.type}} ui toast compact visible">

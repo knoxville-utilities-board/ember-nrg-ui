@@ -1,4 +1,4 @@
-<div class="ui fluid input nrg-text-area {{if @fluid "fluid"}} {{@class}} ">
+<div class="ui fluid input nrg-text-area {{if @fluid "fluid"}} {{@class}}">
   <textarea
     id={{@focusId}}
     value={{@value}}
@@ -9,7 +9,7 @@
     placeholder={{@placeholder}}
     disabled={{@disabled}}
     {{on "input" this._valueChange}}
-  />
+  ></textarea>
   {{#if this.characterLimit}}
     <div class="text character-limit {{if this.overCharacterLimit "red"}}">
       {{or this.value.length 0}}/{{this.characterLimit}}

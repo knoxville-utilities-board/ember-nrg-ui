@@ -3,10 +3,10 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Helper | exists', function(hooks) {
+module('Integration | Helper | exists', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('item does exist', async function(assert) {
+  test('item does exist', async function (assert) {
     const items = ['bobs', 'bob'];
     const item = items[1];
 
@@ -18,7 +18,7 @@ module('Integration | Helper | exists', function(hooks) {
     assert.dom(this.element).hasText('true');
   });
 
-  test('item does not exist', async function(assert) {
+  test('item does not exist', async function (assert) {
     const items = ['bobs', 'bob'];
     const item = 'zach can code';
 
