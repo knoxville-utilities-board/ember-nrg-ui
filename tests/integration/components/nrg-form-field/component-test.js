@@ -6,27 +6,13 @@ import { module, test } from 'qunit';
 module('Integration | Component | nrg-form-field', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('proper errors display', async function (assert) {
+  test('label displays', async function (assert) {
     await render(hbs`
       <NrgFormContainer as |form|>
-        <form.field @errorMessage="Test Message" />
-        <form.submit-button />
+        <form.field @label="Test Message" />
       </NrgFormContainer>
     `);
-    await click('button');
 
-    assert.dom('.field.error .label').hasText('Test Message');
-  });
-
-  test('error class shows', async function (assert) {
-    await render(hbs`
-      <NrgFormContainer as |form|>
-        <form.field @errorMessage="Test Message" />
-        <form.submit-button />
-      </NrgFormContainer>
-    `);
-    await click('button');
-
-    assert.dom('.field').hasClass('error');
+    assert.dom('label').hasText('Test Message');
   });
 });

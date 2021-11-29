@@ -3,11 +3,13 @@
 
 module.exports = function (environment) {
   const ENV = {
+    DEBUG_TASKS: true,
     environment,
     modulePrefix: 'dummy',
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
+      DEBUG_TASKS: true,
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
@@ -19,6 +21,7 @@ module.exports = function (environment) {
     },
 
     APP: {
+      DEBUG_TASKS: true,
       // Here you can pass flags/options to your application instance
       // when it is created
     },
