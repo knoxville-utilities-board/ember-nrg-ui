@@ -9,7 +9,7 @@ const {
 export function appVersion() {
   const parts = version.split('+');
   const isTag = parts.length === 1;
-  let displayVersion = `v${version}`;
+  let displayVersion = `${version}`;
 
   if (!isTag) {
     displayVersion = version.match(shaRegExp)[0];
