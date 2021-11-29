@@ -3,8 +3,11 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class HomeCard extends Component {
-  @service application;
-  @service router;
+  @service
+  application;
+
+  @service
+  router;
 
   get visible() {
     if (!this.args.role) {
@@ -21,7 +24,10 @@ export default class HomeCard extends Component {
     return roles.some((role) => currentUser.hasRole(role));
   }
 
-  @action click() {
+  @action
+  click(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
     const route = this.args.route;
     const routeModel = this.args.routeModel;
     const url = this.args.url;
