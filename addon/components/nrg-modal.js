@@ -4,10 +4,17 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class NrgModal extends Component {
-  @service('modal') modalService;
-  @service('application') applicationService;
-  @tracked renderIndex;
-  @tracked renderTo;
+  @service('modal')
+  modalService;
+
+  @service('application')
+  applicationService;
+
+  @tracked
+  renderIndex;
+
+  @tracked
+  renderTo;
 
   get hasButtons() {
     return !!(this.primaryButton || this.secondaryButton);

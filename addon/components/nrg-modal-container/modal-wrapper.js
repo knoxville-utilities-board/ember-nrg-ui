@@ -8,8 +8,11 @@ const isIE11 = !window.ActiveXObject && 'ActiveXObject' in window;
 const useFlexBox = !isIE11;
 
 export default class ModalWrapper extends Component {
-  @service('modal') modalService;
-  @tracked modalStyles;
+  @service('modal')
+  modalService;
+
+  @tracked
+  modalStyles;
 
   get hasCloseIcon() {
     return this.args.modal?.dismissable && !this.args.modal?.sidebar;

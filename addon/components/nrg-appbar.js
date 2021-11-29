@@ -25,12 +25,16 @@ export default class NrgAppbarComponent extends Component {
   }
 
   @action
-  onToggleSidebar() {
+  onToggleSidebar(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
     this.args.onToggleSidebar?.();
   }
 
   @action
-  onBackArrowClick() {
+  onBackArrowClick(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
     this.args.onBackArrowClick?.();
   }
 }
