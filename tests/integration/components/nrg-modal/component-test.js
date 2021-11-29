@@ -1,3 +1,4 @@
+import Service from '@ember/service';
 import { click, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -7,8 +8,18 @@ module('Integration | Component | nrg-modal', function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
-    const service = this.owner.lookup('service:application');
-    service.set('isTesting', false);
+    class ApplicationServiceStub extends Service {
+      environmentConfig = {
+        'ember-nrg-ui': {
+          productionEnvironments: ['prod'],
+        },
+        environment: 'test',
+      };
+      settings = {
+        localEnvironment: 'test',
+      };
+    }
+    this.owner.register('service:application', ApplicationServiceStub);
   });
 
   test('secondary button works', async function (assert) {
@@ -57,24 +68,5 @@ module('Integration | Component | nrg-modal', function (hooks) {
       </NrgModal>
     `);
     assert.dom('*').hasText('block text');
-  });
-
-  test('modal supports being destroying instead of using isOpen', async function (assert) {
-    assert.expect(3);
-    this.onModalClose = function () {
-      assert.ok(true);
-    };
-    this.hasModal = true;
-    await render(hbs`
-      <NrgModalContainer />
-      {{#if hasModal}}
-        <NrgModal @isOpen={{true}} @onModalClose={{action this.onModalClose}}>
-          block text
-        </NrgModal>
-      {{/if}}
-    `);
-    assert.dom('.ui.modals').hasText('block text');
-    this.set('hasModal', false);
-    assert.dom('.ui.modals').hasText('');
   });
 });
