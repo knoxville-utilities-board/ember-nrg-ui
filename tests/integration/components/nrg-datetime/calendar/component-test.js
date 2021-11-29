@@ -16,7 +16,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test('use arrow key to move to previous day', async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     await render(
@@ -33,7 +33,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     this.set('value', moment());
     const expectedDate = moment();
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     await render(
@@ -49,7 +49,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     this.set('value', moment());
     const expectedDate = moment();
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
 
@@ -65,7 +65,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test('disabled dates are not navigable', async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     const expectedDate = moment({
@@ -73,7 +73,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       month: 1,
       year: 2020,
     });
-    this.isDateDisabled = function (date) {
+    this.isDateDisabled = (date) => {
       return moment(date).day() === 3;
     };
     this.minDate = expectedDate.clone().day(1);
@@ -91,7 +91,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test('disabled dates are not clickable', async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     const expectedDate = moment({
@@ -99,7 +99,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
       month: 1,
       year: 2020,
     });
-    this.isDateDisabled = function (date) {
+    this.isDateDisabled = (date) => {
       return moment(date).day() === 3;
     };
     this.minDate = expectedDate.clone().day(1);
@@ -117,7 +117,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test("previous month's dates are clickable", async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     const expectedDate = moment({
@@ -142,7 +142,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test("next month's dates are clickable", async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     const expectedDate = moment({
@@ -167,7 +167,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test('go through full date time workflow', async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     await render(
@@ -185,7 +185,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test('go through time only workflow', async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     await render(
@@ -201,7 +201,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test('header navigation changes indexes', async function (assert) {
     this.set('value', moment());
 
-    this.onSelect = function (date) {
+    this.onSelect = (date) => {
       this.set('value', moment(date));
     };
     await render(
@@ -250,7 +250,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     });
     this.set('value', minDate);
 
-    this.isDateDisabled = function (date, precision) {
+    this.isDateDisabled = (date, precision) => {
       if (precision == 'hour') {
         return date.isBefore(minDate, precision);
       }

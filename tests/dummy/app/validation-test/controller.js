@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
-import validationState, { validator } from 'ember-nrg-ui/validation';
+import validationState, { validator } from 'ember-nrg-ui/decorators/validation';
 
 const Validators = {
   textField: [validator('presence', true)],

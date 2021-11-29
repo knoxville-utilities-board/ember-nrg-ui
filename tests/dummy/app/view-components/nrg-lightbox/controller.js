@@ -33,7 +33,7 @@ export default class ViewComponentsNrgLightboxController extends Controller {
 
   async incrementCounter() {
     this.counter++;
-    if (!this.application.testing) {
+    if (!this.application.isTesting) {
       await timeout(1000);
       this.incrementCounter();
     }
