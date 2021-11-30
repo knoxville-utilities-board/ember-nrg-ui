@@ -46,9 +46,6 @@ module.exports = function (environment) {
   if (environment === 'review') {
     ENV.rootURL = process.env.rootURL || '/';
     ENV.locationType = 'hash';
-    ENV['ember-cli-mirage'] = {
-      enabled: true,
-    };
   }
 
   if (environment === 'production') {
