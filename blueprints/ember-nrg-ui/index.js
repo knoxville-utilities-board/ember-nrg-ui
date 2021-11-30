@@ -13,18 +13,13 @@ const appChunk = `
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
     },`;
 
-function directoryIsEmpty(path) {
-  const files = fs.readdirSync(path);
-  return !files.length;
-}
-
 module.exports = {
   description: '',
 
   fileMapTokens: function () {
     return {
-      __application__: function () {
-        return '/app/application';
+      __templates__: function () {
+        return '/app/templates';
       },
       __styles__: function () {
         return '/app/styles';
@@ -38,32 +33,6 @@ module.exports = {
     };
   },
 
-  podifyApp() {
-    if (fs.existsSync('app/controllers/.gitkeep')) {
-      fs.unlinkSync('app/controllers/.gitkeep');
-    }
-    if (fs.existsSync('app/routes/.gitkeep')) {
-      fs.unlinkSync('app/routes/.gitkeep');
-    }
-    if (fs.existsSync('app/templates/components/.gitkeep')) {
-      fs.unlinkSync('app/templates/components/.gitkeep');
-    }
-    if (fs.existsSync('app/templates/application.hbs')) {
-      fs.unlinkSync('app/templates/application.hbs');
-    }
-
-    [
-      'app/controllers',
-      'app/templates/components',
-      'app/templates',
-      'app/routes',
-    ].forEach(function (path) {
-      if (fs.existsSync(path) && directoryIsEmpty(path)) {
-        fs.rmdirSync(path);
-      }
-    });
-  },
-
   useSCSSInsteadOfCSS() {
     if (fs.existsSync('app/styles/app.css')) {
       fs.renameSync('app/styles/app.css', 'app/styles/app.scss');
@@ -75,19 +44,20 @@ module.exports = {
     const nodePackages = [
       {
         name: 'ember-cli-mirage',
-        target: '1.1.6',
+        target: '2.2.0',
       },
       {
         name: 'ember-cli-sass',
         target: '10.0.1',
       },
+      {
+        name: 'sass',
+        target: '1.43.5',
+      },
     ];
 
     this.ui.writeLine('Renaming app.css -> app.scss');
     this.useSCSSInsteadOfCSS();
-
-    this.ui.writeLine('Podifying the app');
-    this.podifyApp();
 
     return blueprint
       .insertIntoFile('app/router.js', '\n  nrgRoutes(this);', {

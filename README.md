@@ -20,9 +20,7 @@ It includes an application shell with sidebar navigation, typical UI components,
 
 ## What it does
 
-- Overwrites `.ember-cli`
 - Overwrites `application.hbs` to use `nrg-application` component
-- Converts the application to `Pods`
 - Converts the application to use Sass
 - Adds routes `/release-notes` and `404 Not Found`
 - Modifies `config/environment.js`
@@ -74,34 +72,6 @@ Once the addon is installed, create a new index route and template:
     />
   </NrgHomeCards>
 </div>
-```
-
-### Context Menu
-
-Use the `ContextMenuMixin` to route the user to Release Notes by creating
-an application route.
-
-```javascript
-// app/application/route.js
-
-import Route from '@ember/routing/route';
-import ContextMenuMixin from 'ember-nrg-ui/mixins/context-menu';
-
-export default Route.extend(ContextMenuMixin, {
-  contextItems: [
-    {
-      label: 'Release Notes',
-      actionName: 'routeToReleaseNotes',
-      priority: 2,
-    },
-  ],
-
-  actions: {
-    routeToReleaseNotes() {
-      this.transitionTo('release-notes');
-    },
-  },
-});
 ```
 
 ### Theming
