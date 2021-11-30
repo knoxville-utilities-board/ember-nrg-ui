@@ -104,5 +104,10 @@
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "https://knoxville-utilities-board.github.io/ember-nrg-ui/"
+  },
+  "resolutions": {
+    "ansi-regex": "^5.0.1",
+    "clean-css": "^4.1.11",
+    "glob-parent": "^5.1.2"
   }
 }
