@@ -8,8 +8,8 @@ module.exports = function (defaults) {
   const app = new EmberAddon(defaults, {
     snippetSearchPaths: ['tests', 'app'],
     snippetRegexes: {
-      begin: /{{!--\s+BEGIN-SNIPPET\s+(\S+)\s+--}}/,
-      end: /{{!--\s+END-SNIPPET\s+--}}/,
+      begin: /{{!\s+BEGIN-SNIPPET\s+(\S+)\s+}}/,
+      end: /{{!\s+END-SNIPPET\s+}}/,
     },
     fingerprint: {
       enabled: env === 'review' || env === 'production',
