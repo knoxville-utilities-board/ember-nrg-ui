@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 

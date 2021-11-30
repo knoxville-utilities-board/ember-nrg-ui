@@ -1,7 +1,7 @@
 import { A } from '@ember/array';
 import { action } from '@ember/object';
 import Service from '@ember/service';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import { tracked } from '@glimmer/tracking';
 
 export default class LightboxService extends Service {
