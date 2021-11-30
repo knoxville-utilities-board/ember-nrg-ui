@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import NrgValidationComponent from './nrg-validation-component';
 
 const defaultDateFormat = 'LL';
@@ -58,11 +58,11 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
     if (!this.value) {
       return '';
     }
-    return moment(this.value).format(this.displayFormat);
+    return dayjs(this.value).format(this.displayFormat);
   }
 
   set displayValue(value) {
-    const newValue = moment(value, this.displayFormat);
+    const newValue = dayjs(value, this.displayFormat);
     if (!newValue.isValid()) {
       return;
     }

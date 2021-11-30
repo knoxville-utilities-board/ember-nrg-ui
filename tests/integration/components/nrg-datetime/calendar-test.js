@@ -7,17 +7,17 @@ import {
 } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { module, test } from 'qunit';
 
 module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   setupRenderingTest(hooks);
 
   test('use arrow key to move to previous day', async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
     await render(
       hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
@@ -25,16 +25,16 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
-    const expectedDate = moment().subtract(1, 'day');
+    const expectedDate = dayjs().subtract(1, 'day');
     assert.ok(expectedDate.isSame(this.value, 'day'));
   });
 
   test('maxDate limits selection', async function (assert) {
-    this.set('value', moment());
-    const expectedDate = moment();
+    this.set('value', dayjs());
+    const expectedDate = dayjs();
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
     await render(
       hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @maxDate={{this.value}} @onSelect={{this.onSelect}} />`
@@ -46,11 +46,11 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   });
 
   test('minDate limits selection', async function (assert) {
-    this.set('value', moment());
-    const expectedDate = moment();
+    this.set('value', dayjs());
+    const expectedDate = dayjs();
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
 
     await render(
@@ -63,18 +63,18 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   });
 
   test('disabled dates are not navigable', async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
-    const expectedDate = moment({
+    const expectedDate = dayjs({
       day: 20,
       month: 1,
       year: 2020,
     });
     this.isDateDisabled = (date) => {
-      return moment(date).day() === 3;
+      return dayjs(date).day() === 3;
     };
     this.minDate = expectedDate.clone().day(1);
     this.maxDate = expectedDate.clone().day(5);
@@ -89,18 +89,18 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   });
 
   test('disabled dates are not clickable', async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
-    const expectedDate = moment({
+    const expectedDate = dayjs({
       day: 20,
       month: 1,
       year: 2020,
     });
     this.isDateDisabled = (date) => {
-      return moment(date).day() === 3;
+      return dayjs(date).day() === 3;
     };
     this.minDate = expectedDate.clone().day(1);
     this.maxDate = expectedDate.clone().day(5);
@@ -115,17 +115,17 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   });
 
   test("previous month's dates are clickable", async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
-    const expectedDate = moment({
+    const expectedDate = dayjs({
       day: 30,
       month: 5,
       year: 2020,
     });
-    this.value = moment({
+    this.value = dayjs({
       day: 31,
       month: 6,
       year: 2020,
@@ -140,17 +140,17 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   });
 
   test("next month's dates are clickable", async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
-    const expectedDate = moment({
+    const expectedDate = dayjs({
       day: 6,
       month: 2,
       year: 2020,
     });
-    this.value = moment({
+    this.value = dayjs({
       day: 15,
       month: 1,
       year: 2020,
@@ -165,10 +165,10 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   });
 
   test('go through full date time workflow', async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
     await render(
       hbs`<NrgDatetime::Calendar @type="datetime" @value={{this.value}} @onSelect={{this.onSelect}} />`
@@ -178,15 +178,15 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
     await click('tbody tr:first-child td:first-child');
     await click('tbody tr:nth-child(4) td:last-child');
-    const expectedDate = moment().add(1, 'day').hour(0).minute(55);
+    const expectedDate = dayjs().add(1, 'day').hour(0).minute(55);
     assert.ok(expectedDate.isSame(this.value, 'minute'));
   });
 
   test('go through time only workflow', async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
     await render(
       hbs`<NrgDatetime::Calendar @type="time" @value={{this.value}} @onSelect={{this.onSelect}} />`
@@ -194,15 +194,15 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     await focus('.ui.popup.calendar');
     await click('tbody tr:first-child td:first-child');
     await click('tbody tr:nth-child(4) td:last-child');
-    const expectedDate = moment().hour(0).minute(55);
+    const expectedDate = dayjs().hour(0).minute(55);
     assert.ok(expectedDate.isSame(this.value, 'minute'));
   });
 
   test('header navigation changes indexes', async function (assert) {
-    this.set('value', moment());
+    this.set('value', dayjs());
 
     this.onSelect = (date) => {
-      this.set('value', moment(date));
+      this.set('value', dayjs(date));
     };
     await render(
       hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
@@ -210,12 +210,12 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     await focus('.ui.popup.calendar');
     await click('.chevron.right.icon');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
-    const expectedDate = moment().add(1, 'month');
+    const expectedDate = dayjs().add(1, 'month');
     assert.ok(expectedDate.isSame(this.value, 'day'));
   });
 
   test('today/now button hidden if after max date', async function (assert) {
-    this.value = moment({
+    this.value = dayjs({
       day: 20,
       month: 1,
       year: 2020,
@@ -244,7 +244,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   test('isDateDisabled can use precision', async function (assert) {
     const hour = 8;
     const minute = 15;
-    const minDate = moment({
+    const minDate = dayjs({
       hour,
       minute,
     });

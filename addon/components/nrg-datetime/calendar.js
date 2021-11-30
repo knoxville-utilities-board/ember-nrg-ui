@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const DAY_HEADERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const MINUTE_INTERVAL = 5;
@@ -35,21 +35,21 @@ export default class NrgDateTimeCalendarComponent extends Component {
     if (!this.args.value) {
       return null;
     }
-    return moment(this.args.value).date();
+    return dayjs(this.args.value).date();
   }
 
   get selectedMonthIndex() {
     if (!this.args.value) {
       return null;
     }
-    return moment(this.args.value).month();
+    return dayjs(this.args.value).month();
   }
 
   get selectedYearIndex() {
     if (!this.args.value) {
       return null;
     }
-    return moment(this.args.value).year();
+    return dayjs(this.args.value).year();
   }
 
   get selectedHourIndex() {
@@ -57,7 +57,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
     if (!this.args.value || !hasTime) {
       return null;
     }
-    return moment(this.args.value).hour();
+    return dayjs(this.args.value).hour();
   }
 
   get selectedMinuteIndex() {
@@ -65,14 +65,14 @@ export default class NrgDateTimeCalendarComponent extends Component {
     if (!this.args.value || !hasTime) {
       return null;
     }
-    return moment(this.args.value).minute();
+    return dayjs(this.args.value).minute();
   }
 
   get _showNowShortcut() {
     if (this.args.showNowShortcut === false) {
       return false;
     }
-    const now = moment();
+    const now = dayjs();
     const userDisabled = this.args.isDateDisabled?.(now);
     const afterMaxDate = now.isAfter(this.args.maxDate, 'date');
     const beforeMinDate = now.isBefore(this.args.minDate, 'date');
@@ -80,7 +80,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get headerDisplay() {
-    const calendar = moment({
+    const calendar = dayjs({
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
@@ -100,7 +100,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get minutes() {
-    const calendar = moment({
+    let calendar = dayjs({
       hour: this.selectedHourIndex,
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
@@ -119,7 +119,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
           disabled,
           selected,
         });
-        calendar.add(MINUTE_INTERVAL, 'minute');
+        calendar = calendar.add(MINUTE_INTERVAL, 'minute');
       }
       rows.push(row);
     }
@@ -127,7 +127,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get hours() {
-    const calendar = moment({
+    let calendar = dayjs({
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
@@ -145,7 +145,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
           disabled,
           selected,
         });
-        calendar.add(1, 'hour');
+        calendar = calendar.add(1, 'hour');
       }
       rows.push(row);
     }
@@ -153,9 +153,9 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get days() {
-    const today = moment();
+    const today = dayjs();
     const weeks = [];
-    const calendar = moment({
+    let calendar = dayjs({
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
     }).startOf('week');
@@ -180,7 +180,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
           disabled,
           selected,
         });
-        calendar.add(1, 'day');
+        calendar = calendar.add(1, 'day');
       } while (calendar.day() != 0);
 
       weeks.push(week);
@@ -190,7 +190,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
 
   get months() {
     const rows = [];
-    const calendar = moment({
+    let calendar = dayjs({
       year: this.selectedYearIndex,
     });
     for (let i = 0; i < 4; i++) {
@@ -205,7 +205,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
           disabled,
           selected,
         });
-        calendar.add(1, 'month');
+        calendar = calendar.add(1, 'month');
       }
       rows.push(row);
     }
@@ -223,7 +223,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
     for (let i = 0; i < 5; i++) {
       const row = [];
       for (let j = 0; j < 2; j++, year++) {
-        const calendar = moment({
+        const calendar = dayjs({
           year,
         });
         const disabled = this._isDateDisabled(calendar, 'year');
@@ -270,7 +270,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   isBeyondDateRange(date, precision) {
-    date = moment(date);
+    date = dayjs(date);
     let valid = true;
     if (this.args.minDate) {
       valid = !date.isBefore(this.args.minDate, precision);
@@ -292,7 +292,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       evt.preventDefault();
       evt.stopPropagation();
     }
-    let date = moment({
+    let date = dayjs({
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
@@ -301,7 +301,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
     });
     const currentDate = date.clone();
 
-    date[operation](dateTransformation);
+    date = date[operation](dateTransformation);
 
     let precision = null;
 
@@ -329,20 +329,20 @@ export default class NrgDateTimeCalendarComponent extends Component {
       this.args.maxDate && date.isAfter(this.args.maxDate);
 
     if (dateBeforeMinDate) {
-      date = moment(this.args.minDate).clone();
+      date = dayjs(this.args.minDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
-      date.add(remainder, 'minute');
+      date = date.add(remainder, 'minute');
     } else if (dateAfterMaxDate) {
-      date = moment(this.args.maxDate).clone();
+      date = dayjs(this.args.maxDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
-      date.subtract(remainder, 'minute');
+      date = date.subtract(remainder, 'minute');
     }
 
     this._onSelect(date.toDate());
   }
 
   selectDate() {
-    const value = moment({
+    const value = dayjs({
       hour: this.selectedHourIndex,
       minute: this.selectedMinuteIndex,
       day: this.selectedDayIndex,

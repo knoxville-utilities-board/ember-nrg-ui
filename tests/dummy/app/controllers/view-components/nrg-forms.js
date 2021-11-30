@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import validationState, { validator } from 'ember-nrg-ui/decorators/validation';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const Validators = {
   turkey: [validator('presence', true)],
@@ -77,7 +77,7 @@ export default class ViewComponentsNrgFormsController extends Controller {
   selectedOption;
 
   @tracked
-  maxDate = moment().add(5, 'days').toDate();
+  maxDate = dayjs().add(5, 'days').toDate();
 
   @tracked
   searchResult;
