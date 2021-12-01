@@ -26,32 +26,32 @@ const defaultList = [
   {
     animal: 'rabbit',
     name: 'Alfred',
-    gender: 'male',
+    meta: 'type 1',
   },
   {
     animal: 'rabbit',
     name: 'Betty',
-    gender: 'female',
+    meta: 'type 2',
   },
   {
     animal: 'dog',
     name: 'Bobby',
-    gender: 'male',
+    meta: 'type 1',
   },
   {
     animal: 'dog',
     name: 'Harley',
-    gender: 'female',
+    meta: 'type 2',
   },
   {
     animal: 'cat',
     name: 'Sam',
-    gender: 'male',
+    meta: 'type 1',
   },
   {
     animal: 'cat',
     name: 'Sally',
-    gender: 'female',
+    meta: 'type 2',
   },
 ];
 
@@ -95,7 +95,7 @@ export default class ViewComponentsNrgFormsController extends Controller {
     return defaultList.map((item) => {
       return {
         header: item.name,
-        meta: item.gender,
+        meta: item.meta,
         extra: item.animal,
       };
     });
