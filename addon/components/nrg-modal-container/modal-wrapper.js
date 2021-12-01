@@ -37,9 +37,6 @@ export default class ModalWrapper extends Component {
 
   @action
   addModalToWormhole(element) {
-    if (this.args.modal?.renderInPlace || this.args.modal?.isTesting) {
-      return;
-    }
     this.args.modal.renderTo = element;
   }
 

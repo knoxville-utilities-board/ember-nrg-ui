@@ -16,6 +16,17 @@ export default class NrgModal extends Component {
   @tracked
   renderTo;
 
+  get _renderTo() {
+    if (this.renderInPlace || this.isTesting) {
+      return null;
+    }
+    return this.renderTo;
+  }
+
+  get isHidden() {
+    return !(this.renderInPlace && !this.renderTo);
+  }
+
   get hasButtons() {
     return !!(this.primaryButton || this.secondaryButton);
   }
@@ -97,19 +108,8 @@ export default class NrgModal extends Component {
   }
 
   @action
-  handleIsOpenChange(element) {
-    if (this.shouldWormhole) {
-      this.addToService(element);
-    } else {
-      this.removeFromService();
-    }
-  }
-
-  @action
   addToService() {
-    if (this.shouldWormhole) {
-      this.modalService.add(this);
-    }
+    this.modalService.add(this);
   }
 
   @action
@@ -143,7 +143,6 @@ export default class NrgModal extends Component {
   onHide() {
     if (this.args.isOpen && this.dismissable) {
       this.args.onDismiss?.();
-      this.removeFromService();
     }
   }
 }
