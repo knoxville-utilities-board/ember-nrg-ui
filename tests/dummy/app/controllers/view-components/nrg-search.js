@@ -8,17 +8,17 @@ const options = [
   {
     animal: 'rabbit',
     header: 'Alfred',
-    description: 'male',
+    description: 'type 1',
   },
   {
     animal: 'rabbit',
     header: 'Betty',
-    description: 'female',
+    description: 'type 2',
   },
   {
     animal: 'dog',
     header: 'Bobby',
-    description: 'male',
+    description: 'type 1',
   },
 ];
 
