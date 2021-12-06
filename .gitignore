@@ -26,3 +26,6 @@ ember-tests.xml
 bower.json.ember-try
 package.json.ember-try
 .DS_Store
+
+# vscode
+*.vscode/settings.json
