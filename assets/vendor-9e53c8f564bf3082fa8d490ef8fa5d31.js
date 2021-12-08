@@ -7262,10 +7262,7 @@ return Object.keys(n).forEach((function(e){a[e]=n[e]})),a.enumerable=!!a.enumera
 let s=(i=class extends t.default{constructor(){var e,t,r,n
 super(...arguments),e=this,t="resizeObserver",n=this,(r=a)&&Object.defineProperty(e,t,{enumerable:r.enumerable,configurable:r.configurable,writable:r.writable,value:r.initializer?r.initializer.call(n):void 0})}get callback(){return this.args.positional[0]}didInstall(){this.resizeObserver.observe(this.element,this.handleResize)}willRemove(){this.resizeObserver.unobserve(this.element,this.handleResize)}handleResize(){this.callback(...arguments)}},a=o(i.prototype,"resizeObserver",[r.inject],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),o(i.prototype,"handleResize",[n.action],Object.getOwnPropertyDescriptor(i.prototype,"handleResize"),i.prototype),i)
 e.default=s})),define("ember-nrg-ui/router",["exports"],(function(e){"use strict"
-Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e){e.route("release-notes"),e.route("not-found",{path:"/*path"})}})),define("ember-nrg-ui/routes/nrg-application-error",["exports","@ember/routing/route"],(function(e,t){"use strict"
-Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=t.default
-e.default=r})),define("ember-nrg-ui/services/application",["exports","@ember/application","@ember/object/proxy","@ember/service","@glimmer/tracking"],(function(e,t,r,n,i){"use strict"
+Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e){e.route("release-notes"),e.route("not-found",{path:"/*path"})}})),define("ember-nrg-ui/services/application",["exports","@ember/application","@ember/object/proxy","@ember/service","@glimmer/tracking"],(function(e,t,r,n,i){"use strict"
 var a,o,s,l,u,c,d,h
 function p(e,t,r,n){r&&Object.defineProperty(e,t,{enumerable:r.enumerable,configurable:r.configurable,writable:r.writable,value:r.initializer?r.initializer.call(n):void 0})}function f(e,t,r,n,i){var a={}
 return Object.keys(n).forEach((function(e){a[e]=n[e]})),a.enumerable=!!a.enumerable,a.configurable=!!a.configurable,("value"in a||a.initializer)&&(a.writable=!0),a=r.slice().reverse().reduce((function(r,n){return n(e,t,r)||r}),a),i&&void 0!==a.initializer&&(a.value=a.initializer?a.initializer.call(i):void 0,a.initializer=void 0),void 0===a.initializer&&(Object.defineProperty(e,t,a),a=null),a}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
@@ -7307,9 +7304,6 @@ var r=(0,t.createTemplateFactory)({id:"dEaDFIid",block:'[[[8,[39,0],null,[["@isL
 e.default=r})),define("ember-nrg-ui/templates/not-found",["exports","@ember/template-factory"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=(0,t.createTemplateFactory)({id:"qz6jf76k",block:'[[[8,[39,0],null,null,null]],[],false,["nrg-not-found"]]',moduleName:"ember-nrg-ui/templates/not-found.hbs",isStrictMode:!1})
-e.default=r})),define("ember-nrg-ui/templates/release-notes",["exports","@ember/template-factory"],(function(e,t){"use strict"
-Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=(0,t.createTemplateFactory)({id:"lX0DxV8s",block:'[[[10,0],[14,0,"ui segment markdown-body"],[12],[10,"h1"],[12],[1,"No Release Notes Available"],[13],[1,"\\n"],[13]],[],false,[]]',moduleName:"ember-nrg-ui/templates/release-notes.hbs",isStrictMode:!1})
 e.default=r})),define("ember-nrg-ui/utils/modifier-keys",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 e.default=["AltLeft","CapsLock","ControlLeft","OSLeft","OSRight","ShiftLeft","ContextMenu","AltRight"]})),define("ember-nrg-ui/utils/special-characters",["exports"],(function(e){"use strict"
@@ -7352,8 +7346,7 @@ const t=this.document.head,r=t.childNodes
 for(let a=0;a<r.length;a++){let e=r[a]
 "title"===e.nodeName.toLowerCase()&&t.removeChild(e)}let n=this.document.createElement("title"),i=this.document.createTextNode(e)
 n.appendChild(i),t.appendChild(n)}},c=m(u.prototype,"pageTitle",[s],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),d=m(u.prototype,"router",[n.inject],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),h=m(u.prototype,"document",[l],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),u)
-e.default=g}))
-define("ember-page-title/services/page-title",["exports","@ember/service"],(function(e,t){"use strict"
+e.default=g})),define("ember-page-title/services/page-title",["exports","@ember/service"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 class r extends t.default{titleDidUpdate(){}}e.default=r})),define("ember-resize-observer-service/services/resize-observer",["exports","@ember/service","@ember/object","@ember/debug","ember-resize-observer-service/utils/ignore-ro-error"],(function(e,t,r,n,i){"use strict"
 var a
@@ -7365,7 +7358,8 @@ const r=this.callbacks.get(e)
 r&&(r.delete(t),t&&r.size||(this.callbacks.delete(e),this.observer.unobserve(e)))}clear(){this.isEnabled&&(this.callbacks=new WeakMap,this.observer.disconnect())}willDestroy(){this.clear()}handleResize(e){for(const t of e){const e=this.callbacks.get(t.target)
 if(e)for(const r of e)r(t)}}},s=a.prototype,l="handleResize",u=[r.action],c=Object.getOwnPropertyDescriptor(a.prototype,"handleResize"),d=a.prototype,h={},Object.keys(c).forEach((function(e){h[e]=c[e]})),h.enumerable=!!h.enumerable,h.configurable=!!h.configurable,("value"in h||h.initializer)&&(h.writable=!0),h=u.slice().reverse().reduce((function(e,t){return t(s,l,e)||e}),h),d&&void 0!==h.initializer&&(h.value=h.initializer?h.initializer.call(d):void 0,h.initializer=void 0),void 0===h.initializer&&(Object.defineProperty(s,l,h),h=null),a)
 var s,l,u,c,d,h
-e.default=o})),define("ember-resize-observer-service/utils/ignore-ro-error",["exports"],(function(e){"use strict"
+e.default=o}))
+define("ember-resize-observer-service/utils/ignore-ro-error",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(){if("function"!=typeof window.onerror)return
 const e=window.onerror
 window.onerror=function(r){if(t.includes(r))return!0
@@ -7513,8 +7507,7 @@ return(0,t.isArray)(e)?0!==(0,r.get)(e,"length"):!!e}})),define("ember-validator
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e,t,n,a){let o=t.collection
 if(!0===o&&!(0,r.isArray)(e))return(0,i.default)("collection",e,t)
 if(!1===o&&(0,r.isArray)(e))return(0,i.default)("singular",e,t)
-return!0}}))
-define("ember-validators/confirmation",["exports","@ember/object","@ember/debug","@ember/utils","ember-validators/utils/validation-error"],(function(e,t,r,n,i){"use strict"
+return!0}})),define("ember-validators/confirmation",["exports","@ember/object","@ember/debug","@ember/utils","ember-validators/utils/validation-error"],(function(e,t,r,n,i){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e,r,a,o){let s=r.on
 if(r.allowBlank&&(0,n.isEmpty)(e))return!0
 if(!(0,n.isEqual)(e,(0,t.get)(a,s)))return(0,i.default)("confirmation",e,r)
@@ -7531,7 +7524,8 @@ if(p&&(p=a(p,d,c),!s(u,p)))return(0,t.set)(n,"before",i(p,b,c)),(0,r.default)("b
 if(f&&(f=a(f,d,c),!function(e,t){return o(e,t)||s(e,t)}(u,f)))return(0,t.set)(n,"onOrBefore",i(f,b,c)),(0,r.default)("onOrBefore",e,n)
 if(m&&(m=a(m,d,c),!l(u,m)))return(0,t.set)(n,"after",i(m,b,c)),(0,r.default)("after",e,n)
 if(v&&(v=a(v,d,c),!function(e,t){return o(e,t)||l(e,t)}(u,v)))return(0,t.set)(n,"onOrAfter",i(v,b,c)),(0,r.default)("onOrAfter",e,n)
-return!0},e.parseDate=n})),define("ember-validators/ds-error",["exports","ember-validators/utils/validation-error"],(function(e,t){"use strict"
+return!0},e.parseDate=n}))
+define("ember-validators/ds-error",["exports","ember-validators/utils/validation-error"],(function(e,t){"use strict"
 function r(e){let t=e.split("."),r=t.pop()
 return t.push("errors"),{path:t.join("."),key:r}}Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e,n,i,a){let{path:o,key:s}=r(a),l=i[o]
 if(l&&l.has&&l.has(s)){let e=l.errorsFor(s)
