@@ -11,6 +11,20 @@ const appChunk = `
       enabled: emberENV === 'review' || emberENV === 'production',
       prepend: process.env.rootURL || ENV.rootURL,
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg'],
+    },
+    'ember-dayjs': {
+      plugins: [
+        // Case-sensitive
+        'customParseFormat',
+        'duration',
+        'isBetween',
+        'isSameOrAfter',
+        'isSameOrBefore',
+        'localizedFormat',
+        'objectSupport',
+        'relativeTime',
+        'weekday',
+      ],
     },`;
 
 module.exports = {
