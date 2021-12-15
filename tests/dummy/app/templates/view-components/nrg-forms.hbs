@@ -88,6 +88,8 @@
       </form.field>
     </div>
     <br />
+    <span>{{format-date this.dateTime1}}</span>
+    <br />
     <form.field @label="Datetime" @required={{this.required}} as |field|>
       <field.datetime
         @type="datetime"

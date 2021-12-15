@@ -20,20 +20,6 @@ module.exports = function (defaults) {
     'ember-cli-babel': {
       includePolyfill: true,
     },
-    'ember-dayjs': {
-      plugins: [
-        // Case-sensitive
-        'customParseFormat',
-        'duration',
-        'isBetween',
-        'isSameOrAfter',
-        'isSameOrBefore',
-        'localizedFormat',
-        'objectSupport',
-        'relativeTime',
-        'weekday',
-      ],
-    },
   });
 
   const { maybeEmbroider } = require('@embroider/test-setup');
