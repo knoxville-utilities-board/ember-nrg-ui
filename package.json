@@ -51,7 +51,7 @@
     "ember-truth-helpers": "3.0.0",
     "ember-validators": "4.0.0",
     "fomantic-ui-css": "2.8.8",
-    "markdown-it": "8.4.2",
+    "markdown-it": "12.3.2",
     "sass": "1.43.5",
     "walk-sync": "^3.0.0"
   },
