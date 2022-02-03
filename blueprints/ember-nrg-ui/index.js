@@ -47,7 +47,7 @@ module.exports = {
         target: '1.43.5',
       },
     ];
-    const AddOns = [
+    const addOns = [
       {
         name: 'ember-cli-mirage',
         target: '2.2.0',
@@ -87,9 +87,10 @@ module.exports = {
       })
       .then(function () {
         return blueprint.addAddonsToProject({
-          packages: AddOns,
+          packages: addOns,
         });
-      }).then(function () {
+      })
+      .then(function () {
         return blueprint.addPackageToProject({
           packages: nodePackages,
         });
