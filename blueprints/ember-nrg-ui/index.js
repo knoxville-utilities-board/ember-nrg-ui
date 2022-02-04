@@ -91,9 +91,7 @@ module.exports = {
         });
       })
       .then(function () {
-        return blueprint.addPackageToProject({
-          packages: nodePackages,
-        });
+        return blueprint.addPackagesToProject(nodePackages);
       })
       .then(function () {
         return blueprint.removePackageFromProject('ember-welcome-page');
