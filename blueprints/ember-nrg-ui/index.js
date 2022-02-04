@@ -106,5 +106,5 @@ module.exports = {
       });
   },
 
-  normalizeEntityName: function () { },
+  normalizeEntityName: function () {},
 };
