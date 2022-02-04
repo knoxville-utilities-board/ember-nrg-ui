@@ -43,16 +43,18 @@ module.exports = {
     const blueprint = this;
     const nodePackages = [
       {
+        name: 'sass',
+        target: '1.43.5',
+      },
+    ];
+    const addOns = [
+      {
         name: 'ember-cli-mirage',
         target: '2.2.0',
       },
       {
         name: 'ember-cli-sass',
         target: '10.0.1',
-      },
-      {
-        name: 'sass',
-        target: '1.43.5',
       },
     ];
 
@@ -85,6 +87,11 @@ module.exports = {
       })
       .then(function () {
         return blueprint.addAddonsToProject({
+          packages: addOns,
+        });
+      })
+      .then(function () {
+        return blueprint.addPackageToProject({
           packages: nodePackages,
         });
       })
