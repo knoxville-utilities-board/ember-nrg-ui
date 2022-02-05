@@ -9,12 +9,26 @@ export function formatNumber(value = 0, precision = 0) {
   value = unformat(value + '');
   const absoluteValue = Math.abs(value);
   let formattedValue = absoluteValue + '';
+  let decimals = '';
   if (precision !== undefined || isDecimalNumber(value)) {
     formattedValue = absoluteValue.toFixed(precision);
+    let splits = formattedValue.split('.');
+
+    if (splits[0] != undefined) {
+      formattedValue = splits[0];
+    }
+
+    if (splits[1] != undefined) {
+      decimals = `.${splits[1]}`;
+    }
   }
+
   while (/(\d+)(\d{3})/.test(formattedValue)) {
     formattedValue = formattedValue.replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
   }
+
+  formattedValue = formattedValue + decimals;
+
   return formattedValue;
 }
 
