@@ -13,7 +13,7 @@ export function formatNumber(value = 0, precision = 0) {
   if (precision !== undefined || isDecimalNumber(value)) {
     formattedValue = absoluteValue.toFixed(precision);
     const splits = formattedValue.split('.');
-    if(splits.length == 2){
+    if (splits.length == 2) {
       formattedValue = splits[0];
       decimals = `.${splits[1]}`;
     }
