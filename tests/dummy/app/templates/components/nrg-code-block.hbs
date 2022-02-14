@@ -17,5 +17,7 @@
       {{yield}}
     </div>
   {{/if}}
-  <CodeSnippet @name={{@codeBlockName}} />
+  {{#let (get-code-snippet @codeBlockName) as |snippet|}}
+    <CodeBlock @language={{snippet.language}} @code={{snippet.source}}/>
+  {{/let}}
 </div>
