@@ -20,6 +20,9 @@ module.exports = function (defaults) {
     'ember-cli-babel': {
       includePolyfill: true,
     },
+    'ember-prism': {
+      components: ['markup', 'handlebars', 'javascript', 'markup-templating'],
+    },
   });
 
   const { maybeEmbroider } = require('@embroider/test-setup');
