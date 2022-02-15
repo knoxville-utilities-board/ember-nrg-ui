@@ -12,15 +12,13 @@ const {
 
 export function appVersion() {
   const isTag = commitsSinceLastTag == 0;
-  let displayVersion =
-    version.match(versionExtendedRegExp)?.[0] ??
-    version.match(versionRegExp)?.[0];
-
   if (!isTag) {
-    displayVersion = version.match(shaRegExp)?.[0];
+    return version.match(shaRegExp)?.[0];
   }
-
-  return displayVersion;
+  return (
+    version.match(versionExtendedRegExp)?.[0] ??
+    version.match(versionRegExp)?.[0]
+  );
 }
 
 export default helper(appVersion);
