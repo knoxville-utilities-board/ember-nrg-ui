@@ -2,6 +2,7 @@
 'use strict';
 const path = require('path');
 const walkSync = require('walk-sync');
+const getGitInfo = require('git-repo-info');
 
 module.exports = {
   name: require('./package').name,
@@ -37,5 +38,15 @@ module.exports = {
     const plugin = new MarkdownTemplateCompiler();
     registry.instantiatedPlugins.push(plugin);
     registry.registeredForType('template').unshift(plugin);
+  },
+
+  config(env, baseConfig) {
+    let config = this._super.config.apply(this, arguments);
+    if (!baseConfig.APP) {
+      return config;
+    }
+    const gitInfo = getGitInfo();
+    baseConfig.APP.commitsSinceLastTag = gitInfo.commitsSinceLastTag;
+    return config;
   },
 };
