@@ -55,13 +55,16 @@ export default class ToastsController extends Controller {
   openStickyToast() {
     //BEGIN-SNIPPET sticky-toasts
     this.flashMessages.info('This is a sticky info message', {
-      timeout: 0,
+      sticky: true,
+      showProgress: false,
     });
     this.flashMessages.success('This is a sticky success message', {
       sticky: true,
+      showProgress: false,
     });
     this.flashMessages.error('This is a sticky error message', {
       sticky: true,
+      showProgress: false,
     });
     //END-SNIPPET
   }

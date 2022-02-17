@@ -1,10 +1,9 @@
 <div
   role="button"
   class="floating toast-box compact transition visible"
-  {{on "mouseenter" this._mouseEnterHandler}}
-  {{on "mouseleave" this._mouseLeaveHandler}}
+  {{on "click" this.onClick}}
 >
-  {{#if this.showProgress}}
+  {{#if this.toast.showProgress}}
     <div
       class="ui attached active progress
         {{this.toast.type}}
