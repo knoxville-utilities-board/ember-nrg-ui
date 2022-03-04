@@ -29,7 +29,10 @@
     "test": "npm-run-all lint:js lint:hbs test:ember",
     "test:ember": "ember test",
     "test:cicd": "ember test -r xunit",
-    "test:ember-compatibility": "ember try:each"
+    "test:ember-compatibility": "ember try:each",
+    "storybook": "start-storybook -p 6006 -s dist --ci",
+    "storybook-dev": "npm-run-all --continue-on-error --parallel start storybook",
+    "build-storybook": "build-storybook -s dist"
   },
   "dependencies": {
     "@ember/render-modifiers": "^1.0.2",
@@ -62,6 +65,11 @@
     "@embroider/test-setup": "^0.43.5",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
+    "@storybook/addon-actions": "^6.4.0",
+    "@storybook/addon-essentials": "^6.4.0",
+    "@storybook/addon-links": "^6.4.0",
+    "@storybook/ember": "^6.4.0",
+    "@storybook/ember-cli-storybook": "^0.4.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-cli": "~3.28.4",
@@ -110,5 +118,9 @@
     "ansi-regex": "^5.0.1",
     "clean-css": "^4.1.11",
     "glob-parent": "^5.1.2"
+  },
+  "storybook": {
+    "ignoreTestFiles": true,
+    "config": {}
   }
 }
