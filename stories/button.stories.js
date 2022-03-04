@@ -9,7 +9,7 @@ export default {
 };
 
 const Template = (args) => ({
-  template: hbs`<NrgButton @text="Hover Me" @disabled={{false}} />`,
+  template: hbs`<NrgButton @text={{this.text}} @disabled={{this.disabled}} />`,
   context: args,
 });
 
