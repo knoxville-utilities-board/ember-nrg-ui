@@ -14,6 +14,12 @@ module('Integration | Component | nrg-search', function (hooks) {
     assert.dom('input').hasValue('header');
   });
 
+  test('it renders selected string value', async function (assert) {
+    this.selected = 'SomeValue';
+    await render(hbs`<NrgSearch @model={{this}} @valuePath="selected" />`);
+    assert.dom('input').hasValue('SomeValue');
+  });
+
   test('query method is called with querystring', async function (assert) {
     assert.expect(1);
     this.query = (querystring) => {
