@@ -75,7 +75,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
 
   updateDisplayValue(selected) {
     const displayLabel = get(selected ?? {}, this.displayLabel);
-    this.searchString = displayLabel ?? '';
+    this.searchString = displayLabel ?? this.value ?? '';
   }
 
   selectItem(item) {
