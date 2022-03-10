@@ -94,6 +94,6 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
 
   @action
   onDateSelect(value) {
-    this.value = value;
+    this._onChange(value);
   }
 }
