@@ -19,6 +19,11 @@ export default class NrgPopupComponent extends Component {
   }
 
   @action
+  onDismiss() {
+    this.lightboxService.lightboxIsOpen = false;
+  }
+
+  @action
   previousImage() {
     this.lightboxService.selectPrevious();
   }
