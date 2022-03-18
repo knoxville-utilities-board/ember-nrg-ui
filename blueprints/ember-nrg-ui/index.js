@@ -54,7 +54,7 @@ module.exports = {
     const addOns = [
       {
         name: 'ember-cli-mirage',
-        target: '2.2.0',
+        target: '2.4.0',
       },
       {
         name: 'ember-cli-sass',
