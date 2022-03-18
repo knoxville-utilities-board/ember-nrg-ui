@@ -67,14 +67,14 @@ module.exports = {
 
     return blueprint
       .insertIntoFile('app/router.js', '\n  nrgRoutes(this);', {
-        after: 'Router.map(function() {',
+        after: 'Router.map(function () {',
       })
       .then(function () {
         return blueprint.insertIntoFile(
           'app/router.js',
           "\nimport nrgRoutes from 'ember-nrg-ui/router';",
           {
-            after: "import config from './config/environment';",
+            before: "import EmberRouter from '@ember/routing/router';",
           }
         );
       })
