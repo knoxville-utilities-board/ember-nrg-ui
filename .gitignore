@@ -29,3 +29,6 @@ package.json.ember-try
 
 # vscode
 *.vscode/settings.json
+
+# storybook
+storybook-static
