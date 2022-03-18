@@ -46,6 +46,10 @@ module.exports = {
         name: 'sass',
         target: '1.43.5',
       },
+      {
+        name: '@faker-js/faker',
+        target: '6.0.0-alpha.7',
+      },
     ];
     const addOns = [
       {
