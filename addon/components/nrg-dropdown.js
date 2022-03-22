@@ -66,7 +66,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   get _dropdownDisabled() {
-    return this.args.loading ?? this.args.disabled;
+    return this.args.loading || this.args.disabled;
   }
 
   get selection() {
