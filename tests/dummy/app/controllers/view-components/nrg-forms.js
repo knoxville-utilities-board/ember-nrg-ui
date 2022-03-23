@@ -21,15 +21,19 @@ const Validators = {
       in: [true],
     }),
   ],
-  checkbox2: [validator('presence', true)],
+  checkbox2: [
+    validator('inclusion', {
+      in: [true],
+    }),
+  ],
   selectedOption: [validator('presence', true)],
-  textArea: [
+  textArea2: [
     validator('presence', true),
     validator('length', {
       min: 3,
       max: 5,
       disabled() {
-        return this.meal;
+        return this.textArea3;
       },
     }),
   ],
@@ -62,13 +66,19 @@ export default class ViewComponentsNrgFormsController extends Controller {
   radio;
 
   @tracked
-  textArea;
-
-  @tracked
   textArea1;
 
   @tracked
+  textArea2;
+
+  @tracked
+  textArea3;
+
+  @tracked
   checkbox1 = true;
+
+  @tracked
+  checkbox2 = false;
 
   @tracked
   dateTime1;

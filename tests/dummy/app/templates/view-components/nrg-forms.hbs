@@ -79,12 +79,15 @@
       <form.field @label="Text Area" @required={{this.required}} as |field|>
         <field.text-area
           @model={{this}}
-          @valuePath="textArea"
+          @valuePath="textArea2"
           @disabled={{this.disabled}}
         />
       </form.field>
       <form.field @label="Text Area" @required={{this.required}} as |field|>
-        <field.text-area @disabled={{this.disabled}} />
+        <field.text-area
+          @model={{this}}
+          @valuePath="textArea3"
+          @disabled={{this.disabled}} />
       </form.field>
     </div>
     <br />
@@ -172,6 +175,8 @@
         <field.checkbox
           @type="slider"
           @label="Inline Slider"
+          @model={{this}}
+          @valuePath="checkbox2"
           @disabled={{this.disabled}}
         />
       </form.field>
