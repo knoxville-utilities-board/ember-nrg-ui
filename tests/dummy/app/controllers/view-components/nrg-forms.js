@@ -28,6 +28,9 @@ const Validators = {
     validator('length', {
       min: 3,
       max: 5,
+      disabled() {
+        return this.meal;
+      },
     }),
   ],
   searchResult: [validator('presence', true)],

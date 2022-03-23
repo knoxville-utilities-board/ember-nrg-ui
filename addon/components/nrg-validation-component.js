@@ -1,8 +1,6 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { timeout } from 'ember-concurrency';
-import { keepLatestTask } from 'ember-concurrency-decorators';
 
 export default class NrgValidationComponent extends Component {
   @tracked
@@ -31,45 +29,20 @@ export default class NrgValidationComponent extends Component {
     } else if (this.args.value) {
       this.value = this.args.value;
     }
-    this.propogateErrorMessage.perform();
+
+    if (this.hasModelPath && this.args.field) {
+      this.args.field.model = this.args.model;
+      this.args.field.valuePath = this.args.valuePath;
+    }
   }
 
   get hasModelPath() {
     return this.args.model && this.args.valuePath;
   }
 
-  get hasWarning() {
-    return this.validation?.warningMessage;
-  }
-
-  get validation() {
-    return this.args.model?.validations?.attrs[this.args.valuePath];
-  }
-
   @action
   _onChange(newValue) {
     this.value = newValue;
     this.args.onChange?.(...arguments);
-    this.propogateErrorMessage.perform();
-  }
-
-  @keepLatestTask
-  *propogateErrorMessage() {
-    if (!this.args.valuePath) {
-      return;
-    }
-    let errorMessage = '';
-    let warningMessage = '';
-    if (!this.validation?.isValid) {
-      errorMessage = this.validation?.message;
-    }
-    if (this.hasWarning) {
-      warningMessage = this.validation?.warningMessage;
-    }
-    if (this.args.field) {
-      this.args.field.errorMessage = errorMessage;
-      this.args.field.warningMessage = warningMessage;
-    }
-    yield timeout(50);
   }
 }

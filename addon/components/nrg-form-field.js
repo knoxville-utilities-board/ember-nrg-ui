@@ -7,10 +7,14 @@ export default class NrgFormFieldComponent extends Component {
   focusId = 'field-' + guidFor(this);
 
   @tracked
-  errorMessage;
+  model;
 
   @tracked
-  warningMessage;
+  valuePath;
+
+  get validation() {
+    return this.model?.validations?.attrs[this.valuePath];
+  }
 
   get didValidate() {
     return this.args.form?.didValidate;
@@ -22,5 +26,13 @@ export default class NrgFormFieldComponent extends Component {
 
   get showWarning() {
     return this.warningMessage && !this.errorMessage;
+  }
+
+  get errorMessage() {
+    return !this.validation?.isValid ? this.validation?.message : '';
+  }
+
+  get warningMessage() {
+    return this.validation?.warningMessage;
   }
 }
