@@ -2,7 +2,7 @@
   <div class="ui middle aligned divided unstackable items">
     {{#each this.itemsProxy as |item i|}}
       {{#if @groupHeaderHandler}}
-        {{#with
+        {{#let
           (list-group-header this.itemsProxy i @groupHeaderHandler)
           as |groupHeader|
         }}
@@ -11,7 +11,7 @@
               {{groupHeader}}
             </div>
           {{/if}}
-        {{/with}}
+        {{/let}}
       {{/if}}
       {{#if this.canSelect}}
         <div
