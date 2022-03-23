@@ -42,6 +42,15 @@ export default function validationState(validatorsArgument) {
               continue;
             }
 
+            const disabledProp = validatorResponse?.options?.disabled;
+            let isDisabled = disabledProp;
+            if (typeof disabledProp == 'function') {
+              isDisabled = disabledProp.apply(this);
+            }
+            if (isDisabled) {
+              continue;
+            }
+
             attrState[key].message = validatorResponse.errorMessage;
             attrState[key].isValid = false;
           }
