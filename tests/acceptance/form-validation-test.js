@@ -1,4 +1,4 @@
-import { click, findAll, visit } from '@ember/test-helpers';
+import { click, fillIn, findAll, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -10,6 +10,26 @@ module('Acceptance | form validation', function (hooks) {
     await click('button[type=submit]');
     const errorNodes = findAll('.error');
 
-    assert.equal(errorNodes.length, 6);
+    assert.equal(errorNodes.length, 7);
+  });
+
+  test('Custom validators work', async function (assert) {
+    await visit('/validation-tests');
+    await click('button[type=submit]');
+
+    assert
+      .dom('div.field:last-of-type > div.red.label')
+      .hasText('This is an invalid value', 'Custom error message works');
+
+    await fillIn('div.field.error:last-of-type input', 'defaultError');
+
+    assert
+      .dom('div.field:last-of-type > div.red.label')
+      .hasText('This field is not valid', 'false displays default error');
+
+    await fillIn('div.field.error:last-of-type input', 'correct');
+    assert
+      .dom('div.field:last-of-type > div.red.label')
+      .doesNotExist('true displays no error');
   });
 });

@@ -76,7 +76,13 @@ export function validator(eventName, options) {
     options[eventName] = originalOption;
   }
   return function (value, messages) {
-    const validationResponse = validate(eventName, value, options);
+    let validationResponse;
+
+    if (eventName === 'custom') {
+      validationResponse = options.validate?.apply(this, [value]);
+    } else {
+      validationResponse = validate(eventName, value, options);
+    }
 
     if (!options.description) {
       options.description = messages.defaultDescription;
@@ -92,9 +98,16 @@ export function validator(eventName, options) {
       return response;
     }
 
-    const message =
-      options.message ||
-      messages.getMessageFor(validationResponse.type, options);
+    let message;
+
+    if (eventName === 'custom') {
+      message =
+        validationResponse || (options.message ?? 'This field is not valid');
+    } else {
+      message =
+        options.message ||
+        messages.getMessageFor(validationResponse.type, options);
+    }
 
     if (options.isWarning) {
       response.warningMessage = message;

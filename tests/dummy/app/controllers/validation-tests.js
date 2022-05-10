@@ -9,6 +9,19 @@ const Validators = {
   dropdown: [validator('presence', true)],
   checkbox: [validator('presence', true)],
   radio: [validator('presence', true)],
+  customValidation: [
+    validator('custom', {
+      validate(value) {
+        if (value == 'defaultError') {
+          return false;
+        }
+        if (value != 'correct') {
+          return 'This is an invalid value';
+        }
+        return true;
+      },
+    }),
+  ],
 };
 
 export default class ValidationTestsController extends Controller {
@@ -42,4 +55,7 @@ export default class ValidationTestsController extends Controller {
       label: 'Item 2',
     },
   ];
+
+  @tracked
+  customValidation;
 }
