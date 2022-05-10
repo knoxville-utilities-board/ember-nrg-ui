@@ -79,7 +79,7 @@ export function validator(eventName, options) {
     let validationResponse;
 
     if (eventName === 'custom') {
-      validationResponse = options.validate?.apply(this);
+      validationResponse = options.validate?.apply(this, [value]);
     } else {
       validationResponse = validate(eventName, value, options);
     }

@@ -11,11 +11,11 @@ const Validators = {
   radio: [validator('presence', true)],
   customValidation: [
     validator('custom', {
-      validate() {
-        if (this.customValidation == 'defaultError') {
+      validate(value) {
+        if (value == 'defaultError') {
           return false;
         }
-        if (this.customValidation != 'correct') {
+        if (value != 'correct') {
           return 'This is an invalid value';
         }
         return true;
