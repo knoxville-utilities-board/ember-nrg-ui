@@ -7094,12 +7094,12 @@ if(r.valid){i[e].warningMessage=r.warningMessage
 continue}const a=r?.options?.disabled
 let o=a
 "function"==typeof a&&(o=a.apply(this)),o||(i[e].message=r.errorMessage,i[e].isValid=!1)}}for(const e in i)if(a=i[e].isValid,!a)break
-return{isValid:a,attrs:i}}})},e.validator=function(e,t){if("boolean"==typeof t){const r=t;(t={})[e]=r}return function(n,i){const a=(0,r.validate)(e,n,t)
-t.description||(t.description=i.defaultDescription)
+return{isValid:a,attrs:i}}})},e.validator=function(e,t){if("boolean"==typeof t){const r=t;(t={})[e]=r}return function(n,i){let a
+a="custom"===e?t.validate?.apply(this,[n]):(0,r.validate)(e,n,t),t.description||(t.description=i.defaultDescription)
 const o={validator:e,options:t,valid:!0}
 if("boolean"==typeof a&&a)return o
-const s=t.message||i.getMessageFor(a.type,t)
-return t.isWarning?o.warningMessage=s:(o.valid=!1,o.errorMessage=s),o}}})),define("ember-nrg-ui/helpers/exists",["exports","@ember/component/helper","@ember/utils"],(function(e,t,r){"use strict"
+let s
+return s="custom"===e?a||(t.message??"This field is not valid"):t.message||i.getMessageFor(a.type,t),t.isWarning?o.warningMessage=s:(o.valid=!1,o.errorMessage=s),o}}})),define("ember-nrg-ui/helpers/exists",["exports","@ember/component/helper","@ember/utils"],(function(e,t,r){"use strict"
 function n(e){let[t,n]=e
 return!(0,r.isEmpty)(t)&&n&&t.includes(n)||!1}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.exists=n
 var i=(0,t.helper)(n)
