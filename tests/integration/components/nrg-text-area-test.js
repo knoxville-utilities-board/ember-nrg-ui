@@ -1,4 +1,4 @@
-import { render } from '@ember/test-helpers';
+import { fillIn, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
@@ -12,5 +12,19 @@ module('Integration | Component | nrg-text-area', function (hooks) {
     await render(hbs`<NrgTextArea @value={{this.value}} />`);
 
     assert.dom('textarea').hasValue('bob');
+  });
+
+  test('values from a model are used', async function (assert) {
+    this.set('model', {
+      value: 'bob',
+    });
+
+    await render(hbs`<NrgTextArea @model={{this.model}} @valuePath="value" />`);
+
+    assert.dom('textarea').hasValue('bob');
+
+    await fillIn('textarea', 'text');
+
+    assert.equal(this.model.value, 'text');
   });
 });
