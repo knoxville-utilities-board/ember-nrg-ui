@@ -1,6 +1,6 @@
 {
   "name": "ember-nrg-ui",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
   "keywords": [
     "ember-addon",
