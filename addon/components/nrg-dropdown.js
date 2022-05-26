@@ -284,11 +284,11 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     if (this.hideAction || notCurrentlySelected) {
       this.onSelect(option);
     }
-    if (this.isSearching) {
-      this.searchValue = '';
-    }
     if (this.isAddingOption && !this.args.hideAdditions) {
       this.options?.push?.(option);
+    }
+    if (this.isSearching) {
+      this.searchValue = '';
     }
     if (!this.args.multiple) {
       this.isOpen = false;
