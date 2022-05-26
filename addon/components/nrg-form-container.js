@@ -3,14 +3,18 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 export default class NrgFormComponent extends Component {
   @tracked
-  didValidate = false;
+  _didValidate = false;
+
+  get didValidate() {
+    return this.args.didValidate ?? this._didValidate;
+  }
 
   @action
   submit(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    this.didValidate = true;
+    this._didValidate = true;
     this.args.onSubmit?.();
   }
 }
