@@ -22,14 +22,14 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`<NrgDropdown @options={{options}} />`);
+    await render(hbs`<NrgDropdown @options={{this.options}} />`);
 
     assert.dom('.text').hasText('Select an Option');
   });
 
   test('default text renders', async function (assert) {
     await render(
-      hbs`<NrgDropdown @options={{options}} @defaultText="Pick Something" />`
+      hbs`<NrgDropdown @options={{this.options}} @defaultText="Pick Something" />`
     );
 
     assert.dom('.text').hasText('Pick Something');
@@ -37,7 +37,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
 
   test('item prepopulation works', async function (assert) {
     await render(
-      hbs`<NrgDropdown @options={{options}} @model={{this}} @valuePath="selectedOption" />`
+      hbs`<NrgDropdown @options={{this.options}} @model={{this}} @valuePath="selectedOption" />`
     );
 
     assert.dom('.text').hasText('Option 2');
@@ -45,7 +45,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
 
   test('block templating works', async function (assert) {
     await render(hbs`
-      <NrgDropdown @options={{options}} @model={{this}} @valuePath="selectedOption" as |option|>
+      <NrgDropdown @options={{this.options}} @model={{this}} @valuePath="selectedOption" as |option|>
         {{option.label2}}
       </NrgDropdown>
     `);
@@ -64,7 +64,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 2',
       },
     ];
-    await render(hbs`<NrgDropdown @options={{options}} />`);
+    await render(hbs`<NrgDropdown @options={{this.options}} />`);
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
     await triggerKeyDown('ArrowDown');
@@ -83,7 +83,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 2',
       },
     ];
-    await render(hbs`<NrgDropdown @options={{options}} />`);
+    await render(hbs`<NrgDropdown @options={{this.options}} />`);
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
     await triggerKeyDown('ArrowDown');
@@ -103,7 +103,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 2',
       },
     ];
-    await render(hbs`<NrgDropdown @options={{options}} />`);
+    await render(hbs`<NrgDropdown @options={{this.options}} />`);
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
     await triggerKeyDown('ArrowDown');
@@ -122,7 +122,9 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 2',
       },
     ];
-    await render(hbs`<NrgDropdown @search={{true}} @options={{options}} />`);
+    await render(
+      hbs`<NrgDropdown @search={{true}} @options={{this.options}} />`
+    );
     await click('.dropdown');
     await fillIn('input', '2');
     await triggerKeyDown('Tab');
@@ -136,7 +138,9 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 1',
       },
     ];
-    await render(hbs`<NrgDropdown @search={{true}} @options={{options}} />`);
+    await render(
+      hbs`<NrgDropdown @search={{true}} @options={{this.options}} />`
+    );
     await focus('input');
     assert.dom('.dropdown.visible').exists();
   });

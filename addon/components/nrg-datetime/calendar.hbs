@@ -43,8 +43,8 @@
           {{#each row as |cell|}}
             <td
               class="link
-                {{if cell.disabled "adjacent disabled"}}
-                {{if cell.selected "active focus"}}
+                {{if cell.disabled 'adjacent disabled'}}
+                {{if cell.selected 'active focus'}}
                 {{cell.customClass}}"
               role="button"
               {{on "click" (fn this.clickCell cell)}}

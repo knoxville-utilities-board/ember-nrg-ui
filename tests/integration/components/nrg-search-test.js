@@ -33,7 +33,7 @@ module('Integration | Component | nrg-search', function (hooks) {
     this.query = () => {
       return [{}];
     };
-    await render(hbs`<NrgSearch @searchTimeout={{0}} @query={{query}} />`);
+    await render(hbs`<NrgSearch @searchTimeout={{0}} @query={{this.query}} />`);
     await fillIn('input', 'querystring');
     assert.ok(findAll('.results').length);
   });
@@ -43,7 +43,7 @@ module('Integration | Component | nrg-search', function (hooks) {
       return [{}];
     };
     await render(
-      hbs`<NrgSearch @searchTimeout={{0}} @query={{query}} @loading={{true}} />`
+      hbs`<NrgSearch @searchTimeout={{0}} @query={{this.query}} @loading={{true}} />`
     );
     await fillIn('input', 'querystring');
     assert.notOk(findAll('.results').length);

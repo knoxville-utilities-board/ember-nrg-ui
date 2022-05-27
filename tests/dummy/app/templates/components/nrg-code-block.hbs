@@ -18,6 +18,6 @@
     </div>
   {{/if}}
   {{#let (get-code-snippet @codeBlockName) as |snippet|}}
-    <CodeBlock @language={{snippet.language}} @code={{snippet.source}}/>
+    <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
   {{/let}}
 </div>

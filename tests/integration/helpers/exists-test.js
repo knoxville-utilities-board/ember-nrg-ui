@@ -13,7 +13,7 @@ module('Integration | Helper | exists', function (hooks) {
     this.set('items', items);
     this.set('item', item);
 
-    await render(hbs`{{exists items item}}`);
+    await render(hbs`{{exists this.items this.item}}`);
 
     assert.dom(this.element).hasText('true');
   });
@@ -25,7 +25,7 @@ module('Integration | Helper | exists', function (hooks) {
     this.set('items', items);
     this.set('item', item);
 
-    await render(hbs`{{exists items item}}`);
+    await render(hbs`{{exists this.items this.item}}`);
 
     assert.dom(this.element).hasText('false');
   });

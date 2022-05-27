@@ -50,7 +50,7 @@ module('Integration | Component | nrg-modal', function (hooks) {
     this.isOpen = false;
     await render(hbs`
       <NrgModalContainer />
-      <NrgModal @isOpen={{isOpen}}>
+      <NrgModal @isOpen={{this.isOpen}}>
         <h2>Test Content</h2>
       </NrgModal>
     `);

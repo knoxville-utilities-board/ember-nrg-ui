@@ -1,4 +1,4 @@
-<div class="ui attached segment nrg-list {{if @loading "disabled"}} {{@class}}">
+<div class="ui attached segment nrg-list {{if @loading 'disabled'}} {{@class}}">
   <div class="ui middle aligned divided unstackable items">
     {{#each this.itemsProxy as |item i|}}
       {{#if @groupHeaderHandler}}
@@ -18,16 +18,16 @@
           role="button"
           class="{{if
               (and (exists this.selected item) this.canShowActiveItem)
-              "active"
+              'active'
             }}
             item
-            {{if (not (list-item-selectable item @isSelectable)) "disabled"}}"
+            {{if (not (list-item-selectable item @isSelectable)) 'disabled'}}"
           {{on "click" (fn this.onItemClick item)}}
         >
           {{#if (has-block)}}
             {{yield item}}
           {{else}}
-            <NrgList::DefaultListItem @item={{item}} />
+            <NrgList::DefaultListItem @item={{this.item}} />
           {{/if}}
         </div>
       {{else}}
@@ -35,7 +35,7 @@
           {{#if (has-block)}}
             {{yield item}}
           {{else}}
-            <NrgList::DefaultListItem @item={{item}} />
+            <NrgList::DefaultListItem @item={{this.item}} />
           {{/if}}
         </div>
       {{/if}}

@@ -13,7 +13,7 @@ module('Integration | Component | nrg-form-container', function (hooks) {
     });
 
     await render(hbs`
-      <NrgFormContainer @onSubmit={{action onSubmit}} as |form|>
+      <NrgFormContainer @onSubmit={{this.onSubmit}} as |form|>
         <form.submit-button />
       </NrgFormContainer>
     `);

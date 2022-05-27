@@ -80,7 +80,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     this.maxDate = expectedDate.clone().day(5);
     this.value = expectedDate.clone().toDate();
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @minDate={{minDate}} @maxDate={{maxDate}} @isDateDisabled={{isDateDisabled}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @minDate={{this.minDate}} @maxDate={{this.maxDate}} @isDateDisabled={{this.isDateDisabled}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
@@ -106,7 +106,7 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     this.maxDate = expectedDate.clone().day(5);
     this.value = expectedDate.clone().toDate();
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @minDate={{minDate}} @maxDate={{maxDate}} @isDateDisabled={{isDateDisabled}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @minDate={{this.minDate}} @maxDate={{this.maxDate}} @isDateDisabled={{this.isDateDisabled}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     const availableDateCells = findAll('.ui.calendar tbody td.link');

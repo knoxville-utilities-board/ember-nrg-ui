@@ -15,7 +15,7 @@
   {{/if}}
   {{! template-lint-disable no-inline-styles }}
   <div
-    class="{{if this.renderInModal "main-content"}}"
+    class={{if this.renderInModal "main-content"}}
     style={{this.mainContentStyle}}
   >
     {{yield}}

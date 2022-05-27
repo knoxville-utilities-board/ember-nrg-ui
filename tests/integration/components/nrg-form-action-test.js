@@ -11,7 +11,7 @@ module('Integration | Component | nrg-form-action', function (hooks) {
     this.set('testAction', function () {
       assert.ok(true);
     });
-    await render(hbs`<NrgFormAction @onClick={{action testAction}} />`);
+    await render(hbs`<NrgFormAction @onClick={{this.testAction}} />`);
 
     await click('a');
   });
