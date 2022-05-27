@@ -1,8 +1,8 @@
 {{! template-lint-disable no-inline-styles }}
 <div
   class="nrg-application
-    {{if @fullscreenMap "fullscreen-map"}}
-    {{if this.computerScreenSidebarActive "large-screen-sidebar-active"}}"
+    {{if @fullscreenMap 'fullscreen-map'}}
+    {{if this.computerScreenSidebarActive 'large-screen-sidebar-active'}}"
   {{on-resize this.setMainContentStyle}}
 >
   <NrgAppbar @onToggleSidebar={{this.toggleSidebar}}>
@@ -51,7 +51,7 @@
           </div>
         {{/if}}
         <div class="main-content" style={{this.mainContentStyle}}>
-          <div class="ui {{if @fluid "fluid"}} container">
+          <div class="ui {{if @fluid 'fluid'}} container">
             {{#if @isLoading}}
               <NrgLoadingIndicator />
             {{/if}}

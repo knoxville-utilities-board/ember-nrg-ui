@@ -1,7 +1,7 @@
 <div
   class="ui category search focus box inlined
-    {{if this.fluid "fluid"}}
-    {{if this._loading "loading"}}
+    {{if this.fluid 'fluid'}}
+    {{if this._loading 'loading'}}
     {{@class}}"
   {{on-click-outside this.onBlur}}
 >
@@ -33,7 +33,7 @@
       {{#each this.items as |item i|}}
         <div
           role="button"
-          class="result {{if (eq i this.activeItem) "active"}}"
+          class="result {{if (eq i this.activeItem) 'active'}}"
           {{on "click" (fn this.onItemClick item)}}
         >
           {{#if (has-block)}}

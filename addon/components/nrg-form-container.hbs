@@ -1,5 +1,5 @@
 <form
-  class="ui form {{if @error "error"}} {{if @loading "loading"}} {{@class}}"
+  class="ui form {{if @error 'error'}} {{if @loading 'loading'}} {{@class}}"
   {{on "submit" this.submit}}
 >
   {{yield

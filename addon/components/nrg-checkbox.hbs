@@ -1,12 +1,12 @@
 <div
   class="ui checkbox
-    {{if @disabled "disabled"}}
-    {{if @fitted "fitted"}}
-    {{if @readonly "read-only"}}
-    {{if (eq @type "slider") "slider"}}
-    {{if (eq @type "toggle") "toggle"}}
+    {{if @disabled 'disabled'}}
+    {{if @fitted 'fitted'}}
+    {{if @readonly 'read-only'}}
+    {{if (eq @type 'slider') 'slider'}}
+    {{if (eq @type 'toggle') 'toggle'}}
     {{@class}}"
-    ...attributes
+  ...attributes
 >
   <input
     id={{this.focusId}}

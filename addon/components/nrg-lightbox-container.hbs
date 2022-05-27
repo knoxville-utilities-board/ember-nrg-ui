@@ -8,8 +8,8 @@
   <div
     class="{{if
         this.bottomDetails
-        "lightbox-upper-container--bottom"
-        "lightbox-upper-container"
+        'lightbox-upper-container--bottom'
+        'lightbox-upper-container'
       }}"
   >
     <div class="lightbox-image">
@@ -35,8 +35,8 @@
   <div
     class="{{if
         this.bottomDetails
-        "lightbox-controls--bottom"
-        "lightbox-controls"
+        'lightbox-controls--bottom'
+        'lightbox-controls'
       }}"
   >
     <button
@@ -59,14 +59,14 @@
     <button
       type="button"
       class="ui primary icon button"
-      title="Detail Location - {{if this.bottomDetails "Right" "Bottom"}}"
+      title="Detail Location - {{if this.bottomDetails 'Right' 'Bottom'}}"
       {{on "click" this.toggleDetailLocation}}
     >
       <i
         class="{{if
             this.bottomDetails
-            "vertically flipped"
-            "clockwise rotated"
+            'vertically flipped'
+            'clockwise rotated'
           }}
           columns icon"
       ></i>

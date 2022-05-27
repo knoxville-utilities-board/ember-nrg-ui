@@ -1,11 +1,11 @@
 <div
   class="ui dropdown
-    {{if @search "search"}}
-    {{if (or this.selection @search) "selection"}}
-    {{if @loading "loading"}}
-    {{if this._dropdownDisabled "disabled"}}
-    {{if this.isOpen "active visible"}}
-    {{if @multiple "multiple"}}
+    {{if @search 'search'}}
+    {{if (or this.selection @search) 'selection'}}
+    {{if @loading 'loading'}}
+    {{if this._dropdownDisabled 'disabled'}}
+    {{if this.isOpen 'active visible'}}
+    {{if @multiple 'multiple'}}
     {{@class}}"
   tabindex={{unless @search "0"}}
   {{on "click" this.onClick}}

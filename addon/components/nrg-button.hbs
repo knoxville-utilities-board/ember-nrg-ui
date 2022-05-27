@@ -1,8 +1,8 @@
 <button
   type={{if @type @type "button"}}
   class="ui button
-    {{if @disabled "disabled"}}
-    {{if @loading "loading"}}
+    {{if @disabled 'disabled'}}
+    {{if @loading 'loading'}}
     {{@class}}"
   disabled={{or @disabled @loading}}
   {{on "click" this.onClick}}

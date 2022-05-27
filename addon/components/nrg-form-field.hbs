@@ -1,10 +1,10 @@
 <div
   class="ui field
-    {{if this.showError "error"}}
-    {{if @required "required"}}
-    {{if @inline "inline"}}
+    {{if this.showError 'error'}}
+    {{if @required 'required'}}
+    {{if @inline 'inline'}}
     {{@class}}"
-    ...attributes
+  ...attributes
 >
   {{#if @label}}
     <label for={{this.focusId}}>
