@@ -24,7 +24,7 @@ module('Integration | Helper | list-group-header', function (hooks) {
   test('label is shown correctly', async function (assert) {
     this.i = 0;
     await render(
-      hbs`<div>{{list-group-header items i groupHeaderHandler}}</div>`
+      hbs`<div>{{list-group-header this.items this.i this.groupHeaderHandler}}</div>`
     );
     assert.dom('div').hasText('B');
   });
@@ -32,7 +32,7 @@ module('Integration | Helper | list-group-header', function (hooks) {
   test('label is not shown for the second item', async function (assert) {
     this.i = 1;
     await render(
-      hbs`<div>{{list-group-header items i groupHeaderHandler}}</div>`
+      hbs`<div>{{list-group-header this.items this.i this.groupHeaderHandler}}</div>`
     );
     assert.dom('div').hasText('');
   });

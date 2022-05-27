@@ -9,7 +9,7 @@ module('Integration | Helper | format-number', function (hooks) {
   test('decimal for hbs template', async function (assert) {
     this.set('value', '1000000.1');
 
-    await render(hbs`{{format-number value 2}}`);
+    await render(hbs`{{format-number this.value 2}}`);
 
     assert.dom(this.element).hasText('1,000,000.10');
   });
@@ -17,7 +17,7 @@ module('Integration | Helper | format-number', function (hooks) {
   test('integer for hbs template', async function (assert) {
     this.set('value', '1000000');
 
-    await render(hbs`{{format-number value 0}}`);
+    await render(hbs`{{format-number this.value 0}}`);
 
     assert.dom(this.element).hasText('1,000,000');
 
@@ -28,7 +28,7 @@ module('Integration | Helper | format-number', function (hooks) {
   test('high precision decimal for hbs template', async function (assert) {
     this.set('value', '1000000.1');
 
-    await render(hbs`{{format-number value 6}}`);
+    await render(hbs`{{format-number this.value 6}}`);
 
     assert.dom(this.element).hasText('1,000,000.100000');
   });
@@ -36,7 +36,7 @@ module('Integration | Helper | format-number', function (hooks) {
   test('high precision decimal with no decimals for hbs template', async function (assert) {
     this.set('value', '1000000');
 
-    await render(hbs`{{format-number value 6}}`);
+    await render(hbs`{{format-number this.value 6}}`);
 
     assert.dom(this.element).hasText('1,000,000.000000');
   });
@@ -44,7 +44,7 @@ module('Integration | Helper | format-number', function (hooks) {
   test('high precision decimal with 4 decimals for hbs template', async function (assert) {
     this.set('value', '1000000.1234');
 
-    await render(hbs`{{format-number value 4}}`);
+    await render(hbs`{{format-number this.value 4}}`);
 
     assert.dom(this.element).hasText('1,000,000.1234');
   });

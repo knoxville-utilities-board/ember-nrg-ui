@@ -16,7 +16,7 @@ module('Integration | Component | nrg-list', function (hooks) {
       assert.equal(selectedItem, item);
     };
     await render(
-      hbs`<NrgList @selectionType="single" @items={{this.items}} @onItemSelect={{action selectAction}} />`
+      hbs`<NrgList @selectionType="single" @items={{this.items}} @onItemSelect={{this.selectAction}} />`
     );
     click('.item');
   });

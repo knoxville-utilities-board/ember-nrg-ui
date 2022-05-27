@@ -18,7 +18,7 @@ module('Integration | Component | nrg-list/header/filter', function (hooks) {
     };
 
     await render(
-      hbs`<NrgList::Header::Filter @filterParam="param" @filters={{filterList}} @onChange={{action changedAction}} />`
+      hbs`<NrgList::Header::Filter @filterParam="param" @filters={{this.filterList}} @onChange={{this.changedAction}} />`
     );
 
     const dropdown = find('.ui.dropdown');

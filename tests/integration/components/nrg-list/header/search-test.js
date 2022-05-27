@@ -12,7 +12,7 @@ module('Integration | Component | nrg-list/header/search', function (hooks) {
       assert.equal(value, 'value');
     };
     await render(
-      hbs`<NrgList::Header::Search @onChange={{action changedAction}} />`
+      hbs`<NrgList::Header::Search @onChange={{this.changedAction}} />`
     );
     await fillIn('input', 'value');
   });
