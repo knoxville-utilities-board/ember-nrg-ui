@@ -22,6 +22,7 @@ const Validators = {
       },
     }),
   ],
+  'nested.field': validator('presence', true),
 };
 
 export default class ValidationTestsController extends Controller {
@@ -58,4 +59,10 @@ export default class ValidationTestsController extends Controller {
 
   @tracked
   customValidation;
+
+  @tracked
+  nested = new (class {
+    @tracked
+    field;
+  })();
 }

@@ -49,5 +49,9 @@
     <field.text-field @model={{this}} @valuePath="customValidation" />
   </form.field>
 
+  <form.field @label="Nested Validations" data-test-nested-validator as |field|>
+    <field.text-field @model={{this}} @valuePath="nested.field" />
+  </form.field>
+
   <form.submit-button />
 </NrgFormContainer>
