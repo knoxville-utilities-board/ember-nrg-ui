@@ -1,3 +1,4 @@
+import { get } from '@ember/object';
 import { typeOf } from '@ember/utils';
 import { validate } from 'ember-validators';
 import messages from 'ember-validators/messages';
@@ -24,9 +25,15 @@ export default function validationState(validatorsArgument) {
             options: {},
           };
 
-          for (const validator of validators[key]) {
+          let validatorArray = validators[key];
+
+          if (!Array.isArray(validatorArray)) {
+            validatorArray = [validatorArray];
+          }
+
+          for (const validator of validatorArray) {
             const validatorResponse = validator.apply(this, [
-              this[key],
+              get(this, key),
               messages,
             ]);
 

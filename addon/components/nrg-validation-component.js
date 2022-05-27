@@ -1,6 +1,7 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { get, set } from '@ember/object';
 
 export default class NrgValidationComponent extends Component {
   @tracked
@@ -8,7 +9,7 @@ export default class NrgValidationComponent extends Component {
 
   get value() {
     if (this.hasModelPath) {
-      return this.args.model[this.args.valuePath];
+      return get(this.args.model, this.args.valuePath);
     } else {
       return this._value;
     }
@@ -16,7 +17,7 @@ export default class NrgValidationComponent extends Component {
 
   set value(newValue) {
     if (this.hasModelPath) {
-      this.args.model[this.args.valuePath] = newValue;
+      set(this.args.model, this.args.valuePath, newValue);
     } else {
       this._value = newValue;
     }
@@ -24,10 +25,8 @@ export default class NrgValidationComponent extends Component {
 
   constructor() {
     super(...arguments);
-    if (this.hasModelPath) {
-      this.value = this.args.model[this.args.valuePath];
-    } else if (this.args.value) {
-      this.value = this.args.value;
+    if (!this.hasModelPath && this.args.value) {
+      this._value = this.args.value;
     }
 
     if (this.hasModelPath && this.args.field) {
