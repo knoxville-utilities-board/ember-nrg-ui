@@ -45,8 +45,12 @@
     />
   </form.field>
 
-  <form.field @label="Custom Validation" as |field|>
+  <form.field @label="Custom Validation" data-test-custom-validator as |field|>
     <field.text-field @model={{this}} @valuePath="customValidation" />
+  </form.field>
+
+  <form.field @label="Nested Validations" data-test-nested-validator as |field|>
+    <field.text-field @model={{this}} @valuePath="nested.field" />
   </form.field>
 
   <form.submit-button />
