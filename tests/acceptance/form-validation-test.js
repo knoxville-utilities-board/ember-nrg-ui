@@ -18,18 +18,18 @@ module('Acceptance | form validation', function (hooks) {
     await click('button[type=submit]');
 
     assert
-      .dom('div.field:last-of-type > div.red.label')
+      .dom('[data-test-custom-validator] > div.red.label')
       .hasText('This is an invalid value', 'Custom error message works');
 
-    await fillIn('div.field.error:last-of-type input', 'defaultError');
+    await fillIn('[data-test-custom-validator] input', 'defaultError');
 
     assert
-      .dom('div.field:last-of-type > div.red.label')
+      .dom('[data-test-custom-validator] > div.red.label')
       .hasText('This field is not valid', 'false displays default error');
 
-    await fillIn('div.field.error:last-of-type input', 'correct');
+    await fillIn('[data-test-custom-validator] input', 'correct');
     assert
-      .dom('div.field:last-of-type > div.red.label')
+      .dom('[data-test-custom-validator] > div.red.label')
       .doesNotExist('true displays no error');
   });
 
