@@ -6,7 +6,7 @@ module.exports = function (environment) {
       policy: {
         'default-src': ["'none'"],
         'connect-src': ["'self'"],
-        'script-src': ["'unsafe-eval'"],
+        'script-src': ["'self' 'unsafe-eval'"],
         'script-src-elem': ["'unsafe-inline'",],
         'img-src': ["'self'"],
         'font-src': ["'self' data:"],
