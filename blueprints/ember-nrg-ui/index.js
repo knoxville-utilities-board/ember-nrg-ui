@@ -27,6 +27,9 @@ module.exports = {
       __root__: function () {
         return '/';
       },
+      __config__: function () {
+        return '/config';
+      },
       __public__: function () {
         return '/public';
       },
