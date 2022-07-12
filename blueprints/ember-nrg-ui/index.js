@@ -63,6 +63,10 @@ module.exports = {
         name: 'ember-cli-sass',
         target: '10.0.1',
       },
+      {
+        name: 'ember-cli-content-security-policy',
+        target: '2.0.3'
+      }
     ];
 
     this.ui.writeLine('Renaming app.css -> app.scss');
