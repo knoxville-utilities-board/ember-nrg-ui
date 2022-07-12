@@ -27,6 +27,9 @@ module.exports = {
       __root__: function () {
         return '/';
       },
+      __config__: function () {
+        return '/config';
+      },
       __public__: function () {
         return '/public';
       },
@@ -59,6 +62,10 @@ module.exports = {
       {
         name: 'ember-cli-sass',
         target: '10.0.1',
+      },
+      {
+        name: 'ember-cli-content-security-policy',
+        target: '2.0.3',
       },
     ];
 
