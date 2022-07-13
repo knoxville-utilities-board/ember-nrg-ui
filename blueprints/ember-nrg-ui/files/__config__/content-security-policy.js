@@ -12,7 +12,7 @@ module.exports = function (environment) {
         'font-src': ["'self' data:"],
         'style-src': ["'unsafe-inline'"],
         'style-src-elem': ["'self'"],
-        "report-uri": "/",
+        "report-uri": ["/"],
       },
       reportOnly: true,
     };
