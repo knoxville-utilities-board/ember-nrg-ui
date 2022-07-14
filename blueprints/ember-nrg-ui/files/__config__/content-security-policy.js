@@ -1,4 +1,4 @@
-module.exports = function (environment) {
+module.exports = function () {
     return {
       delivery: ['header'],
       enabled: true,
@@ -7,7 +7,7 @@ module.exports = function (environment) {
         'default-src': ["'none'"],
         'connect-src': ["'self'"],
         'script-src': ["'self' 'unsafe-eval'"],
-        'script-src-elem': ["'unsafe-inline'",],
+        'script-src-elem': ["'self' 'unsafe-inline'",],
         'img-src': ["'self'"],
         'font-src': ["'self' data:"],
         'style-src': ["'unsafe-inline'"],
