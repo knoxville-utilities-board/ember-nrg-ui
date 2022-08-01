@@ -27,7 +27,7 @@
           {{#if (has-block)}}
             {{yield item}}
           {{else}}
-            <NrgList::DefaultListItem @item={{this.item}} />
+            <NrgList::DefaultListItem @item={{item}} />
           {{/if}}
         </div>
       {{else}}
@@ -35,7 +35,7 @@
           {{#if (has-block)}}
             {{yield item}}
           {{else}}
-            <NrgList::DefaultListItem @item={{this.item}} />
+            <NrgList::DefaultListItem @item={{item}} />
           {{/if}}
         </div>
       {{/if}}
