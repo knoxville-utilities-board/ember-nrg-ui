@@ -6,6 +6,20 @@ import { module, test } from 'qunit';
 module('Integration | Component | nrg-list/items', function (hooks) {
   setupRenderingTest(hooks);
 
+  test('renders item implicitly', async function (assert) {
+    this.items = [
+      {
+        header: 'Header',
+        meta: 'Meta',
+        id: 'id',
+      },
+    ];
+    await render(hbs`<NrgList::Items @items={{this.items}} />`);
+
+    assert.dom('.header').containsText('Header');
+    assert.dom('.meta > span').containsText('Meta');
+  });
+
   test('can click on item', async function (assert) {
     assert.expect(2);
     let selected;
