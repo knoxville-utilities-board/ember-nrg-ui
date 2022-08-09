@@ -6875,10 +6875,7 @@ let h=(o=class extends n.default{constructor(){super(...arguments),u(this,"appli
 const e=Array.isArray(this.args.role)?this.args.role:[this.args.role],t=this.args.needsAllRoles,r=this.application.user
 return t?e.every((e=>r.hasRole(e))):e.some((e=>r.hasRole(e)))}click(e){e.preventDefault(),e.stopPropagation()
 const t=this.args.route,r=this.args.routeModel,n=this.args.url
-if(t&&r)this.router.transitionTo(t,r)
-else if(t)this.router.transitionTo(t)
-else if(n){const e=window.open()
-e.opener=null,e.location=n}else this.args.onClick&&this.args.onClick()}},s=c(o.prototype,"application",[i.inject],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),l=c(o.prototype,"router",[i.inject],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),c(o.prototype,"click",[a.action],Object.getOwnPropertyDescriptor(o.prototype,"click"),o.prototype),o)
+t&&r?this.router.transitionTo(t,r):t?this.router.transitionTo(t):n?window.open(n,"_blank","noopener,noreferrer"):this.args.onClick&&this.args.onClick()}},s=c(o.prototype,"application",[i.inject],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),l=c(o.prototype,"router",[i.inject],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),c(o.prototype,"click",[a.action],Object.getOwnPropertyDescriptor(o.prototype,"click"),o.prototype),o)
 e.default=h,(0,t.setComponentTemplate)(d,h)})),define("ember-nrg-ui/components/nrg-icon",["exports","@ember/component","@ember/template-factory","@ember/component/template-only"],(function(e,t,r,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 const i=(0,r.createTemplateFactory)({id:"JguA21Bc",block:'[[[10,"i"],[15,0,[29,["icon ",[30,1]," ",[30,2]]]],[12],[1,"\\n  "],[18,3,null],[1,"\\n"],[13]],["@class","@icon","&default"],false,["yield"]]',moduleName:"ember-nrg-ui/components/nrg-icon.hbs",isStrictMode:!1})
