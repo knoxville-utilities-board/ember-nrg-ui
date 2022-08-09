@@ -36,10 +36,7 @@ export default Component.extend({
     } else if (route) {
       this.router.transitionTo(route);
     } else if (url) {
-      // https://mathiasbynens.github.io/rel-noopener/
-      const newWindow = window.open();
-      newWindow.opener = null;
-      newWindow.location = url;
+      window.open(url, '_blank', 'noopener,noreferrer');
     } else {
       this.sendAction();
     }
