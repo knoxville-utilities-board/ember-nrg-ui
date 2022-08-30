@@ -7,9 +7,9 @@ module('Integration | Component | nrg-text-area', function (hooks) {
   setupRenderingTest(hooks);
 
   test('use like a regular text area with bound value', async function (assert) {
-    this.set('value', 'bob');
+    this.set('name', 'bob');
 
-    await render(hbs`<NrgTextArea @value={{this.value}} />`);
+    await render(hbs`<NrgTextArea @model={{this}} @valuePath="name" />`);
 
     assert.dom('textarea').hasValue('bob');
   });
