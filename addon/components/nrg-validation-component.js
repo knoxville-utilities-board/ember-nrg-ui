@@ -11,8 +11,16 @@ export default class NrgValidationComponent extends Component {
     if (this.hasModelPath) {
       return get(this.args.model, this.args.valuePath);
     } else {
-      return this._value;
+      return this.args.value !== undefined ? this.args.value : this._value;
     }
+  }
+
+  get hasModelPath() {
+    return this.args.model && this.args.valuePath;
+  }
+
+  get twoWayBinding() {
+    return this.args.twoWayBinding !== false;
   }
 
   set value(newValue) {
@@ -25,9 +33,6 @@ export default class NrgValidationComponent extends Component {
 
   constructor() {
     super(...arguments);
-    if (!this.hasModelPath && this.args.value) {
-      this._value = this.args.value;
-    }
 
     if (this.hasModelPath && this.args.field) {
       this.args.field.model = this.args.model;
@@ -35,13 +40,11 @@ export default class NrgValidationComponent extends Component {
     }
   }
 
-  get hasModelPath() {
-    return this.args.model && this.args.valuePath;
-  }
-
   @action
   _onChange(newValue) {
-    this.value = newValue;
+    if (this.twoWayBinding) {
+      this.value = newValue;
+    }
     this.args.onChange?.(...arguments);
   }
 }
