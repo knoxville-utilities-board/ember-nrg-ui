@@ -11,7 +11,7 @@ export default class NrgValidationComponent extends Component {
     if (this.hasModelPath) {
       return get(this.args.model, this.args.valuePath);
     } else {
-      return this.args.value !== undefined ? this.args.value : this._value;
+      return this._value;
     }
   }
 
