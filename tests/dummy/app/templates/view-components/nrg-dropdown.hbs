@@ -93,6 +93,14 @@
     <form.field @label="Hide Action" as |field|>
       <field.dropdown @options={{this.optionList}} @dropdownAction="hide" />
     </form.field>
+    <form.field @label="Two Way Binding Disabled" as |field|>
+      <field.dropdown
+        @options={{this.optionList}}
+        @model={{this}}
+        @valuePath="selectedOption"
+        @twoWayBinding={{false}}
+      />
+    </form.field>
   </NrgFormContainer>
   {{! END-SNIPPET }}
 </NrgCodeBlock>

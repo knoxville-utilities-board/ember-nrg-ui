@@ -281,6 +281,13 @@
     <form.form-link @route="index">
       Index
     </form.form-link>
+    <br />
+    <br />
+    <form.field @label="Text Field with Two Way Binding Disabled" as |field|>
+      <field.text-field @twoWayBinding={{false}} as |view|>
+        {{view.input}}
+      </field.text-field>
+    </form.field>
   </NrgFormContainer>
   {{! END-SNIPPET }}
 </NrgCodeBlock>
