@@ -8,9 +8,15 @@ module('Integration | Component | nrg-datetime', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders (empty)', async function (assert) {
-    await render(hbs`<NrgDatetime @initializeDate={{false}} />`);
+    await render(hbs`<NrgDatetime />`);
 
     assert.dom('input').hasValue('');
+  });
+
+  test('it renders (with default value)', async function (assert) {
+    await render(hbs`<NrgDatetime @useDefaultValue={{true}} />`);
+
+    assert.dom('input').hasValue();
   });
 
   test('it renders (datetime)', async function (assert) {
