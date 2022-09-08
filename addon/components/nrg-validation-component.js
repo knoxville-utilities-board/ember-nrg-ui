@@ -25,14 +25,37 @@ export default class NrgValidationComponent extends Component {
 
   constructor() {
     super(...arguments);
-    if (!this.hasModelPath && this.args.value) {
-      this._value = this.args.value;
+    const defaultValue = this.defaultValue;
+    const initialValue = this.hasModelPath ? this.value : this.args.value;
+    if (
+      initialValue === undefined &&
+      defaultValue !== undefined &&
+      this.useDefaultValue
+    ) {
+      this._onChange(this.defaultValue);
+    } else if (!this.hasModelPath) {
+      this._value = initialValue;
     }
 
     if (this.hasModelPath && this.args.field) {
       this.args.field.model = this.args.model;
       this.args.field.valuePath = this.args.valuePath;
     }
+  }
+
+  get useDefaultValue() {
+    return this.args.useDefaultValue ?? false;
+  }
+
+  get defaultValue() {
+    if (this.args.defaultValue !== undefined) {
+      return this.args.defaultValue;
+    }
+    return this.getDefaultValue();
+  }
+
+  getDefaultValue() {
+    return undefined;
   }
 
   get hasModelPath() {
