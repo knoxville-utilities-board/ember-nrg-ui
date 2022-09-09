@@ -7,7 +7,7 @@ module.exports = function (environment) {
     environment,
     modulePrefix: 'dummy',
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'history',
     EmberENV: {
       DEBUG_TASKS: true,
       FEATURES: {

@@ -9,5 +9,8 @@ module.exports = {
     'no-implicit-this': {
       allow: ['nrg-app-version'],
     },
+    'require-valid-named-block-naming-format': 'kebab-case',
+    'no-autofocus-attribute': false,
+    'require-presentational-children': false,
   },
 };

@@ -231,14 +231,14 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     await render(hbs`<NrgDatetime::Calendar @type="time"/>`);
 
     const selected = findAll('div.calendar.visible td.active');
-    assert.equal(selected.length, 0);
+    assert.strictEqual(selected.length, 0);
   });
 
   test('no date is selected if no value is passed in', async function (assert) {
     await render(hbs`<NrgDatetime::Calendar @type="date" />`);
 
     const selected = findAll('div.calendar.visible td.active');
-    assert.equal(selected.length, 0);
+    assert.strictEqual(selected.length, 0);
   });
 
   test('isDateDisabled can use precision', async function (assert) {

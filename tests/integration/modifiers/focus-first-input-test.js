@@ -16,7 +16,7 @@ module('Integration | Modifier | focus-first-input', function (hooks) {
     `);
     const firstInput = document.querySelector('#test-first-input');
     const secondInput = document.querySelector('#test-second-input');
-    assert.equal(document.activeElement, firstInput);
+    assert.strictEqual(document.activeElement, firstInput);
     assert.notEqual(document.activeElement, secondInput);
   });
 });
