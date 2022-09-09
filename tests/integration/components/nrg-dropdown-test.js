@@ -64,7 +64,9 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 2',
       },
     ];
-    await render(hbs`<NrgDropdown @options={{this.options}} />`);
+    await render(
+      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @options={{this.options}} />`
+    );
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
     await triggerKeyDown('ArrowDown');
@@ -83,7 +85,9 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 2',
       },
     ];
-    await render(hbs`<NrgDropdown @options={{this.options}} />`);
+    await render(
+      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @options={{this.options}} />`
+    );
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
     await triggerKeyDown('ArrowDown');
@@ -103,7 +107,9 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         value: 'Value 2',
       },
     ];
-    await render(hbs`<NrgDropdown @options={{this.options}} />`);
+    await render(
+      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @options={{this.options}} />`
+    );
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
     await triggerKeyDown('ArrowDown');
@@ -123,7 +129,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
       },
     ];
     await render(
-      hbs`<NrgDropdown @search={{true}} @options={{this.options}} />`
+      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @search={{true}} @options={{this.options}} />`
     );
     await click('.dropdown');
     await fillIn('input', '2');
