@@ -23,7 +23,7 @@ module('Integration | Component | nrg-search', function (hooks) {
   test('query method is called with querystring', async function (assert) {
     assert.expect(1);
     this.query = (querystring) => {
-      assert.equal(querystring, 'search');
+      assert.strictEqual(querystring, 'search');
     };
     await render(hbs`<NrgSearch @query={{this.query}} />`);
     await fillIn('input', 'search');

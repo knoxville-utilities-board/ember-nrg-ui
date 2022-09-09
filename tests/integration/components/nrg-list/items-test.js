@@ -28,7 +28,7 @@ module('Integration | Component | nrg-list/items', function (hooks) {
     };
     this.items = [item];
     this.selectAction = function (selectedItem, allSelected) {
-      assert.equal(selectedItem, item);
+      assert.deepEqual(selectedItem, item);
       selected = allSelected;
     };
     this.isSelectable = function () {
@@ -38,7 +38,7 @@ module('Integration | Component | nrg-list/items', function (hooks) {
       hbs`<NrgList::Items @selectionType="single" @items={{this.items}} @isSelectable={{this.isSelectable}} @onItemSelect={{this.selectAction}} />`
     );
     await click('.item');
-    assert.equal(selected.length, 1);
+    assert.strictEqual(selected.length, 1);
   });
 
   test('can not select if isSelectable returns false', async function (assert) {
@@ -52,7 +52,7 @@ module('Integration | Component | nrg-list/items', function (hooks) {
     };
     this.items = [item1, item2];
     this.selectAction = function (selectedItem, allSelected) {
-      assert.equal(selectedItem, item2);
+      assert.deepEqual(selectedItem, item2);
       selected = allSelected;
     };
     this.isSelectable = function (item) {
@@ -65,6 +65,6 @@ module('Integration | Component | nrg-list/items', function (hooks) {
     const items = findAll('.item');
     await click(items[0]);
     await click(items[1]);
-    assert.equal(selected.length, 1);
+    assert.strictEqual(selected.length, 1);
   });
 });

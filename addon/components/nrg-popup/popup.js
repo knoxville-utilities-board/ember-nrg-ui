@@ -32,8 +32,4 @@ export default class NrgPopupPopupComponent extends Component {
       return '';
     }
   }
-
-  get popupContainer() {
-    return document.querySelector('#popup-container');
-  }
 }
