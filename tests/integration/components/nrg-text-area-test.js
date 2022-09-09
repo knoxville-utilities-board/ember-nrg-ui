@@ -25,6 +25,6 @@ module('Integration | Component | nrg-text-area', function (hooks) {
 
     await fillIn('textarea', 'text');
 
-    assert.equal(this.model.value, 'text');
+    assert.strictEqual(this.model.value, 'text');
   });
 });

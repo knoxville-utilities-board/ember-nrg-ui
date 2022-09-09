@@ -19,9 +19,9 @@ module('Integration | Component | nrg-radio', function (hooks) {
     await render(
       hbs`<NrgRadio @value="1" @model={{this}} @valuePath="selectedValue" />`
     );
-    assert.equal(this.selectedValue, '0');
+    assert.strictEqual(this.selectedValue, '0');
     await click('.ui.checkbox.radio input');
-    assert.equal(this.selectedValue, '1');
+    assert.strictEqual(this.selectedValue, '1');
   });
 
   test('label is clickable', async function (assert) {
@@ -29,9 +29,9 @@ module('Integration | Component | nrg-radio', function (hooks) {
     await render(
       hbs`<NrgRadio @value="1" @model={{this}} @valuePath="selectedValue" @label="clickable label" />`
     );
-    assert.equal(this.selectedValue, '0');
+    assert.strictEqual(this.selectedValue, '0');
     await click(find('.ui.checkbox.radio label'));
-    assert.equal(this.selectedValue, '1');
+    assert.strictEqual(this.selectedValue, '1');
   });
 
   test('only one radio is checked in a group', async function (assert) {
@@ -50,6 +50,6 @@ module('Integration | Component | nrg-radio', function (hooks) {
 
     assert.notOk(inputs[0].checked);
     assert.ok(inputs[1].checked);
-    assert.equal(this.selectedValue, '2');
+    assert.strictEqual(this.selectedValue, '2');
   });
 });

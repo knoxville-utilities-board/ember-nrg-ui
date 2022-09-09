@@ -17,7 +17,7 @@ module('Integration | Component | nrg-text-field/trim-input', function (hooks) {
   test('trim white space from user input', async function (assert) {
     assert.expect(1);
     this.onChange = (value) => {
-      assert.equal(value, 'bob');
+      assert.strictEqual(value, 'bob');
     };
     this.set('value', '');
     await render(
