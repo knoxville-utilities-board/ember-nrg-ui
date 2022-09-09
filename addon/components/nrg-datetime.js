@@ -10,13 +10,6 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
   @tracked
   isFocused = false;
 
-  constructor() {
-    super(...arguments);
-    if (!this.value && this.initializeDate) {
-      this.value = new Date();
-    }
-  }
-
   get dateFormat() {
     return this.args.dateFormat ?? defaultDateFormat;
   }
@@ -31,10 +24,6 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
 
   get showNowShortcut() {
     return this.args.showNowShortcut !== false;
-  }
-
-  get initializeDate() {
-    return this.args.initializeDate !== false;
   }
 
   get icon() {
@@ -71,6 +60,10 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
       return;
     }
     this.value = newValue.toDate();
+  }
+
+  getDefaultValue() {
+    return new Date();
   }
 
   @action
