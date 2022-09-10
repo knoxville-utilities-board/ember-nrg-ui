@@ -4,7 +4,7 @@
       href=""
       role="button"
       class="{{if @disabled 'disabled'}} item {{@class}}"
-      {{on "click" this._onClick}}
+      {{on "click" this.onClick}}
       ...attributes
     >
       {{yield}}

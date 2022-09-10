@@ -51,12 +51,12 @@ export default class ModalWrapper extends Component {
   }
 
   @action
-  _onPrimary() {
-    this.args.modal?._onPrimary?.();
+  onPrimary() {
+    this.args.modal?.onPrimary?.();
   }
 
   @action
-  _onSecondary() {
-    this.args.modal?._onSecondary?.();
+  onSecondary() {
+    this.args.modal?.onSecondary?.();
   }
 }

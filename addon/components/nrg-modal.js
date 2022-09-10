@@ -16,7 +16,7 @@ export default class NrgModal extends Component {
   @tracked
   renderTo;
 
-  get _renderTo() {
+  get renderTo() {
     if (this.renderInPlace || this.isTesting) {
       return null;
     }
@@ -118,13 +118,13 @@ export default class NrgModal extends Component {
   }
 
   @action
-  _onPrimary() {
+  onPrimary() {
     this.onHide();
     this.onPrimaryButtonClick();
   }
 
   @action
-  _onSecondary() {
+  onSecondary() {
     this.onHide();
     this.onSecondaryButtonClick();
   }

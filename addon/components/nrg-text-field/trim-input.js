@@ -44,7 +44,7 @@ export default class TrimInputComponent extends Component {
   }
 
   @action
-  _valueChange({ target }) {
+  valueChange({ target }) {
     this.innerValue = target.value;
     const value = target.value.trim();
     this.args.onChange?.(value);
