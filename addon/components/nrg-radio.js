@@ -8,6 +8,6 @@ export default class NrgRadioComponent extends NrgValidationComponent {
 
   @action
   selectOption() {
-    this._onChange(this.args.value);
+    this.onChange(this.args.value);
   }
 }

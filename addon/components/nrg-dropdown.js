@@ -65,7 +65,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     return this.args.match ?? defaultMatch;
   }
 
-  get _dropdownDisabled() {
+  get dropdownDisabled() {
     return this.args.loading || this.args.disabled;
   }
 
@@ -114,12 +114,8 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     return !this.hideAction;
   }
 
-  get _hideAction() {
-    return this.args.dropdownAction == 'hide';
-  }
-
   get hideAction() {
-    return this._hideAction || this.args.freeform;
+    return this.args.dropdownAction == 'hide' || this.args.freeform;
   }
 
   get isStringData() {
@@ -174,7 +170,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   focusInput() {
-    if (!this.args.search || this._dropdownDisabled) {
+    if (!this.args.search || this.dropdownDisabled) {
       return;
     }
     const input = this.wrapperElement.querySelector('input');
@@ -222,7 +218,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   onSelect(option) {
-    this._onChange(option);
+    this.onChange(option);
   }
 
   isCurrentlySelected(option) {
@@ -268,7 +264,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
       evt.stopPropagation();
       evt.preventDefault();
     }
-    if (!option || this._dropdownDisabled) {
+    if (!option || this.dropdownDisabled) {
       this.isOpen = false;
     }
     const notCurrentlySelected = !this.isCurrentlySelected(option);
@@ -298,7 +294,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
 
   @action
   keyboardEscapeHandler(evt) {
-    if (this._dropdownDisabled) {
+    if (this.dropdownDisabled) {
       return;
     }
     const displayedOptionsLength = this.displayedOptions.length;
@@ -323,7 +319,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
 
   @action
   moveUp(evt) {
-    if (!this.isOpen || this._dropdownDisabled) {
+    if (!this.isOpen || this.dropdownDisabled) {
       return;
     }
     evt.preventDefault();
@@ -336,7 +332,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
 
   @action
   moveDown(evt) {
-    if (!this.isOpen || this._dropdownDisabled) {
+    if (!this.isOpen || this.dropdownDisabled) {
       return;
     }
     evt.preventDefault();

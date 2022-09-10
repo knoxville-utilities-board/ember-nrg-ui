@@ -8,7 +8,7 @@
     name={{@name}}
     placeholder={{@placeholder}}
     disabled={{@disabled}}
-    {{on "input" this._valueChange}}
+    {{on "input" this.valueChange}}
   ></textarea>
   {{#if this.characterLimit}}
     <div class="text character-limit {{if this.overCharacterLimit 'red'}}">

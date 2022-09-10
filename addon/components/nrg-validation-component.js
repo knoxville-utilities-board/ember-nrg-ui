@@ -14,7 +14,7 @@ export default class NrgValidationComponent extends Component {
       this.useDefaultValue
     ) {
       schedule('actions', () => {
-        this._onChange(this.defaultValue);
+        this.onChange(this.defaultValue);
       });
     }
 
@@ -57,7 +57,7 @@ export default class NrgValidationComponent extends Component {
   }
 
   @action
-  _onChange(newValue) {
+  onChange(newValue) {
     this.value = newValue;
     this.args.onChange?.(...arguments);
   }
