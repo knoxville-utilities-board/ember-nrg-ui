@@ -68,7 +68,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
     return dayjs(this.args.value).minute();
   }
 
-  get _showNowShortcut() {
+  get showNowShortcut() {
     if (this.args.showNowShortcut === false) {
       return false;
     }
@@ -111,7 +111,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       const row = [];
       for (let j = 0; j < 3; j++) {
         const minute = calendar.minute();
-        const disabled = this._isDateDisabled(calendar, 'minute');
+        const disabled = this.isDateDisabled(calendar, 'minute');
         const selected = !disabled && this.selectedMinuteIndex === minute;
         row.push({
           display: calendar.format('LT'),
@@ -137,7 +137,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       const row = [];
       for (let j = 0; j < 4; j++) {
         const hour = calendar.hour();
-        const disabled = this._isDateDisabled(calendar, 'hour');
+        const disabled = this.isDateDisabled(calendar, 'hour');
         const selected = !disabled && this.selectedHourIndex === hour;
         row.push({
           display: calendar.format('LT'),
@@ -168,7 +168,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
         const isDifferentMonth = month !== this.selectedMonthIndex;
         const dateIsToday = calendar.isSame(today, 'date');
         const disabled =
-          this._isDateDisabled(calendar, 'date') || isDifferentMonth;
+          this.isDateDisabled(calendar, 'date') || isDifferentMonth;
         const selected = !disabled && this.selectedDayIndex === date;
 
         week.push({
@@ -197,7 +197,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       let row = [];
       for (let j = 0; j < 3; j++) {
         const month = calendar.month();
-        const disabled = this._isDateDisabled(calendar, 'month');
+        const disabled = this.isDateDisabled(calendar, 'month');
         const selected = !disabled && this.selectedMonthIndex === month;
         row.push({
           display: calendar.format('MMM'),
@@ -226,7 +226,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
         const calendar = dayjs({
           year,
         });
-        const disabled = this._isDateDisabled(calendar, 'year');
+        const disabled = this.isDateDisabled(calendar, 'year');
         const selected = !disabled && this.selectedYearIndex === year;
         row.push({
           display: year,
@@ -281,13 +281,13 @@ export default class NrgDateTimeCalendarComponent extends Component {
     return !valid;
   }
 
-  _isDateDisabled(date, precision) {
+  isDateDisabled(date, precision) {
     const userDisabled = this.args.isDateDisabled?.(date, precision);
     const isBeyondDateRange = this.isBeyondDateRange(date, precision);
     return userDisabled || isBeyondDateRange;
   }
 
-  _manipulateDate(operation, dateTransformation, evt) {
+  manipulateDate(operation, dateTransformation, evt) {
     if (evt) {
       evt.preventDefault();
       evt.stopPropagation();
@@ -319,7 +319,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
 
     const userDisabled = this.args.isDateDisabled?.(date, precision);
     if (userDisabled) {
-      this._onSelect(currentDate.toDate());
+      this.onSelect(currentDate.toDate());
       return;
     }
 
@@ -338,7 +338,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       date = date.subtract(remainder, 'minute');
     }
 
-    this._onSelect(date.toDate());
+    this.onSelect(date.toDate());
   }
 
   selectDate() {
@@ -349,10 +349,10 @@ export default class NrgDateTimeCalendarComponent extends Component {
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
     });
-    this._onSelect(value.toDate());
+    this.onSelect(value.toDate());
   }
 
-  _onSelect(date) {
+  onSelect(date) {
     this.args.onSelect?.(date);
   }
 
@@ -363,60 +363,60 @@ export default class NrgDateTimeCalendarComponent extends Component {
   @action
   moveLeft(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('subtract', { day: 1 }, evt);
+      this.manipulateDate('subtract', { day: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('subtract', { month: 1 }, evt);
+      this.manipulateDate('subtract', { month: 1 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('subtract', { year: 1 }, evt);
+      this.manipulateDate('subtract', { year: 1 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('subtract', { minute: MINUTE_INTERVAL }, evt);
+      this.manipulateDate('subtract', { minute: MINUTE_INTERVAL }, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('subtract', { hour: 1 }, evt);
+      this.manipulateDate('subtract', { hour: 1 }, evt);
     }
   }
 
   @action
   moveRight(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('add', { day: 1 }, evt);
+      this.manipulateDate('add', { day: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('add', { month: 1 }, evt);
+      this.manipulateDate('add', { month: 1 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('add', { year: 1 }, evt);
+      this.manipulateDate('add', { year: 1 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('add', { minute: MINUTE_INTERVAL }, evt);
+      this.manipulateDate('add', { minute: MINUTE_INTERVAL }, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('add', { hour: 1 }, evt);
+      this.manipulateDate('add', { hour: 1 }, evt);
     }
   }
 
   @action
   moveUp(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('subtract', { week: 1 }, evt);
+      this.manipulateDate('subtract', { week: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('subtract', { month: 3 }, evt);
+      this.manipulateDate('subtract', { month: 3 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('subtract', { year: 2 }, evt);
+      this.manipulateDate('subtract', { year: 2 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('subtract', { minute: MINUTE_INTERVAL * 3 }, evt);
+      this.manipulateDate('subtract', { minute: MINUTE_INTERVAL * 3 }, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('subtract', { hour: 4 }, evt);
+      this.manipulateDate('subtract', { hour: 4 }, evt);
     }
   }
 
   @action
   moveDown(evt) {
     if (this.isSelectingDays) {
-      this._manipulateDate('add', { week: 1 }, evt);
+      this.manipulateDate('add', { week: 1 }, evt);
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('add', { month: 3 }, evt);
+      this.manipulateDate('add', { month: 3 }, evt);
     } else if (this.isSelectingYears) {
-      this._manipulateDate('add', { year: 2 }, evt);
+      this.manipulateDate('add', { year: 2 }, evt);
     } else if (this.isSelectingMinutes) {
-      this._manipulateDate('add', { minute: MINUTE_INTERVAL * 3 }, evt);
+      this.manipulateDate('add', { minute: MINUTE_INTERVAL * 3 }, evt);
     } else if (this.isSelectingHours) {
-      this._manipulateDate('add', { hour: 4 }, evt);
+      this.manipulateDate('add', { hour: 4 }, evt);
     }
   }
 
@@ -436,7 +436,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
 
   @action
   setToNow() {
-    this._onSelect(new Date());
+    this.onSelect(new Date());
   }
 
   @action
@@ -445,18 +445,18 @@ export default class NrgDateTimeCalendarComponent extends Component {
     evt.stopPropagation();
 
     if (this.isSelectingMinutes) {
-      this._manipulateDate('set', { minute: cell.minute });
+      this.manipulateDate('set', { minute: cell.minute });
     } else if (this.isSelectingHours) {
-      this._manipulateDate('set', {
+      this.manipulateDate('set', {
         hour: cell.hour,
         minute: 0,
       });
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('set', { month: cell.month });
+      this.manipulateDate('set', { month: cell.month });
     } else if (this.isSelectingYears) {
-      this._manipulateDate('set', { year: cell.year });
+      this.manipulateDate('set', { year: cell.year });
     } else if (this.isSelectingDays) {
-      this._manipulateDate('set', {
+      this.manipulateDate('set', {
         date: cell.date,
         month: cell.month,
         year: cell.year,
@@ -513,26 +513,26 @@ export default class NrgDateTimeCalendarComponent extends Component {
   @action
   onPrevious() {
     if (this.isSelectingDays) {
-      this._manipulateDate('subtract', { month: 1 });
+      this.manipulateDate('subtract', { month: 1 });
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('subtract', { year: 1 });
+      this.manipulateDate('subtract', { year: 1 });
     } else if (this.isSelectingYears) {
-      this._manipulateDate('subtract', { year: 10 });
+      this.manipulateDate('subtract', { year: 10 });
     } else if (this.isSelectingHours || this.isSelectingMinutes) {
-      this._manipulateDate('subtract', { day: 1 });
+      this.manipulateDate('subtract', { day: 1 });
     }
   }
 
   @action
   onNext() {
     if (this.isSelectingDays) {
-      this._manipulateDate('add', { month: 1 });
+      this.manipulateDate('add', { month: 1 });
     } else if (this.isSelectingMonths) {
-      this._manipulateDate('add', { year: 1 });
+      this.manipulateDate('add', { year: 1 });
     } else if (this.isSelectingYears) {
-      this._manipulateDate('add', { year: 10 });
+      this.manipulateDate('add', { year: 10 });
     } else if (this.isSelectingHours || this.isSelectingMinutes) {
-      this._manipulateDate('add', { day: 1 });
+      this.manipulateDate('add', { day: 1 });
     }
   }
 }

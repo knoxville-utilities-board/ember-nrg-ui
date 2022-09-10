@@ -52,7 +52,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     return this.args.noResultsLabel ?? defaultNoResultsLabel;
   }
 
-  get _loading() {
+  get loading() {
     return this.args.loading ?? this.throttleQuery.isRunning;
   }
 
@@ -68,7 +68,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     return (
       this.isFocused &&
       this.canPerformSearch &&
-      !this._loading &&
+      !this.loading &&
       this.receivedResults
     );
   }
@@ -82,7 +82,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     if (!item) {
       item = this.items[this.activeItem];
     }
-    this._onChange(item);
+    this.onChange(item);
     this.updateDisplayValue(item);
     this.onBlur();
   }

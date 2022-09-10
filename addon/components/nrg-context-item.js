@@ -19,7 +19,7 @@ export default class NrgContextItemComponent extends Component {
   }
 
   @action
-  _onClick(evt) {
+  onClick(evt) {
     evt.preventDefault();
     if (this.args.disabled) {
       return;

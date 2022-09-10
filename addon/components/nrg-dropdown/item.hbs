@@ -6,7 +6,7 @@
     {{if this.active 'active'}}
     item
     {{@class}}"
-  {{on "click" (fn this._onClick @option)}}
+  {{on "click" (fn this.onClick @option)}}
   ...attributes
 >
   {{yield}}
