@@ -1,5 +1,5 @@
 import Modifier from 'ember-modifier';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class OnResizeModifier extends Modifier {
