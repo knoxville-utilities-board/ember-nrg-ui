@@ -6,31 +6,33 @@
     {{@class}}"
   ...attributes
 >
-  {{#if @label}}
-    <label for={{this.focusId}}>
-      {{@label}}
-      {{#if @secondaryLabel}}
-        <div class="ui basic horizontal label">{{@secondaryLabel}}</div>
-      {{/if}}
-    </label>
-  {{/if}}
+  {{#let (unique-id) as |focusId|}}
+    {{#if @label}}
+      <label for={{focusId}}>
+        {{@label}}
+        {{#if @secondaryLabel}}
+          <div class="ui basic horizontal label">{{@secondaryLabel}}</div>
+        {{/if}}
+      </label>
+    {{/if}}
 
-  {{yield
-    (hash
-      field=this
-      checkbox=(component "nrg-checkbox" field=this)
-      datetime=(component "nrg-datetime" field=this focusId=this.focusId)
-      dropdown=(component "nrg-dropdown" field=this focusId=this.focusId)
-      radio=(component "nrg-radio" field=this focusId=this.focusId)
-      text-area=(component
-        "nrg-text-area" fluid=true field=this focusId=this.focusId
+    {{yield
+      (hash
+        field=this
+        checkbox=(component "nrg-checkbox" field=this)
+        datetime=(component "nrg-datetime" field=this focusId=focusId)
+        dropdown=(component "nrg-dropdown" field=this focusId=focusId)
+        radio=(component "nrg-radio" field=this focusId=focusId)
+        text-area=(component
+          "nrg-text-area" fluid=true field=this focusId=focusId
+        )
+        text-field=(component
+          "nrg-text-field" fluid=true field=this focusId=focusId
+        )
+        search=(component "nrg-search" fluid=true field=this focusId=focusId)
       )
-      text-field=(component
-        "nrg-text-field" fluid=true field=this focusId=this.focusId
-      )
-      search=(component "nrg-search" fluid=true field=this focusId=this.focusId)
-    )
-  }}
+    }}
+  {{/let}}
 
   {{#if this.showError}}
     <div class="ui basic red pointing prompt label">{{this.errorMessage}}</div>

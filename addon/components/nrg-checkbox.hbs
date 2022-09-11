@@ -8,16 +8,18 @@
     {{@class}}"
   ...attributes
 >
-  <input
-    id={{this.focusId}}
-    class="hidden"
-    type="checkbox"
-    checked={{this.checked}}
-    name={{@name}}
-    disabled={{@disabled}}
-    {{on "input" this.valueChange}}
-  />
-  <label for={{this.focusId}}>
-    {{@label}}
-  </label>
+  {{#let (unique-id) as |focusId|}}
+    <input
+      id={{focusId}}
+      class="hidden"
+      type="checkbox"
+      checked={{this.checked}}
+      name={{@name}}
+      disabled={{@disabled}}
+      {{on "input" this.valueChange}}
+    />
+    <label for={{focusId}}>
+      {{@label}}
+    </label>
+  {{/let}}
 </div>
