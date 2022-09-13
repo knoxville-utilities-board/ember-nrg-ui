@@ -48,10 +48,11 @@
     height: 7em;
     line-height: 7em;
     background-color: #2185d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .icon {
-      display: inline-block;
-      vertical-align: middle;
       font-size: 2.5em;
       color: #fff;
       box-shadow: 0 0 0 0.1em rgba(255, 255, 255, 0.3) inset;
