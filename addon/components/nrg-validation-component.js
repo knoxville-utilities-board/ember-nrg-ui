@@ -7,8 +7,25 @@ export default class NrgValidationComponent extends Component {
   @tracked
   _value;
 
+  get valuePathIsArray() {
+    const regExp = /\(|\)|\[|\]/g;
+
+    return regExp.test(this.args.valuePath);
+  }
+
   get value() {
-    if (this.hasModelPath) {
+    if (this.valuePathIsArray) {
+      const valuePathStringWithoutArray = this.args.valuePath.substring(
+        0,
+        this.args.valuePath.indexOf('[')
+      );
+      const index = this.args.valuePath.substring(
+        this.args.valuePath.indexOf('[') + 1,
+        this.args.valuePath.indexOf(']')
+      );
+      const valuePathArray = get(this.args.model, valuePathStringWithoutArray);
+      return valuePathArray[index];
+    } else if (this.hasModelPath) {
       return get(this.args.model, this.args.valuePath);
     } else {
       return this._value;
@@ -16,7 +33,20 @@ export default class NrgValidationComponent extends Component {
   }
 
   set value(newValue) {
-    if (this.hasModelPath) {
+    if (this.valuePathIsArray) {
+      const valuePathStringWithoutArray = this.args.valuePath.substring(
+        0,
+        this.args.valuePath.indexOf('[')
+      );
+      const index = this.args.valuePath.substring(
+        this.args.valuePath.indexOf('[') + 1,
+        this.args.valuePath.indexOf(']')
+      );
+      const updatedArray = get(this.args.model, valuePathStringWithoutArray);
+      updatedArray[index] = newValue;
+
+      set(this.args.model, valuePathStringWithoutArray, updatedArray);
+    } else if (this.hasModelPath) {
       set(this.args.model, this.args.valuePath, newValue);
     } else {
       this._value = newValue;
