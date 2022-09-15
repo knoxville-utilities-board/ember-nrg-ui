@@ -6944,7 +6944,7 @@ void 0===(this.hasModelPath?this.value:this.args.value)&&void 0!==e&&this.useDef
 var a,s,l,u,c,d
 e.default=o})),define("ember-nrg-ui/decorators/validation",["exports","@ember/object","@ember/utils","ember-validators","ember-validators/messages"],(function(e,t,r,n,i){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e){return()=>({get(){let n=e
-"function"===(0,r.typeOf)(e)&&(n=e(this))
+"function"===(0,r.typeOf)(e)&&(n=e.apply(this))
 const o={}
 let a=!0
 for(const e in n){o[e]={warningMessage:null,message:null,isValid:!0,options:{}}
