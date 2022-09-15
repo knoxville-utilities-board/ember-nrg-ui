@@ -6,7 +6,7 @@ import NrgValidationComponent from './nrg-validation-component';
 const defaultDateFormat = 'LL';
 const defaultTimeFormat = 'LT';
 
-export default class NrgTextFieldComponent extends NrgValidationComponent {
+export default class NrgDatetimeComponent extends NrgValidationComponent {
   @tracked
   isFocused = false;
 
