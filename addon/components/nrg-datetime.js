@@ -59,7 +59,7 @@ export default class NrgDatetimeComponent extends NrgValidationComponent {
     if (newValue.isSame(this.value, 'minute')) {
       return;
     }
-    this.value = newValue.toDate();
+    this.onDateSelect(newValue.toDate());
   }
 
   getDefaultValue() {
