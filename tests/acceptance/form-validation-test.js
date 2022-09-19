@@ -10,7 +10,7 @@ module('Acceptance | form validation', function (hooks) {
     await click('button[type=submit]');
     const errorNodes = findAll('.error');
 
-    assert.strictEqual(errorNodes.length, 8);
+    assert.strictEqual(errorNodes.length, 9);
   });
 
   test('Custom validators work', async function (assert) {

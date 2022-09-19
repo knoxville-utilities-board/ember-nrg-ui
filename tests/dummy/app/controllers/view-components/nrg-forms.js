@@ -38,6 +38,8 @@ const Validators = {
     }),
   ],
   searchResult: [validator('presence', true)],
+  dateTime1: [validator('presence', true)],
+  dateTime2: [validator('presence', true)],
 };
 
 export default class ViewComponentsNrgFormsController extends Controller {
