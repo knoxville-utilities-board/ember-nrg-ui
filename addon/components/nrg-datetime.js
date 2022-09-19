@@ -6,7 +6,7 @@ import NrgValidationComponent from './nrg-validation-component';
 const defaultDateFormat = 'LL';
 const defaultTimeFormat = 'LT';
 
-export default class NrgTextFieldComponent extends NrgValidationComponent {
+export default class NrgDatetimeComponent extends NrgValidationComponent {
   @tracked
   isFocused = false;
 
@@ -59,7 +59,7 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
     if (newValue.isSame(this.value, 'minute')) {
       return;
     }
-    this.value = newValue.toDate();
+    this.onDateSelect(newValue.toDate());
   }
 
   getDefaultValue() {
