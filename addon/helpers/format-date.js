@@ -6,6 +6,10 @@ export function formatDate([date, format], { type }) {
     return '';
   }
   let outputFormat = 'L LT';
+
+  if (!dayjs(date).hour() && !dayjs(date).minute()) {
+    outputFormat = 'L';
+  }
   if (format) {
     outputFormat = format;
   } else if (type === 'date') {
