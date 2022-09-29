@@ -107,6 +107,9 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   get hasSelected() {
+    if (this.args.multiple) {
+      return this.value?.length && !this.hideAction;
+    }
     return this.value && !this.hideAction;
   }
 
@@ -127,7 +130,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   get displayDefaultText() {
-    return !this.args.multiple && !this.searchValue;
+    return !this.searchValue;
   }
 
   get filteredOptions() {

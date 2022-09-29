@@ -52,6 +52,12 @@
   }
 }
 
+.ui.multiple.dropdown > .text.default {
+  white-space: nowrap;
+  overflow: inherit;
+  text-overflow: ellipsis;
+}
+
 .nrg-list.nrg-list.nrg-list {
   padding: 0;
 
