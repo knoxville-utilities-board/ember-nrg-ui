@@ -108,7 +108,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
 
   get hasSelected() {
     if (this.args.multiple) {
-      return this.value.length && !this.hideAction;
+      return this.value?.length && !this.hideAction;
     }
     return this.value && !this.hideAction;
   }
