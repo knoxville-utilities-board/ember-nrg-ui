@@ -52,7 +52,7 @@
         {{/if}}
       </div>
     {{/if}}
-    {{#if @multiple}}
+    {{#if (and @multiple this.hasSelected)}}
       {{#each this.value as |selectedOption|}}
         <div
           data-dropdown-multi-selection="true"
