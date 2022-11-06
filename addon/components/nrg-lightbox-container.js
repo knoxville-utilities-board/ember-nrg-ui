@@ -10,8 +10,13 @@ export default class NrgPopupComponent extends Component {
   @tracked
   rotationClass;
 
-  @tracked
-  bottomDetails = false;
+  get bottomDetails() {
+    return this.lightboxService.bottomDetails;
+  }
+
+  set bottomDetails(bottomDetails) {
+    this.lightboxService.bottomDetails = bottomDetails;
+  }
 
   @action
   onModalOpen() {
@@ -36,6 +41,7 @@ export default class NrgPopupComponent extends Component {
   @action
   toggleDetailLocation() {
     this.bottomDetails = !this.bottomDetails;
+    this.lightboxService.onBottomDetailsChange?.(this.bottomDetails);
   }
 
   @action
