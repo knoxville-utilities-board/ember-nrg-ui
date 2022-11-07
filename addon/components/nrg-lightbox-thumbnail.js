@@ -11,6 +11,13 @@ export default class NrgLightboxThumbnailComponent extends Component {
   @tracked
   detail;
 
+  constructor() {
+    super(...arguments);
+    this.lightboxService.bottomDetails = this.args.bottomDetails ?? false;
+    this.lightboxService.onBottomDetailsChange =
+      this.args.onBottomDetailsChange;
+  }
+
   thumbnailId = 'thumbnail-' + guidFor(this);
 
   @action

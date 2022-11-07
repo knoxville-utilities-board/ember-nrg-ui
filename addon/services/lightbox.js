@@ -17,6 +17,9 @@ export default class LightboxService extends Service {
   @tracked
   selectedPhotoDetail;
 
+  @tracked
+  bottomDetails = false;
+
   get hasChildren() {
     return this.items?.length > 0;
   }
