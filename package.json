@@ -1,6 +1,6 @@
 {
   "name": "ember-nrg-ui",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
   "keywords": [
     "ember-addon",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.4",
-    "dayjs": "1.10.7",
+    "dayjs": "1.11.2",
     "ember-auto-import": "^2.4.1",
     "ember-cli-app-version": "5.0.0",
     "ember-cli-babel": "^7.26.11",
