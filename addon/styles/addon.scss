@@ -38,3 +38,7 @@ textarea {
 [data-ember-action] {
   cursor: pointer;
 }
+
+[role="button"]:not(.disabled):not([disabled]) {
+  cursor: pointer;
+}
