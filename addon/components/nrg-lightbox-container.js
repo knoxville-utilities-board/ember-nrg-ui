@@ -18,9 +18,13 @@ export default class NrgPopupComponent extends Component {
     this.lightboxService.bottomDetails = bottomDetails;
   }
 
+  clearRotationClass() {
+    this.rotationClass = '';
+  }
+
   @action
   onModalOpen() {
-    this.rotationClass = '';
+    this.clearRotationClass();
   }
 
   @action
@@ -31,11 +35,13 @@ export default class NrgPopupComponent extends Component {
   @action
   previousImage() {
     this.lightboxService.selectPrevious();
+    this.clearRotationClass();
   }
 
   @action
   nextImage() {
     this.lightboxService.selectNext();
+    this.clearRotationClass();
   }
 
   @action
@@ -49,6 +55,7 @@ export default class NrgPopupComponent extends Component {
     if (!this.lightboxService.previousDisabled) {
       this.lightboxService.selectPrevious();
     }
+    this.clearRotationClass();
   }
 
   @action
@@ -56,6 +63,7 @@ export default class NrgPopupComponent extends Component {
     if (!this.lightboxService.nextDisabled) {
       this.lightboxService.selectNext();
     }
+    this.clearRotationClass();
   }
 
   @action
