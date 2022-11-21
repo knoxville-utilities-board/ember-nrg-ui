@@ -10,7 +10,7 @@ module('Acceptance | form validation', function (hooks) {
     await click('button[type=submit]');
     const errorNodes = findAll('.error');
 
-    assert.equal(errorNodes.length, 8);
+    assert.strictEqual(errorNodes.length, 9);
   });
 
   test('Custom validators work', async function (assert) {
@@ -46,6 +46,10 @@ module('Acceptance | form validation', function (hooks) {
     await fillIn('[data-test-nested-validator] input', 'text');
     assert.dom('[data-test-nested-validator] > div.red.label').doesNotExist();
 
-    assert.equal(controller.nested.field, 'text', 'nested value paths work');
+    assert.strictEqual(
+      controller.nested.field,
+      'text',
+      'nested value paths work'
+    );
   });
 });

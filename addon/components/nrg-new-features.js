@@ -26,7 +26,7 @@ export default class NrgNewFeaturesComponent extends Component {
     return this.args.secondaryButtonText ?? '';
   }
 
-  get _isOpen() {
+  get isOpen() {
     return this.whatsNewService.isOpen && this.canOpen;
   }
 

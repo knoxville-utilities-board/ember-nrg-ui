@@ -9,7 +9,7 @@ module('Integration | Component | nrg-list/header/search', function (hooks) {
   test('action fires when value changes', async function (assert) {
     assert.expect(1);
     this.changedAction = function (value) {
-      assert.equal(value, 'value');
+      assert.strictEqual(value, 'value');
     };
     await render(
       hbs`<NrgList::Header::Search @onChange={{this.changedAction}} />`

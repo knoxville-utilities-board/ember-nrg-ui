@@ -38,9 +38,9 @@ module('Unit | Service | lightbox', function (hooks) {
     service.set('selectedItem', items.get('firstObject'));
     service.selectNext();
     service.selectNext();
-    assert.equal(service.get('selectedItem.thumbnailId'), 2);
+    assert.strictEqual(service.get('selectedItem.thumbnailId'), 2);
 
     service.selectPrevious();
-    assert.equal(service.get('selectedItem.thumbnailId'), 1);
+    assert.strictEqual(service.get('selectedItem.thumbnailId'), 1);
   });
 });

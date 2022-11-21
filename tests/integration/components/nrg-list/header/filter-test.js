@@ -14,7 +14,7 @@ module('Integration | Component | nrg-list/header/filter', function (hooks) {
     this.filterList = [filterValue];
 
     this.changedAction = function (filterParam, selectedFilterValue) {
-      assert.equal(selectedFilterValue, filterValue);
+      assert.deepEqual(selectedFilterValue, filterValue);
     };
 
     await render(

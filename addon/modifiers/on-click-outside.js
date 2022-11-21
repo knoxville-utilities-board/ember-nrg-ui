@@ -1,24 +1,35 @@
 import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
+import { tracked } from '@glimmer/tracking';
 import Modifier from 'ember-modifier';
 
 export default class OnClickOutsideModifier extends Modifier {
+  @tracked
+  _element;
+
+  @tracked
+  callback;
+
+  @tracked
+  named;
+
   guid = guidFor(this);
 
-  get callback() {
-    return this.args.positional[0];
-  }
   get disabled() {
-    return this.args.named?.disabled;
+    return this.named?.disabled;
   }
 
-  didInstall() {
-    this.element.dataset.clickHandler = this.guid;
+  modify(element, positional, named) {
+    this._element = element;
+    this.callback = positional[0];
+    this.named = named;
+
+    element.dataset.clickHandler = this.guid;
     document.documentElement.addEventListener('click', this.clickHandler, true);
   }
 
   willRemove() {
-    delete this.element.dataset.clickHandler;
+    delete this._element.dataset.clickHandler;
     document.documentElement.removeEventListener(
       'click',
       this.clickHandler,

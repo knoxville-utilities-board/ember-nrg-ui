@@ -1,5 +1,9 @@
 <div class="ui vertical left menu sidebar-menu">
-  <a class="nrg-logo" href={{if @appReloadLocation @appReloadLocation "/"}}></a>
+  <a
+    class="nrg-logo"
+    href={{if @appReloadLocation @appReloadLocation "/"}}
+    aria-label="Application logo"
+  ></a>
   {{yield
     (hash
       item=(component "nrg-sidebar-menu/item" onClickInternal=@onClickInternal)

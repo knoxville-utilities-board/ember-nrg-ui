@@ -10,7 +10,7 @@ export default class NrgDropdownItemComponent extends Component {
   }
 
   @action
-  _onClick(option, evt) {
+  onClick(option, evt) {
     if (evt) {
       evt.stopPropagation();
       evt.preventDefault();

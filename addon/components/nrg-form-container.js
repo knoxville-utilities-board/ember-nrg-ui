@@ -3,10 +3,10 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 export default class NrgFormComponent extends Component {
   @tracked
-  _didValidate = false;
+  internalDidValidate = false;
 
   get didValidate() {
-    return this.args.didValidate ?? this._didValidate;
+    return this.args.didValidate ?? this.internalDidValidate;
   }
 
   @action
@@ -14,7 +14,7 @@ export default class NrgFormComponent extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    this._didValidate = true;
+    this.internalDidValidate = true;
     this.args.onSubmit?.();
   }
 }

@@ -10,7 +10,7 @@ export default function validationState(validatorsArgument) {
         let validators = validatorsArgument;
 
         if (typeOf(validatorsArgument) === 'function') {
-          validators = validatorsArgument(this);
+          validators = validatorsArgument.apply(this);
         }
 
         const attrState = {};

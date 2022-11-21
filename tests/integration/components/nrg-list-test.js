@@ -13,7 +13,7 @@ module('Integration | Component | nrg-list', function (hooks) {
     };
     this.items = [item];
     this.selectAction = function (selectedItem) {
-      assert.equal(selectedItem, item);
+      assert.deepEqual(selectedItem, item);
     };
     await render(
       hbs`<NrgList @selectionType="single" @items={{this.items}} @onItemSelect={{this.selectAction}} />`

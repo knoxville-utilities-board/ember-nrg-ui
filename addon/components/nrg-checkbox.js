@@ -12,7 +12,7 @@ export default class NrgCheckboxComponent extends NrgValidationComponent {
   }
 
   @action
-  _valueChange({ target }) {
-    this._onChange(target.checked);
+  valueChange({ target }) {
+    this.onChange(target.checked);
   }
 }
