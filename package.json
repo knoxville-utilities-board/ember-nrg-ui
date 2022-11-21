@@ -1,6 +1,6 @@
 {
   "name": "ember-nrg-ui",
-  "version": "4.0.3",
+  "version": "4.0.5",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
   "keywords": [
     "ember-addon",
@@ -96,7 +96,7 @@
     "webpack": "^5.72.1"
   },
   "engines": {
-    "node": "12.* || 14.* || >= 16"
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
   },
   "ember": {
     "edition": "octane"
