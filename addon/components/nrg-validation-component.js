@@ -1,6 +1,6 @@
-import { action } from '@ember/object';
+import { action, get, set } from '@ember/object';
 import Component from '@glimmer/component';
-import { get, set } from '@ember/object';
+import ensurePathExists from 'ember-nrg-ui/utils/ensure-path-exists';
 import { schedule } from '@ember/runloop';
 
 export default class NrgValidationComponent extends Component {
@@ -25,20 +25,33 @@ export default class NrgValidationComponent extends Component {
   }
 
   get value() {
-    if (this.hasModelPath) {
+    if (!this.hasModelPath) {
+      return undefined;
+    }
+    if (this.useNestedValuePath) {
       return get(this.args.model, this.args.valuePath);
     }
-    return undefined;
+    return this.args.model?.[this.args.valuePath];
   }
 
   set value(newValue) {
-    if (this.hasModelPath) {
-      set(this.args.model, this.args.valuePath, newValue);
+    if (!this.hasModelPath) {
+      return;
     }
+    if (this.useNestedValuePath) {
+      ensurePathExists(this.args.model, this.args.valuePath);
+      set(this.args.model, this.args.valuePath, newValue);
+      return;
+    }
+    this.args.model[this.args.valuePath] = newValue;
   }
 
   get useDefaultValue() {
     return this.args.useDefaultValue ?? false;
+  }
+
+  get useNestedValuePath() {
+    return this.args.useNestedValuePath ?? true;
   }
 
   get defaultValue() {
