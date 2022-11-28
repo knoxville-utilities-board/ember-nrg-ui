@@ -85,21 +85,47 @@ module('Unit | Utility | ensure-path-exists', function () {
   });
 
   test('it works with non-empty object and deeply nested, non-existing value path with arrays', function (assert) {
-    const path = 'this.a.deeply.nested.path.property';
+    const path = 'this.a.deeply.nested.array.0.path.property';
     const object = {
       this: {
         is: {
-          test: 'aa',
+          test: ['aa', 'bb', 'cc'],
         },
-        a: { deeply: { nested: { testing: 'test' } } },
+        array: ['test', 'test', { test: 'test' }],
+        a: {
+          deeply: {
+            nested: {
+              array: [
+                { testing: { test: 'test' } },
+                { testing: 'test' },
+                {},
+                {},
+                {},
+              ],
+            },
+          },
+        },
       },
     };
     const expected = {
       this: {
         is: {
-          test: 'aa',
+          test: ['aa', 'bb', 'cc'],
         },
-        a: { deeply: { nested: { testing: 'test', path: {} } } },
+        array: ['test', 'test', { test: 'test' }],
+        a: {
+          deeply: {
+            nested: {
+              array: [
+                { path: {}, testing: { test: 'test' } },
+                { testing: 'test' },
+                {},
+                {},
+                {},
+              ],
+            },
+          },
+        },
       },
     };
 
