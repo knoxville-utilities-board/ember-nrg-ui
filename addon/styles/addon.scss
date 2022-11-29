@@ -39,6 +39,6 @@ textarea {
   cursor: pointer;
 }
 
-[role="button"]:not(.disabled):not([disabled]) {
+[role='button']:not(.disabled):not([disabled]) {
   cursor: pointer;
 }
