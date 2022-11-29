@@ -67,7 +67,7 @@
   <NrgModalContainer />
   <NrgToastContainer as |view|>
     {{#each this.flashMessages.queue as |flash|}}
-      <view.toast @toast={{flash}} />
+      <view.toast @flash={{flash}} />
     {{/each}}
   </NrgToastContainer>
   <div id="popup-container"></div>
