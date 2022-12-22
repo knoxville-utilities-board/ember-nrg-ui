@@ -6,11 +6,7 @@ const walkSync = require('walk-sync');
 module.exports = {
   name: 'ember-nrg-ui',
 
-  blueprintsPath() {
-    return path.join(__dirname, 'blueprints');
-  },
-
-  included: function(app) {
+  included: function (app) {
     this._super.included.apply(this, arguments);
 
     const cssSource = 'node_modules/fomantic-ui-css';
