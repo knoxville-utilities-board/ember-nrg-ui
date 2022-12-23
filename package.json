@@ -1,6 +1,6 @@
 {
   "name": "ember-nrg-ui",
-  "version": "4.0.8",
+  "version": "4.0.9",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
   "keywords": [
     "ember-addon",
@@ -45,6 +45,7 @@
     "ember-get-config": "0.5.0",
     "ember-is-mobile": "4.1.2",
     "ember-keyboard": "8.2.0",
+    "ember-modifier": "3.2.7",
     "ember-resize-observer-service": "^0.4.5",
     "ember-responsive": "4.0.2",
     "ember-tether": "^2.0.1",
