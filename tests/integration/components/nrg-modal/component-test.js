@@ -1,4 +1,4 @@
-import { click, find, render } from '@ember/test-helpers';
+import { click, find, render, settled } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
@@ -43,8 +43,10 @@ module('Integration | Component | nrg-modal', function(hooks) {
     `);
     assert.dom('.ui.modals h2').doesNotExist();
     this.set('isOpen', true);
+    await settled();
     assert.dom('.ui.modals h2').exists();
-    this.set('isOpen', false);
+    await this.set('isOpen', false);
+    await settled();
     assert.dom('.ui.modals h2').doesNotExist();
   });
 

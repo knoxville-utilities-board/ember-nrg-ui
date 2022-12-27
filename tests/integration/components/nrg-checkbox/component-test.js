@@ -14,7 +14,7 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
 
   test('click toggles state', async function(assert) {
     this.checked = false;
-    await render(hbs`<NrgCheckbox @checked={{checked}} />`);
+    await render(hbs`<NrgCheckbox @model={{this}} @valuePath="checked" />`);
     await click('.checkbox > input');
 
     assert.ok(this.checked);
@@ -22,7 +22,7 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
 
   test('clicking label toggles state', async function(assert) {
     this.checked = false;
-    await render(hbs`<NrgCheckbox @checked={{checked}} />`);
+    await render(hbs`<NrgCheckbox @model={{this}} @valuePath="checked" />`);
     await click('.checkbox > label');
 
     assert.ok(this.checked);
@@ -30,7 +30,7 @@ module('Integration | Component | nrg-checkbox', function(hooks) {
 
   test('click does nothing when disabled', async function(assert) {
     this.checked = false;
-    await render(hbs`<NrgCheckbox @checked={{checked}} @disabled={{true}} />`);
+    await render(hbs`<NrgCheckbox @model={{this}} @valuePath="checked" @disabled={{true}} />`);
     await click('.checkbox');
 
     assert.notOk(this.checked);

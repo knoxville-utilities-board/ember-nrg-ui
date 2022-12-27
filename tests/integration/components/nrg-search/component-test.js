@@ -1,4 +1,4 @@
-import { fillIn, find, findAll, render } from '@ember/test-helpers';
+import { fillIn, settled, findAll, render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
@@ -22,6 +22,7 @@ module('Integration | Component | nrg-search', function(hooks) {
     assert.dom('input').hasValue('');
     this.set('selected.header', 'header');
     this.set('selected.isLoading', false);
+    await settled();
     assert.dom('input').hasValue('header');
   });
 
