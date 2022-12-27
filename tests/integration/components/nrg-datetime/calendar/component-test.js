@@ -1,4 +1,11 @@
-import { click, find, findAll, focus, render, triggerKeyEvent } from '@ember/test-helpers';
+import {
+  click,
+  find,
+  findAll,
+  focus,
+  render,
+  triggerKeyEvent
+} from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import moment from 'moment';
@@ -182,7 +189,7 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     });
     this.maxDate = this.value.clone();
     await render(hbs`<NrgDatetime::Calendar @type="date" @maxDate={{maxDate}} @value={{value}} />`);
-    assert.notOk(find('tbody tr:nth-child(7)'));
+    assert.dom('tbody tr:nth-child(7)').doesNotExist();
   });
 
   test('no time is selected if no value is passed in', async function(assert) {
@@ -219,6 +226,6 @@ module('Integration | Component | nrg-datetime/calendar', function(hooks) {
     await click(findAll('tbody tr td.link')[hour]);
 
     const lastDisabledTime = findAll('tbody tr td.link.disabled')[minute / 5];
-    assert.ok(lastDisabledTime.classList.contains('disabled'));
+    assert.dom(lastDisabledTime).hasClass('disabled');
   });
 });

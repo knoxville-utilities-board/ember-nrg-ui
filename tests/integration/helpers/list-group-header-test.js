@@ -21,15 +21,15 @@ module('Integration | Helper | list-group-header', function(hooks) {
 
   setupRenderingTest(hooks);
 
-  test('label is show correctly', async function(assert) {
+  test('label is shown correctly', async function(assert) {
     this.i = 0;
     await render(hbs`{{list-group-header items i groupHeaderHandler}}`);
-    assert.equal(find('*').textContent.trim(), 'B');
+    assert.dom().hasText('B');
   });
 
-  test('label is not show for the second item', async function(assert) {
+  test('label is not shown for the second item', async function(assert) {
     this.i = 1;
     await render(hbs`{{list-group-header items i groupHeaderHandler}}`);
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom().hasText('');
   });
 });

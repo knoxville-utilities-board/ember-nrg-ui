@@ -4,13 +4,9 @@ const path = require('path');
 const walkSync = require('walk-sync');
 
 module.exports = {
-  name: 'ember-nrg-ui',
+  name: require('./package').name,
 
-  blueprintsPath() {
-    return path.join(__dirname, 'blueprints');
-  },
-
-  included: function(app) {
+  included: function (app) {
     this._super.included.apply(this, arguments);
 
     const cssSource = 'node_modules/fomantic-ui-css';
@@ -19,8 +15,11 @@ module.exports = {
       production: path.join(cssSource, 'semantic.min.css'),
     });
 
-    const fontSource = 'node_modules/fomantic-ui-css/themes/default/assets/fonts';
-    const fontFiles = walkSync(fontSource, { directories: false });
+    const fontSource =
+      'node_modules/fomantic-ui-css/themes/default/assets/fonts';
+    const fontFiles = walkSync(fontSource, {
+      directories: false,
+    });
     const fontOptions = {
       destDir: 'assets/themes/default/assets/fonts',
     };

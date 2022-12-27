@@ -8,21 +8,21 @@ module('Integration | Component | nrg-loading-indicator', function(hooks) {
 
   test('loader is active', async function(assert) {
     await render(hbs`<NrgLoadingIndicator />`);
-    assert.equal(findAll('.ui.loader.active').length, 1);
+    assert.dom('.ui.loader.active').exists({ count: 1 });
   });
 
   test('loader text is displayed', async function(assert) {
     await render(hbs`<NrgLoadingIndicator @text="Tyler can code." />`);
-    assert.equal(find('*').textContent.trim(), 'Tyler can code.');
+    assert.dom('*').hasText('Tyler can code.');
   });
 
   test('loader size is set corrected', async function(assert) {
     await render(hbs`<NrgLoadingIndicator @size="tiny" />`);
-    assert.equal(findAll('.ui.loader.active.tiny').length, 1);
+    assert.dom('.ui.loader.active.tiny').exists({ count: 1 });
   });
 
   test('loader is indeterminate', async function(assert) {
     await render(hbs`<NrgLoadingIndicator @indeterminate={{true}} />`);
-    assert.equal(findAll('.ui.loader.active.indeterminate').length, 1);
+    assert.dom('.ui.loader.active.indeterminate').exists({ count: 1 });
   });
 });

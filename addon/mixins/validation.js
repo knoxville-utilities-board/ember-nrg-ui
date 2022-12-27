@@ -7,15 +7,15 @@ import Mixin from '@ember/object/mixin';
 export default Mixin.create({
   init() {
     this._super(...arguments);
-    const valuePath = this.get('valuePath');
+    const valuePath = this.valuePath;
     defineProperty(this, 'validation', oneWay(`model.validations.attrs.${valuePath}`));
 
-    const { value, model } = this.getProperties('value', 'model');
+    const { value, model } = this;
     if (isNone(value) && !isNone(model)) {
       defineProperty(this, 'value', alias(`model.${valuePath}`));
     }
     next(this, () => {
-      if (!this.get('isDestroyed') && this.get('valuePath')) {
+      if (!this.isDestroyed && this.valuePath) {
         this.propogateErrorMessage();
       }
     });
@@ -34,11 +34,11 @@ export default Mixin.create({
   hasWarnings: oneWay('validation.hasWarnings'),
 
   showError: computed('validation.isDirty', 'isInvalid', 'didValidate', function() {
-    return this.get('didValidate') && this.get('isInvalid');
+    return this.didValidate && this.isInvalid;
   }),
 
   showWarning: computed('validation.isDirty', 'hasWarnings', 'showError', function() {
-    return this.get('hasWarnings') && !this.get('showError');
+    return this.hasWarnings && !this.showError;
   }),
 
   errorMessageObserver: observer('validation.message', 'validation.isDirty', 'isInvalid', 'didValidate', function() {
@@ -46,18 +46,18 @@ export default Mixin.create({
   }),
 
   propogateErrorMessage() {
-    if (this.get('isDestroyed') || !this.get('valuePath')) {
+    if (this.isDestroyed || !this.valuePath) {
       return;
     }
     let errorMessage = '';
     let warningMessage = '';
-    if (this.get('showError')) {
+    if (this.showError) {
       errorMessage = this.get('validation.message');
     }
-    if (this.get('showWarning')) {
+    if (this.showWarning) {
       warningMessage = this.get('validation.warningMessage');
     }
-    if (this.get('field')) {
+    if (this.field) {
       this.set('field.errorMessage', errorMessage);
       this.set('field.warningMessage', warningMessage);
     }

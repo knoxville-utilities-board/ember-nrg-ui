@@ -1,12 +1,13 @@
-import { module, test } from 'qunit';
-import { visit, find } from '@ember/test-helpers';
+import { visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
 
-module('Acceptance | focus first input', function(hooks) {
+
+module('Acceptance | focus first input', function (hooks) {
   setupApplicationTest(hooks);
 
-  test('First form input is focused', async function(assert) {
+  test('First form input is focused', async function (assert) {
     await visit('/view-mixins/focus-first-input');
-    assert.equal(find('input'), document.activeElement);
+    assert.dom('input').isFocused();
   });
 });
