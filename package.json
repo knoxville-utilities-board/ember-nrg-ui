@@ -29,7 +29,8 @@
     "test": "npm-run-all lint:js lint:hbs test:ember",
     "test:ember": "ember test",
     "test:cicd": "ember test -r xunit",
-    "test:ember-compatibility": "ember try:each"
+    "test:ember-compatibility": "ember try:each",
+    "format": "prettier --config ./.prettierrc.js --ignore-path ./.prettierignore --write ."
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.4",

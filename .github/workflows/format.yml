@@ -1,0 +1,51 @@
+name: Format
+
+on:
+  push:
+    branches: main
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    name: 'Create PR'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+          cache: yarn
+
+      - name: Use Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-release
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Format
+        run: yarn format
+
+      - name: Undo modifications to Github workflows
+        run: git checkout -- .github
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: 'auto-style: Format'
+          title: 'auto-style: Format'
+          body: ''
+          branch: format
+          base: main
+          delete-branch: true
