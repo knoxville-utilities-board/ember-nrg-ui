@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@ember/render-modifiers": "^1.0.2",
-    "ember-auto-import": "^1.11.3",
+    "ember-auto-import": "2.5.0",
     "ember-cli-app-version": "3.1.0",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-flash": "1.9.0",
@@ -47,7 +47,7 @@
     "ember-get-config": "0.5.0",
     "ember-is-mobile": "4.1.2",
     "ember-keyboard": "5.0.0",
-    "ember-moment": "8.0.0",
+    "ember-moment": "10.0.0",
     "ember-resize": "0.3.4",
     "ember-resize-observer-service": "^0.4.5",
     "ember-responsive": "4.0.2",
@@ -108,5 +108,8 @@
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "https://knoxville-utilities-board.github.io/ember-nrg-ui/"
+  },
+  "resolutions": {
+    "ember-auto-import": "2.5.0"
   }
 }
