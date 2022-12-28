@@ -2,7 +2,7 @@ name: 'Ember'
 
 on:
   push:
-    branches: [master, main, release]
+    branches: [master, main]
   pull_request:
 
 jobs:
@@ -62,53 +62,3 @@ jobs:
 
       - name: Run Ember Tests and Linting
         run: yarn test:cicd
-
-  release:
-    name: Release
-    runs-on: ubuntu-20.04
-    needs: [lint, test]
-    if: github.ref == 'refs/heads/release'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.x
-
-      - name: Use Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-release
-
-      - name: Install Dependencies
-        run: yarn install
-
-      - name: Get Package Version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
-
-      - uses: 'marvinpinto/action-automatic-releases@v1.1.2'
-        with:
-          repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: '${{ steps.package-version.outputs.current-version}}'
-          prerelease: false
-
-      - name: Build App
-        run: yarn run build-dummy-app
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        with:
-          branch: gh-pages
-          folder: dist
-
-      - name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
