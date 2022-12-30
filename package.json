@@ -1,6 +1,6 @@
 {
   "name": "ember-nrg-ui",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "Opinionated UI addon based on how KUB scaffolds web applications",
   "keywords": [
     "ember-addon",
@@ -33,12 +33,12 @@
   },
   "dependencies": {
     "@ember/render-modifiers": "^1.0.2",
+    "dayjs": "1.11.2",
     "ember-auto-import": "2.5.0",
     "ember-cli-app-version": "3.1.0",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-flash": "1.9.0",
     "ember-cli-htmlbars": "^5.7.1",
-    "ember-cli-moment-shim": "^3.7.1",
     "ember-cli-sass": "10.0.1",
     "ember-concurrency": "2.2.0",
     "ember-compatibility-helpers": "^1.2.5",
@@ -47,7 +47,6 @@
     "ember-get-config": "0.5.0",
     "ember-is-mobile": "4.1.2",
     "ember-keyboard": "5.0.0",
-    "ember-moment": "10.0.0",
     "ember-resize": "0.3.4",
     "ember-resize-observer-service": "^0.4.5",
     "ember-responsive": "4.0.2",

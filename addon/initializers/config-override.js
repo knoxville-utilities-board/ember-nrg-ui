@@ -8,12 +8,6 @@ export function initialize(application) {
       showProgress: true,
     };
   }
-  if (!config.moment) {
-    config.moment = {
-      allowEmpty: true,
-      includeTimezone: 'all',
-    };
-  }
 }
 
 export default {

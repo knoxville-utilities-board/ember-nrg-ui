@@ -6,7 +6,7 @@ import {
   EKMixin,
   keyDown
 } from 'ember-keyboard';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import layout from '../../templates/components/nrg-datetime/calendar';
 
 const DAY_HEADERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -33,7 +33,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     if (!this.showNowShortcut) {
       return;
     }
-    const now = moment();
+    const now = dayjs();
     const userDisabled = this.isDateDisabled && this.isDateDisabled(now);
     const afterMaxDate = now.isAfter(this.maxDate, 'date');
     const beforeMinDate = now.isBefore(this.minDate, 'date');
@@ -60,7 +60,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     'isSelectingHours',
     'isSelectingMinutes',
     function() {
-      const calendar = moment({
+      const calendar = dayjs({
         day: this.selectedDayIndex,
         month: this.selectedMonthIndex,
         year: this.selectedYearIndex,
@@ -85,7 +85,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   }),
 
   _isBeyondDateRange(date, precision) {
-    date = moment(date);
+    date = dayjs(date);
     let invalid = false;
     if (this.minDate) {
       invalid = date.isBefore(this.minDate, precision);
@@ -103,7 +103,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   },
 
   minutes: computed('selectedMinuteIndex', function() {
-    const calendar = moment({
+    const calendar = dayjs({
       hour: this.selectedHourIndex,
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
@@ -130,7 +130,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   }),
 
   hours: computed('selectedHourIndex', function() {
-    const calendar = moment({
+    const calendar = dayjs({
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
@@ -156,9 +156,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   }),
 
   days: computed('selectedDayIndex', 'selectedMonthIndex', 'selectedYearIndex', function() {
-    const today = moment();
+    const today = dayjs();
     const weeks = [];
-    const calendar = moment({
+    const calendar = dayjs({
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
     }).startOf('week');
@@ -192,7 +192,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   months: computed('selectedMonthIndex', function() {
     const rows = [];
-    const calendar = moment({
+    const calendar = dayjs({
       year: this.selectedYearIndex,
     });
     for (let i = 0; i < 4; i++) {
@@ -225,7 +225,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     for (let i = 0; i < 5; i++) {
       const row = [];
       for (let j = 0; j < 2; j++, year++) {
-        const calendar = moment({
+        const calendar = dayjs({
           year,
         });
         const disabled = this._isDateDisabled(calendar, 'year');
@@ -288,7 +288,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       evt.preventDefault();
       evt.stopPropagation();
     }
-    let date = moment({
+    let date = dayjs({
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
@@ -321,11 +321,11 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     const dateAfterMaxDate = this.maxDate && date.isAfter(this.maxDate);
 
     if (dateBeforeMinDate) {
-      date = moment(this.minDate).clone();
+      date = dayjs(this.minDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.add(remainder, 'minute');
     } else if (dateAfterMaxDate) {
-      date = moment(this.maxDate).clone();
+      date = dayjs(this.maxDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
       date.subtract(remainder, 'minute');
     }
@@ -421,7 +421,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   },
 
   selectDate() {
-    const value = moment({
+    const value = dayjs({
       hour: this.selectedHourIndex,
       minute: this.selectedMinuteIndex,
       day: this.selectedDayIndex,
@@ -503,7 +503,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     if (!value) {
       return;
     }
-    value = moment(value);
+    value = dayjs(value);
     this.set('selectedDayIndex', value.date());
     this.set('selectedMonthIndex', value.month());
     this.set('selectedYearIndex', value.year());
