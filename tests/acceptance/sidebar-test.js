@@ -56,7 +56,7 @@ module('Acceptance | sidebar', function(hooks) {
       acceptanceTestRouteIsShownInSidebar: true,
     });
     await visit('/');
-    const text = find('.sidebar-menu > .sidebar-footer').innerText;
-    assert.ok(text.includes('Acceptance Test Route'));
+    assert.dom('.sidebar-menu > .sidebar-footer').containsText('Acceptance Test Route')
+
   });
 });

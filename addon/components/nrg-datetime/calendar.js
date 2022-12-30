@@ -103,7 +103,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   },
 
   minutes: computed('selectedMinuteIndex', function() {
-    const calendar = dayjs({
+    let calendar = dayjs({
       hour: this.selectedHourIndex,
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
@@ -122,7 +122,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
           disabled,
           selected,
         });
-        calendar.add(MINUTE_INTERVAL, 'minute');
+        calendar = calendar.add(MINUTE_INTERVAL, 'minute');
       }
       rows.push(row);
     }
@@ -130,7 +130,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   }),
 
   hours: computed('selectedHourIndex', function() {
-    const calendar = dayjs({
+    let calendar = dayjs({
       day: this.selectedDayIndex,
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
@@ -148,7 +148,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
           disabled,
           selected,
         });
-        calendar.add(1, 'hour');
+        calendar = calendar.add(1, 'hour');
       }
       rows.push(row);
     }
@@ -158,7 +158,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
   days: computed('selectedDayIndex', 'selectedMonthIndex', 'selectedYearIndex', function() {
     const today = dayjs();
     const weeks = [];
-    const calendar = dayjs({
+    let calendar = dayjs({
       month: this.selectedMonthIndex,
       year: this.selectedYearIndex,
     }).startOf('week');
@@ -182,7 +182,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
           disabled,
           selected,
         });
-        calendar.add(1, 'day');
+        calendar = calendar.add(1, 'day');
       } while (calendar.day() != 0);
 
       weeks.push(week);
@@ -192,7 +192,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
 
   months: computed('selectedMonthIndex', function() {
     const rows = [];
-    const calendar = dayjs({
+    let calendar = dayjs({
       year: this.selectedYearIndex,
     });
     for (let i = 0; i < 4; i++) {
@@ -207,7 +207,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
           disabled,
           selected,
         });
-        calendar.add(1, 'month');
+        calendar = calendar.add(1, 'month');
       }
       rows.push(row);
     }
@@ -296,7 +296,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       minute: this.selectedMinuteIndex,
     });
 
-    date[operation](dateTransformation);
+    date = date[operation](dateTransformation);
 
     let precision = null;
 
@@ -323,11 +323,11 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     if (dateBeforeMinDate) {
       date = dayjs(this.minDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
-      date.add(remainder, 'minute');
+      date = date.add(remainder, 'minute');
     } else if (dateAfterMaxDate) {
       date = dayjs(this.maxDate).clone();
       const remainder = date.minute() % MINUTE_INTERVAL;
-      date.subtract(remainder, 'minute');
+      date = date.subtract(remainder, 'minute');
     }
 
     this._updateSelectedIndexes(date);
