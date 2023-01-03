@@ -7,6 +7,8 @@ import IsSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import ObjectSupport from 'dayjs/plugin/objectSupport';
 import RelativeTime from 'dayjs/plugin/relativeTime';
+import Timezone from 'dayjs/plugin/timezone';
+import UTC from 'dayjs/plugin/utc';
 import Weekday from 'dayjs/plugin/weekday';
 
 export function initialize() {
@@ -18,6 +20,8 @@ export function initialize() {
   dayjs.extend(LocalizedFormat);
   dayjs.extend(ObjectSupport);
   dayjs.extend(RelativeTime);
+  dayjs.extend(Timezone);
+  dayjs.extend(UTC);
   dayjs.extend(Weekday);
 }
 
