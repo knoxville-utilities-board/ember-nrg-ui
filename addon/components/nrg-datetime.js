@@ -1,7 +1,7 @@
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from '../templates/components/nrg-datetime';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Validation from 'ember-nrg-ui/mixins/validation';
 import { next } from '@ember/runloop';
 
@@ -84,10 +84,10 @@ export default Component.extend(Validation, {
       if (!this.value) {
         return '';
       }
-      return moment(this.value).format(this.displayFormat);
+      return dayjs(this.value).format(this.displayFormat);
     },
     set(type, value) {
-      const newValue = moment(value, this.displayFormat);
+      const newValue = dayjs(value, this.displayFormat);
       if (newValue.isValid()) {
         this.set('value', newValue);
       }

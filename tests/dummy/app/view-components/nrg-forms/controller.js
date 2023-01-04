@@ -1,12 +1,12 @@
 import Controller from '@ember/controller';
 import Validations from './validations';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export default Controller.extend(Validations, {
   required: false,
   disabled: false,
 
-  maxDate: moment()
+  maxDate: dayjs()
     .add(5, 'days')
     .toDate(),
 

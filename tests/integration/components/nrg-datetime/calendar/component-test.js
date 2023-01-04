@@ -1,227 +1,265 @@
 import {
   click,
-  find,
   findAll,
   focus,
   render,
-  triggerKeyEvent
+  triggerKeyEvent,
 } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { module, test } from 'qunit';
 
-module('Integration | Component | nrg-datetime/calendar', function(hooks) {
+module('Integration | Component | nrg-datetime/calendar', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('use arrow key to move to previous day', async function(assert) {
-    this.onSelect = function(date) {
-      const expectedDate = moment().subtract(1, 'day');
-      assert.ok(expectedDate.isSame(date, 'day'));
-    };
-    await render(hbs`<NrgDatetime::Calendar @type="date" @onSelect={{action this.onSelect}} />`);
-    await focus('.ui.popup.calendar');
-    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
-    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
-  });
+  test('use arrow key to move to previous day', async function (assert) {
+    this.set('value', dayjs());
 
-  test('maxDate limits selection', async function(assert) {
-    const expectedDate = moment();
-    this.onSelect = function(date) {
-      assert.ok(expectedDate.isSame(date, 'day'));
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
     };
-
-    this.today = expectedDate.clone();
-    await render(hbs`<NrgDatetime::Calendar @type="date" @maxDate={{today}} @onSelect={{action this.onSelect}} />`);
-    await focus('.ui.popup.calendar');
-    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
-    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
-  });
-
-  test('minDate limits selection', async function(assert) {
-    const expectedDate = moment();
-    this.onSelect = function(date) {
-      assert.ok(expectedDate.isSame(date, 'day'));
-    };
-
-    this.today = expectedDate.clone();
-    await render(hbs`<NrgDatetime::Calendar @type="date" @minDate={{today}} @onSelect={{action this.onSelect}} />`);
-    await focus('.ui.popup.calendar');
-    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft ');
-    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
-  });
-
-  test('disabled dates are not navigable', async function(assert) {
-    const expectedDate = moment({
-      day: 20,
-      month: 1,
-      year: 2020,
-    });
-    this.onSelect = function(date) {
-      assert.ok(expectedDate.isSame(date, 'day'));
-    };
-    this.isDateDisabled = function(date) {
-      return moment(date).day() === 3;
-    };
-    this.minDate = expectedDate.clone().day(1);
-    this.maxDate = expectedDate.clone().day(5);
-    this.value = expectedDate.clone().toDate();
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @minDate={{minDate}} @maxDate={{maxDate}} @isDateDisabled={{isDateDisabled}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
+    const expectedDate = dayjs().subtract(1, 'day');
+    assert.ok(expectedDate.isSame(this.value, 'day'));
   });
 
-  test('disabled dates are not clickable', async function(assert) {
-    const expectedDate = moment({
+  test('maxDate limits selection', async function (assert) {
+    this.set('value', dayjs());
+    const expectedDate = dayjs();
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+    await render(
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @maxDate={{this.value}} @onSelect={{this.onSelect}} />`
+    );
+    await focus('.ui.popup.calendar');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
+    assert.ok(expectedDate.isSame(this.value, 'day'));
+  });
+
+  test('minDate limits selection', async function (assert) {
+    this.set('value', dayjs());
+    const expectedDate = dayjs();
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+
+    await render(
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @minDate={{this.value}} @onSelect={{this.onSelect}} />`
+    );
+    await focus('.ui.popup.calendar');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
+    assert.ok(expectedDate.isSame(this.value, 'day'));
+  });
+
+  test('disabled dates are not navigable', async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+    const expectedDate = dayjs({
       day: 20,
       month: 1,
       year: 2020,
     });
-    this.onSelect = function(date) {
-      assert.ok(expectedDate.isSame(date, 'day'));
-    };
-    this.isDateDisabled = function(date) {
-      return moment(date).day() === 3;
+    this.isDateDisabled = (date) => {
+      return dayjs(date).day() === 3;
     };
     this.minDate = expectedDate.clone().day(1);
     this.maxDate = expectedDate.clone().day(5);
     this.value = expectedDate.clone().toDate();
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @minDate={{minDate}} @maxDate={{maxDate}} @isDateDisabled={{isDateDisabled}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @minDate={{this.minDate}} @maxDate={{this.maxDate}} @isDateDisabled={{this.isDateDisabled}} @onSelect={{this.onSelect}} />`
+    );
+    await focus('.ui.popup.calendar');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowLeft');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
+    assert.ok(expectedDate.isSame(this.value, 'day'));
+  });
+
+  test('disabled dates are not clickable', async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+    const expectedDate = dayjs({
+      day: 20,
+      month: 1,
+      year: 2020,
+    });
+    this.isDateDisabled = (date) => {
+      return dayjs(date).day() === 3;
+    };
+    this.minDate = expectedDate.clone().day(1);
+    this.maxDate = expectedDate.clone().day(5);
+    this.value = expectedDate.clone().toDate();
+    await render(
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @minDate={{this.minDate}} @maxDate={{this.maxDate}} @isDateDisabled={{this.isDateDisabled}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     const availableDateCells = findAll('.ui.calendar tbody td.link');
     await click(availableDateCells[24]);
+    assert.ok(expectedDate.isSame(this.value, 'day'));
   });
 
-  test('previous month\'s dates are clickable', async function(assert) {
-    const expectedDate = moment({
+  test("previous month's dates are clickable", async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+    const expectedDate = dayjs({
       day: 30,
       month: 5,
-      year: 2020
+      year: 2020,
     });
-    this.value = moment({
+    this.value = dayjs({
       day: 31,
       month: 6,
       year: 2020,
     });
-    this.onSelect = function(date) {
-      assert.ok(expectedDate.isSame(date, 'day'));
-    };
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     const availableDateCells = findAll('.ui.calendar tbody td.link');
     await click(availableDateCells[2]);
+    assert.ok(expectedDate.isSame(this.value, 'day'));
   });
 
-  test('next month\'s dates are clickable', async function(assert) {
-    const expectedDate = moment({
+  test("next month's dates are clickable", async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+    const expectedDate = dayjs({
       day: 6,
       month: 2,
-      year: 2020
+      year: 2020,
     });
-    this.value = moment({
+    this.value = dayjs({
       day: 15,
       month: 1,
       year: 2020,
     });
-    this.onSelect = function(date) {
-      assert.ok(expectedDate.isSame(date, 'day'));
-    };
     await render(
-      hbs`<NrgDatetime::Calendar @type="date" @value={{value}} @onSelect={{action this.onSelect}} />`
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
     );
     await focus('.ui.popup.calendar');
     const availableDateCells = findAll('.ui.calendar tbody td.link');
     await click(availableDateCells[40]);
+    assert.ok(expectedDate.isSame(this.value, 'day'));
   });
 
-  test('go through full date time workflow', async function(assert) {
-    this.onSelect = function(date) {
-      const expectedDate = moment()
-        .add(1, 'day')
-        .hour(0)
-        .minute(55);
-      assert.ok(expectedDate.isSame(date, 'minute'));
+  test('go through full date time workflow', async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
     };
-    await render(hbs`<NrgDatetime::Calendar @type="datetime" @onSelect={{action this.onSelect}} />`);
+    await render(
+      hbs`<NrgDatetime::Calendar @type="datetime" @value={{this.value}} @onSelect={{this.onSelect}} />`
+    );
     await focus('.ui.popup.calendar');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
     await click('tbody tr:first-child td:first-child');
     await click('tbody tr:nth-child(4) td:last-child');
+    const expectedDate = dayjs().add(1, 'day').hour(0).minute(55);
+    assert.ok(expectedDate.isSame(this.value, 'minute'));
   });
 
-  test('go through time only workflow', async function(assert) {
-    this.onSelect = function(date) {
-      const expectedDate = moment()
-        .hour(0)
-        .minute(55);
-      assert.ok(expectedDate.isSame(date, 'minute'));
+  test('go through time only workflow', async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
     };
-    await render(hbs`<NrgDatetime::Calendar @type="time" @onSelect={{action this.onSelect}} />`);
+    await render(
+      hbs`<NrgDatetime::Calendar @type="time" @value={{this.value}} @onSelect={{this.onSelect}} />`
+    );
     await focus('.ui.popup.calendar');
     await click('tbody tr:first-child td:first-child');
     await click('tbody tr:nth-child(4) td:last-child');
+    const expectedDate = dayjs().hour(0).minute(55);
+    assert.ok(expectedDate.isSame(this.value, 'minute'));
   });
 
-  test('header navigation changes indexes', async function(assert) {
-    this.onSelect = function(date) {
-      const expectedDate = moment().add(1, 'month');
-      assert.ok(expectedDate.isSame(date, 'day'));
+  test('header navigation changes indexes', async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
     };
-    await render(hbs`<NrgDatetime::Calendar @type="date" @onSelect={{action this.onSelect}} />`);
+    await render(
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @onSelect={{this.onSelect}} />`
+    );
     await focus('.ui.popup.calendar');
     await click('.chevron.right.icon');
     await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
+    const expectedDate = dayjs().add(1, 'month');
+    assert.ok(expectedDate.isSame(this.value, 'day'));
   });
 
-  test('today/now button hidden if after max date', async function(assert) {
-    this.value = moment({
+  test('today/now button hidden if after max date', async function (assert) {
+    this.value = dayjs({
       day: 20,
       month: 1,
       year: 2020,
     });
     this.maxDate = this.value.clone();
-    await render(hbs`<NrgDatetime::Calendar @type="date" @maxDate={{maxDate}} @value={{value}} />`);
+    await render(
+      hbs`<NrgDatetime::Calendar @type="date" @value={{this.value}} @maxDate={{this.maxDate}} />`
+    );
     assert.dom('tbody tr:nth-child(7)').doesNotExist();
   });
 
-  test('no time is selected if no value is passed in', async function(assert) {
-    await render(hbs`<NrgDatetime::Calendar @type="time" @value={{value}} />`);
-    
+  test('no time is selected if no value is passed in', async function (assert) {
+    await render(hbs`<NrgDatetime::Calendar @type="time"/>`);
+
     const selected = findAll('div.calendar.visible td.active');
-    assert.equal(selected.length, 0);
+    assert.strictEqual(selected.length, 0);
   });
 
-  test('no date is selected if no value is passed in', async function(assert) {
-    await render(hbs`<NrgDatetime::Calendar @type="date" @value={{value}} />`);
-    
+  test('no date is selected if no value is passed in', async function (assert) {
+    await render(hbs`<NrgDatetime::Calendar @type="date" />`);
+
     const selected = findAll('div.calendar.visible td.active');
-    assert.equal(selected.length, 0);
+    assert.strictEqual(selected.length, 0);
   });
 
-  test('isDateDisabled can use precision', async function(assert) {
+  test('isDateDisabled can use precision', async function (assert) {
     const hour = 8;
     const minute = 15;
-    const minDate = moment({
+    const minDate = dayjs({
       hour,
-      minute
+      minute,
     });
+    this.set('value', minDate);
 
-    this.isDateDisabled = function(date, precision) {
+    this.isDateDisabled = (date, precision) => {
       if (precision == 'hour') {
         return date.isBefore(minDate, precision);
       }
       return date.isSameOrBefore(minDate, precision);
-    }
-    
-    await render(hbs`<NrgDatetime::Calendar @type="time" @isDateDisabled={{isDateDisabled}} />`);
+    };
+
+    await render(
+      hbs`<NrgDatetime::Calendar @type="time" @value={{this.value}} @isDateDisabled={{this.isDateDisabled}} />`
+    );
 
     await click(findAll('tbody tr td.link')[hour]);
 
