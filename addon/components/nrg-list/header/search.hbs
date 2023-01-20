@@ -4,6 +4,8 @@
       @class="item-list--search"
       @placeholder={{@placeholder}}
       @onChange={{this.onSearchInput}}
+      @model={{@model}}
+      @valuePath={{@valuePath}}
       {{on "focus" this.onFocus}}
     />
     <i class="search link icon"></i>
