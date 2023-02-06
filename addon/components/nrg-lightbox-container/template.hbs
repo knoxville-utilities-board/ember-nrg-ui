@@ -2,7 +2,11 @@
   <div class="lightbox-upper-container{{bottomDetailClass}}">
     <div class="lightbox-image">
       <div class="image-container">
+      {{#if isPhoto}}
         <img class="ui image centered {{rotationClass}}" src={{selectedPhoto.url}} alt={{selectedPhoto.altText}}>
+      {{else}}
+        <video class="ui image centered" src={{selectedVideo.url}} alt={{selectedVideo.altText}}/>
+      {{/if}}
       </div>
     </div>
     {{#unless bottomDetails}}

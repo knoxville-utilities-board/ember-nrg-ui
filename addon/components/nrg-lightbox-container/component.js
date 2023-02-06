@@ -16,6 +16,15 @@ export default Component.extend({
 
   selectedPhoto: alias('selectedItem.photo'),
 
+  selectedVideo: alias('selectedItem.video'),
+
+  isPhoto: computed('selectedItem.photo', 'selectedItem.video', function() {
+    if(this.get('selectedItem.photo')){
+      return true;
+    }
+    return false;
+  }),
+  
   selectedPhotoDetail: computed('selectedItem.detail', function() {
     return htmlSafe(this.get('selectedItem.detail'));
   }),
