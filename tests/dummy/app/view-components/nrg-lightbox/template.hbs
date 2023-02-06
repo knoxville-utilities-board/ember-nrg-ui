@@ -17,10 +17,21 @@
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
 
-<NrgCodeBlock @label="Lightbox Videos" @codeBlockName="lightbox-video.hbs">
+<NrgCodeBlock @label="Lightbox Videos" @codeBlockName="lightbox-videos.hbs">
   <!-- BEGIN-SNIPPET lightbox-videos -->
   {{#each model.videos as |video|}}
     <NrgLightboxVideo @video={{video}}/>
+  {{/each}}
+  <!-- END-SNIPPET  -->
+</NrgCodeBlock>
+
+<NrgCodeBlock @label="Lightbox Videos with Custom Details" @codeBlockName="lightbox-videos-block.hbs">
+  <!-- BEGIN-SNIPPET lightbox-videos-block -->
+  {{#each model.videos as |video|}}
+    <NrgLightboxVideo @video={{video}}>
+      <strong>{{photo.detail}}</strong>
+      <span>{{counter}}</span>
+    </NrgLightboxVideo>
   {{/each}}
   <!-- END-SNIPPET  -->
 </NrgCodeBlock>
