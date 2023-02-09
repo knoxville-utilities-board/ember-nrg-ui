@@ -1,26 +1,18 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | nrg-lightbox-video', function(hooks) {
+module('Integration | Component | nrg-lightbox-video', function (hooks) {
   setupRenderingTest(hooks);
+  const URL = 'http://someUrl';
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders', async function (assert) {
+    this.video = {
+      url: URL,
+    };
 
-    await render(hbs`<NrgLightboxVideo />`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      <NrgLightboxVideo>
-        template block text
-      </NrgLightboxVideo>
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    await render(hbs`<NrgLightboxVideo @video={{video}} />`);
+    assert.equal(find('source').getAttribute('src'), URL);
   });
 });
