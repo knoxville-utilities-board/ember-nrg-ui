@@ -1,5 +1,6 @@
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from './template';
@@ -22,6 +23,20 @@ export default Component.extend({
       return true;
     }
     return false;
+  }),
+  
+  selectedPhotoDetail: computed('selectedItem.detail', function() {
+    return htmlSafe(this.get('selectedItem.detail'));
+  }),
+
+  rotationClass: alias('lightboxService.rotationClass'),
+
+  previousDisabled: alias('lightboxService.previousDisabled'),
+
+  nextDisabled: alias('lightboxService.nextDisabled'),
+
+  bottomDetailClass: computed('bottomDetails', function() {
+    return this.bottomDetails ? '--bottom' : '';
   }),
 
   onModalOpen() {

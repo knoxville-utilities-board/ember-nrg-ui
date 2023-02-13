@@ -1,47 +1,7 @@
 <NrgModal @isOpen={{isOpen}} @lightbox={{true}} @autofocus={{false}} @onModalOpen={{action onModalOpen}}>
-  <div class="lightbox-upper-container{{bottomDetailClass}}">
-    {{#if isPhoto}}
-      <div class="lightbox-image">
-        <div class="image-container">
-          <img class="ui image centered {{rotationClass}}" src={{selectedPhoto.url}} alt={{selectedPhoto.altText}}>
-        </div>
-      </div>
-    {{else}}
-      <div class="lightbox-video">
-        <div class="video-container">
-          <video src={{selectedVideo.url}} alt={{selectedVideo.altText}}/>
-        </div>
-      </div>
-    {{/if}}
-    {{#unless bottomDetails}}
-      <div class="lightbox-details">
-        {{selectedPhotoDetail}}
-      </div>
-    {{/unless}}
-  </div>
-  {{#if bottomDetails}}
-    <div class="lightbox-details--bottom">
-      {{selectedPhotoDetail}}
-    </div>
-  {{/if}}
-  <div class="lightbox-controls{{bottomDetailClass}}">
-    <button class="ui primary icon button" title="Previous Image" disabled={{previousDisabled}} {{action previousImage}}>
-      <i class="chevron left icon"></i>
-    </button>
-    <button class="ui primary icon button" title="Rotate Left" {{action rotateLeft}}>
-      <i class="undo icon"></i>
-    </button>
-    <button class="ui primary icon button" title="Detail Location - {{if bottomDetails "Right" "Bottom"}}" {{action toggleDetailLocation}}>
-      <i class="{{if bottomDetails "vertically flipped" "clockwise rotated"}} columns icon"></i>
-    </button>
-    <button class="ui primary icon button" title="Rotate Right" {{action rotateRight}}>
-      <i class="repeat icon"></i>
-    </button>
-    <button class="ui primary icon button" title="Next Image" disabled={{nextDisabled}} {{action nextImage}}>
-      <i class="chevron right icon"></i>
-    </button>
-  </div>
-  {{#if isOpen}}
-    <NrgLightboxContainer::KeyboardShortcuts />
+  {{#if isPhoto}}
+    <NrgLightboxContainerPhoto />
+  {{else}}
+    <NrgLightboxContainerVideo />
   {{/if}}
 </NrgModal>
