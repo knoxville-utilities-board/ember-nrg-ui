@@ -17,6 +17,8 @@ export default Service.extend({
     this.get('items').pushObject(item);
   },
 
+  showDetails: true,
+
   remove(thumbnailId) {
     const items = this.get('items').rejectBy('thumbnailId', thumbnailId);
     this.set('items', items);
@@ -25,6 +27,7 @@ export default Service.extend({
   selectAndOpen(thumbnailId) {
     const item = this.get('items').findBy('thumbnailId', thumbnailId);
     this.set('selectedItem', item);
+    this.set('rotationClass', '');
     this.set('lightboxIsOpen', true);
   },
 
@@ -34,6 +37,10 @@ export default Service.extend({
       set(item, 'detail', detail);
     }
   },
+
+  bottomDetailClass: computed('bottomDetails', function() {
+    return this.bottomDetails ? '--bottom' : '';
+  }),
 
   selectedIndex: computed('selectedItem', 'items.[]', function() {
     return this.get('items').indexOf(this.get('selectedItem'));
@@ -65,5 +72,14 @@ export default Service.extend({
       this.set('selectedItem', photo);
       this.set('rotationClass', '');
     }
+  },
+
+  toggleDetailLocation() {
+    this.toggleProperty('bottomDetails');
+    this.set('showDetails', true);
+  },
+
+  toggleDetails() {
+    this.toggleProperty('showDetails');
   },
 });

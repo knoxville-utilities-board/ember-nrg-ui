@@ -35,8 +35,12 @@ export default Component.extend({
 
   nextDisabled: alias('lightboxService.nextDisabled'),
 
-  bottomDetailClass: computed('bottomDetails', function() {
-    return this.bottomDetails ? '--bottom' : '';
+  bottomDetailClass: alias('lightboxService.bottomDetailClass'),
+
+  showDetails: alias('lightboxService.showDetails'),
+
+  showDetailsClass: computed('showDetails', function() {
+    return this.showDetails ? '' : '--hide-details';
   }),
 
   onModalOpen() {
@@ -52,7 +56,11 @@ export default Component.extend({
   },
 
   toggleDetailLocation() {
-    this.toggleProperty('bottomDetails');
+    this.get('lightboxService').toggleDetailLocation();
+  },
+
+  toggleDetails() {
+    this.get('lightboxService').toggleDetails();
   },
 
   rotateLeft() {

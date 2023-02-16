@@ -10,20 +10,9 @@ export default Component.extend({
 
   lightboxService: service('lightbox'),
 
-  isOpen: alias('lightboxService.lightboxIsOpen'),
-
   selectedItem: alias('lightboxService.selectedItem'),
 
   selectedPhoto: alias('selectedItem.photo'),
-
-  selectedVideo: alias('selectedItem.video'),
-
-  isPhoto: computed('selectedItem.photo', 'selectedItem.video', function() {
-    if(this.get('selectedItem.photo')){
-      return true;
-    }
-    return false;
-  }),
   
   selectedPhotoDetail: computed('selectedItem.detail', function() {
     return htmlSafe(this.get('selectedItem.detail'));
@@ -35,13 +24,7 @@ export default Component.extend({
 
   nextDisabled: alias('lightboxService.nextDisabled'),
 
-  bottomDetailClass: computed('bottomDetails', function() {
-    return this.bottomDetails ? '--bottom' : '';
-  }),
-
-  onModalOpen() {
-    this.set('rotationClass', '');
-  },
+  bottomDetailClass: alias('lightboxService.bottomDetailClass'),
 
   previousImage() {
     this.get('lightboxService').selectPrevious();
@@ -52,7 +35,7 @@ export default Component.extend({
   },
 
   toggleDetailLocation() {
-    this.toggleProperty('bottomDetails');
+    this.get('lightboxService').toggleDetailLocation();
   },
 
   rotateLeft() {
