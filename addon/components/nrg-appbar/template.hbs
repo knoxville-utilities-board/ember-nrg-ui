@@ -1,11 +1,19 @@
 <div class="ui fluid container">
   <div class="left menu">
     {{#if showBackArrow}}
-      <a role="button" class="ui item icon sidebar-toggle-button" {{action this.onBackArrowClick}}>
+      <a
+        role="button"
+        class="ui item icon sidebar-toggle-button"
+        {{action this.onBackArrowClick}}
+      >
         <i class="arrow left icon"></i>
       </a>
     {{else}}
-      <a role="button" class="ui item icon sidebar-toggle-button" {{action this.onToggleSidebar}}>
+      <a
+        role="button"
+        class="ui item icon sidebar-toggle-button"
+        {{action this.onToggleSidebar}}
+      >
         <i class="content icon"></i>
       </a>
     {{/if}}
@@ -20,7 +28,7 @@
     {{yield}}
     {{#if showReleaseNotes}}
       <div class="item">
-        <LinkTo @route="release-notes">{{nrg-app-version}}</LinkTo>
+        <LinkTo @route="release-notes">{{appVersion}}</LinkTo>
       </div>
     {{/if}}
     <NrgContextMenu />

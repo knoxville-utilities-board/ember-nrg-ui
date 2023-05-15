@@ -5,6 +5,13 @@ import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import Component from '@ember/component';
 import layout from './template';
 import { getOwner } from '@ember/application';
+import config from 'ember-get-config';
+import { shaRegExp } from 'ember-cli-app-version/utils/regexp';
+import { task } from 'ember-concurrency';
+
+const {
+  APP: { version },
+} = config;
 
 export default Component.extend(ResizeMixin, {
   layout,
@@ -19,16 +26,51 @@ export default Component.extend(ResizeMixin, {
 
   showReleaseNotes: true,
 
-  environmentDisplay: computed('applicationSettings.localEnvironment', function() {
-    const ENV = getOwner(this).resolveRegistration('config:environment');
-    const config = ENV['ember-nrg-ui'];
-    const productionEnvironments = (config && config.productionEnvironments) || ['prod'];
-    const environment = this.get('applicationSettings.localEnvironment');
-    if (environment && !productionEnvironments.includes(environment)) {
-      return environment.toUpperCase();
+  appVersion: '',
+
+  init() {
+    this._super(...arguments);
+
+    if (window.ELECTRON) {
+      this.getElectronAppVersionTask.perform();
+    } else {
+      this.getAppVersion();
     }
-    return null;
+  },
+
+  getElectronAppVersionTask: task(function* () {
+    const electronAppVersion =
+      yield window.electronBridge.getCurrentElectronAppVersion();
+
+    this.set('appVersion', electronAppVersion);
   }),
+
+  getAppVersion() {
+    const parts = version.split('+');
+    const isTag = parts.length === 1;
+    let displayVersion = `v${version}`;
+
+    if (!isTag) {
+      displayVersion = version.match(shaRegExp)[0];
+    }
+
+    this.set('appVersion', displayVersion);
+  },
+
+  environmentDisplay: computed(
+    'applicationSettings.localEnvironment',
+    function () {
+      const ENV = getOwner(this).resolveRegistration('config:environment');
+      const config = ENV['ember-nrg-ui'];
+      const productionEnvironments = (config &&
+        config.productionEnvironments) || ['prod'];
+      const environment = this.get('applicationSettings.localEnvironment');
+      if (environment && !productionEnvironments.includes(environment)) {
+        return environment.toUpperCase();
+      }
+      return null;
+    }
+  ),
 
   onToggleSidebar() {
     this.sendAction('toggleSidebar');
