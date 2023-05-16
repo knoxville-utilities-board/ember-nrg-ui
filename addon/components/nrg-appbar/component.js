@@ -5,6 +5,9 @@ import ResizeMixin from 'ember-nrg-ui/mixins/resize';
 import Component from '@ember/component';
 import layout from './template';
 import { getOwner } from '@ember/application';
+import { task } from 'ember-concurrency';
+import { appVersion, electronAppVersion } from 'ember-nrg-ui/utils/nrg-app-version';
+
 
 export default Component.extend(ResizeMixin, {
   layout,
@@ -18,6 +21,24 @@ export default Component.extend(ResizeMixin, {
   isMobileScreen: alias('responsive.isMobileScreenGroup'),
 
   showReleaseNotes: true,
+
+  appVersion,
+
+  init() {
+    this._super(...arguments);
+
+    if (window.ELECTRON) {
+      this.getElectronAppVersion.perform();
+    } else {
+      this.set('appVersion', appVersion());
+    }
+  },
+
+  getElectronAppVersion: task(function* () {
+    const appVersion = yield electronAppVersion();
+
+    this.set('appVersion', appVersion);
+  }),
 
   environmentDisplay: computed('applicationSettings.localEnvironment', function() {
     const ENV = getOwner(this).resolveRegistration('config:environment');

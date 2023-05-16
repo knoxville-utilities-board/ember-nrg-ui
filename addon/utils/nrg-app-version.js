@@ -1,10 +1,15 @@
-import { helper } from '@ember/component/helper';
 import config from 'ember-get-config';
 import { shaRegExp } from 'ember-cli-app-version/utils/regexp';
 
 const {
   APP: { version },
 } = config;
+
+export async function electronAppVersion() {
+    const electronAppVersion = await window.electronBridge.getCurrentElectronAppVersion();
+
+    return electronAppVersion;
+}
 
 export function appVersion() {
   const parts = version.split('+');
@@ -18,4 +23,4 @@ export function appVersion() {
   return displayVersion;
 }
 
-export default helper(appVersion);
+export default appVersion;
