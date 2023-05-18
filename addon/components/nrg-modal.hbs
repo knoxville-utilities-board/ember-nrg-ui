@@ -3,8 +3,8 @@
   {{did-insert this.addToService}}
   {{will-destroy this.removeFromService}}
 >
-  {{#if this.renderTo}}
-    {{#in-element this.renderTo}}
+  {{#if this._renderTo}}
+    {{#in-element this._renderTo}}
       {{yield}}
     {{/in-element}}
   {{else}}

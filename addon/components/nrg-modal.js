@@ -16,7 +16,7 @@ export default class NrgModal extends Component {
   @tracked
   renderTo;
 
-  get renderTo() {
+  get _renderTo() {
     if (this.renderInPlace || this.isTesting) {
       return null;
     }
