@@ -1,11 +1,6 @@
 {{! template-lint-disable no-inline-styles }}
 <div
-  class="ui modal visible active
-    {{if @modal.isSidebar 'sidebar-modal'}}
-    {{if @modal.lightbox 'fullscreen lightbox'}}
-    {{if @modal.modalClass @modal.modalClass}}
-    {{if @modal.basic 'basic'}}
-    {{if @modal.takeover 'side-by-side--takeover'}}"
+  class={{@modal.modalClasses}}
   style={{this.modalStyles}}
   role="dialog"
   aria-label="Modal"
@@ -20,7 +15,10 @@
     ></i>
   {{/if}}
   {{#if @modal.headerText}}
-    <div class="header">
+    {{#if @modal.headerIcon}}
+      <i class="{{@modal.headerIcon}} icon"></i>
+    {{/if}}
+    <div class="ui header">
       {{@modal.headerText}}
     </div>
   {{/if}}

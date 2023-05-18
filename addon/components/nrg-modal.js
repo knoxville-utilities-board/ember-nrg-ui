@@ -47,6 +47,10 @@ export default class NrgModal extends Component {
     return this.type === 'sidebar';
   }
 
+  get isFlyout() {
+    return this.type === 'flyout';
+  }
+
   get type() {
     return this.args.type ?? 'modal';
   }
@@ -109,6 +113,39 @@ export default class NrgModal extends Component {
     let classList = 'basic';
     classList += this.basic ? ' secondary' : ' black';
     return classList;
+  }
+
+  get modalClasses() {
+    const classes = ['ui'];
+
+    if (this.isFlyout) {
+      const position = this.args.position ?? 'right';
+      classes.push(`simple flyout ${position} overlay visible`);
+    } else {
+      classes.push('modal visible active');
+    }
+
+    if (this.isSidebar) {
+      classes.push('sidebar-modal');
+    }
+
+    if (this.lightbox) {
+      classes.push('fullscreen lightbox');
+    }
+
+    if (this.args.modalClass) {
+      classes.push(this.args.modalClass);
+    }
+
+    if (this.basic) {
+      classes.push('basic');
+    }
+
+    if (this.takeover) {
+      classes.push('side-by-side--takeover');
+    }
+
+    return classes.join(' ');
   }
 
   @action

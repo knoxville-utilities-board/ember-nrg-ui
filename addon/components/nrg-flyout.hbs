@@ -1,0 +1,15 @@
+<NrgModal
+  @type="flyout"
+  @isOpen={{@isOpen}}
+  @onDismiss={{@onDismiss}}
+  @headerText={{@headerText}}
+  @headerIcon={{@headerIcon}}
+  @hasRendered={{this.hasRendered}}
+>
+  <div
+    class="rendering-indicator"
+    {{did-insert this.didRenderElement}}
+    {{will-destroy this.willDestroy}}
+  ></div>
+  {{yield}}
+</NrgModal>

@@ -4,7 +4,7 @@
     {{if this.modalService.activeModal.isSidebar 'sidebar-container'}}"
 >
   {{#each this.modalService.openModals as |modal|}}
-    {{#if (eq this.modalService.activeModal modal)}}
+    {{#if (and (eq this.modalService.activeModal modal) (not modal.isFlyout))}}
       <div
         role="button"
         aria-label={{if modal.isDismissable "Dismiss Modal"}}

@@ -8,6 +8,8 @@
       {{yield}}
     {{/in-element}}
   {{else}}
-    {{yield}}
+    {{#unless this.isFlyout}}
+      {{yield}}
+    {{/unless}}
   {{/if}}
 </div>

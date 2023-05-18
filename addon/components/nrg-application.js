@@ -34,6 +34,10 @@ export default class NrgFormComponent extends Component {
     this.setMainContentStyle();
   }
 
+  get flyoutIsActive() {
+    return this.modal.activeModal?.isFlyout;
+  }
+
   @action
   setMainContentStyle() {
     this.mainContentStyle = htmlSafe(`height:${window.innerHeight}px`);
@@ -51,5 +55,15 @@ export default class NrgFormComponent extends Component {
   @action
   clickedLink(item) {
     this.args.onSidebarItemClick?.(item);
+  }
+
+  @action
+  onFlyoutDimmerClick() {
+    const isDismissable = this.modal.activeModal?.dismissable;
+    const isFlyout = this.flyoutIsActive;
+    const flyoutHasRendered = this.modal.activeModal?.args?.hasRendered;
+    if (isDismissable && isFlyout && flyoutHasRendered) {
+      this.modal.activeModal?.onHide();
+    }
   }
 }
