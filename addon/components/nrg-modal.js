@@ -43,8 +43,12 @@ export default class NrgModal extends Component {
     return this.args.basic ?? false;
   }
 
-  get sidebar() {
-    return this.args.sidebar ?? false;
+  get isSidebar() {
+    return this.type === 'sidebar';
+  }
+
+  get type() {
+    return this.args.type ?? 'modal';
   }
 
   get lightbox() {
@@ -53,7 +57,7 @@ export default class NrgModal extends Component {
 
   get scrolling() {
     return (
-      !this.takeover && !this.lightbox && !this.sidebar && this.renderInModal
+      !this.takeover && !this.lightbox && !this.isSidebar && this.renderInModal
     );
   }
 

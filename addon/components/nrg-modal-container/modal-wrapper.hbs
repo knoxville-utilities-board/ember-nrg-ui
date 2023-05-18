@@ -1,7 +1,7 @@
 {{! template-lint-disable no-inline-styles }}
 <div
   class="ui modal visible active
-    {{if @modal.sidebar 'sidebar-modal'}}
+    {{if @modal.isSidebar 'sidebar-modal'}}
     {{if @modal.lightbox 'fullscreen lightbox'}}
     {{if @modal.modalClass @modal.modalClass}}
     {{if @modal.basic 'basic'}}
@@ -28,7 +28,7 @@
   <div
     class="modal-content
       {{if @modal.lightbox 'image'}}
-      {{unless @modal.sidebar 'content'}}
+      {{unless @modal.isSidebar 'content'}}
       {{if @modal.scrolling 'scrolling'}}"
     {{did-insert this.addModalToWormhole}}
     {{will-destroy this.removeModalFromWormhole}}

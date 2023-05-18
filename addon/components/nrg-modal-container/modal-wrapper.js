@@ -15,7 +15,7 @@ export default class ModalWrapper extends Component {
   modalStyles;
 
   get hasCloseIcon() {
-    return this.args.modal?.dismissable && !this.args.modal?.sidebar;
+    return this.args.modal?.dismissable && !this.args.modal?.isSidebar;
   }
 
   @action
@@ -23,7 +23,7 @@ export default class ModalWrapper extends Component {
     if (
       useFlexBox ||
       this.args.modal?.takeover ||
-      this.args.modal?.sidebar ||
+      this.args.modal?.isSidebar ||
       this.args.modal?.lightbox
     ) {
       this.modalStyles = '';

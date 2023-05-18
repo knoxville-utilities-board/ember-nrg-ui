@@ -1,7 +1,7 @@
 <div
   class="ui modals
     {{if this.modalService.hasOpenModals 'visible active' 'hidden'}}
-    {{if this.modalService.activeModal.sidebar 'sidebar-container'}}"
+    {{if this.modalService.activeModal.isSidebar 'sidebar-container'}}"
 >
   {{#each this.modalService.openModals as |modal|}}
     {{#if (eq this.modalService.activeModal modal)}}
@@ -9,7 +9,7 @@
         role="button"
         aria-label={{if modal.isDismissable "Dismiss Modal"}}
         class="ui dimmer visible active
-          {{if modal.sidebar 'sidebar-dimmer' 'page'}}
+          {{if modal.isSidebar 'sidebar-dimmer' 'page'}}
           {{unless modal.isDismissable 'not-dismissable'}}
           {{modal.dimmerClass}}"
         {{on "click" this.onDimmerClick}}
