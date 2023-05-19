@@ -1,0 +1,43 @@
+<FreestyleSection @name="Master Detail" as |Section|>
+  <Freestyle::Usage @name="Master Detail">
+    <:example>
+      <NrgSideBySide>
+        <:primary>
+          <NrgList
+            @selectionType="single"
+            @pageMeta={{this.pageMeta}}
+            @items={{this.mappedItems}}
+            @onItemSelect={{this.onSelect}}
+          />
+        </:primary>
+
+        <:secondary>
+          {{#if this.selectedItem}}
+            <NrgResponsiveTakeover>
+              <div class="ui segment">
+                <h2>{{this.selectedItem.name}}</h2>
+              </div>
+            </NrgResponsiveTakeover>
+          {{else}}
+            <h2>Select a human</h2>
+          {{/if}}
+        </:secondary>
+
+      </NrgSideBySide>
+    </:example>
+
+  </Freestyle::Usage>
+
+  <Freestyle::CodeBlock
+    @label="Parent Route Template"
+    @codeBlockName="side-by-side.hbs"
+  />
+  <Freestyle::CodeBlock
+    @label="Index Route Template"
+    @codeBlockName="side-by-side-index.hbs"
+  />
+  <Freestyle::CodeBlock
+    @label="Detail Route Template"
+    @codeBlockName="side-by-side-detail.hbs"
+  />
+</FreestyleSection>

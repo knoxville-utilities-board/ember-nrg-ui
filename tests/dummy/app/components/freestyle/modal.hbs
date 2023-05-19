@@ -1,0 +1,42 @@
+<FreestyleSection @name="Modal" as |Section|>
+  <Freestyle::Usage @name="Modal">
+    <:example>
+      <NrgButton @text="Open Modal" @onClick={{this.toggleModalOpen}} />
+
+      <NrgModal
+        @headerText={{this.headerText}}
+        @onDismiss={{this.toggleModalOpen}}
+        @isOpen={{this.modalOpen}}
+        @basic={{this.isBasic}}
+        @primaryButton="Primary"
+        @secondaryButton="Secondary"
+        @onPrimaryButtonClick={{this.onPrimaryButtonClick}}
+        @onSecondaryButtonClick={{this.onSecondaryButtonClick}}
+      >
+        <p>
+          Lorem ipsum.
+        </p>
+      </NrgModal>
+    </:example>
+
+    <:api as |Args|>
+      <Args.String
+        @name="headerText"
+        @value={{this.headerText}}
+        @onInput={{fn (mut this.headerText)}}
+      />
+      <Args.Bool
+        @name="isOpen"
+        @defaults={{false}}
+        @value={{this.modalOpen}}
+        @onInput={{fn (mut this.modalOpen)}}
+      />
+      <Args.Bool
+        @name="basic"
+        @defaults={{false}}
+        @value={{this.isBasic}}
+        @onInput={{fn (mut this.isBasic)}}
+      />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>

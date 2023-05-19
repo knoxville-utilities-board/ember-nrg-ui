@@ -1,0 +1,28 @@
+<FreestyleSection @name="Context Menu Mixin" as |Section|>
+  <Freestyle::Usage @name="Context Menu Mixin">
+    <:example>
+      <div class="ui top attached segment">
+        <p>
+          The nrg-context-item component can be added to routes and components.
+          The context item will be moved into the context menu automatically.
+        </p>
+      </div>
+      <br />
+
+      <NrgCheckbox
+        @type="toggle"
+        @label="Context Menu Items Toggle"
+        @model={{this}}
+        @valuePath="contextTestsEnabled"
+      />
+
+      {{#if this.contextTestsEnabled}}
+        <ContextTests />
+      {{/if}}
+    </:example>
+
+  </Freestyle::Usage>
+
+  <Freestyle::CodeBlock @label="Example" @codeBlockName="context-item.hbs" />
+  <Freestyle::CodeBlock @label="Usage" @codeBlockName="context-item-js.js" />
+</FreestyleSection>

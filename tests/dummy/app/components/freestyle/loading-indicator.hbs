@@ -1,0 +1,40 @@
+<FreestyleSection @name="Loading Indicator" as |Section|>
+  <Freestyle::Usage @name="Loading Indicator">
+    <:example>
+      <NrgLoadingIndicator
+        @centered={{this.centered}}
+        @indeterminate={{this.indeterminate}}
+        @size={{this.size}}
+        @text={{this.text}}
+      />
+    </:example>
+
+    <:api as |Args|>
+      <Args.Bool
+        @name="centered"
+        @defaults={{false}}
+        @value={{this.centered}}
+        @onInput={{fn (mut this.centered)}}
+      />
+
+      <Args.Bool
+        @name="indeterminate"
+        @defaults={{false}}
+        @value={{this.indeterminate}}
+        @onInput={{fn (mut this.indeterminate)}}
+      />
+
+      <Args.String
+        @name="size"
+        @value={{this.size}}
+        @onInput={{fn (mut this.size)}}
+        @options={{this.sizeOptions}}
+      />
+      <Args.String
+        @name="text"
+        @value={{this.text}}
+        @onInput={{fn (mut this.text)}}
+      />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>

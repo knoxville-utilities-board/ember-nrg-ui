@@ -1,0 +1,31 @@
+<FreestyleSection @name="Lightbox" as |Section|>
+  <Freestyle::Usage @name="Lightbox">
+    <:example>
+      <NrgLightboxThumbnail @photo={{this.photo}}>
+        <strong>{{this.detail}}</strong>
+        <span>{{this.counter}}</span>
+      </NrgLightboxThumbnail>
+      <NrgLightboxThumbnail @photo={{this.photo}}>
+        <strong>{{this.detail}}</strong>
+        <span>{{this.counter}}</span>
+      </NrgLightboxThumbnail>
+      <NrgLightboxThumbnail @photo={{this.photo}}>
+        <strong>{{this.detail}}</strong>
+        <span>{{this.counter}}</span>
+      </NrgLightboxThumbnail>
+    </:example>
+
+    <:api as |Args|>
+      <Args.String
+        @name="detail"
+        @value={{this.detail}}
+        @onInput={{fn (mut this.detail)}}
+      />
+      <Args.String
+        @name="counter"
+        @value={{this.counter}}
+        @onInput={{fn (mut this.counter)}}
+      />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>

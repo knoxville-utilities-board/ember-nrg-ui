@@ -1,0 +1,34 @@
+<Freestyle::Usage @name="Datetime">
+  <:description>
+    Handles date and datetime input.
+  </:description>
+
+  <:example>
+    <NrgFormContainer as |form|>
+      <form.field @label="Datetime" as |field|>
+        <field.datetime
+          @disabled={{this.dateTimeDisabled}}
+          @valuePath="dateTimeValue"
+          @model={{this}}
+          @type={{this.dateTimeType}}
+          as |view|
+        />
+      </form.field>
+    </NrgFormContainer>
+  </:example>
+
+  <:api as |Args|>
+    <Args.String
+      @name="type"
+      @value={{this.dateTimeType}}
+      @onInput={{fn (mut this.dateTimeType)}}
+      @options={{this.dateTimeTypeOptions}}
+    />
+    <Args.Bool
+      @name="disabled"
+      @defaults={{false}}
+      @value={{this.dateTimeDisabled}}
+      @onInput={{fn (mut this.dateTimeDisabled)}}
+    />
+  </:api>
+</Freestyle::Usage>

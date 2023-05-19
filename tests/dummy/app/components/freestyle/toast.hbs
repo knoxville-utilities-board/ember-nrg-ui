@@ -1,0 +1,45 @@
+<FreestyleSection @name="Toast" as |Section|>
+  <Freestyle::Usage @name="Toast">
+    <:example>
+      <NrgButton @onClick={{this.openDefaultToasts}}>Open</NrgButton>
+      <br />
+      <br />
+      <Freestyle::CodeBlock
+        @label="Default Toasts"
+        @codeBlockName="default-toasts.js"
+      />
+
+      <NrgButton @onClick={{this.openToastsWithoutProgress}}>Open</NrgButton>
+      <br />
+      <br />
+      <Freestyle::CodeBlock
+        @label="Toasts without Progress"
+        @codeBlockName="no-progress-toasts.js"
+      />
+
+      <NrgButton @onClick={{this.openProgressToast}}>Open</NrgButton>
+      <br />
+      <br />
+      <Freestyle::CodeBlock
+        @label="Toasts with Progress"
+        @codeBlockName="progress-toasts.js"
+      />
+
+      <NrgButton @onClick={{this.openStickyToast}}>Open</NrgButton>
+      <br />
+      <br />
+      <Freestyle::CodeBlock
+        @label="Sticky Toasts"
+        @codeBlockName="sticky-toasts.js"
+      />
+
+      <NrgButton @onClick={{this.openToastWithLongMessage}}>Open</NrgButton>
+      <br />
+      <br />
+      <Freestyle::CodeBlock
+        @label="Long Paragraph Toast"
+        @codeBlockName="long-toasts.js"
+      />
+    </:example>
+  </Freestyle::Usage>
+</FreestyleSection>
