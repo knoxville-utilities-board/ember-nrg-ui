@@ -3,6 +3,7 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 const env = process.env.EMBER_ENV;
+const addonsToExclude = env === 'production' ? ['ember-freestyle'] : [];
 
 module.exports = function (defaults) {
   const app = new EmberAddon(defaults, {
@@ -22,6 +23,9 @@ module.exports = function (defaults) {
     },
     'ember-prism': {
       components: ['markup', 'handlebars', 'javascript', 'markup-templating'],
+    },
+    addons: {
+      exclude: addonsToExclude,
     },
   });
 
