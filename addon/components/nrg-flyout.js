@@ -16,6 +16,12 @@ export default class NrgFlyout extends Component {
   @tracked
   _renderTo;
 
+  @tracked
+  flyoutElement;
+
+  @tracked
+  visible;
+
   get isTesting() {
     return this.applicationService.isTesting ?? false;
   }
@@ -44,7 +50,9 @@ export default class NrgFlyout extends Component {
     }
     classList.push('flyout');
     classList.push(this.args.position ?? 'right');
-    classList.push('overlay visible');
+    if (this.visible) {
+      classList.push('overlay visible');
+    }
     classList.push(this.args.class ?? '');
 
     return classList.filter(Boolean).join(' ');
@@ -88,6 +96,10 @@ export default class NrgFlyout extends Component {
 
   get hidden() {
     return this.args.hidden ?? !this.renderInModal;
+  }
+
+  animateIn() {
+    this.visible = true;
   }
 
   @action

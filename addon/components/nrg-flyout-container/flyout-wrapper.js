@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { next } from '@ember/runloop';
 
 export default class FlyoutWrapper extends Component {
   @service('flyout')
@@ -32,6 +33,15 @@ export default class FlyoutWrapper extends Component {
   @action
   removeFlyoutFromWormhole() {
     this.args.flyout._renderTo = null;
+  }
+
+  @action
+  didInsert(element) {
+    const { flyout } = this.args;
+    flyout.flyoutElement = element;
+    next(() => {
+      flyout.animateIn();
+    });
   }
 
   @action
