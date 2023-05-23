@@ -18,7 +18,7 @@
       </:footer>
     </NrgSidebar>
     {{#if @fullscreenMap}}
-      <div class="pusher">
+      <div class="pusher {{if this.flyout.hasOpenFlyouts "dimmed"}}">
         {{#if this.application.sidebarMenuIsOpen}}
           <div class="sidebar-solid">
             <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}}>
@@ -37,7 +37,7 @@
         {{yield}}
       </div>
     {{else}}
-      <div class="pusher sidebar-flex-container">
+      <div class="pusher sidebar-flex-container {{if this.flyout.hasOpenFlyouts "dimmed"}}">
         {{#if this.application.sidebarMenuIsOpen}}
           <div class="sidebar-solid">
             <NrgSidebarMenu @onSidebarItemClick={{this.clickedLink}}>
@@ -65,6 +65,7 @@
     <NrgLightboxContainer />
   {{/if}}
   <NrgModalContainer />
+  <NrgFlyoutContainer />
   <NrgToastContainer as |view|>
     {{#each this.flashMessages.queue as |flash|}}
       <view.toast @flash={{flash}} />

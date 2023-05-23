@@ -14,6 +14,9 @@ export default class NrgFormComponent extends Component {
   modal;
 
   @service
+  flyout;
+
+  @service
   responsive;
 
   @service

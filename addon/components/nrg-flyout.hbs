@@ -1,0 +1,13 @@
+<div
+  hidden={{this.isHidden}}
+  {{did-insert this.addToService}}
+  {{will-destroy this.removeFromService}}
+>
+  {{#if this.renderTo}}
+    {{#in-element this.renderTo}}
+      {{yield}}
+    {{/in-element}}
+  {{else}}
+    {{yield}}
+  {{/if}}
+</div>
