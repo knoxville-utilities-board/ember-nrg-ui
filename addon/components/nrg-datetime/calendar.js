@@ -270,7 +270,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get allowMinuteSelection() {
-    return !(this.args.allowMinuteSelection == false);
+    return this.args.allowMinuteSelection !== false;
   }
 
   isBeyondDateRange(date, precision) {
