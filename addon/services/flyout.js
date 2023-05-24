@@ -30,6 +30,10 @@ export default class FlyoutService extends Service {
     return this.openFlyouts?.length;
   }
 
+  get allOpenFlyoutsAreClosing() {
+    return this.openFlyouts?.length === 1 && this.activeFlyout?.closing;
+  }
+
   @action
   add(item) {
     this.items.pushObject(item);

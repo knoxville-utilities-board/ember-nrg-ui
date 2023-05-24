@@ -46,7 +46,8 @@ export default class FlyoutWrapper extends Component {
 
   @action
   onClickOutside() {
-    if (this.args.flyout?.dismissable) {
+    const { flyout } = this.args;
+    if (this.flyoutService.activeFlyout === flyout && flyout?.dismissable) {
       this.onHide();
     }
   }

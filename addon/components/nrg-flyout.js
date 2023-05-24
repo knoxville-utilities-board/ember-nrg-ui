@@ -20,7 +20,13 @@ export default class NrgFlyout extends Component {
   flyoutElement;
 
   @tracked
-  visible;
+  showOverlay;
+
+  @tracked
+  closing;
+
+  @tracked
+  animating;
 
   get isTesting() {
     return this.applicationService.isTesting ?? false;
@@ -50,8 +56,14 @@ export default class NrgFlyout extends Component {
     }
     classList.push('flyout');
     classList.push(this.args.position ?? 'right');
-    if (this.visible) {
-      classList.push('overlay visible');
+    if (this.showOverlay) {
+      classList.push('overlay');
+      if (!this.closing) {
+        classList.push('visible');
+      }
+    }
+    if (this.animating) {
+      classList.push('animating');
     }
     classList.push(this.args.class ?? '');
 
@@ -99,7 +111,30 @@ export default class NrgFlyout extends Component {
   }
 
   animateIn() {
-    this.visible = true;
+    this.showOverlay = true;
+  }
+
+  async animateOut() {
+    return new Promise((resolve) => {
+      const finishTransition = () => {
+        this.completeTransition();
+        resolve();
+        this.flyoutElement.removeEventListener(
+          'transitionend',
+          finishTransition
+        );
+      };
+      this.flyoutElement.addEventListener('transitionend', finishTransition);
+      this.closing = true;
+      this.animating = true;
+    });
+  }
+
+  @action
+  completeTransition() {
+    this.showOverlay = false;
+    this.closing = false;
+    this.animating = false;
   }
 
   @action
@@ -113,14 +148,14 @@ export default class NrgFlyout extends Component {
   }
 
   @action
-  onPrimary() {
-    this.onHide();
+  async onPrimary() {
+    await this.onHide();
     this.onPrimaryButtonClick();
   }
 
   @action
-  onSecondary() {
-    this.onHide();
+  async onSecondary() {
+    await this.onHide();
     this.onSecondaryButtonClick();
   }
 
@@ -136,6 +171,7 @@ export default class NrgFlyout extends Component {
 
   @action
   async onHide() {
+    await this.animateOut();
     if (this.args.isOpen && this.dismissable) {
       this.args.onDismiss?.();
     }
