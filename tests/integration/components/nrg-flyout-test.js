@@ -1,26 +1,72 @@
+import Service from '@ember/service';
+import { click, render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
-import { setupRenderingTest } from 'dummy/tests/helpers';
-import { render } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | nrg-flyout', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  hooks.beforeEach(function () {
+    class ApplicationServiceStub extends Service {
+      environmentConfig = {
+        'ember-nrg-ui': {
+          productionEnvironments: ['prod'],
+        },
+        environment: 'test',
+      };
+      settings = {
+        localEnvironment: 'test',
+      };
+    }
+    this.owner.register('service:application', ApplicationServiceStub);
+  });
 
-    await render(hbs`<NrgFlyout />`);
-
-    assert.dom(this.element).hasText('');
-
-    // Template block usage:
+  test('primary button works', async function (assert) {
+    assert.expect(1);
+    this.onButtonClick = function () {
+      assert.ok(true);
+    };
     await render(hbs`
-      <NrgFlyout>
-        template block text
+      <NrgFlyoutContainer />
+      <NrgFlyout @primaryButton="Button Text" @isOpen={{true}} @onPrimaryButtonClick={{this.onButtonClick}} />
+    `);
+    await click('button');
+  });
+
+  test('secondary button works', async function (assert) {
+    assert.expect(1);
+    this.onButtonClick = function () {
+      assert.ok(true);
+    };
+    await render(hbs`
+      <NrgFlyoutContainer />
+      <NrgFlyout @secondaryButton="Button Text" @isOpen={{true}} @onSecondaryButtonClick={{this.onButtonClick}} />
+    `);
+    await click('button');
+  });
+
+  test('flyout handles multiple isOpen changes', async function (assert) {
+    this.isOpen = false;
+    await render(hbs`
+      <NrgFlyoutContainer />
+      <NrgFlyout @isOpen={{this.isOpen}}>
+        <h2>Test Content</h2>
       </NrgFlyout>
     `);
+    assert.dom('.ui.flyouts h2').doesNotExist();
+    this.set('isOpen', true);
+    assert.dom('.ui.flyouts h2').exists();
+    this.set('isOpen', false);
+    assert.dom('.ui.flyouts h2').doesNotExist();
+  });
 
-    assert.dom(this.element).hasText('template block text');
+  test('it renders block text in place', async function (assert) {
+    await render(hbs`
+      <NrgFlyout @isOpen={{true}} @renderInPlace={{true}}>
+        block text
+      </NrgFlyout>
+    `);
+    assert.dom('*').hasText('block text');
   });
 });
