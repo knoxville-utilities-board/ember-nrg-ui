@@ -40,6 +40,9 @@ const Validators = {
   searchResult: [validator('presence', true)],
   dateTime1: [validator('presence', true)],
   dateTime2: [validator('presence', true)],
+  time1: [validator('presence', true)],
+  time2: [validator('presence', true)],
+  date1: [validator('presence', true)],
 };
 
 export default class ViewComponentsNrgFormsController extends Controller {
@@ -87,6 +90,15 @@ export default class ViewComponentsNrgFormsController extends Controller {
 
   @tracked
   dateTime2;
+
+  @tracked
+  time1;
+
+  @tracked
+  time2;
+
+  @tracked
+  date1;
 
   @tracked
   selectedOption;

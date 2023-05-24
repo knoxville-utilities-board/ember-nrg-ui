@@ -104,11 +104,42 @@
       />
     </form.field>
     <br />
+    <form.field @label="Datetime (hours only)" @required={{this.required}} as |field|>
+      <field.datetime
+        @type="datetime"
+        @maxDate={{this.maxDate}}
+        @disabled={{this.disabled}}
+        @model={{this}}
+        @valuePath="dateTime2"
+        @allowMinuteSelection={{false}}
+      />
+    </form.field>
+    <br />
+    <form.field @label="Time" @required={{this.required}} as |field|>
+      <field.datetime
+        @type="time"
+        @disabled={{this.disabled}}
+        @model={{this}}
+        @valuePath="time1"
+      />
+    </form.field>
+    <br />
+    <form.field @label="Time (hours only)" @required={{this.required}} as |field|>
+      <field.datetime
+        @type="time"
+        @maxDate={{this.maxDate}}
+        @disabled={{this.disabled}}
+        @model={{this}}
+        @valuePath="time2"
+        @allowMinuteSelection={{false}}
+      />
+    </form.field>
+    <br />
     <form.field @label="Date (Button)" @required={{this.required}} as |field|>
       <field.datetime
         @disabled={{this.disabled}}
         @model={{this}}
-        @valuePath="dateTime2"
+        @valuePath="date1"
       >
         <NrgButton @class="green" @text="Open Datepicker" />
       </field.datetime>
