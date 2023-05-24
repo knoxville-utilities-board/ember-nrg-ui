@@ -7,5 +7,7 @@
     {{#in-element this.renderTo}}
       {{yield}}
     {{/in-element}}
+  {{else if this.renderInPlace}}
+    {{yield}}
   {{/if}}
 </div>

@@ -17,9 +17,6 @@ export default class NrgFlyout extends Component {
   _renderTo;
 
   @tracked
-  flyoutElement;
-
-  @tracked
   showOverlay;
 
   @tracked
@@ -110,33 +107,6 @@ export default class NrgFlyout extends Component {
     return this.args.hidden ?? !this.renderInModal;
   }
 
-  animateIn() {
-    this.showOverlay = true;
-  }
-
-  async animateOut() {
-    return new Promise((resolve) => {
-      const finishTransition = () => {
-        this.completeTransition();
-        resolve();
-        this.flyoutElement.removeEventListener(
-          'transitionend',
-          finishTransition
-        );
-      };
-      this.flyoutElement.addEventListener('transitionend', finishTransition);
-      this.closing = true;
-      this.animating = true;
-    });
-  }
-
-  @action
-  completeTransition() {
-    this.showOverlay = false;
-    this.closing = false;
-    this.animating = false;
-  }
-
   @action
   addToService() {
     this.flyoutService.add(this);
@@ -147,31 +117,15 @@ export default class NrgFlyout extends Component {
     this.flyoutService.remove(this);
   }
 
-  @action
-  async onPrimary() {
-    await this.onHide();
-    this.onPrimaryButtonClick();
-  }
-
-  @action
-  async onSecondary() {
-    await this.onHide();
-    this.onSecondaryButtonClick();
-  }
-
-  @action
-  onPrimaryButtonClick() {
+  onPrimary() {
     this.args.onPrimaryButtonClick?.();
   }
 
-  @action
-  onSecondaryButtonClick() {
+  onSecondary() {
     this.args.onSecondaryButtonClick?.();
   }
 
-  @action
-  async onHide() {
-    await this.animateOut();
+  onHide() {
     if (this.args.isOpen && this.dismissable) {
       this.args.onDismiss?.();
     }

@@ -12,8 +12,15 @@ export default class FlyoutWrapper extends Component {
   @tracked
   flyoutStyles;
 
+  @tracked
+  flyoutElement;
+
   get hasCloseIcon() {
-    return this.args.flyout?.dismissable;
+    return this.flyout.dismissable;
+  }
+
+  get flyout() {
+    return this.args.flyout;
   }
 
   @action
@@ -27,43 +34,74 @@ export default class FlyoutWrapper extends Component {
 
   @action
   addFlyoutToWormhole(element) {
-    this.args.flyout._renderTo = element;
+    this.flyout._renderTo = element;
   }
 
   @action
   removeFlyoutFromWormhole() {
-    this.args.flyout._renderTo = null;
+    this.flyout._renderTo = null;
   }
 
   @action
   didInsert(element) {
-    const { flyout } = this.args;
-    flyout.flyoutElement = element;
+    this.flyoutElement = element;
     next(() => {
-      flyout.animateIn();
+      this.animateIn();
+    });
+  }
+
+  animateIn() {
+    this.flyout.showOverlay = true;
+  }
+
+  async animateOut() {
+    return new Promise((resolve) => {
+      const finishTransition = () => {
+        this.completeTransition();
+        resolve();
+        this.flyoutElement.removeEventListener(
+          'transitionend',
+          finishTransition
+        );
+      };
+      this.flyoutElement.addEventListener('transitionend', finishTransition);
+      this.flyout.closing = true;
+      this.flyout.animating = true;
     });
   }
 
   @action
-  onClickOutside() {
-    const { flyout } = this.args;
-    if (this.flyoutService.activeFlyout === flyout && flyout?.dismissable) {
+  completeTransition() {
+    this.flyout.showOverlay = false;
+    this.flyout.closing = false;
+    this.flyout.animating = false;
+  }
+
+  @action
+  async onClickOutside() {
+    if (
+      this.flyoutService.activeFlyout === this.flyout &&
+      this.flyout.dismissable
+    ) {
+      await this.animateOut();
       this.onHide();
     }
   }
 
   @action
   onHide() {
-    this.args.flyout?.onHide?.();
+    this.flyout.onHide();
   }
 
   @action
   onPrimary() {
-    this.args.flyout?.onPrimary?.();
+    this.onHide();
+    this.flyout.onPrimary();
   }
 
   @action
   onSecondary() {
-    this.args.flyout?.onSecondary?.();
+    this.onHide();
+    this.flyout.onSecondary();
   }
 }
