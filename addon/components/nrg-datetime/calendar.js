@@ -22,12 +22,18 @@ export default class NrgDateTimeCalendarComponent extends Component {
   @tracked
   isSelectingMinutes = false;
 
+  @tracked
+  allowMinuteSelection = true;
+
   constructor() {
     super(...arguments);
     if (this.args.type === 'datetime' || this.args.type === 'date') {
       this.isSelectingDays = true;
     } else if (this.args.type === 'time') {
       this.isSelectingHours = true;
+    }
+    if (this.args.allowMinuteSelection == false) {
+      this.allowMinuteSelection = false;
     }
   }
 
@@ -436,7 +442,11 @@ export default class NrgDateTimeCalendarComponent extends Component {
 
   @action
   setToNow() {
-    this.onSelect(new Date());
+    if (!this.allowMinuteSelection) {
+      this.onSelect(new Date().setMinutes(0, 0, 0));
+    } else {
+      this.onSelect(new Date());
+    }
   }
 
   @action
@@ -495,7 +505,11 @@ export default class NrgDateTimeCalendarComponent extends Component {
     if (this.args.type === 'datetime' || this.args.type === 'time') {
       if (this.isSelectingHours) {
         this.isSelectingHours = false;
-        this.isSelectingMinutes = true;
+        if (this.allowMinuteSelection) {
+          this.isSelectingMinutes = true;
+        } else {
+          this.close();
+        }
         return;
       } else if (this.isSelectingMinutes) {
         this.close();
