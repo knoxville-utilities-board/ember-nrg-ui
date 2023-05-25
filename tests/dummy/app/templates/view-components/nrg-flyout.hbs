@@ -1,0 +1,100 @@
+{{page-title "nrg-flyout"}}
+
+<NrgCodeBlock @label="Default Flyout" @codeBlockName="default-flyout.hbs">
+  <NrgButton
+    @text="Open Flyout"
+    @onClick={{fn this.setProperty "flyoutOpen1" true}}
+  />
+  {{! BEGIN-SNIPPET default-flyout }}
+  <NrgFlyout
+    @headerText="A simple flyout"
+    @onDismiss={{fn this.setProperty "flyoutOpen1" false}}
+    @isOpen={{this.flyoutOpen1}}
+  >
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+    </p>
+    <NrgButton
+      @text="Open Flyout 2"
+      @onClick={{fn this.setProperty "flyoutOpen2" true}}
+    />
+  </NrgFlyout>
+  {{! END-SNIPPET }}
+  <NrgFlyout
+    @headerText="Flyout 2 Is Left Aligned"
+    @onDismiss={{fn this.setProperty "flyoutOpen2" false}}
+    @isOpen={{this.flyoutOpen2}}
+    @position="left"
+  >
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+    </p>
+    <NrgButton
+      @text="Open Flyout 3"
+      @onClick={{fn this.setProperty "flyoutOpen3" true}}
+    />
+  </NrgFlyout>
+  <NrgFlyout
+    @headerText="Flyout 3 is along the top"
+    @isOpen={{this.flyoutOpen3}}
+    @position="top"
+    @dismissable={{false}}
+    @primaryButton="Dismiss"
+    @onPrimaryButtonClick={{fn this.setProperty "flyoutOpen3" false}}
+  >
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+    </p>
+  </NrgFlyout>
+</NrgCodeBlock>
+
+<NrgCodeBlock @label="Fullscreen Flyout" @codeBlockName="fullscreen-flyout.hbs">
+  <NrgButton
+    @text="Open Flyout"
+    @onClick={{fn this.setProperty "fullscreenFlyoutOpen" true}}
+  />
+  {{! BEGIN-SNIPPET fullscreen-flyout }}
+  <NrgFlyout
+    @headerText="A fullscreen flyout"
+    @onDismiss={{fn this.setProperty "fullscreenFlyoutOpen" false}}
+    @isOpen={{this.fullscreenFlyoutOpen}}
+    @fullscreen={{true}}
+  >
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+    </p>
+  </NrgFlyout>
+  {{! END-SNIPPET }}
+</NrgCodeBlock>
