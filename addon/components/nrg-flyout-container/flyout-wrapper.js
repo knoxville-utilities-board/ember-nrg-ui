@@ -58,7 +58,9 @@ export default class FlyoutWrapper extends Component {
   @action
   didInsert(element) {
     this.flyoutElement = element;
-    element.addEventListener('transitionend', this.completeTransition);
+    element.addEventListener('transitionend', this.completeTransition, {
+      once: true,
+    });
     next(() => {
       this.animateIn();
       this.flyoutService.activeIsTransitioning = true;
@@ -73,10 +75,6 @@ export default class FlyoutWrapper extends Component {
     this.flyoutService.activeIsTransitioning = false;
     this.flyout.closing = false;
     this.flyout.animating = false;
-    this.flyoutElement.removeEventListener(
-      'transitionend',
-      this.completeTransition
-    );
   }
 
   @action
