@@ -56,3 +56,32 @@
     border-radius: 0;
   }
 }
+
+.ui.flyouts > .flyout {
+  &::after {
+    content: '';
+    right: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    transition: background 0.5s ease;
+  }
+
+  &.active {
+    &::after {
+      background: transparent !important;
+    }
+    &:not(.transitioning)::after {
+      height: 0;
+    }
+  }
+
+  &:not(.active)::after {
+    background: rgba(0, 0, 0, 0.4);
+    height: 100%;
+  }
+
+  &.transitioning::after {
+    height: 100% !important;
+  }
+}

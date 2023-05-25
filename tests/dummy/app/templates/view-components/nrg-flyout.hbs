@@ -41,6 +41,25 @@
       hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
       aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
     </p>
+    <NrgButton @text="Open Flyout 3" @onClick={{fn this.setProperty "flyoutOpen3" true}} />
+  </NrgFlyout>
+  <NrgFlyout
+    @headerText="A simple flyout"
+    @onDismiss={{fn this.setProperty "flyoutOpen3" false}}
+    @isOpen={{this.flyoutOpen3}}
+    @position="top"
+  >
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+    </p>
   </NrgFlyout>
   {{! END-SNIPPET }}
 </NrgCodeBlock>

@@ -23,6 +23,19 @@ export default class FlyoutWrapper extends Component {
     return this.args.flyout;
   }
 
+  get classes() {
+    let flyoutClasses = this.flyout.flyoutClasses;
+
+    if (this.args.isActive) {
+      flyoutClasses += ' active';
+    }
+    if (this.flyoutService.activeIsTransitioning) {
+      flyoutClasses += ' transitioning';
+    }
+
+    return flyoutClasses;
+  }
+
   @action
   onResize(element) {
     const marginTop = element.offsetHeight / 2;
@@ -45,8 +58,10 @@ export default class FlyoutWrapper extends Component {
   @action
   didInsert(element) {
     this.flyoutElement = element;
+    element.addEventListener('transitionend', this.completeTransition);
     next(() => {
       this.animateIn();
+      this.flyoutService.activeIsTransitioning = true;
     });
   }
 
@@ -55,6 +70,7 @@ export default class FlyoutWrapper extends Component {
   }
 
   async animateOut() {
+    this.flyoutService.activeIsTransitioning = true;
     return new Promise((resolve) => {
       const finishTransition = () => {
         this.completeTransition();
@@ -71,25 +87,32 @@ export default class FlyoutWrapper extends Component {
   }
 
   @action
-  completeTransition() {
-    this.flyout.showOverlay = false;
+  completeTransition(evt) {
+    if (!evt) {
+      this.flyout.showOverlay = false;
+    }
+    this.flyoutService.activeIsTransitioning = false;
     this.flyout.closing = false;
     this.flyout.animating = false;
+    this.flyoutElement.removeEventListener(
+      'transitionend',
+      this.completeTransition
+    );
   }
 
   @action
-  async onClickOutside() {
+  onClickOutside() {
     if (
       this.flyoutService.activeFlyout === this.flyout &&
       this.flyout.dismissable
     ) {
-      await this.animateOut();
       this.onHide();
     }
   }
 
   @action
-  onHide() {
+  async onHide() {
+    await this.animateOut();
     this.flyout.onHide();
   }
 
