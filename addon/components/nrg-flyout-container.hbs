@@ -1,13 +1,19 @@
 <div class="ui flyouts">
   {{#each this.flyoutService.openFlyouts as |flyout|}}
-    {{#if (eq this.flyoutService.activeFlyout flyout)}}
-      <div
-        role="button"
-        aria-label={{if flyout.isDismissable "Dismiss Flyout"}}
-        class="ui visible active
-          {{unless flyout.isDismissable 'not-dismissable'}}"
-      ></div>
-    {{/if}}
-    <NrgFlyoutContainer::FlyoutWrapper @flyout={{flyout}} />
+    {{#let (eq this.flyoutService.activeFlyout flyout) as |isActiveFlyout|}}
+      {{#if isActiveFlyout}}
+        <div
+          role="button"
+          aria-label={{if flyout.isDismissable "Dismiss Flyout"}}
+          class="ui visible active
+            {{unless flyout.isDismissable 'not-dismissable'}}"
+        ></div>
+      {{/if}}
+      <NrgFlyoutContainer::FlyoutWrapper
+        @flyout={{flyout}}
+        @isActive={{isActiveFlyout}}
+        @activeIsTransitioning={{this.flyoutService.activeIsTransitioning}}
+      />
+    {{/let}}
   {{/each}}
 </div>

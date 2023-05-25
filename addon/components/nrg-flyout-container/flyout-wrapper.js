@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { next } from '@ember/runloop';
 
 export default class FlyoutWrapper extends Component {
   @service('flyout')
@@ -11,8 +12,28 @@ export default class FlyoutWrapper extends Component {
   @tracked
   flyoutStyles;
 
+  @tracked
+  flyoutElement;
+
   get hasCloseIcon() {
-    return this.args.flyout?.dismissable;
+    return this.flyout.dismissable;
+  }
+
+  get flyout() {
+    return this.args.flyout;
+  }
+
+  get classes() {
+    let flyoutClasses = this.flyout.flyoutClasses;
+
+    if (this.args.isActive) {
+      flyoutClasses += ' active';
+    }
+    if (this.flyoutService.activeIsTransitioning) {
+      flyoutClasses += ' transitioning';
+    }
+
+    return flyoutClasses;
   }
 
   @action
@@ -26,34 +47,87 @@ export default class FlyoutWrapper extends Component {
 
   @action
   addFlyoutToWormhole(element) {
-    this.args.flyout._renderTo = element;
+    this.flyout._renderTo = element;
   }
 
   @action
   removeFlyoutFromWormhole() {
-    this.args.flyout._renderTo = null;
+    this.flyout._renderTo = null;
+  }
+
+  @action
+  didInsert(element) {
+    this.flyoutElement = element;
+    element.addEventListener('transitionend', this.completeTransition);
+    next(() => {
+      this.animateIn();
+      this.flyoutService.activeIsTransitioning = true;
+    });
+  }
+
+  @action
+  completeTransition(evt) {
+    if (!evt) {
+      this.flyout.showOverlay = false;
+    }
+    this.flyoutService.activeIsTransitioning = false;
+    this.flyout.closing = false;
+    this.flyout.animating = false;
+    this.flyoutElement.removeEventListener(
+      'transitionend',
+      this.completeTransition
+    );
   }
 
   @action
   onClickOutside() {
-    const { flyout } = this.args;
-    if (this.flyoutService.activeFlyout === flyout && flyout?.dismissable) {
+    if (
+      this.flyoutService.activeFlyout === this.flyout &&
+      this.flyout.dismissable
+    ) {
       this.onHide();
     }
   }
 
   @action
-  onHide() {
-    this.args.flyout?.onHide?.();
+  async onHide() {
+    await this.animateOut();
+    this.flyout.onHide();
   }
 
   @action
-  onPrimary() {
-    this.args.flyout?.onPrimary?.();
+  async onPrimary() {
+    await this.onHide();
+    this.flyout.onPrimary();
   }
 
   @action
-  onSecondary() {
-    this.args.flyout?.onSecondary?.();
+  async onSecondary() {
+    await this.onHide();
+    this.flyout.onSecondary();
+  }
+
+  animateIn() {
+    this.flyout.showOverlay = true;
+  }
+
+  async animateOut() {
+    this.flyoutService.activeIsTransitioning = true;
+    return new Promise((resolve) => {
+      const finishTransition = (event) => {
+        if (event?.target !== this.flyoutElement) {
+          return;
+        }
+        this.completeTransition();
+        resolve();
+        this.flyoutElement.removeEventListener(
+          'transitionend',
+          finishTransition
+        );
+      };
+      this.flyoutElement.addEventListener('transitionend', finishTransition);
+      this.flyout.closing = true;
+      this.flyout.animating = true;
+    });
   }
 }

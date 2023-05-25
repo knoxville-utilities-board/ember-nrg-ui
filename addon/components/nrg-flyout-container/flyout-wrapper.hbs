@@ -1,9 +1,10 @@
 {{! template-lint-disable no-inline-styles }}
 <div
-  class={{@flyout.flyoutClasses}}
+  class={{this.classes}}
   style={{this.flyoutStyles}}
   role="dialog"
   aria-label="Flyout"
+  {{did-insert this.didInsert}}
   {{on-resize this.onResize}}
   {{on-click-outside this.onClickOutside}}
 >

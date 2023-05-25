@@ -10,6 +10,9 @@ export default class FlyoutService extends Service {
   @tracked
   renderIndex = 0;
 
+  @tracked
+  activeIsTransitioning = false;
+
   get openFlyouts() {
     return A(
       this.items
@@ -19,11 +22,18 @@ export default class FlyoutService extends Service {
   }
 
   get activeFlyout() {
-    return this.openFlyouts?.lastObject;
+    if (this.openFlyouts?.length === 1) {
+      return this.openFlyouts?.firstObject;
+    }
+    return this.openFlyouts?.findLast((item) => !item.closing);
   }
 
   get hasOpenFlyouts() {
     return this.openFlyouts?.length;
+  }
+
+  get allOpenFlyoutsAreClosing() {
+    return this.openFlyouts?.length === 1 && this.activeFlyout?.closing;
   }
 
   @action

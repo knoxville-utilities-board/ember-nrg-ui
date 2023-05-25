@@ -37,6 +37,17 @@ export default class NrgFormComponent extends Component {
     this.setMainContentStyle();
   }
 
+  get pusherClass() {
+    let pusherClass = 'pusher';
+    if (this.flyout.hasOpenFlyouts) {
+      pusherClass += ' dimmed';
+    }
+    if (this.flyout.allOpenFlyoutsAreClosing) {
+      pusherClass += ' closing';
+    }
+    return pusherClass;
+  }
+
   @action
   setMainContentStyle() {
     this.mainContentStyle = htmlSafe(`height:${window.innerHeight}px`);

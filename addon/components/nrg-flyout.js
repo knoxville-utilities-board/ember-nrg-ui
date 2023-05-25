@@ -16,6 +16,15 @@ export default class NrgFlyout extends Component {
   @tracked
   _renderTo;
 
+  @tracked
+  showOverlay;
+
+  @tracked
+  closing;
+
+  @tracked
+  animating;
+
   get isTesting() {
     return this.applicationService.isTesting ?? false;
   }
@@ -40,7 +49,15 @@ export default class NrgFlyout extends Component {
     }
     classList.push('flyout');
     classList.push(this.args.position ?? 'right');
-    classList.push('overlay visible');
+    if (this.showOverlay) {
+      classList.push('overlay');
+      if (!this.closing) {
+        classList.push('visible');
+      }
+    }
+    if (this.animating) {
+      classList.push('animating');
+    }
     classList.push(this.args.class ?? '');
 
     return classList.filter(Boolean).join(' ');
@@ -88,30 +105,15 @@ export default class NrgFlyout extends Component {
     this.flyoutService.remove(this);
   }
 
-  @action
   onPrimary() {
-    this.onHide();
-    this.onPrimaryButtonClick();
-  }
-
-  @action
-  onSecondary() {
-    this.onHide();
-    this.onSecondaryButtonClick();
-  }
-
-  @action
-  onPrimaryButtonClick() {
     this.args.onPrimaryButtonClick?.();
   }
 
-  @action
-  onSecondaryButtonClick() {
+  onSecondary() {
     this.args.onSecondaryButtonClick?.();
   }
 
-  @action
-  async onHide() {
+  onHide() {
     if (this.args.isOpen && this.dismissable) {
       this.args.onDismiss?.();
     }
