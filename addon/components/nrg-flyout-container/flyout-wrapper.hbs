@@ -1,0 +1,54 @@
+{{! template-lint-disable no-inline-styles }}
+<div
+  class={{@flyout.flyoutClasses}}
+  style={{this.flyoutStyles}}
+  role="dialog"
+  aria-label="Flyout"
+  {{on-resize this.onResize}}
+  {{on-click-outside this.onClickOutside}}
+>
+  {{#if this.hasCloseIcon}}
+    <i
+      class="close icon"
+      role="button"
+      aria-label="Close flyout"
+      {{on "click" this.onHide}}
+    ></i>
+  {{/if}}
+  {{#if (or @flyout.headerText @flyout.headerIcon)}}
+    <div class="header">
+      {{#if @flyout.headerIcon}}
+        <i class="{{@flyout.headerIcon}} icon"></i>
+      {{/if}}
+      <div class="content">
+        {{@flyout.headerText}}
+      </div>
+    </div>
+  {{/if}}
+
+  <div
+    class="flyout-content content {{unless @flyout.renderInFlyout 'scrolling'}}"
+    {{did-insert this.addFlyoutToWormhole}}
+    {{will-destroy this.removeFlyoutFromWormhole}}
+  ></div>
+
+  {{#if @flyout.hasButtons}}
+    <div class="actions">
+      {{#if @flyout.secondaryButton}}
+        <NrgButton
+          @class="basic black"
+          @text={{@flyout.secondaryButton}}
+          @onClick={{this.onSecondary}}
+        />
+      {{/if}}
+      {{#if @flyout.primaryButton}}
+        <NrgButton
+          @class="primary right"
+          @text={{@flyout.primaryButton}}
+          @onClick={{this.onPrimary}}
+          @autofocus={{true}}
+        />
+      {{/if}}
+    </div>
+  {{/if}}
+</div>
