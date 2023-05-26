@@ -61,10 +61,11 @@ export default class Modal extends Service {
     if (!this.openModals.length) {
       return null;
     }
-    if (this.openModals.some((i) => i.dimmerType === 'dark')) {
-      return 'dark';
-    }
-    return 'light';
+    const baseClass = this.openModals.some((i) => i.dimmerType === 'dark')
+      ? 'dark'
+      : 'light';
+    const dismissableClass = this.dimmerClickable ? '' : 'not-dismissable';
+    return `${baseClass} ${dismissableClass}`;
   }
 
   @action
