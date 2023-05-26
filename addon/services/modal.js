@@ -11,23 +11,69 @@ export default class Modal extends Service {
   renderIndex = 0;
 
   get openModals() {
-    return A(
-      this.items
-        ?.filter((item) => !item.renderInPlace && item.args.isOpen)
-        ?.sort((a, b) =>
-          a.priority == b.priority
-            ? a.renderIndex - b.renderIndex
-            : a.priority - b.priority
-        )
-    );
+    return this.items
+      ?.filter((item) => !item.renderInPlace && item.args.isOpen)
+      ?.sort((a, b) =>
+        a.priority == b.priority
+          ? a.renderIndex - b.renderIndex
+          : a.priority - b.priority
+      );
   }
 
-  get activeModal() {
-    return this.openModals?.lastObject;
+  get dimmerIndex() {
+    const lastUnstackable = this.openModals.findLastIndex(
+      (item) => !item.stackable
+    );
+    if (lastUnstackable === -1) {
+      return 0;
+    }
+    if (lastUnstackable === this.openModals.length - 1) {
+      return lastUnstackable;
+    }
+    return lastUnstackable + 1;
+  }
+
+  get activeModals() {
+    if (!this.openModals.length) {
+      return [];
+    }
+    return this.openModals.slice(this.dimmerIndex, this.openModals.length);
+  }
+
+  get modalRenderList() {
+    if (!this.openModals.length) {
+      return [];
+    }
+    const modalRenderList = this.openModals.slice();
+    modalRenderList.splice(this.dimmerIndex, 0, 'dimmer');
+    return modalRenderList;
   }
 
   get hasOpenModals() {
-    return this.openModals?.length;
+    return this.openModals.length;
+  }
+
+  get dimmerClickable() {
+    return this.activeModals.some((item) => item.dismissable);
+  }
+
+  get dimmerClass() {
+    if (!this.openModals.length) {
+      return null;
+    }
+    if (this.openModals.some((i) => i.dimmerType === 'dark')) {
+      return 'dark';
+    }
+    return 'light';
+  }
+
+  @action
+  onDimmerClick() {
+    for (const item of this.activeModals) {
+      if (item.dismissable) {
+        item.onHide();
+      }
+    }
   }
 
   @action

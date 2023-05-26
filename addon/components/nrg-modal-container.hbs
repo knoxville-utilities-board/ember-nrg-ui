@@ -3,18 +3,21 @@
     {{if this.modalService.hasOpenModals 'visible active' 'hidden'}}
     {{if this.modalService.activeModal.sidebar 'sidebar-container'}}"
 >
-  {{#each this.modalService.openModals as |modal|}}
-    {{#if (eq this.modalService.activeModal modal)}}
+  {{#each this.modalService.modalRenderList as |item index|}}
+    {{#if (eq item "dimmer")}}
       <div
         role="button"
-        aria-label={{if modal.isDismissable "Dismiss Modal"}}
+        aria-label={{if this.modalService.dimmerClickable "Dismiss Modal"}}
         class="ui dimmer visible active
-          {{if modal.sidebar 'sidebar-dimmer' 'page'}}
-          {{unless modal.isDismissable 'not-dismissable'}}
-          {{modal.dimmerClass}}"
-        {{on "click" this.onDimmerClick}}
+          {{this.modalService.dimmerClass}}
+          {{unless this.modalService.dimmerClickable 'not-dismissable'}}"
+        {{on "click" this.modalService.onDimmerClick}}
       ></div>
+    {{else}}
+      <NrgModalContainer::ModalWrapper
+        @modal={{item}}
+        @aboveDimmer={{gt index this.modalService.dimmerIndex}}
+      />
     {{/if}}
-    <NrgModalContainer::ModalWrapper @modal={{modal}} />
   {{/each}}
 </div>
