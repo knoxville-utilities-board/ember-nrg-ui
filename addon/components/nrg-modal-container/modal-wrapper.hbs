@@ -1,6 +1,9 @@
 {{! template-lint-disable no-inline-styles }}
 <div
-  class="ui modal visible active
+  class="ui visible active
+    {{if @aboveDimmer 'above-dimmer'}}
+    {{if @modal.position @modal.position}}
+    {{if @modal.flyout 'simple flyout overlay' 'modal'}}
     {{if @modal.sidebar 'sidebar-modal'}}
     {{if @modal.lightbox 'fullscreen lightbox'}}
     {{if @modal.modalClass @modal.modalClass}}
@@ -20,13 +23,13 @@
     ></i>
   {{/if}}
   {{#if @modal.headerText}}
-    <div class="header">
+    <div class="ui header">
       {{@modal.headerText}}
     </div>
   {{/if}}
 
   <div
-    class="modal-content
+    class="{{unless @modal.flyout 'modal-content'}}
       {{if @modal.lightbox 'image'}}
       {{unless @modal.sidebar 'content'}}
       {{if @modal.scrolling 'scrolling'}}"

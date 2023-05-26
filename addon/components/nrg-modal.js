@@ -51,6 +51,41 @@ export default class NrgModal extends Component {
     return this.args.lightbox ?? false;
   }
 
+  get flyout() {
+    return this.args.flyout ?? false;
+  }
+
+  get stackable() {
+    return this.args.stackable ?? this.args.flyout ?? false;
+  }
+
+  get position() {
+    if (!this.flyout) {
+      return '';
+    }
+    return this.args.position ?? 'left';
+  }
+
+  get type() {
+    if (this.flyout) {
+      return 'flyout';
+    }
+    if (this.lightbox) {
+      return 'lightbox';
+    }
+    if (this.sidebar) {
+      return 'sidebar';
+    }
+    return 'modal';
+  }
+
+  get dimmerType() {
+    if (this.flyout || this.sidebar) {
+      return 'light';
+    }
+    return 'dark';
+  }
+
   get scrolling() {
     return (
       !this.takeover && !this.lightbox && !this.sidebar && this.renderInModal

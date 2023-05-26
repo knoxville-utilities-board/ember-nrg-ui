@@ -1,8 +1,11 @@
-<div
-  hidden={{this.isHidden}}
-  {{did-insert this.addToService}}
-  {{will-destroy this.removeFromService}}
->
+<div hidden={{this.isHidden}}>
+  {{#if @isOpen}}
+    <div
+      {{did-insert this.addToService}}
+      {{will-destroy this.removeFromService}}
+    />
+  {{/if}}
+
   {{#if this.renderTo}}
     {{#in-element this.renderTo}}
       {{yield}}

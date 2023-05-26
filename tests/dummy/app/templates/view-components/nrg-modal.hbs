@@ -187,6 +187,11 @@
       @text="Open Basic Modal with Actions"
       @onClick={{fn this.setProperty "modalOpen4" true}}
     />
+    <br />
+    <NrgButton
+      @text="Open Flyout 1"
+      @onClick={{fn this.setProperty "modalOpen8" true}}
+    />
   </NrgModal>
   {{! END-SNIPPET }}
 </NrgCodeBlock>
@@ -213,3 +218,80 @@
   </NrgModal>
   {{! END-SNIPPET }}
 </NrgCodeBlock>
+
+<NrgCodeBlock @label="Flyout" @codeBlockName="flyout.hbs">
+  <NrgButton
+    @text="Open Flyout"
+    @onClick={{fn this.setProperty "modalOpen8" true}}
+  />
+  {{! BEGIN-SNIPPET flyout }}
+  <NrgModal
+    @headerText="A flyout"
+    @onDismiss={{fn this.setProperty "modalOpen8" false}}
+    @flyout={{true}}
+    @isOpen={{this.modalOpen8}}
+  >
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+      commodo tristique libero, in rutrum est aliquet et. Nulla imperdiet justo
+      nec tempus sagittis. Sed nec quam non magna facilisis ornare. Nulla eget
+      erat dapibus, scelerisque urna sed, vehicula sem. Ut vitae semper ligula,
+      eu varius arcu. Aliquam lorem leo, mollis nec maximus eget, facilisis vel
+      ipsum. Aliquam in nibh et nisl ornare convallis. Sed consectetur libero
+      diam. Nam volutpat dolor sed nunc rhoncus finibus. Curabitur vestibulum
+      hendrerit condimentum. Nam quis ultricies sem. Morbi a eros accumsan,
+      aliquet nunc in, egestas orci. Nullam eget efficitur lacus.
+    </p>
+
+    <NrgButton
+      @text="Open Flyout 2"
+      @onClick={{fn this.setProperty "modalOpen9" true}}
+    />
+  </NrgModal>
+  {{! END-SNIPPET }}
+</NrgCodeBlock>
+
+<NrgModal
+  @headerText="A second stackable flyout"
+  @onDismiss={{fn this.setProperty "modalOpen9" false}}
+  @flyout={{true}}
+  @position="right"
+  @isOpen={{this.modalOpen9}}
+>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo
+    tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus
+    sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+    scelerisque urna sed, vehicula sem. Ut vitae semper ligula, eu varius arcu.
+    Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in
+    nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat
+    dolor sed nunc rhoncus finibus. Curabitur vestibulum hendrerit condimentum.
+    Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas
+    orci. Nullam eget efficitur lacus.
+  </p>
+  <NrgButton
+    @text="Open Flyout 3"
+    @onClick={{fn this.setProperty "modalOpen10" true}}
+  />
+</NrgModal>
+
+<NrgModal
+  @headerText="A third flyout"
+  @onDismiss={{fn this.setProperty "modalOpen10" false}}
+  @flyout={{true}}
+  @position="bottom"
+  @stackable={{false}}
+  @isOpen={{this.modalOpen10}}
+>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo
+    tristique libero, in rutrum est aliquet et. Nulla imperdiet justo nec tempus
+    sagittis. Sed nec quam non magna facilisis ornare. Nulla eget erat dapibus,
+    scelerisque urna sed, vehicula sem. Ut vitae semper ligula, eu varius arcu.
+    Aliquam lorem leo, mollis nec maximus eget, facilisis vel ipsum. Aliquam in
+    nibh et nisl ornare convallis. Sed consectetur libero diam. Nam volutpat
+    dolor sed nunc rhoncus finibus. Curabitur vestibulum hendrerit condimentum.
+    Nam quis ultricies sem. Morbi a eros accumsan, aliquet nunc in, egestas
+    orci. Nullam eget efficitur lacus.
+  </p>
+</NrgModal>
