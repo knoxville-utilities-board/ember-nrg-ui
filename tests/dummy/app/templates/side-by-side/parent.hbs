@@ -1,0 +1,17 @@
+{{! BEGIN-SNIPPET side-by-side }}
+{{page-title "nrg-side-by-side"}}
+
+<NrgSideBySide>
+  <:primary>
+    <NrgList
+      @selectionType="single"
+      @pageMeta={{this.pageMeta}}
+      @items={{this.mappedItems}}
+      @onItemSelect={{this.onSelect}}
+    />
+  </:primary>
+  <:secondary>
+    {{outlet}}
+  </:secondary>
+</NrgSideBySide>
+{{! END-SNIPPET }}
