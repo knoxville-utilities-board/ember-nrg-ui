@@ -14,6 +14,14 @@ export default class ModalWrapper extends NrgAnimatableComponent {
   @tracked
   modalStyles;
 
+  constructor() {
+    super(...arguments);
+    if (!this.args.modal.flyout) {
+      this.openedEvent = 'animationend';
+      this.closedEvent = 'animationend';
+    }
+  }
+
   get hasCloseIcon() {
     return this.args.modal?.dismissable && !this.args.modal?.sidebar;
   }
@@ -22,19 +30,9 @@ export default class ModalWrapper extends NrgAnimatableComponent {
     const classes = ['ui'];
     const { modal } = this.args;
 
-    // classes.push('visible active');
-    // if (!modal.flyout) {
-    //   classes.push('visible active');
-    // }
-
-    if (this.args.aboveDimmer) {
-      // classes.push('above-dimmer');
-    }
-
-    let typeClass = 'modal';
+    let typeClass = 'modal transition';
     if (modal.flyout) {
       typeClass = `simple flyout ${modal.position}`;
-      // typeClass = `simple flyout overlay ${modal.position}`;
     } else if (modal.lightbox) {
       typeClass = 'fullscreen lightbox';
     } else if (modal.takeover) {
@@ -54,17 +52,21 @@ export default class ModalWrapper extends NrgAnimatableComponent {
   }
 
   get openClasses() {
-    const openClasses = [];
+    const openClasses = ['visible'];
     if (this.args.modal.flyout) {
-      openClasses.push('overlay visible');
+      openClasses.push('overlay');
+    } else {
+      openClasses.push('active');
     }
     return openClasses.join(' ');
   }
 
   get openingClasses() {
-    const openingClasses = [];
+    const openingClasses = ['visible'];
     if (this.args.modal.flyout) {
-      openingClasses.push('overlay visible');
+      openingClasses.push('overlay');
+    } else {
+      openingClasses.push('animating scale in');
     }
     return openingClasses.join(' ');
   }
@@ -73,8 +75,20 @@ export default class ModalWrapper extends NrgAnimatableComponent {
     const closingClasses = [];
     if (this.args.modal.flyout) {
       closingClasses.push('overlay animating');
+    } else {
+      closingClasses.push('visible animating scale out');
     }
     return closingClasses.join(' ');
+  }
+
+  get closedClasses() {
+    const closedClasses = [];
+
+    if (!this.args.modal.flyout) {
+      closedClasses.push('hidden');
+    }
+
+    return closedClasses.join(' ');
   }
 
   get renderDimmer() {
@@ -121,17 +135,25 @@ export default class ModalWrapper extends NrgAnimatableComponent {
   }
 
   @action
+  handleClick(callback) {
+    this.close(callback);
+    if (this.modalService.allModalsAreClosing) {
+      this.modalService.pageDimmer?.close();
+    }
+  }
+
+  @action
   onHide() {
     this.close(this.args.modal?.onHide);
   }
 
-  @action
-  onPrimary() {
-    this.close(this.args.modal?.onPrimary);
-  }
+  // @action
+  // onPrimary() {
+  //   this.close(this.args.modal?.onPrimary);
+  // }
 
-  @action
-  onSecondary() {
-    this.close(this.args.modal?.onSecondary?.());
-  }
+  // @action
+  // onSecondary() {
+  //   this.close(this.args.modal?.onSecondary);
+  // }
 }

@@ -3,5 +3,6 @@
   class={{this.dimmerClasses}}
   aria-label={{@ariaLabel}}
   {{did-insert this.didInsert}}
+  {{did-update this.maybeShow @visible}}
   {{on "click" this.onClick}}
 ></div>

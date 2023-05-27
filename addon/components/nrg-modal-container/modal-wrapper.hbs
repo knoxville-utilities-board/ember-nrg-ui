@@ -19,7 +19,7 @@
       class="close icon"
       role="button"
       aria-label="Close modal"
-      {{on "click" this.onHide}}
+      {{on "click" (fn this.handleClick @modal.onHide)}}
     ></i>
   {{/if}}
   {{#if @modal.headerText}}
@@ -43,14 +43,14 @@
         <NrgButton
           @class={{@modal.secondaryButtonClass}}
           @text={{@modal.secondaryButton}}
-          @onClick={{this.onSecondary}}
+          @onClick={{(fn this.handleClick @modal.onSecondary)}}
         />
       {{/if}}
       {{#if @modal.primaryButton}}
         <NrgButton
           @class="primary right"
           @text={{@modal.primaryButton}}
-          @onClick={{this.onPrimary}}
+          @onClick={{(fn this.handleClick @modal.onPrimary)}}
           @autofocus={{true}}
         />
       {{/if}}

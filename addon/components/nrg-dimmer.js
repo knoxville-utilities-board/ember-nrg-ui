@@ -33,6 +33,14 @@ export default class NrgDimmerComponent extends NrgAnimatableComponent {
   }
 
   @action
+  maybeShow(_, [visible]) {
+    // debugger;
+    if (visible && !this.isOpen && !this.isOpening) {
+      this.open();
+    }
+  }
+
+  @action
   onClick() {
     this.args.onClick?.();
   }

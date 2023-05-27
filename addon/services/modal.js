@@ -78,6 +78,13 @@ export default class Modal extends Service {
     return this.activeModals.some((item) => item.dismissable);
   }
 
+  get pageDimmerType() {
+    if (this.openModals.some((item) => item.dimmerType === 'dark')) {
+      return 'dark';
+    }
+    return 'light';
+  }
+
   get dimmerType() {
     if (this.activeModals.some((item) => item.dimmerType === 'dark')) {
       return 'dark';
@@ -89,36 +96,40 @@ export default class Modal extends Service {
     return this.openModals.every((item) => item.wrapper?.isClosing);
   }
 
-  get dimmerClass() {
-    if (!this.openModals.length) {
-      return null;
-    }
-    const dimmerClasses = ['visible active'];
-    let baseClass = 'light';
-    let animating = false;
-    const closing = this.allModalsAreClosing;
-    for (const item of this.activeModals) {
-      if (item.dimmerType === 'dark') {
-        baseClass = 'dark';
-      }
-      if (item.wrapper?.isAnimating) {
-        animating = true;
-      }
-    }
-    if (!closing) {
-      dimmerClasses.push(baseClass);
-    }
-    if (animating) {
-      dimmerClasses.push('animating');
-    }
-    if (!this.dimmerClickable) {
-      dimmerClasses.push('not-dismissable');
-    }
-    return dimmerClasses.join(' ');
-  }
+  // get dimmerClass() {
+  //   if (!this.openModals.length) {
+  //     return null;
+  //   }
+  //   const dimmerClasses = ['visible active'];
+  //   let baseClass = 'light';
+  //   let animating = false;
+  //   const closing = this.allModalsAreClosing;
+  //   for (const item of this.activeModals) {
+  //     if (item.dimmerType === 'dark') {
+  //       baseClass = 'dark';
+  //     }
+  //     if (item.wrapper?.isAnimating) {
+  //       animating = true;
+  //     }
+  //   }
+  //   if (!closing) {
+  //     dimmerClasses.push(baseClass);
+  //   }
+  //   if (animating) {
+  //     dimmerClasses.push('animating');
+  //   }
+  //   if (!this.dimmerClickable) {
+  //     dimmerClasses.push('not-dismissable');
+  //   }
+  //   return dimmerClasses.join(' ');
+  // }
 
   @action
   onDimmerClick() {
+    if (!this.dimmerClickable) {
+      return;
+    }
+
     const inactiveModals = this.inactiveModals;
     const nextDimmerIndex = this.nextDimmerIndex - 1;
     for (let idx = 0; idx < inactiveModals.length; idx++) {
