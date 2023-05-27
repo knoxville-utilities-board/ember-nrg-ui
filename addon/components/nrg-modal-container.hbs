@@ -5,12 +5,13 @@
 >
   {{#each this.modalService.modalRenderList as |item index|}}
     {{#if (eq item "dimmer")}}
-      <div
-        role="button"
-        aria-label={{if this.modalService.dimmerClickable "Dismiss Modal"}}
-        class="ui dimmer visible active {{this.modalService.dimmerClass}}"
-        {{on "click" this.modalService.onDimmerClick}}
-      ></div>
+      <NrgDimmer
+        @ariaLabel={{if this.modalService.dimmerClickable "Dismiss Modal"}}
+        @_class={{this.modalService.dimmerClass}}
+        @shading={{this.modalService.dimmerType}}
+        @onClick={{this.modalService.onDimmerClick}}
+        @visible={{true}}
+      />
     {{else}}
       <NrgModalContainer::ModalWrapper
         @modal={{item}}

@@ -16,7 +16,10 @@ export default class NrgModal extends Component {
   @tracked
   renderTo;
 
-  get renderTo() {
+  @tracked
+  wrapper;
+
+  get renderToElement() {
     if (this.renderInPlace || this.isTesting) {
       return null;
     }
@@ -24,7 +27,7 @@ export default class NrgModal extends Component {
   }
 
   get isHidden() {
-    return !(this.renderInPlace && !this.renderTo);
+    return !(this.renderInPlace && !this.renderToElement);
   }
 
   get hasButtons() {

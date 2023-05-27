@@ -1,19 +1,18 @@
 {{! template-lint-disable no-inline-styles }}
 <div
-  class="ui visible active
-    {{if @aboveDimmer 'above-dimmer'}}
-    {{if @modal.position @modal.position}}
-    {{if @modal.flyout 'simple flyout overlay' 'modal'}}
-    {{if @modal.sidebar 'sidebar-modal'}}
-    {{if @modal.lightbox 'fullscreen lightbox'}}
-    {{if @modal.modalClass @modal.modalClass}}
-    {{if @modal.basic 'basic'}}
-    {{if @modal.takeover 'side-by-side--takeover'}}"
+  class={{this.wrapperClasses}}
   style={{this.modalStyles}}
   role="dialog"
   aria-label="Modal"
   {{on-resize this.onResize}}
+  {{did-insert this.didInsertModalElement}}
 >
+  <NrgDimmer
+    @ariaLabel={{if this.modalService.dimmerClickable "Dismiss Modal"}}
+    @shading={{this.modalService.dimmerType}}
+    @onClick={{this.modalService.onDimmerClick}}
+    @visible={{(not @aboveDimmer)}}
+  />
   {{#if this.hasCloseIcon}}
     <i
       class="close icon"
@@ -33,8 +32,8 @@
       {{if @modal.lightbox 'image'}}
       {{unless @modal.sidebar 'content'}}
       {{if @modal.scrolling 'scrolling'}}"
-    {{did-insert this.addModalToWormhole}}
-    {{will-destroy this.removeModalFromWormhole}}
+    {{did-insert this.didInsert}}
+    {{will-destroy this.willDestroyElement}}
   ></div>
 
   {{#if @modal.hasButtons}}

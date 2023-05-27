@@ -57,22 +57,50 @@ export default class Modal extends Service {
     return this.activeModals.some((item) => item.dismissable);
   }
 
+  get dimmerType() {
+    if (this.activeModals.some((item) => item.dimmerType === 'dark')) {
+      return 'dark';
+    }
+    return 'light';
+  }
+
   get dimmerClass() {
     if (!this.openModals.length) {
       return null;
     }
-    const baseClass = this.openModals.some((i) => i.dimmerType === 'dark')
-      ? 'dark'
-      : 'light';
-    const dismissableClass = this.dimmerClickable ? '' : 'not-dismissable';
-    return `${baseClass} ${dismissableClass}`;
+    const dimmerClasses = ['visible active'];
+    let baseClass = 'light';
+    let animating = false;
+    let closing = false;
+    for (const item of this.activeModals) {
+      if (item.dimmerType === 'dark') {
+        baseClass = 'dark';
+      }
+      if (item.wrapper?.isAnimating) {
+        animating = true;
+      }
+      if (item.wrapper?.isClosing) {
+        closing = true;
+      }
+    }
+    // dimmerClasses.push(c ? 'animating' : baseClass);
+    if (!closing) {
+      dimmerClasses.push(baseClass);
+    }
+    if (animating) {
+      dimmerClasses.push('animating');
+    }
+    if (!this.dimmerClickable) {
+      dimmerClasses.push('not-dismissable');
+    }
+    return dimmerClasses.join(' ');
   }
 
   @action
   onDimmerClick() {
     for (const item of this.activeModals) {
       if (item.dismissable) {
-        item.onHide();
+        item.wrapper?.onHide();
       }
     }
   }

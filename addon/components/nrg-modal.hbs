@@ -6,8 +6,8 @@
     />
   {{/if}}
 
-  {{#if this.renderTo}}
-    {{#in-element this.renderTo}}
+  {{#if this.renderToElement}}
+    {{#in-element this.renderToElement}}
       {{yield}}
     {{/in-element}}
   {{else}}
