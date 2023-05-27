@@ -123,7 +123,7 @@ export default class Modal extends Service {
     const nextDimmerIndex = this.nextDimmerIndex - 1;
     for (let idx = 0; idx < inactiveModals.length; idx++) {
       if (idx > nextDimmerIndex) {
-        inactiveModals[idx].wrapper?.closeDimmer();
+        inactiveModals[idx].wrapper?.modalDimmer?.close();
       }
     }
     for (const item of this.activeModals) {

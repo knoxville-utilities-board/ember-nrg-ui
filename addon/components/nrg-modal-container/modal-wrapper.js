@@ -121,11 +121,6 @@ export default class ModalWrapper extends NrgAnimatableComponent {
   }
 
   @action
-  closeDimmer() {
-    this.modalDimmer?.close();
-  }
-
-  @action
   onHide() {
     this.close(this.args.modal?.onHide);
   }
