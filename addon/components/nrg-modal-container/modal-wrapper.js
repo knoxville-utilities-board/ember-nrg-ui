@@ -77,6 +77,10 @@ export default class ModalWrapper extends NrgAnimatableComponent {
     return closingClasses.join(' ');
   }
 
+  get renderDimmer() {
+    return !this.args.aboveDimmer && !this.isClosing;
+  }
+
   @action
   onResize(element) {
     if (
@@ -109,6 +113,16 @@ export default class ModalWrapper extends NrgAnimatableComponent {
   @action
   willDestroyElement() {
     this.args.modal.renderTo = null;
+  }
+
+  @action
+  registerDimmer(dimmer) {
+    this.modalDimmer = dimmer;
+  }
+
+  @action
+  closeDimmer() {
+    this.modalDimmer?.close();
   }
 
   @action

@@ -36,11 +36,29 @@ export default class Modal extends Service {
     return lastUnstackable + 1;
   }
 
+  get nextDimmerIndex() {
+    const currentDimmerIndex = this.dimmerIndex;
+    const lastUnstackable = this.openModals
+      .slice(0, currentDimmerIndex)
+      .findLastIndex((item) => !item.stackable);
+    if (lastUnstackable < 0) {
+      return 0;
+    }
+    return lastUnstackable;
+  }
+
   get activeModals() {
     if (!this.openModals.length) {
       return [];
     }
     return this.openModals.slice(this.dimmerIndex, this.openModals.length);
+  }
+
+  get inactiveModals() {
+    if (!this.openModals.length) {
+      return [];
+    }
+    return this.openModals.slice(0, this.dimmerIndex);
   }
 
   get modalRenderList() {
@@ -101,6 +119,13 @@ export default class Modal extends Service {
 
   @action
   onDimmerClick() {
+    const inactiveModals = this.inactiveModals;
+    const nextDimmerIndex = this.nextDimmerIndex - 1;
+    for (let idx = 0; idx < inactiveModals.length; idx++) {
+      if (idx > nextDimmerIndex) {
+        inactiveModals[idx].wrapper?.closeDimmer();
+      }
+    }
     for (const item of this.activeModals) {
       if (item.dismissable) {
         item.wrapper?.onHide();

@@ -11,7 +11,8 @@
     @ariaLabel={{if this.modalService.dimmerClickable "Dismiss Modal"}}
     @shading={{this.modalService.dimmerType}}
     @onClick={{this.modalService.onDimmerClick}}
-    @visible={{(not @aboveDimmer)}}
+    @onRegister={{this.registerDimmer}}
+    @visible={{this.renderDimmer}}
   />
   {{#if this.hasCloseIcon}}
     <i
