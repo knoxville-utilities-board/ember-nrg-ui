@@ -98,7 +98,10 @@ export default class NrgAnimatableComponent extends Component {
   close(callback) {
     this.animatableElement?.addEventListener(
       this.closedEvent,
-      () => {
+      (event) => {
+        if (event?.target !== this.animatableElement) {
+          return;
+        }
         this.didClose();
         callback?.();
       },

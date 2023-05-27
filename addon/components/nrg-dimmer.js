@@ -21,6 +21,11 @@ export default class NrgDimmerComponent extends NrgAnimatableComponent {
     return this.args.shading;
   }
 
+  constructor() {
+    super(...arguments);
+    this.args.onRegister?.(this);
+  }
+
   @action
   didInsert(element) {
     this.animatableElement = element;
@@ -30,6 +35,5 @@ export default class NrgDimmerComponent extends NrgAnimatableComponent {
   @action
   onClick() {
     this.args.onClick?.();
-    this.close();
   }
 }

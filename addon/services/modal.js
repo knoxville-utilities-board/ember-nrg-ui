@@ -10,6 +10,9 @@ export default class Modal extends Service {
   @tracked
   renderIndex = 0;
 
+  @tracked
+  pageDimmer;
+
   get openModals() {
     return this.items
       ?.filter((item) => !item.renderInPlace && item.args.isOpen)
@@ -64,6 +67,10 @@ export default class Modal extends Service {
     return 'light';
   }
 
+  get allModalsAreClosing() {
+    return this.openModals.every((item) => item.wrapper?.isClosing);
+  }
+
   get dimmerClass() {
     if (!this.openModals.length) {
       return null;
@@ -71,7 +78,7 @@ export default class Modal extends Service {
     const dimmerClasses = ['visible active'];
     let baseClass = 'light';
     let animating = false;
-    let closing = false;
+    const closing = this.allModalsAreClosing;
     for (const item of this.activeModals) {
       if (item.dimmerType === 'dark') {
         baseClass = 'dark';
@@ -79,11 +86,7 @@ export default class Modal extends Service {
       if (item.wrapper?.isAnimating) {
         animating = true;
       }
-      if (item.wrapper?.isClosing) {
-        closing = true;
-      }
     }
-    // dimmerClasses.push(c ? 'animating' : baseClass);
     if (!closing) {
       dimmerClasses.push(baseClass);
     }
@@ -103,6 +106,14 @@ export default class Modal extends Service {
         item.wrapper?.onHide();
       }
     }
+    if (this.allModalsAreClosing) {
+      this.pageDimmer?.close();
+    }
+  }
+
+  @action
+  registerDimmer(dimmer) {
+    this.pageDimmer = dimmer;
   }
 
   @action
