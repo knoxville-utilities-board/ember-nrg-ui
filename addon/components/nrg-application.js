@@ -11,9 +11,6 @@ export default class NrgFormComponent extends Component {
   lightbox;
 
   @service
-  modal;
-
-  @service
   responsive;
 
   @service
