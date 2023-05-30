@@ -1,0 +1,33 @@
+.ui.nrg-dimmer {
+
+  &::after {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: background-color 0.5s ease;
+    position: relative;
+    display: block;
+  }
+
+  &.dismissable::after {
+    cursor: pointer;
+  }
+
+  &:not(.closed)::after {
+    height: 100%;
+  }
+
+  &.light.active::after {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &.dark.active::after {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
+
+  &.closing::after, &.closed::after {
+    background: transparent;
+    transition: background-color 0.5s ease;
+  }
+}
