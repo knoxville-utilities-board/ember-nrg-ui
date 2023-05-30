@@ -19,19 +19,16 @@
     z-index: 100;
     top: $appbar-height;
     height: calc(100% - #{$appbar-height});
-  }
 
-  .above-dimmer.above-dimmer.above-dimmer.above-dimmer {
-    z-index: 1002;
+    & .sidebar-dimmer {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
   }
 
   .ui.modal.visible {
     flex: 0 0 auto;
     position: absolute;
-    z-index: 1000;
-  }
-  .ui.flyout.visible {
-    z-index: 1000;
+    z-index: 1001;
   }
 
   .scrolling.content {

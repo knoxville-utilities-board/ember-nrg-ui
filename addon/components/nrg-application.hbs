@@ -64,6 +64,7 @@
   {{#if this.lightbox.hasChildren}}
     <NrgLightboxContainer />
   {{/if}}
+  <NrgModalContainer />
   <NrgToastContainer as |view|>
     {{#each this.flashMessages.queue as |flash|}}
       <view.toast @flash={{flash}} />
