@@ -266,4 +266,36 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     const lastDisabledTime = findAll('tbody tr td.link.disabled')[minute / 5];
     assert.dom(lastDisabledTime).hasClass('disabled');
   });
+
+  test('Datetime flow (hours only)', async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+    await render(
+      hbs`<NrgDatetime::Calendar @type="datetime" @value={{this.value}} @onSelect={{this.onSelect}} @allowMinuteSelection={{false}}/>`
+    );
+    await focus('.ui.popup.calendar');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'ArrowRight');
+    await triggerKeyEvent('.ui.popup.calendar', 'keydown', 'Enter');
+    await click('tbody tr:first-child td:first-child');
+    const expectedDate = dayjs().add(1, 'day').hour(0).minute(0);
+    assert.ok(expectedDate.isSame(this.value, 'minute'));
+  });
+
+  test('Time flow (hours only)', async function (assert) {
+    this.set('value', dayjs());
+
+    this.onSelect = (date) => {
+      this.set('value', dayjs(date));
+    };
+    await render(
+      hbs`<NrgDatetime::Calendar @type="time" @value={{this.value}} @onSelect={{this.onSelect}} @allowMinuteSelection={{false}}/>`
+    );
+    await focus('.ui.popup.calendar');
+    await click('tbody tr:first-child td:first-child');
+    const expectedDate = dayjs().hour(0).minute(0);
+    assert.ok(expectedDate.isSame(this.value, 'minute'));
+  });
 });
