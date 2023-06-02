@@ -11,6 +11,8 @@
           @valuePath="dateTimeValue"
           @model={{this}}
           @type={{this.dateTimeType}}
+          @maxDate={{this.maxDate}}
+          @allowMinuteSelection={{this.allowMinuteSelection}}
           as |view|
         />
       </form.field>
@@ -29,6 +31,17 @@
       @defaults={{false}}
       @value={{this.dateTimeDisabled}}
       @onInput={{fn (mut this.dateTimeDisabled)}}
+    />
+    <Args.Object
+      @name="maxDate"
+      @value={{this.maxDate}}
+      @jsonCollapseDepth={{0}}
+    />
+    <Args.Bool
+      @name="allowMinuteSelection"
+      @defaults={{false}}
+      @value={{this.allowMinuteSelection}}
+      @onInput={{fn (mut this.allowMinuteSelection)}}
     />
   </:api>
 </Freestyle::Usage>
