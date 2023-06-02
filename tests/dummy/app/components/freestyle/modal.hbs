@@ -12,6 +12,7 @@
         @secondaryButton="Secondary"
         @onPrimaryButtonClick={{this.onPrimaryButtonClick}}
         @onSecondaryButtonClick={{this.onSecondaryButtonClick}}
+        @flyout={{this.flyout}}
       >
         <p>
           Lorem ipsum.
@@ -36,6 +37,12 @@
         @defaults={{false}}
         @value={{this.isBasic}}
         @onInput={{fn (mut this.isBasic)}}
+      />
+      <Args.Bool
+        @name="flyout"
+        @defaults={{false}}
+        @value={{this.flyout}}
+        @onInput={{fn (mut this.flyout)}}
       />
     </:api>
   </Freestyle::Usage>
