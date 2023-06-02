@@ -1,27 +1,25 @@
-<Freestyle::Usage @name="Dropdown">
-  <:description>
-    Handles dropdown selection.
-  </:description>
+<FreestyleSection @name="Dropdown">
+  <Freestyle::Usage>
+    <:example>
+      <NrgFormContainer as |form|>
+        <form.field @label="Dropdown" as |field|>
+          <field.dropdown
+            @disabled={{this.dropdownDisabled}}
+            @valuePath="dropdownValue"
+            @model={{this}}
+            @options={{this.dropdownOptions}}
+          />
+        </form.field>
+      </NrgFormContainer>
+    </:example>
 
-  <:example>
-    <NrgFormContainer as |form|>
-      <form.field @label="Dropdown" as |field|>
-        <field.dropdown
-          @disabled={{this.dropdownDisabled}}
-          @valuePath="dropdownValue"
-          @model={{this}}
-          @options={{this.dropdownOptions}}
-        />
-      </form.field>
-    </NrgFormContainer>
-  </:example>
-
-  <:api as |Args|>
-    <Args.Bool
-      @name="disabled"
-      @defaults={{false}}
-      @value={{this.dropdownDisabled}}
-      @onInput={{fn (mut this.dropdownDisabled)}}
-    />
-  </:api>
-</Freestyle::Usage>
+    <:api as |Args|>
+      <Args.Bool
+        @name="disabled"
+        @defaults={{false}}
+        @value={{this.dropdownDisabled}}
+        @onInput={{fn (mut this.dropdownDisabled)}}
+      />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>
