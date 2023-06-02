@@ -59,11 +59,11 @@
     border-radius: 0;
   }
 
-
-  .closed, .open {
+  .closed,
+  .open {
     transition: all ease 0.3s;
   }
-  
+
   .open {
     transform: none;
     opacity: 1;
@@ -74,13 +74,13 @@
       &.left {
         transform: translateX(-100%);
       }
-      &.right{
+      &.right {
         transform: translateX(100%);
       }
       &.top {
         transform: translateY(-100%);
       }
-      &.bottom{
+      &.bottom {
         transform: translateY(100%);
       }
     }
@@ -90,7 +90,8 @@
     &.sidebar-modal {
       transform: translateX(-100%);
     }
-    &.standard-modal, &.lightbox {
+    &.standard-modal,
+    &.lightbox {
       transform: translateY(100px) scale(0.8);
       opacity: 0;
     }
