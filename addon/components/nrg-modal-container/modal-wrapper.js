@@ -50,8 +50,7 @@ export default class ModalWrapper extends Component {
   }
 
   @action
-  onInsert(element) {
-    this.animationElement = element;
+  onInsert() {
     next(() => {
       this.animationState = 'open';
     });
