@@ -76,6 +76,9 @@ export default class NrgModal extends Component {
     if (this.sidebar) {
       return 'sidebar';
     }
+    if(this.takeover) {
+      return 'takeover';
+    }
     return 'modal';
   }
 

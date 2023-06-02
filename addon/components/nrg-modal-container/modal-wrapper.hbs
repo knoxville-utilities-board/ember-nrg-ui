@@ -1,11 +1,13 @@
 {{! template-lint-disable no-inline-styles }}
 <div
   class="ui visible active
+    {{this.animationState}}
     {{if @aboveDimmer 'above-dimmer'}}
     {{if @modal.position @modal.position}}
     {{if @modal.flyout 'simple flyout overlay' 'modal'}}
     {{if @modal.sidebar 'sidebar-modal'}}
     {{if @modal.lightbox 'fullscreen lightbox'}}
+    {{if (eq @modal.type 'modal') 'standard-modal'}}
     {{if @modal.modalClass @modal.modalClass}}
     {{if @modal.basic 'basic'}}
     {{if @modal.takeover 'side-by-side--takeover'}}"
@@ -13,6 +15,7 @@
   role="dialog"
   aria-label="Modal"
   {{on-resize this.onResize}}
+  {{did-insert this.onInsert}}
 >
   {{#if this.hasCloseIcon}}
     <i

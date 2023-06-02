@@ -1,7 +1,8 @@
-import Component from '@glimmer/component';
+import { action } from '@ember/object';
+import { next } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
-import { action } from '@ember/object';
+import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
 const isIE11 = !window.ActiveXObject && 'ActiveXObject' in window;
@@ -13,6 +14,9 @@ export default class ModalWrapper extends Component {
 
   @tracked
   modalStyles;
+
+  @tracked
+  animationState = 'closed';
 
   get hasCloseIcon() {
     return this.args.modal?.dismissable && !this.args.modal?.sidebar;
@@ -43,6 +47,14 @@ export default class ModalWrapper extends Component {
   @action
   removeModalFromWormhole() {
     this.args.modal.renderTo = null;
+  }
+
+  @action
+  onInsert(element) {
+    this.animationElement = element;
+    next(() => {
+      this.animationState = 'open';
+    });
   }
 
   @action

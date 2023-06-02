@@ -1,6 +1,7 @@
 <NrgModal
   @sidebar={{true}}
   @isOpen={{this.application.sidebarIsOpen}}
+  @onDismiss={{this.onClickInternal}}
   {{on-resize this.onResize}}
 >
   <NrgSidebarMenu @onClickInternal={{this.onClickInternal}}>

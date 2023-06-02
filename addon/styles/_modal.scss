@@ -58,4 +58,41 @@
     width: $sidebar-width;
     border-radius: 0;
   }
+
+
+  .closed, .open {
+    transition: all ease 0.3s;
+  }
+  
+  .open {
+    transform: none;
+    opacity: 1;
+  }
+
+  .closed {
+    &.flyout {
+      &.left {
+        transform: translateX(-100%);
+      }
+      &.right{
+        transform: translateX(100%);
+      }
+      &.top {
+        transform: translateY(-100%);
+      }
+      &.bottom{
+        transform: translateY(100%);
+      }
+    }
+    &.side-by-side--takeover {
+      transform: translateX(100%);
+    }
+    &.sidebar-modal {
+      transform: translateX(-100%);
+    }
+    &.standard-modal, &.lightbox {
+      transform: translateY(100px) scale(0.8);
+      opacity: 0;
+    }
+  }
 }
