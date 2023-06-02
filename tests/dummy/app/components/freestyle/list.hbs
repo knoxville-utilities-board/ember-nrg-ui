@@ -1,4 +1,4 @@
-<FreestyleSection @name="List" as |Section|>
+<FreestyleSection @name="List">
   <Freestyle::Usage @name="List">
     <:example>
       <NrgList
@@ -8,7 +8,6 @@
         @onItemSelect={{this.onItemSelect}}
         @selectionType={{this.selectionType}}
         @loading={{this.loading}}
-        @pageMeta={{this.pageItems.meta}}
         @onChangePage={{this.onChangePage}}
         @selectedPageSize={{this.selectedPageSize}}
         as |list|
