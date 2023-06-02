@@ -1,0 +1,18 @@
+<FreestyleSection @name="On Resize Modifier" as |Section|>
+  <Freestyle::Usage @name="On Resize Modifier">
+    <:example>
+      <NrgButton @onClick={{this.changeTemplate}}>Change Template</NrgButton>
+      <NrgRenderTemplateBlock @templateRendered={{this.cloneTemplate}}>
+        <p>
+          {{this.templateBody}}
+        </p>
+      </NrgRenderTemplateBlock>
+      <div class="ui top attached segment">
+        Cloned Template Block
+      </div>
+      <div class="ui attached segment">
+        {{this.clonedTemplateBlock}}
+      </div>
+    </:example>
+  </Freestyle::Usage>
+</FreestyleSection>
