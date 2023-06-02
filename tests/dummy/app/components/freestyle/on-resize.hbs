@@ -1,14 +1,16 @@
 <FreestyleSection @name="On Resize Modifier" as |Section|>
   <Freestyle::Usage @name="On Resize Modifier">
     <:example>
+    <div {{on-resize this.onResize}}>
       <p>
-        <strong>Current Width:</strong>
-        <span>{{this.width}}</span>
-      </p>
-      <p>
-        <strong>Current Height:</strong>
-        <span>{{this.height}}</span>
-      </p>
+          <strong>Current Width:</strong>
+          <span>{{this.width}}</span>
+        </p>
+        <p>
+          <strong>Current Height:</strong>
+          <span>{{this.height}}</span>
+        </p>
+      </div>
     </:example>
   </Freestyle::Usage>
 </FreestyleSection>

@@ -1,17 +1,3 @@
 {{page-title "on-click-outside"}}
 
-{{! BEGIN-SNIPPET on-click-outside }}
-<div
-  role="button"
-  class="ui segment"
-  {{on-click-outside this.onClickOutside}}
-  {{on "click" this.onClick}}
->
-  <p>
-    <strong>Last State:</strong>
-    <span>{{this.lastState}}</span>
-  </p>
-</div>
-{{! END-SNIPPET }}
-
-<NrgCodeBlock @label="Example" @codeBlockName="on-click-outside.hbs" />
+<Freestyle::OnClickOutside />

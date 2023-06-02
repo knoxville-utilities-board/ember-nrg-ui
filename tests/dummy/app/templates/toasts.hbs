@@ -1,25 +1,3 @@
 {{page-title "nrg-toast"}}
 
-<div class="ui segment">
-  <NrgCodeBlock @label="Default Toasts" @codeBlockName="default-toasts.js">
-    <NrgButton @onClick={{this.openDefaultToasts}}>Open</NrgButton>
-  </NrgCodeBlock>
-  <NrgCodeBlock
-    @label="Toasts without Progress"
-    @codeBlockName="no-progress-toasts.js"
-  >
-    <NrgButton @onClick={{this.openToastsWithoutProgress}}>Open</NrgButton>
-  </NrgCodeBlock>
-  <NrgCodeBlock
-    @label="Toasts with Progress"
-    @codeBlockName="progress-toasts.js"
-  >
-    <NrgButton @onClick={{this.openProgressToast}}>Open</NrgButton>
-  </NrgCodeBlock>
-  <NrgCodeBlock @label="Sticky Toasts" @codeBlockName="sticky-toasts.js">
-    <NrgButton @onClick={{this.openStickyToast}}>Open</NrgButton>
-  </NrgCodeBlock>
-  <NrgCodeBlock @label="Long Paragraph Toast" @codeBlockName="long-toasts.js">
-    <NrgButton @onClick={{this.openToastWithLongMessage}}>Open</NrgButton>
-  </NrgCodeBlock>
-</div>
+<Freestyle::Toast />
