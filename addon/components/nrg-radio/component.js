@@ -1,7 +1,8 @@
 import Component from '@ember/component';
 import layout from './template';
+import Validation from 'ember-nrg-ui/mixins/validation';
 
-export default Component.extend({
+export default Component.extend(Validation, {
   layout,
 
   tagName: '',
