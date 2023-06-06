@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
 import { restartableTask } from 'ember-concurrency-decorators';
 import NrgValidationComponent from './nrg-validation-component';
+import { inject as service } from '@ember/service';
 
 const defaultPlaceholder = 'Search';
 const defaultMinCharacters = 1;
@@ -11,6 +12,9 @@ const defaultDisplayLabel = 'header';
 const defaultNoResultsLabel = 'No Results';
 
 export default class NrgSearchComponent extends NrgValidationComponent {
+  @service
+  application;
+
   @tracked
   isFocused = false;
 
@@ -28,11 +32,18 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     this.updateDisplayValue(this.value);
   }
 
+  get isTesting() {
+    return this.application.isTesting ?? false;
+  }
+
   get fluid() {
     return this.args.fluid !== false;
   }
 
   get searchTimeout() {
+    if (this.isTesting) {
+      return 0;
+    }
     return this.args.searchTimeout ?? defaultSearchTimeout;
   }
 

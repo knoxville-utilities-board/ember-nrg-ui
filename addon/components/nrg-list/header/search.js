@@ -2,16 +2,27 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { timeout } from 'ember-concurrency';
 import { restartableTask } from 'ember-concurrency-decorators';
+import { inject as service } from '@ember/service';
 
 const defaultPlaceholder = 'Search...';
 const defaultSearchTimeout = 400;
 
 export default class NrgListHeaderSearchComponent extends Component {
+  @service
+  application;
+
+  get isTesting() {
+    return this.application.isTesting ?? false;
+  }
+
   get placeholder() {
     return this.args.placeholder ?? defaultPlaceholder;
   }
 
   get searchTimeout() {
+    if (this.isTesting) {
+      return 0;
+    }
     return this.args.searchTimeout ?? defaultSearchTimeout;
   }
 
