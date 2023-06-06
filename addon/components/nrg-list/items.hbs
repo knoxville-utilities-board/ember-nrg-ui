@@ -39,12 +39,14 @@
           {{/if}}
         </div>
       {{/if}}
-    {{else if (not @loading)}}
-      <div class="item">
-        <div class="middle aligned content">
-          <div class="header">{{this.noResultsLabel}}</div>
+    {{else}}
+      {{#unless @loading}}
+        <div class="item">
+          <div class="middle aligned content">
+            <div class="header">{{this.noResultsLabel}}</div>
+          </div>
         </div>
-      </div>
+      {{/unless}}
     {{/each}}
     {{#if @loading}}
       <div class="item">
