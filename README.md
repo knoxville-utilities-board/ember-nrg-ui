@@ -53,8 +53,6 @@ See the [Contributing](CONTRIBUTING.md) guide for details.
 
 ## Getting Started
 
-### Hello World
-
 Once the addon is installed, create a new index route and template:
 
 ```hbs
