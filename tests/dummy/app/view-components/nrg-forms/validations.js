@@ -22,4 +22,7 @@ export default buildValidations({
       max: 5,
     }),
   ],
+  selectedValue: [
+    validator('presence', true, { allowBlank: false }),
+  ],
 });
