@@ -18,26 +18,6 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Use Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-release
-
-      - name: Install Dependencies
-        run: yarn install
-
-      - name: Build App
-        run: yarn run build-dummy-app
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        with:
-          branch: gh-pages
-          folder: dist
-
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
         with:
