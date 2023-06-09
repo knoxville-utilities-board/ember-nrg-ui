@@ -29,6 +29,8 @@ Router.map(function () {
     this.route('nrg-render-template-block');
     this.route('nrg-search');
     this.route('nrg-context-item');
+    this.route('nrg-button');
+    this.route('nrg-text-field');
   });
   this.route('view-mixins', function () {
     this.route('focus-first-input');

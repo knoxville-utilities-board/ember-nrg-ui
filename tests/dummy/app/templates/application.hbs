@@ -27,9 +27,6 @@
         <menu.item @routeName="view-components.nrg-error-pages">
           Error Pages
         </menu.item>
-        <menu.item @routeName="view-components.nrg-forms">
-          Forms
-        </menu.item>
         <menu.item @routeName="view-components.nrg-dropdown">
           nrg-dropdown
         </menu.item>
@@ -59,6 +56,17 @@
         </menu.item>
         <menu.item @routeName="view-components.nrg-context-item">
           nrg-context-item
+        </menu.item>
+      </:menu>
+    </sidebar.group>
+    <sidebar.group @routeName="view-components.nrg-forms">
+      <:default>Forms</:default>
+      <:menu as |menu|>
+        <menu.item @routeName="view-components.nrg-button">
+          nrg-button
+        </menu.item>
+        <menu.item @routeName="view-components.nrg-text-field">
+          nrg-text-field
         </menu.item>
       </:menu>
     </sidebar.group>
