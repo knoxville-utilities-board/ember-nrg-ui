@@ -1,60 +1,64 @@
-<Freestyle::Usage>
-  <:example>
-    <NrgFormContainer as |form|>
-      <form.field @label="Text Field" as |field|>
-        <field.text-field
-          @disabled={{this.inputDisabled}}
-          @placeholder="Placeholder"
-          @valuePath="inputValue"
-          @model={{this}}
-          as |view|
-        >
-          {{view.input}}
-        </field.text-field>
-      </form.field>
-    </NrgFormContainer>
-  </:example>
+<FreestyleSection @name="Forms" as |Section|>
+  <Section.subsection @name="Text Field">
+    <Freestyle::Usage>
+      <:example>
+        <NrgFormContainer as |form|>
+          <form.field @label="Text Field" as |field|>
+            <field.text-field
+              @disabled={{this.inputDisabled}}
+              @placeholder="Placeholder"
+              @valuePath="inputValue"
+              @model={{this}}
+              as |view|
+            >
+              {{view.input}}
+            </field.text-field>
+          </form.field>
+        </NrgFormContainer>
+      </:example>
 
-  <:api as |Args|>
-    <Args.String
-      @name="inputValue"
-      @description="The value of the input field."
-      @value={{this.inputValue}}
-      @onInput={{fn (mut this.inputValue)}}
-    />
-  </:api>
-</Freestyle::Usage>
+      <:api as |Args|>
+        <Args.String
+          @name="inputValue"
+          @description="The value of the input field."
+          @value={{this.inputValue}}
+          @onInput={{fn (mut this.inputValue)}}
+        />
+      </:api>
+    </Freestyle::Usage>
 
-<Freestyle::Usage>
-  <:example>
-    <NrgFormContainer as |form|>
-      <form.field @label="Text Field" as |field|>
-        <field.text-field
-          @class="left icon action"
-          @disabled={{this.inputDisabled}}
-          @placeholder="Placeholder"
-          @valuePath="inputValue"
-          @model={{this}}
-          as |view|
-        >
-          <NrgIcon @icon="settings" />
-          {{view.input}}
-          <NrgButton
-            @class="primary"
-            @text="Action"
-            @disabled={{this.disabled}}
-          />
-        </field.text-field>
-      </form.field>
-    </NrgFormContainer>
-  </:example>
+    <Freestyle::Usage>
+      <:example>
+        <NrgFormContainer as |form|>
+          <form.field @label="Text Field" as |field|>
+            <field.text-field
+              @class="left icon action"
+              @disabled={{this.inputDisabled}}
+              @placeholder="Placeholder"
+              @valuePath="inputValue"
+              @model={{this}}
+              as |view|
+            >
+              <NrgIcon @icon="settings" />
+              {{view.input}}
+              <NrgButton
+                @class="primary"
+                @text="Action"
+                @disabled={{this.disabled}}
+              />
+            </field.text-field>
+          </form.field>
+        </NrgFormContainer>
+      </:example>
 
-  <:api as |Args|>
-    <Args.String
-      @name="inputValue"
-      @description="The value of the input field."
-      @value={{this.inputValue}}
-      @onInput={{fn (mut this.inputValue)}}
-    />
-  </:api>
-</Freestyle::Usage>
+      <:api as |Args|>
+        <Args.String
+          @name="inputValue"
+          @description="The value of the input field."
+          @value={{this.inputValue}}
+          @onInput={{fn (mut this.inputValue)}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+</FreestyleSection>

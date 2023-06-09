@@ -1,44 +1,48 @@
-<Freestyle::Usage>
-  <:example>
-    <NrgButton
-      @text={{this.buttonText}}
-      @class={{this.buttonClass}}
-      @loading={{this.loading}}
-      @disabled={{this.disabled}}
-    />
-  </:example>
+<FreestyleSection @name="Forms" as |Section|>
+  <Section.subsection @name="Button">
+    <Freestyle::Usage>
+      <:example>
+        <NrgButton
+          @text={{this.buttonText}}
+          @class={{this.buttonClass}}
+          @loading={{this.loading}}
+          @disabled={{this.disabled}}
+        />
+      </:example>
 
-  <:api as |Args|>
-    <Args.String
-      @name="class"
-      @value={{this.buttonClass}}
-      @onInput={{fn (mut this.buttonClass)}}
-      @options={{this.classOptions}}
-    />
-    <Args.String
-      @name="text"
-      @value={{this.buttonText}}
-      @onInput={{fn (mut this.buttonText)}}
-    />
-    <Args.Bool
-      @name="loading"
-      @defaults={{false}}
-      @value={{this.loading}}
-      @onInput={{fn (mut this.loading)}}
-    />
-    <Args.Bool
-      @name="disabled"
-      @defaults={{false}}
-      @value={{this.disabled}}
-      @onInput={{fn (mut this.disabled)}}
-    />
-  </:api>
-</Freestyle::Usage>
+      <:api as |Args|>
+        <Args.String
+          @name="class"
+          @value={{this.buttonClass}}
+          @onInput={{fn (mut this.buttonClass)}}
+          @options={{this.classOptions}}
+        />
+        <Args.String
+          @name="text"
+          @value={{this.buttonText}}
+          @onInput={{fn (mut this.buttonText)}}
+        />
+        <Args.Bool
+          @name="loading"
+          @defaults={{false}}
+          @value={{this.loading}}
+          @onInput={{fn (mut this.loading)}}
+        />
+        <Args.Bool
+          @name="disabled"
+          @defaults={{false}}
+          @value={{this.disabled}}
+          @onInput={{fn (mut this.disabled)}}
+        />
+      </:api>
+    </Freestyle::Usage>
 
-<Freestyle::Usage>
-  <:example>
-    <NrgButton @class="circular primary ui icon button">
-      <i class="plus icon"></i>
-    </NrgButton>
-  </:example>
-</Freestyle::Usage>
+    <Freestyle::Usage>
+      <:example>
+        <NrgButton @class="circular primary ui icon button">
+          <i class="plus icon"></i>
+        </NrgButton>
+      </:example>
+    </Freestyle::Usage>
+  </Section.subsection>
+</FreestyleSection>

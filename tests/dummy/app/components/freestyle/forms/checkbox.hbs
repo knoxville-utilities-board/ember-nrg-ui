@@ -1,30 +1,34 @@
-<Freestyle::Usage>
-  <:example>
-    <NrgFormContainer as |form|>
-      <form.field @inline={{true}} @required={{this.required}} as |field|>
-        <field.checkbox
-          @label="Checkbox"
-          @model={{this}}
-          @valuePath="checkbox1"
-          @disabled={{this.checkbox1Disabled}}
-          @type={{this.checkboxType}}
-        />
-      </form.field>
-    </NrgFormContainer>
-  </:example>
+<FreestyleSection @name="Forms" as |Section|>
+  <Section.subsection @name="Checkbox">
+    <Freestyle::Usage>
+      <:example>
+        <NrgFormContainer as |form|>
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.checkbox
+              @label="Checkbox"
+              @model={{this}}
+              @valuePath="checkbox1"
+              @disabled={{this.checkbox1Disabled}}
+              @type={{this.checkboxType}}
+            />
+          </form.field>
+        </NrgFormContainer>
+      </:example>
 
-  <:api as |Args|>
-    <Args.Bool
-      @name="disabled"
-      @defaults={{false}}
-      @value={{this.checkbox1Disabled}}
-      @onInput={{fn (mut this.checkbox1Disabled)}}
-    />
-    <Args.String
-      @name="type"
-      @value={{this.checkboxType}}
-      @onInput={{fn (mut this.checkboxType)}}
-      @options={{this.checkboxTypeOptions}}
-    />
-  </:api>
-</Freestyle::Usage>
+      <:api as |Args|>
+        <Args.Bool
+          @name="disabled"
+          @defaults={{false}}
+          @value={{this.checkbox1Disabled}}
+          @onInput={{fn (mut this.checkbox1Disabled)}}
+        />
+        <Args.String
+          @name="type"
+          @value={{this.checkboxType}}
+          @onInput={{fn (mut this.checkboxType)}}
+          @options={{this.checkboxTypeOptions}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+</FreestyleSection>
