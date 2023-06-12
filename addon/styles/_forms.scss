@@ -62,3 +62,15 @@
     font-weight: 700;
   }
 }
+
+.ui.field {
+  display: flex !important;
+  flex-direction: column;
+  &.inline {
+    flex-direction: row;
+    gap: 1.5em;
+  }
+  & * {
+    margin-bottom: 0.75em;
+  }
+}
