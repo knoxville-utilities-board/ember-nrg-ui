@@ -74,3 +74,14 @@
     margin-bottom: 0.75em;
   }
 }
+
+.grouped.fields{
+  width: fit-content;
+  .ui.field.ember-view {
+    display: flex;
+    flex-direction: column;
+    .ui.radio.checkbox {
+      margin-bottom: 0.75em;
+    }
+  }
+}
