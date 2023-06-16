@@ -63,25 +63,25 @@
   }
 }
 
-.ui.field {
-  display: flex !important;
-  flex-direction: column;
-  &.inline {
-    flex-direction: row;
-    gap: 1.5em;
-  }
-  & * {
-    margin-bottom: 0.75em;
-  }
+.inline.fields > .ui.field{
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 }
-
-.grouped.fields{
-  width: fit-content;
-  .ui.field.ember-view {
-    display: flex;
-    flex-direction: column;
-    .ui.radio.checkbox {
-      margin-bottom: 0.75em;
+.grouped.fields > .ui.field{
+  display: flex !important;
+  flex-direction: column !important;
+  .ui.radio.checkbox {
+    margin-bottom: 0.75em;
+    &:last-of-type {
+      margin-bottom: 0;
     }
+  }
+  &.error.inline {
+    flex-direction: row !important;
+    gap: 0;
+  }
+  &.error > .red.pointing.label {
+    width: fit-content;
   }
 }
