@@ -1,13 +1,9 @@
-import { A } from '@ember/array';
-import Controller from '@ember/controller';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { A } from '@ember/array';
 
-export default class SideBySideController extends Controller {
-  @service
-  router;
-
+export default class FreestyleNrgSideBySideComponent extends Component {
   @tracked
   items = A([
     {
@@ -100,9 +96,12 @@ export default class SideBySideController extends Controller {
     };
   }
 
+  @tracked
+  selectedItem;
+
   @action
   onSelect(item) {
     const animal = this.items.findBy('name', item.header);
-    this.router.transitionTo('side-by-side.detail', animal);
+    this.selectedItem = animal;
   }
 }

@@ -1,9 +1,8 @@
-import Controller from '@ember/controller';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
-// BEGIN-SNIPPET on-resize
-export default class ViewModifiersOnResizeController extends Controller {
+export default class FreestyleOnResizeComponent extends Component {
   @tracked
   width = 'onResize event not yet fired';
 
@@ -16,4 +15,3 @@ export default class ViewModifiersOnResizeController extends Controller {
     this.height = window.innerHeight;
   }
 }
-// END-SNIPPET

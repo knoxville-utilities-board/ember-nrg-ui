@@ -1,17 +1,3 @@
 {{page-title "on-resize"}}
 
-{{! BEGIN-SNIPPET on-resize }}
-<div class="ui segment" {{on-resize this.onResize}}>
-  <p>
-    <strong>Current Width:</strong>
-    <span>{{this.width}}</span>
-  </p>
-  <p>
-    <strong>Current Height:</strong>
-    <span>{{this.height}}</span>
-  </p>
-</div>
-{{! END-SNIPPET }}
-
-<NrgCodeBlock @label="HBS" @codeBlockName="on-resize.hbs" />
-<NrgCodeBlock @label="JS" @codeBlockName="on-resize.js" />
+<Freestyle::OnResize />

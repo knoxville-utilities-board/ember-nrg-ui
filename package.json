@@ -75,6 +75,7 @@
     "ember-data": "4.4.0",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-export-application-global": "^2.0.1",
+    "ember-freestyle": "^0.17.0",
     "ember-load-initializers": "^2.1.2",
     "ember-page-title": "^7.0.0",
     "ember-prism": "^0.13.0",

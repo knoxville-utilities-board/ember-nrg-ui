@@ -1,0 +1,101 @@
+<FreestyleSection @name="Application">
+  <Freestyle::Usage>
+    {{page-title "NRG UI"}}
+
+    <NrgContextItem @bottom={{true}}>
+      Logout
+    </NrgContextItem>
+
+    <NrgApplication>
+      <:appbar>
+        <a
+          href="https://github.com/knoxville-utilities-board/ember-nrg-ui"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="item icon"
+        >
+          <i class="big github icon"></i>
+        </a>
+      </:appbar>
+
+      <:sidebar as |sidebar|>
+        <sidebar.group @routeName="view-components">
+          <:default>Components</:default>
+          <:menu as |menu|>
+            <menu.item @routeName="view-components.nrg-application">
+              nrg-application
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-error-pages">
+              Error Pages
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-forms">
+              Forms
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-dropdown">
+              nrg-dropdown
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-home-cards">
+              nrg-home-cards
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-lightbox">
+              nrg-lightbox
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-list">
+              nrg-list
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-loading-indicator">
+              nrg-loading-indicator
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-modal">
+              nrg-modal
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-popup">
+              nrg-popup
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-render-template-block">
+              nrg-render-template-block
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-search">
+              nrg-search
+            </menu.item>
+            <menu.item @routeName="view-components.nrg-context-item">
+              nrg-context-item
+            </menu.item>
+          </:menu>
+        </sidebar.group>
+        <sidebar.item @routeName="side-by-side">
+          Side by Side
+        </sidebar.item>
+        <sidebar.group @routeName="view-modifiers">
+          <:default>Modifiers</:default>
+          <:menu as |menu|>
+            <menu.item @routeName="view-modifiers.focus-first-input">
+              focus-first-input
+            </menu.item>
+            <menu.item @routeName="view-modifiers.on-click-outside">
+              on-click-outside
+            </menu.item>
+            <menu.item @routeName="view-modifiers.on-resize">
+              on-resize
+            </menu.item>
+          </:menu>
+        </sidebar.group>
+        <sidebar.item @routeName="toasts">
+          Toasts
+        </sidebar.item>
+      </:sidebar>
+
+      <:sidebar-footer as |sidebar|>
+        <sidebar.item
+          @url="https://github.com/knoxville-utilities-board/ember-nrg-ui"
+        >
+          Github
+        </sidebar.item>
+      </:sidebar-footer>
+
+      <:default>
+        {{outlet}}
+      </:default>
+    </NrgApplication>
+  </Freestyle::Usage>
+</FreestyleSection>

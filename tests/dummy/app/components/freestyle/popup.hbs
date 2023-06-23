@@ -1,0 +1,172 @@
+<FreestyleSection @name="Popup">
+  <Freestyle::Usage>
+    <:example>
+      <NrgPopup as |hash|>
+        <NrgButton @text="Hover Me" @disabled={{true}} />
+        <hash.popup
+          @position={{this.popupPosition}}
+          @inverted={{this.inverted}}
+        >
+          {{this.popupContent}}
+        </hash.popup>
+      </NrgPopup>
+    </:example>
+
+    <:api as |Args|>
+      <Args.Bool
+        @name="inverted"
+        @defaults={{false}}
+        @value={{this.inverted}}
+        @onInput={{fn (mut this.inverted)}}
+      />
+      <Args.String
+        @name="popupContent"
+        @value={{this.popupContent}}
+        @onInput={{fn (mut this.popupContent)}}
+      />
+      <Args.String
+        @name="popupPosition"
+        @value={{this.popupPosition}}
+        @onInput={{fn (mut this.popupPosition)}}
+        @options={{this.popupPositionOptions}}
+      />
+    </:api>
+  </Freestyle::Usage>
+
+  <Freestyle::Usage>
+    <:example>
+      <NrgPopup as |hash|>
+        <div>
+          <div class="ui segment">
+            <p>
+              Popups are not limited to text content, and can be attached to any
+              kind of element. Even ember components can be placed inside of
+              popups.
+            </p>
+            <p>
+              However, keep in mind that anything placed in a popup will be
+              destroyed when the popup disappears. Do not expect it's contents
+              to maintain state.
+            </p>
+          </div>
+        </div>
+
+        <hash.popup @position="bottom">
+          <NrgFormContainer as |form|>
+            <form.field
+              @label="Text Field"
+              @required={{this.required}}
+              as |field|
+            >
+              <field.text-field
+                @class="left icon action"
+                @disabled={{this.disabled}}
+                as |view|
+              >
+                <NrgIcon @icon="settings" />
+                <view.input />
+                <NrgButton @class="primary" @text="Action" />
+              </field.text-field>
+            </form.field>
+            <br />
+            <form.field
+              @label="Datetime (Button)"
+              @required={{this.required}}
+              as |field|
+            >
+              <field.datetime @disabled={{this.disabled}}>
+                <NrgButton @class="green" @text="Open Datepicker" />
+              </field.datetime>
+            </form.field>
+            <br />
+            <form.field
+              @label="Dropdown"
+              @required={{this.required}}
+              as |field|
+            >
+              <field.dropdown
+                @options={{this.optionList}}
+                @disabled={{this.disabled}}
+              />
+            </form.field>
+            <br />
+            <div class="grouped fields">
+              <form.field
+                @inline={{true}}
+                @required={{this.required}}
+                as |field|
+              >
+                <field.checkbox
+                  @label="Checkbox"
+                  @model={{this}}
+                  @valuePath="checkbox1"
+                  @disabled={{this.disabled}}
+                />
+              </form.field>
+              <form.field
+                @inline={{true}}
+                @required={{this.required}}
+                as |field|
+              >
+                <field.checkbox
+                  @type="slider"
+                  @label="Slider"
+                  @checked={{true}}
+                  @disabled={{this.disabled}}
+                />
+              </form.field>
+              <form.field
+                @inline={{true}}
+                @required={{this.required}}
+                as |field|
+              >
+                <field.checkbox
+                  @type="toggle"
+                  @label="Toggle"
+                  @disabled={{this.disabled}}
+                />
+              </form.field>
+            </div>
+            <br />
+            <div class="grouped fields">
+              <form.field @required={{this.required}} as |field|>
+                <field.radio
+                  @label="Option 1"
+                  @disabled={{this.disabled}}
+                  @value="1"
+                  @selectedValue={{this.selectedValue}}
+                />
+              </form.field>
+              <form.field @required={{this.required}} as |field|>
+                <field.radio
+                  @label="Option 2"
+                  @disabled={{this.disabled}}
+                  @value="2"
+                  @selectedValue={{this.selectedValue}}
+                />
+              </form.field>
+              <form.field @required={{this.required}} as |field|>
+                <field.radio
+                  @label="Option 3"
+                  @disabled={{this.disabled}}
+                  @value="3"
+                  @selectedValue={{this.selectedValue}}
+                />
+              </form.field>
+              <form.field @required={{this.required}} as |field|>
+                <field.radio
+                  @label="Option 4"
+                  @disabled={{this.disabled}}
+                  @value="4"
+                  @selectedValue={{this.selectedValue}}
+                />
+              </form.field>
+            </div>
+            <form.submit-button />
+            <NrgButton @class="basic black" @text="Cancel" />
+          </NrgFormContainer>
+        </hash.popup>
+      </NrgPopup>
+    </:example>
+  </Freestyle::Usage>
+</FreestyleSection>

@@ -1,8 +1,8 @@
-import Controller from '@ember/controller';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-export default class ToastsController extends Controller {
+export default class FreestyleToastComponent extends Component {
   @service
   flashMessages;
 

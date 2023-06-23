@@ -1,26 +1,3 @@
 {{page-title "nrg-search"}}
 
-<NrgCodeBlock @label="Disabled" @codeBlockName="disabled-search.hbs">
-  {{! BEGIN-SNIPPET disabled-search }}
-  <NrgSearch @disabled={{true}} />
-  {{! END-SNIPPET }}
-</NrgCodeBlock>
-
-<NrgCodeBlock @label="Querying" @codeBlockName="querying-search.hbs">
-  <p>
-    Searching for
-    <strong>{{or this.queryString "Nothing"}}</strong>
-    <br />
-    Selected
-    <strong>{{or this.selectedResult.header "Nothing"}}</strong>
-  </p>
-  {{! BEGIN-SNIPPET querying-search }}
-  <NrgSearch
-    @query={{this.query}}
-    @model={{this}}
-    @valuePath="selectedResult"
-  />
-  {{! END-SNIPPET }}
-</NrgCodeBlock>
-
-<NrgCodeBlock @label="Querying JS" @codeBlockName="querying-search.js" />
+<Freestyle::Search />

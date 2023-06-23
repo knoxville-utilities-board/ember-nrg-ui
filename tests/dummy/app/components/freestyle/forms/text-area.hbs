@@ -1,0 +1,30 @@
+<FreestyleSection @name="Forms" as |Section|>
+  <Section.subsection @name="Text Area">
+    <Freestyle::Usage>
+      <:example>
+        <NrgFormContainer as |form|>
+          <form.field @label="Text Area" as |field|>
+            <field.text-area
+              @disabled={{this.textAreaDisabled}}
+              @placeholder="Placeholder"
+              @valuePath="textAreaValue"
+              @model={{this}}
+              as |view|
+            >
+              {{view.input}}
+            </field.text-area>
+          </form.field>
+        </NrgFormContainer>
+      </:example>
+
+      <:api as |Args|>
+        <Args.String
+          @name="textAreaValue"
+          @description="The value of the text area field."
+          @value={{this.textAreaValue}}
+          @onInput={{fn (mut this.textAreaValue)}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+</FreestyleSection>

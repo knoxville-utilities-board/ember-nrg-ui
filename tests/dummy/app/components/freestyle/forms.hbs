@@ -1,0 +1,336 @@
+{{page-title "nrg-forms"}}
+
+<FreestyleSection @name="Forms">
+  <Freestyle::Usage>
+    <:example>
+      <NrgFormContainer as |form|>
+        <form.field @label="Text Field" @required={{this.required}} as |field|>
+          <field.text-field
+            @class="left icon action"
+            @disabled={{this.disabled}}
+            as |view|
+          >
+            <NrgIcon @icon="settings" />
+            {{view.input}}
+            <NrgButton
+              @class="primary"
+              @text="Action"
+              @disabled={{this.disabled}}
+            />
+          </field.text-field>
+        </form.field>
+        <br />
+        <div class="four fields">
+          <div class="field"></div>
+          <form.field
+            @label="Text Field (turkey)"
+            @required={{this.required}}
+            as |field|
+          >
+            <field.text-field
+              @model={{this}}
+              @valuePath="turkey"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field
+            @label="Text Field (meal)"
+            @required={{this.required}}
+            as |field|
+          >
+            <field.text-field
+              @model={{this}}
+              @valuePath="meal"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field
+            @label="Text Field (super)"
+            @required={{this.required}}
+            as |field|
+          >
+            <field.text-field
+              @model={{this}}
+              @valuePath="super"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field
+            @label="Text Field (deal)"
+            @required={{this.required}}
+            as |field|
+          >
+            <field.text-field
+              @model={{this}}
+              @valuePath="deal"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+        </div>
+        <br />
+        <form.field @label="Text Area" @required={{this.required}} as |field|>
+          <field.text-area
+            @model={{this}}
+            @valuePath="textArea1"
+            @disabled={{this.disabled}}
+          />
+        </form.field>
+        <br />
+        <div class="two fields">
+          <form.field @label="Text Area" @required={{this.required}} as |field|>
+            <field.text-area
+              @model={{this}}
+              @valuePath="textArea2"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field @label="Text Area" @required={{this.required}} as |field|>
+            <field.text-area
+              @model={{this}}
+              @valuePath="textArea3"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+        </div>
+        <br />
+        <span>{{format-date this.dateTime1}}</span>
+        <br />
+        <form.field @label="Datetime" @required={{this.required}} as |field|>
+          <field.datetime
+            @type="datetime"
+            @maxDate={{this.maxDate}}
+            @disabled={{this.disabled}}
+            @model={{this}}
+            @valuePath="dateTime1"
+          />
+        </form.field>
+        <br />
+        <form.field
+          @label="Datetime (hours only)"
+          @required={{this.required}}
+          as |field|
+        >
+          <field.datetime
+            @type="datetime"
+            @maxDate={{this.maxDate}}
+            @disabled={{this.disabled}}
+            @model={{this}}
+            @valuePath="dateTime2"
+            @allowMinuteSelection={{false}}
+          />
+        </form.field>
+        <br />
+        <form.field @label="Time" @required={{this.required}} as |field|>
+          <field.datetime
+            @type="time"
+            @disabled={{this.disabled}}
+            @model={{this}}
+            @valuePath="time1"
+          />
+        </form.field>
+        <br />
+        <form.field
+          @label="Time (hours only)"
+          @required={{this.required}}
+          as |field|
+        >
+          <field.datetime
+            @type="time"
+            @maxDate={{this.maxDate}}
+            @disabled={{this.disabled}}
+            @model={{this}}
+            @valuePath="time2"
+            @allowMinuteSelection={{false}}
+          />
+        </form.field>
+        <br />
+        <form.field
+          @label="Date (Button)"
+          @required={{this.required}}
+          as |field|
+        >
+          <field.datetime
+            @disabled={{this.disabled}}
+            @model={{this}}
+            @valuePath="date1"
+          >
+            <NrgButton @class="green" @text="Open Datepicker" />
+          </field.datetime>
+        </form.field>
+        <br />
+        <form.field @label="Dropdown" @required={{this.required}} as |field|>
+          <field.dropdown
+            @options={{this.optionList}}
+            @model={{this}}
+            @valuePath="selectedOption"
+            @disabled={{this.disabled}}
+          />
+        </form.field>
+        <br />
+        <div class="grouped fields">
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.checkbox
+              @label="Checkbox"
+              @model={{this}}
+              @valuePath="checkbox1"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.checkbox
+              @type="slider"
+              @label="Slider"
+              @model={{this}}
+              @valuePath="checkbox2"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.checkbox
+              @type="toggle"
+              @label="Toggle"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+        </div>
+        <br />
+        <form.field @label="Search" @required={{this.required}} as |field|>
+          <field.search
+            @query={{this.searchQuery}}
+            @model={{this}}
+            @valuePath="searchResult"
+            @displayLabel="label"
+            @disabled={{this.disabled}}
+            as |view|
+          >
+            {{view.label}}
+          </field.search>
+        </form.field>
+        <br />
+        <div class="inline fields">
+          <form.field @required={{this.required}} as |field|>
+            <field.checkbox
+              @label="Inline Checkbox"
+              @model={{this}}
+              @valuePath="checkbox1"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.checkbox
+              @type="slider"
+              @label="Inline Slider"
+              @model={{this}}
+              @valuePath="checkbox2"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.checkbox
+              @type="toggle"
+              @label="Inline Toggle"
+              @disabled={{this.disabled}}
+            />
+          </form.field>
+        </div>
+        <br />
+        <div class="grouped fields">
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 1"
+              @disabled={{this.disabled}}
+              @value="1"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 2"
+              @disabled={{this.disabled}}
+              @value="2"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 3"
+              @disabled={{this.disabled}}
+              @value="3"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 4"
+              @disabled={{this.disabled}}
+              @value="4"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+        </div>
+        <br />
+        <div class="inline fields">
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 1"
+              @disabled={{this.disabled}}
+              @value="1"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 2"
+              @disabled={{this.disabled}}
+              @value="2"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 3"
+              @disabled={{this.disabled}}
+              @value="3"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+          <form.field @required={{this.required}} as |field|>
+            <field.radio
+              @label="Option 4"
+              @disabled={{this.disabled}}
+              @value="4"
+              @model={{this}}
+              @valuePath="radio"
+            />
+          </form.field>
+        </div>
+
+        <form.submit-button />
+        <NrgButton @class="basic black" @text="Cancel" />
+        <form.form-action
+          @text="Toggle Required"
+          @onClick={{this.requiredToggle}}
+        />
+        <form.form-action
+          @text="Toggle Disabled"
+          @onClick={{this.disabledToggle}}
+        />
+        <form.form-link @route="index">
+          Index
+        </form.form-link>
+      </NrgFormContainer>
+    </:example>
+  </Freestyle::Usage>
+
+  <Freestyle::CodeBlock
+    @label="Backing Component"
+    @codeBlockName="form-backing-component.js"
+  />
+</FreestyleSection>

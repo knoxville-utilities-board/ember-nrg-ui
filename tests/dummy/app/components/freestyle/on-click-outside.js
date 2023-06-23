@@ -1,8 +1,8 @@
-import Controller from '@ember/controller';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
-export default class ViewModifiersOnClickOutsideController extends Controller {
+export default class FreestyleOnClickOutsideComponent extends Component {
   @tracked
   lastState = 'None';
 

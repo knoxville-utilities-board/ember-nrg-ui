@@ -1,5 +1,4 @@
-// BEGIN-SNIPPET querying-search
-import Controller from '@ember/controller';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
@@ -22,7 +21,7 @@ const options = [
   },
 ];
 
-export default class ViewComponentsNrgSearchController extends Controller {
+export default class FreestyleNrgSearchComponent extends Component {
   @tracked
   queryString = null;
 
@@ -36,4 +35,3 @@ export default class ViewComponentsNrgSearchController extends Controller {
     return options;
   }
 }
-// END-SNIPPET querying-search

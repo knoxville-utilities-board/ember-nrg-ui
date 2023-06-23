@@ -1,0 +1,16 @@
+<FreestyleSection @name="On Click Outside Modifier">
+  <Freestyle::Usage>
+    <:example>
+      <div
+        role="button"
+        {{on-click-outside this.onClickOutside}}
+        {{on "click" this.onClick}}
+      >
+        <p>
+          <strong>Last State:</strong>
+          <span>{{this.lastState}}</span>
+        </p>
+      </div>
+    </:example>
+  </Freestyle::Usage>
+</FreestyleSection>

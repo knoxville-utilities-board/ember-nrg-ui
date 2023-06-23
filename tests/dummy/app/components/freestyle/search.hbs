@@ -1,0 +1,29 @@
+<FreestyleSection @name="Search">
+  <Freestyle::Usage>
+    <:example>
+      <p>
+        Searching for
+        <strong>{{or this.queryString "Nothing"}}</strong>
+        <br />
+        Selected
+        <strong>{{or this.selectedResult.header "Nothing"}}</strong>
+      </p>
+
+      <NrgSearch
+        @disabled={{this.disabled}}
+        @query={{this.query}}
+        @model={{this}}
+        @valuePath="selectedResult"
+      />
+    </:example>
+
+    <:api as |Args|>
+      <Args.Bool
+        @name="disabled"
+        @defaults={{false}}
+        @value={{this.disabled}}
+        @onInput={{fn (mut this.disabled)}}
+      />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>

@@ -1,0 +1,10 @@
+<FreestyleAnnotation>
+  <h4>{{@label}}</h4>
+
+  {{#let (get-code-snippet @codeBlockName) as |snippet|}}
+    <pre
+      {{freestyle-highlight}}
+      class="{{snippet.language}} u-outdent"
+    >{{snippet.source}}</pre>
+  {{/let}}
+</FreestyleAnnotation>

@@ -1,4 +1,4 @@
-import Controller from '@ember/controller';
+import Component from '@glimmer/component';
 import { debug } from '@ember/debug';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
@@ -55,7 +55,7 @@ const defaultList = [
   },
 ];
 
-export default class ViewComponentsNrgFormsController extends Controller {
+export default class FreestyleListComponent extends Component {
   @tracked
   filters = defaultFilters;
 
@@ -64,6 +64,11 @@ export default class ViewComponentsNrgFormsController extends Controller {
 
   @tracked
   pageStart = 0;
+
+  @tracked
+  selectedPageSize = 2;
+
+  selectionTypeOptions = ['', 'single', 'multiple'];
 
   get filteredItems() {
     let items = defaultList;
@@ -101,14 +106,14 @@ export default class ViewComponentsNrgFormsController extends Controller {
     });
   }
 
-  get pageItems() {
+  get pagedItems() {
     const start = this.pageStart;
-    const count = 2;
-    const items = this.mappedItems.slice(0, start + count);
+    const count = this.selectedPageSize || this.filteredItems.length;
+    const items = this.filteredItems.slice(0, start + count);
     items.meta = {
       start,
       count,
-      total: this.mappedItems.length,
+      total: this.filteredItems.length,
     };
     return items;
   }

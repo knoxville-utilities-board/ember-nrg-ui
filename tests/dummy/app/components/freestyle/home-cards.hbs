@@ -1,0 +1,85 @@
+<FreestyleSection @name="Home Cards">
+  <Freestyle::Usage>
+    <:example>
+      <NrgHomeCards
+        @actionCard={{this.isActionCard}}
+        @columns={{this.columns}}
+        as |view|
+      >
+        <view.home-card
+          @label="Actionable Item"
+          @icon={{this.icon}}
+          @route="index"
+          @meta={{this.meta}}
+          @badge={{this.badge}}
+          @url="http://www.google.com"
+          @image={{this.image}}
+        />
+        <view.home-card
+          @label="Actionable Item"
+          @icon={{this.icon}}
+          @route="index"
+          @meta={{this.meta}}
+          @badge={{this.badge}}
+          @url="http://www.google.com"
+          @image={{this.image}}
+        />
+        <view.home-card
+          @label="Actionable Item"
+          @icon={{this.icon}}
+          @route="index"
+          @meta={{this.meta}}
+          @badge={{this.badge}}
+          @url="http://www.google.com"
+          @image={{this.image}}
+        />
+        <view.home-card
+          @label="Actionable Item"
+          @icon={{this.icon}}
+          @route="index"
+          @meta={{this.meta}}
+          @badge={{this.badge}}
+          @url="http://www.google.com"
+          @image={{this.image}}
+        />
+      </NrgHomeCards>
+    </:example>
+
+    <:api as |Args|>
+      <Args.String
+        @name="icon"
+        @value={{this.icon}}
+        @onInput={{fn (mut this.icon)}}
+        @options={{this.iconOptions}}
+      />
+      <Args.String
+        @name="badge"
+        @value={{this.badge}}
+        @onInput={{fn (mut this.badge)}}
+      />
+      <Args.String
+        @name="meta"
+        @value={{this.meta}}
+        @onInput={{fn (mut this.meta)}}
+      />
+      <Args.Bool
+        @name="isActionCard"
+        @defaults={{false}}
+        @value={{this.loadisActionCarding}}
+        @onInput={{fn (mut this.isActionCard)}}
+      />
+      <Args.String
+        @name="columns"
+        @value={{this.columns}}
+        @onInput={{fn (mut this.columns)}}
+        @options={{this.columnOptions}}
+      />
+      <Args.String
+        @name="image"
+        @value={{this.image}}
+        @onInput={{fn (mut this.image)}}
+        @options={{this.imageOptions}}
+      />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>

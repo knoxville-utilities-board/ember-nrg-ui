@@ -1,4 +1,5 @@
-import Controller from '@ember/controller';
+//BEGIN-SNIPPET form-backing-component
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import validationState, { validator } from 'ember-nrg-ui/decorators/validation';
@@ -45,7 +46,7 @@ const Validators = {
   date1: [validator('presence', true)],
 };
 
-export default class ViewComponentsNrgFormsController extends Controller {
+export default class FreestyleFormsComponent extends Component {
   @validationState(Validators)
   validations;
 
@@ -143,3 +144,4 @@ export default class ViewComponentsNrgFormsController extends Controller {
     this.disabled = !this.disabled;
   }
 }
+//END-SNIPPET

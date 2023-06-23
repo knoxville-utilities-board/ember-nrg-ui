@@ -1,0 +1,64 @@
+<FreestyleSection @name="List">
+  <Freestyle::Usage>
+    <:example>
+      <NrgList
+        @items={{this.pagedItems}}
+        @pageMeta={{this.pagedItems.meta}}
+        @onQuery={{this.onQuery}}
+        @onItemSelect={{this.onItemSelect}}
+        @selectionType={{this.selectionType}}
+        @loading={{this.loading}}
+        @onChangePage={{this.onChangePage}}
+        @selectedPageSize={{this.selectedPageSize}}
+        as |list|
+      >
+        <list.header as |header|>
+          <header.search />
+          <header.filter @filters={{this.filters}} @filterParam="animal" />
+        </list.header>
+        <list.items as |item|>
+          <div class="content">
+            <a href="" class="header">{{item.name}}</a>
+            <div class="meta">
+              <span>{{item.meta}}</span>
+            </div>
+            <div class="extra">
+              {{item.animal}}
+            </div>
+          </div>
+        </list.items>
+        <list.create-button />
+      </NrgList>
+    </:example>
+
+    <:api as |Args|>
+      <Args.Bool
+        @name="loading"
+        @defaults={{false}}
+        @value={{this.loading}}
+        @onInput={{fn (mut this.loading)}}
+      />
+      <Args.String
+        @name="selectedPageSize"
+        @value={{this.selectedPageSize}}
+        @onInput={{fn (mut this.selectedPageSize)}}
+      />
+      <Args.String
+        @name="selectionType"
+        @value={{this.selectionType}}
+        @onInput={{fn (mut this.selectionType)}}
+        @options={{this.selectionTypeOptions}}
+      />
+    </:api>
+  </Freestyle::Usage>
+
+  <Freestyle::Usage>
+    <:example>
+      <NrgList
+        @groupHeaderHandler={{this.groupHeaderHandler}}
+        @items={{this.mappedItems}}
+        @onItemSelect={{this.onItemSelect}}
+      />
+    </:example>
+  </Freestyle::Usage>
+</FreestyleSection>

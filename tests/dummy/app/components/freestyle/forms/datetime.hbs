@@ -1,0 +1,46 @@
+<FreestyleSection @name="Forms" as |Section|>
+  <Section.subsection @name="Datetime">
+    <Freestyle::Usage>
+      <:example>
+        <NrgFormContainer as |form|>
+          <form.field @label="Datetime" as |field|>
+            <field.datetime
+              @disabled={{this.dateTimeDisabled}}
+              @valuePath="dateTimeValue"
+              @model={{this}}
+              @type={{this.dateTimeType}}
+              @maxDate={{this.maxDate}}
+              @allowMinuteSelection={{this.allowMinuteSelection}}
+            />
+          </form.field>
+        </NrgFormContainer>
+      </:example>
+
+      <:api as |Args|>
+        <Args.String
+          @name="type"
+          @value={{this.dateTimeType}}
+          @onInput={{fn (mut this.dateTimeType)}}
+          @options={{this.dateTimeTypeOptions}}
+        />
+        <Args.Bool
+          @name="disabled"
+          @defaults={{false}}
+          @value={{this.dateTimeDisabled}}
+          @onInput={{fn (mut this.dateTimeDisabled)}}
+        />
+        <Args.Object
+          @name="maxDate"
+          @value={{this.maxDate}}
+          @jsonCollapseDepth={{0}}
+        />
+        <Args.Bool
+          @name="allowMinuteSelection"
+          @defaults={{false}}
+          @value={{this.allowMinuteSelection}}
+          @onInput={{fn (mut this.allowMinuteSelection)}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+</FreestyleSection>
