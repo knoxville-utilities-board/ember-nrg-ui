@@ -11,6 +11,7 @@
 
       <NrgSearch
         @disabled={{this.disabled}}
+        @hideSearchIcon={{this.hideSearchIcon}}
         @query={{this.query}}
         @model={{this}}
         @valuePath="selectedResult"
@@ -20,9 +21,15 @@
     <:api as |Args|>
       <Args.Bool
         @name="disabled"
-        @defaults={{false}}
+        @defaultValue={{false}}
         @value={{this.disabled}}
         @onInput={{fn (mut this.disabled)}}
+      />
+      <Args.Bool
+        @name="hideSearchIcon"
+        @defaultValue={{false}}
+        @value={{this.hideSearchIcon}}
+        @onInput={{fn (mut this.hideSearchIcon)}}
       />
     </:api>
   </Freestyle::Usage>

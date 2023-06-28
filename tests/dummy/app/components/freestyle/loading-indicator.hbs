@@ -12,14 +12,14 @@
     <:api as |Args|>
       <Args.Bool
         @name="centered"
-        @defaults={{false}}
+        @defaultValue={{false}}
         @value={{this.centered}}
         @onInput={{fn (mut this.centered)}}
       />
 
       <Args.Bool
         @name="indeterminate"
-        @defaults={{false}}
+        @defaultValue={{false}}
         @value={{this.indeterminate}}
         @onInput={{fn (mut this.indeterminate)}}
       />
