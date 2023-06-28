@@ -6,7 +6,7 @@
   {{on-click-outside this.onBlur}}
 >
   <div
-    class="ui icon input"
+    class="ui icon input {{if @disabled 'disabled'}}"
     role="button"
     aria-label="Search box"
     {{on "click" this.onFocus}}
