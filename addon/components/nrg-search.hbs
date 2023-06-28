@@ -20,7 +20,9 @@
       @valuePath="searchString"
       @onChange={{this.query}}
     />
-    <i class="search icon"></i>
+    {{#unless @hideSearchIcon}}
+      <i class="search icon"></i>
+    {{/unless}}
   </div>
   {{#if this.showResults}}
     <div
