@@ -48,4 +48,9 @@ module('Integration | Component | nrg-search', function (hooks) {
     await fillIn('input', 'querystring');
     assert.notOk(findAll('.results').length);
   });
+
+  test('search icon is hidden', async function (assert) {
+    await render(hbs`<NrgSearch @hideSearchIcon={{true}} />`);
+    assert.dom('i.search.icon').doesNotExist();
+  });
 });
