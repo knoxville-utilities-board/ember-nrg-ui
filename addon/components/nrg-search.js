@@ -22,15 +22,10 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   activeItem = -1;
 
   @tracked
-  searchString = '';
+  searchString = null;
 
   @tracked
   items = null;
-
-  constructor() {
-    super(...arguments);
-    this.updateDisplayValue(this.value);
-  }
 
   get isTesting() {
     return this.application.isTesting ?? false;
@@ -84,9 +79,13 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     );
   }
 
-  updateDisplayValue(selected) {
-    const displayLabel = get(selected ?? {}, this.displayLabel);
-    this.searchString = displayLabel ?? this.value ?? '';
+  get displayValue() {
+    const displayLabel = get(this.value ?? {}, this.displayLabel);
+    return this.searchString ?? displayLabel ?? this.value ?? '';
+  }
+
+  set displayValue(value) {
+    this.searchString = value;
   }
 
   selectItem(item) {
@@ -94,7 +93,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
       item = this.items[this.activeItem];
     }
     this.onChange(item);
-    this.updateDisplayValue(item);
+    this.searchString = null;
     this.onBlur();
   }
 
