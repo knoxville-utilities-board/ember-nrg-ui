@@ -69,6 +69,10 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     return this.args.loading || this.args.disabled;
   }
 
+  get readonly() {
+    return this.args.readonly;
+  }
+
   get selection() {
     return this.args.selection ?? this.args.field;
   }
@@ -173,7 +177,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   focusInput() {
-    if (!this.args.search || this.dropdownDisabled) {
+    if (!this.args.search || this.dropdownDisabled || this.readonly) {
       return;
     }
     const input = this.wrapperElement.querySelector('input');
@@ -322,7 +326,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
 
   @action
   moveUp(evt) {
-    if (!this.isOpen || this.dropdownDisabled) {
+    if (!this.isOpen || this.dropdownDisabled || this.readonly) {
       return;
     }
     evt.preventDefault();
@@ -335,7 +339,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
 
   @action
   moveDown(evt) {
-    if (!this.isOpen || this.dropdownDisabled) {
+    if (!this.isOpen || this.dropdownDisabled || this.readonly) {
       return;
     }
     evt.preventDefault();
@@ -352,7 +356,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
       evt.preventDefault();
       evt.stopPropagation();
 
-      if (this.args.disabled) {
+      if (this.args.disabled || this.readonly) {
         return;
       }
 
