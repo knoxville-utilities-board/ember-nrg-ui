@@ -11,6 +11,7 @@
               @type={{this.dateTimeType}}
               @maxDate={{this.maxDate}}
               @allowMinuteSelection={{this.allowMinuteSelection}}
+              @readonly={{this.dateTimeReadonly}}
             />
           </form.field>
         </NrgFormContainer>
@@ -28,6 +29,12 @@
           @defaultValue={{false}}
           @value={{this.dateTimeDisabled}}
           @onInput={{fn (mut this.dateTimeDisabled)}}
+        />
+        <Args.Bool
+          @name="readonly"
+          @defaultValue={{false}}
+          @value={{this.dateTimeReadonly}}
+          @onInput={{fn (mut this.dateTimeReadonly)}}
         />
         <Args.Object
           @name="maxDate"

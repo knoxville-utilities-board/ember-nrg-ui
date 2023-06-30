@@ -7,6 +7,7 @@
             <field.text-field
               @disabled={{this.inputDisabled}}
               @placeholder="Placeholder"
+              @readonly={{this.readonly}}
               @valuePath="inputValue"
               @model={{this}}
               as |view|
@@ -23,6 +24,12 @@
           @description="The value of the input field."
           @value={{this.inputValue}}
           @onInput={{fn (mut this.inputValue)}}
+        />
+        <Args.Bool
+          @name="readonly"
+          @description="Whether the input field is readonly."
+          @value={{this.readonly}}
+          @onInput={{fn (mut this.readonly)}}
         />
       </:api>
     </Freestyle::Usage>

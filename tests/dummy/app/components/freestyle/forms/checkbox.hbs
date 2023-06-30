@@ -10,6 +10,7 @@
               @valuePath="checkbox1"
               @disabled={{this.checkbox1Disabled}}
               @type={{this.checkboxType}}
+              @readonly={{this.readonly}}
             />
           </form.field>
         </NrgFormContainer>
@@ -21,6 +22,12 @@
           @defaultValue={{false}}
           @value={{this.checkbox1Disabled}}
           @onInput={{fn (mut this.checkbox1Disabled)}}
+        />
+        <Args.Bool
+          @name="readonly"
+          @defaultValue={{false}}
+          @value={{this.readonly}}
+          @onInput={{fn (mut this.readonly)}}
         />
         <Args.String
           @name="type"
