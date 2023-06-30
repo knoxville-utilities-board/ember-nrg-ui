@@ -1,4 +1,9 @@
-<div class="ui checkbox radio {{if @disabled 'disabled'}} {{@class}}">
+<div
+  class="ui checkbox radio
+    {{if @disabled 'disabled'}}
+    {{if @readonly 'read-only'}}
+    {{@class}}"
+>
   <input
     id={{@focusId}}
     type="radio"
