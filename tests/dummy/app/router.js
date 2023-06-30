@@ -48,4 +48,5 @@ Router.map(function () {
     this.route('child');
   });
   this.route('validation-tests');
+  this.route('dynamic-field-validations');
 });

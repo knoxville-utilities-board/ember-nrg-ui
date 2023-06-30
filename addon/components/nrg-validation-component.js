@@ -1,7 +1,7 @@
 import { action, get, set } from '@ember/object';
 import Component from '@glimmer/component';
 import ensurePathExists from 'ember-nrg-ui/utils/ensure-path-exists';
-import { schedule } from '@ember/runloop';
+import { schedule, next } from '@ember/runloop';
 
 export default class NrgValidationComponent extends Component {
   constructor() {
@@ -19,8 +19,10 @@ export default class NrgValidationComponent extends Component {
     }
 
     if (this.hasModelPath && this.args.field) {
-      this.args.field.model = this.args.model;
-      this.args.field.valuePath = this.args.valuePath;
+      next(() => {
+        this.args.field.model = this.args.model;
+        this.args.field.valuePath = this.args.valuePath;
+      });
     }
   }
 
