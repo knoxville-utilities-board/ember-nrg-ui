@@ -34,6 +34,7 @@ Router.map(function () {
     this.route('nrg-text-area');
     this.route('nrg-datetime');
     this.route('nrg-checkbox');
+    this.route('nrg-radio');
   });
   this.route('view-mixins', function () {
     this.route('focus-first-input');

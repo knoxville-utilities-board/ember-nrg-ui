@@ -1,0 +1,34 @@
+<FreestyleSection @name="Forms" as |Section|>
+  <Section.subsection @name="Radio">
+    <Freestyle::Usage>
+      <:example>
+        <NrgFormContainer as |form|>
+          <form.field @inline={{true}} @required={{this.required}} as |field|>
+            <field.radio
+              @label="Radio"
+              @model={{this}}
+              @valuePath="radio1"
+              @disabled={{this.radio1Disabled}}
+              @readonly={{this.readonly}}
+            />
+          </form.field>
+        </NrgFormContainer>
+      </:example>
+
+      <:api as |Args|>
+        <Args.Bool
+          @name="disabled"
+          @defaultValue={{false}}
+          @value={{this.radio1Disabled}}
+          @onInput={{fn (mut this.radio1Disabled)}}
+        />
+        <Args.Bool
+          @name="readonly"
+          @defaultValue={{false}}
+          @value={{this.readonly}}
+          @onInput={{fn (mut this.readonly)}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+</FreestyleSection>
