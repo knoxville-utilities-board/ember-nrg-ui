@@ -6,6 +6,7 @@
           <form.field @label="Dropdown" as |field|>
             <field.dropdown
               @disabled={{this.dropdownDisabled}}
+              @readonly={{this.dropdownReadonly}}
               @valuePath="dropdownValue"
               @model={{this}}
               @options={{this.dropdownOptions}}
@@ -20,6 +21,12 @@
           @defaultValue={{false}}
           @value={{this.dropdownDisabled}}
           @onInput={{fn (mut this.dropdownDisabled)}}
+        />
+        <Args.Bool
+          @name="readonly"
+          @defaultValue={{false}}
+          @value={{this.dropdownReadonly}}
+          @onInput={{fn (mut this.dropdownReadonly)}}
         />
       </:api>
     </Freestyle::Usage>

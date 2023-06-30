@@ -9,6 +9,7 @@
               @placeholder="Placeholder"
               @valuePath="textAreaValue"
               @model={{this}}
+              @readonly={{this.textAreaReadonly}}
               as |view|
             >
               {{view.input}}
@@ -23,6 +24,12 @@
           @description="The value of the text area field."
           @value={{this.textAreaValue}}
           @onInput={{fn (mut this.textAreaValue)}}
+        />
+        <Args.Bool
+          @name="readonly"
+          @description="Whether the text area field is read only."
+          @value={{this.textAreaReadonly}}
+          @onInput={{fn (mut this.textAreaReadonly)}}
         />
       </:api>
     </Freestyle::Usage>

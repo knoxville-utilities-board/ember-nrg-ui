@@ -12,6 +12,7 @@
       <NrgSearch
         @disabled={{this.disabled}}
         @hideSearchIcon={{this.hideSearchIcon}}
+        @readonly={{this.readonly}}
         @query={{this.query}}
         @model={{this}}
         @valuePath="selectedResult"
@@ -24,6 +25,12 @@
         @defaultValue={{false}}
         @value={{this.disabled}}
         @onInput={{fn (mut this.disabled)}}
+      />
+      <Args.Bool
+        @name="readonly"
+        @defaultValue={{false}}
+        @value={{this.readonly}}
+        @onInput={{fn (mut this.readonly)}}
       />
       <Args.Bool
         @name="hideSearchIcon"

@@ -1,15 +1,14 @@
 <FreestyleSection @name="Forms" as |Section|>
-  <Section.subsection @name="Checkbox">
+  <Section.subsection @name="Radio">
     <Freestyle::Usage>
       <:example>
         <NrgFormContainer as |form|>
           <form.field @inline={{true}} @required={{this.required}} as |field|>
-            <field.checkbox
-              @label="Checkbox"
+            <field.radio
+              @label="Radio"
               @model={{this}}
-              @valuePath="checkbox1"
-              @disabled={{this.checkbox1Disabled}}
-              @type={{this.checkboxType}}
+              @valuePath="radio1"
+              @disabled={{this.radio1Disabled}}
               @readonly={{this.readonly}}
             />
           </form.field>
@@ -20,20 +19,14 @@
         <Args.Bool
           @name="disabled"
           @defaultValue={{false}}
-          @value={{this.checkbox1Disabled}}
-          @onInput={{fn (mut this.checkbox1Disabled)}}
+          @value={{this.radio1Disabled}}
+          @onInput={{fn (mut this.radio1Disabled)}}
         />
         <Args.Bool
           @name="readonly"
           @defaultValue={{false}}
           @value={{this.readonly}}
           @onInput={{fn (mut this.readonly)}}
-        />
-        <Args.String
-          @name="type"
-          @value={{this.checkboxType}}
-          @onInput={{fn (mut this.checkboxType)}}
-          @options={{this.checkboxTypeOptions}}
         />
       </:api>
     </Freestyle::Usage>

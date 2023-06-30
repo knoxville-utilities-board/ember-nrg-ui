@@ -16,6 +16,7 @@
           @showNowShortcut={{this.showNowShortcut}}
           @isDateDisabled={{@isDateDisabled}}
           @allowMinuteSelection={{@allowMinuteSelection}}
+          @readonly={{@readonly}}
           @onSelect={{this.onDateSelect}}
           @onClose={{this.onBlur}}
         />
@@ -27,6 +28,7 @@
       @placeholder={{@placeholder}}
       @class="left icon"
       @disabled={{@disabled}}
+      @readonly={{@readonly}}
       @model={{this}}
       @valuePath="displayValue"
       as |view|

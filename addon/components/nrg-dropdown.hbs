@@ -6,6 +6,7 @@
     {{if this.dropdownDisabled 'disabled'}}
     {{if this.isOpen 'active visible'}}
     {{if @multiple 'multiple'}}
+    {{if @readonly 'read-only'}}
     {{@class}}"
   tabindex={{unless @search "0"}}
   {{on "click" this.onClick}}
@@ -81,6 +82,7 @@
         class="search"
         autocomplete="off"
         name={{@name}}
+        readonly={{@readonly}}
         value={{this.searchValue}}
         {{on "input" this.onSearchInputChange}}
         {{on "focus" this.onClick}}
