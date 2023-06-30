@@ -11,6 +11,7 @@
   maxlength={{@maxLength}}
   autocomplete={{if @autocomplete "on" "off"}}
   placeholder={{@placeholder}}
+  readonly={{@readonly}}
   {{on "blur" this.blur}}
   {{on "focus" this.focus}}
   {{on "input" this.valueChange}}
