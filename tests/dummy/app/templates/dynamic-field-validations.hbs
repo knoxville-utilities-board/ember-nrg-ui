@@ -1,7 +1,11 @@
 <div class="ui segment">
   <NrgFormContainer @onSubmit={{this.submit}} as |form|>
     <form.field @label="Show Text" as |field|>
-      <field.checkbox @model={{this}} @valuePath="showText" @label="Check me!" />
+      <field.checkbox
+        @model={{this}}
+        @valuePath="showText"
+        @label="Check me!"
+      />
     </form.field>
     {{#if this.showText}}
       <form.field @label="Text Field" as |field|>
