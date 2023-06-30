@@ -126,7 +126,9 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   get isStringData() {
-    return this.args.options.length && typeof this.args.options[0] == 'string';
+    return (
+      this.args.options?.length && typeof this.args.options?.[0] == 'string'
+    );
   }
 
   get displayDefaultText() {
