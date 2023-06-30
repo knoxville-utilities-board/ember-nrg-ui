@@ -82,6 +82,7 @@
         class="search"
         autocomplete="off"
         name={{@name}}
+        readonly={{@readonly}}
         value={{this.searchValue}}
         {{on "input" this.onSearchInputChange}}
         {{on "focus" this.onClick}}
