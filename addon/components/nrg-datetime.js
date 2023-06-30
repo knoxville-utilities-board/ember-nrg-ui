@@ -76,7 +76,7 @@ export default class NrgDatetimeComponent extends NrgValidationComponent {
     evt.preventDefault();
     evt.stopPropagation();
 
-    if (this.isFocused || this.args.disabled) {
+    if (this.isFocused || this.args.disabled || this.args.readonly) {
       return;
     }
 
