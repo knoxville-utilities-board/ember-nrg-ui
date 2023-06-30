@@ -52,4 +52,17 @@ module('Integration | Component | nrg-radio', function (hooks) {
     assert.ok(inputs[1].checked);
     assert.strictEqual(this.selectedValue, '2');
   });
+
+  test('field can be marked readonly', async function (assert) {
+    this.checked = false;
+    await render(
+      hbs`<NrgRadio @model={{this}} @valuePath="checked" @readonly={{true}} />`
+    );
+    await click('.radio');
+
+    assert.notOk(this.checked);
+    assert.dom('.radio').hasClass('read-only');
+    assert.dom('.radio > input').hasAttribute('readonly');
+    assert.dom('.radio > input').isNotDisabled();
+  });
 });

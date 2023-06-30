@@ -150,4 +150,19 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
     await focus('input');
     assert.dom('.dropdown.visible').exists();
   });
+
+  test('field can be marked readonly', async function (assert) {
+    await render(
+      hbs`<NrgDropdown @model={{this}} @valuePath="selectedOption" @readonly={{true}} />`
+    );
+    assert.dom('.dropdown').hasClass('read-only');
+  });
+
+  test('searchable field can be marked readonly', async function (assert) {
+    await render(
+      hbs`<NrgDropdown @model={{this}} @valuePath="selectedOption" @readonly={{true}} @search={{true}} />`
+    );
+    assert.dom('.dropdown').hasClass('read-only');
+    assert.dom('.dropdown > input').hasAttribute('readonly');
+  });
 });

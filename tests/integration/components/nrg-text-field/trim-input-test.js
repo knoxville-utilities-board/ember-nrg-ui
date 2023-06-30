@@ -25,4 +25,10 @@ module('Integration | Component | nrg-text-field/trim-input', function (hooks) {
     );
     await fillIn('input', 'bob     ');
   });
+
+  test('field can be marked readonly', async function (assert) {
+    await render(hbs`<NrgTextField::TrimInput @readonly={{true}}/>`);
+    assert.dom('input').isNotDisabled();
+    assert.dom('input').hasAttribute('readonly');
+  });
 });

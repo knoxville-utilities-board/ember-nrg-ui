@@ -37,4 +37,17 @@ module('Integration | Component | nrg-checkbox', function (hooks) {
 
     assert.notOk(this.checked);
   });
+
+  test('field can be marked readonly', async function (assert) {
+    this.checked = false;
+    await render(
+      hbs`<NrgCheckbox @model={{this}} @valuePath="checked" @readonly={{true}} />`
+    );
+    await click('.checkbox');
+
+    assert.notOk(this.checked);
+    assert.dom('.checkbox').hasClass('read-only');
+    assert.dom('.checkbox > input').hasAttribute('readonly');
+    assert.dom('.checkbox > input').isNotDisabled();
+  });
 });

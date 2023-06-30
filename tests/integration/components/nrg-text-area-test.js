@@ -27,4 +27,11 @@ module('Integration | Component | nrg-text-area', function (hooks) {
 
     assert.strictEqual(this.model.value, 'text');
   });
+
+  test('field can be marked readonly', async function (assert) {
+    await render(hbs`<NrgTextArea @readonly={{true}} />`);
+
+    assert.dom('textarea').isNotDisabled();
+    assert.dom('textarea').hasAttribute('readonly');
+  });
 });

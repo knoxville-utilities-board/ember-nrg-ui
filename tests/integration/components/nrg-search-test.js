@@ -53,4 +53,11 @@ module('Integration | Component | nrg-search', function (hooks) {
     await render(hbs`<NrgSearch @hideSearchIcon={{true}} />`);
     assert.dom('i.search.icon').doesNotExist();
   });
+
+  test('field can be marked readonly', async function (assert) {
+    await render(hbs`<NrgSearch @readonly={{true}} />`);
+
+    assert.dom('.search input').hasAttribute('readonly');
+    assert.dom('.search input').isNotDisabled();
+  });
 });

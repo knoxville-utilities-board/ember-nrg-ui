@@ -54,4 +54,13 @@ module('Integration | Component | nrg-datetime', function (hooks) {
     `);
     assert.dom('*').hasText('template block text');
   });
+
+  test('field can be marked readonly', async function (assert) {
+    await render(
+      hbs`<NrgDatetime @model={{this}} @valuePath="dateValue" @readonly={{true}} />`
+    );
+
+    assert.dom('input').isNotDisabled();
+    assert.dom('input').hasAttribute('readonly');
+  });
 });
