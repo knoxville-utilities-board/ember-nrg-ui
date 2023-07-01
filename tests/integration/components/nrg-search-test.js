@@ -1,4 +1,5 @@
-import { fillIn, findAll, render } from '@ember/test-helpers';
+import { fillIn, findAll, render, settled } from '@ember/test-helpers';
+import { tracked } from '@glimmer/tracking';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
@@ -59,5 +60,28 @@ module('Integration | Component | nrg-search', function (hooks) {
 
     assert.dom('.search input').hasAttribute('readonly');
     assert.dom('.search input').isNotDisabled();
+  });
+
+  test('input value updates dynamically', async function (assert) {
+    class Model {
+      @tracked
+      valuePath = 'prop1';
+
+      prop1 = 'value1';
+      prop2 = 'value2';
+    }
+
+    this.model = new Model();
+
+    await render(
+      hbs`<NrgSearch @model={{this.model}} @valuePath={{this.model.valuePath}} />`
+    );
+
+    assert.dom('input').hasValue('value1');
+
+    this.model.valuePath = 'prop2';
+    await settled();
+
+    assert.dom('input').hasValue('value2');
   });
 });
