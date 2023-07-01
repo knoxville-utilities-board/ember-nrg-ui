@@ -63,7 +63,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   }
 
   get canPerformSearch() {
-    return this.searchString.length >= this.minCharacters;
+    return this.searchString?.length >= this.minCharacters;
   }
 
   get receivedResults() {
