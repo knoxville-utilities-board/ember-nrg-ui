@@ -172,7 +172,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
       return this.args.defaultValue;
     }
     if (this.args.multiple) {
-      return [];
+      return A();
     }
     return this.options?.[0];
   }
