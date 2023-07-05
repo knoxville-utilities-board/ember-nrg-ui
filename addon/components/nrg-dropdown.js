@@ -22,19 +22,8 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   @tracked
   selected;
 
-  constructor() {
-    super(...arguments);
-
-    if (
-      this.args.forceSelection &&
-      !this.hasSelected &&
-      this.args.options.length
-    ) {
-      this.onSelectInternal(this.args.options[0]);
-    }
-    if (this.args.multiple && !this.value) {
-      this.value = A();
-    }
+  get useDefaultValue() {
+    return this.args.forceSelection || (this.args.multiple && !this.value);
   }
 
   get options() {
@@ -176,6 +165,16 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
       this.searchValue &&
       this.filteredOptions.length == 0
     );
+  }
+
+  getDefaultValue() {
+    if (this.args.defaultValue !== undefined) {
+      return this.args.defaultValue;
+    }
+    if (this.args.multiple) {
+      return [];
+    }
+    return this.options?.[0];
   }
 
   focusInput() {
