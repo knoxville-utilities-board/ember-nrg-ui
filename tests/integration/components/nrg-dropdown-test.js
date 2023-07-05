@@ -3,9 +3,14 @@ import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { module, test } from 'qunit';
 import { triggerKeyDown } from 'ember-keyboard';
+import { tracked } from '@glimmer/tracking';
 
 module('Integration | Component | nrg-dropdown', function (hooks) {
-  hooks.beforeEach(() => {
+  hooks.beforeEach(function () {
+    class Model {
+      @tracked
+      selectedOption;
+    }
     this.options = [
       {
         label: 'Option 1',
@@ -16,7 +21,8 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
         label2: 'Label2 2',
       },
     ];
-    this.selectedOption = this.options[1];
+    this.model = new Model();
+    this.model.selectedOption = this.options[1];
   });
 
   setupRenderingTest(hooks);
@@ -35,9 +41,18 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
     assert.dom('.text').hasText('Pick Something');
   });
 
+  test('forceSelection works', async function (assert) {
+    this.model.selectedOption = undefined;
+    await render(
+      hbs`<NrgDropdown @model={{this.model}} @valuePath="selectedOption" @options={{this.options}} @forceSelection={{true}} />`
+    );
+
+    assert.dom('.text').hasText('Option 1');
+  });
+
   test('item prepopulation works', async function (assert) {
     await render(
-      hbs`<NrgDropdown @options={{this.options}} @model={{this}} @valuePath="selectedOption" />`
+      hbs`<NrgDropdown @options={{this.options}} @model={{this.model}} @valuePath="selectedOption" />`
     );
 
     assert.dom('.text').hasText('Option 2');
@@ -45,7 +60,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
 
   test('block templating works', async function (assert) {
     await render(hbs`
-      <NrgDropdown @options={{this.options}} @model={{this}} @valuePath="selectedOption" as |option|>
+      <NrgDropdown @options={{this.options}} @model={{this.model}} @valuePath="selectedOption" as |option|>
         {{option.label2}}
       </NrgDropdown>
     `);
@@ -65,7 +80,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
       },
     ];
     await render(
-      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @options={{this.options}} />`
+      hbs`<NrgDropdown @model={{this.model}} @valuePath="valuePath" @options={{this.options}} />`
     );
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
@@ -86,7 +101,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
       },
     ];
     await render(
-      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @options={{this.options}} />`
+      hbs`<NrgDropdown @model={{this.model}} @valuePath="selectedOption" @options={{this.options}} />`
     );
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
@@ -108,7 +123,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
       },
     ];
     await render(
-      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @options={{this.options}} />`
+      hbs`<NrgDropdown @model={{this.model}} @valuePath="selectedOption" @options={{this.options}} />`
     );
     await click('.dropdown');
     await triggerKeyDown('ArrowDown');
@@ -129,7 +144,7 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
       },
     ];
     await render(
-      hbs`<NrgDropdown @model={{this}} @valuePath="valuePath" @search={{true}} @options={{this.options}} />`
+      hbs`<NrgDropdown @model={{this.model}} @valuePath="selectedOption" @search={{true}} @options={{this.options}} />`
     );
     await click('.dropdown');
     await fillIn('input', '2');
@@ -153,14 +168,14 @@ module('Integration | Component | nrg-dropdown', function (hooks) {
 
   test('field can be marked readonly', async function (assert) {
     await render(
-      hbs`<NrgDropdown @model={{this}} @valuePath="selectedOption" @readonly={{true}} />`
+      hbs`<NrgDropdown @model={{this.model}} @valuePath="selectedOption" @readonly={{true}} />`
     );
     assert.dom('.dropdown').hasClass('read-only');
   });
 
   test('searchable field can be marked readonly', async function (assert) {
     await render(
-      hbs`<NrgDropdown @model={{this}} @valuePath="selectedOption" @readonly={{true}} @search={{true}} />`
+      hbs`<NrgDropdown @model={{this.model}} @valuePath="selectedOption" @readonly={{true}} @search={{true}} />`
     );
     assert.dom('.dropdown').hasClass('read-only');
     assert.dom('.dropdown > input').hasAttribute('readonly');
