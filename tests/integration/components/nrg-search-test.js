@@ -1,4 +1,4 @@
-import { fillIn, findAll, render, settled } from '@ember/test-helpers';
+import { click, fillIn, findAll, render, settled } from '@ember/test-helpers';
 import { tracked } from '@glimmer/tracking';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -48,6 +48,51 @@ module('Integration | Component | nrg-search', function (hooks) {
     );
     await fillIn('input', 'querystring');
     assert.notOk(findAll('.results').length);
+  });
+
+  test('action fires when item is clicked', async function (assert) {
+    assert.expect(1);
+    this.query = () => {
+      return [
+        {
+          header: 'header',
+        },
+      ];
+    };
+    this.onChange = (item) => {
+      assert.deepEqual(item, this.query()[0]);
+    };
+    await render(
+      hbs`<NrgSearch @query={{this.query}} @onChange={{this.onChange}} />`
+    );
+    await fillIn('input', 'querystring');
+    await click('.result');
+  });
+
+  test("action doesn't fire when disabled item is clicked", async function (assert) {
+    assert.expect(1);
+    this.query = () => {
+      return [
+        {
+          header: 'header',
+        },
+        {
+          header: 'header',
+          disabled: true,
+        },
+      ];
+    };
+    this.onChange = () => {
+      assert.notOk(true);
+    };
+    await render(
+      hbs`<NrgSearch @query={{this.query}} @onChange={{this.onChange}} />`
+    );
+    await fillIn('input', 'querystring');
+
+    assert.dom('.result:last-child').hasClass('disabled');
+
+    await click('.result.disabled');
   });
 
   test('search icon is hidden', async function (assert) {

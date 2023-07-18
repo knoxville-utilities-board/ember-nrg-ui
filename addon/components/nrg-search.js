@@ -163,6 +163,10 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   onItemClick(item, evt) {
     evt.preventDefault();
     evt.stopPropagation();
+
+    if (item?.disabled) {
+      return;
+    }
     this.selectItem(item);
   }
 
