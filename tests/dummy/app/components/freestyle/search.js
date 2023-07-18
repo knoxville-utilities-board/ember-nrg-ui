@@ -16,8 +16,14 @@ const options = [
   },
   {
     animal: 'dog',
-    header: 'Bobby',
+    header: 'Charlie',
     description: 'type 1',
+    disabled: true,
+  },
+  {
+    animal: 'cat',
+    header: 'David',
+    description: 'type 2',
   },
 ];
 
