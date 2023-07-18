@@ -79,3 +79,12 @@
     border-top: 1px solid rgba(34, 36, 38, 0.1);
   }
 }
+
+div.search > div.results > div.result.disabled {
+  cursor: default;
+  opacity: 0.5;
+
+  &:hover {
+    background-color: inherit;
+  }
+}

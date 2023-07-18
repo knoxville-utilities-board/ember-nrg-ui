@@ -36,7 +36,9 @@
       {{#each this.items as |item i|}}
         <div
           role="button"
-          class="result {{if (eq i this.activeItem) 'active'}}"
+          class="result
+            {{if (eq i this.activeItem) 'active'}}
+            {{if item.disabled 'disabled'}}"
           {{on "click" (fn this.onItemClick item)}}
         >
           {{#if (has-block)}}
