@@ -43,6 +43,9 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.type === 'time') {
       this.set('isSelectingHours', true);
     }
+    if (!this.value) {
+      this.value = new Date();
+    }
     this._updateSelectedIndexes(this.value);
   },
 
