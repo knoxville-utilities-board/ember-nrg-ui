@@ -43,7 +43,7 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
     } else if (this.type === 'time') {
       this.set('isSelectingHours', true);
     }
-    this._updateSelectedIndexes(this.value);
+    this._updateSelectedIndexes(this.value || new Date());
   },
 
   headerDisplay: computed(
@@ -111,7 +111,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       for (let j = 0; j < 3; j++) {
         const minute = calendar.minute();
         const disabled = this._isDateDisabled(calendar, 'minute');
-        const selected = !disabled && this.selectedMinuteIndex === minute;
+        const selected =
+          !disabled && this.value && this.selectedMinuteIndex === minute;
         row.push({
           display: calendar.format('LT'),
           minute,
@@ -137,7 +138,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       for (let j = 0; j < 4; j++) {
         const hour = calendar.hour();
         const disabled = this._isDateDisabled(calendar, 'hour');
-        const selected = !disabled && this.selectedHourIndex === hour;
+        const selected =
+          !disabled && this.value & (this.selectedHourIndex === hour);
         row.push({
           display: calendar.format('LT'),
           hour,
@@ -166,8 +168,10 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
         const year = calendar.year();
         const isDifferentMonth = month !== this.selectedMonthIndex;
         const dateIsToday = calendar.isSame(today, 'date');
-        const disabled = this._isDateDisabled(calendar, 'date') || isDifferentMonth;
-        const selected = !disabled && this.selectedDayIndex === date;
+          const disabled =
+            this._isDateDisabled(calendar, 'date') || isDifferentMonth;
+          const selected =
+            !disabled && this.value && this.selectedDayIndex === date;
 
         week.push({
           customClass: (dateIsToday && 'today') || '',
@@ -196,7 +200,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
       for (let j = 0; j < 3; j++) {
         const month = calendar.month();
         const disabled = this._isDateDisabled(calendar, 'month');
-        const selected = !disabled && this.selectedMonthIndex === month;
+        const selected =
+          !disabled && this.value && this.selectedMonthIndex === month;
         row.push({
           display: calendar.format('MMM'),
           month,
@@ -225,7 +230,8 @@ export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
           year,
         });
         const disabled = this._isDateDisabled(calendar, 'year');
-        const selected = !disabled && this.selectedYearIndex === year;
+        const selected =
+          !disabled && this.value && this.selectedYearIndex === year;
         row.push({
           display: year,
           year,
