@@ -1,6 +1,6 @@
 <div
   role="button"
-  class="floating toast-box compact transition visible"
+  class="floating toast-box compact transition visible {{@class}}"
   {{on "click" this.onClick}}
 >
   {{#if this.toast.showProgress}}
