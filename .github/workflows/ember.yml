@@ -32,9 +32,19 @@ jobs:
 
       - name: Run Handlebars Linter
         run: yarn run lint:hbs
+        working-directory: addon
 
       - name: Run Javascript Linter
         run: yarn run lint:js
+        working-directory: addon
+
+      - name: Run Handlebars Linter
+        run: yarn run lint:hbs
+        working-directory: test-app
+
+      - name: Run Javascript Linter
+        run: yarn run lint:js
+        working-directory: test-app
 
   test:
     name: Test
@@ -62,3 +72,4 @@ jobs:
 
       - name: Run Ember Tests and Linting
         run: yarn test:cicd
+        working-directory: test-app

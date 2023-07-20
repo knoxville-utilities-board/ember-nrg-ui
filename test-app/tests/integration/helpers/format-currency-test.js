@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { formatCurrency } from 'dummy/helpers/format-currency';
+import { formatCurrency } from 'test-app/helpers/format-currency';
 
 module('Integration | Helper | format-currency', function (hooks) {
   setupRenderingTest(hooks);

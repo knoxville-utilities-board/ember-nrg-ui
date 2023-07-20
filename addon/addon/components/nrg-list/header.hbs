@@ -1,0 +1,13 @@
+<div class="ui attached segment nrg-list--filter-menu">
+  {{#if (has-block)}}
+    {{yield
+      (hash
+        header=this
+        filter=(component "nrg-list/header/filter" onChange=@onFilterChange)
+        search=(component "nrg-list/header/search" onChange=@onSearchChange)
+        filterChangedAction=@onFilterChange
+      )
+    }}
+  {{/if}}
+  <div class="cleared"></div>
+</div>

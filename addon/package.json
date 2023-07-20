@@ -1,0 +1,56 @@
+{
+  "name": "ember-nrg-ui",
+  "version": "4.1.9",
+  "description": "Opinionated UI addon based on how KUB scaffolds web applications",
+  "keywords": [
+    "ember-addon",
+    "Fomantic UI"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knoxville-utilities-board/ember-nrg-ui"
+  },
+  "license": "MIT",
+  "author": "",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "dependencies": {
+    "@ember/render-modifiers": "^2.0.4",
+    "dayjs": "1.11.2",
+    "ember-auto-import": "^2.4.3",
+    "ember-cli-app-version": "5.0.0",
+    "ember-cli-babel": "^7.26.11",
+    "ember-cli-flash": "4.0.0",
+    "ember-cli-htmlbars": "^6.1.1",
+    "ember-cli-sass": "10.0.1",
+    "ember-concurrency": "2.2.0",
+    "ember-concurrency-decorators": "2.0.3",
+    "ember-get-config": "0.5.0",
+    "ember-is-mobile": "4.1.2",
+    "ember-keyboard": "8.2.0",
+    "ember-modifier": "3.2.7",
+    "ember-resize-observer-service": "^0.4.5",
+    "ember-responsive": "4.0.2",
+    "ember-tether": "^2.0.1",
+    "ember-truth-helpers": "3.0.0",
+    "ember-validators": "4.0.0",
+    "fomantic-ui-css": "2.9.2",
+    "git-repo-info": "^2.1.1",
+    "markdown-it": "12.3.2",
+    "sass": "1.43.5",
+    "walk-sync": "^3.0.0"
+  },
+  "engines": {
+    "node": "14.* || 16.* || >= 18"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "resolutions": {
+    "ansi-regex": "^5.0.1",
+    "clean-css": "^4.1.11",
+    "glob-parent": "^5.1.2"
+  }
+}

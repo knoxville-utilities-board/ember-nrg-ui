@@ -1,4 +1,4 @@
-import ensurePathExists from 'dummy/utils/ensure-path-exists';
+import ensurePathExists from 'test-app/utils/ensure-path-exists';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | ensure-path-exists', function () {

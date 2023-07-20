@@ -1,0 +1,22 @@
+<div class="item">
+  <NrgSidebarMenu::Item
+    @url={{@url}}
+    @routeName={{@routeName}}
+    @onClick={{@onClick}}
+    @isParentGroup={{true}}
+    @onClickInternal={{@onClickInternal}}
+  >
+    {{yield}}
+  </NrgSidebarMenu::Item>
+
+  <div class="menu">
+    {{yield
+      (hash
+        item=(component
+          "nrg-sidebar-menu/item" onClickInternal=@onClickInternal
+        )
+      )
+      to="menu"
+    }}
+  </div>
+</div>

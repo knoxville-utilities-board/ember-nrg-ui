@@ -5,7 +5,7 @@ module.exports = function (environment) {
   const ENV = {
     DEBUG_TASKS: true,
     environment,
-    modulePrefix: 'dummy',
+    modulePrefix: 'test-app',
     rootURL: '/',
     locationType: 'history',
     EmberENV: {

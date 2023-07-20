@@ -1,0 +1,39 @@
+{{#if @item.image}}
+  <div class="image">
+    <img src={{@item.image}} alt={{@altText}} />
+  </div>
+{{/if}}
+<div class="middle aligned content {{@class}}">
+  {{#if @item.header}}
+    <div class="header">{{@item.header}}</div>
+  {{/if}}
+  {{#if @item.meta}}
+    <div class="meta">
+      <span>{{@item.meta}}</span>
+    </div>
+  {{/if}}
+  {{#if @item.description}}
+    <div class="description">
+      <p>{{@item.description}}</p>
+    </div>
+  {{/if}}
+  {{#if (or (has-block) @item.labels)}}
+    <div class="extra">
+      {{#each @item.labels as |label|}}
+        <div
+          role="button"
+          class="ui label"
+          {{on "click" (fn label.link label.openLinkInNewWindow)}}
+        >
+          {{#if label.icon}}
+            <i class="{{label.icon}} icon"></i>
+            {{label.text}}
+          {{else}}
+            {{label}}
+          {{/if}}
+        </div>
+      {{/each}}
+      {{yield}}
+    </div>
+  {{/if}}
+</div>
