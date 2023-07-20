@@ -30,7 +30,7 @@ It includes an application shell with sidebar navigation, typical UI components,
 
 ## Example App
 
-Ember NRG UI comes with a [dummy app](tests/dummy) that implements all of the components.
+Ember NRG UI comes with a [dummy app](./test-app) that implements all of the components.
 **Check out that dummy app for reference**. To start it, run
 
 ```bash
