@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@ember/render-modifiers": "^2.0.4",
+    "@ember/string": "^3.1.1",
     "dayjs": "1.11.2",
     "ember-auto-import": "^2.4.3",
     "ember-cli-babel": "^7.26.11",
@@ -59,7 +60,7 @@
     "ember-page-title": "^7.0.0",
     "ember-prism": "^0.13.0",
     "ember-qunit": "^6.0.0",
-    "ember-resolver": "^8.0.3",
+    "ember-resolver": "^10.1.1",
     "ember-source": "~4.8.0",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^4.16.1",
