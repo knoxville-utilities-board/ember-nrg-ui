@@ -3,7 +3,8 @@
   role="button"
   class="card home-card
     {{if @actionCard 'action-card'}}
-    {{unless this.visible 'is-visually-hidden'}}"
+    {{unless this.visible 'is-visually-hidden'}}
+    {{@class}}"
   {{on "click" this.click}}
 >
   {{#if @icon}}

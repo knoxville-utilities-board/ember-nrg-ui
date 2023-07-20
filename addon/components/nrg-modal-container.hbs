@@ -1,7 +1,8 @@
 <div
   class="ui modals
     {{if this.modalService.hasOpenModals 'visible active' 'hidden'}}
-    {{if this.modalService.activeModal.sidebar 'sidebar-container'}}"
+    {{if this.modalService.activeModal.sidebar 'sidebar-container'}}
+    {{@class}}"
 >
   {{#each this.modalService.modalRenderList as |item index|}}
     {{#if (eq item "dimmer")}}

@@ -2,7 +2,8 @@
 <div
   class="nrg-application
     {{if @fullscreenMap 'fullscreen-map'}}
-    {{if this.computerScreenSidebarActive 'large-screen-sidebar-active'}}"
+    {{if this.computerScreenSidebarActive 'large-screen-sidebar-active'}}
+    {{@class}}"
   {{on-resize this.setMainContentStyle}}
 >
   <NrgAppbar @onToggleSidebar={{this.toggleSidebar}}>
