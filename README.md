@@ -36,7 +36,7 @@ Ember NRG UI comes with a [dummy app](tests/dummy) that implements all of the co
 ```bash
 git clone git@github.com:knoxville-utilities-board/ember-nrg-ui.git
 cd ember-nrg-ui
-yarn install && ember serve
+pnpm install && ember serve
 ```
 
 and go to <http://localhost:4200>.

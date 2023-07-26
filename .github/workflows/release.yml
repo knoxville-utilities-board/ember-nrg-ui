@@ -12,11 +12,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16.x
 
       - name: Use Cache
         uses: actions/cache@v3
@@ -24,13 +28,13 @@ jobs:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-release
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-release
 
       - name: Install Dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Build App
-        run: yarn run build-dummy-app
+        run: pnpm run build-dummy-app
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.1

@@ -13,28 +13,31 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
-
+          node-version: 16.x
       - name: Use Cache
         uses: actions/cache@v3
         with:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-lint
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-lint
 
       - name: Install Dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Run Handlebars Linter
-        run: yarn run lint:hbs
+        run: pnpm run lint:hbs
 
       - name: Run Javascript Linter
-        run: yarn run lint:js
+        run: pnpm run lint:js
 
   test:
     name: Test
@@ -43,22 +46,25 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
-
+          node-version: 16.x
       - name: Use Cache
         uses: actions/cache@v3
         with:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-test
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-test
 
       - name: Install Dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Run Ember Tests and Linting
-        run: yarn test:cicd
+        run: pnpm test:cicd
