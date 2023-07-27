@@ -16,7 +16,7 @@ export default Mixin.create({
 
   init() {
     this._super(...arguments);
-    this.updateSidebarMenuItems(undefined);
+    this.updateSidebarMenuItems();
   },
 
   updateSidebarMenuItems(dynamicSidebarUrls) {
