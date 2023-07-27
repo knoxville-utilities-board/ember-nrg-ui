@@ -16,14 +16,21 @@ export default Mixin.create({
 
   init() {
     this._super(...arguments);
+    this.updateSidebarMenuItems();
+  },
+
+  updateSidebarMenuItems(dynamicSidebarUrls) {
     next(() => {
       const sidebarMenuManager = this.get('sidebarMenuManager');
 
-      sidebarMenuManager.registerSidebarMenuItem(this);
-
-      const sidebarURLs = this.get('sidebarURLs') || A();
+      let sidebarURLs = this.get('sidebarURLs') || A();
+      if (dynamicSidebarUrls) {
+        sidebarURLs = dynamicSidebarUrls;
+      } else {
+        sidebarMenuManager.registerSidebarMenuItem(this);
+      }
       const routeName = this.get('routeName');
-      sidebarURLs.forEach(item => {
+      sidebarURLs.forEach((item) => {
         if (item.isShownInSidebar === undefined) {
           item.isShownInSidebar = true;
         }
