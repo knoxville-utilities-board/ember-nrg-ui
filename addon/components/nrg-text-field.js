@@ -1,5 +1,6 @@
 import NrgValidationComponent from './nrg-validation-component';
 import { action } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
 const defaultType = 'text';
 export default class NrgTextFieldComponent extends NrgValidationComponent {
@@ -13,6 +14,11 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
     }
 
     if (this.type === 'number') {
+      if (isEmpty(input)) {
+        const min = this.args.min ?? 0;
+        super.onChange(min);
+        return false;
+      }
       if (this.args.allowDecimals) {
         return !isNaN(parseFloat(input));
       }
