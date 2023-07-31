@@ -13,13 +13,16 @@ export default class TrimInputComponent extends Component {
 
   get trimmedOuterValue() {
     const value = this.args.value;
-    if (value && typeof value == 'string') {
-      return value.trim() ?? '';
-    } else if (value && typeof value == 'number') {
-      return value.toString() ?? '';
-    } else {
+
+    if (value === undefined || value === null) {
       return '';
     }
+    if (typeof value == 'string') {
+      return value.trim() ?? '';
+    } else if (typeof value == 'number') {
+      return value.toString() ?? '';
+    }
+    return '';
   }
 
   get trimmedInnerValue() {
