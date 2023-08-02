@@ -10,6 +10,7 @@
               @readonly={{this.readonly}}
               @valuePath="inputValue"
               @model={{this}}
+              @type={{this.type}}
               as |view|
             >
               {{view.input}}
@@ -30,6 +31,13 @@
           @description="Whether the input field is readonly."
           @value={{this.readonly}}
           @onInput={{fn (mut this.readonly)}}
+        />
+        <Args.String
+          @name="type"
+          @description="Type"
+          @value={{this.type}}
+          @onInput={{fn (mut this.type)}}
+          @options={{array "text" "number"}}
         />
       </:api>
     </Freestyle::Usage>
