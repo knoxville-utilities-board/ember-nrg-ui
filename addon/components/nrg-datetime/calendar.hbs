@@ -20,13 +20,15 @@
             class="link"
             role="button"
             {{on "click" this.onHeaderDisplayClick}}
-          >{{this.headerDisplay}}</span>
-          <span class="prev link" role="button" {{on "click" this.onPrevious}}>
-            <i class="chevron left icon"></i>
-          </span>
-          <span class="next link" role="button" {{on "click" this.onNext}}>
-            <i class="chevron right icon"></i>
-          </span>
+          >{{if (eq @type "time") "" this.headerDisplay}}</span>
+          {{#if (eq @type "date")}}
+            <span class="prev link" role="button" {{on "click" this.onPrevious}}>
+              <i class="chevron left icon"></i>
+            </span>
+            <span class="next link" role="button" {{on "click" this.onNext}}>
+              <i class="chevron right icon"></i>
+            </span>
+          {{/if}}
         </th>
       </tr>
       {{#if this.table.columnHeaders}}
