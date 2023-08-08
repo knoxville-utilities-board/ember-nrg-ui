@@ -14,7 +14,7 @@
       column day"
   >
     <thead>
-      {{#unless (eq @type "time")}}
+      {{#if (not-eq @type "time")}}
         <tr>
           <th colspan="7">
             <span
@@ -35,7 +35,7 @@
 
           </th>
         </tr>
-      {{/unless}}
+      {{/if}}
       {{#if this.table.columnHeaders}}
         <tr>
           {{#each this.table.columnHeaders as |columnHeader|}}
