@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 export default class FreestyleFormsDatetimeComponent extends Component {
   maxDate = dayjs().add(5, 'days').toDate();
 
-  dateTimeTypeOptions = ['date', 'datetime'];
+  dateTimeTypeOptions = ['date', 'datetime', 'time'];
 
   dateTimeValue = new Date();
 

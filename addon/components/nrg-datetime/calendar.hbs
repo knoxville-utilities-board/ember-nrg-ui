@@ -14,21 +14,28 @@
       column day"
   >
     <thead>
-      <tr>
-        <th colspan="7">
-          <span
-            class="link"
-            role="button"
-            {{on "click" this.onHeaderDisplayClick}}
-          >{{this.headerDisplay}}</span>
-          <span class="prev link" role="button" {{on "click" this.onPrevious}}>
-            <i class="chevron left icon"></i>
-          </span>
-          <span class="next link" role="button" {{on "click" this.onNext}}>
-            <i class="chevron right icon"></i>
-          </span>
-        </th>
-      </tr>
+      {{#if (not-eq @type "time")}}
+        <tr>
+          <th colspan="7">
+            <span
+              class="link"
+              role="button"
+              {{on "click" this.onHeaderDisplayClick}}
+            >{{this.headerDisplay}}</span>
+            <span
+              class="prev link"
+              role="button"
+              {{on "click" this.onPrevious}}
+            >
+              <i class="chevron left icon"></i>
+            </span>
+            <span class="next link" role="button" {{on "click" this.onNext}}>
+              <i class="chevron right icon"></i>
+            </span>
+
+          </th>
+        </tr>
+      {{/if}}
       {{#if this.table.columnHeaders}}
         <tr>
           {{#each this.table.columnHeaders as |columnHeader|}}

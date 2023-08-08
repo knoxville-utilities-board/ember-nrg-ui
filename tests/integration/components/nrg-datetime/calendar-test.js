@@ -298,4 +298,9 @@ module('Integration | Component | nrg-datetime/calendar', function (hooks) {
     const expectedDate = dayjs().hour(0).minute(0);
     assert.ok(expectedDate.isSame(this.value, 'minute'));
   });
+
+  test('Header is hidden with time only', async function (assert) {
+    await render(hbs`<NrgDatetime::Calendar @type="time" />`);
+    assert.dom('.ui.calendar thead tr').doesNotExist();
+  });
 });
