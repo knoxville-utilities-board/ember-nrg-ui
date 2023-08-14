@@ -34,7 +34,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   isOpen: false,
   searchProperty: undefined,
   activeItem: -1,
-  _dropdownDisabled: or('disabled', 'loading'), 
+  _dropdownDisabled: or('disabled', 'loading'),
 
   classNames: ['ui', 'dropdown'],
   classNameBindings: [
@@ -70,7 +70,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     if (this.isStringData) {
       return option || '';
     }
-    
+
     if (!option) {
       return '';
     }
@@ -194,7 +194,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       this.scrollToItem(this.activeItem);
     }
   }),
-  
+
   scrollToItem(itemIndex) {
     const item = this.element.querySelector(`[data-dropdown-index="${itemIndex}"]`);
     if (!item) {
@@ -290,6 +290,16 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   mouseDown(evt) {
+    const dropdownElement = evt.target.closest('.dropdown');
+
+    if (dropdownElement) {
+        const rect = dropdownElement.getBoundingClientRect();
+        if (evt.clientX > rect.left + rect.width || evt.clientY > rect.top + rect.height) {
+            return;
+        }
+    }
+
+
     const isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
     const isDropdownItem = evt.target.closest('[data-dropdown-item]');
     if (isMultiSelection || isDropdownItem) {
