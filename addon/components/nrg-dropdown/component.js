@@ -290,31 +290,24 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   },
 
   mouseDown(evt) {
-    const dropdownElement = evt.target.closest('.dropdown');
-
-    if (dropdownElement) {
-        const rect = dropdownElement.getBoundingClientRect();
-        if (evt.clientX > rect.left + rect.width || evt.clientY > rect.top + rect.height) {
-            return;
-        }
-    }
-
-
     const isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
     const isDropdownItem = evt.target.closest('[data-dropdown-item]');
     if (isMultiSelection || isDropdownItem) {
       return false;
     }
     const isDropdownIcon = evt.target.closest('.dropdown.icon');
-    const clickedInsideDropdownElement = evt.target.closest('.dropdown');
+    const dropdownBounding = evt.target.closest('.dropdown').getBoundingClientRect();
+    const clickedInsideDropdown = evt.clientX > dropdownBounding.left + dropdownBounding.width || evt.clientY > dropdownBounding.top + dropdownBounding.height;
+
     if (this.search && !this.isOpen) {
       this.openDropdown();
-    } else if (!this.search || isDropdownIcon) {
-      if (this.isOpen && (isDropdownIcon || !clickedInsideDropdownElement)) {
-        this.closeDropdown();
-      } else {
-        this.openDropdown();
-      }
+      return;
+    }
+
+    if (this.isOpen && isDropdownIcon && !clickedInsideDropdown) {
+      this.closeDropdown();
+    } else {
+      this.openDropdown();
     }
   },
 
