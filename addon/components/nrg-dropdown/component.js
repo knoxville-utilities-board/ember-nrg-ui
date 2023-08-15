@@ -292,19 +292,20 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   mouseDown(evt) {
     const isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
     const isDropdownItem = evt.target.closest('[data-dropdown-item]');
+
     if (isMultiSelection || isDropdownItem) {
       return false;
     }
-    const isDropdownIcon = evt.target.closest('.dropdown.icon');
-    const dropdownBounding = evt.target.closest('.dropdown').getBoundingClientRect();
-    const clickedInsideDropdown = evt.clientX > dropdownBounding.left + dropdownBounding.width || evt.clientY > dropdownBounding.top + dropdownBounding.height;
 
     if (this.search && !this.isOpen) {
       this.openDropdown();
       return;
     }
 
-    if (this.isOpen && isDropdownIcon && !clickedInsideDropdown) {
+    const dropdownBounding = evt.target.closest('.dropdown:not(i)').getBoundingClientRect();
+    const clickedInsideDropdown = evt.clientX > dropdownBounding.left + dropdownBounding.width || evt.clientY > dropdownBounding.top + dropdownBounding.height;
+
+    if (this.isOpen && !clickedInsideDropdown) {
       this.closeDropdown();
     } else {
       this.openDropdown();
