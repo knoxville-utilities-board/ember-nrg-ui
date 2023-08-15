@@ -34,7 +34,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   isOpen: false,
   searchProperty: undefined,
   activeItem: -1,
-  _dropdownDisabled: or('disabled', 'loading'), 
+  _dropdownDisabled: or('disabled', 'loading'),
 
   classNames: ['ui', 'dropdown'],
   classNameBindings: [
@@ -70,7 +70,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
     if (this.isStringData) {
       return option || '';
     }
-    
+
     if (!option) {
       return '';
     }
@@ -194,7 +194,7 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
       this.scrollToItem(this.activeItem);
     }
   }),
-  
+
   scrollToItem(itemIndex) {
     const item = this.element.querySelector(`[data-dropdown-index="${itemIndex}"]`);
     if (!item) {
@@ -292,19 +292,23 @@ export default Component.extend(Validation, EKMixin, EKFirstResponderOnFocusMixi
   mouseDown(evt) {
     const isMultiSelection = evt.target.closest('[data-dropdown-multi-selection]');
     const isDropdownItem = evt.target.closest('[data-dropdown-item]');
+
     if (isMultiSelection || isDropdownItem) {
       return false;
     }
-    const isDropdownIcon = evt.target.closest('.dropdown.icon');
-    const clickedInsideDropdownElement = evt.target.closest('.dropdown');
+
     if (this.search && !this.isOpen) {
       this.openDropdown();
-    } else if (!this.search || isDropdownIcon) {
-      if (this.isOpen && (isDropdownIcon || !clickedInsideDropdownElement)) {
-        this.closeDropdown();
-      } else {
-        this.openDropdown();
-      }
+      return;
+    }
+
+    const dropdownBounding = evt.target.closest('.dropdown:not(i)').getBoundingClientRect();
+    const clickedInsideDropdown = evt.clientX > dropdownBounding.left + dropdownBounding.width || evt.clientY > dropdownBounding.top + dropdownBounding.height;
+
+    if (this.isOpen && !clickedInsideDropdown) {
+      this.closeDropdown();
+    } else {
+      this.openDropdown();
     }
   },
 
