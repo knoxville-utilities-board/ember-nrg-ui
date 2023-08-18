@@ -7,6 +7,7 @@
             <field.dropdown
               @disabled={{this.dropdownDisabled}}
               @readonly={{this.dropdownReadonly}}
+              @multiple={{this.dropdownMulti}}
               @valuePath="dropdownValue"
               @model={{this}}
               @options={{this.dropdownOptions}}
@@ -27,6 +28,12 @@
           @defaultValue={{false}}
           @value={{this.dropdownReadonly}}
           @onInput={{fn (mut this.dropdownReadonly)}}
+        />
+        <Args.Bool
+          @name="multiple"
+          @defaultValue={{false}}
+          @value={{this.dropdownMulti}}
+          @onInput={{fn (mut this.dropdownMulti)}}
         />
       </:api>
     </Freestyle::Usage>
