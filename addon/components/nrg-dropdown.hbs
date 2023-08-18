@@ -38,7 +38,7 @@
       <i class="icon {{@icon}}"></i>
     {{/if}}
 
-    {{#if this.displayDefaultText}}
+    {{#if (and this.displayDefaultText (not @multiple))}}
       <div class="{{this.textClass}} text">
         {{#if this.hasSelected}}
           {{#if (has-block)}}
@@ -53,27 +53,36 @@
         {{/if}}
       </div>
     {{/if}}
-    {{#if (and @multiple this.hasSelected)}}
-      {{#each this.value as |selectedOption|}}
-        <div
-          data-dropdown-multi-selection="true"
-          class="ui label transition visible"
-        >
-          {{#if (has-block)}}
-            {{yield selectedOption}}
-          {{else if this.isStringData}}
-            {{selectedOption}}
-          {{else}}
-            {{selectedOption.label}}
-          {{/if}}
-          <i
+
+    {{#if (and @multiple)}}
+      {{#if this.hasSelected}}
+        {{#each this.value as |selectedOption|}}
+          <div
             data-dropdown-multi-selection="true"
-            class="delete icon"
-            role="button"
-            {{on "click" (fn this.unselectOption selectedOption)}}
-          ></i>
-        </div>
-      {{/each}}
+            class="ui label transition visible"
+          >
+            {{#if (has-block)}}
+              {{yield selectedOption}}
+            {{else if this.isStringData}}
+              {{selectedOption}}
+            {{else}}
+              {{selectedOption.label}}
+            {{/if}}
+            <i
+              data-dropdown-multi-selection="true"
+              class="delete icon"
+              role="button"
+              {{on "click" (fn this.unselectOption selectedOption)}}
+            ></i>
+          </div>
+        {{/each}}
+      {{else}}
+        {{#if this.displayDefaultText}}
+          <div class="{{this.textClass}} text">
+            {{this.defaultText}}
+          </div>
+        {{/if}}
+      {{/if}}
     {{/if}}
     {{#if @search}}
       <input
