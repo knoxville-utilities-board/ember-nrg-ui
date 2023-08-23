@@ -33,7 +33,7 @@
         <div class="item">
           {{#if @appVersionRoute}}
             <LinkTo @route={{@appVersionRoute}}>{{nrg-app-version}}</LinkTo>
-          {{else if (has-block "appVersion")}}
+          {{else if (has-block "app-version")}}
             {{yield (hash app-version=(nrg-app-version))}}
           {{else}}
             {{nrg-app-version}}
