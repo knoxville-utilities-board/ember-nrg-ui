@@ -14,13 +14,13 @@ Ember NRG UI
 
 Ember NRG UI is an opinionated UI addon based on how KUB scaffolds web applications.
 The addon provides the skeleton of an Ember app so that a developer can immediately start solving a business problem.
-It includes an application shell with sidebar navigation, typical UI components, and a Release Notes route implementation to get you started.
+It includes an application shell with sidebar navigation and typical UI components to get you started.
 
 ## What it does
 
 - Overwrites `application.hbs` to use `nrg-application` component
 - Converts the application to use Sass
-- Adds routes `/release-notes` and `404 Not Found`
+- Adds route `404 Not Found`
 - Modifies `config/environment.js`
 - Modifies `ember-cli-build.js`
 - Installs `ember-cli-mirage` and `ember-cli-sass`

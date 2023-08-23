@@ -33,13 +33,6 @@ module.exports = {
     }
   },
 
-  setupPreprocessorRegistry(type, registry) {
-    const MarkdownTemplateCompiler = require('./lib/preprocessors/markdown-template-compiler');
-    const plugin = new MarkdownTemplateCompiler();
-    registry.instantiatedPlugins.push(plugin);
-    registry.registeredForType('template').unshift(plugin);
-  },
-
   config(env, baseConfig) {
     let config = this._super.config.apply(this, arguments);
     if (!baseConfig.APP) {
