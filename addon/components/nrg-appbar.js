@@ -9,8 +9,8 @@ export default class NrgAppbarComponent extends Component {
   @service
   application;
 
-  get showReleaseNotes() {
-    return this.args.showReleaseNotes !== false;
+  get showAppVersion() {
+    return this.args.showAppVersion !== false;
   }
 
   get environmentDisplay() {

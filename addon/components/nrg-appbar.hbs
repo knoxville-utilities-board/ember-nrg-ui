@@ -29,9 +29,15 @@
     </div>
     <div class="right menu">
       {{yield}}
-      {{#if @showReleaseNotes}}
+      {{#if this.showAppVersion}}
         <div class="item">
-          <LinkTo @route="release-notes">{{nrg-app-version}}</LinkTo>
+          {{#if @appVersionRoute}}
+            <LinkTo @route={{@appVersionRoute}}>{{nrg-app-version}}</LinkTo>
+          {{else if (has-block "appVersion")}}
+            {{yield (hash app-version=(nrg-app-version))}}
+          {{else}}
+            {{nrg-app-version}}
+          {{/if}}
         </div>
       {{/if}}
       <NrgContextMenu />
