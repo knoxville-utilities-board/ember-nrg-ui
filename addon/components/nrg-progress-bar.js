@@ -18,11 +18,13 @@ export default class ProgressBarComponent extends Component {
   get progressPercentage() {
     return (parseInt(this.progressValue) / this.progressMax) * 100;
   }
-  get progressStyleWidth() {
-    return htmlSafe(`width: ${this.progressPercentage}%`);
+  get infillStylingString() {
+    return htmlSafe(
+      `background-color: ${this.args.barColor}; width: ${this.sectionWidth}%;`
+    );
   }
 
-  get progressStyleAbsolutePosition() {
-    return htmlSafe(`left: ${this.progressPercentage}%`);
+  get labelColorString() {
+    return htmlSafe(`color: ${this.args.labelColor};`);
   }
 }

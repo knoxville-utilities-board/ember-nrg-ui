@@ -4,10 +4,12 @@
       <NrgProgressBar
         @progressValue={{this.currentStep}}
         @progressMax={{this.maxStep}}
+        @barColor={{this.barColor}}
         @isAnimated={{this.isAnimated}}
         @showDots={{this.showDots}}
         @showCurrentDot={{this.showCurrentDot}}
         @showLabel={{this.showLabel}}
+        @labelColor={{this.labelColor}}
       />
     </:example>
 
@@ -25,6 +27,12 @@
         @max={{10}}
         @step={{1}}
         @onInput={{fn (mut this.maxStep)}}
+      />
+      <Args.String
+        @name="barColor"
+        @defaultValue="darkblue"
+        @value={{this.barColor}}
+        @onInput={{fn (mut this.barColor)}}
       />
       <Args.Bool
         @name="isAnimated"
@@ -49,6 +57,12 @@
         @defaultValue={{true}}
         @value={{this.showLabel}}
         @onInput={{fn (mut this.showLabel)}}
+      />
+      <Args.String
+        @name="labelColor"
+        @defaultValue="black"
+        @value={{this.labelColor}}
+        @onInput={{fn (mut this.labelColor)}}
       />
     </:api>
   </Freestyle::Usage>

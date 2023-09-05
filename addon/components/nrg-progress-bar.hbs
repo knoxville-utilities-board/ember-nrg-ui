@@ -1,7 +1,7 @@
 <div class={{if @isProgressHidden "display-none" "progress-bar"}}>
   <div class="spacing-container {{if @isAnimated "animated" ""}}">
     <div class="bar-container">
-      <div style={{this.progressStyleWidth}} class="infill">
+      <div style={{this.infillStylingString}} class="infill">
       </div>
       <div class="outer-border">
       </div>
@@ -28,7 +28,7 @@
   </div>
   {{#if @showLabel}}
   <div class="text-container">
-    <span>
+    <span style={{this.labelColorString}}>
       <strong>Step {{this.progressValue}} </strong>
       of
       {{this.progressMax}}
