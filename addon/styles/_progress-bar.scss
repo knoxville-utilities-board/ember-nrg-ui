@@ -45,6 +45,9 @@ $kub-blue: #063c6f;
           background-color: $light-gray;
           margin: auto 0 auto auto;
           border: 1px solid $light-gray;
+          &.hidden {
+            display: none;
+          }
         }
       }
     }

@@ -10,4 +10,7 @@ export default class FreestyleNrgPopupComponent extends Component {
 
   @tracked
   isAnimated = true;
+
+  @tracked
+  areDotsHidden = false;
 }

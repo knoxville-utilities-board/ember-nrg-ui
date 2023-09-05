@@ -5,6 +5,7 @@
         @progressValue={{this.currentStep}}
         @progressMax={{this.maxStep}}
         @isAnimated={{this.isAnimated}}
+        @areDotsHidden={{this.areDotsHidden}}
       />
     </:example>
 
@@ -28,6 +29,12 @@
         @defaultValue={{true}}
         @value={{this.isAnimated}}
         @onInput={{fn (mut this.isAnimated)}}
+      />
+      <Args.Bool
+        @name="areDotsHidden"
+        @defaultValue={{false}}
+        @value={{this.areDotsHidden}}
+        @onInput={{fn (mut this.areDotsHidden)}}
       />
     </:api>
   </Freestyle::Usage>
