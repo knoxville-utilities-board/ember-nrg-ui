@@ -1,6 +1,5 @@
 $off-white: #e5e5e5;
 $light-gray: rgba(34, 36, 38, 0.15);
-$kub-blue: #063c6f;
 
 [class='progress-bar'] {
   display: flex;
@@ -22,7 +21,7 @@ $kub-blue: #063c6f;
       .infill {
         position: absolute;
         width: 50%;
-        background-color: $kub-blue;
+        background-color: darkblue;
         height: 100%;
         border-radius: 12px;
         border: 3px solid $off-white;
@@ -68,7 +67,7 @@ $kub-blue: #063c6f;
     font-size: 16px;
     margin: auto;
     flex: 0;
-    color: $kub-blue;
+    color: darkblue;
     white-space: nowrap;
     text-align: center;
   }
