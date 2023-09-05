@@ -1,0 +1,24 @@
+<FreestyleSection @name="Progress Bar">
+  <Freestyle::Usage>
+    <:example>
+      <NrgProgressBar @progressValue={{this.currentStep}} @progressMax={{this.maxStep}} />
+    </:example>
+
+    <:api as |Args|>
+    <Args.Number
+      @name="currentStep"
+      @min={{1}}
+      @max={{this.maxStep}}
+      @step={{1}}
+      @onInput={{fn (mut this.currentStep)}}
+    />
+    <Args.Number
+      @name="maxStep"
+      @min={{1}}
+      @max={{10}}
+      @step={{1}}
+      @onInput={{fn (mut this.maxStep)}}
+    />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>
