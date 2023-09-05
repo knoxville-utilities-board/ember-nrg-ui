@@ -2,6 +2,30 @@ import Component from '@glimmer/component';
 import { htmlSafe } from '@ember/template';
 
 export default class ProgressBarComponent extends Component {
+  get progressValue() {
+    return this.args.progressValue ?? 1;
+  }
+  get progressMax() {
+    return this.args.progressMax ?? 5;
+  }
+  get infillColor() {
+    return this.args.infillColor ?? 'blue';
+  }
+  get isAnimated() {
+    return this.args.isAnimated ?? true;
+  }
+  get showDots() {
+    return this.args.showDots ?? true;
+  }
+  get showCurrentDot() {
+    return this.args.showCurrentDot ?? true;
+  }
+  get showLabel() {
+    return this.args.showLabel ?? true;
+  }
+  get labelColor() {
+    return this.args.labelColor ?? 'black';
+  }
   get stepArray() {
     return [...Array(this.args.progressMax).keys()];
   }

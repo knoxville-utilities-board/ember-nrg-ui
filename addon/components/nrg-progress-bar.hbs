@@ -1,5 +1,5 @@
-<div class={{if @isProgressHidden "display-none" "progress-bar"}}>
-  <div class="spacing-container {{if @isAnimated "animated" ""}}">
+<div class={{if this.isProgressHidden "display-none" "progress-bar"}}>
+  <div class="spacing-container {{if this.isAnimated "animated" ""}}">
     <div class="bar-container">
       <div style={{this.infillStylingString}} class="infill">
       </div>
@@ -13,7 +13,7 @@
             style={{this.stepWidthString}}
             key={{value}}
           >
-            <div class="step {{unless @showDots "hidden"}}"></div>
+            <div class="step {{unless this.showDots "hidden"}}"></div>
           </div>
         {{/each}}
 
@@ -22,16 +22,16 @@
     </div>
     <div
       style={{this.absoluteWidthString}}
-      class="current-step {{unless @showCurrentDot "hidden"}}"
+      class="current-step {{unless this.showCurrentDot "hidden"}}"
     >
     </div>
   </div>
-  {{#if @showLabel}}
+  {{#if this.showLabel}}
   <div class="text-container">
     <span style={{this.labelColorString}}>
-      <strong>Step {{@progressValue}} </strong>
+      <strong>Step {{this.progressValue}} </strong>
       of
-      {{@progressMax}}
+      {{this.progressMax}}
     </span>
   </div>
   {{/if}}
