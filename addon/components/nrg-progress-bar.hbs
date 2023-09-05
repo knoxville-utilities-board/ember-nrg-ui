@@ -1,19 +1,19 @@
 <div class={{if @isProgressHidden "display-none" "progress-bar"}}>
-  <div class="progress-bar spacing-container {{if @isAnimated "animated" ""}}">
-    <div class="progress-bar bar-container">
-      <div style={{this.progressStyleWidth}} class="progress-bar infill">
+  <div class="spacing-container {{if @isAnimated "animated" ""}}">
+    <div class="bar-container">
+      <div style={{this.progressStyleWidth}} class="infill">
       </div>
-      <div class="progress-bar outer-border">
+      <div class="outer-border">
       </div>
-      <div class="progress-bar step-container">
+      <div class="step-container">
 
         {{#each this.progressValueArray as |value|}}
           <div
-            class="progress-bar step-width"
+            class="step-width"
             style={{this.progressStyleWidth}}
             key={{value}}
           >
-            <div class="progress-bar step"></div>
+            <div class="step"></div>
           </div>
         {{/each}}
 
@@ -22,11 +22,11 @@
     </div>
     <div
       style={{this.progressStyleAbsolutePosition}}
-      class="progress-bar current-step"
+      class="current-step"
     >
     </div>
   </div>
-  <div class="progress-bar text-container">
+  <div class="text-container">
     <span>
       <strong>Step {{this.progressValue}} </strong>
       of
