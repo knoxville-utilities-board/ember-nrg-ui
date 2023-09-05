@@ -1,5 +1,5 @@
 <div class={{if @isProgressHidden "display-none" "progress-bar"}}>
-  <div class="progress-bar spacing-container">
+  <div class="progress-bar spacing-container {{if @isAnimated "animated" ""}}">
     <div class="progress-bar bar-container">
       <div style={{this.progressStyleWidth}} class="progress-bar infill">
       </div>

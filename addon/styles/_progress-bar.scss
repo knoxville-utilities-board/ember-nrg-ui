@@ -27,7 +27,6 @@ $kub-blue: #063c6f;
         height: 100%;
         border-radius: 12px;
         border: 3px solid $off-white;
-        transition: width 1s ease;
       }
       .progress-bar.outer-border {
         position: absolute;
@@ -60,7 +59,6 @@ $kub-blue: #063c6f;
       position: absolute;
       top: 0;
       margin-left: -11px;
-      transition: left 1s ease;
     }
   }
 
@@ -71,5 +69,14 @@ $kub-blue: #063c6f;
     color: $kub-blue;
     white-space: nowrap;
     text-align: center;
+  }
+}
+
+.animated {
+  .progress-bar.infill {
+    transition: width 1s ease;
+  }
+  .progress-bar.current-step {
+    transition: left 1s ease;
   }
 }

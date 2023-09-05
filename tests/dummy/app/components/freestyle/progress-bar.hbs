@@ -4,6 +4,7 @@
       <NrgProgressBar
         @progressValue={{this.currentStep}}
         @progressMax={{this.maxStep}}
+        @isAnimated={{this.isAnimated}}
       />
     </:example>
 
@@ -21,6 +22,12 @@
         @max={{10}}
         @step={{1}}
         @onInput={{fn (mut this.maxStep)}}
+      />
+      <Args.Bool
+        @name="isAnimated"
+        @defaultValue={{true}}
+        @value={{this.isAnimated}}
+        @onInput={{fn (mut this.isAnimated)}}
       />
     </:api>
   </Freestyle::Usage>
