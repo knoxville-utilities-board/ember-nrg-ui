@@ -2,25 +2,22 @@ import Component from '@glimmer/component';
 import { htmlSafe } from '@ember/template';
 
 export default class ProgressBarComponent extends Component {
-  get progressValue() {
-    return this.args.progressValue;
+  get stepArray() {
+    return [...Array(this.args.progressMax).keys()];
   }
-  get progressMax() {
-    return this.args.progressMax;
+  get stepWidth() {
+    return (parseInt(this.args.progressValue) / this.args.progressMax) * 100;
   }
-  get progressValueArray() {
-    const values = [];
-    for (let i = 0; i < this.progressMax; i++) {
-      values.push(i);
-    }
-    return values;
+  get stepWidthString() {
+    return htmlSafe(`width: ${this.stepWidth}%`);
   }
-  get progressPercentage() {
-    return (parseInt(this.progressValue) / this.progressMax) * 100;
+
+  get absoluteWidthString() {
+    return htmlSafe(`left: ${this.stepWidth}%`);
   }
   get infillStylingString() {
     return htmlSafe(
-      `background-color: ${this.args.barColor}; width: ${this.sectionWidth}%;`
+      `background-color: ${this.args.infillColor}; width: ${this.stepWidth}%;`
     );
   }
 

@@ -4,7 +4,7 @@
       <NrgProgressBar
         @progressValue={{this.currentStep}}
         @progressMax={{this.maxStep}}
-        @barColor={{this.barColor}}
+        @infillColor={{this.infillColor}}
         @isAnimated={{this.isAnimated}}
         @showDots={{this.showDots}}
         @showCurrentDot={{this.showCurrentDot}}
@@ -29,10 +29,10 @@
         @onInput={{fn (mut this.maxStep)}}
       />
       <Args.String
-        @name="barColor"
+        @name="infillColor"
         @defaultValue="darkblue"
-        @value={{this.barColor}}
-        @onInput={{fn (mut this.barColor)}}
+        @value={{this.infillColor}}
+        @onInput={{fn (mut this.infillColor)}}
       />
       <Args.Bool
         @name="isAnimated"

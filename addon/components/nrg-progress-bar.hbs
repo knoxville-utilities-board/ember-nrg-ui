@@ -7,10 +7,10 @@
       </div>
       <div class="step-container">
 
-        {{#each this.progressValueArray as |value|}}
+        {{#each this.stepArray as |value|}}
           <div
             class="step-width"
-            style={{this.progressStyleWidth}}
+            style={{this.stepWidthString}}
             key={{value}}
           >
             <div class="step {{unless @showDots "hidden"}}"></div>
@@ -21,7 +21,7 @@
 
     </div>
     <div
-      style={{this.progressStyleAbsolutePosition}}
+      style={{this.absoluteWidthString}}
       class="current-step {{unless @showCurrentDot "hidden"}}"
     >
     </div>
@@ -29,9 +29,9 @@
   {{#if @showLabel}}
   <div class="text-container">
     <span style={{this.labelColorString}}>
-      <strong>Step {{this.progressValue}} </strong>
+      <strong>Step {{@progressValue}} </strong>
       of
-      {{this.progressMax}}
+      {{@progressMax}}
     </span>
   </div>
   {{/if}}
