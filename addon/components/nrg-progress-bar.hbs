@@ -13,7 +13,7 @@
             style={{this.progressStyleWidth}}
             key={{value}}
           >
-            <div class="step {{if @areDotsHidden "hidden"}}"></div>
+            <div class="step {{unless @showDots "hidden"}}"></div>
           </div>
         {{/each}}
 
@@ -26,6 +26,7 @@
     >
     </div>
   </div>
+  {{#if @showLabel}}
   <div class="text-container">
     <span>
       <strong>Step {{this.progressValue}} </strong>
@@ -33,4 +34,5 @@
       {{this.progressMax}}
     </span>
   </div>
+  {{/if}}
 </div>
