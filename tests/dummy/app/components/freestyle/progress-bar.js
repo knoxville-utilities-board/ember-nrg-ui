@@ -15,5 +15,8 @@ export default class FreestyleNrgPopupComponent extends Component {
   showDots = true;
 
   @tracked
+  showCurrentDot = true;
+
+  @tracked
   showLabel = true;
 }

@@ -42,7 +42,7 @@ $light-gray: rgba(34, 36, 38, 0.15);
           border-radius: 50%;
           aspect-ratio: 1/1;
           background-color: $light-gray;
-          margin: auto 0 auto auto;
+          margin: auto 4px auto auto;
           border: 1px solid $light-gray;
           &.hidden {
             display: none;
@@ -60,6 +60,9 @@ $light-gray: rgba(34, 36, 38, 0.15);
       position: absolute;
       top: 0;
       margin-left: -11px;
+      &.hidden {
+        display: none;
+      }
     }
   }
 

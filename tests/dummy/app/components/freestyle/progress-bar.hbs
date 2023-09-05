@@ -6,6 +6,7 @@
         @progressMax={{this.maxStep}}
         @isAnimated={{this.isAnimated}}
         @showDots={{this.showDots}}
+        @showCurrentDot={{this.showCurrentDot}}
         @showLabel={{this.showLabel}}
       />
     </:example>
@@ -36,6 +37,12 @@
         @defaultValue={{true}}
         @value={{this.showDots}}
         @onInput={{fn (mut this.showDots)}}
+      />
+      <Args.Bool
+        @name="showCurrentDot"
+        @defaultValue={{true}}
+        @value={{this.showCurrentDot}}
+        @onInput={{fn (mut this.showCurrentDot)}}
       />
       <Args.Bool
         @name="showLabel"
