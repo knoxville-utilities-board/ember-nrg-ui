@@ -1,0 +1,38 @@
+<div class={{if this.isProgressHidden "display-none" "progress-bar"}}>
+  <div class="spacing-container {{if this.isAnimated "animated"}}">
+    <div class="bar-container">
+      <div style={{this.infillStylingString}} class="infill">
+      </div>
+      <div class="outer-border">
+      </div>
+      <div class="step-container">
+
+        {{#each this.stepArray as |value|}}
+          <div
+            class="step-width"
+            style={{this.stepWidthString}}
+            key={{value}}
+          >
+            <div class="step {{unless this.showDots "hidden"}}"></div>
+          </div>
+        {{/each}}
+
+      </div>
+
+    </div>
+    <div
+      style={{this.absoluteWidthString}}
+      class="current-step {{unless this.showCurrentDot "hidden"}}"
+    >
+    </div>
+  </div>
+  {{#if this.showLabel}}
+  <div class="text-container">
+    <span style={{this.labelColorString}}>
+      <strong>Step {{this.progressValue}} </strong>
+      of
+      {{this.progressMax}}
+    </span>
+  </div>
+  {{/if}}
+</div>

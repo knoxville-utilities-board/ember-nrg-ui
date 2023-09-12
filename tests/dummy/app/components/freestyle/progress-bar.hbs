@@ -1,0 +1,69 @@
+<FreestyleSection @name="Progress Bar">
+  <Freestyle::Usage>
+    <:example>
+      <NrgProgressBar
+        @progressValue={{this.currentStep}}
+        @progressMax={{this.maxStep}}
+        @infillColor={{this.infillColor}}
+        @isAnimated={{this.isAnimated}}
+        @showDots={{this.showDots}}
+        @showCurrentDot={{this.showCurrentDot}}
+        @showLabel={{this.showLabel}}
+        @labelColor={{this.labelColor}}
+      />
+    </:example>
+
+    <:api as |Args|>
+      <Args.Number
+        @name="currentStep"
+        @min={{1}}
+        @max={{this.maxStep}}
+        @step={{1}}
+        @onInput={{fn (mut this.currentStep)}}
+      />
+      <Args.Number
+        @name="maxStep"
+        @min={{1}}
+        @max={{10}}
+        @step={{1}}
+        @onInput={{fn (mut this.maxStep)}}
+      />
+      <Args.String
+        @name="infillColor"
+        @defaultValue="darkblue"
+        @value={{this.infillColor}}
+        @onInput={{fn (mut this.infillColor)}}
+      />
+      <Args.Bool
+        @name="isAnimated"
+        @defaultValue={{true}}
+        @value={{this.isAnimated}}
+        @onInput={{fn (mut this.isAnimated)}}
+      />
+      <Args.Bool
+        @name="showDots"
+        @defaultValue={{true}}
+        @value={{this.showDots}}
+        @onInput={{fn (mut this.showDots)}}
+      />
+      <Args.Bool
+        @name="showCurrentDot"
+        @defaultValue={{true}}
+        @value={{this.showCurrentDot}}
+        @onInput={{fn (mut this.showCurrentDot)}}
+      />
+      <Args.Bool
+        @name="showLabel"
+        @defaultValue={{true}}
+        @value={{this.showLabel}}
+        @onInput={{fn (mut this.showLabel)}}
+      />
+      <Args.String
+        @name="labelColor"
+        @defaultValue="black"
+        @value={{this.labelColor}}
+        @onInput={{fn (mut this.labelColor)}}
+      />
+    </:api>
+  </Freestyle::Usage>
+</FreestyleSection>
