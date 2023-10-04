@@ -8,13 +8,23 @@ class Test {
 }
 
 module('Unit | Utility | nrg-proxy', function () {
-  // TODO: Replace this with your real tests.
   test('it works', function (assert) {
     const proxy = new NrgProxy();
+
     assert.notOk(proxy.foo);
 
-    proxy.setTarget(new Test());
+    proxy.foo = 'baz';
+    assert.strictEqual(proxy.foo, 'baz');
 
+    proxy.content = new Test();
     assert.strictEqual(proxy.foo, 'bar');
+
+    proxy.foo = 'baz';
+    assert.strictEqual(proxy.foo, 'baz');
+    assert.strictEqual(proxy.content.foo, 'baz');
+
+    proxy.content = new Test();
+    assert.strictEqual(proxy.foo, 'bar');
+    assert.strictEqual(proxy.content.foo, 'bar');
   });
 });
