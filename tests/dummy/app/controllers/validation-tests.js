@@ -29,6 +29,7 @@ const Validators = {
     isWarning: true,
     message: 'This is a warning message',
   }),
+  noInput: validator('presence', true),
 };
 
 export default class ValidationTestsController extends Controller {
@@ -82,4 +83,7 @@ export default class ValidationTestsController extends Controller {
 
   @tracked
   warning;
+
+  @tracked
+  noInput;
 }

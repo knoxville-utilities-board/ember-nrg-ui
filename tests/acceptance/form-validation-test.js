@@ -9,7 +9,7 @@ module('Acceptance | form validation', function (hooks) {
     await visit('/validation-tests');
     await click('button[type=submit]');
 
-    assert.dom('.error').exists({ count: 10 });
+    assert.dom('.error').exists({ count: 11 });
     assert.dom('.orange').exists({ count: 1 });
   });
 
