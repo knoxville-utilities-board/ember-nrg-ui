@@ -24,6 +24,11 @@ const Validators = {
   ],
   'nested.field': validator('presence', true),
   'nestedArray.0.field': validator('presence', true),
+  warning: validator('presence', {
+    presence: true,
+    isWarning: true,
+    message: 'This is a warning message',
+  }),
 };
 
 export default class ValidationTestsController extends Controller {
@@ -74,4 +79,7 @@ export default class ValidationTestsController extends Controller {
       field;
     })(),
   ];
+
+  @tracked
+  warning;
 }

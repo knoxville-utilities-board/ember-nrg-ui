@@ -57,5 +57,12 @@
     <field.text-field @model={{this}} @valuePath="nestedArray.0.field" />
   </form.field>
 
+  <form.field
+    @label="Warning Validation"
+    data-test-warning-validator
+    as |field|
+  >
+    <field.text-field @model={{this}} @valuePath="warning" />
+  </form.field>
   <form.submit-button />
 </NrgFormContainer>
