@@ -49,5 +49,13 @@
     <field.text-field @model={{this}} @valuePath="nested.field" />
   </form.field>
 
+  <form.field
+    @label="Nested Validations (with array support)"
+    data-test-nested-array-validator
+    as |field|
+  >
+    <field.text-field @model={{this}} @valuePath="nestedArray.0.field" />
+  </form.field>
+
   <form.submit-button />
 </NrgFormContainer>

@@ -10,7 +10,7 @@ module('Acceptance | form validation', function (hooks) {
     await click('button[type=submit]');
     const errorNodes = findAll('.error');
 
-    assert.strictEqual(errorNodes.length, 9);
+    assert.strictEqual(errorNodes.length, 10);
   });
 
   test('Custom validators work', async function (assert) {
@@ -50,6 +50,28 @@ module('Acceptance | form validation', function (hooks) {
       controller.nested.field,
       'text',
       'nested value paths work'
+    );
+  });
+
+  test('Nested validators work with arrays', async function (assert) {
+    await visit('/validation-tests');
+    await click('button[type=submit]');
+
+    const controller = this.owner.lookup('controller:validation-tests');
+
+    assert
+      .dom('[data-test-nested-array-validator] > div.red.label')
+      .hasText("This field can't be blank");
+
+    await fillIn('[data-test-nested-array-validator] input', 'text');
+    assert
+      .dom('[data-test-nested-array-validator] > div.red.label')
+      .doesNotExist();
+
+    assert.strictEqual(
+      controller.nestedArray[0].field,
+      'text',
+      'nested array value paths work'
     );
   });
 });

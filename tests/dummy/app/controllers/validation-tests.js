@@ -23,6 +23,7 @@ const Validators = {
     }),
   ],
   'nested.field': validator('presence', true),
+  'nestedArray.0.field': validator('presence', true),
 };
 
 export default class ValidationTestsController extends Controller {
@@ -65,4 +66,12 @@ export default class ValidationTestsController extends Controller {
     @tracked
     field;
   })();
+
+  @tracked
+  nestedArray = [
+    new (class {
+      @tracked
+      field;
+    })(),
+  ];
 }
