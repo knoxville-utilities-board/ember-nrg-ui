@@ -88,3 +88,14 @@ div.search > div.results > div.result.disabled {
     background-color: inherit;
   }
 }
+
+.ui.form .field-segment {
+  margin-bottom: 0;
+}
+
+.field.error > .ui.segment.field-segment {
+  color: #9f3a38;
+  background: #fff6f6;
+  border-color: #e0b4b4;
+  box-shadow: none;
+}

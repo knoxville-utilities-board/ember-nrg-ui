@@ -1,4 +1,4 @@
-import { click, fillIn, findAll, visit } from '@ember/test-helpers';
+import { click, fillIn, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -8,9 +8,9 @@ module('Acceptance | form validation', function (hooks) {
   test('All form elements fail validation with no input', async function (assert) {
     await visit('/validation-tests');
     await click('button[type=submit]');
-    const errorNodes = findAll('.error');
 
-    assert.strictEqual(errorNodes.length, 9);
+    assert.dom('.error').exists({ count: 11 });
+    assert.dom('.orange').exists({ count: 1 });
   });
 
   test('Custom validators work', async function (assert) {
@@ -50,6 +50,28 @@ module('Acceptance | form validation', function (hooks) {
       controller.nested.field,
       'text',
       'nested value paths work'
+    );
+  });
+
+  test('Nested validators work with arrays', async function (assert) {
+    await visit('/validation-tests');
+    await click('button[type=submit]');
+
+    const controller = this.owner.lookup('controller:validation-tests');
+
+    assert
+      .dom('[data-test-nested-array-validator] > div.red.label')
+      .hasText("This field can't be blank");
+
+    await fillIn('[data-test-nested-array-validator] input', 'text');
+    assert
+      .dom('[data-test-nested-array-validator] > div.red.label')
+      .doesNotExist();
+
+    assert.strictEqual(
+      controller.nestedArray[0].field,
+      'text',
+      'nested array value paths work'
     );
   });
 });

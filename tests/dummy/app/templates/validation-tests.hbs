@@ -49,5 +49,30 @@
     <field.text-field @model={{this}} @valuePath="nested.field" />
   </form.field>
 
+  <form.field
+    @label="Nested Validations (with array support)"
+    data-test-nested-array-validator
+    as |field|
+  >
+    <field.text-field @model={{this}} @valuePath="nestedArray.0.field" />
+  </form.field>
+
+  <form.field
+    @label="Warning Validation"
+    data-test-warning-validator
+    as |field|
+  >
+    <field.text-field @model={{this}} @valuePath="warning" />
+  </form.field>
+
+  <form.field
+    @label="Custom Error Message"
+    data-test-custom-error-message
+    as |field|
+  >
+    <field.segment @model={{this}} @valuePath="noInput">
+      Some text
+    </field.segment>
+  </form.field>
   <form.submit-button />
 </NrgFormContainer>
