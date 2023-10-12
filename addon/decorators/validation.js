@@ -3,8 +3,11 @@ import { typeOf } from '@ember/utils';
 import { validate } from 'ember-validators';
 import messages from 'ember-validators/messages';
 
+export const VALIDATIONS_SYMBOL = Symbol('NRG_VALIDATIONS');
+
 export default function validationState(validatorsArgument) {
-  return () => {
+  return (target, property) => {
+    target[VALIDATIONS_SYMBOL] = property;
     return {
       get() {
         let validators = validatorsArgument;
