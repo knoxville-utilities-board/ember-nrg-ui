@@ -85,19 +85,29 @@ export function validator(eventName, options) {
   return function (value, messages) {
     let validationResponse;
 
-    if (eventName === 'custom') {
-      validationResponse = options.validate?.apply(this, [value]);
-    } else {
-      validationResponse = validate(eventName, value, options);
+    const computedOptions = { ...options };
+    for (const option in computedOptions) {
+      if (
+        typeof computedOptions[option] === 'function' &&
+        option !== 'validate'
+      ) {
+        computedOptions[option] = options[option].apply(this);
+      }
     }
 
-    if (!options.description) {
-      options.description = messages.defaultDescription;
+    if (eventName === 'custom') {
+      validationResponse = computedOptions.validate?.apply(this, [value]);
+    } else {
+      validationResponse = validate(eventName, value, computedOptions);
+    }
+
+    if (!computedOptions.description) {
+      computedOptions.description = messages.defaultDescription;
     }
 
     const response = {
       validator: eventName,
-      options,
+      options: computedOptions,
       valid: true,
     };
 
@@ -109,14 +119,15 @@ export function validator(eventName, options) {
 
     if (eventName === 'custom') {
       message =
-        validationResponse || (options.message ?? 'This field is not valid');
+        validationResponse ||
+        (computedOptions.message ?? 'This field is not valid');
     } else {
       message =
-        options.message ||
-        messages.getMessageFor(validationResponse.type, options);
+        computedOptions.message ||
+        messages.getMessageFor(validationResponse.type, computedOptions);
     }
 
-    if (options.isWarning) {
+    if (computedOptions.isWarning) {
       response.warningMessage = message;
     } else {
       response.valid = false;
