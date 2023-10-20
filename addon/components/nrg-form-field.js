@@ -1,6 +1,7 @@
 import { guidFor } from '@ember/object/internals';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { VALIDATIONS_SYMBOL } from 'ember-nrg-ui/decorators/validation';
 
 export default class NrgFormFieldComponent extends Component {
   @tracked
@@ -13,7 +14,12 @@ export default class NrgFormFieldComponent extends Component {
   valuePath;
 
   get validation() {
-    return this.model?.validations?.attrs[this.valuePath];
+    if (!this.model) {
+      return null;
+    }
+    const proto = Object.getPrototypeOf(this.model);
+    const validationPath = proto[VALIDATIONS_SYMBOL];
+    return this.model[validationPath]?.attrs[this.valuePath];
   }
 
   get didValidate() {
