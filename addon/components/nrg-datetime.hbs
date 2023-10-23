@@ -3,6 +3,7 @@
   role="button"
   {{on "click" this.onFocus}}
   {{on-click-outside this.onBlur}}
+  ...attributes
 >
   {{#if (has-block)}}
     <div class="wrapper">
