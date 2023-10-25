@@ -1,14 +1,22 @@
 import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import Component from '@glimmer/component';
+import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
 import { tracked } from '@glimmer/tracking';
 
 const defaultNoResultsLabel = 'No Results';
 
-export default class NrgListItemsComponent extends Component {
+export default class NrgListItemsComponent extends NrgValidationComponent {
   @tracked
-  selected = A();
+  internalSelection = A([]);
+
+  get model() {
+    return this.args.model ?? this;
+  }
+
+  get valuePath() {
+    return this.args.valuePath ?? 'internalSelection';
+  }
 
   get itemsProxy() {
     let content = this.args.items ?? [];
@@ -27,7 +35,7 @@ export default class NrgListItemsComponent extends Component {
   }
 
   get canShowActiveItem() {
-    return !isEmpty(this.selected);
+    return !isEmpty(this.value);
   }
 
   get currentPage() {
@@ -42,26 +50,38 @@ export default class NrgListItemsComponent extends Component {
     return this.currentPage < this.totalPages;
   }
 
+  getDefaultValue() {
+    return A([]);
+  }
+
   @action
   onItemClick(item) {
-    let selected = A([item]);
+    const selectionType = this.args.selectionType;
 
-    if (!this.canSelect || !this.args.isSelectable?.(item)) {
+    if (!selectionType || selectionType === 'click') {
+      if (this.args.onItemSelect) {
+        this.args.onItemSelect?.(item);
+      }
+      this.args.onItemClick?.(item);
+      return;
+    }
+    let allSelected = this.value ?? A([]);
+
+    if (this.args.isSelectable && !this.args.isSelectable(item)) {
       return;
     }
 
-    const selectionType = this.args.selectionType;
     if (selectionType === 'multiple') {
-      if (this.selected.includes(item)) {
-        selected = A(this.selected.without(item));
+      if (allSelected.includes(item)) {
+        allSelected.removeObject(item);
       } else {
-        selected = A(this.selected.concat(selected));
+        allSelected.addObject(item);
       }
+    } else if (selectionType === 'single') {
+      allSelected = item;
     }
-    if (selectionType !== 'click') {
-      this.selected = selected;
-    }
-    this.args.onItemSelect?.(item, selected);
+    this.onChange(allSelected, item);
+    this.args.onItemSelect?.(item, allSelected);
   }
 
   @action
