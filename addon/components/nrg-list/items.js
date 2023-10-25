@@ -2,6 +2,7 @@ import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
+import { deprecate } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
 
 const defaultNoResultsLabel = 'No Results';
@@ -60,6 +61,20 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
 
     if (!selectionType || selectionType === 'click') {
       if (this.args.onItemSelect) {
+        deprecate(
+          `\`onItemSelect(item)\` is deprecated for ${
+            selectionType
+              ? `selection type "${selectionType}"`
+              : 'no selection type'
+          }, please use onItemClick(item) instead`,
+          false,
+          {
+            id: 'nrg-list.onItemSelect.click',
+            until: '5.0.0',
+            for: 'ember-nrg-ui',
+            since: '4.5.0',
+          }
+        );
         this.args.onItemSelect?.(item);
       }
       this.args.onItemClick?.(item);
@@ -81,6 +96,17 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
       allSelected = item;
     }
     this.onChange(allSelected, item);
+
+    deprecate(
+      `\`onItemSelect(item, value)\` is deprecated for selection type "${selectionType}", please use onChange(value, item) instead`,
+      !this.args.onItemSelect,
+      {
+        id: 'nrg-list.onItemSelect.selection',
+        until: '5.0.0',
+        for: 'ember-nrg-ui',
+        since: '4.5.0',
+      }
+    );
     this.args.onItemSelect?.(item, allSelected);
   }
 
