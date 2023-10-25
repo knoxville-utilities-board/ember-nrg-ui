@@ -20,10 +20,18 @@ export default class NrgValidationComponent extends Component {
 
     if (this.hasModelPath && this.args.field) {
       next(() => {
-        this.args.field.model = this.args.model;
-        this.args.field.valuePath = this.args.valuePath;
+        this.args.field.model = this.model;
+        this.args.field.valuePath = this.valuePath;
       });
     }
+  }
+
+  get model() {
+    return this.args.model;
+  }
+
+  get valuePath() {
+    return this.args.valuePath;
   }
 
   get value() {
@@ -31,9 +39,9 @@ export default class NrgValidationComponent extends Component {
       return undefined;
     }
     if (this.useNestedValuePath) {
-      return get(this.args.model, this.args.valuePath);
+      return get(this.model, this.valuePath);
     }
-    return this.args.model?.[this.args.valuePath];
+    return this.model?.[this.valuePath];
   }
 
   set value(newValue) {
@@ -41,11 +49,11 @@ export default class NrgValidationComponent extends Component {
       return;
     }
     if (this.useNestedValuePath) {
-      ensurePathExists(this.args.model, this.args.valuePath);
-      set(this.args.model, this.args.valuePath, newValue);
+      ensurePathExists(this.model, this.valuePath);
+      set(this.model, this.valuePath, newValue);
       return;
     }
-    this.args.model[this.args.valuePath] = newValue;
+    this.model[this.valuePath] = newValue;
   }
 
   get useDefaultValue() {
@@ -64,7 +72,7 @@ export default class NrgValidationComponent extends Component {
   }
 
   get hasModelPath() {
-    return this.args.model && this.args.valuePath;
+    return Boolean(this.model && this.valuePath);
   }
 
   getDefaultValue() {

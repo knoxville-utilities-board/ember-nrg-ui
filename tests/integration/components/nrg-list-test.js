@@ -16,8 +16,8 @@ module('Integration | Component | nrg-list', function (hooks) {
       assert.deepEqual(selectedItem, item);
     };
     await render(
-      hbs`<NrgList @selectionType="single" @items={{this.items}} @onItemSelect={{this.selectAction}} />`
+      hbs`<NrgList @selectionType="single" @items={{this.items}} @onChange={{this.selectAction}} />`
     );
-    click('.item');
+    await click('.item');
   });
 });
