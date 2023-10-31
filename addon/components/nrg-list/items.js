@@ -2,7 +2,7 @@ import { A, isArray } from '@ember/array';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
-import { deprecate } from '@ember/debug';
+import { deprecate, assert } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
 
 const defaultNoResultsLabel = 'No Results';
@@ -12,6 +12,20 @@ function ensureArray(value) {
     return value;
   }
   return A([value]);
+}
+
+function isPrimitive(val) {
+  return val !== Object(val);
+}
+
+function defaultItemHash(obj) {
+  if (isPrimitive(obj)) {
+    return String(obj);
+  }
+  if (obj.toString) {
+    return obj.toString();
+  }
+  return JSON.stringify(obj);
 }
 
 export default class NrgListItemsComponent extends NrgValidationComponent {
@@ -56,6 +70,17 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
 
   get canStepForward() {
     return this.currentPage < this.totalPages;
+  }
+
+  get getItemHash() {
+    const { getItemHash } = this.args;
+    if (getItemHash) {
+      assert(
+        '`getItemHash` must be a function',
+        typeof this.args.getItemHash === 'function'
+      );
+    }
+    return this.args.getItemHash ?? defaultItemHash;
   }
 
   getDefaultValue() {
