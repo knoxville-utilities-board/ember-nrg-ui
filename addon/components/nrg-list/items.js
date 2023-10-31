@@ -1,4 +1,4 @@
-import { A } from '@ember/array';
+import { A, isArray } from '@ember/array';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
@@ -6,6 +6,13 @@ import { deprecate } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
 
 const defaultNoResultsLabel = 'No Results';
+
+function ensureArray(value) {
+  if (isArray(value)) {
+    return value;
+  }
+  return A([value]);
+}
 
 export default class NrgListItemsComponent extends NrgValidationComponent {
   @tracked
@@ -56,7 +63,9 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
   }
 
   @action
-  onItemClick(item) {
+  onItemClick(item, evt) {
+    evt?.preventDefault();
+    evt?.stopPropagation();
     const selectionType = this.args.selectionType;
 
     if (!selectionType || selectionType === 'click') {
@@ -87,6 +96,7 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
     }
 
     if (selectionType === 'multiple') {
+      allSelected = ensureArray(allSelected);
       if (allSelected.includes(item)) {
         allSelected.removeObject(item);
       } else {
