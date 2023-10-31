@@ -23,7 +23,8 @@
         loading=@loading
         items=@items
         onChange=@onChange
-        onItemSelect=this.onItemSelect
+        onItemClick=@onItemClick
+        onItemSelect=@onItemSelect
         onChangePage=this.onChangePage
         groupHeaderHandler=this.groupHeaderHandler
       )
@@ -45,7 +46,8 @@
     @loading={{@loading}}
     @items={{@items}}
     @onChange={{@onChange}}
-    @onItemSelect={{this.onItemSelect}}
+    @onItemClick={{@onItemClick}}
+    @onItemSelect={{@onItemSelect}}
     @onChangePage={{this.onChangePage}}
     @groupHeaderHandler={{this.groupHeaderHandler}}
   />
