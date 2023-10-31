@@ -5,7 +5,8 @@
         @items={{this.pagedItems}}
         @pageMeta={{this.pagedItems.meta}}
         @onQuery={{this.onQuery}}
-        @onItemSelect={{this.onItemSelect}}
+        @onItemClick={{fn this.onItemClick "onItemClick"}}
+        @onChange={{fn this.onItemClick "onChange"}}
         @selectionType={{this.selectionType}}
         @loading={{this.loading}}
         @onChangePage={{this.onChangePage}}
@@ -18,7 +19,7 @@
         </list.header>
         <list.items as |item|>
           <div class="content">
-            <a href="" class="header">{{item.name}}</a>
+            <span class="header">{{item.name}}</span>
             <div class="meta">
               <span>{{item.meta}}</span>
             </div>
@@ -57,7 +58,7 @@
       <NrgList
         @groupHeaderHandler={{this.groupHeaderHandler}}
         @items={{this.mappedItems}}
-        @onItemSelect={{this.onItemSelect}}
+        @onItemClick={{this.onItemClick}}
       />
     </:example>
   </Freestyle::Usage>
