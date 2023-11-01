@@ -109,10 +109,14 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
 
     if (selectionType === 'multiple') {
       allSelected = ensureArray(allSelected);
-      if (allSelected.includes(item)) {
-        allSelected.removeObject(item);
+      const itemHash = this.getItemHash(item);
+      const matchingItemIndex = allSelected.findIndex(
+        (i) => this.getItemHash(i) === itemHash
+      );
+      if (matchingItemIndex > -1) {
+        allSelected.removeAt(matchingItemIndex);
       } else {
-        allSelected.addObject(item);
+        allSelected.pushObject(item);
       }
     } else if (selectionType === 'single') {
       allSelected = item;
