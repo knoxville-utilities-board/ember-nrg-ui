@@ -4,6 +4,7 @@ import { isEmpty } from '@ember/utils';
 import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
 import { deprecate, assert } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
+import defaultItemHash from 'ember-nrg-ui/utils/object-hash';
 
 const defaultNoResultsLabel = 'No Results';
 
@@ -12,20 +13,6 @@ function ensureArray(value) {
     return value;
   }
   return A([value]);
-}
-
-function isPrimitive(val) {
-  return val !== Object(val);
-}
-
-function defaultItemHash(obj) {
-  if (isPrimitive(obj)) {
-    return String(obj);
-  }
-  if (obj.toString) {
-    return obj.toString();
-  }
-  return JSON.stringify(obj);
 }
 
 export default class NrgListItemsComponent extends NrgValidationComponent {
