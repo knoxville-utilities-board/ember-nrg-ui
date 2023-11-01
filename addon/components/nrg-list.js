@@ -70,11 +70,6 @@ export default class NrgListComponent extends Component {
   }
 
   @action
-  onItemSelect() {
-    this.args.onItemSelect?.(...arguments);
-  }
-
-  @action
   onChangePage() {
     this.args.onChangePage?.(...arguments);
   }

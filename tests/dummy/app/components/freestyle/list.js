@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import { debug } from '@ember/debug';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
@@ -68,7 +67,7 @@ export default class FreestyleListComponent extends Component {
   @tracked
   selectedPageSize = 2;
 
-  selectionTypeOptions = ['', 'single', 'multiple'];
+  selectionTypeOptions = ['', 'click', 'single', 'multiple'];
 
   get filteredItems() {
     let items = defaultList;
@@ -129,8 +128,8 @@ export default class FreestyleListComponent extends Component {
   }
 
   @action
-  onItemSelect() {
-    debug('item selected', ...arguments);
+  onItemClick() {
+    console.log('item clicked', ...arguments);
   }
 
   @action
