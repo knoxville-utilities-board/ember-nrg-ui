@@ -1,31 +1,40 @@
 import Model from '@ember-data/model';
 
+let suppressDeprecations = false;
+
+export const deprecationHandler = function (message, options, next) {
+  if (suppressDeprecations) {
+    return;
+  }
+  next(message, options);
+};
+
 export function isPrimitive(val) {
   return val !== Object(val);
 }
 
 export default function (object) {
-  return JSON.stringify(object, function (key) {
-    if (isPrimitive(value)) {
-      return String(value);
-    }
-    const value = this[key];
-    if (value instanceof Object) {
-      serializeModels(value);
-      return JSON.stringify(value);
-    }
-    return value;
-  });
-}
-
-function serializeModels(obj) {
-  for (const key in obj) {
-    const val = obj[key];
-    if (val instanceof Model) {
-      obj[key] = `(${val.toString()}:${val.id})`;
-    }
-    if (String(val) === '[object Object]') {
-      serializeModels(val);
-    }
+  if (isPrimitive(object)) {
+    return String(object);
   }
+  suppressDeprecations = true;
+  let hash;
+
+  try {
+    hash = JSON.stringify(object, function (key, value) {
+      if (isPrimitive(value)) {
+        return value;
+      }
+      if (value instanceof Model) {
+        return `(${value.toString()}:${value.id})`;
+      }
+      return value;
+    });
+  } catch (e) {
+    console.debug('error in object-hash', e);
+  } finally {
+    suppressDeprecations = false;
+  }
+
+  return hash;
 }
