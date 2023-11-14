@@ -3,9 +3,11 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
 import { restartableTask } from 'ember-concurrency-decorators';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 const defaultHoverTimeout = 250;
 
+@AddNrgDeprecations()
 export default class NrgPopupComponent extends Component {
   @tracked
   isOpen;

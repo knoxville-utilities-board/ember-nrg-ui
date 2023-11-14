@@ -6,6 +6,7 @@
     {{unless this.visible 'is-visually-hidden'}}
     {{@class}}"
   {{on "click" this.click}}
+  ...attributes
 >
   {{#if @icon}}
     <div class="image icon">

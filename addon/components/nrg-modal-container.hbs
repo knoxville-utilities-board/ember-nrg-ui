@@ -3,6 +3,7 @@
     {{if this.modalService.hasOpenModals 'visible active' 'hidden'}}
     {{if this.modalService.activeModal.sidebar 'sidebar-container'}}
     {{@class}}"
+  ...attributes
 >
   {{#each this.modalService.modalRenderList as |item index|}}
     {{#if (eq item "dimmer")}}

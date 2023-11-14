@@ -6,6 +6,7 @@
   {{on "click" this.openLightbox}}
   {{did-insert this.onInsert}}
   {{will-destroy this.onDestroy}}
+  ...attributes
 />
 {{#if (has-block)}}
   <NrgRenderTemplateBlock @templateRendered={{this.setDetail}}>

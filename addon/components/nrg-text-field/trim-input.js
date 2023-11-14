@@ -1,7 +1,9 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
+@AddNrgDeprecations()
 export default class TrimInputComponent extends Component {
   constructor() {
     super(...arguments);

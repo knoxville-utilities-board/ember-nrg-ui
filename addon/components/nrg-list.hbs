@@ -5,6 +5,8 @@
   </NrgContextItem>
 {{/if}}
 {{#if (has-block)}}
+  {{! As of now, there is no way to spread attributes to a component curried with the `component` helper: }}
+  {{! https://github.com/emberjs/rfcs/issues/497 }}
   {{yield
     (hash
       list=this
@@ -51,5 +53,6 @@
     @onChangePage={{this.onChangePage}}
     @groupHeaderHandler={{this.groupHeaderHandler}}
     @getItemHash={{@getItemHash}}
+    ...attributes
   />
 {{/if}}

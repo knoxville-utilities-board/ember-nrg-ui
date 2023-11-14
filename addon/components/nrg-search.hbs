@@ -4,6 +4,7 @@
     {{if this.loading 'loading'}}
     {{@class}}"
   {{on-click-outside this.onBlur}}
+  ...attributes
 >
   <div
     class="ui icon input {{if @disabled 'disabled'}}"

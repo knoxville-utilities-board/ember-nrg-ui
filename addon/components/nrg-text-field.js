@@ -1,8 +1,11 @@
 import NrgValidationComponent from './nrg-validation-component';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 const defaultType = 'text';
+
+@AddNrgDeprecations()
 export default class NrgTextFieldComponent extends NrgValidationComponent {
   get type() {
     return this.args.type ?? defaultType;

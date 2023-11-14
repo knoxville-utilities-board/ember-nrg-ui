@@ -1,4 +1,7 @@
-<div class="{{if @scrollable 'scrollable'}} menu {{@menuClass}} {{@class}}">
+<div
+  class="{{if @scrollable 'scrollable'}} menu {{@menuClass}} {{@class}}"
+  ...attributes
+>
   {{yield
     (hash
       options=@displayedOptions

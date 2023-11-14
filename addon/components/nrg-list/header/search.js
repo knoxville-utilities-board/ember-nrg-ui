@@ -3,10 +3,12 @@ import Component from '@glimmer/component';
 import { timeout } from 'ember-concurrency';
 import { restartableTask } from 'ember-concurrency-decorators';
 import { inject as service } from '@ember/service';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 const defaultPlaceholder = 'Search...';
 const defaultSearchTimeout = 400;
 
+@AddNrgDeprecations()
 export default class NrgListHeaderSearchComponent extends Component {
   @service
   application;

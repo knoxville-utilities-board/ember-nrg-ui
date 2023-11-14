@@ -2,10 +2,12 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
 import NrgValidationComponent from './nrg-validation-component';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 const defaultDateFormat = 'LL';
 const defaultTimeFormat = 'LT';
 
+@AddNrgDeprecations()
 export default class NrgDatetimeComponent extends NrgValidationComponent {
   @tracked
   isFocused = false;

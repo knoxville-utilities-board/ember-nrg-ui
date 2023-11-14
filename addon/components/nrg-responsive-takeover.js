@@ -3,6 +3,9 @@ import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
+
+@AddNrgDeprecations()
 export default class NrgFormComponent extends Component {
   @service
   application;

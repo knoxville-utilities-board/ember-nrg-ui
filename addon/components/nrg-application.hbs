@@ -5,6 +5,7 @@
     {{if this.computerScreenSidebarActive 'large-screen-sidebar-active'}}
     {{@class}}"
   {{on-resize this.setMainContentStyle}}
+  ...attributes
 >
   <NrgAppbar @onToggleSidebar={{this.toggleSidebar}}>
     {{yield to="appbar"}}
