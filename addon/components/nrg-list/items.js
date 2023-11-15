@@ -2,8 +2,9 @@ import { A, isArray } from '@ember/array';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
-import { deprecate } from '@ember/debug';
+import { deprecate, assert } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
+import defaultItemHash from 'ember-nrg-ui/utils/object-hash';
 
 const defaultNoResultsLabel = 'No Results';
 
@@ -58,6 +59,17 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
     return this.currentPage < this.totalPages;
   }
 
+  get getItemHash() {
+    const { getItemHash } = this.args;
+    if (getItemHash) {
+      assert(
+        '`getItemHash` must be a function',
+        typeof this.args.getItemHash === 'function'
+      );
+    }
+    return this.args.getItemHash ?? defaultItemHash;
+  }
+
   getDefaultValue() {
     return A([]);
   }
@@ -97,10 +109,14 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
 
     if (selectionType === 'multiple') {
       allSelected = ensureArray(allSelected);
-      if (allSelected.includes(item)) {
-        allSelected.removeObject(item);
+      const itemHash = this.getItemHash(item);
+      const matchingItemIndex = allSelected.findIndex(
+        (i) => this.getItemHash(i) === itemHash
+      );
+      if (matchingItemIndex > -1) {
+        allSelected.removeAt(matchingItemIndex);
       } else {
-        allSelected.addObject(item);
+        allSelected.pushObject(item);
       }
     } else if (selectionType === 'single') {
       allSelected = item;
