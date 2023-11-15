@@ -47,7 +47,7 @@
         <NrgFormContainer as |form|>
           <form.field @label="Text Field" as |field|>
             <field.text-field
-              @class="left icon action"
+              class="left icon action"
               @disabled={{this.inputDisabled}}
               @placeholder="Placeholder"
               @valuePath="inputValue"
@@ -57,7 +57,7 @@
               <NrgIcon @icon="settings" />
               {{view.input}}
               <NrgButton
-                @class="primary"
+                class="primary"
                 @text="Action"
                 @disabled={{this.disabled}}
               />

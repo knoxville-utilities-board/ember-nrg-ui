@@ -4,6 +4,7 @@
       @route={{@routeName}}
       class="{{@class}} {{if @isParentGroup 'parent-route' 'item'}}"
       {{on "click" this.onClick}}
+      ...attributes
     >
       {{yield}}
     </LinkTo>
@@ -14,6 +15,7 @@
       target="_blank"
       rel="noopener noreferrer"
       {{on "click" this.onClick}}
+      ...attributes
     >
       {{yield}}
       {{#if this.url}}

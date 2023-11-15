@@ -1,4 +1,4 @@
-<div class="ui cards {{if @columns @columns 'three'}} {{@class}}">
+<div class="ui cards {{if @columns @columns 'three'}} {{@class}}" ...attributes>
   {{yield
     (hash
       home-card=(component "nrg-home-cards/home-card" actionCard=@actionCard)

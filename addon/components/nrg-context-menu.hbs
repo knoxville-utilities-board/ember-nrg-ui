@@ -1,7 +1,8 @@
 <NrgDropdown
-  @class="item icon {{@class}}"
+  class="item icon {{@class}}"
   @freeform={{true}}
   @disabled={{this.contextService.disabled}}
+  ...attributes
   as |dropdown|
 >
   <dropdown.source>

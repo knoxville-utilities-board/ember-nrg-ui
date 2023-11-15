@@ -2,11 +2,13 @@ import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import NrgValidationComponent from './nrg-validation-component';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 const baseDefaultText = 'Select an Option';
 const defaultDropdownAction = 'activate';
 const defaultMatch = 'both';
 
+@AddNrgDeprecations()
 export default class NrgDropdownComponent extends NrgValidationComponent {
   wrapperElement = null;
 

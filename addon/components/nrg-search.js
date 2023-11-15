@@ -4,6 +4,7 @@ import { timeout } from 'ember-concurrency';
 import { restartableTask } from 'ember-concurrency-decorators';
 import NrgValidationComponent from './nrg-validation-component';
 import { inject as service } from '@ember/service';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 const defaultPlaceholder = 'Search';
 const defaultMinCharacters = 1;
@@ -11,6 +12,7 @@ const defaultSearchTimeout = 300;
 const defaultDisplayLabel = 'header';
 const defaultNoResultsLabel = 'No Results';
 
+@AddNrgDeprecations()
 export default class NrgSearchComponent extends NrgValidationComponent {
   @service
   application;

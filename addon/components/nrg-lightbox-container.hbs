@@ -1,10 +1,11 @@
 <NrgModal
   @isOpen={{this.lightboxService.lightboxIsOpen}}
-  @class={{@class}}
+  class={{@class}}
   @lightbox={{true}}
   @autofocus={{false}}
   @onModalOpen={{this.onModalOpen}}
   @onDismiss={{this.onDismiss}}
+  ...attributes
 >
   <div
     class="{{if

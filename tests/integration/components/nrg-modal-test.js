@@ -29,7 +29,7 @@ module('Integration | Component | nrg-modal', function (hooks) {
     };
     await render(hbs`
       <NrgModalContainer />
-      <NrgModal @secondaryButton="Button Text" @isOpen={{true}} @onSecondaryButtonClick={{action this.onButtonClick}} />
+      <NrgModal @secondaryButton="Button Text" @isOpen={{true}} @onSecondaryButtonClick={{this.onButtonClick}} />
     `);
     await click('button');
   });
@@ -41,7 +41,7 @@ module('Integration | Component | nrg-modal', function (hooks) {
     };
     await render(hbs`
       <NrgModalContainer />
-      <NrgModal @primaryButton="Button Text" @isOpen={{true}} @onPrimaryButtonClick={{action this.onButtonClick}} />
+      <NrgModal @primaryButton="Button Text" @isOpen={{true}} @onPrimaryButtonClick={{this.onButtonClick}} />
     `);
     await click('button');
   });

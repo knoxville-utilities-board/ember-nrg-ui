@@ -2,7 +2,8 @@ import { A, isArray } from '@ember/array';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
-import { deprecate, assert } from '@ember/debug';
+import { assert } from '@ember/debug';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 import { tracked } from '@glimmer/tracking';
 import defaultItemHash from 'ember-nrg-ui/utils/object-hash';
 
@@ -15,6 +16,41 @@ function ensureArray(value) {
   return A([value]);
 }
 
+@AddNrgDeprecations(
+  {
+    id: 'list.onItemSelect.click',
+    test(target) {
+      const selectionType = target.args.selectionType;
+      return (
+        (!selectionType || selectionType == 'click') && target.args.onItemSelect
+      );
+    },
+    message(target) {
+      const selectionType = target.selectionType;
+      return `\`onItemSelect(item)\` is deprecated for ${
+        selectionType
+          ? `selection type "${selectionType}"`
+          : 'no selection type'
+      }, please use onItemClick(item) instead`;
+    },
+    since: '4.5.0',
+    until: '5.0.0',
+  },
+  {
+    id: 'list.onItemSelect.selection',
+    test(target) {
+      return (
+        target.args.onItemSelect &&
+        ['single', 'multiple'].includes(target.args.selectionType)
+      );
+    },
+    message(target) {
+      return `\`onItemSelect(item, value)\` is deprecated for selection type "${target.args.selectionType}", please use onChange(value, item) instead`;
+    },
+    since: '4.5.0',
+    until: '5.0.0',
+  }
+)
 export default class NrgListItemsComponent extends NrgValidationComponent {
   @tracked
   internalSelection = A([]);
@@ -81,23 +117,7 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
     const selectionType = this.args.selectionType;
 
     if (!selectionType || selectionType === 'click') {
-      if (this.args.onItemSelect) {
-        deprecate(
-          `\`onItemSelect(item)\` is deprecated for ${
-            selectionType
-              ? `selection type "${selectionType}"`
-              : 'no selection type'
-          }, please use onItemClick(item) instead`,
-          false,
-          {
-            id: 'nrg-list.onItemSelect.click',
-            until: '5.0.0',
-            for: 'ember-nrg-ui',
-            since: '4.5.0',
-          }
-        );
-        this.args.onItemSelect?.(item);
-      }
+      this.args.onItemSelect?.(item);
       this.args.onItemClick?.(item);
       return;
     }
@@ -122,17 +142,6 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
       allSelected = item;
     }
     this.onChange(allSelected, item);
-
-    deprecate(
-      `\`onItemSelect(item, value)\` is deprecated for selection type "${selectionType}", please use onChange(value, item) instead`,
-      !this.args.onItemSelect,
-      {
-        id: 'nrg-list.onItemSelect.selection',
-        until: '5.0.0',
-        for: 'ember-nrg-ui',
-        since: '4.5.0',
-      }
-    );
     this.args.onItemSelect?.(item, allSelected);
   }
 

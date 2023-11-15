@@ -4,8 +4,9 @@
   @isOpen={{true}}
   @dismissable={{false}}
   @takeover={{true}}
-  @class={{@class}}
+  class={{@class}}
   {{on-resize this.setMainContentStyle}}
+  ...attributes
 >
   {{#if this.renderInModal}}
     <NrgAppbar

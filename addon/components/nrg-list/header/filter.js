@@ -1,10 +1,12 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
+import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 const baseDefaultText = 'Select a Filter';
 const defaultDirection = 'down';
 const defaultMenuDirection = 'left';
 
+@AddNrgDeprecations()
 export default class NrgListHeaderFilterComponent extends Component {
   get defaultText() {
     return this.args.defaultText ?? baseDefaultText;

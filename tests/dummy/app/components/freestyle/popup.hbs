@@ -59,13 +59,13 @@
               as |field|
             >
               <field.text-field
-                @class="left icon action"
+                class="left icon action"
                 @disabled={{this.disabled}}
                 as |view|
               >
                 <NrgIcon @icon="settings" />
                 <view.input />
-                <NrgButton @class="primary" @text="Action" />
+                <NrgButton class="primary" @text="Action" />
               </field.text-field>
             </form.field>
             <br />
@@ -75,7 +75,7 @@
               as |field|
             >
               <field.datetime @disabled={{this.disabled}}>
-                <NrgButton @class="green" @text="Open Datepicker" />
+                <NrgButton class="green" @text="Open Datepicker" />
               </field.datetime>
             </form.field>
             <br />
@@ -163,7 +163,7 @@
               </form.field>
             </div>
             <form.submit-button />
-            <NrgButton @class="basic black" @text="Cancel" />
+            <NrgButton class="basic black" @text="Cancel" />
           </NrgFormContainer>
         </hash.popup>
       </NrgPopup>

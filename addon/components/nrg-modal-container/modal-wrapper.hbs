@@ -44,14 +44,14 @@
     <div class="actions">
       {{#if @modal.secondaryButton}}
         <NrgButton
-          @class={{@modal.secondaryButtonClass}}
+          class={{@modal.secondaryButtonClass}}
           @text={{@modal.secondaryButton}}
           @onClick={{this.onSecondary}}
         />
       {{/if}}
       {{#if @modal.primaryButton}}
         <NrgButton
-          @class="primary right"
+          class="primary right"
           @text={{@modal.primaryButton}}
           @onClick={{this.onPrimary}}
           @autofocus={{true}}
