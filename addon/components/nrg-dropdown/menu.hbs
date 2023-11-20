@@ -1,5 +1,10 @@
+{{! The subMenuClass property is private and temporary, and should not be used outside of NRG }}
 <div
-  class="{{if @scrollable 'scrollable'}} menu {{@menuClass}} {{@class}}"
+  class="{{if @scrollable 'scrollable'}}
+    menu
+    {{@subMenuClass}}
+    {{@menuClass}}
+    {{@class}}"
   ...attributes
 >
   {{yield

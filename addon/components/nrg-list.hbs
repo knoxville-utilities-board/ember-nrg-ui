@@ -7,6 +7,7 @@
 {{#if (has-block)}}
   {{! As of now, there is no way to spread attributes to a component curried with the `component` helper: }}
   {{! https://github.com/emberjs/rfcs/issues/497 }}
+  {{! As such, the buttonClass property is private and temporary, and should not be used outside of NRG }}
   {{yield
     (hash
       list=this
@@ -32,7 +33,7 @@
       )
       create-button=(component
         "nrg-button"
-        class="ui circular icon big primary bottom right floating button"
+        buttonClass="ui circular icon big primary bottom right floating button"
         icon="plus"
       )
     )
