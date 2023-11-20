@@ -3,6 +3,7 @@
   class="ui button
     {{if @disabled 'disabled'}}
     {{if @loading 'loading'}}
+    {{@buttonClass}}
     {{@class}}"
   disabled={{or @disabled @loading}}
   {{on "click" this.onClick}}

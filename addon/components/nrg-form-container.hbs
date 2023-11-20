@@ -3,6 +3,12 @@
   {{on "submit" this.submit}}
   ...attributes
 >
+  {{! The buttonClass property is private and temporary, and should not be used outside of NRG }}
+  {{! Temporarily removing the `class="item form-link" property from the yielded form-link component; }}
+  {{! This property is not used by the `link-to` component, but this should be added back when the issue }}
+  {{! referenced in 'addon/components/nrg-list.hbs' is resolved. }}
+
+  {{! TODO: Add `class` attribute to curried `form-link` component }}
   {{yield
     (hash
       form=this
@@ -10,11 +16,11 @@
       submit-button=(component
         "nrg-button"
         type="submit"
-        class="primary"
+        buttonClass="primary"
         text="Submit"
         disabled=@disabled
       )
-      form-link=(component "link-to" class="item form-link")
+      form-link=(component "link-to")
       form-action=(component "nrg-form-action")
     )
   }}
