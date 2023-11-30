@@ -70,8 +70,8 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
 
   get menuClass() {
     let computedClasses = '';
-    if (this.menuDirection) {
-      computedClasses = this.menuDirection;
+    if (this.args.menuDirection) {
+      computedClasses = this.args.menuDirection;
     }
     if (this.args.scrollable) {
       computedClasses += ' scrollable';
