@@ -8,6 +8,7 @@ import { tracked } from '@glimmer/tracking';
 import defaultItemHash from 'ember-nrg-ui/utils/object-hash';
 
 const defaultNoResultsLabel = 'No Results';
+const defaultPageSize = 25;
 
 function ensureArray(value) {
   if (isArray(value)) {
@@ -83,12 +84,16 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
     return !isEmpty(this.value);
   }
 
+  get selectedPageSize() {
+    return this.args.selectedPageSize ?? defaultPageSize;
+  }
+
   get currentPage() {
-    return this.args.pageMeta?.start / this.args.selectedPageSize + 1;
+    return this.args.pageMeta?.start / this.selectedPageSize + 1;
   }
 
   get totalPages() {
-    return Math.ceil(this.args.pageMeta?.total / this.args.selectedPageSize);
+    return Math.ceil(this.args.pageMeta?.total / this.selectedPageSize);
   }
 
   get canStepForward() {
@@ -147,7 +152,7 @@ export default class NrgListItemsComponent extends NrgValidationComponent {
 
   @action
   nextPage() {
-    const pageSize = this.args.selectedPageSize;
+    const pageSize = this.selectedPageSize;
     const start = this.args.pageMeta?.start;
     this.args.onChangePage?.(start + pageSize);
   }
