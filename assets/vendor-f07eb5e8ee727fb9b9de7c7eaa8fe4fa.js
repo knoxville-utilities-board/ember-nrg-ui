@@ -7157,7 +7157,7 @@ let g=(0,l.AddNrgDeprecations)({id:"list.onItemSelect.click",test(e){const t=e.a
 return(!t||"click"==t)&&e.args.onItemSelect},message(e){const t=e.selectionType
 return`\`onItemSelect(item)\` is deprecated for ${t?`selection type "${t}"`:"no selection type"}, please use onItemClick(item) instead`},since:"4.5.0",until:"5.0.0"},{id:"list.onItemSelect.selection",test:e=>e.args.onItemSelect&&["single","multiple"].includes(e.args.selectionType),message:e=>`\`onItemSelect(item, value)\` is deprecated for selection type "${e.args.selectionType}", please use onChange(value, item) instead`,since:"4.5.0",until:"5.0.0"})((p=class extends a.default{constructor(){var e,t,r,n
 super(...arguments),e=this,t="internalSelection",n=this,(r=h)&&Object.defineProperty(e,t,{enumerable:r.enumerable,configurable:r.configurable,writable:r.writable,value:r.initializer?r.initializer.call(n):void 0})}get model(){return this.args.model??this}get valuePath(){return this.args.valuePath??"internalSelection"}get itemsProxy(){let e=this.args.items??[]
-return e?.toArray&&(e=e.toArray()),(0,n.A)(e)}get noResultsLabel(){return this.args.noResultsLabel??"No Results"}get canSelect(){return!!this.args.selectionType}get canShowActiveItem(){return!(0,o.isEmpty)(this.value)}get currentPage(){return this.args.pageMeta?.start/this.args.selectedPageSize+1}get totalPages(){return Math.ceil(this.args.pageMeta?.total/this.args.selectedPageSize)}get canStepForward(){return this.currentPage<this.totalPages}get getItemHash(){const{getItemHash:e}=this.args
+return e?.toArray&&(e=e.toArray()),(0,n.A)(e)}get noResultsLabel(){return this.args.noResultsLabel??"No Results"}get canSelect(){return!!this.args.selectionType}get canShowActiveItem(){return!(0,o.isEmpty)(this.value)}get selectedPageSize(){return this.args.selectedPageSize??25}get currentPage(){return this.args.pageMeta?.start/this.selectedPageSize+1}get totalPages(){return Math.ceil(this.args.pageMeta?.total/this.selectedPageSize)}get canStepForward(){return this.currentPage<this.totalPages}get getItemHash(){const{getItemHash:e}=this.args
 return this.args.getItemHash??c.default}getDefaultValue(){return(0,n.A)([])}onItemClick(e,t){t?.preventDefault(),t?.stopPropagation()
 const r=this.args.selectionType
 if(!r||"click"===r)return this.args.onItemSelect?.(e),void this.args.onItemClick?.(e)
@@ -7166,7 +7166,7 @@ if(!this.args.isSelectable||this.args.isSelectable(e)){if("multiple"===r){o=i,i=
 const t=this.getItemHash(e),r=i.findIndex((e=>this.getItemHash(e)===t))
 r>-1?i.removeAt(r):i.pushObject(e)}else"single"===r&&(i=e)
 var o
-this.onChange(i,e),this.args.onItemSelect?.(e,i)}}nextPage(){const e=this.args.selectedPageSize,t=this.args.pageMeta?.start
+this.onChange(i,e),this.args.onItemSelect?.(e,i)}}nextPage(){const e=this.selectedPageSize,t=this.args.pageMeta?.start
 this.args.onChangePage?.(t+e)}},h=f(p.prototype,"internalSelection",[u.tracked],{configurable:!0,enumerable:!0,writable:!0,initializer:function(){return(0,n.A)([])}}),f(p.prototype,"onItemClick",[i.action],Object.getOwnPropertyDescriptor(p.prototype,"onItemClick"),p.prototype),f(p.prototype,"nextPage",[i.action],Object.getOwnPropertyDescriptor(p.prototype,"nextPage"),p.prototype),d=p))||d
 e.default=g,(0,t.setComponentTemplate)(m,g)})),define("ember-nrg-ui/components/nrg-loading-indicator",["exports","@ember/component","@ember/template-factory","@glimmer/component","ember-nrg-ui/utils/deprecation-handler"],(function(e,t,r,n,i){"use strict"
 var o
