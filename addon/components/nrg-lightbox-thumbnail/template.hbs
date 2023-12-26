@@ -1,4 +1,5 @@
 <img role="button" class="ui image photo-thumbnail" src={{photo.url}} alt={{photo.altText}} {{action openLightbox}}>
+{{log photo}}
 {{#if hasBlock}}
   <NrgRenderTemplateBlock @templateRendered={{action setDetail}}>
     {{yield}}

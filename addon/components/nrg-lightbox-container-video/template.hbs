@@ -1,0 +1,34 @@
+<div class="lightbox-container-video{{bottomDetailClass}}">
+  <div class="lightbox-video-flexy{{bottomDetailClass}} {{showDetailsClass}}">
+    <div class="video-container"> 
+      <video controls
+        aria-label="video"
+        role="button"
+        preload="metadata"
+        class="lightbox-video"
+        src={{selectedVideo.url}}>
+      </video>
+    </div>
+    <div class="lightbox-controls-videos">
+      <button class="ui primary icon button" title="Previous Image" disabled={{previousDisabled}} {{action previousImage}}>
+        <i class="chevron left icon"></i>
+      </button>
+      <button class="ui primary icon button" title="Toggle Video Details" {{action toggleDetails}}>
+        <i class="{{if showDetails "eye slash" "eye"}} icon"></i>
+      </button>
+      <button class="ui primary icon button" title="Detail Location - {{if bottomDetails "Right" "Bottom"}}" {{action toggleDetailLocation}}>
+        <i class="{{if bottomDetails "vertically flipped" "clockwise rotated"}} columns icon"></i>
+      </button>
+      <button class="ui primary icon button" title="Next Image" disabled={{nextDisabled}} {{action nextImage}}>
+        <i class="chevron right icon"></i>
+      </button>
+    </div>
+  </div>
+  {{log 'showDetails' showDetails}}
+  {{#if showDetails}}
+    <div class="lightbox-video-details{{bottomDetailClass}}">
+      {{selectedVideo.detail}}
+    </div>
+  {{/if}}
+</div>
+<NrgLightboxContainerVideo::KeyboardShortcuts/>
