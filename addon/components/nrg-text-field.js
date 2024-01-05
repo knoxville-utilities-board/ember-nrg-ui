@@ -11,6 +11,18 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
     return this.args.type ?? defaultType;
   }
 
+  get step() {
+    if (this.type != 'number') {
+      return null;
+    }
+    const { allowDecimals, step } = this.args;
+    if (allowDecimals) {
+      return step ?? 'any';
+    }
+
+    return step ?? 1;
+  }
+
   validateInput(input) {
     if (this.args.validateInput) {
       return this.args.validateInput(input);
