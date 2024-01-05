@@ -33,7 +33,7 @@ module('Integration | Component | nrg-text-field', function (hooks) {
     await fillIn('input', '123');
 
     assert.dom('input').hasValue('123');
-    assert.strictEqual(this.value, '123');
+    assert.strictEqual(this.value, 123);
   });
 
   test('number fields allow decimal characters', async function (assert) {
@@ -44,7 +44,7 @@ module('Integration | Component | nrg-text-field', function (hooks) {
     await fillIn('input', '123.45');
 
     assert.dom('input').hasValue('123.45');
-    assert.strictEqual(this.value, '123.45');
+    assert.strictEqual(this.value, 123.45);
   });
 
   test('number fields do not allow decimal characters', async function (assert) {
@@ -56,41 +56,41 @@ module('Integration | Component | nrg-text-field', function (hooks) {
     await fillIn('input', '123.4');
 
     assert.dom('input').hasValue('123');
-    assert.strictEqual(this.value, '123');
+    assert.strictEqual(this.value, 123);
   });
 
   test('number fields allow negative numbers', async function (assert) {
     await render(
-      hbs`<NrgTextField @model={{this}} @valuePath="value" @type="number" />`
+      hbs`<NrgTextField @model={{this}} @valuePath="value" @type="number" @allowNegatives={{true}} />`
     );
 
     await fillIn('input', '-123');
 
     assert.dom('input').hasValue('-123');
-    assert.strictEqual(this.value, '-123');
+    assert.strictEqual(this.value, -123);
   });
 
   test('number fields allow negative decimal numbers', async function (assert) {
     await render(
-      hbs`<NrgTextField @model={{this}} @valuePath="value" @type="number" @allowDecimals={{true}} />`
+      hbs`<NrgTextField @model={{this}} @valuePath="value" @type="number" @allowDecimals={{true}} @allowNegatives={{true}} />`
     );
 
     await fillIn('input', '-123.45');
 
     assert.dom('input').hasValue('-123.45');
-    assert.strictEqual(this.value, '-123.45');
+    assert.strictEqual(this.value, -123.45);
   });
 
   test('number fields do not allow negative decimal numbers', async function (assert) {
     await render(
-      hbs`<NrgTextField @model={{this}} @valuePath="value" @type="number" />`
+      hbs`<NrgTextField @model={{this}} @valuePath="value" @type="number" @allowNegatives={{true}} />`
     );
 
     await fillIn('input', '-123');
     await fillIn('input', '-123.4');
 
     assert.dom('input').hasValue('-123');
-    assert.strictEqual(this.value, '-123');
+    assert.strictEqual(this.value, -123);
   });
 
   test('number fields default to min', async function (assert) {

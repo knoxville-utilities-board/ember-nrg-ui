@@ -8,12 +8,11 @@
               @disabled={{this.inputDisabled}}
               @placeholder="Placeholder"
               @readonly={{this.readonly}}
-              @valuePath="inputValue"
+              @valuePath="textInputValue"
               @model={{this}}
-              @type={{this.type}}
               as |view|
             >
-              {{view.input}}
+              <view.input />
             </field.text-field>
           </form.field>
         </NrgFormContainer>
@@ -21,23 +20,16 @@
 
       <:api as |Args|>
         <Args.String
-          @name="inputValue"
+          @name="textInputValue"
           @description="The value of the input field."
-          @value={{this.inputValue}}
-          @onInput={{fn (mut this.inputValue)}}
+          @value={{this.textInputValue}}
+          @onInput={{fn (mut this.textInputValue)}}
         />
         <Args.Bool
           @name="readonly"
           @description="Whether the input field is readonly."
           @value={{this.readonly}}
           @onInput={{fn (mut this.readonly)}}
-        />
-        <Args.String
-          @name="type"
-          @description="Type"
-          @value={{this.type}}
-          @onInput={{fn (mut this.type)}}
-          @options={{array "text" "number"}}
         />
       </:api>
     </Freestyle::Usage>
@@ -50,12 +42,12 @@
               class="left icon action"
               @disabled={{this.inputDisabled}}
               @placeholder="Placeholder"
-              @valuePath="inputValue"
+              @valuePath="textInputValue"
               @model={{this}}
               as |view|
             >
               <NrgIcon @icon="settings" />
-              {{view.input}}
+              <view.input />
               <NrgButton
                 class="primary"
                 @text="Action"
@@ -68,10 +60,55 @@
 
       <:api as |Args|>
         <Args.String
-          @name="inputValue"
+          @name="textInputValue"
           @description="The value of the input field."
-          @value={{this.inputValue}}
-          @onInput={{fn (mut this.inputValue)}}
+          @value={{this.textInputValue}}
+          @onInput={{fn (mut this.textInputValue)}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+
+  <Section.subsection @name="Number Field">
+    <Freestyle::Usage>
+      <:example>
+        <NrgFormContainer as |form|>
+          <form.field @label="Number Field" as |field|>
+            <field.text-field
+              class="left icon"
+              @model={{this}}
+              @valuePath="numberValue"
+              @placeholder={{if this.allowDecimals "###.##" "###"}}
+              @type="number"
+              @allowDecimals={{this.allowDecimals}}
+              @allowNegatives={{this.allowNegatives}}
+              as |view|
+            >
+              <NrgIcon @icon="hashtag" />
+              <view.input />
+            </field.text-field>
+          </form.field>
+        </NrgFormContainer>
+      </:example>
+
+      <:api as |Args|>
+        <Args.String
+          @name="numberValue"
+          @description="The value of the input field."
+          @value={{this.numberValue}}
+          @onInput={{fn (mut this.numberValue)}}
+        />
+        <Args.Bool
+          @name="allowDecimals"
+          @description="Allow decimals."
+          @value={{this.allowDecimals}}
+          @onInput={{fn (mut this.allowDecimals)}}
+        />
+        <Args.Bool
+          @name="allowNegatives"
+          @description="Allow negative numbers."
+          @value={{this.allowNegatives}}
+          @onInput={{fn (mut this.allowNegatives)}}
         />
       </:api>
     </Freestyle::Usage>
