@@ -8,8 +8,8 @@
 
 ## Linting
 
-- `yarn lint`
-- `yarn lint:fix`
+- `pnpm run lint`
+- `pnpm run lint:fix`
 
 ## Running tests
 
