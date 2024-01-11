@@ -1,13 +1,12 @@
-# compiled output
-declarations/
-dist/
-tmp/
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# npm/pnpm/yarn pack output
-*.tgz
+# compiled output
+/dist
+/tmp
 
 # dependencies
-node_modules/
+/node_modules
+/bower_components
 
 # misc
 /.env*
@@ -17,9 +16,8 @@ node_modules/
 /connect.lock
 /coverage/*
 /libpeerconnection.log
-/npm-debug.log*
-/.pnpm-debug.log
-/yarn-error.log
+npm-debug.log*
+yarn-error.log
 testem.log
 ember-tests.xml
 

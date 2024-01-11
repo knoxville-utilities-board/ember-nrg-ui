@@ -1,0 +1,3 @@
+packages:
+  - 'ember-nrg-ui'
+  - 'test-app'
