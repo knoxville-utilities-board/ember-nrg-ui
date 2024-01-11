@@ -1,6 +1,6 @@
 import { action, get, set } from '@ember/object';
 import Component from '@glimmer/component';
-import ensurePathExists from 'ember-nrg-ui/utils/ensure-path-exists';
+import ensurePathExists from '../utils/ensure-path-exists';
 import { schedule, next } from '@ember/runloop';
 
 export default class NrgValidationComponent extends Component {

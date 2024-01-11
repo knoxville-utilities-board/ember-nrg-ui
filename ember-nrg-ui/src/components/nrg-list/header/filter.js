@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
+import { AddNrgDeprecations } from '../../../utils/deprecation-handler';
 
 const baseDefaultText = 'Select a Filter';
 const defaultDirection = 'down';

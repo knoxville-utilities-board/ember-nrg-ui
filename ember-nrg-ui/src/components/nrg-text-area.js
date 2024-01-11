@@ -1,6 +1,6 @@
 import NrgValidationComponent from './nrg-validation-component';
 import { action } from '@ember/object';
-import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
+import { AddNrgDeprecations } from '../utils/deprecation-handler';
 
 @AddNrgDeprecations()
 export default class NrgTextAreaComponent extends NrgValidationComponent {

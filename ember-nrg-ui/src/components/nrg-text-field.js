@@ -1,7 +1,7 @@
 import NrgValidationComponent from './nrg-validation-component';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
+import { AddNrgDeprecations } from '../utils/deprecation-handler';
 
 const defaultType = 'text';
 

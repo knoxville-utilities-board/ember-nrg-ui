@@ -1,6 +1,6 @@
 import { default as EmberComponent } from '@ember/component';
 import { default as GlimmerComponent } from '@glimmer/component';
-import { default as NrgValidationComponent } from 'ember-nrg-ui/components/nrg-validation-component';
+import { default as NrgValidationComponent } from './components/nrg-validation-component';
 
 export default [
   {

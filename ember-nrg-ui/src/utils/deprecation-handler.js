@@ -1,5 +1,5 @@
 import { deprecate as emberDeprecate } from '@ember/debug';
-import GLOBAL_DEPRECATIONS from 'ember-nrg-ui/global-deprecations';
+import GLOBAL_DEPRECATIONS from '../global-deprecations';
 
 export function AddNrgDeprecations(...deprecations) {
   return function (target) {

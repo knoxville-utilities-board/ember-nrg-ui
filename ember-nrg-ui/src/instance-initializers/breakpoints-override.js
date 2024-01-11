@@ -1,4 +1,4 @@
-import breakpoints from 'ember-nrg-ui/breakpoints';
+import breakpoints from '../breakpoints';
 
 export function initialize(application) {
   application.unregister('breakpoints:main');

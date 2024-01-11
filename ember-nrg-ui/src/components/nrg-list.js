@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import Component from '@glimmer/component';
-import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
+import { AddNrgDeprecations } from '../utils/deprecation-handler';
 
 const defaultPageSize = 25;
 const defaultSearchParameter = 'search';

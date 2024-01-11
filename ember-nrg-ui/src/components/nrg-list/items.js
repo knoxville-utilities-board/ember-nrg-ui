@@ -1,11 +1,11 @@
 import { A, isArray } from '@ember/array';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
-import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
+import NrgValidationComponent from '../../components/nrg-validation-component';
 import { assert } from '@ember/debug';
-import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
+import { AddNrgDeprecations } from '../../utils/deprecation-handler';
 import { tracked } from '@glimmer/tracking';
-import defaultItemHash from 'ember-nrg-ui/utils/object-hash';
+import defaultItemHash from '../../utils/object-hash';
 
 const defaultNoResultsLabel = 'No Results';
 const defaultPageSize = 25;

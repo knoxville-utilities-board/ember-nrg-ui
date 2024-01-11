@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import NrgValidationComponent from './nrg-validation-component';
-import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
+import { AddNrgDeprecations } from '../utils/deprecation-handler';
 
 @AddNrgDeprecations()
 export default class NrgRadioComponent extends NrgValidationComponent {
