@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  ansi-regex: ^5.0.1
+  clean-css: ^4.1.11
+  glob-parent: ^5.1.2
+
 importers:
 
   .:
@@ -20,6 +25,9 @@ importers:
       '@embroider/addon-shim':
         specifier: ^1.8.5
         version: 1.8.7
+      '@embroider/macros':
+        specifier: ^1.13.4
+        version: 1.13.4
       dayjs:
         specifier: 1.11.2
         version: 1.11.2

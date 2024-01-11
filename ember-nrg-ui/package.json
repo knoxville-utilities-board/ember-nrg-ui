@@ -36,6 +36,7 @@
   "dependencies": {
     "@ember/render-modifiers": "^2.0.4",
     "@embroider/addon-shim": "^1.8.5",
+    "@embroider/macros": "^1.13.4",
     "dayjs": "1.11.2",
     "ember-cli-app-version": "5.0.0",
     "ember-cli-flash": "4.0.0",

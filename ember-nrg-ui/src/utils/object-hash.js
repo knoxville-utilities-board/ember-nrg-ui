@@ -1,4 +1,4 @@
-import Model from '@ember-data/model';
+import { dependencySatisfies, importSync } from '@embroider/macros';
 
 let suppressDeprecations = false;
 
@@ -25,10 +25,13 @@ export default function (object) {
       if (isPrimitive(value)) {
         return value;
       }
-      if (value instanceof Model) {
-        return `(${value.toString()}:${value.id})`;
+      if (dependencySatisfies('@ember-data/model', '*')) {
+        const Model = importSync('@ember-data/model').default;
+        if (value instanceof Model) {
+          return `(${value.toString()}:${value.id})`;
+        }
+        return value;
       }
-      return value;
     });
   } catch (e) {
     console.debug('error in object-hash', e);
