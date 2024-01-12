@@ -5,3 +5,10 @@ declare module 'ember-nrg-ui/templates/*' {
   const tmpl: TemplateFactory;
   export default tmpl;
 }
+
+// ember-cli-app-version does not provide types
+declare module 'ember-cli-app-version/utils/regexp' {
+  export const shaRegExp: RegExp;
+  export const versionExtendedRegExp: RegExp;
+  export const versionRegExp: RegExp;
+}
