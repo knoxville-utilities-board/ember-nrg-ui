@@ -6,6 +6,11 @@ const getGitInfo = require('git-repo-info');
 
 module.exports = {
   name: require('./package').name,
+  options: {
+    'ember-cli-babel': {
+      enableTypeScriptTransform: true,
+    },
+  },
 
   blueprintsPath() {
     return path.join(__dirname, 'blueprints');
