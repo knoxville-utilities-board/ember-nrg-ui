@@ -1,7 +1,10 @@
 import { helper } from '@ember/component/helper';
 import dayjs from 'dayjs';
 
-export function formatDate([date, format], { type }) {
+export function formatDate(
+  [date, format]: [string, string],
+  { type }: { type: string }
+) {
   if (!date) {
     return '';
   }

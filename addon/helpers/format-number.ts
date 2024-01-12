@@ -1,20 +1,20 @@
 import { helper } from '@ember/component/helper';
 import unformat from './unformat';
 
-function isDecimalNumber(value) {
+function isDecimalNumber(value: number) {
   return value % 1 !== 0;
 }
 
-export function formatNumber(value = 0, precision = 0) {
+export function formatNumber(value: number | string | undefined, precision = 0): string {
   value = unformat(value + '');
   const absoluteValue = Math.abs(value);
-  let formattedValue = absoluteValue + '';
+  let formattedValue: string = absoluteValue + '';
   let decimals = '';
   if (precision !== undefined || isDecimalNumber(value)) {
     formattedValue = absoluteValue.toFixed(precision);
     const splits = formattedValue.split('.');
     if (splits.length == 2) {
-      formattedValue = splits[0];
+      formattedValue = splits[0] as string;
       decimals = `.${splits[1]}`;
     }
   }
@@ -28,7 +28,7 @@ export function formatNumber(value = 0, precision = 0) {
   return formattedValue;
 }
 
-export function numberFormatter([value, precision]) {
+export function numberFormatter([value, precision]: [number, number]) {
   const formattedValue = formatNumber(value, precision);
   return unformat(value) < 0 ? '-' + formattedValue : formattedValue;
 }
