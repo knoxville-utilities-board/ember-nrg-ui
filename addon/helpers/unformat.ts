@@ -1,4 +1,4 @@
-export default function unformat(value) {
+export default function unformat(value: number | string) {
   value = value ?? 0;
   if (typeof value === 'number') {
     return value;

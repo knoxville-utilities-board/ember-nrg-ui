@@ -1,7 +1,11 @@
 import { helper } from '@ember/component/helper';
 import { A } from '@ember/array';
 
-export function exists([items, i, groupHeaderHandler]) {
+export function exists<T>([items, i, groupHeaderHandler]: [
+  T[],
+  number,
+  (item: T | undefined) => string
+]) {
   const item = A(items).objectAt(i);
 
   if (i === 0) {
