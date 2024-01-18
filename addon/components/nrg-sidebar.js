@@ -1,4 +1,5 @@
 import { action } from '@ember/object';
+import { next } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
@@ -23,6 +24,8 @@ export default class NrgSidebarComponent extends Component {
 
   @action
   onClickInternal() {
-    this.application.sidebarIsOpen = false;
+    next(() => {
+      this.application.sidebarIsOpen = false;
+    });
   }
 }
