@@ -3,9 +3,32 @@ import Component from '@glimmer/component';
 import ensurePathExists from 'ember-nrg-ui/utils/ensure-path-exists';
 import { schedule, next } from '@ember/runloop';
 
-export default class NrgValidationComponent extends Component {
-  constructor() {
-    super(...arguments);
+declare type Field = {
+  model: unknown;
+  valuePath: string;
+};
+
+declare type Model = {
+  [key: string]: unknown;
+};
+
+declare type NrgValidationComponentArgs = {
+  model: Model;
+  valuePath: string;
+  value: unknown;
+  field?: Field;
+  useDefaultValue?: boolean;
+  useNestedValuePath?: boolean;
+  defaultValue?: unknown;
+  onChange?: (value: unknown, ...args: unknown[]) => void;
+
+  // Deprecated
+  class?: string;
+};
+
+export default class NrgValidationComponent extends Component<NrgValidationComponentArgs> {
+  constructor(owner: unknown, args: NrgValidationComponentArgs) {
+    super(owner, args);
     const defaultValue = this.defaultValue;
     const initialValue = this.hasModelPath ? this.value : this.args.value;
     if (
@@ -18,10 +41,10 @@ export default class NrgValidationComponent extends Component {
       });
     }
 
-    if (this.hasModelPath && this.args.field) {
+    if (this.hasModelPath && this.args.field !== undefined) {
       next(() => {
-        this.args.field.model = this.model;
-        this.args.field.valuePath = this.valuePath;
+        this.args.field!.model = this.model;
+        this.args.field!.valuePath = this.valuePath;
       });
     }
   }
@@ -80,8 +103,8 @@ export default class NrgValidationComponent extends Component {
   }
 
   @action
-  onChange(newValue) {
+  onChange(newValue: unknown, ...args: unknown[]) {
     this.value = newValue;
-    this.args.onChange?.(...arguments);
+    this.args.onChange?.(newValue, ...args);
   }
 }
