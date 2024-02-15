@@ -2,26 +2,35 @@ import Model from '@ember-data/model';
 
 let suppressDeprecations = false;
 
-export const deprecationHandler = function (message, options, next) {
+declare type DeprecationHandlerOptions = {
+  id?: string;
+  [key: string]: unknown;
+};
+
+export const deprecationHandler = function (
+  message: string,
+  options: DeprecationHandlerOptions | undefined,
+  next: (message: string, options?: DeprecationHandlerOptions) => void
+) {
   if (suppressDeprecations && options?.id === 'ember-data:model.toJSON') {
     return;
   }
   next(message, options);
 };
 
-export function isPrimitive(val) {
+export function isPrimitive(val: unknown) {
   return val !== Object(val);
 }
 
-export function stringHash(s) {
-  let h;
+export function stringHash(s: string) {
+  let h = 0;
   for (let i = 0; i < s.length; i++) {
     h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
   }
   return h;
 }
 
-export default function (object) {
+export function objectHash<T>(object: T) {
   if (isPrimitive(object)) {
     return String(object);
   }
@@ -46,3 +55,5 @@ export default function (object) {
 
   return hash;
 }
+
+export default objectHash;

@@ -1,9 +1,13 @@
-export default function ensurePathExists(object, path) {
+export default function ensurePathExists(
+  object: Record<string, unknown>,
+  path: string
+) {
   const keys = path.split?.('.');
   _ensurePathExists(object, keys);
 }
 
-const _ensurePathExists = (object, keys) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const _ensurePathExists = (object: Record<string, any>, keys?: string[]) => {
   const key = keys?.[0];
   const nextKey = keys?.[1];
 
