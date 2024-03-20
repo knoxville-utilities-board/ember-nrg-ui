@@ -23,7 +23,7 @@ export default class ModalWrapper extends Component {
   }
 
   @action
-  onResize(element) {
+  onResize({ target }) {
     if (
       useFlexBox ||
       this.args.modal?.takeover ||
@@ -32,11 +32,8 @@ export default class ModalWrapper extends Component {
     ) {
       this.modalStyles = '';
     }
-    const marginTop = element.offsetHeight / 2;
-    const marginLeft = element.offsetWidth / 2;
-    this.modalStyles = htmlSafe(
-      `margin-top: -${marginTop}px; margin-left: -${marginLeft}px;`
-    );
+    const marginTop = target.offsetHeight / 2;
+    this.modalStyles = htmlSafe(`margin-top: -${marginTop}px`);
   }
 
   @action

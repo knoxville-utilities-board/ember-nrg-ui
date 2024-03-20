@@ -91,7 +91,11 @@ export default class NrgModal extends Component {
 
   get scrolling() {
     return (
-      !this.takeover && !this.lightbox && !this.sidebar && this.renderInModal
+      !this.takeover &&
+      !this.lightbox &&
+      !this.sidebar &&
+      this.renderInModal &&
+      this.args.scrolling !== false
     );
   }
 
