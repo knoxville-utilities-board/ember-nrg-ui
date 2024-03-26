@@ -6599,8 +6599,8 @@ const{allowDecimals:e,step:t}=this.args
 return e?t??"any":t??1}validateInput(e){if(this.args.validateInput)return this.args.validateInput(e)
 let t=!0,r=e
 if("number"===this.type){const n=this.args.min??0
-if((0,o.isEmpty)(e))return n
-r=parseFloat(e),this.args.allowDecimals||(r=Math.trunc(e)),t=!isNaN(e),!0!==this.args.allowNegatives&&r<0&&(t=!0,r=n)}return t&&r}onChange(e){!1!==(e=this.validateInput(e))&&super.onChange(e)}},d=l.prototype,p="onChange",h=[i.action],f=Object.getOwnPropertyDescriptor(l.prototype,"onChange"),m=l.prototype,g={},Object.keys(f).forEach((function(e){g[e]=f[e]})),g.enumerable=!!g.enumerable,g.configurable=!!g.configurable,("value"in g||g.initializer)&&(g.writable=!0),g=h.slice().reverse().reduce((function(e,t){return t(d,p,e)||e}),g),m&&void 0!==g.initializer&&(g.value=g.initializer?g.initializer.call(m):void 0,g.initializer=void 0),void 0===g.initializer&&(Object.defineProperty(d,p,g),g=null),s=l))||s
+if((0,o.isEmpty)(e))return n.toString()
+r=parseFloat(e),this.args.allowDecimals||(r=Math.trunc(e),e=r.toString()),t=!isNaN(e),!0!==this.args.allowNegatives&&r<0&&(t=!0,r=n)}return t&&e}onChange(e){!1!==(e=this.validateInput(e))&&super.onChange(e)}},d=l.prototype,p="onChange",h=[i.action],f=Object.getOwnPropertyDescriptor(l.prototype,"onChange"),m=l.prototype,g={},Object.keys(f).forEach((function(e){g[e]=f[e]})),g.enumerable=!!g.enumerable,g.configurable=!!g.configurable,("value"in g||g.initializer)&&(g.writable=!0),g=h.slice().reverse().reduce((function(e,t){return t(d,p,e)||e}),g),m&&void 0!==g.initializer&&(g.value=g.initializer?g.initializer.call(m):void 0,g.initializer=void 0),void 0===g.initializer&&(Object.defineProperty(d,p,g),g=null),s=l))||s
 var d,p,h,f,m,g;(0,t.setComponentTemplate)(u,c)})),define("ember-nrg-ui/components/nrg-text-field/trim-input",["exports","@ember/component","@ember/template-factory","@glimmer/component","@ember/object","@glimmer/tracking","ember-nrg-ui/utils/deprecation-handler"],(function(e,t,r,n,i,o,a){"use strict"
 var s,l,u
 function c(e,t,r,n,i){var o={}
