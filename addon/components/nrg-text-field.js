@@ -33,11 +33,12 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
     if (this.type === 'number') {
       const min = this.args.min ?? 0;
       if (isEmpty(input)) {
-        return min;
+        return min.toString();
       }
       value = parseFloat(input);
       if (!this.args.allowDecimals) {
         value = Math.trunc(input);
+        input = value.toString();
       }
       isValid = !isNaN(input);
 
@@ -46,7 +47,7 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
         value = min;
       }
     }
-    return isValid && value;
+    return isValid && input;
   }
 
   @action
