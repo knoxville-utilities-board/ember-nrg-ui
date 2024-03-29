@@ -215,4 +215,51 @@ module('Integration | Component | nrg-accordion', function (hooks) {
 
     assert.verifySteps(expectedSteps);
   });
+
+  test('`freeform` option works', async function (assert) {
+    await render(hbs`
+      <NrgAccordion @items={{this.items}} @exclusive={{false}} @freeform={{true}}>
+        <:title as |item isActive|>
+          <h3 class="ui header">
+            <i class="{{if isActive 'minus' 'plus'}} icon" />
+            {{item.title}}
+          </h3>
+        </:title>
+        <:content as |item|>
+          <em>
+            {{item.content}}
+          </em>
+        </:content>
+      </NrgAccordion>
+    `);
+
+    let titles = findAll('div.title');
+
+    for (let i = 0; i < this.items.length; i++) {
+      const { title } = this.items[i];
+      const titleEl = titles[i];
+
+      assert.dom(titleEl).doesNotHaveClass('active');
+      assert.dom('h3', titleEl).hasText(title);
+      assert.dom('h3 > i', titleEl).hasClass('plus');
+    }
+
+    await click('div.title:not(.active)');
+    await click('div.title:not(.active)');
+    await click('div.title:not(.active)');
+
+    titles = findAll('div.title');
+    let contents = findAll('div.content');
+
+    for (let i = 0; i < this.items.length; i++) {
+      const { content } = this.items[i];
+      const titleEl = titles[i];
+      const contentEl = contents[i];
+
+      assert.dom(titleEl).hasClass('active');
+      assert.dom('h3 > i', titleEl).hasClass('minus');
+      assert.dom(contentEl).hasClass('active');
+      assert.dom('em', contentEl).hasText(content);
+    }
   });
+});

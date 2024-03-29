@@ -9,21 +9,29 @@
       class="{{if item.active 'active '}}title"
       data-accordion-hash={{item.hash}}
     >
-      {{#if this.icon}}
-        <i class={{this.iconClass}}></i>
+      {{#if @freeform}}
+        {{yield item.data item.active to="title"}}
+      {{else}}
+        {{#if this.icon}}
+          <i class={{this.iconClass}}></i>
+        {{/if}}
+        {{item.data.title}}
       {{/if}}
-      {{item.data.title}}
     </div>
     <div
       class="{{if item.active 'active '}}content"
       data-accordion-hash={{item.hash}}
     >
-      {{#if (has-block-params)}}
-        {{yield item.data}}
+      {{#if @freeform}}
+        {{yield item.data item.active to="content"}}
       {{else}}
-        <p>
-          {{item.data.content}}
-        </p>
+        {{#if (has-block-params)}}
+          {{yield item.data}}
+        {{else}}
+          <p>
+            {{item.data.content}}
+          </p>
+        {{/if}}
       {{/if}}
     </div>
   {{/each}}
