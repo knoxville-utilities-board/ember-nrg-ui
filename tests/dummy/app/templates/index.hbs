@@ -3,6 +3,11 @@
 
   <NrgHomeCards as |view|>
     <view.home-card
+      @route="view-components.nrg-accordion"
+      @label="Accordion"
+      @icon="stream"
+    />
+    <view.home-card
       @route="view-components.nrg-application"
       @label="Application"
       @icon="window maximize outline"

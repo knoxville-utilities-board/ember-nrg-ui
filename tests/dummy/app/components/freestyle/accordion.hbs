@@ -1,0 +1,86 @@
+<FreestyleSection @name="Accordion" as |Section|>
+  <Section.subsection @name="Default">
+    <Freestyle::Usage>
+      <:example>
+        <NrgAccordion
+          @items={{this.items}}
+          @exclusive={{this.exclusive}}
+          @forceOpen={{this.forceOpen}}
+          @onClick={{this.itemClicked}}
+          @onOpen={{this.itemOpened}}
+          @onClose={{this.itemClosed}}
+        />
+      </:example>
+
+      <:api as |Args|>
+        <Args.Bool
+          @name="exclusive"
+          @defaultValue={{true}}
+          @value={{this.exclusive}}
+          @description="Whether to limit one item open at a time"
+          @onInput={{fn (mut this.exclusive)}}
+        />
+        <Args.Bool
+          @name="forceOpen"
+          @defaultValue={{false}}
+          @value={{this.forceOpen}}
+          @description="Whether to that require one item is always open"
+          @onInput={{fn (mut this.forceOpen)}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+
+  <Section.subsection @name="Styles">
+    <Freestyle::Usage>
+      <:example>
+        <NrgAccordion
+          @items={{this.items}}
+          @icon={{this.icon}}
+          @rightIcon={{this.rightIcon}}
+          @styled={{this.styled}}
+          @basic={{this.basic}}
+          @fluid={{this.fluid}}
+        />
+      </:example>
+
+      <:api as |Args|>
+        <Args.String
+          @name="icon"
+          @defaultValue=""
+          @value={{this.icon}}
+          @description="What icon to display next to the title. A value of false removes the icon"
+          @onInput={{fn (mut this._icon)}}
+        />
+        <Args.Bool
+          @name="rightIcon"
+          @defaultValue={{false}}
+          @value={{this.rightIcon}}
+          @description="Whether to display the icon on the right"
+          @onInput={{fn (mut this.rightIcon)}}
+        />
+        <Args.Bool
+          @name="styled"
+          @defaultValue={{false}}
+          @value={{this.styled}}
+          @description="Whether to apply styling"
+          @onInput={{fn (mut this.styled)}}
+        />
+        <Args.Bool
+          @name="basic"
+          @defaultValue={{false}}
+          @value={{this.basic}}
+          @description="Whether to apply basic styling. Implies the `basic` option"
+          @onInput={{fn (mut this.basic)}}
+        />
+        <Args.Bool
+          @name="fluid"
+          @defaultValue={{false}}
+          @value={{this.fluid}}
+          @description="Whether to take up the container's width"
+          @onInput={{fn (mut this.fluid)}}
+        />
+      </:api>
+    </Freestyle::Usage>
+  </Section.subsection>
+</FreestyleSection>

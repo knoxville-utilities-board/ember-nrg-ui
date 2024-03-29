@@ -36,6 +36,7 @@ Router.map(function () {
     this.route('nrg-checkbox');
     this.route('nrg-radio');
     this.route('nrg-progress-bar');
+    this.route('nrg-accordion');
   });
   this.route('view-mixins', function () {
     this.route('focus-first-input');
