@@ -1,0 +1,30 @@
+<div
+  role="button"
+  class={{this.classes}}
+  {{on "click" this.clickItem}}
+  ...attributes
+>
+  {{#each this.mappedItems as |item|}}
+    <div
+      class="{{if item.active 'active '}}title"
+      data-accordion-hash={{item.hash}}
+    >
+      {{#if this.icon}}
+        <i class={{this.iconClass}}></i>
+      {{/if}}
+      {{item.data.title}}
+    </div>
+    <div
+      class="{{if item.active 'active '}}content"
+      data-accordion-hash={{item.hash}}
+    >
+      {{#if (has-block-params)}}
+        {{yield item.data}}
+      {{else}}
+        <p>
+          {{item.data.content}}
+        </p>
+      {{/if}}
+    </div>
+  {{/each}}
+</div>
