@@ -13,6 +13,14 @@ export function isPrimitive(val) {
   return val !== Object(val);
 }
 
+export function stringHash(s) {
+  let h;
+  for (let i = 0; i < s.length; i++) {
+    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+  }
+  return h;
+}
+
 export default function (object) {
   if (isPrimitive(object)) {
     return String(object);
