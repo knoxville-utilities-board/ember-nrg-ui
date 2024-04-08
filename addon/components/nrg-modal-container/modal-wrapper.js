@@ -31,6 +31,7 @@ export default class ModalWrapper extends Component {
       this.args.modal?.lightbox
     ) {
       this.modalStyles = '';
+      return;
     }
     const marginTop = target.offsetHeight / 2;
     this.modalStyles = htmlSafe(`margin-top: -${marginTop}px`);
