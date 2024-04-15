@@ -73,7 +73,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   }
 
   get showClearIcon() {
-    return (!this.args.disabled && this.args.clearable) || false;
+    return Boolean(!this.args.disabled && this.args.clearable);
   }
 
   get showResults() {
@@ -184,6 +184,6 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   @action
   clear() {
     this.searchString = null;
-    this.value = null;
+    this.onChange(null);
   }
 }

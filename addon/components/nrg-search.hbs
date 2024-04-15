@@ -27,14 +27,16 @@
         <i class="search icon"></i>
       {{/unless}}
     </div>
-    <div
-      role="button"
-      aria-label="Clear search box"
-      class="clear-search {{unless this.showClearIcon 'clear-search-hidden'}}"
-      {{on "click" this.clear}}
-    >
-      <i class="icon times circle"></i>
-    </div>
+    {{#if this.showClearIcon}}
+      <div
+        role="button"
+        aria-label="Clear search box"
+        class="clear-search"
+        {{on "click" this.clear}}
+      >
+        <i class="icon times circle"></i>
+      </div>
+    {{/if}}
   </div>
   {{#if this.showResults}}
     <div
