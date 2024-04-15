@@ -129,4 +129,18 @@ module('Integration | Component | nrg-search', function (hooks) {
 
     assert.dom('input').hasValue('value2');
   });
+
+  test('clears text when clearable and the clear icon is clicked', async function (assert) {
+    this.query = () => {
+      return [{}];
+    };
+    await render(hbs`<NrgSearch @query={{this.query}} @clearable={{true}}/>`);
+    await fillIn('input', 'search');
+
+    assert.dom('input').hasAnyValue();
+
+    await click('.clear-search');
+
+    assert.dom('input').hasNoValue();
+  });
 });
