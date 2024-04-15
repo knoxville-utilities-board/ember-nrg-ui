@@ -13,6 +13,7 @@
         @disabled={{this.disabled}}
         @hideSearchIcon={{this.hideSearchIcon}}
         @readonly={{this.readonly}}
+        @clearable={{this.clearable}}
         @query={{this.query}}
         @model={{this}}
         @valuePath="selectedResult"
@@ -38,6 +39,13 @@
         @value={{this.hideSearchIcon}}
         @onInput={{fn (mut this.hideSearchIcon)}}
       />
+      <Args.Bool
+        @name="clearable"
+        @defaultValue={{false}}
+        @value={{this.clearable}}
+        @onInput={{fn (mut this.clearable)}}
+      />
+
     </:api>
   </Freestyle::Usage>
 </FreestyleSection>

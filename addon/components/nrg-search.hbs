@@ -6,25 +6,37 @@
   {{on-click-outside this.onBlur}}
   ...attributes
 >
-  <div
-    class="ui icon input {{if @disabled 'disabled'}}"
-    role="button"
-    aria-label="Search box"
-    {{on "click" this.onFocus}}
-  >
-    <NrgTextField
-      @focusId={{@focusId}}
-      class="prompt"
-      @disabled={{@disabled}}
-      @placeholder={{this.placeholder}}
-      @readonly={{@readonly}}
-      @model={{this}}
-      @valuePath="displayValue"
-      @onChange={{this.query}}
-    />
-    {{#unless @hideSearchIcon}}
-      <i class="search icon"></i>
-    {{/unless}}
+  <div class="ui label search-container">
+    <div
+      class="ui icon input {{if @disabled 'disabled'}}"
+      role="button"
+      aria-label="Search box"
+      {{on "click" this.onFocus}}
+    >
+      <NrgTextField
+        @focusId={{@focusId}}
+        class="prompt"
+        @disabled={{@disabled}}
+        @placeholder={{this.placeholder}}
+        @readonly={{@readonly}}
+        @model={{this}}
+        @valuePath="displayValue"
+        @onChange={{this.query}}
+      />
+      {{#unless @hideSearchIcon}}
+        <i class="search icon"></i>
+      {{/unless}}
+    </div>
+    {{#if this.showClearIcon}}
+      <div
+        role="button"
+        aria-label="Clear search box"
+        class="clear-search"
+        {{on "click" this.clear}}
+      >
+        <i class="icon times circle"></i>
+      </div>
+    {{/if}}
   </div>
   {{#if this.showResults}}
     <div
