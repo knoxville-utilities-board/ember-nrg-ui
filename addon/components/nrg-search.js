@@ -70,6 +70,10 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     return this.items != null;
   }
 
+  get showClearIcon() {
+    return Boolean(!this.args.disabled && this.args.clearable);
+  }
+
   get showResults() {
     return (
       this.isFocused &&
@@ -173,5 +177,11 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   @action
   query(searchString) {
     this.throttleQuery.perform(searchString);
+  }
+
+  @action
+  clear() {
+    this.searchString = null;
+    this.onChange(null);
   }
 }
