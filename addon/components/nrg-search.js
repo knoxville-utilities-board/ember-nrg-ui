@@ -85,6 +85,13 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     );
   }
 
+  get empty() {
+    return (
+      (this.searchString == null || this.searchString == '') &&
+      this.activeItem == -1
+    );
+  }
+
   get displayValue() {
     const displayLabel = get(this.value ?? {}, this.displayLabel);
     return this.searchString ?? displayLabel ?? this.value ?? '';
