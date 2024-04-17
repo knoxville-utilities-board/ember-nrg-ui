@@ -31,7 +31,8 @@
       <div
         role="button"
         aria-label="Clear search box"
-        class="clear-search"
+        aria-disabled={{this.empty}}
+        class="clear-search {{if this.empty 'clear-search-disabled disabled'}}"
         {{on "click" this.clear}}
       >
         <i class="icon times circle"></i>

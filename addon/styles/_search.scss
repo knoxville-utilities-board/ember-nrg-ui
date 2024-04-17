@@ -9,4 +9,9 @@
 .clear-search {
   padding: 0.75em 0.75em 0.75em 0.25em;
   font-size: 1.25em;
+
+  &-disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
 }
