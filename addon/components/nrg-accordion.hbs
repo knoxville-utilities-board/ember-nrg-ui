@@ -19,8 +19,10 @@
       {{/if}}
     </div>
     <div
-      class="{{if item.active 'active '}}content"
-      data-accordion-hash={{item.hash}}
+      class="{{if item.active 'active '~}}
+        {{unless this.contentClickable 'no-click'}}
+        content"
+      data-accordion-hash={{item.contentHash}}
     >
       {{#if @freeform}}
         {{yield item.data item.active to="content"}}

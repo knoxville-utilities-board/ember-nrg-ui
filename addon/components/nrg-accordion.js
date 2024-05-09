@@ -12,13 +12,14 @@ export default class NrgAccordionComponent extends Component {
 
   get mappedItems() {
     const items = this.args.items ?? [];
-    const { openItems } = this;
+    const { openItems, contentClickable } = this;
 
     return items.map((item) => {
       const hash = stringHash(objectHash(item)).toString(36);
+      const contentHash = contentClickable ? hash : undefined;
       const active = openItems.includes(hash);
 
-      return { data: item, hash, active };
+      return { data: item, hash, contentHash, active };
     });
   }
 
@@ -80,6 +81,10 @@ export default class NrgAccordionComponent extends Component {
 
   get forceOpen() {
     return this.args.forceOpen === true;
+  }
+
+  get contentClickable() {
+    return this.args.contentClickable === true;
   }
 
   openItem(item) {
