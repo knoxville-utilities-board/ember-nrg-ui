@@ -44,3 +44,7 @@ textarea {
 [role='button']:not(.disabled):not([disabled]) {
   cursor: pointer;
 }
+
+.ui.accordion > div.content.no-click {
+  cursor: default;
+}
