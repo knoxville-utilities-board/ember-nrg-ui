@@ -1,0 +1,21 @@
+<NrgSideBySide class={{@class}} ...attributes>
+  <:primary>
+    <div class="ui basic segment">
+      <NrgLoadingIndicator
+        @loading={{@loading}}
+        @centered={{@centered}}
+        @inline={{@inline}}
+        @text={{@text}}
+        @inverted={{@inverted}}
+        @indeterminate={{@indeterminate}}
+        @size={{@size}}
+      >
+        {{yield to="text"}}
+      </NrgLoadingIndicator>
+    </div>
+    {{yield to="primary"}}
+  </:primary>
+  <:secondary>
+    {{yield to="secondary"}}
+  </:secondary>
+</NrgSideBySide>
