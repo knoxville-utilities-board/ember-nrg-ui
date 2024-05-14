@@ -1,0 +1,7 @@
+{{#if (has-block)}}
+  {{yield}}
+{{else}}
+  <div class="ui header" ...attributes>
+    {{or @text "Please select an item"}}
+  </div>
+{{/if}}
