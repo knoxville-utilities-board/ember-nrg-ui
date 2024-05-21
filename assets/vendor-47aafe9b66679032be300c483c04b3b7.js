@@ -6583,7 +6583,10 @@ let s=e.default=(0,i.AddNrgDeprecations)()(o=class extends n.default{})||o;(0,t.
 var o
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 const a=(0,r.createTemplateFactory)({id:"Hn2QVMj6",block:'[[[8,[39,0],[[16,0,[30,1]],[17,2]],null,[["primary","secondary"],[[[[1,"\\n    "],[10,0],[14,0,"ui basic segment"],[12],[1,"\\n      "],[8,[39,1],null,[["@loading","@centered","@inline","@text","@inverted","@indeterminate","@size"],[[30,3],[30,4],[30,5],[30,6],[30,7],[30,8],[30,9]]],[["default"],[[[[1,"\\n        "],[18,10,null],[1,"\\n      "]],[]]]]],[1,"\\n    "],[13],[1,"\\n    "],[18,11,null],[1,"\\n  "]],[]],[[[1,"\\n    "],[18,12,null],[1,"\\n  "]],[]]]]]],["@class","&attrs","@loading","@centered","@inline","@text","@inverted","@indeterminate","@size","&text","&primary","&secondary"],false,["nrg-side-by-side","nrg-loading-indicator","yield"]]',moduleName:"ember-nrg-ui/components/nrg-side-by-side/loading.hbs",isStrictMode:!1})
-let s=e.default=(0,i.AddNrgDeprecations)()(o=class extends n.default{})||o;(0,t.setComponentTemplate)(a,s)})),define("ember-nrg-ui/components/nrg-sidebar-menu",["exports","@ember/component","@ember/template-factory","@glimmer/component","ember-nrg-ui/utils/deprecation-handler"],(function(e,t,r,n,i){"use strict"
+let s=e.default=(0,i.AddNrgDeprecations)()(o=class extends n.default{})||o;(0,t.setComponentTemplate)(a,s)})),define("ember-nrg-ui/components/nrg-side-by-side/placeholder",["exports","@ember/component","@ember/template-factory","@ember/component/template-only"],(function(e,t,r,n){"use strict"
+Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
+const i=(0,r.createTemplateFactory)({id:"7Y6KoE3M",block:'[[[41,[48,[30,3]],[[[1,"  "],[18,3,null],[1,"\\n"]],[]],[[[1,"  "],[11,0],[24,0,"ui header"],[17,1],[12],[1,"\\n    "],[1,[28,[35,3],[[30,2],"Please select an item"],null]],[1,"\\n  "],[13],[1,"\\n"]],[]]]],["&attrs","@text","&default"],false,["if","has-block","yield","or"]]',moduleName:"ember-nrg-ui/components/nrg-side-by-side/placeholder.hbs",isStrictMode:!1})
+e.default=(0,t.setComponentTemplate)(i,(0,n.default)())})),define("ember-nrg-ui/components/nrg-sidebar-menu",["exports","@ember/component","@ember/template-factory","@glimmer/component","ember-nrg-ui/utils/deprecation-handler"],(function(e,t,r,n,i){"use strict"
 var o
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 const a=(0,r.createTemplateFactory)({id:"EKsS7zyQ",block:'[[[11,0],[16,0,[29,["ui vertical left menu sidebar-menu ",[30,1]]]],[17,2],[12],[1,"\\n  "],[10,3],[14,0,"nrg-logo"],[15,6,[52,[30,3],[30,3],"/"]],[14,"aria-label","Application logo"],[12],[13],[1,"\\n  "],[18,5,[[28,[37,2],null,[["item","group"],[[50,"nrg-sidebar-menu/item",0,null,[["onClickInternal"],[[30,4]]]],[50,"nrg-sidebar-menu/group",0,null,[["onClickInternal"],[[30,4]]]]]]]]],[1,"\\n\\n"],[41,[48,[30,6]],[[[1,"    "],[10,0],[14,0,"sidebar-footer"],[12],[1,"\\n      "],[10,0],[14,0,"footer-pusher"],[12],[13],[1,"\\n      "],[18,6,[[28,[37,2],null,[["item","group"],[[50,"nrg-sidebar-menu/item",0,null,[["onClickInternal"],[[30,4]]]],[50,"nrg-sidebar-menu/group",0,null,[["onClickInternal"],[[30,4]]]]]]]]],[1,"\\n    "],[13],[1,"\\n"]],[]],null],[13]],["@class","&attrs","@appReloadLocation","@onClickInternal","&default","&footer"],false,["if","yield","hash","component","has-block"]]',moduleName:"ember-nrg-ui/components/nrg-sidebar-menu.hbs",isStrictMode:!1})
@@ -6694,10 +6697,10 @@ function n([e,t,n]){const i=(0,r.A)(e).objectAt(t)
 if(0===t)return n(i)
 const o=n((0,r.A)(e).objectAt(t-1)),a=n(i)
 return o!==a?a:""}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.exists=n
-e.default=(0,t.helper)(n)})),define("ember-nrg-ui/helpers/list-item-selectable",["exports","@ember/component/helper"],(function(e,t){"use strict"
+e.default=(0,t.helper)(n)}))
+define("ember-nrg-ui/helpers/list-item-selectable",["exports","@ember/component/helper"],(function(e,t){"use strict"
 function r([e,t]){return t?.(e)??!0}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.listItemSelectable=r
-e.default=(0,t.helper)(r)}))
-define("ember-nrg-ui/helpers/nrg-app-version",["exports","@ember/component/helper","ember-get-config","ember-cli-app-version/utils/regexp"],(function(e,t,r,n){"use strict"
+e.default=(0,t.helper)(r)})),define("ember-nrg-ui/helpers/nrg-app-version",["exports","@ember/component/helper","ember-get-config","ember-cli-app-version/utils/regexp"],(function(e,t,r,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.appVersion=a,e.default=void 0
 const{APP:{version:i,commitsSinceLastTag:o}}=r.default
 function a(){return 0==o?i.match(n.versionExtendedRegExp)?.[0]??i.match(n.versionRegExp)?.[0]:i.match(n.shaRegExp)?.[0]}e.default=(0,t.helper)(a)})),define("ember-nrg-ui/helpers/unformat",["exports"],(function(e){"use strict"
@@ -6838,7 +6841,8 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 class r extends t.default{titleDidUpdate(){}}e.default=r})),define("ember-prism/components/code-block",["exports","@ember/component","@ember/template-factory","@glimmer/component"],(function(e,t,r,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 const i=(0,r.createTemplateFactory)({id:"6RbsvH6W",block:'[[[10,"pre"],[15,0,[29,[[30,0,["languageClass"]]," ",[52,[30,1],"line-numbers"]]]],[15,"data-start",[30,2]],[12],[8,[39,1],[[17,3]],[["@code","@language"],[[30,4],[30,5]]],null],[13]],["@showLineNumbers","@start","&attrs","@code","@language"],false,["if","code-inline"]]',moduleName:"ember-prism/components/code-block.hbs",isStrictMode:!1})
-class o extends n.default{get language(){return this.args.language??"markup"}get languageClass(){return`language-${this.language}`}}e.default=o,(0,t.setComponentTemplate)(i,o)})),define("ember-prism/components/code-inline",["exports","@ember/component","@ember/template-factory","@glimmer/component","@ember/object","@ember/template","@glimmer/tracking","@ember/debug"],(function(e,t,r,n,i,o,a,s){"use strict"
+class o extends n.default{get language(){return this.args.language??"markup"}get languageClass(){return`language-${this.language}`}}e.default=o,(0,t.setComponentTemplate)(i,o)}))
+define("ember-prism/components/code-inline",["exports","@ember/component","@ember/template-factory","@glimmer/component","@ember/object","@ember/template","@glimmer/tracking","@ember/debug"],(function(e,t,r,n,i,o,a,s){"use strict"
 var l,u
 function c(e,t,r,n,i){var o={}
 return Object.keys(n).forEach((function(e){o[e]=n[e]})),o.enumerable=!!o.enumerable,o.configurable=!!o.configurable,("value"in o||o.initializer)&&(o.writable=!0),o=r.slice().reverse().reduce((function(r,n){return n(e,t,r)||r}),o),i&&void 0!==o.initializer&&(o.value=o.initializer?o.initializer.call(i):void 0,o.initializer=void 0),void 0===o.initializer&&(Object.defineProperty(e,t,o),o=null),o}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
@@ -6846,8 +6850,7 @@ const d=(0,r.createTemplateFactory)({id:"xjF1+9TK",block:'[[[11,"code"],[17,1],[
 let p=e.default=(l=class extends n.default{constructor(...e){var t,r,n,i
 super(...e),t=this,r="prismCode",i=this,(n=u)&&Object.defineProperty(t,r,{enumerable:n.enumerable,configurable:n.configurable,writable:n.writable,value:n.initializer?n.initializer.call(i):void 0})}get code(){const e=this.args.code
 return Prism?.plugins?.NormalizeWhitespace?Prism.plugins.NormalizeWhitespace.normalize(e):e}get language(){return this.args.language??"markup"}get languageClass(){return`language-${this.language}`}setPrismCode(e){const t=this.code,r=this.language,n=Prism.languages[r]
-this.prismCode=t&&r&&n?(0,o.htmlSafe)(Prism.highlight(t,n,r)):"",Prism.hooks.run("complete",{code:t,element:e})}},u=c(l.prototype,"prismCode",[a.tracked],{configurable:!0,enumerable:!0,writable:!0,initializer:function(){return""}}),c(l.prototype,"setPrismCode",[i.action],Object.getOwnPropertyDescriptor(l.prototype,"setPrismCode"),l.prototype),l);(0,t.setComponentTemplate)(d,p)}))
-define("ember-prism/index",["exports","prismjs-glimmer"],(function(e,t){"use strict"
+this.prismCode=t&&r&&n?(0,o.htmlSafe)(Prism.highlight(t,n,r)):"",Prism.hooks.run("complete",{code:t,element:e})}},u=c(l.prototype,"prismCode",[a.tracked],{configurable:!0,enumerable:!0,writable:!0,initializer:function(){return""}}),c(l.prototype,"setPrismCode",[i.action],Object.getOwnPropertyDescriptor(l.prototype,"setPrismCode"),l.prototype),l);(0,t.setComponentTemplate)(d,p)})),define("ember-prism/index",["exports","prismjs-glimmer"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.setup=function(){(0,t.setup)(Prism),Prism.languages.handlebars=Prism.languages.glimmer}})),define("ember-resize-observer-service/services/resize-observer",["exports","@ember/service","@ember/object","@ember/debug","ember-resize-observer-service/utils/ignore-ro-error"],(function(e,t,r,n,i){"use strict"
 var o
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
@@ -6984,11 +6987,11 @@ function r(e){return e[0]!==e[1]}Object.defineProperty(e,"__esModule",{value:!0}
 e.default=(0,t.helper)(r)})),define("ember-truth-helpers/helpers/not",["exports","@ember/component/helper","ember-truth-helpers/utils/truth-convert"],(function(e,t,r){"use strict"
 function n(e){for(let t=0,n=e.length;t<n;t++)if(!0===(0,r.default)(e[t]))return!1
 return!0}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.not=n
-e.default=(0,t.helper)(n)})),define("ember-truth-helpers/helpers/or",["exports","@ember/component/helper","ember-truth-helpers/utils/truth-convert"],(function(e,t,r){"use strict"
+e.default=(0,t.helper)(n)}))
+define("ember-truth-helpers/helpers/or",["exports","@ember/component/helper","ember-truth-helpers/utils/truth-convert"],(function(e,t,r){"use strict"
 function n(e){for(let t=0,n=e.length;t<n;t++)if(!0===(0,r.default)(e[t]))return e[t]
 return e[e.length-1]}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.or=n
-e.default=(0,t.helper)(n)}))
-define("ember-truth-helpers/helpers/xor",["exports","@ember/component/helper","ember-truth-helpers/utils/truth-convert"],(function(e,t,r){"use strict"
+e.default=(0,t.helper)(n)})),define("ember-truth-helpers/helpers/xor",["exports","@ember/component/helper","ember-truth-helpers/utils/truth-convert"],(function(e,t,r){"use strict"
 function n(e){return(0,r.default)(e[0])!==(0,r.default)(e[1])}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0,e.xor=n
 e.default=(0,t.helper)(n)})),define("ember-truth-helpers/utils/truth-convert",["exports","@ember/array","@ember/object"],(function(e,t,r){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(e){const n=e&&(0,r.get)(e,"isTruthy")
