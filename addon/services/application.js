@@ -39,7 +39,7 @@ export default class ApplicationService extends Service {
   sidebarIsOpen = false;
 
   @tracked
-  pageTitle = this.environmentConfig?.APP?.name;
+  pageTitle;
 
   get environmentConfig() {
     return getOwner(this).resolveRegistration('config:environment');
