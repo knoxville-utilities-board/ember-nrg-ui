@@ -34,17 +34,17 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get selectedDayIndex() {
-    const value = this.args.value || new Date();
+    const value = this.args.value || this.args.minDate || new Date();
     return dayjs(value).date();
   }
 
   get selectedMonthIndex() {
-    const value = this.args.value || new Date();
+    const value = this.args.value || this.args.minDate || new Date();
     return dayjs(value).month();
   }
 
   get selectedYearIndex() {
-    const value = this.args.value || new Date();
+    const value = this.args.value || this.args.minDate || new Date();
     return dayjs(value).year();
   }
 
