@@ -10,6 +10,7 @@
               @model={{this}}
               @type={{this.dateTimeType}}
               @maxDate={{this.maxDate}}
+              @minDate={{this.minDate}}
               @allowMinuteSelection={{this.allowMinuteSelection}}
               @readonly={{this.dateTimeReadonly}}
             />
@@ -39,6 +40,11 @@
         <Args.Object
           @name="maxDate"
           @value={{this.maxDate}}
+          @jsonCollapseDepth={{0}}
+        />
+        <Args.Object
+          @name="minDate"
+          @value={{this.minDate}}
           @jsonCollapseDepth={{0}}
         />
         <Args.Bool

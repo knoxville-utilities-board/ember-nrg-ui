@@ -33,23 +33,39 @@ export default class NrgDateTimeCalendarComponent extends Component {
     }
   }
 
+  get selectedIndex() {
+    if (this.args.value) {
+      return this.args.value;
+    }
+
+    const now = dayjs();
+
+    if (now.isBefore(this.args.minDate)) {
+      return this.args.minDate;
+    } else if (now.isAfter(this.args.maxDate)) {
+      return this.args.maxDate;
+    } else {
+      return now;
+    }
+  }
+
   get selectedDayIndex() {
-    const value = this.args.value || new Date();
+    const value = this.selectedIndex;
     return dayjs(value).date();
   }
 
   get selectedMonthIndex() {
-    const value = this.args.value || new Date();
+    const value = this.selectedIndex;
     return dayjs(value).month();
   }
 
   get selectedYearIndex() {
-    const value = this.args.value || new Date();
+    const value = this.selectedIndex;
     return dayjs(value).year();
   }
 
   get selectedHourIndex() {
-    const value = this.args.value || new Date();
+    const value = this.selectedIndex;
     const hasTime = this.args.type === 'datetime' || this.args.type === 'time';
     if (!hasTime) {
       return null;
@@ -58,7 +74,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get selectedMinuteIndex() {
-    const value = this.args.value || new Date();
+    const value = this.selectedIndex;
     const hasTime = this.args.type === 'datetime' || this.args.type === 'time';
     if (!hasTime) {
       return null;
