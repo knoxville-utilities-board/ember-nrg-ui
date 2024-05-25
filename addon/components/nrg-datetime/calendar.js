@@ -33,23 +33,39 @@ export default class NrgDateTimeCalendarComponent extends Component {
     }
   }
 
+  get selectedIndex() {
+    if (this.args.value) {
+      return this.args.value;
+    }
+
+    const now = dayjs();
+
+    if (now.isBefore(this.args.minDate)) {
+      return this.args.minDate;
+    } else if (now.isAfter(this.args.maxDate)) {
+      return this.args.maxDate;
+    } else {
+      return now;
+    }
+  }
+
   get selectedDayIndex() {
-    const value = this.args.value || this.args.minDate || new Date();
+    const value = this.selectedIndex;
     return dayjs(value).date();
   }
 
   get selectedMonthIndex() {
-    const value = this.args.value || this.args.minDate || new Date();
+    const value = this.selectedIndex;
     return dayjs(value).month();
   }
 
   get selectedYearIndex() {
-    const value = this.args.value || this.args.minDate || new Date();
+    const value = this.selectedIndex;
     return dayjs(value).year();
   }
 
   get selectedHourIndex() {
-    const value = this.args.value || new Date();
+    const value = this.selectedIndex;
     const hasTime = this.args.type === 'datetime' || this.args.type === 'time';
     if (!hasTime) {
       return null;
@@ -58,7 +74,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   get selectedMinuteIndex() {
-    const value = this.args.value || new Date();
+    const value = this.selectedIndex;
     const hasTime = this.args.type === 'datetime' || this.args.type === 'time';
     if (!hasTime) {
       return null;
@@ -110,8 +126,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       for (let j = 0; j < 3; j++) {
         const minute = calendar.minute();
         const disabled = this.isDateDisabled(calendar, 'minute');
-        const selected =
-          !disabled && this.args.value && this.selectedMinuteIndex === minute;
+        const selected = !disabled && this.args.value && this.selectedMinuteIndex === minute;
         row.push({
           display: calendar.format('LT'),
           minute,
@@ -137,8 +152,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       for (let j = 0; j < 4; j++) {
         const hour = calendar.hour();
         const disabled = this.isDateDisabled(calendar, 'hour');
-        const selected =
-          !disabled && this.args.value && this.selectedHourIndex === hour;
+        const selected = !disabled && this.args.value && this.selectedHourIndex === hour;
         row.push({
           display: calendar.format('LT'),
           hour,
@@ -167,10 +181,8 @@ export default class NrgDateTimeCalendarComponent extends Component {
         const year = calendar.year();
         const isDifferentMonth = month !== this.selectedMonthIndex;
         const dateIsToday = calendar.isSame(today, 'date');
-        const disabled =
-          this.isDateDisabled(calendar, 'date') || isDifferentMonth;
-        const selected =
-          !disabled && this.args.value && this.selectedDayIndex === date;
+        const disabled = this.isDateDisabled(calendar, 'date') || isDifferentMonth;
+        const selected = !disabled && this.args.value && this.selectedDayIndex === date;
 
         week.push({
           customClass: (dateIsToday && 'today') || '',
@@ -199,8 +211,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
       for (let j = 0; j < 3; j++) {
         const month = calendar.month();
         const disabled = this.isDateDisabled(calendar, 'month');
-        const selected =
-          !disabled && this.args.value && this.selectedMonthIndex === month;
+        const selected = !disabled && this.args.value && this.selectedMonthIndex === month;
         row.push({
           display: calendar.format('MMM'),
           month,
@@ -229,8 +240,7 @@ export default class NrgDateTimeCalendarComponent extends Component {
           year,
         });
         const disabled = this.isDateDisabled(calendar, 'year');
-        const selected =
-          !disabled && this.args.value && this.selectedYearIndex === year;
+        const selected = !disabled && this.args.value && this.selectedYearIndex === year;
         row.push({
           display: year,
           year,
@@ -330,10 +340,8 @@ export default class NrgDateTimeCalendarComponent extends Component {
       return;
     }
 
-    const dateBeforeMinDate =
-      this.args.minDate && date.isBefore(this.args.minDate);
-    const dateAfterMaxDate =
-      this.args.maxDate && date.isAfter(this.args.maxDate);
+    const dateBeforeMinDate = this.args.minDate && date.isBefore(this.args.minDate);
+    const dateAfterMaxDate = this.args.maxDate && date.isAfter(this.args.maxDate);
 
     if (dateBeforeMinDate) {
       date = dayjs(this.args.minDate).clone();
