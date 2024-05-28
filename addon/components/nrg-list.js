@@ -36,8 +36,8 @@ export default class NrgListComponent extends Component {
       query[this.filterParam] = selectedFilterValue;
     }
 
-    if (isRefresh) {
-      this.args.onRefresh?.(query) ?? this.args.onQuery?.(query);
+    if (isRefresh && this.args.onRefresh) {
+      this.args.onRefresh?.(query);
     } else {
       this.args.onQuery?.(query);
     }
