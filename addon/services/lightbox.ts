@@ -4,18 +4,28 @@ import Service from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import { tracked } from '@glimmer/tracking';
 
+export type LightboxItem = {
+  thumbnailId: string;
+  detail: string;
+
+  photo?: {
+    url?: string;
+    altText?: string;
+  };
+};
+
 export default class LightboxService extends Service {
   @tracked
   lightboxIsOpen = false;
 
   @tracked
-  items = A();
+  items = A<LightboxItem>();
 
   @tracked
-  selectedItem;
+  selectedItem: LightboxItem | undefined;
 
   @tracked
-  selectedPhotoDetail;
+  selectedPhotoDetail: unknown;
 
   @tracked
   bottomDetails = false;
@@ -29,6 +39,9 @@ export default class LightboxService extends Service {
   }
 
   get selectedIndex() {
+    if (!this.selectedItem) {
+      return -1;
+    }
     return this.items.indexOf(this.selectedItem);
   }
 
@@ -39,18 +52,18 @@ export default class LightboxService extends Service {
   }
 
   @action
-  add(item) {
+  add(item: LightboxItem) {
     this.items.pushObject(item);
   }
 
   @action
-  remove(thumbnailId) {
+  remove(thumbnailId: string) {
     const items = A(this.items.rejectBy('thumbnailId', thumbnailId));
     this.items = items;
   }
 
   @action
-  selectAndOpen(thumbnailId) {
+  selectAndOpen(thumbnailId: string) {
     const item = this.items.findBy('thumbnailId', thumbnailId);
     this.selectedItem = item;
     this.lightboxIsOpen = true;
@@ -58,13 +71,19 @@ export default class LightboxService extends Service {
   }
 
   @action
-  updateDetail(thumbnailId, detail) {
+  updateDetail(thumbnailId: string, detail: string) {
     const item = this.items.findBy('thumbnailId', thumbnailId);
+    if (!item) {
+      return;
+    }
     item.detail = detail;
     this.setSelectedDetail();
   }
 
   setSelectedDetail() {
+    if (!this.selectedItem) {
+      return;
+    }
     this.selectedPhotoDetail = htmlSafe(this.selectedItem?.detail);
   }
 

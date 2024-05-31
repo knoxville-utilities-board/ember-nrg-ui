@@ -10,11 +10,11 @@ export default class ContextMenuService extends Service {
     return this.contextMenus.lastObject;
   }
 
-  addContextMenu(elements) {
-    this.contextMenus.addObject(elements);
+  addContextMenu(element: HTMLElement) {
+    this.contextMenus.addObject(element);
   }
 
-  removeContextMenu(elements) {
-    this.contextMenus.removeObject(elements);
+  removeContextMenu(element: HTMLElement) {
+    this.contextMenus.removeObject(element);
   }
 }

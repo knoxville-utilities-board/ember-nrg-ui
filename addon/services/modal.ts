@@ -3,9 +3,11 @@ import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
+import type NativeArray from '@ember/array/-private/native-array';
+
 export default class Modal extends Service {
   @tracked
-  items = A();
+  items: NativeArray<NrgModal> = A();
 
   @tracked
   renderIndex = 0;
@@ -24,7 +26,7 @@ export default class Modal extends Service {
   get dimmerIndex() {
     let lastUnstackable = -1;
     for (let i = this.openModals.length - 1; i >= 0; i--) {
-      if (!this.openModals[i].stackable) {
+      if (!this.openModals[i]?.stackable) {
         lastUnstackable = i;
         break;
       }
@@ -49,7 +51,7 @@ export default class Modal extends Service {
     if (!this.openModals.length) {
       return [];
     }
-    const modalRenderList = this.openModals.slice();
+    const modalRenderList: (NrgModal | 'dimmer')[] = this.openModals.slice();
     modalRenderList.splice(this.dimmerIndex, 0, 'dimmer');
     return modalRenderList;
   }
@@ -83,14 +85,14 @@ export default class Modal extends Service {
   }
 
   @action
-  add(item) {
+  add(item: NrgModal) {
     this.items.pushObject(item);
     item.renderIndex = this.renderIndex;
     this.renderIndex++;
   }
 
   @action
-  remove(item) {
+  remove(item: NrgModal) {
     this.items.removeObject(item);
   }
 }

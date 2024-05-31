@@ -1,11 +1,12 @@
 import Service, { inject as service } from '@ember/service';
+import type { IsMobileService, MediaService } from 'global';
 
 export default class Responsive extends Service {
   @service
-  isMobile;
+  declare isMobile: IsMobileService;
 
   @service
-  media;
+  declare media: MediaService;
 
   get screenWidth() {
     return window.innerWidth;

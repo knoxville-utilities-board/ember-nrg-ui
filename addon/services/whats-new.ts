@@ -6,7 +6,7 @@ export default class WhatsNewService extends Service {
   content = '';
 
   @tracked
-  _isOpen;
+  _isOpen?: boolean;
 
   get isOpen() {
     return this._isOpen ?? this.hasContent;
