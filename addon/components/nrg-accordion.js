@@ -8,16 +8,16 @@ import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 @AddNrgDeprecations()
 export default class NrgAccordionComponent extends Component {
   @tracked
-  openItems = A();
+  activeItems = A();
 
   get mappedItems() {
     const items = this.args.items ?? [];
-    const { openItems, closeOnContentClick } = this;
+    const { activeItems, closeOnContentClick } = this;
 
     return items.map((item) => {
       const hash = stringHash(objectHash(item)).toString(36);
       const contentHash = closeOnContentClick ? hash : undefined;
-      const active = openItems.includes(hash);
+      const active = activeItems.includes(hash);
 
       return { data: item, hash, contentHash, active };
     });
@@ -88,13 +88,13 @@ export default class NrgAccordionComponent extends Component {
   }
 
   openItem(item) {
-    this.openItems.pushObject(item.hash);
+    this.activeItems.pushObject(item.hash);
 
     this.args.onOpen?.(item.data);
   }
 
   closeItem(item) {
-    this.openItems.removeObject(item.hash);
+    this.activeItems.removeObject(item.hash);
 
     this.args.onClose?.(item.data);
   }
@@ -107,10 +107,10 @@ export default class NrgAccordionComponent extends Component {
     if (!clickedElement && !clickedHash) {
       return;
     }
-    const { exclusive, forceOpen, openItems, mappedItems } = this;
+    const { exclusive, forceOpen, activeItems, mappedItems } = this;
     const clickedItem = mappedItems.find((i) => i.hash === clickedHash);
     const currentlyOpen = mappedItems.filter((mappedItem) =>
-      openItems.includes(mappedItem.hash)
+      activeItems.includes(mappedItem.hash)
     );
 
     const closingOnlyOpenItem =
