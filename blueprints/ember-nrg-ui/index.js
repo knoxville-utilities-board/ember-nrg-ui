@@ -47,21 +47,21 @@ module.exports = {
     const nodePackages = [
       {
         name: 'sass',
-        target: '1.43.5',
+        target: '^1.77.4',
       },
       {
         name: '@faker-js/faker',
-        target: '6.0.0-alpha.7',
+        target: '^8.4.1',
       },
     ];
     const addOns = [
       {
         name: 'ember-cli-mirage',
-        target: '2.4.0',
+        target: '^3.0.3',
       },
       {
         name: 'ember-cli-sass',
-        target: '10.0.1',
+        target: '^11.0.1',
       },
       {
         name: 'ember-cli-content-security-policy',
