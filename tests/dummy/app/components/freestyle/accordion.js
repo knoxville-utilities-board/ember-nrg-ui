@@ -56,6 +56,9 @@ export default class FreestyleAccordionComponent extends Component {
   @tracked
   fluid = false;
 
+  @tracked
+  contentClickable = false;
+
   get icon() {
     if (this._icon == 'false') {
       return false;

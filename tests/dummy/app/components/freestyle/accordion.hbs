@@ -65,6 +65,7 @@
           @styled={{this.styled}}
           @basic={{this.basic}}
           @fluid={{this.fluid}}
+          @contentClickable={{this.contentClickable}}
         />
       </:example>
 
@@ -103,6 +104,13 @@
           @value={{this.fluid}}
           @description="Whether to take up the container's width"
           @onInput={{fn (mut this.fluid)}}
+        />
+        <Args.Bool
+          @name="contentClickable"
+          @defaultValue={{false}}
+          @value={{this.contentClickable}}
+          @description="If false, clicking on the content will close the accordion item"
+          @onInput={{fn (mut this.contentClickable)}}
         />
       </:api>
     </Freestyle::Usage>
