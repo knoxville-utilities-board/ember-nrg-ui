@@ -17,9 +17,9 @@ export default class NrgAccordionComponent extends Component {
     return items.map((item) => {
       const hash = stringHash(objectHash(item)).toString(36);
       const contentHash = closeOnContentClick ? hash : undefined;
-      const active = activeItems.includes(hash);
+      const active = activeItems.includes(item);
 
-      return { data: item, hash, contentHash, active };
+      return { item, hash, contentHash, active };
     });
   }
 
@@ -87,16 +87,16 @@ export default class NrgAccordionComponent extends Component {
     return this.args.contentClickable !== true;
   }
 
-  openItem(item) {
-    this.activeItems.pushObject(item.hash);
+  openItem(data) {
+    this.activeItems.pushObject(data.item);
 
-    this.args.onOpen?.(item.data);
+    this.args.onOpen?.(data.item);
   }
 
-  closeItem(item) {
-    this.activeItems.removeObject(item.hash);
+  closeItem(data) {
+    this.activeItems.removeObject(data.item);
 
-    this.args.onClose?.(item.data);
+    this.args.onClose?.(data.item);
   }
 
   @action
@@ -110,7 +110,7 @@ export default class NrgAccordionComponent extends Component {
     const { exclusive, forceOpen, activeItems, mappedItems } = this;
     const clickedItem = mappedItems.find((i) => i.hash === clickedHash);
     const currentlyOpen = mappedItems.filter((mappedItem) =>
-      activeItems.includes(mappedItem.hash)
+      activeItems.includes(mappedItem.item)
     );
 
     const closingOnlyOpenItem =
@@ -133,7 +133,7 @@ export default class NrgAccordionComponent extends Component {
       this.openItem(clickedItem);
     }
 
-    this.args.onClick?.(clickedItem.data);
+    this.args.onClick?.(clickedItem.item);
   }
 
   @action
