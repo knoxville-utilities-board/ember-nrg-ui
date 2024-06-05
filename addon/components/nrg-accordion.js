@@ -2,7 +2,6 @@ import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-compo
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
-import objectHash, { stringHash } from 'ember-nrg-ui/utils/object-hash';
 import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 @AddNrgDeprecations()
@@ -20,14 +19,12 @@ export default class NrgAccordionComponent extends NrgValidationComponent {
 
   get mappedItems() {
     const items = this.args.items ?? [];
-    const { value, closeOnContentClick } = this;
+    const { value } = this;
 
     return items.map((item) => {
-      const hash = stringHash(objectHash(item)).toString(36);
-      const contentHash = closeOnContentClick ? hash : undefined;
       const active = value.includes(item);
 
-      return { item, hash, contentHash, active };
+      return { item, active };
     });
   }
 
@@ -115,20 +112,24 @@ export default class NrgAccordionComponent extends NrgValidationComponent {
 
   @action
   clickItem({ srcElement }) {
-    const clickedElement = srcElement.closest('[data-accordion-hash]');
-    const clickedHash =
-      clickedElement?.attributes['data-accordion-hash']?.value;
-    if (!clickedElement && !clickedHash) {
+    const clickedElement = srcElement.closest('[data-accordion-index]');
+    const clickedIndex =
+      clickedElement?.attributes['data-accordion-index']?.value;
+    if (!clickedElement && !clickedIndex) {
       return;
     }
-    const { exclusive, forceOpen, value, mappedItems } = this;
-    const clickedItem = mappedItems.find((i) => i.hash === clickedHash);
+    const { exclusive, forceOpen, value, mappedItems, closeOnContentClick } =
+      this;
+    if (!closeOnContentClick && clickedElement.classList.contains('content')) {
+      return;
+    }
+    const clickedItem = mappedItems[clickedIndex];
     const currentlyOpen = mappedItems.filter((mappedItem) =>
       value.includes(mappedItem.item)
     );
 
     const closingOnlyOpenItem =
-      currentlyOpen.length === 1 && clickedItem.hash === currentlyOpen[0].hash;
+      currentlyOpen.length === 1 && clickedItem === currentlyOpen[0];
 
     if (closingOnlyOpenItem && forceOpen) {
       return;

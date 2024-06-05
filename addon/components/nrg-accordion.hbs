@@ -4,10 +4,10 @@
   {{on "click" this.clickItem}}
   ...attributes
 >
-  {{#each this.mappedItems as |data|}}
+  {{#each this.mappedItems as |data index|}}
     <div
       class="{{if data.active 'active '}}title"
-      data-accordion-hash={{data.hash}}
+      data-accordion-index={{index}}
     >
       {{#if @freeform}}
         {{yield data.item data.active to="title"}}
@@ -22,7 +22,7 @@
       class="{{if data.active 'active '~}}
         {{unless this.closeOnContentClick 'no-click'}}
         content"
-      data-accordion-hash={{data.contentHash}}
+      data-accordion-index={{index}}
     >
       {{#if @freeform}}
         {{yield data.item data.active to="content"}}
