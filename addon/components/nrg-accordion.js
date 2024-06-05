@@ -1,25 +1,30 @@
-import Component from '@glimmer/component';
+import NrgValidationComponent from 'ember-nrg-ui/components/nrg-validation-component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
-import objectHash, { stringHash } from 'ember-nrg-ui/utils/object-hash';
 import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
 @AddNrgDeprecations()
-export default class NrgAccordionComponent extends Component {
+export default class NrgAccordionComponent extends NrgValidationComponent {
   @tracked
-  openItems = A();
+  activeItems = A();
+
+  get model() {
+    return this.args.model ?? this;
+  }
+
+  get valuePath() {
+    return this.args.valuePath ?? 'activeItems';
+  }
 
   get mappedItems() {
     const items = this.args.items ?? [];
-    const { openItems, closeOnContentClick } = this;
+    const { value } = this;
 
     return items.map((item) => {
-      const hash = stringHash(objectHash(item)).toString(36);
-      const contentHash = closeOnContentClick ? hash : undefined;
-      const active = openItems.includes(hash);
+      const active = value.includes(item);
 
-      return { data: item, hash, contentHash, active };
+      return { item, active };
     });
   }
 
@@ -87,34 +92,44 @@ export default class NrgAccordionComponent extends Component {
     return this.args.contentClickable !== true;
   }
 
-  openItem(item) {
-    this.openItems.pushObject(item.hash);
-
-    this.args.onOpen?.(item.data);
+  getDefaultValue() {
+    return A();
   }
 
-  closeItem(item) {
-    this.openItems.removeObject(item.hash);
+  openItem(data) {
+    this.value.pushObject(data.item);
 
-    this.args.onClose?.(item.data);
+    this.onChange(this.value);
+    this.args.onOpen?.(data.item);
+  }
+
+  closeItem(data) {
+    this.value.removeObject(data.item);
+
+    this.onChange(this.value);
+    this.args.onClose?.(data.item);
   }
 
   @action
   clickItem({ srcElement }) {
-    const clickedElement = srcElement.closest('[data-accordion-hash]');
-    const clickedHash =
-      clickedElement?.attributes['data-accordion-hash']?.value;
-    if (!clickedElement && !clickedHash) {
+    const clickedElement = srcElement.closest('[data-accordion-index]');
+    const clickedIndex =
+      clickedElement?.attributes['data-accordion-index']?.value;
+    if (!clickedElement && !clickedIndex) {
       return;
     }
-    const { exclusive, forceOpen, openItems, mappedItems } = this;
-    const clickedItem = mappedItems.find((i) => i.hash === clickedHash);
+    const { exclusive, forceOpen, value, mappedItems, closeOnContentClick } =
+      this;
+    if (!closeOnContentClick && clickedElement.classList.contains('content')) {
+      return;
+    }
+    const clickedItem = mappedItems[clickedIndex];
     const currentlyOpen = mappedItems.filter((mappedItem) =>
-      openItems.includes(mappedItem.hash)
+      value.includes(mappedItem.item)
     );
 
     const closingOnlyOpenItem =
-      currentlyOpen.length === 1 && clickedItem.hash === currentlyOpen[0].hash;
+      currentlyOpen.length === 1 && clickedItem === currentlyOpen[0];
 
     if (closingOnlyOpenItem && forceOpen) {
       return;
@@ -133,6 +148,6 @@ export default class NrgAccordionComponent extends Component {
       this.openItem(clickedItem);
     }
 
-    this.args.onClick?.(clickedItem.data);
+    this.args.onClick?.(clickedItem.item);
   }
 }

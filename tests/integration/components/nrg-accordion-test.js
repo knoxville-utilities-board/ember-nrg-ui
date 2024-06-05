@@ -1,7 +1,8 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'dummy/tests/helpers';
-import { click, findAll, render } from '@ember/test-helpers';
+import { click, findAll, render, rerender } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { A } from '@ember/array';
 
 module('Integration | Component | nrg-accordion', function (hooks) {
   setupRenderingTest(hooks);
@@ -261,5 +262,49 @@ module('Integration | Component | nrg-accordion', function (hooks) {
       assert.dom(contentEl).hasClass('active');
       assert.dom('em', contentEl).hasText(content);
     }
+  });
+
+  test('model/valuePath works', async function (assert) {
+    this.value = A([this.items[2]]);
+
+    await render(hbs`
+      <NrgAccordion
+        @items={{this.items}}
+        @model={{this}}
+        @valuePath="value"
+        @exclusive={{false}} />
+    `);
+
+    let titles = findAll('div.title');
+    let contents = findAll('div.content');
+
+    assert.dom(titles[0]).doesNotHaveClass('active');
+    assert.dom(contents[0]).doesNotHaveClass('active');
+
+    assert.dom(titles[1]).doesNotHaveClass('active');
+    assert.dom(contents[1]).doesNotHaveClass('active');
+
+    assert.dom(titles[2]).hasClass('active');
+    assert.dom(contents[2]).hasClass('active');
+
+    this.value.pushObject(this.items[0]);
+
+    await rerender();
+
+    titles = findAll('div.title');
+    contents = findAll('div.content');
+
+    assert.dom(titles[0]).hasClass('active');
+    assert.dom(contents[0]).hasClass('active');
+
+    assert.dom(titles[1]).doesNotHaveClass('active');
+    assert.dom(contents[1]).doesNotHaveClass('active');
+
+    assert.dom(titles[2]).hasClass('active');
+    assert.dom(contents[2]).hasClass('active');
+
+    await click('[data-accordion-index="2"]');
+
+    assert.deepEqual(this.value, [this.items[0]]);
   });
 });

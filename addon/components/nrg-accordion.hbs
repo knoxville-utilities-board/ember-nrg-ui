@@ -4,34 +4,34 @@
   {{on "click" this.clickItem}}
   ...attributes
 >
-  {{#each this.mappedItems as |item|}}
+  {{#each this.mappedItems as |data index|}}
     <div
-      class="{{if item.active 'active '}}title"
-      data-accordion-hash={{item.hash}}
+      class="{{if data.active 'active '}}title"
+      data-accordion-index={{index}}
     >
       {{#if @freeform}}
-        {{yield item.data item.active to="title"}}
+        {{yield data.item data.active to="title"}}
       {{else}}
         {{#if this.icon}}
           <i class={{this.iconClass}}></i>
         {{/if}}
-        {{item.data.title}}
+        {{data.item.title}}
       {{/if}}
     </div>
     <div
-      class="{{if item.active 'active '~}}
+      class="{{if data.active 'active '~}}
         {{unless this.closeOnContentClick 'no-click'}}
         content"
-      data-accordion-hash={{item.contentHash}}
+      data-accordion-index={{index}}
     >
       {{#if @freeform}}
-        {{yield item.data item.active to="content"}}
+        {{yield data.item data.active to="content"}}
       {{else}}
         {{#if (has-block-params)}}
-          {{yield item.data}}
+          {{yield data.item}}
         {{else}}
           <p>
-            {{item.data.content}}
+            {{data.item.content}}
           </p>
         {{/if}}
       {{/if}}
