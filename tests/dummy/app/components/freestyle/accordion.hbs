@@ -4,9 +4,10 @@
       <:example>
         <NrgAccordion
           @items={{this.items}}
+          @model={{this}}
+          @valuePath="openItems"
           @exclusive={{this.exclusive}}
           @forceOpen={{this.forceOpen}}
-          @openItems={{this.openItems}}
           @onClick={{this.itemClicked}}
           @onOpen={{this.itemOpened}}
           @onClose={{this.itemClosed}}
@@ -29,22 +30,22 @@
           @onInput={{fn (mut this.forceOpen)}}
         />
         <Args.Base
-          @name="openItems"
-          @type="Array"
+          @name="model/valuePath"
+          @type="Array (bound value)"
           @value={{this.openItems}}
-          @description="Force these item(s) to open"
+          @description="An array of items that are open"
         >
-          {{#each this.items as |item index|}}
+          {{#each this.displayItems as |data|}}
             <div class="ui field">
               {{#let (unique-id) as |id|}}
                 <input
                   id={{id}}
                   type="checkbox"
-                  {{on "change" (fn this.toggleIndex index)}}
+                  checked={{data.isActive}}
+                  {{on "change" (fn this.toggleItem data.item)}}
                 />
                 <label for={{id}}>
-                  {{item.title}}
-                  (#{{index}})
+                  {{data.item.title}}
                 </label>
               {{/let}}
             </div>

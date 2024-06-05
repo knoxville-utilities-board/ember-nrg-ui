@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { A } from '@ember/array';
 
 const FLASH_TIMEOUT = 1000;
 const flashOptions = {
@@ -38,7 +39,7 @@ export default class FreestyleAccordionComponent extends Component {
   forceOpen = false;
 
   @tracked
-  openItems = [];
+  openItems = A();
 
   @tracked
   _icon;
@@ -63,12 +64,22 @@ export default class FreestyleAccordionComponent extends Component {
     return this._icon || undefined;
   }
 
+  get displayItems() {
+    const { openItems } = this;
+    return this.items.map((item) => {
+      return {
+        item,
+        isActive: openItems.includes(item),
+      };
+    });
+  }
+
   @action
-  toggleIndex(index) {
-    if (this.openItems.includes(index)) {
-      this.openItems.removeObject(index);
+  toggleItem(item) {
+    if (this.openItems.includes(item)) {
+      this.openItems.removeObject(item);
     } else {
-      this.openItems.addObject(index);
+      this.openItems.pushObject(item);
     }
   }
 
