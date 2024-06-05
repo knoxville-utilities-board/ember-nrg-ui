@@ -38,6 +38,9 @@ export default class FreestyleAccordionComponent extends Component {
   forceOpen = false;
 
   @tracked
+  openItems = [];
+
+  @tracked
   _icon;
 
   @tracked
@@ -58,6 +61,15 @@ export default class FreestyleAccordionComponent extends Component {
     }
 
     return this._icon || undefined;
+  }
+
+  @action
+  toggleIndex(index) {
+    if (this.openItems.includes(index)) {
+      this.openItems.removeObject(index);
+    } else {
+      this.openItems.addObject(index);
+    }
   }
 
   @action

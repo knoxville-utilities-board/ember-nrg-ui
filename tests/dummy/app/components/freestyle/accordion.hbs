@@ -6,6 +6,7 @@
           @items={{this.items}}
           @exclusive={{this.exclusive}}
           @forceOpen={{this.forceOpen}}
+          @openItems={{this.openItems}}
           @onClick={{this.itemClicked}}
           @onOpen={{this.itemOpened}}
           @onClose={{this.itemClosed}}
@@ -27,6 +28,28 @@
           @description="Whether to that require one item is always open"
           @onInput={{fn (mut this.forceOpen)}}
         />
+        <Args.Base
+          @name="openItems"
+          @type="Array"
+          @value={{this.openItems}}
+          @description="Force these item(s) to open"
+        >
+          {{#each this.items as |item index|}}
+            <div class="ui field">
+              {{#let (unique-id) as |id|}}
+                <input
+                  id={{id}}
+                  type="checkbox"
+                  {{on "change" (fn this.toggleIndex index)}}
+                />
+                <label for={{id}}>
+                  {{item.title}}
+                  (#{{index}})
+                </label>
+              {{/let}}
+            </div>
+          {{/each}}
+        </Args.Base>
       </:api>
     </Freestyle::Usage>
   </Section.subsection>

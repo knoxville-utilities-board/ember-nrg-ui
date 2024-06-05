@@ -2,6 +2,8 @@
   role="button"
   class={{this.classes}}
   {{on "click" this.clickItem}}
+  {{did-insert this.updateOpenItems @openItems @openItems.length}}
+  {{did-update this.updateOpenItems @openItems @openItems.length}}
   ...attributes
 >
   {{#each this.mappedItems as |item|}}

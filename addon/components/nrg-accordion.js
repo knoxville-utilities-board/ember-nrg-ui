@@ -135,4 +135,14 @@ export default class NrgAccordionComponent extends Component {
 
     this.args.onClick?.(clickedItem.data);
   }
+
+  @action
+  updateOpenItems(element, [_openItems]) {
+    const openItems = _openItems ?? [];
+    const { activeItems, mappedItems } = this;
+    const openItemHashes = openItems.map((i) => mappedItems[i].hash);
+
+    activeItems.clear();
+    activeItems.pushObjects(openItemHashes);
+  }
 }
