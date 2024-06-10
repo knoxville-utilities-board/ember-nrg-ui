@@ -185,5 +185,6 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   clear() {
     this.searchString = null;
     this.onChange(null);
+    this.args.onClear?.();
   }
 }
