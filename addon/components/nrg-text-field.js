@@ -29,22 +29,24 @@ export default class NrgTextFieldComponent extends NrgValidationComponent {
     }
 
     let isValid = true;
-    let value = input;
     if (this.type === 'number') {
       const min = this.args.min ?? 0;
       if (isEmpty(input)) {
-        return min.toString();
+        if (!this.args.allowNull) {
+          return min.toString();
+        }
+        return null;
       }
-      value = parseFloat(input);
+      let numericValue = parseFloat(input);
       if (!this.args.allowDecimals) {
-        value = Math.trunc(input);
-        input = value.toString();
+        numericValue = Math.trunc(input);
+        input = numericValue.toString();
       }
-      isValid = !isNaN(input);
+      isValid = !isNaN(numericValue);
 
-      if (this.args.allowNegatives !== true && value < 0) {
+      if (this.args.allowNegatives !== true && numericValue < 0) {
         isValid = true;
-        value = min;
+        input = min;
       }
     }
     return isValid && input;

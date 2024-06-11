@@ -82,6 +82,7 @@
               @type="number"
               @allowDecimals={{this.allowDecimals}}
               @allowNegatives={{this.allowNegatives}}
+              @allowNull={{this.allowNull}}
               as |view|
             >
               <NrgIcon @icon="hashtag" />
@@ -109,6 +110,12 @@
           @description="Allow negative numbers."
           @value={{this.allowNegatives}}
           @onInput={{fn (mut this.allowNegatives)}}
+        />
+        <Args.Bool
+          @name="allowNull"
+          @description="Allow null as an accepted value."
+          @value={{this.allowNull}}
+          @onInput={{fn (mut this.allowNull)}}
         />
       </:api>
     </Freestyle::Usage>

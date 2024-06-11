@@ -109,4 +109,21 @@ module('Integration | Component | nrg-text-field', function (hooks) {
     assert.dom('input').hasValue('-5');
     assert.strictEqual(this.value, '-5');
   });
+
+  test('null values can be allowed', async function (assert) {
+    this.min = -5;
+    this.value = '7';
+
+    await render(
+      hbs`<NrgTextField @model={{this}} @valuePath="value" @type="number" @min={{this.min}} @allowNull={{true}} />`
+    );
+
+    assert.dom('input').hasValue('7');
+    assert.strictEqual(this.value, '7');
+
+    await fillIn('input', '');
+
+    assert.dom('input').hasValue('');
+    assert.strictEqual(this.value, null);
+  });
 });
