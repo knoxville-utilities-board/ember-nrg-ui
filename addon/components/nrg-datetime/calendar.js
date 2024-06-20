@@ -44,9 +44,8 @@ export default class NrgDateTimeCalendarComponent extends Component {
       return this.args.minDate;
     } else if (now.isAfter(this.args.maxDate)) {
       return this.args.maxDate;
-    } else {
-      return now;
     }
+    return now;
   }
 
   get selectedDayIndex() {
