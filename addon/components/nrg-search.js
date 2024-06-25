@@ -1,7 +1,6 @@
 import { action, get } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { timeout } from 'ember-concurrency';
-import { restartableTask } from 'ember-concurrency-decorators';
+import { restartableTask, timeout } from 'ember-concurrency';
 import NrgValidationComponent from './nrg-validation-component';
 import { inject as service } from '@ember/service';
 import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
@@ -103,13 +102,12 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     this.onBlur();
   }
 
-  @restartableTask
-  *throttleQuery(searchString) {
-    yield timeout(this.searchTimeout);
-    this.items = yield this.args.query(searchString);
+  throttleQuery = restartableTask(async (searchString) => {
+    await timeout(this.searchTimeout);
+    this.items = await this.args.query(searchString);
     this.activeItem = -1;
     this.isFocused = true;
-  }
+  });
 
   @action
   onBlur() {

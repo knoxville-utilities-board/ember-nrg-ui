@@ -7,6 +7,14 @@ const getGitInfo = require('git-repo-info');
 module.exports = {
   name: require('./package').name,
 
+  options: {
+    babel: {
+      plugins: [
+        require.resolve('ember-concurrency/async-arrow-task-transform'),
+      ],
+    },
+  },
+
   blueprintsPath() {
     return path.join(__dirname, 'blueprints');
   },

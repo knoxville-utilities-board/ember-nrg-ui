@@ -1,7 +1,6 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { timeout } from 'ember-concurrency';
-import { restartableTask } from 'ember-concurrency-decorators';
+import { restartableTask, timeout } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
@@ -28,16 +27,15 @@ export default class NrgListHeaderSearchComponent extends Component {
     return this.args.searchTimeout ?? defaultSearchTimeout;
   }
 
-  @restartableTask
-  *searchTask(searchString, immediate) {
+  searchTask = restartableTask(async (searchString, immediate) => {
     if (searchString === null) {
       return;
     }
     if (!immediate) {
-      yield timeout(this.searchTimeout);
+      await timeout(this.searchTimeout);
     }
     this.args.onChange?.(searchString);
-  }
+  });
 
   @action
   onSearchInput(searchString) {
