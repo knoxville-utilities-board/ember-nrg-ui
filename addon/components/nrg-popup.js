@@ -11,12 +11,11 @@ export default class NrgPopupComponent extends Component {
   @tracked
   isOpen;
 
-  @restartableTask
-  *hoverTask(hovering) {
+  hoverTask = restartableTask(async hovering => {
     const hoverTimeout = this.args.hoverTimeout ?? defaultHoverTimeout;
-    yield timeout(hoverTimeout);
+    await timeout(hoverTimeout);
     this.isOpen = hovering;
-  }
+  });
 
   @action
   getTarget(element) {

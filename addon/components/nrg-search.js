@@ -102,13 +102,12 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     this.onBlur();
   }
 
-  @restartableTask
-  *throttleQuery(searchString) {
-    yield timeout(this.searchTimeout);
-    this.items = yield this.args.query(searchString);
+  throttleQuery = restartableTask(async searchString => {
+    await timeout(this.searchTimeout);
+    this.items = await this.args.query(searchString);
     this.activeItem = -1;
     this.isFocused = true;
-  }
+  });
 
   @action
   onBlur() {

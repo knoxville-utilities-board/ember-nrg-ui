@@ -27,16 +27,15 @@ export default class NrgListHeaderSearchComponent extends Component {
     return this.args.searchTimeout ?? defaultSearchTimeout;
   }
 
-  @restartableTask
-  *searchTask(searchString, immediate) {
+  searchTask = restartableTask(async (searchString, immediate) => {
     if (searchString === null) {
       return;
     }
     if (!immediate) {
-      yield timeout(this.searchTimeout);
+      await timeout(this.searchTimeout);
     }
     this.args.onChange?.(searchString);
-  }
+  });
 
   @action
   onSearchInput(searchString) {
