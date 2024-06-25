@@ -102,7 +102,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
     this.onBlur();
   }
 
-  throttleQuery = restartableTask(async searchString => {
+  throttleQuery = restartableTask(async (searchString) => {
     await timeout(this.searchTimeout);
     this.items = await this.args.query(searchString);
     this.activeItem = -1;

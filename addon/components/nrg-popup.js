@@ -11,7 +11,7 @@ export default class NrgPopupComponent extends Component {
   @tracked
   isOpen;
 
-  hoverTask = restartableTask(async hovering => {
+  hoverTask = restartableTask(async (hovering) => {
     const hoverTimeout = this.args.hoverTimeout ?? defaultHoverTimeout;
     await timeout(hoverTimeout);
     this.isOpen = hovering;
