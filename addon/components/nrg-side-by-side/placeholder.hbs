@@ -1,7 +1,10 @@
 {{#if (has-block)}}
   {{yield}}
 {{else}}
-  <div class="ui header" ...attributes>
-    {{or @text "Please select an item"}}
+  <div class="ui center aligned icon header" ...attributes>
+    <i class="large list icon"></i>
+    <div class="content">
+      {{or @text "Please select an item"}}
+    </div>
   </div>
 {{/if}}
