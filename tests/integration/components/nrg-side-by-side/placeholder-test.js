@@ -11,15 +11,17 @@ module(
     test('it renders (inline)', async function (assert) {
       await render(hbs`<NrgSideBySide::Placeholder />`);
 
-      assert.dom('div.ui.header').hasText('Please select an item');
+      assert.dom('div.ui.header > .content').hasText('Please select an item');
+      assert.dom('div.ui.header > i').hasClass('list');
 
       await render(
         hbs`<NrgSideBySide::Placeholder @text="Please select an item from the list" />`
       );
 
       assert
-        .dom('div.ui.header')
+        .dom('div.ui.header > .content')
         .hasText('Please select an item from the list');
+      assert.dom('div.ui.header > i').hasClass('list');
     });
 
     test('it renders (block)', async function (assert) {
