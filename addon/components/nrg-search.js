@@ -95,7 +95,7 @@ export default class NrgSearchComponent extends NrgValidationComponent {
 
   selectItem(item) {
     if (!item) {
-      item = this.items[this.activeItem];
+      item = this.items.slice()[this.activeItem];
     }
     this.onChange(item);
     this.searchString = null;
