@@ -20,21 +20,18 @@ export default class Modal extends Service {
       );
   }
 
-  // This was written with findLastIndex but caused issues with old versions of safari on iPad
   get dimmerIndex() {
-    let lastUnstackable = -1;
-    for (let i = this.openModals.length - 1; i >= 0; i--) {
-      if (!this.openModals[i].stackable) {
-        lastUnstackable = i;
-        break;
-      }
-    }
+    const lastUnstackable = this.openModals.findLastIndex(
+      (item) => !item.stackable
+    );
+
     if (lastUnstackable === -1) {
       return 0;
     }
     if (lastUnstackable === this.openModals.length - 1) {
       return lastUnstackable;
     }
+
     return lastUnstackable + 1;
   }
 
