@@ -64,6 +64,9 @@ export default class NrgSearchComponent extends NrgValidationComponent {
   }
 
   get canPerformSearch() {
+    if (this.args.minCharacters === '0') {
+      return true;
+    }
     return this.searchString?.length >= this.minCharacters;
   }
 

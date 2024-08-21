@@ -39,6 +39,19 @@ module('Integration | Component | nrg-search', function (hooks) {
     assert.ok(findAll('.results').length);
   });
 
+  test('results display on focus when minCharacters is zero', async function (assert) {
+    this.query = () => {
+      return [
+        {
+          header: 'header',
+        },
+      ];
+    };
+    await render(hbs`<NrgSearch @query={{this.query}} @minCharacters="0"/>`);
+    await click('input');
+    assert.ok(findAll('.results').length);
+  });
+
   test('results do not display when loading', async function (assert) {
     this.query = () => {
       return [{}];

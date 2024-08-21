@@ -34,6 +34,9 @@ export default class FreestyleNrgSearchComponent extends Component {
   @tracked
   selectedResult = null;
 
+  @tracked
+  minCharacters = 1;
+
   @action
   async query(queryString) {
     this.queryString = queryString;
