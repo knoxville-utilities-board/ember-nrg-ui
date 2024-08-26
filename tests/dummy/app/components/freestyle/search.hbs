@@ -17,6 +17,7 @@
         @query={{this.query}}
         @model={{this}}
         @valuePath="selectedResult"
+        @minCharacters={{this.minCharacters}}
       />
     </:example>
 
@@ -44,6 +45,11 @@
         @defaultValue={{false}}
         @value={{this.clearable}}
         @onInput={{fn (mut this.clearable)}}
+      />
+      <Args.String
+        @name="minCharacters"
+        @value={{this.minCharacters}}
+        @onInput={{fn (mut this.minCharacters)}}
       />
 
     </:api>
