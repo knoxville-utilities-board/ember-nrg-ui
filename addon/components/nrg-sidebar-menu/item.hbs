@@ -3,6 +3,7 @@
     <LinkTo
       @route={{@routeName}}
       class="{{@class}} {{if @isParentGroup 'parent-route' 'item'}}"
+      data-test-sidebar-menu-item
       {{on "click" this.onClick}}
       ...attributes
     >
@@ -12,6 +13,7 @@
     <a
       href={{this.url}}
       class="{{@class}} {{if @isParentGroup 'parent-route' 'item'}}"
+      data-test-sidebar-menu-item
       target="_blank"
       rel="noopener noreferrer"
       {{on "click" this.onClick}}
