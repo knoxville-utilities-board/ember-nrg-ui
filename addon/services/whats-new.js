@@ -6,14 +6,17 @@ export default class WhatsNewService extends Service {
   content = '';
 
   @tracked
-  isOpen;
+  _isOpen;
+
+  get isOpen() {
+    return this._isOpen ?? this.hasContent;
+  }
+
+  set isOpen(value) {
+    this._isOpen = value;
+  }
 
   get hasContent() {
     return !!this.content;
-  }
-
-  constructor() {
-    super(...arguments);
-    this.isOpen = this.hasContent;
   }
 }
