@@ -54,4 +54,12 @@ export default class TrimInputComponent extends Component {
     const value = target.value.trim();
     this.args.onChange?.(value);
   }
+
+  @action
+  handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
 }
