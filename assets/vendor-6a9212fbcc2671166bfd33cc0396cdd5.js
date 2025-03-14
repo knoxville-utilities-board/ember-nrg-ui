@@ -6408,10 +6408,9 @@ let r=i[e]
 Array.isArray(r)||(r=[r])
 for(const i of r){const r=i.apply(this,[(0,t.get)(this,e),n.default])
 if(o[e].options[r.validator]=r.options,!o[e].isValid)continue
-if(r.valid){o[e].warningMessage=r.warningMessage
-continue}const a=r?.options?.disabled
+const a=r?.options?.disabled
 let s=a
-"function"==typeof a&&(s=a.apply(this)),s||(o[e].message=r.errorMessage,o[e].isValid=!1)}}for(const e in o)if(a=o[e].isValid,!a)break
+"function"==typeof a&&(s=a.apply(this)),s||(r.valid?o[e].warningMessage=r.warningMessage:(o[e].message=r.errorMessage,o[e].isValid=!1))}}for(const e in o)if(a=o[e].isValid,!a)break
 return{isValid:a,attrs:o}}})},e.validator=function(e,t){if("boolean"==typeof t){const r=t;(t={})[e]=r}return function(r,n){let o
 const a={...t}
 for(const e in a)"function"==typeof a[e]&&"validate"!==e&&(a[e]=t[e].apply(this))
