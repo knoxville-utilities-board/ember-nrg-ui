@@ -47,17 +47,17 @@ export default function validationState(validatorsArgument) {
               continue;
             }
 
-            if (validatorResponse.valid) {
-              attrState[key].warningMessage = validatorResponse.warningMessage;
-              continue;
-            }
-
             const disabledProp = validatorResponse?.options?.disabled;
             let isDisabled = disabledProp;
             if (typeof disabledProp == 'function') {
               isDisabled = disabledProp.apply(this);
             }
             if (isDisabled) {
+              continue;
+            }
+
+            if (validatorResponse.valid) {
+              attrState[key].warningMessage = validatorResponse.warningMessage;
               continue;
             }
 
