@@ -384,7 +384,10 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     const clickedInsideDropdownElement = evt.target.closest('.dropdown');
     if (!this.search || isDropdownIcon) {
       if (this.isOpen && (isDropdownIcon || !clickedInsideDropdownElement)) {
-        if (isDropdownIcon == clickedInsideDropdownElement || this.closeOnInternalSelect) {
+        if (
+          isDropdownIcon == clickedInsideDropdownElement ||
+          this.closeOnInternalSelect
+        ) {
           this.isOpen = false;
         }
       }
