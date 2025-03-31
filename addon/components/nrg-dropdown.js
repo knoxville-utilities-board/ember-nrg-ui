@@ -68,6 +68,10 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     return this.args.selection ?? this.args.field;
   }
 
+  get closeOnInternalSelect() {
+    return this.args.closeOnInternalSelect ?? true;
+  }
+
   get menuClass() {
     let computedClasses = '';
     if (this.args.menuDirection) {
@@ -296,7 +300,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     if (this.isSearching) {
       this.searchValue = '';
     }
-    if (!this.args.multiple) {
+    if (!this.args.multiple && this.closeOnInternalSelect) {
       this.isOpen = false;
     }
     this.activeItem = -1;
@@ -380,7 +384,9 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
     const clickedInsideDropdownElement = evt.target.closest('.dropdown');
     if (!this.search || isDropdownIcon) {
       if (this.isOpen && (isDropdownIcon || !clickedInsideDropdownElement)) {
-        this.isOpen = false;
+        if (isDropdownIcon == clickedInsideDropdownElement || this.closeOnInternalSelect) {
+          this.isOpen = false;
+        }
       }
     }
   }
