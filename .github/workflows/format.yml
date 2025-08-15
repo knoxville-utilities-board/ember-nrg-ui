@@ -15,17 +15,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 22.x
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
           run_install: false
 
       - name: Get pnpm store directory
