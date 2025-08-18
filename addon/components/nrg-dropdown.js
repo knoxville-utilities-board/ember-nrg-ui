@@ -24,6 +24,9 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   @tracked
   selected;
 
+  @tracked
+  focused = false;
+
   get useDefaultValue() {
     return this.args.forceSelection || (this.args.multiple && !this.value);
   }
@@ -358,6 +361,14 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
   }
 
   @action
+  onFocus(evt) {
+    if (!this.isOpen) {
+      this.focused = true;
+      this.onClick(evt);
+    }
+  }
+
+  @action
   onClick(evt) {
     if (!this.isOpen) {
       evt.preventDefault();
@@ -370,6 +381,11 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
       this.isOpen = true;
       this.activeItem = -1;
       this.focusInput();
+      return;
+    }
+
+    if(this.focused) {
+      this.focused = false;
       return;
     }
 
