@@ -384,7 +384,7 @@ export default class NrgDropdownComponent extends NrgValidationComponent {
       return;
     }
 
-    if(this.focused) {
+    if (this.focused) {
       this.focused = false;
       return;
     }
