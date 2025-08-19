@@ -9,7 +9,8 @@
     {{if @readonly 'read-only'}}
     {{@class}}"
   tabindex={{unless @search "0"}}
-  {{on "focus" this.onClick}}
+  {{on "click" this.onClick}}
+  {{on "focus" this.onFocus}}
   {{on-click-outside this.onBlur}}
   {{did-insert this.setWrapperElement}}
   {{on-key "ArrowUp" this.moveUp}}
