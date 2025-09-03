@@ -1,5 +1,5 @@
-import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { AddNrgDeprecations } from 'ember-nrg-ui/utils/deprecation-handler';
 
@@ -57,7 +57,7 @@ export default class TrimInputComponent extends Component {
 
   @action
   handleKeyDown(event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && this.args.enableEnterKey !== true) {
       event.preventDefault();
       event.stopPropagation();
     }
