@@ -457,12 +457,15 @@ export default class NrgDateTimeCalendarComponent extends Component {
   }
 
   @action
-  setToNow() {
+  setToNow(evt) {
+    evt.preventDefault();
+    evt.stopPropogation();
     const now = new Date();
     if (!this.allowMinuteSelection) {
       now.setMinutes(0, 0, 0);
     }
     this.onSelect(now);
+    this.close();
   }
 
   @action
